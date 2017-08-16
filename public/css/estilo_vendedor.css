@@ -1,0 +1,57 @@
+.top-top{
+	margin-top:100px;
+}
+.top{
+	margin-top: 30px;
+}
+.top-reloj{
+	margin-top:80px;
+}
+.ico-clock{
+	float: none;
+    margin: 0 auto;
+	height: 120px;
+	width: 130px;
+	background:url("../ico/clock.png");
+	background-size: 100% 100%;
+}
+.ico-house{
+	float: none;
+    margin: 0 auto;
+	height: 120px;
+	width: 130px;
+	background:url("../ico/house.png");
+	background-size: 100% 100%;
+}
+
+.centro-link{
+	text-align: center;
+	margin-top: 15px;
+}
+.centro-link a{
+	font-size: 17px;
+}
+.papel{
+	background: #FAFAFA;
+	margin-right: 15%;
+	margin-left:15%;
+	padding: 8px;
+	box-shadow: 4px 4px 15px #888888;
+}
+.p-right{
+	text-align: right;
+	color:white;
+
+}
+.min-perfil-vendedor{
+	text-align: center;
+	margin-right: 40px;
+}
+.nombre-perfil{
+
+	
+	color:white;
+}
+.pequenio{
+	font-size: 13px;
+}

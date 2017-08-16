@@ -1,0 +1,63 @@
+<?php
+
+namespace App;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password','id_rol'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+
+    protected function insertar_vendedor($datos){
+
+            $user = new User;
+
+            $user->nombres = $datos->nombres;
+            $user->apellidos = $datos->apellidos;
+            $user->email = $datos->correo;
+            $user->password = \Hash::make($datos->clave);
+            $user->id_rol = "1";/* id de vendedor */
+            $user->id_sexo = $datos->id_sexo;
+            
+            if($user->save()){
+                return true;
+            }
+            return false;
+    }
+     protected function insertar_vendedorDependiente($datos){
+
+            $user = new User;
+
+            $user->nombres = $datos->nombres;
+            $user->apellidos = $datos->apellidos;
+            $user->email = $datos->correo;
+            $user->password = \Hash::make($datos->clave);
+            $user->id_rol = "2";/* id de vendedor dependiente */
+            $user->id_sexo = $datos->id_sexo;
+            
+            if($user->save()){
+                return true;
+            }
+            return false;
+    }
+}

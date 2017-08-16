@@ -1,0 +1,60 @@
+.centro{
+	padding-top: 50px;
+	text-align: center;
+}
+.min-perfil-instituto{
+	text-align: center;
+}
+.nombre-institucion-perfil{
+	color:white;
+	
+}
+.mas{
+	padding-top: 60px; 
+
+}
+.mas ul li{
+	list-style: none;
+}
+.p-right{
+	text-align: right;
+	color:white;
+
+}
+.blue-sky{
+	background: #E0F8F7;
+}
+.padding-body{
+	padding-top: 50px;
+}
+.p-right strong{
+	color:#00FF80;
+}
+.p-titulo-inst{
+	font-size: 43px;
+	color: #58D3F7;
+	font-weight:bold;
+	text-align: center;
+	/*background: red;*/
+}
+.ico-map{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 50px;
+	width: 50px;
+	background:url("../ico/map.png");
+	background-size: 100% 100%;
+}
+.tr-estilo{
+	color:white;
+	background-color: #1A5276;
+}
+.top-top{
+	padding-top: 100px;
+}
+.papel-blanco{
+	background:#FAFAFA;
+	box-shadow: 2px 2px 12px #888888;
+	margin-bottom: 25px;
+}

@@ -28,8 +28,8 @@ class herramientasayudaController extends Controller
 	public function activar_texto(){
 
 			if(\Session::has('activarMicro')){
-        			\Session::flash('flash_desactivar', 'Desactiva la opcion actual');
-        			return redirect()->back();
+        		\Session::flash('flash_desactivar', 'Desactiva la opcion actual');
+        		return redirect()->back();
     		}
    			\Session::put('activarText', '1');
 				//dd(Session::get('activar'));

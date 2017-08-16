@@ -16,12 +16,7 @@ class autenticarController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-    //protected $guard = 'institucion';
-
-    /*protected function guard()
-    {
-        return \Auth::guard('institucion');
-    }*/
+   
 
     /*Logear una institucion */////////////////////////////////////////////////////////////////////////////////////
   
@@ -30,7 +25,7 @@ class autenticarController extends Controller
 		return view('invitado.login_institucion');
 	}
 
-    public function login(Request $data)
+    public function login(Request $data)/* Logear una institución */
     {
         
     	if (\Auth::guard('institucion')->attempt(['email' => $data->correo, 'password' => $data->clave])) {
@@ -55,7 +50,6 @@ class autenticarController extends Controller
     
     public function login_vendedorInst(Request $data){
         
-
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
             if(count($verificar)>0 && $verificar[0]->id_rol == 2){  /**"eres vendedor institucional"**/
@@ -73,7 +67,6 @@ class autenticarController extends Controller
         }
         //return redirect()->back();
     
-
     public function logout_venIns(){
             \Auth::logout();
             return redirect('/inicio');
@@ -89,8 +82,7 @@ class autenticarController extends Controller
      public function login_vendedor(Request $data){
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
-             if (count($verificar)>0 && $verificar[0]->id_rol == 1) { /**"eres vendedor"**/
-
+             if (count($verificar)>0 && $verificar[0]->id_rol == 1) { /**"eres vendedor individual"**/
 
                 if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
                     // Authentication passed...

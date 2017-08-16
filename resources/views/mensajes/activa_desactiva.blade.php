@@ -20,13 +20,14 @@
 	}
 
 	function estaPulsadoShift(event){
-if (event.shiftKey==1)
-	//alert("esta ok");
-    $("a, p, h1, h2, h3, h4, h5, input").addClass('zoom');
-else
-	//alert("no ok");
-    $("a, p, h1, h2, h3, h4, h5, input").removeClass('zoom');
-}
+            if (event.shiftKey==1){
+                //alert("esta ok");
+                $("a, p, h1, h2, h3, h4, h5, input").addClass('zoom');
+            }else{
+                //alert("no ok");
+                $("a, p, h1, h2, h3, h4, h5, input").removeClass('zoom');
+            }
+    }
 
 
 	@if (Session::has('activarMicro'))		 

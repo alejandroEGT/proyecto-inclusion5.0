@@ -13,19 +13,17 @@ class vendedorIndependienteController extends Controller
     	# code...
     }
 
-    public function insertar_vendedorIndependiente(Request $datos)
+     public function insertar_vendedorIndependiente(Request $datos)
     {
         $insert = User::insertar_vendedor($datos);
-            if ($insert) {
+        if ($insert) {
            
-            	$id_user = User::where('email','=',"$datos->correo")->get();
-            	foreach ($id_user as $id_us) {
-            		$forId = $id_us->id;
-            		$vendedor = Vendedor::insertar_aprobado($datos, $forId);
-            		if ($vendedor) {
-            			return "todo oka";
-            		}
-            	}
-            }
+            $id_user = User::where('email','=',"$datos->correo")->get();
+                
+            $vendedor = Vendedor::insertar_aprobado($datos, $id_user[0]->id);
+            if ($vendedor) {
+                return "todo oka";
+            }        
+        }
     }
 }

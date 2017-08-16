@@ -62,10 +62,9 @@ Route::group(['prefix' => 'userIndependiente', 'middleware' => ['vendedor']], fu
 
         route::get('/index', function(){
 
-            return "hola mono";
+            return "hola mundo del vendedor";
         });
 });
-
 
 
 

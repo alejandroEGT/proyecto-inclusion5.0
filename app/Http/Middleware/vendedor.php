@@ -20,7 +20,8 @@ class vendedor
       
         if (\Auth::user()->id_rol == 1 && \Auth::check()) {
             # code...
-            return redirect('userIndependiente/index');
+            return $next($request);
+            //return redirect('userIndependiente/index');
             //dd("el vendedor esta logeado y es vendedor");
         }
         return redirect('inicio');

@@ -17,10 +17,11 @@ class vendedorInstitucional
     {
         if (\Auth::user()->id_rol == 2 && \Auth::check()) {
             # code...
-            dd("el vendedor esta logeado y es vendedor institucional");
+            return $next($request);
+            //dd("el vendedor esta logeado y es vendedor institucional");
         }
         return redirect('inicio');
         dd("parece que no estas logeado ni eres vendedor institucional");
-        //return $next($request);
+        //
     }
 }

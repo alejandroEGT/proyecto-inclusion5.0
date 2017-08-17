@@ -36,7 +36,7 @@
                                 <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
                             </a></li>
                             @endif
-                            <li class="pushy-link"><a><input onclick="clickLupa()" type="checkbox"> Lupa</a></li>
+                            <li class="pushy-link"><a><input @click="clickLupa" type="checkbox"> Lupa</a></li>
                              <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
                     </li>
@@ -85,7 +85,8 @@
     </div>    
 </body>
 	
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" ></script>
 		<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}" ></script>
 		<script src="{{ asset('js/toastr.js')}}" ></script>
 		
@@ -97,13 +98,6 @@
 
 		<script src="{{ asset('js/pushy.min.js') }}"></script>
 		@include('mensajes.activa_desactiva')
-        <script>
-
-            function clickLupa(){
-               
-                $("a, p, h1, h2, h3, h4, h5, input").toggleClass('zoom');
-            }
-        </script>
 
 </html>
 

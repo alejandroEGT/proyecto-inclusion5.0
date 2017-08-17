@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\VendedorInstitucion;
 use App\Vendedor;
 use App\User;
+use App\Http\Requests\userloginRequest;
 class autenticarController extends Controller
 {
 
@@ -48,7 +49,7 @@ class autenticarController extends Controller
         return view('invitado.login_vendedorInstitucional');
     }
     
-    public function login_vendedorInst(Request $data){
+    public function login_vendedorInst(userloginRequest $data){
         
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
@@ -79,7 +80,7 @@ class autenticarController extends Controller
      {
             return view('invitado.login_vendedor');
      }
-     public function login_vendedor(Request $data){
+     public function login_vendedor(userloginRequest $data){
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
              if (count($verificar)>0 && $verificar[0]->id_rol == 1) { /**"eres vendedor individual"**/

@@ -22,14 +22,18 @@ var app = new Vue({
         })
       },
 			insertar(e) {
-			e.preventDefault();
+			 e.preventDefault();
            this.$http.post('/guardarInstitucion', this.formCliente).then(function(response){
 	      			console.log(response.body);
 
 	      			alert("guardado con exito!");
 	      			
 	  			})
-		}
+		  },
+      clickLupa(){
+               
+                $("a, p, h1, h2, h3, h4, h5, input").toggleClass('zoom');
+            }
     },
     created(){
     	

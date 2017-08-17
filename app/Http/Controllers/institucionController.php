@@ -66,19 +66,15 @@ class institucionController extends Controller
         $aceptarUser = Vendedor::aceptarusuario($data[0]);
         $user = User::find($data[0]);
         
-             //\Session::put('user',$user->nombres.' '.$user->apellidos);
+             \Session::put('user',$user->nombres.' '.$user->apellidos);//obtener usuario y enviarlo a mail.blade.php
              
         if($aceptarUser == 1){
                 
                  Mail::send(['text'=>'emails.mail'],['name','janin'],function ($message) use ($user)
                 {
-
                     $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
-
                     $message->to($user['email'],'to jano');
-
                 });
-
           return "ok";
         }
         return "error";

@@ -1,0 +1,55 @@
+@extends('institucion.master_institucion')
+
+@section('content')
+	<div class="padre-agregar">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-2">
+				<div class="ico-add"></div>
+			</div>
+			<div class="col-md-6">
+				<p class="panel-title-agregar">Ingresa un alumno</p>
+				<p class="panel-body-mst">
+					En este formulario podras registrar a los alumnos que ayudan a levantar la institución, cabe señalar que ellos mismos tambien podran hacerlo desde un formulario que esta fuera de esta sesión, al registrar a un alumno, su clave será enviada a su correo electrónico, la cual será temporal hasta que la actualize.
+				</p>
+			</div>
+		</div>
+		
+		<form action="/insertar_vendedor" method="Post">
+		{{csrf_field()}}
+		<div class="container estilo-form animated fadeInUp ">
+			<div class="row">
+					<div class="col-md-offset-2 col-md-4">
+						<p class="p-form">Nombres</p>
+						<input name="nombres" class="form-control input" type="text">
+						<p class="p-form">Apellidos</p>
+						<input name="apellidos" class="form-control input" type="text">
+						<p class="p-form">Fecha de Nacimiento</p>
+    						<input name="dia" class="form-control fech" size="2" maxlength="2" type="text"  required>-
+    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" required>-
+    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" required>
+					</div>
+					<div class="col-md-4">
+						<p class="p-form">Sexo</p>
+						<select name="id_sexo"  class="form-control input" name="" id="">
+							<option value="">Seleccione...</option>
+							@foreach ($sexo as $sex)
+								<option value="{{$sex->id}}">{{ $sex->nombre }}</option>
+							@endforeach
+						</select>
+						<p class="p-form">Nª telefono</p>
+						<input name="telefono" class="form-control input" type="text">
+						<p class="p-form">Correo</p>
+						<input name="correo" class="form-control input" type="text">
+						
+					</div>
+			</div>
+			<div class="row top">
+				<div class="col-md-offset-3 col-md-6">
+					<input class="btn btn-success input-btn" type="submit" value="Registrar">
+				</div>
+			</div>
+		</div>
+		
+	</form>	
+	</div>
+@endsection

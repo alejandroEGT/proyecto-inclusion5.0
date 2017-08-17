@@ -30,31 +30,15 @@
                         <hr/>
                     </li>
                     <li class="pushy-submenu">
-                        <button id="first-link">¿Te ayudamos?</button>
+                        <button>Nuestra Información</button>
                         <ul>
-                            @if (Session::has('activarMicro'))
-                                <li class="pushy-link"><a href="desactivarmicro"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
-                            @endif
-
-                            @if (empty(Session::get('activarMicro')))
-                            <li class="pushy-link"><a href="activarmicro">
-                                <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
-                            </a></li>
-                            @endif
-                            @if (Session::has('activarText'))
-                                <li class="pushy-link"><a href="desactivartext"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
-                            @endif
-
-                            @if (empty(Session::get('activarText')))
-                           <li class="pushy-link"><a href="activartext">
-                                <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
-                            </a></li>
-                            @endif
-                             <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
+                            <li class="pushy-link"><a href="index">Misión y Visión</a></li>
+                            <li class="pushy-link"><a href="/login">Datos específicos</a></li>
+                            <li class="pushy-link"><a href="#">Item 3</a></li>
                         </ul>
                     </li>
                     <li class="pushy-submenu">
-                        <button>Formularios</button>
+                        <button>Nuestro equipo</button>
                         <ul>
                             <li class="pushy-link"><a href="index">Inicio</a></li>
                             <li class="pushy-link"><a href="/login">Login de institución</a></li>
@@ -90,13 +74,23 @@
             <div id="container">
             <!-- Menu Button -->
                 <nav class="navbar-fixed-top color-verde">
-                        <div class="container-fluid" v-for="item in db_institucion" >
-                            <p class="p-right">Registrado como: <strong>@{{item.email}}</strong></p>
+                        <div class="row">
+                            <div class="col-md-2">
+                                    <button class="menu-btn">&#9776; Menu</button>              
+                            </div>  
+                            <div class="col-md-4">
+
+                                <input class="form-control"  type="text" name="" placeholder="buscar novedades, instituciones o personas" >
+                            </div>
+                            <div class="col-md-6">
+                                <div class="container-fluid" v-for="item in db_institucion" >
+                                     <p class="p-right">Registrado como: <strong>@{{item.email}}</strong></p>
+                                </div>
+                            </div>
                         </div>
+                            
                 </nav>
-                <div class="fx">
-                	<button class="menu-btn">&#9776; Menu</button>
-                </div>
+                
     			@yield('content')
 
             </div>

@@ -2,6 +2,12 @@
 	padding-top: 50px;
 	text-align: center;
 }
+.padre{
+	padding-top: 50px;
+}
+.padre-agregar{
+	padding-top: 110px;
+}
 .min-perfil-instituto{
 	text-align: center;
 }
@@ -31,7 +37,7 @@
 	color:#00FF80;
 }
 .p-titulo-inst{
-	font-size: 43px;
+	font-size: 30px;
 	color: #58D3F7;
 	font-weight:bold;
 	text-align: center;
@@ -46,6 +52,33 @@
 	background:url("../ico/map.png");
 	background-size: 100% 100%;
 }
+.ico-push{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 50px;
+	width: 50px;
+	background:url("../ico/push.png");
+	background-size: 100% 100%;
+}
+.ico-add{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 130px;
+	width: 130px;
+	background:url("../ico/add.png");
+	background-size: 100% 100%;
+}
+.ico-addArea{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 130px;
+	width: 130px;
+	background:url("../ico/addArea.png");
+	background-size: 100% 100%;
+}
 .tr-estilo{
 	color:white;
 	background-color: #1A5276;
@@ -57,4 +90,63 @@
 	background:#FAFAFA;
 	box-shadow: 2px 2px 12px #888888;
 	margin-bottom: 25px;
+}
+.papel-inicio{
+	border: 2px solid #BDBDBD;
+	border-radius: 5px;
+	border-style: dotted;
+}
+.centro {
+	/*background:red;*/
+	text-align: center;
+    margin: 0 auto;
+}
+.papel-titulo{/*ejemplo para poder ajustar el texto en nuestro div para los comandos de lector de texto*/
+	background:;
+	color:black;
+	font-size: 23px;
+	width: 320px;
+	margin: 0 auto;
+	font-weight:bold;
+	text-align: center;	
+
+}
+.papel-body{
+	width: 360px;
+	margin: 0 auto;
+	text-align: center;	
+}
+.botones-grupo{
+	margin-top:30px;
+	margin-bottom:30px;
+}
+.btn-verde{
+	color:white;
+	background: #45B39D;
+}
+.btn-verde:hover{
+	color:white;
+	background: #138D75;
+}
+.btn-naranja{
+	color:white;
+	background: #E67E22;
+}
+.btn-naranja:hover{
+	color:white;
+	background: #A04000;
+}
+.panel-title-agregar{
+	background:;
+	font-size: 23px;
+	width: 210px;
+	
+	font-weight:bold;
+}
+.panel-body-mst{
+
+}
+.buttomytop{
+	margin-top:10px;
+	margin-bottom:10px;
 }

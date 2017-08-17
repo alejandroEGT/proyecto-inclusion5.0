@@ -19,6 +19,7 @@ class Institucion extends Authenticatable
          'email', 'password',
     ];
 
+    
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -76,5 +77,10 @@ class Institucion extends Authenticatable
     protected function usuariosEsperando(){
             $espera = \DB::select("CALL `usuariosEsperando`(".\Auth::guard('institucion')->user()->id.");");
             return $espera;
+    }
+
+    protected function datos(){
+            $datos = \DB::select('select * from `institucion` where id ='.\Auth::guard('institucion')->user()->id);
+            return $datos[0];
     }
 }

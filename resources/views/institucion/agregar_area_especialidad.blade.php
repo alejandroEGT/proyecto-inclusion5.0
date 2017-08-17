@@ -2,8 +2,19 @@
 
 @section('content')
 	
-	<div class="padding-body">
-		<div class="row well blue-sky">
+	<div class="padre-agregar">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-2">
+				<div class="ico-addArea"></div>
+			</div>
+			<div class="col-md-6">
+				<p class="panel-title-agregar">Ingresa un área o especialidad </p>
+				<p class="panel-body-mst">
+					En este formulario podras registrar las áreas o especialidades que tenga la institución, tambien podras asignar un encargado en cada area o especialidd.
+				</p>
+			</div>
+		</div>
+		<div class="row animated buttomytop fadeInLeft">
 			<form  @submit.prevent="formArea" method="POST" >
 					<div class="col-md-offset-1 col-md-6">
 						{{ csrf_field() }}
@@ -33,7 +44,7 @@
 				</tr>	
 			</table>
 
-</div>
+		</div>
 		</div>
 
 	</div>

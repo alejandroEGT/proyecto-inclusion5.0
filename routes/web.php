@@ -38,14 +38,15 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['prefix' => 'institucion','middleware' => ['institucion']], function () {
 
-        Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');
+        /*Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');
         Route::get('/desactivarmicro', 'herramientasayudaController@desactivar_microfono');
         Route::get('/activartext', 'herramientasayudaController@activar_texto');
-        Route::get('/desactivartext','herramientasayudaController@desactivar_texto');
+        Route::get('/desactivartext','herramientasayudaController@desactivar_texto');*/
 
         Route::get('/logout','autenticarController@logout');
         Route::get("/index", 'institucionController@vista_institucion');
         Route::get("/agregarAE", 'institucionController@vista_agregarAE');
+        Route::get('agregarAlumno','institucionController@vista_agregarAlumno');
         Route::get('/verArea/{id}','areaController@vista_area');
         Route::get('/correo','emailController@send');
         Route::get('/notificacio_vendedor', 'institucionController@vista_notificacio_vendedor');

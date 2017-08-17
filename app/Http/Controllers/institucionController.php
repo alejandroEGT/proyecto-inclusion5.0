@@ -8,16 +8,16 @@ use App\User;
 use App\Institucion;
 use App\Area;
 use App\Vendedor;
+use App\Sexo;
 class institucionController extends Controller
 {
     
     public function vista_institucion(){
 
-         
-        //if (\Auth::guard('institucion')->check()) {
-            return view('institucion.inicio');
-       // }
-       // return redirect('/inicio');
+          $datosInstitucion = Institucion::datos();
+          //dd($datosInstitucion);
+            return view('institucion.inicio')->with('institucion', $datosInstitucion);
+      
     }
     public function vista_agregarAE(){
             return view('institucion.agregar_area_especialidad');
@@ -30,17 +30,9 @@ class institucionController extends Controller
             return view('institucion.notificaciones_vendedor')->with('userEsperando', $usuariosEsperando);
 
     }
-     public function send()
-    {
-         Mail::send(['text'=>'emails.mail'],['name','janin'],function ($message)
-        {
-
-            $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido nigga"');
-
-            $message->to("$correo",'to jano');
-
-        });
-
+    public function vista_agregarAlumno(){
+            $sexo = Sexo::all();
+            return view('institucion.agregar_alumno')->with('sexo', $sexo);
     }
 
     /*Peticiones en ajax mediante vue y vue-resource*/

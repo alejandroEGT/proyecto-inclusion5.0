@@ -19,7 +19,7 @@
                 <ul>
                     <li class="pushy-submenu" >
                         
-                        <div class="min-perfil-instituto" >
+                        <div class="min-perfil-institucion" >
                             <img v-for="item in db_institucion" height="70"  :src="'/'+item.logo" alt=""/>
                             <p class="nombre-institucion-perfil" v-for="item in db_institucion">
                                 @{{ item.nombre }}
@@ -29,19 +29,20 @@
                         
                         <hr/>
                     </li>
+                    <li class="pushy-link"><a href="{{ url('institucion/index') }}">Inicio</a></li>
                     <li class="pushy-submenu">
                         <button>Nuestra Información</button>
                         <ul>
-                            <li class="pushy-link"><a href="index">Misión y Visión</a></li>
-                            <li class="pushy-link"><a href="/login">Datos específicos</a></li>
-                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                            <li class="pushy-link"><a href="{{ url('institucion/misionyvision') }}">Misión y Visión</a></li>
+                            <li class="pushy-link"><a href="#">Datos específicos</a></li>
+                            <li class="pushy-link"><a href="noticia">Publicar noticias</a></li>
                         </ul>
                     </li>
                     <li class="pushy-submenu">
                         <button>Nuestro equipo</button>
                         <ul>
-                            <li class="pushy-link"><a href="index">Inicio</a></li>
-                            <li class="pushy-link"><a href="/login">Login de institución</a></li>
+                            <li class="pushy-link"><a href="#">Inicio</a></li>
+                            <li class="pushy-link"><a href="#">Login de institución</a></li>
                             <li class="pushy-link"><a href="#">Item 3</a></li>
                         </ul>
                     </li>

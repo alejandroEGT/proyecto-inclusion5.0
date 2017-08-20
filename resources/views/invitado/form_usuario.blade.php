@@ -5,8 +5,8 @@
 	<div class="padding color-verde">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>Registro de usuario</h3>
-				<h4 class="txt">Registro de usuario individual o no perteneciente a una institución.</h4>
+				<h3><label>Registro de usuario</label></h3>
+				<h4 class="txt"><label>Registro de usuario individual o no perteneciente a una institución.</label></h4>
 			</div>
 		</div>
 		<div class="ico-user-form animated bounceIn"></div>
@@ -17,31 +17,33 @@
 		<div class="container estilo-form animated fadeInUp ">
 			<div class="row">
 					<div class="col-md-offset-3 col-md-3">
-						<p class="p-form">Nombres</p>
-						<input name="nombres" class="form-control input" type="text">
-						<p class="p-form">Apellidos</p>
-						<input name="apellidos" class="form-control input" type="text">
-						<p class="p-form">Fecha de Nacimiento</p>
-    						<input name="dia" class="form-control fech" size="2" maxlength="2" type="text"  required>-
-    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" required>-
-    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" required>
-						<p class="p-form">Sexo</p>
-						<select name="id_sexo"  class="form-control input" name="" id="">
-							<option value="">Seleccione...</option>
+						<label class="p-form">Nombres</label>
+						<input name="nombres" class="form-control input" type="text" placeholder="Nombres">
+						<label class="p-form">Apellidos</label>
+						<input name="apellidos" class="form-control input" type="text" placeholder="Apellidos">
+						<label class="p-form">Fecha de Nacimiento</label>
+    						<p>
+    						<input name="dia" class="form-control fech" size="2" maxlength="2" type="text" placeholder="Día"  >-
+    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" placeholder="Mes" >-
+    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" placeholder="Año" >
+    						</p>
+						<label class="p-form">Sexo</label>
+						<select name="id_sexo"  class="form-control input" >
+							<option value="">Seleccione su sexo</option>
 							@foreach ($sexo as $sex)
 								<option value="{{$sex->id}}">{{ $sex->nombre }}</option>
 							@endforeach
 						</select>
 					</div>
 					<div class="col-md-3">
-						<p class="p-form">Nª telefono</p>
-						<input name="telefono" class="form-control input" type="text">
-						<p class="p-form">Correo</p>
-						<input name="correo" class="form-control input" type="text">
-						<p class="p-form">Clave</p>
-						<input name="clave" class="form-control input" type="password">
-						<p class="p-form">Repita Clave</p>
-						<input name="rClave" class="form-control input" type="password">
+						<label class="p-form">Nª telefono</label>
+						<input name="telefono" class="form-control input" type="text" placeholder="Telefono">
+						<label class="p-form">Correo</label>
+						<input name="correo" class="form-control input" type="text" placeholder="Correo">
+						<label class="p-form">Clave</label>
+						<input name="clave" class="form-control input" type="password" placeholder="Clave">
+						<label class="p-form">Repita Clave</label>
+						<input name="rClave" class="form-control input" type="password" placeholder="Clave nuevamente">
 					</div>
 			</div>
 			<div class="row top">

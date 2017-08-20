@@ -5,8 +5,8 @@
 	<div class="padding color-verde">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>Registro institucional</h3>
-				<h4 class="txt">Registro de una institución que trabaje y apoye el arte de personas en situación de discapacidad.</h4>
+				<h3><label>Registro institucional</label></h3>
+				<h4 class="txt"><label>Registro de una institución que trabaje y apoye el arte de personas en situación de discapacidad.</label></h4>
 			</div>
 		</div>
 		<div class="ico-instituto-form animated bounceIn"></div>
@@ -19,7 +19,7 @@
 			    <div class="alert alert-danger">
 				        <ul>
 				            @foreach ($errors->all() as $error)
-				                <li>{{ $error }}</li>
+				                <li><label>{{ $error }}</label></li>
 				            @endforeach
 				        </ul>
 			    </div>
@@ -37,7 +37,7 @@
 					<input  class="form-control input" type="text" name="rut" placeholder="rut" >
 					<label  class="p-form">Nombre</label>
 					<input  class="form-control input" type="text" name="nombre" placeholder="nombre" >
-					<label class="p-form">Razon Social</label>
+					<label  class="p-form">Razon Social</label>
 					<input  class="form-control input" type="text" name="razonSocial" placeholder="razón social" >
 					<label  class="p-form">Telefono 1</label>
 					<input  class="form-control input" type="text" name="telefono1" placeholder="telefono 1" >
@@ -45,15 +45,15 @@
 					<input class="form-control input" type="text" name="telefono2" placeholder="telefono 2">
 				</div>
 					<div class="col-md-3">
-						<p  class="p-form">Dirección</p>
+						<label  class="p-form">Dirección</label>
 						<input class="form-control input" type="text" name="direccion" placeholder="dirección">
-						<p  class="p-form">Logo</p>
+						<label  class="p-form">Logo</label>
 						<input class="form-control input" type="file" name="logo" placeholder="logo">
-						<p  class="p-form">Correo</p>
+						<label  class="p-form">Correo</label>
 						<input class="form-control input" type="text" name="correo" placeholder="correo">
-						<p  class="p-form">Clave</p>
+						<label  class="p-form">Clave</label>
 						<input class="form-control input" type="password" name="clave" placeholder="clave">
-						<p  class="p-form">Repita Clave</p>
+						<label  class="p-form">Repita Clave</label>
 						<input class="form-control input" type="password" name="repeClave" placeholder="nuevamente clave">
 					</div>
 			</div>

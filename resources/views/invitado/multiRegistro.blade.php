@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-md-12 animated bounceInDown">
 				<h3>BienVenido a nuestro sitio web</h3>
-				<h4 class="txt">Somos un sistema sin fines de lucro denominados como "Proyecto Inclusión", puedes registrarte gratis de las siguientes maneras que tenemos para ti o institucion a la que pertenescas</h4>
+				<h4 class="txt">Este proyecto es una version de prueba, puedes registrarte segun tu situación.</h4>
 			</div>
 		</div>
 		<div class="ico-delivery animated bounceInDown"></div>
@@ -22,12 +22,6 @@
 				<div onclick="userOnly()" class="ico-user"></div>
 				<p class="p-center">usuario individual</p>
 			</div>
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-md-12">
-			<h5><a class="a-center" href="/formInstitucion">Registrar una institución</a></h5>
 		</div>
 	</div>
 

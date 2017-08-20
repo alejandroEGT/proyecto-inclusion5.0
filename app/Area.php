@@ -27,4 +27,8 @@ class Area extends Model
         $area = Area::where('id_institucion','=',\Auth::guard("institucion")->user()->id)->get();
         return $area;
     }
+    protected function traer_area($id){
+        $area = Area::find($id);
+        return $area;
+    }
 }

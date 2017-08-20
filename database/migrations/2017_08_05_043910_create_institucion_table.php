@@ -19,11 +19,13 @@ class CreateInstitucionTable extends Migration
             $table->string('nombre');
             $table->string('razonSocial');
             $table->integer('telefono1');
-            $table->integer('telefono2');
+            $table->integer('telefono2')->nullable();
             $table->text('direccion');
             $table->text('logo');
-            $table->string('correo');
-            $table->string('clave');
+            $table->string('email');
+            $table->string('password');
+            $table->text('mision')->nullable();
+            $table->text('vision')->nullable();
             $table->timestamps();
         });
 

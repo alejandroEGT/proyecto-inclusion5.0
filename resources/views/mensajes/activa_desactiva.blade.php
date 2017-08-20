@@ -22,10 +22,10 @@
 	function estaPulsadoShift(event){
 		if (event.shiftKey==1)
 			//alert("esta ok");
-		    $("a, p, h1, h2, h3, h4, h5, input").addClass('zoom');
+		    $("a, p, h1, h2, h3, h4, h5, input, label").addClass('zoom');
 		else
 			//alert("no ok");
-		    $("a, p, h1, h2, h3, h4, h5, input").removeClass('zoom');
+		    $("a, p, h1, h2, h3, h4, h5, input, label").removeClass('zoom');
 	}
 
 
@@ -53,14 +53,17 @@
 					}
 
 
-	                $( "p" ).mouseover(function(event) {
+	                $( "label" ).mouseover(function(event) {
 				  				//var p = $(this).text();
 				  					hablar($(event.target).text());
 							 	//hablar($(event.target).text());
 							});
-							$( "h2, h3, h4, h5, h6" ).mouseover(function(event) {
-				  					hablar($(event.target).text());
+	                 $( "select" ).mouseover(function(event) {
+				  					texto = $(event.target).text();
+				  					hablar(texto);
+							 	//hablar($(event.target).text());
 							});
+							
 							$( "button, input[type='button'], input[type='submit']" ).mouseover(function(event) {
 									var ph = $(this).text();
 				  					hablar("Botón "+ph);

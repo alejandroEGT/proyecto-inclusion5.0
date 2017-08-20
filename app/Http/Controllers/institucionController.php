@@ -35,8 +35,44 @@ class institucionController extends Controller
             return view('institucion.agregar_alumno')->with('sexo', $sexo);
     }
 
+    public function vista_misionyvision(){
+            return view('institucion.misionyvision');
+    }
+
+    public function vista_noticia(){
+            return view('institucion.noticia');
+    }
+
     /*Peticiones en ajax mediante vue y vue-resource*/
 
+    public function agregar_mision(Request $data)
+    {
+        $this->validate($data, ['mision' => 'required']);
+
+             $institucion = \DB::table('institucion')
+                    ->where('id', \Auth::guard("institucion")->user()->id)
+                    ->update(['mision' => $data->mision]);
+
+                    if (count($institucion)>0) {
+                        return "ok";
+                    }   
+                    return "error";
+            
+    }
+     public function agregar_vision(Request $data)
+    {
+             $this->validate($data, ['vision' => 'required']);
+
+             $institucion = \DB::table('institucion')
+                    ->where('id', \Auth::guard("institucion")->user()->id)
+                    ->update(['vision' => $data->vision]);
+
+                    if (count($institucion)>0) {
+                        return "ok";
+                    }   
+                    return "error";
+            
+    }
     public function traerDatosInstitucion(){
 
     	$instituto = Institucion::where('id','=',\Auth::guard("institucion")->user()->id)->get();

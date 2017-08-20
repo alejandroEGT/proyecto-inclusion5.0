@@ -122,6 +122,10 @@ transform:scale(1.2);
 	background:#1A5276;
 	/*background:#88D2BE;*/
 }
+.lbl-registrar a{
+	text-align: center;
+	color:red;
+}
 h3{
 	text-align: center;
 	/*background:red;*/
@@ -161,9 +165,12 @@ h5{
 	width: 100%;
     border: 2px solid #21618C;
 }
+
 .p-form{
+	
 	color: #6E6E6E;
 }
+
 .estilo-form{
 	padding: 20px;
 }

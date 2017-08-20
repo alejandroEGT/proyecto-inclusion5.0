@@ -7,7 +7,10 @@ new Vue({
 		  nombre:"", desc:""
 		}, 
 		notificacion:'',
-		
+		bd_mv:{
+			mision:'', vision:''
+		},
+		bd_encargado:'',
 		
 	},
 	 http: { 
@@ -68,6 +71,59 @@ new Vue({
 
 		}
 		,
+		guardar_mision(){
+
+						this.$http.post('/agregar_mision', this.bd_mv ).then(function(response){
+								//$('div#contenidoAjax').html('<p><img src="https://s-media-cache-ak0.pinimg.com/originals/0c/44/da/0c44dacf1b038014a6f941131c5e8aa2.gif" /></p>');
+								console.log(response.body);
+								//this.notificar();
+								//location.reload();
+						},
+							(error) =>{
+								alert(error);
+							}
+						)
+						.catch((e) => {
+					        console.log("Caught", e);
+					      }
+					    )
+		},
+		guardar_vision(){
+
+						this.$http.post('/agregar_vision', this.bd_mv ).then(function(response){
+								//$('div#contenidoAjax').html('<p><img src="https://s-media-cache-ak0.pinimg.com/originals/0c/44/da/0c44dacf1b038014a6f941131c5e8aa2.gif" /></p>');
+								console.log(response.body);
+								//this.notificar();
+								//location.reload();
+						},
+							(error) =>{
+								alert(error);
+							}
+						)
+						.catch((e) => {
+					        console.log("Caught", e);
+					      }
+					    )
+		},
+		traerEncargado(){
+
+						this.$http.post('/tarerEncargado', $('#v_area').text() ).then(function(response){
+								
+								console.log(response.body);
+								this.bd_encargado = response.body;
+								//this.traerEncargado();
+								
+						},
+							(error) =>{
+								this.bd_encargado = "No existe encargado(a).";
+							}
+						)
+						.catch((e) => {
+					        alert("excepcion errores", e);
+					      }
+					    )
+		},
+		
 		notificar(){
 				
 				this.$http.get('/traerNotificaciones').then(function(response){
@@ -87,5 +143,7 @@ new Vue({
 		this.datosInstituto();
 		this.llenarTablaArea();
 		this.notificar();
+		this.traerEncargado();
+		
 	}
 })

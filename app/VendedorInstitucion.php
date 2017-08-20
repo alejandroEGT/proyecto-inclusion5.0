@@ -31,7 +31,7 @@ class VendedorInstitucion extends Model
     }
     protected function traerFoto ($id){
 
-        return $id;
+        //return $id;
        $id = \DB::select("CALL `traerFotoPerfil`('".$id."'');");
         return $id;
     }

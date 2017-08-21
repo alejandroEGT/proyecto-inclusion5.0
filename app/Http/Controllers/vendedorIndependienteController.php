@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\agregaralumnoRequest;
 use App\User;
 use App\Vendedor;
+use Illuminate\Http\Request;
+
 
 class vendedorIndependienteController extends Controller
 {
@@ -13,7 +15,7 @@ class vendedorIndependienteController extends Controller
     	# code...
     }
 
-     public function insertar_vendedorIndependiente(Request $datos)
+     public function insertar_vendedorIndependiente(agregaralumnoRequest $datos)
     {
         $insert = User::insertar_vendedor($datos);
         if ($insert) {

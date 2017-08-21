@@ -27,15 +27,13 @@ class institutoRequest extends FormRequest
             'rut' => 'max:9 | required | numeric | unique:institucion,rut',
             'nombre' => 'required | unique:institucion,nombre',
             'razonSocial' => 'required',
-            'telefono1' => 'required | numeric',
-            'telefono2' => 'required | numeric',
+            'telefono1' => 'required | numeric | max:9',
+            'telefono2' => 'required | numeric | max:9',
             'direccion' => 'required',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg | dimensions:max_width=2250,max_height=2680',
             'correo' => 'required',
             'clave' => 'required | min:6',
-            'repeClave' => 'required | min:6',
-
-
+            'repeClave' => 'required | min:6'
         ];
 
     }

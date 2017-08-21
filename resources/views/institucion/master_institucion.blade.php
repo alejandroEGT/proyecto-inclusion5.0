@@ -84,7 +84,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="container-fluid" v-for="item in db_institucion" >
-                                     <p class="p-right">Registrado como: <strong>@{{item.email}}</strong></p>
+
+                                     <p class="p-right">Registrado como: <strong>@{{item.email}}
+                                     </strong><a href="logout"><img src="/ico/arrows.png"  alt=""/></a></p>
+                                     
                                 </div>
                             </div>
                         </div>

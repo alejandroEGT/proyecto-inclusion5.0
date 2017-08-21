@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\vendedor;
-use App\VendedorInstitucion;
+use App\Http\Requests\agregaralumnoRequest;
 use App\User;
+use App\VendedorInstitucion;
+use App\vendedor;
+use Illuminate\Http\Request;
+
 class vendedorDependienteController extends Controller
 {
     public function vista_inicio()
@@ -21,7 +23,7 @@ class vendedorDependienteController extends Controller
         	return view('vendedorDependiente.inicio');
     }
 
-    public function insertar(Request $datos){
+    public function insertar(agregaralumnoRequest $datos){
 
         	$us = User::insertar_vendedorDependiente($datos);
 

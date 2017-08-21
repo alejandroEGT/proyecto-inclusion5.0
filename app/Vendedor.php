@@ -61,4 +61,9 @@ class Vendedor extends Model
         $verificar = \DB::select(" CALL `verificarVendedorInstitucional`('".$correo."');");
         return $verificar;
     }
+    protected function idVendedor($id){
+        
+         $id = \DB::select("select * from `vendedor` where id_user = ".$id);
+        return $id;
+    }
 }

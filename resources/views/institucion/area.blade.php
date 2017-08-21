@@ -60,8 +60,42 @@
 		
 
 		<div class="row panel">
-			<div class="col-md-12">
+			<div class="col-md-1">
+				<button data-toggle="collapse" data-target="#demo" class="btn btn-info badge1" data-badge="{{ $contar }}">Personas</button>
+			</div>
+			<div class="col-md-3">
+				<button class="btn btn-success badge1" data-badge="29">Productos y servicios</button>
+			</div>
+			<div class="col-md-5 ">
 				<p><label>Encargado(a):</label> @{{ bd_encargado }}</p>	
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div id="demo" class="collapse">
+						@if (!is_null($venInstitucion))
+							
+							<table class="table table-hover">
+								<tr>
+									<td>Foto</td>
+									<td>Nombre</td>
+									<td>Correo</td>
+								</tr>
+								
+								@foreach ($venInstitucion as $ven)
+									<tr>
+										<td><img height="70" src="{{'/'.$ven->foto}}"></td>
+										<td>{{$ven->nombres.' '.$ven->apellidos}}</td>
+										<td>{{$ven->email}}</td>
+									</tr>
+								@endforeach
+							</table>
+
+						@endif
+						@if (is_null($venInstitucion))
+							<p>no existen registros de usuarios..</p>
+						@endif
+				</div>
 			</div>
 		</div>
 	</div>

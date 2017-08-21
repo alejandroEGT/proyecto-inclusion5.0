@@ -2,10 +2,10 @@
 	margin-top:100px;
 }
 .top{
-	margin-top: 30px;
+	padding-top: 50px;
 }
 .top-reloj{
-	margin-top:80px;
+	padding-top:80px;
 }
 .ico-clock{
 	float: none;
@@ -23,6 +23,14 @@
 	background:url("../ico/house.png");
 	background-size: 100% 100%;
 }
+.ico-photo{
+	float: none;
+    margin: 0 auto;
+	height: 120px;
+	width: 130px;
+	background:url("../ico/photo.png");
+	background-size: 100% 100%;
+}
 
 .centro-link{
 	text-align: center;
@@ -36,7 +44,7 @@
 	margin-right: 15%;
 	margin-left:15%;
 	padding: 8px;
-	box-shadow: 4px 4px 15px #888888;
+	box-shadow: 5px 5px 15px #888888;
 }
 .p-right{
 	text-align: right;
@@ -58,4 +66,17 @@
 .label-centro{
 	color:white;
 	font-size: 25px;
+}
+.subir{
+	text-align: center;
+}
+.papelImagen{
+	margin:0 auto;
+	background: white;
+	border:1px solid #E6E6E6;
+	width: 400px;
+	height: 300px;
+}
+.papelImagen .cabeza{
+	background: #DAEDF2;
 }

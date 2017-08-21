@@ -46,7 +46,8 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/logout','autenticarController@logout');
         Route::get("/index", 'institucionController@vista_institucion');
         Route::get("/agregarAE", 'institucionController@vista_agregarAE');
-        Route::get('agregarAlumno','institucionController@vista_agregarAlumno');
+        Route::get('/agregarAlumno','institucionController@vista_agregarAlumno');
+        Route::post('/agregarAlumno_insert','institucionController@agregar_alumno');
         Route::post('/agregarUsuario', 'areaController@agregarUsuario');
         Route::get('/verArea/{id}','areaController@vista_area');
         Route::get('/correo','emailController@send');
@@ -59,6 +60,8 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
 
         Route::get('/index', 'vendedorDependienteController@vista_inicio');
         Route::get('/logout','autenticarController@logout_venIns');
+        Route::get('/cambiarFoto', 'vendedorDependienteController@vista_cambiarFoto');
+        Route::post('/guardarFoto', 'vendedorDependienteController@guardar_foto');
 
         
 });
@@ -90,6 +93,6 @@ Route::get('/foto','vendedorDependienteController@fotoPerfil');
 Route::post('/agregar_mision', 'institucionController@agregar_mision');
 Route::post('/agregar_vision', 'institucionController@agregar_vision');
 Route::post('/tarerEncargado', 'areaController@traer_encargado');
-
+Route::get('/foto-vendedorIns', 'vendedorDependienteController@traerFotoVendedor');
 
 

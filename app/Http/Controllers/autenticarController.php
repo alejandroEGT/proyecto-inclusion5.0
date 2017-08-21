@@ -17,8 +17,6 @@ class autenticarController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-   
-
     /*Logear una institucion */////////////////////////////////////////////////////////////////////////////////////
   
 	public function vista_login()
@@ -40,8 +38,6 @@ class autenticarController extends Controller
         return redirect('/inicio');
     }
     /*****************************************************************************************************************
-
-
     /**Logear un Vendedor institucionql**/////////////////////////////////////////////////////////////
 
     public function vista_loginVenInst(){
@@ -54,20 +50,17 @@ class autenticarController extends Controller
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
             if(count($verificar)>0 && $verificar[0]->id_rol == 2){  /**"eres vendedor institucional"**/
-
-               
+   
                 if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
-                    // Authentication passed...
-                    return redirect('/userDependiente/index');
-                
+        
+                    return redirect('/userDependiente/index');    
                 }
                 return redirect()->back();
             }
 
             return redirect()->back();
         }
-        //return redirect()->back();
-    
+        
     public function logout_venIns(){
             \Auth::logout();
             return redirect('/inicio');
@@ -84,9 +77,7 @@ class autenticarController extends Controller
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
              if (count($verificar)>0 && $verificar[0]->id_rol == 1) { /**"eres vendedor individual"**/
-
                 if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
-                    // Authentication passed...
                     return redirect('/userIndependiente/index');
                 
                 }
@@ -95,5 +86,4 @@ class autenticarController extends Controller
             }
             return redirect()->back();
      }
-
 }

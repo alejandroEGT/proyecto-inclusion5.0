@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Vendedor;
+use App\Fotoperfil;
 
 class vendedorIndependienteController extends Controller
 {
@@ -22,8 +23,16 @@ class vendedorIndependienteController extends Controller
                 
             $vendedor = Vendedor::insertar_aprobado($datos, $id_user[0]->id);
             if ($vendedor) {
-                return "todo oka";
+                    $id_vendedor = Vendedor::idVendedor($id_user[0]->id);
+
+                    $foto = Fotoperfil::fotoDefault($id_vendedor[0]->id);
+                    if ($foto) {
+                        return "ok";
+                    }
+                    return "error";
             }        
         }
     }
 }
+
+

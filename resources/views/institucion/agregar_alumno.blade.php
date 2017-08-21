@@ -14,7 +14,7 @@
 			</div>
 		</div>
 		
-		<form action="/insertar_vendedor" method="Post">
+		<form action="agregarAlumno_insert" method="Post">
 		{{csrf_field()}}
 		<div class="container estilo-form animated fadeInUp ">
 			<div class="row">
@@ -38,6 +38,13 @@
 						</select>
 						<p class="p-form">Nª telefono</p>
 						<input name="telefono" class="form-control input" type="text">
+						<label class="p-form">Area o especialidad</label>
+						<select name="id_area" class="form-control input" name="" id="">
+							<option value="">Seleccione...</option>
+							@foreach ($area as $a)
+								<option value="{{ $a->id }}">{{ $a->nombre }}</option>	
+							@endforeach
+						</select>
 						<p class="p-form">Correo</p>
 						<input name="correo" class="form-control input" type="text">
 						

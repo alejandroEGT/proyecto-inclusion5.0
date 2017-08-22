@@ -1,10 +1,9 @@
 @extends('vendedorDependiente.master_vendedorDependiente')
 
 @section('content')
-	<br><br><br><br>
-	<div v-if=" fotoPerfil == 'ico/default-avatar.png' ">
 			
-			<div class="container">
+			@if ($foto == "ico/default-avatar.png")
+				<div class="container">
 				<div class="top-top papel">
 					<div class="row">
 						<div class="col-md-offset-1 col-md-2 ">
@@ -15,7 +14,7 @@
 
 						<blockquote >
 						  	<p onmouseover="fun_p(this)"><strong>Primer paso</strong></p>
-							<p class="pequenio"><i class="fa fa-camera" ></i> <a onmouseover="fun_p(this)" href="#">Identíficate con tu foto de perfil</a></p>
+							<p class="pequenio"><i class="fa fa-camera" ></i> <a onmouseover="fun_p(this)" href="{{ url('userDependiente/cambiarFoto') }}">Identíficate con tu foto de perfil</a></p>
 						</blockquote>
 						</div>
 					</div>
@@ -24,9 +23,13 @@
 					<a  onmouseover="fun_a(this)" href="logout">Salir</a>
 				</div>
 			</div>
+			@endif
+			@if ($foto != "ico/default-avatar.png")
+				<p>wtf</p>
+			@endif
 
 	</div>
-	<div v-if=" fotoPerfil != 'ico/default-avatar.png'">bien loco</div>
+
 		
 	</div>
 @endsection

@@ -14,7 +14,7 @@ new Vue({
 	methods:{
 		
 		traerFoto(){
-				this.$http.get('/foto').then(function(response){
+				this.$http.get('/foto-vendedorIns').then(function(response){
 
 					this.fotoPerfil = response.body;
 					console.log(response.body);

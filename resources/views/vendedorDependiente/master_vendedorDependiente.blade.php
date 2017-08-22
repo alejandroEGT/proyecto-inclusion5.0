@@ -59,6 +59,7 @@
                              <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
                     </li>
+                    <li class="pushy-link"><a href="#">Mis Datos</a></li>
                     <li class="pushy-submenu">
                         <button>Formularios</button>
                         <ul>
@@ -96,17 +97,26 @@
         <div id="container">
             <!-- Menu Button -->
                 <nav class="navbar-fixed-top color-verde">
-                  <div class="container-fluid"  >
+                        <div class="row">
+                            <div class="col-md-2">
+                                    <button class="menu-btn">&#9776; Menu</button>              
+                            </div>  
+                            <div class="col-md-4">
 
-                        <p class="p-right">Registrado como: <strong>{{ Auth::user()->email }}</strong></p>
-                  </div>
+                                <input class="form-control"  type="text" name="" placeholder="buscar novedades, instituciones o personas" >
+                            </div>
+                            <div class="col-md-6">
+                                <div class="container-fluid" >
+                                     <p class="p-right">Registrado como: <strong>{{Auth::user()->email}}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                            
                 </nav>
-                <div class="fx">
-                    <button class="menu-btn">&#9776; Menu</button>
-                </div>
+                
                 @yield('content')
 
-        </div>
+            </div>
         @endif 
        
     </div>    

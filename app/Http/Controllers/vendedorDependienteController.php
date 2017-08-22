@@ -4,81 +4,67 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\agregaralumnoRequest;
 use App\User;
+<<<<<<< HEAD
 use App\VendedorInstitucion;
 use App\vendedor;
 use Illuminate\Http\Request;
 
+=======
+use App\Fotoperfil;
+>>>>>>> a796c04fbe11c5cd8ca4c2046c9880f7ba92401a
 class vendedorDependienteController extends Controller
 {
     public function vista_inicio()
-    {
-            $estado;
+    {       
+            $foto = Fotoperfil::traerFoto();
             $verificEstado = Vendedor::verificEstado(\Auth::user()->id);
-          
-            foreach ($verificEstado as $verific) {
-                $estado = $verific->id_estado;
-            }
+             $estado = $verificEstado[0]->id_estado;
             \Session::put('estado', $estado);
             
-        	return view('vendedorDependiente.inicio');
+        	return view('vendedorDependiente.inicio')->with('foto', $foto);
+    }
+    public function vista_cambiarFoto()
+    {
+        return view('vendedorDependiente.cambiarFoto');
     }
 
     public function insertar(agregaralumnoRequest $datos){
 
-        	$us = User::insertar_vendedorDependiente($datos);
+            $us = User::insertar_vendedorDependiente($datos);
+        	
+             if($us){
+                    $id_us = User::where('email','=',"$datos->correo")->get();
+                    $ven = Vendedor::insertar_esperando($datos, $id_us[0]->id);
+                     if($ven){
 
-        	if($us){
+                            $id_ven = Vendedor::filtrar($id_us[0]->id); 
+                            $venDependiente = VendedorInstitucion::insertar($datos, $id_ven[0]->id);
+                              if($venDependiente){
 
-        		$id_us = User::where('email','=',"$datos->correo")->get();
-        		foreach ($id_us as $id) {
-        			
-        			$forId = $id->id;
-        			//dd($forId);
-        			$ven = Vendedor::insertar_esperando($datos, $forId);
-        			if($ven){
+                                        $id_vendedor = Vendedor::idVendedor($id_us[0]->id);
+                                        $foto = Fotoperfil::fotoDefault($id_vendedor[0]->id);
+                                        if ($foto) 
+                                        {
+                                            return "ok";
+                                        }
+                                }
 
-        				$id_ven = Vendedor::filtrar($forId);
-        				
-        				foreach ($id_ven as $idV) {
-        					
-        						$forId_ven = $idV->id;
-        					
-        						$venDependiente = VendedorInstitucion::insertar($datos, $forId_ven);
+                     }
 
-    		    				if($venDependiente){
-    		    						return "ok";
-    		    				}
-        						return "falso en venDependiente";
-        				}
-        			}
-        			return "falso en ven";
-        		}
-
-        	}
-        	return "falso en us";
-    }
-
-    static function fotoPerfil(){
-
-            $id_ven = VendedorInstitucion::idVendedor(\Auth::user()->id);
-
-            foreach ($id_ven as $idVen) {
-                $id_v = $idVen->id;
-
-                 $foto = VendedorInstitucion::traerFoto($id_v);
-                 
-                 
-
-                 if (count($foto)) {
-                    foreach ($foto as $f) {
-                        return response()->json($f->foto);
-                    }
-                 }
-                 $foto = "ico/default-avatar.png";
-                 return response()->json($foto);
-           
              }
-            
+    }                          
 
+    public function traerFotoVendedor(){
+
+        $dato = VendedorInstitucion::fotoVendedorInstitucion();
+        return $dato;
+    }
+    public function guardar_foto(request $dato)
+    {   
+
+        $guardar = Fotoperfil::guardar($dato);
+        return $guardar;
     }
 }
+           
+             

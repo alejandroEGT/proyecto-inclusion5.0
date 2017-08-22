@@ -60,4 +60,36 @@ class User extends Authenticatable
             }
             return false;
     }
+    protected function insertar_vendedorDependiente_dentro($datos, $clave){
+
+            $user = new User;
+
+            $user->nombres = $datos->nombres;
+            $user->apellidos = $datos->apellidos;
+            $user->email = $datos->correo;
+            $user->password = \Hash::make($clave);
+            $user->id_rol = "2";/* id de vendedor dependiente */
+            $user->id_sexo = $datos->id_sexo;
+            
+            if($user->save()){
+                return true;
+            }
+            return false;
+    }
+    protected function insertar_userInstitucion($datos, $claveGen){
+
+            $user = new User;
+
+            $user->nombres = $datos->nombres;
+            $user->apellidos = $datos->apellidos;
+            $user->email = $datos->correo;
+            $user->password = \Hash::make($claveGen);
+            $user->id_rol = "3";/* id de encargado de area de Institucion,  */
+            $user->id_sexo = $datos->id_sexo;
+            
+            if($user->save()){
+                return true;
+            }
+            return false;
+    }
 }

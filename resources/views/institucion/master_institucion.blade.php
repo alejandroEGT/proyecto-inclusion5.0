@@ -19,29 +19,30 @@
                 <ul>
                     <li class="pushy-submenu" >
                         
-                        <div class="min-perfil-instituto" >
+                        <div class="min-perfil-institucion" >
                             <img v-for="item in db_institucion" height="70"  :src="'/'+item.logo" alt=""/>
                             <p class="nombre-institucion-perfil" v-for="item in db_institucion">
                                 @{{ item.nombre }}
                             </p>
-                            <p><a href="logout"><img src="/ico/arrows.png"  alt=""/></a></p>
+                            <p><a href="{{ url('institucion/logout') }}"><img src="/ico/arrows.png"  alt=""/></a></p>
                         </div>
                         
                         <hr/>
                     </li>
+                    <li class="pushy-link"><a href="{{ url('institucion/index') }}">Inicio</a></li>
                     <li class="pushy-submenu">
                         <button>Nuestra Información</button>
                         <ul>
-                            <li class="pushy-link"><a href="index">Misión y Visión</a></li>
-                            <li class="pushy-link"><a href="/login">Datos específicos</a></li>
-                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                            <li class="pushy-link"><a href="{{ url('institucion/misionyvision') }}">Misión y Visión</a></li>
+                            <li class="pushy-link"><a href="#">Datos específicos</a></li>
+                            <li class="pushy-link"><a href="noticia">Publicar noticias</a></li>
                         </ul>
                     </li>
                     <li class="pushy-submenu">
                         <button>Nuestro equipo</button>
                         <ul>
-                            <li class="pushy-link"><a href="index">Inicio</a></li>
-                            <li class="pushy-link"><a href="/login">Login de institución</a></li>
+                            <li class="pushy-link"><a href="#">Inicio</a></li>
+                            <li class="pushy-link"><a href="#">Login de institución</a></li>
                             <li class="pushy-link"><a href="#">Item 3</a></li>
                         </ul>
                     </li>
@@ -59,7 +60,7 @@
                             <li class="pushy-link"><a href="#">@{{ item.nombre}}</a></li>
                         </ul>
                     </li>
-                    <li class="pushy-link"><a href="notificacio_vendedor"><i class="fa fa-globe"></i> Notificaciones <span class="badge">@{{ notificacion }}</span></a></li>
+                    <li class="pushy-link"><a href="{{ url('institucion/notificacio_vendedor') }}"><i class="fa fa-globe"></i> Notificaciones <span class="badge">@{{ notificacion }}</span></a></li>
                     <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
                     <li class="pushy-link"><a href="#">Item 4</a></li>
@@ -108,6 +109,6 @@
         <script src="/js/vue/vue_master_institucion.js"></script>
         <script src="/js/sweetalert2.js" ></script>
 		<script src="/js/pushy.min.js"></script>
-		@include('mensajes.activa_desactiva')      
+		@include('mensajes.activa_desactiva')     
 
 </html>

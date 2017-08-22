@@ -46,16 +46,22 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/logout','autenticarController@logout');
         Route::get("/index", 'institucionController@vista_institucion');
         Route::get("/agregarAE", 'institucionController@vista_agregarAE');
-        Route::get('agregarAlumno','institucionController@vista_agregarAlumno');
+        Route::get('/agregarAlumno','institucionController@vista_agregarAlumno');
+        Route::post('/agregarAlumno_insert','institucionController@agregar_alumno');
+        Route::post('/agregarUsuario', 'areaController@agregarUsuario');
         Route::get('/verArea/{id}','areaController@vista_area');
         Route::get('/correo','emailController@send');
         Route::get('/notificacio_vendedor', 'institucionController@vista_notificacio_vendedor');
+        Route::get('/misionyvision', 'institucionController@vista_misionyvision');
+        Route::get('/noticia', 'institucionController@vista_noticia');
 });
 
 Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucional']], function () {
 
         Route::get('/index', 'vendedorDependienteController@vista_inicio');
         Route::get('/logout','autenticarController@logout_venIns');
+        Route::get('/cambiarFoto', 'vendedorDependienteController@vista_cambiarFoto');
+        Route::post('/guardarFoto', 'vendedorDependienteController@guardar_foto');
 
         
 });
@@ -84,7 +90,9 @@ Route::get('/filtrarArea/{id}','invitadoController@filtroArea');
 Route::post('/aceptarSolicitudUsuario','institucionController@aceptarSolicitudUsuario');
 Route::get('/traerNotificaciones', 'institucionController@traerNotificaciones');
 Route::get('/foto','vendedorDependienteController@fotoPerfil');
-
-
+Route::post('/agregar_mision', 'institucionController@agregar_mision');
+Route::post('/agregar_vision', 'institucionController@agregar_vision');
+Route::post('/tarerEncargado', 'areaController@traer_encargado');
+Route::get('/foto-vendedorIns', 'vendedorDependienteController@traerFotoVendedor');
 
 

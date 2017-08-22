@@ -43,8 +43,8 @@
                     <li class="pushy-submenu">
                         <button>Formularios</button>
                         <ul>
-                            <li class="pushy-link"><a href="/inicio">Registros</a></li>
-                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                            <li class="pushy-link"><a href="/inicio">Registros de usuarios</a></li>
+                            <li class="pushy-link"><a href="/formInstitucion">Registro de institución</a></li>
                         </ul>
                     </li>
                     <li class="pushy-submenu">
@@ -52,7 +52,7 @@
                         <ul>
                            <li class="pushy-link"><a href="/login_institucion">Institución</a></li>
                             <li class="pushy-link"><a href="/login_vendedorInst">Vendedor institucional</a></li>
-                            <li class="pushy-link"><a href="/login_vendedor">Vendedor Independiente</a></li>
+                            <li class="pushy-link"><a href="/login_vendedor">Vendedor Individual</a></li>
                         </ul>
                     </li>
                     <li class="pushy-submenu">

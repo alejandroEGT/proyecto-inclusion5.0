@@ -10,6 +10,8 @@ new Vue({
 		bd_mv:{
 			mision:'', vision:''
 		},
+		getMision:[],
+		getVision:[],
 		bd_encargado:'',
 		
 	},
@@ -58,7 +60,7 @@ new Vue({
 				    
 
 						this.$http.post('/aceptarSolicitudUsuario', $val).then(function(response){
-								//$('div#contenidoAjax').html('<p><img src="https://s-media-cache-ak0.pinimg.com/originals/0c/44/da/0c44dacf1b038014a6f941131c5e8aa2.gif" /></p>');
+								
 								console.log(response.body);
 								this.notificar();
 								location.reload();
@@ -74,10 +76,10 @@ new Vue({
 		guardar_mision(){
 
 						this.$http.post('/agregar_mision', this.bd_mv ).then(function(response){
-								//$('div#contenidoAjax').html('<p><img src="https://s-media-cache-ak0.pinimg.com/originals/0c/44/da/0c44dacf1b038014a6f941131c5e8aa2.gif" /></p>');
+				
 								console.log(response.body);
-								//this.notificar();
-								//location.reload();
+								this.traerMision();
+								
 						},
 							(error) =>{
 								alert(error);
@@ -91,10 +93,9 @@ new Vue({
 		guardar_vision(){
 
 						this.$http.post('/agregar_vision', this.bd_mv ).then(function(response){
-								//$('div#contenidoAjax').html('<p><img src="https://s-media-cache-ak0.pinimg.com/originals/0c/44/da/0c44dacf1b038014a6f941131c5e8aa2.gif" /></p>');
+								
 								console.log(response.body);
-								//this.notificar();
-								//location.reload();
+								this.traerVision();
 						},
 							(error) =>{
 								alert(error);
@@ -105,9 +106,39 @@ new Vue({
 					      }
 					    )
 		},
+		traerMision(){
+						this.$http.get('/traer_mision').then(function(response){
+								this.getMision = response.body;
+								console.log(response.body);
+								
+						},
+							(error) =>{
+								alert(error);
+							}
+						)
+						.catch((e) => {
+					        console.log("Caught", e);
+					      }
+					    )
+		},
+		traerVision(){
+						this.$http.get('/traer_vision' ).then(function(response){
+								this.getVision = response.body;
+								console.log(response.body);
+						},
+							(error) =>{
+								alert(error);
+							}
+						)
+						.catch((e) => {
+					        console.log("Caught", e);
+					      }
+					    )
+
+		},
 		traerEncargado(){
 
-						this.$http.post('/tarerEncargado', $('#v_area').text() ).then(function(response){
+						this.$http.post('/traerEncargado', $('#v_area').text() ).then(function(response){
 								
 								console.log(response.body);
 								this.bd_encargado = response.body;
@@ -144,6 +175,7 @@ new Vue({
 		this.llenarTablaArea();
 		this.notificar();
 		this.traerEncargado();
-		
+		this.traerMision();
+		this.traerVision();
 	}
 })

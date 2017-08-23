@@ -11,27 +11,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Institucion extends Authenticatable
 {
     use Notifiable;
-    //public $timestamps = false;
     protected $table="institucion";
-    //protected $guard = "institucion";
 
      protected $fillable = [
          'email', 'password',
     ];
-
-    
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
     protected function insertar($datos){
-
-
         $url="logo";
         $file = $datos->file('logo')->getClientOriginalExtension();
         $imageName = time().'.'.$datos->file('logo')->getClientOriginalExtension();//nombre de la imagen como tal.
@@ -46,7 +35,6 @@ class Institucion extends Authenticatable
     	$instituto->logo = $url.'/'.$imageName;
     	$instituto->email = $datos->correo;
     	$instituto->password = bcrypt($datos->clave);
-    	
     	if($instituto->save()){
             $datos->file('logo')->move(public_path($url), $imageName);
     		return 1;
@@ -54,12 +42,10 @@ class Institucion extends Authenticatable
     	else{
     		return 0;
     	}
-
-
     }
 
 
-     private function logo($datos){
+    private function logo($datos){
     	$url="logo";
     	$file = $datos->file('logo')->getClientOriginalExtension();
     	$imageName = time().'.'.$datos->file('logo')->getClientOriginalExtension();//nombre de la imagen como tal.
@@ -82,5 +68,15 @@ class Institucion extends Authenticatable
     protected function datos(){
             $datos = \DB::select('select * from `institucion` where id ='.\Auth::guard('institucion')->user()->id);
             return $datos[0];
+    }
+    protected function traerMision()
+    {
+            $mision = \DB::select('select vision from `institucion` where id = '.\Auth::guard('institucion')->user()->id);
+            return $mision;
+    }
+     protected function traerVision()
+    {
+            $vision = \DB::select('select vision from `institucion` where id = '.\Auth::guard('institucion')->user()->id);
+            return $vision;
     }
 }

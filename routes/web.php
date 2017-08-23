@@ -54,6 +54,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/notificacio_vendedor', 'institucionController@vista_notificacio_vendedor');
         Route::get('/misionyvision', 'institucionController@vista_misionyvision');
         Route::get('/noticia', 'institucionController@vista_noticia');
+        Route::get('/buscador','institucionController@buscador');
 });
 
 Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucional']], function () {
@@ -92,7 +93,9 @@ Route::get('/traerNotificaciones', 'institucionController@traerNotificaciones');
 Route::get('/foto','vendedorDependienteController@fotoPerfil');
 Route::post('/agregar_mision', 'institucionController@agregar_mision');
 Route::post('/agregar_vision', 'institucionController@agregar_vision');
-Route::post('/tarerEncargado', 'areaController@traer_encargado');
+Route::get('/traer_mision', 'institucionController@traer_mision');
+Route::get('/traer_vision', 'institucionController@traer_vision');
+Route::post('/traerEncargado', 'areaController@traer_encargado');
 Route::get('/foto-vendedorIns', 'vendedorDependienteController@traerFotoVendedor');
 
 

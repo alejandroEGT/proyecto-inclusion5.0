@@ -30,7 +30,7 @@
 					</div>
 					<div class="col-md-4">
 						<p class="p-form">Sexo</p>
-						<select name="id_sexo"  class="form-control input" name="" id="">
+						<select name="id_sexo"  class="form-control input">
 							<option value="">Seleccione...</option>
 							@foreach ($sexo as $sex)
 								<option value="{{$sex->id}}">{{ $sex->nombre }}</option>
@@ -39,7 +39,7 @@
 						<p class="p-form">Nª telefono</p>
 						<input name="telefono" class="form-control input" type="text">
 						<label class="p-form">Area o especialidad</label>
-						<select name="id_area" class="form-control input" name="" id="">
+						<select name="id_area" class="form-control input">
 							<option value="">Seleccione...</option>
 							@foreach ($area as $a)
 								<option value="{{ $a->id }}">{{ $a->nombre }}</option>	
@@ -56,7 +56,20 @@
 				</div>
 			</div>
 		</div>
-		
+		@if (count($errors))
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+						<div class="alert alert-danger">
+						    <a href="" class="close" data-dismiss="alert">&times;</a>
+						    @foreach ($errors->all() as $e)
+								<ul>
+									<li>{{ $e }}</li>
+								</ul>
+							@endforeach
+						</div>
+					</div>
+				</div>	
+			@endif
 	</form>	
 	</div>
 @endsection

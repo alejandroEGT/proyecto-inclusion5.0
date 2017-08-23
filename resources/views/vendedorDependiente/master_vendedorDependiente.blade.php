@@ -107,7 +107,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="container-fluid" >
-                                     <p class="p-right">Registrado como: <strong>{{Auth::user()->email}}</strong></p>
+                                     <p class="p-right"><label onmouseover="fun_p(this)">Registrado como: {{Auth::user()->email}}</label></p>
                                 </div>
                             </div>
                         </div>

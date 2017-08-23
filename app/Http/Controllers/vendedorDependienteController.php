@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\vendedor;
-use App\VendedorInstitucion;
+use App\Http\Requests\agregaralumnoRequest;
 use App\User;
+<<<<<<< HEAD
+use App\VendedorInstitucion;
+use App\vendedor;
+use Illuminate\Http\Request;
+
+=======
 use App\Fotoperfil;
+>>>>>>> a796c04fbe11c5cd8ca4c2046c9880f7ba92401a
 class vendedorDependienteController extends Controller
 {
     public function vista_inicio()
@@ -23,7 +28,7 @@ class vendedorDependienteController extends Controller
         return view('vendedorDependiente.cambiarFoto');
     }
 
-    public function insertar(Request $datos){
+    public function insertar(agregaralumnoRequest $datos){
 
             $us = User::insertar_vendedorDependiente($datos);
         	

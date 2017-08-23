@@ -64,7 +64,7 @@
 							 	//hablar($(event.target).text());
 							});
 							
-							$( "button, input[type='button'], input[type='submit']" ).mouseover(function(event) {
+							$( "button" ).mouseover(function(event) {
 									var ph = $(this).text();
 				  					hablar("Botón "+ph);
 							 	//hablar($(event.target).text());
@@ -74,7 +74,7 @@
 				  					hablar("ingrese aqui "+ph);
 							 	//hablar($(event.target).text());
 							});
-							$( "input[type='submit']" ).mouseover(function(event) {
+							$( "input[type='button'], input[type='submit']" ).mouseover(function(event) {
 									var ph = $(this).attr("value");
 				  					hablar("Botón para "+ph);
 							 	//hablar($(event.target).text());

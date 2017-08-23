@@ -12,6 +12,9 @@ use App\Vendedor;
 use App\VendedorInstitucion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Sexo;
+use App\Fotoperfil;
+use App\Http\Requests\vendedorInstitucionRequest;
 class institucionController extends Controller
 {
     
@@ -45,7 +48,9 @@ class institucionController extends Controller
             return view('institucion.noticia');
     }
 
+
     public function agregar_alumno(FormUsuarioRequest $datos)
+    public function agregar_alumno(vendedorInstitucionRequest $datos)
     {
         $genclave = $this->genclave();
         $correo = $datos->correo;
@@ -72,6 +77,14 @@ class institucionController extends Controller
                      }
              }
         }
+    }
+
+    public function buscador(Request $dato)
+    {   
+         $this->validate($dato, ['buscador' => 'required']);
+        $resultado = User::buscador($dato->buscador);
+
+        return view('institucion.buscador_institucion')->with('datos',$resultado);
     }
     /*Peticiones en ajax mediante vue y vue-resource*/
 
@@ -102,6 +115,16 @@ class institucionController extends Controller
                     }   
                     return "error";
             
+    }
+    public function traer_mision()
+    {
+          $mision = Institucion::datos();
+          return response()->json($mision->mision);
+    }
+    public function traer_vision()
+    {
+          $vision = Institucion::datos();
+          return response()->json($vision->vision);
     }
     public function traerDatosInstitucion(){
 

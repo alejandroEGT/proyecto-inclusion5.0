@@ -80,8 +80,15 @@
                                     <button class="menu-btn">&#9776; Menu</button>              
                             </div>  
                             <div class="col-md-4">
-
-                                <input class="form-control"  type="text" name="" placeholder="buscar novedades, instituciones o personas" >
+                                <form action="{{ url('institucion/buscador') }}" method="get">
+                                    <div class="input-group">
+                                    {{ csrf_field() }}
+                                        <input name="buscador" type="text" class="form-control" placeholder="buscar novedades, instituciones o personas">
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-search" type="submit"><i class="fa fa-search fa-fw"></i></button>
+                                          </span>
+                                    </div>
+                                </form>    
                             </div>
                             <div class="col-md-6">
                                 <div class="container-fluid" v-for="item in db_institucion" >

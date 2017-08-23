@@ -26,7 +26,7 @@ class usuarioRequest extends FormRequest
         return [
             'nombres' => 'required',
             'apellidos' => 'required',
-            'correo' => 'required',
+            'correo' => 'unique:users,email',
             'telefono' => 'required',
             'id_sexo' => 'required',
         ];

@@ -1,4 +1,4 @@
-@extends('institucion.master_institucion')
+ @extends('institucion.master_institucion')
 
 @section('content')
 

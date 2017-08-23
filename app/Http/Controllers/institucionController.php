@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Http\Request;
-use App\User;
-use App\Institucion;
 use App\Area;
+use App\Fotoperfil;
+use App\Http\Requests\FormUsuarioRequest;
+use App\Institucion;
+use App\Sexo;
+use App\User;
 use App\Vendedor;
 use App\VendedorInstitucion;
-use App\Sexo;
-use App\Fotoperfil;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 class institucionController extends Controller
 {
     
@@ -44,7 +45,7 @@ class institucionController extends Controller
             return view('institucion.noticia');
     }
 
-    public function agregar_alumno(Request $datos)
+    public function agregar_alumno(FormUsuarioRequest $datos)
     {
         $genclave = $this->genclave();
         $correo = $datos->correo;

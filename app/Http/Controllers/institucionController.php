@@ -77,9 +77,12 @@ class institucionController extends Controller
     public function buscador(Request $dato)
     {   
          $this->validate($dato, ['buscador' => 'required']);
-        $resultado = User::buscador($dato->buscador);
-
-        return view('institucion.buscador_institucion')->with('datos',$resultado);
+        $vendedor = User::buscador($dato->buscador);
+        $institucion = Institucion::buscar($dato->buscador);
+        //return $institucion;
+        return view('institucion.buscador_institucion')
+        ->with('vendedor',$vendedor)
+        ->with('institucion',$institucion);
     }
     /*Peticiones en ajax mediante vue y vue-resource*/
 

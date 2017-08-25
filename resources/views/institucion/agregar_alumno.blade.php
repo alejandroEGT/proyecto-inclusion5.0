@@ -9,12 +9,12 @@
 			<div class="col-md-6">
 				<p class="panel-title-agregar">Ingresa un alumno</p>
 				<p class="panel-body-mst">
-					En este formulario podras registrar a los alumnos que ayudan a levantar la institución, cabe señalar que ellos mismos tambien podran hacerlo desde un formulario que esta fuera de esta sesión, al registrar a un alumno, su clave será enviada a su correo electrónico, la cual será temporal hasta que la actualize.
+					En este formulario podrás registrar a los alumnos que ayudan a levantar la institución, cabe señalar que ellos mismos también podrán hacerlo desde un formulario que esta fuera de esta sesión, al registrar a un alumno, su clave será enviada a su correo electrónico, la cual será temporal hasta que la actualice.
 				</p>
 			</div>
 		</div>
 				
-		<form action="/insertar_vendedor" method="Post">
+		<!--<form action="/insertar_vendedor" method="Post">-->
 		<form action="agregarAlumno_insert" method="Post">
 		{{csrf_field()}}
 		<div class="container estilo-form animated fadeInUp ">
@@ -53,10 +53,10 @@
 								<option value="{{$sex->id}}">{{ $sex->nombre }}</option>
 							@endforeach
 						</select>
-						<p class="p-form">Nª telefono</p>
+						<p class="p-form">Nª teléfono</p>
 						<input name="telefono" class="form-control input" type="text" value="{{ old('telefono') }}">
 						
-						<label class="p-form">Area o especialidad</label>
+						<label class="p-form">Área o especialidad</label>
 						<select name="id_area" class="form-control input">
 							<option value="">Seleccione...</option>
 							@foreach ($area as $a)
@@ -74,23 +74,6 @@
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-		@if (count($errors))
-				<div class="row">
-					<div class="col-md-offset-3 col-md-6">
-						<div class="alert alert-danger">
-						    <a href="" class="close" data-dismiss="alert">&times;</a>
-						    @foreach ($errors->all() as $e)
-								<ul>
-									<li>{{ $e }}</li>
-								</ul>
-							@endforeach
-						</div>
-					</div>
-				</div>	
-			@endif
-=======
->>>>>>> b4c5f1a97d5d70c888124f7882bad8074842f920
 	</form>	
 	</div>
 @endsection

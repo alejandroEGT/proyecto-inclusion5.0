@@ -24,7 +24,7 @@
 						</div>
 						<div class="row top">
 							<div class="col-md-offset-4 col-md-4">
-								<input class="btn btn-info input-btn" type="submit" value="Registrar">
+								<input class="btn btn-info input-btn" type="submit" value="Iniciar">
 							</div>
 						</div>
 				</div>		

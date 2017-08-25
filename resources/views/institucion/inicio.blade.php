@@ -6,7 +6,7 @@
 	<div class="padre" >
 		<div class="row">
 			<div class="col-md-12 well">
-				<div class="centro" >
+				<div class="centro1" >
 					<img src="{{ '/'.$institucion->logo }}" width="100">
 					<p class="p-titulo-inst"> {{ $institucion->nombre }} </p>
 
@@ -20,10 +20,10 @@
 					<p>Publicar tus novedades <div class="ico-push" ></div></p>
 				</div>
 				<div class="papel-body" >
-					<p>Puedes publicar tus novedades cuando gustes, tambien lo podran hacer personas que pertenescan a {{Auth::guard('institucion')->user()->nombre}}</p>
+					<p>Puedes publicar tus novedades cuando gustes, también lo podrán hacer personas que pertenezcan a {{Auth::guard('institucion')->user()->nombre}}</p>
 						<div class="botones-grupo">
-							<button class="btn btn-verde" >Pubicar Producto</button>
-							<button class="btn btn-naranja" >Pubicar Servicio</button>
+							<button class="btn btn-verde" >Publicar Producto</button>
+							<button class="btn btn-naranja" >Publicar Servicio</button>
 						</div>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 					  <div class="panel-heading">Agregar información a nuestra institución</div>
 					  <div class="panel-body">
 					  		<div class="list-group">
-	 							<a class="list-group-item" href="agregarAE"> <i class="fa fa-plus"></i> Agregar Area / Especialidad</a>
+	 							<a class="list-group-item" href="agregarAE"> <i class="fa fa-plus"></i> Agregar Área / Especialidad</a>
 	 							<a class="list-group-item" href="agregarAlumno"> <i class="fa fa-plus"></i> Agregar Alumno</a>
 	 							<a class="list-group-item" href="#"> <i class="fa fa-plus"></i> Agregar mi sitio web</a>
  						</div>

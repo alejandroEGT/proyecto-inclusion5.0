@@ -37,6 +37,7 @@ class vendedorIndependienteController extends Controller
                     return "error";
             }        
         }
+        return "error";
     }
 }
 

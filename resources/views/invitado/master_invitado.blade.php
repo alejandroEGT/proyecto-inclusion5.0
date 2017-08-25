@@ -78,7 +78,7 @@
         <div id="container">
             <!-- Menu Button -->
             <div class="fx">
-            	<button class="menu-btn">&#9776; Menu</button>
+            	<button id="menu-btn" class="menu-btn">&#9776; Menú</button>
             </div>
 			@yield('content')
         </div>

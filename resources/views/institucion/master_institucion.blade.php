@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('css/estilo_institucion.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body onMouseMove="stopScroll();">
+<body onMouseMove="stopScroll();" class="body-institucion">
         
     <div id="master" >
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
@@ -55,7 +55,7 @@
                         </ul>
                     </li>
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-cube"></i> Especialidad / Areas</button>
+                        <button><i class="fa fa-cube"></i> Especialidad / Áreas</button>
                         <ul v-for="item in db_area">
                             <li class="pushy-link"><a href="#">@{{ item.nombre}}</a></li>
                         </ul>
@@ -77,7 +77,7 @@
                 <nav class="navbar-fixed-top color-verde">
                         <div class="row">
                             <div class="col-md-2">
-                                    <button class="menu-btn">&#9776; Menu</button>              
+                                    <button class="menu-btn">&#9776; Menú</button>              
                             </div>  
                             <div class="col-md-4">
                                 <form action="{{ url('institucion/buscador') }}" method="get">
@@ -94,7 +94,7 @@
                                 <div class="container-fluid" v-for="item in db_institucion" >
 
                                      <p class="p-right">Registrado como: <strong>@{{item.email}}
-                                     </strong><a href="logout"><img src="/ico/arrows.png"  alt=""/></a></p>
+                                     </strong><a href="{{ url('institucion/logout') }}"><img src="/ico/arrows.png"  alt=""/></a></p>
                                      
                                 </div>
                             </div>
@@ -116,6 +116,6 @@
         <script src="/js/vue/vue_master_institucion.js"></script>
         <script src="/js/sweetalert2.js" ></script>
 		<script src="/js/pushy.min.js"></script>
-		@include('mensajes.activa_desactiva')     
+		{{--@include('mensajes.activa_desactiva') --}}   
 
 </html>

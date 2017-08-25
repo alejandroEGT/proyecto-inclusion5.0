@@ -10,7 +10,7 @@
 			<div class="col-md-6">
 				<p class="panel-title-agregar">Ingresa un área o especialidad </p>
 				<p class="panel-body-mst">
-					En este formulario podras registrar las áreas o especialidades que tenga la institución, tambien podras asignar un encargado en cada area o especialidd.
+					En este formulario podrás registrar las áreas o especialidades que tenga la institución, también podrás asignar un encargado en cada área o especialidad.
 				</p>
 			</div>
 		</div>

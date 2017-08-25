@@ -1,6 +1,14 @@
-.centro{
+.body-institucion{
+	background: #FAFAFA;
+}
+.centro1{
 	padding-top: 50px;
 	text-align: center;
+}
+.centro2 {
+	/*background:red;*/
+	text-align: center;
+    margin: 0 auto;
 }
 .padre{
 	padding-top: 50px;
@@ -98,6 +106,14 @@
 	background:url("../ico/mundo.png");
 	background-size: 100% 100%;
 }
+.ico-group{
+	float: none;
+    margin: 0 auto;
+	height: 50px;
+	width: 50px;
+	background:url("../ico/group.png");
+	background-size: 100% 100%;
+}
 .tr-estilo{
 	color:white;
 	background-color: #1A5276;
@@ -115,11 +131,7 @@
 	border-radius: 5px;
 	border-style: dotted;
 }
-.centro {
-	/*background:red;*/
-	text-align: center;
-    margin: 0 auto;
-}
+
 .papel-titulo{/*ejemplo para poder ajustar el texto en nuestro div para los comandos de lector de texto*/
 	background:;
 	color:black;
@@ -199,4 +211,22 @@
    line-height:18px;
    border-radius:50%;
    box-shadow:0 0 1px #333;
+}
+.foto-buscar{
+
+	height: 130px;
+	width:200px;
+	/*height: 50%; width: 70%;*/
+}
+.body-buscar{
+	background: white;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+.lbl_titulo{
+	font-size: 18px;
+	margin-left:10%;
+}
+.p-nothing{
+	font-size: 20px;
 }

@@ -95,7 +95,7 @@ class User extends Authenticatable
 
     protected function buscador($dato){
 
-            $resultado = \DB::select("CALL `buscador_vendedor`('%".$dato."%');");
+            $resultado = \DB::select("CALL `buscar_vendedor`('%".$dato."%');");
             return $resultado;
     }
 }

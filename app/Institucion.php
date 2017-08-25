@@ -79,4 +79,9 @@ class Institucion extends Authenticatable
             $vision = \DB::select('select vision from `institucion` where id = '.\Auth::guard('institucion')->user()->id);
             return $vision;
     }
+     protected function buscar($dato){
+
+        $resultado = \DB::select("CALL `buscar_institucion`('%".$dato."%');");
+        return $resultado;
+    }
 }

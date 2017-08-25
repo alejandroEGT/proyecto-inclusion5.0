@@ -66,4 +66,5 @@ class Vendedor extends Model
          $id = \DB::select("select * from `vendedor` where id_user = ".$id);
         return $id;
     }
+
 }

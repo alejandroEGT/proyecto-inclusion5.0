@@ -10,7 +10,7 @@
 							<div class="ico-house" ></div>
 						</div>
 						<div class="col-md-6  ">
-						<p onmouseover="fun_p(this)" class=" ">BienVenido <strong>{{ Auth::user()->nombres.' '.Auth::user()->apellidos }}</strong>, en esta plataforma podras publicar tus productos y/o servicios que tú sepas hacer, tambien tenemos algunas herramientas que te podran ayudar en el acceso y navegabilidad en el sitio", para mas detalles pulsa <a href="#">aquí</a></p>
+						<p onmouseover="fun_p(this)" class=" ">Bienvenido <strong>{{ Auth::user()->nombres.' '.Auth::user()->apellidos }}</strong>, en esta plataforma podrás publicar tus productos y/o servicios que tú sepas hacer, también tenemos algunas herramientas que te podrán ayudar en el acceso y navegabilidad en el sitio", para más detalles pulsa <a href="#">aquí</a></p>
 
 						<blockquote >
 						  	<p onmouseover="fun_p(this)"><strong>Primer paso</strong></p>
@@ -25,7 +25,12 @@
 			</div>
 			@endif
 			@if ($foto != "ico/default-avatar.png")
-				<p>wtf</p>
+
+				<div class="container">
+					<div class="top-top">
+						BienVenido
+					</div>
+				</div>	
 			@endif
 
 	</div>

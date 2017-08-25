@@ -10,6 +10,7 @@ use App\User;
 use App\Usuarioinstitucion;
 use App\Institucion;
 use App\VendedorInstitucion;
+use Illuminate\Support\Facades\Mail;
 class areaController extends Controller
 {
 
@@ -33,17 +34,28 @@ class areaController extends Controller
                 return redirect()->back()->withErrors(['Ya existe un usuarion en esta area']);;
             } 
 
-    		$claveGen = $this->genclave();
-    		$user = User::insertar_userInstitucion($datos, $claveGen);
+    		$genclave = $this->genclave();
+            $correo = $datos->correo;
+            \Session::put('usuario',$datos->nombres.' '.$datos->apellidos);//obtener usuario y enviarlo a clave.blade.php
+            \Session::put('clave',$genclave);//obtener clave y enviarlo a clave.blade.php
+    		$user = User::insertar_userInstitucion($datos, $genclave);
     		if ($user) {
     			$idUser = User::where('email','=', $datos->correo)->get();
     			$userInstitucion = Usuarioinstitucion::insertar($datos, $idUser[0]->id);
     			if($userInstitucion){
+                    
+                        Mail::send(['text'=>'emails.clave'],['name','janin'],function ($message) use ($correo)
+                                      {
+                                          $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
+                                          $message->to($correo,'to jano');
+                                      });
+                    
+
     				return redirect()->back();
     			}
-    			return "other kkck";
+    			return "other error";
     		}
-    		return "kkck";
+    		return "error";
     }
 
     public function genclave(){

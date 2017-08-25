@@ -12,7 +12,7 @@
 			</div>
 			<div class="col-md-6">
 			<p><label>Agregar encargado</label></p>
-			<small><label>Al registrar un encargado la contraseña temporal se le enviará a su correo, Una vez añadido un encargado podras visualizar las actividades de esta area</label></small>
+			<small><label>Al registrar un encargado la contraseña temporal se le enviará a su correo, Una vez añadido un encargado podrás visualizar las actividades de esta área</label></small>
 			<hr>
 				<form action="{{ url('institucion/agregarUsuario') }}" method="post"  >
 					<div class="row">
@@ -28,7 +28,7 @@
 						</div>
 						<div class="col-md-6">
 							<label>Nª Teléfono</label>
-							<input type="" name="telefono" class="form-control ">
+							<input type="numeric" name="telefono" class="form-control ">
 							<p class="p-form">Sexo</p>
 							<select name="id_sexo"  class="form-control input" name="" id="">
 								<option value="">Seleccione...</option>
@@ -64,7 +64,7 @@
 				<button data-toggle="collapse" data-target="#demo" class="btn btn-info badge1" data-badge="{{ $contar }}">Personas</button>
 			</div>
 			<div class="col-md-3">
-				<button class="btn btn-success badge1" data-badge="29">Productos y servicios</button>
+				<button class="btn btn-success badge1" data-badge="0">Productos y servicios</button>
 			</div>
 			<div class="col-md-5 ">
 				<p><label>Encargado(a):</label> @{{ bd_encargado }}</p>	

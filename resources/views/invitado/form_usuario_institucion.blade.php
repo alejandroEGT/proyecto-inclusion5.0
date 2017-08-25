@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h3><label>Registro de usuario institucional</label></h3>
-				<h4 class="txt"><label>Registro de usuario que pertenesca y sea apoyado por una institución.</label></h4>
+				<h4 class="txt"><label>Registro de usuario que pertenezca y sea apoyado por una institución.</label></h4>
 			</div>
 		</div>
 		<div class="ico-userInstituto-form animated bounceIn"></div>
@@ -31,7 +31,7 @@
 								<option value="{{$ins->id}}">{{ $ins->nombre }}</option>
 							@endforeach
 						</select>
-						<label class="p-form">Area o especialidad</label>
+						<label class="p-form">Área o especialidad</label>
 						<select name="id_area" class="form-control input" name="" id="">
 							<option value="">Seleccione...</option>
 							<option v-for="item in id_area" v-bind:value="item.id">@{{ item.nombre }}</option>	
@@ -45,7 +45,7 @@
 								<option value="{{$sex->id}}">{{ $sex->nombre }}</option>
 							@endforeach
 						</select>
-						<label class="p-form">Nª telefono</label>
+						<label class="p-form">Nª teléfono</label>
 						<input name="telefono" class="form-control input" type="text">
 						<label class="p-form">Correo</label>
 						<input name="correo" class="form-control input" type="text">

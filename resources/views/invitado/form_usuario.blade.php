@@ -37,7 +37,7 @@
 					</div>
 					<div class="col-md-3">
 						<label class="p-form">Nª telefono</label>
-						<input name="telefono" class="form-control input" type="text" placeholder="Telefono">
+						<input name="telefono" class="form-control input" type="numeric" placeholder="Telefono">
 						<label class="p-form">Correo</label>
 						<input name="correo" class="form-control input" type="text" placeholder="Correo">
 						<label class="p-form">Clave</label>
@@ -52,6 +52,21 @@
 				</div>
 			</div>
 		</div>
+
+		@if (count($errors))
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+						<div class="alert alert-danger">
+						    <a href="" class="close" data-dismiss="alert">&times;</a>
+						    @foreach ($errors->all() as $e)
+								<ul>
+									<li>{{ $e }}</li>
+								</ul>
+							@endforeach
+						</div>
+					</div>
+				</div>	
+			@endif
 		
 	</form>	
 @endsection

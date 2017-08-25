@@ -17,6 +17,7 @@
 		<div class="col-md-offset-3 col-md-6">
 			@if ($errors->any())
 			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
 				        <ul>
 				            @foreach ($errors->all() as $error)
 				                <li><label>{{ $error }}</label></li>
@@ -37,12 +38,12 @@
 					<input  class="form-control input" type="text" name="rut" placeholder="rut" >
 					<label  class="p-form">Nombre</label>
 					<input  class="form-control input" type="text" name="nombre" placeholder="nombre" >
-					<label  class="p-form">Razon Social</label>
+					<label  class="p-form">Razón Social</label>
 					<input  class="form-control input" type="text" name="razonSocial" placeholder="razón social" >
-					<label  class="p-form">Telefono 1</label>
-					<input  class="form-control input" type="text" name="telefono1" placeholder="telefono 1" >
-					<p class="p-form">Telefono 2</p>
-					<input class="form-control input" type="text" name="telefono2" placeholder="telefono 2">
+					<label  class="p-form">Teléfono 1</label>
+					<input  class="form-control input" type="numeric" name="telefono1" placeholder="telefono 1" >
+					<label class="p-form">Télefono 2</label>
+					<input class="form-control input" type="numeric" name="telefono2" placeholder="telefono 2">
 				</div>
 					<div class="col-md-3">
 						<label  class="p-form">Dirección</label>

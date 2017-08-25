@@ -27,7 +27,7 @@ class usuarioRequest extends FormRequest
             'nombres' => 'required',
             'apellidos' => 'required',
             'correo' => 'unique:users,email',
-            'telefono' => 'required',
+            'telefono' => 'required|min:11|numeric',
             'id_sexo' => 'required',
         ];
     }

@@ -219,9 +219,6 @@
 				
 	@endif
 
-
-
-
 	function iniciar(){
 			var texto ;
 			artyom.initialize({
@@ -230,51 +227,93 @@
 		    listen:true, // Start listening after this
 		    speed:1.2, // Talk a little bit slow
 		    log: true,
-		    mode:"quick", // This parameter is not required as it will be normal by default
+		    mode:"normal", // This parameter is not required as it will be normal by default
 		    continuous:true
 			});
 		}
-		
-	artyom.redirectRecognizedTextOutput((recognized,isFinal) => {
-	    if(isFinal){
-	        // Nothing
-	        if(/Alejandro/.test(recognized) ){
-	        	hablar("hola");
-	        }
-	        if(/subir/.test(recognized) ){
-	        	subir();
-	        	//alert("subir")
-	        }
-	        if(/bajar/.test(recognized) ){
-	        	abajo();
-	        	
-	        }
-	        if( /parar/.test(recognized)){
-	        	stopScroll();
-	        }
-	        if(/contacto/.test(recognized)){
-	        	//hablar("redireccionando a toyota");
-	        	//artyom.fatality();
-        		//setTimeout(function () { window.location = "contacto"; }, 0);
-        		$("#contenido-master").load('contacto');
-	        }
-	         if(/sesión/.test(recognized)){
-	        	//hablar("redireccionando a toyota");
-	        	//artyom.fatality();
-        		//setTimeout(function () { window.location = "sesion"; }, 0);
-        		$("#contenido-master").load('sesion');
-	        }
-	         if(/inicio/.test(recognized) || /inició/.test(recognized)){
-	        	//hablar("redireccionando a toyota");
-	        	artyom.fatality();
-        		setTimeout(function () { window.location = "/inicio"; }, 0);
-	        }
-	        
-	        //artyom.say(recognized);*/
-	    }else{
-	        console.log("error");
-	    }
-	});
+	// Add a single command
+var comandos = {
+    indexes:["institucion","vendedor institución","vendedor", "registar institución","registrar vendedor","registrar vendedor institución","menú", "desactivar"
+    	
+    ], // Decir alguna de estas palabras activara el comando
+    action:function(i){ // Acción a ejecutar cuando alguna palabra de los indices es reconocida
+        
+        if(i == 0){
+
+        	setTimeout(function () { window.location = "login_institucion"; }, 1000);
+        }
+         if(i == 1){
+        	setTimeout(function () { window.location = "login_vendedorInst"; }, 1000);
+        }
+        if(i == 2){
+        	setTimeout(function () { window.location = "login_vendedor"; }, 1000);
+        }
+        if(i == 3){
+        	setTimeout(function () { window.location = "formInstitucion"; }, 1000);
+        }
+        if(i == 4){
+        	setTimeout(function () { window.location = "formUsuario"; }, 1000);
+        }
+         if(i == 5){
+        	setTimeout(function () { window.location = "formUsuarioInstitucion"; }, 1000);
+        }
+         if(i == 6){
+        	$(".menu-btn").click();
+        }
+         if(i == 7){
+         	setTimeout(function () { window.location = "desactivarmicro"; }, 1000);
+        }
+        
+    }
+};
+
+artyom.addCommands(comandos); // Agregar comando
+
+/*var myGroup = [
+    {
+       
+        indexes:["login institución"],
+        action:function(i){
+            var database = ["login institucion"];
+            if(i == 0){
+                setTimeout(function () { window.location = "login_institucion"; }, 2000);
+            }
+        }
+    },
+     {
+    
+        indexes:["login vendedor institución"],
+        action:function(i){
+            var database = ["login vendedor institución"];
+            if(i == 0){
+                setTimeout(function () { window.location = "login_vendedorInst"; }, 2000);
+            }
+        }
+    },
+     {
+     
+        indexes:["login vendedor"],
+        action:function(i){
+            var database = ["login vendedor"];
+            if(i == 0){
+                setTimeout(function () { window.location = "login_vendedor"; }, 2000);
+            }
+        }
+    },
+    {
+        indexes:["Que hora es","Es muy tarde"],
+        action:function(i){
+            if(i == 0){
+                UnaFuncionQueDiceElTiempo(new Date());
+            }else if(i == 1){
+                artyom.say("Nunca es tarde para hacer algo mi amigo!");
+            }
+        }
+    }
+];
+
+artyom.addCommands(myGroup); 
+*/
 	function hablar(texto){
 		
 			if (window.speechSynthesis != 'undefined'){

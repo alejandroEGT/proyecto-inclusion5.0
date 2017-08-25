@@ -5,8 +5,8 @@
 	<div class="padding color-verde">
 		<div class="row">
 			<div class="col-md-12 animated bounceInDown">
-				<h3>BienVenido a nuestro sitio web</h3>
-				<h4 class="txt">Este proyecto es una version de prueba, puedes registrarte segun tu situación.</h4>
+				<h3>Bienvenido a nuestro sitio web</h3>
+				<h4 class="txt">Este proyecto es una versión de prueba, puedes registrarte segun tu situación.</h4>
 			</div>
 		</div>
 		<div class="ico-delivery animated bounceInDown"></div>

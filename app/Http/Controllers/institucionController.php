@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Area;
 use App\Fotoperfil;
-use App\Http\Requests\FormUsuarioRequest;
+use App\Http\Requests\institucionRequest;
 use App\Institucion;
 use App\Sexo;
 use App\User;
@@ -12,9 +12,7 @@ use App\Vendedor;
 use App\VendedorInstitucion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Sexo;
-use App\Fotoperfil;
-use App\Http\Requests\vendedorInstitucionRequest;
+
 class institucionController extends Controller
 {
     
@@ -49,8 +47,7 @@ class institucionController extends Controller
     }
 
 
-    public function agregar_alumno(FormUsuarioRequest $datos)
-    public function agregar_alumno(vendedorInstitucionRequest $datos)
+    public function agregar_alumno(institucionRequest $datos)
     {
         $genclave = $this->genclave();
         $correo = $datos->correo;
@@ -79,7 +76,7 @@ class institucionController extends Controller
         }
     }
 
-    public function buscador(Request $dato)
+    public function buscador(institucionRequest $dato)
     {   
          $this->validate($dato, ['buscador' => 'required']);
         $resultado = User::buscador($dato->buscador);
@@ -102,7 +99,7 @@ class institucionController extends Controller
                     return "error";
             
     }
-     public function agregar_vision(Request $data)
+     public function agregar_vision(institucion $data)
     {
              $this->validate($data, ['vision' => 'required']);
 
@@ -132,7 +129,7 @@ class institucionController extends Controller
     	return $instituto;
     	
     }
-    public function insertarArea(Request $data){
+    public function insertarArea(institucionRequest $data){
         
         $area = Area::insertar($data);
         return $area;
@@ -142,7 +139,7 @@ class institucionController extends Controller
 
         return Area::traer();
     }
-    public function aceptarSolicitudUsuario(Request $data){
+    public function aceptarSolicitudUsuario(institucionRequest $data){
         
         $aceptarUser = Vendedor::aceptarusuario($data[0]);
         $user = User::find($data[0]);

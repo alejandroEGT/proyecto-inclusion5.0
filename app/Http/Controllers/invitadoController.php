@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Institucion;
 use App\Area;
+use App\Http\Requests\institucionRequest;
+use App\Institucion;
 use App\Sexo;
+use Illuminate\Http\Request;
 class invitadoController extends Controller
 {
     public function vista_registros(){
@@ -36,7 +37,7 @@ class invitadoController extends Controller
     }
 
 
-    public function filtroArea(Request $dato){
+    public function filtroArea(institucionRequest $dato){
             $area = Area::where('id_institucion','=',$dato->id)->get();
             return response()->json($area);
     }

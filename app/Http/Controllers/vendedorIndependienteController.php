@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\agregaralumnoRequest;
+use App\Fotoperfil;
+use App\Http\Requests\FormUsuarioRequest;
 use App\User;
 use App\Vendedor;
-
 use Illuminate\Http\Request;
-
-
-use App\Fotoperfil;
 
 
 class vendedorIndependienteController extends Controller
@@ -19,7 +16,7 @@ class vendedorIndependienteController extends Controller
     	# code...
     }
 
-     public function insertar_vendedorIndependiente(agregaralumnoRequest $datos)
+     public function insertar_vendedorIndependiente(FormUsuarioRequest $datos)
     {
         $insert = User::insertar_vendedor($datos);
         if ($insert) {

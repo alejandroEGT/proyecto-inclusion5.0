@@ -74,7 +74,7 @@
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
+
 		@if (count($errors))
 				<div class="row">
 					<div class="col-md-offset-3 col-md-6">
@@ -89,8 +89,7 @@
 					</div>
 				</div>	
 			@endif
-=======
->>>>>>> b4c5f1a97d5d70c888124f7882bad8074842f920
+
 	</form>	
 	</div>
 @endsection

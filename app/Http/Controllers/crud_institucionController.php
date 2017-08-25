@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\institutoRequest;
-use App\User;
+use App\Http\Requests\institucionRequest;
 use App\Institucion;
+use App\User;
+use Illuminate\Http\Request;
 
 class crud_institucionController extends Controller
 {
-    public function insertar(institutoRequest $datos)
+    public function insertar(institucionRequest $datos)
     {
     	$retornar = Institucion::insertar($datos);
 
@@ -17,5 +17,5 @@ class crud_institucionController extends Controller
     		return 1;
     	}
     	return 0;
-    }
 }
+ }

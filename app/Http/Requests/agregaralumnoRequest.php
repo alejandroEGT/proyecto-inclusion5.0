@@ -30,8 +30,13 @@ class agregaralumnoRequest extends FormRequest
             'mes' => 'required | numeric',
             'anio' => 'required | numeric',
             'id_sexo' => 'required',
+<<<<<<< HEAD
             'telefono' => 'required|min:11|numeric',
             //'id_area' => 'required',    
+=======
+            'telefono' => 'required | numeric ',
+            'id_area' => 'required',    
+>>>>>>> a0f1bb656cad8811b6df582a7b12697a640c6712
             'correo' => 'required | email | unique:users,email'
         ];
     }

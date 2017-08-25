@@ -15,17 +15,35 @@
 	<form action="/insertar_vendedor" method="Post">
 		{{csrf_field()}}
 		<div class="container estilo-form animated fadeInUp ">
+
+	<!-- Validacion de campos vacios-->
+				<div class="row" >
+					<div class="col-md-offset-3 col-md-6">
+						@if ($errors->any())
+						    <div class="alert alert-danger">
+							        <ul>
+							            @foreach ($errors->all() as $error)
+							                <li>{{ $error }}</li>
+							            @endforeach
+							        </ul>
+						    </div>
+						@endif	
+					</div>
+				</div>
+
+				
+
 			<div class="row">
 					<div class="col-md-offset-3 col-md-3">
 						<label class="p-form">Nombres</label>
-						<input name="nombres" class="form-control input" type="text" placeholder="Nombres">
+						<input name="nombres" class="form-control input" type="text" placeholder="Nombres" value="{{ old('nombres') }}">
 						<label class="p-form">Apellidos</label>
-						<input name="apellidos" class="form-control input" type="text" placeholder="Apellidos">
+						<input name="apellidos" class="form-control input" type="text" placeholder="Apellidos" value="{{ old('apellidos') }}">
 						<label class="p-form">Fecha de Nacimiento</label>
     						<p>
-    						<input name="dia" class="form-control fech" size="2" maxlength="2" type="text" placeholder="Día"  >-
-    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" placeholder="Mes" >-
-    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" placeholder="Año" >
+    						<input name="dia" class="form-control fech" size="2" maxlength="2" type="text" placeholder="Día" value="{{ old('dia') }}">-
+    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" placeholder="Mes" value="{{ old('mes') }}">-
+    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" placeholder="Año" value="{{ old('anio') }}" >
     						</p>
 						<label class="p-form">Sexo</label>
 						<select name="id_sexo"  class="form-control input" >
@@ -37,9 +55,13 @@
 					</div>
 					<div class="col-md-3">
 						<label class="p-form">Nª telefono</label>
+<<<<<<< HEAD
 						<input name="telefono" class="form-control input" type="numeric" placeholder="Telefono">
+=======
+						<input name="telefono" class="form-control input" type="text" placeholder="Telefono" value="{{ old('telefono') }}">
+>>>>>>> a0f1bb656cad8811b6df582a7b12697a640c6712
 						<label class="p-form">Correo</label>
-						<input name="correo" class="form-control input" type="text" placeholder="Correo">
+						<input name="correo" class="form-control input" type="text" placeholder="Correo" value="{{ old('correo') }}">
 						<label class="p-form">Clave</label>
 						<input name="clave" class="form-control input" type="password" placeholder="Clave">
 						<label class="p-form">Repita Clave</label>

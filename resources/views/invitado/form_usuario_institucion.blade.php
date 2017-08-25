@@ -14,6 +14,22 @@
 	<form action="/insertar" method="post">
 		{{ csrf_field() }}
 		<div class="container estilo-form animated fadeInUp">
+
+				<!-- Validacion de campos vacios-->
+				<div class="row" >
+					<div class="col-md-offset-3 col-md-6">
+						@if ($errors->any())
+						    <div class="alert alert-danger">
+							        <ul>
+							            @foreach ($errors->all() as $error)
+							                <li>{{ $error }}</li>
+							            @endforeach
+							        </ul>
+						    </div>
+						@endif	
+					</div>
+				</div>
+
 			<div class="row">
 					<div class="col-md-offset-3 col-md-3">
 						<label class="p-form">Nombres</label>

@@ -40,7 +40,7 @@
 				<tr v-for="item in db_area">
 					<td>@{{ item.nombre }}</td>
 					<td>@{{ item.descripcion }}</td>
-					<td><a v-bind:href="'verArea/' + item.id"> <i class="fa fa-eye" ></i> ver..</a></td>
+					<td><a :href="'verArea/' + item.id"> <i class="fa fa-eye" ></i> ver..</a></td>
 				</tr>	
 			</table>
 

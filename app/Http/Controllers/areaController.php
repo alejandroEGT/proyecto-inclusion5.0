@@ -72,7 +72,7 @@ class areaController extends Controller
 
     /*Peticiones ajax mediante vue y vue-resource */
 
-    public function traer_encargado(request $idArea){
+    public function traer_encargado(Request $idArea){
 
         $user = Usuarioinstitucion::traerUser($idArea[0]);
         return response()->json($user->nombres.' '.$user->apellidos);

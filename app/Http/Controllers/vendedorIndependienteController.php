@@ -11,9 +11,13 @@ use Illuminate\Http\Request;
 
 class vendedorIndependienteController extends Controller
 {
-    public function vista_vendedor()
+    public function vista_inicio()
     {
-    	# code...
+        $foto = Fotoperfil::traerFoto();
+    	return view('vendedorIndependiente.inicio')->with('foto', $foto);
+    }
+    public function vista_cambiarFoto(){
+        return view('vendedorIndependiente.cambiarFoto');
     }
 
      public function insertar_vendedorIndependiente(FormUsuarioRequest $datos)
@@ -35,6 +39,11 @@ class vendedorIndependienteController extends Controller
             }        
         }
         return "error";
+    }
+     public function traerFotoVendedor(){
+
+        $dato = Vendedor::fotoVendedor();
+        return $dato;
     }
 }
 

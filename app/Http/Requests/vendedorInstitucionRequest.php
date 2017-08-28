@@ -23,7 +23,6 @@ class vendedorInstitucionRequest extends FormRequest
             'id_sexo' => 'required',
             'telefono' => 'required',
             'id_area' => 'required',
-            //'correo' => 'required|email|unique:users,email'
             'correo' => 'required|email|unique:users,email'
         ];
     }

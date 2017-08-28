@@ -35,7 +35,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/desactivartext','herramientasayudaController@desactivar_texto');*/
 
         Route::get('/logout','autenticarController@logout');
-        Route::get("/index", 'institucionController@vista_institucion');
+        Route::get("/inicio", 'institucionController@vista_institucion');
         Route::get("/agregarAE", 'institucionController@vista_agregarAE');
         Route::get('/agregarAlumno','institucionController@vista_agregarAlumno');
         Route::post('/agregarAlumno_insert','institucionController@agregar_alumno');
@@ -45,27 +45,26 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/notificacio_vendedor', 'institucionController@vista_notificacio_vendedor');
         Route::get('/misionyvision', 'institucionController@vista_misionyvision');
         Route::get('/noticia', 'institucionController@vista_noticia');
-        Route::get('/buscador','institucionController@buscador');
+        Route::get('/buscador','buscadorController@buscador_inst');
+        Route::get('/datos', 'institucionController@vista_datos');
 });
 
 Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucional']], function () {
 
-        Route::get('/index', 'vendedorDependienteController@vista_inicio');
+        Route::get('/inicio', 'vendedorDependienteController@vista_inicio');
         Route::get('/logout','autenticarController@logout_venIns');
         Route::get('/cambiarFoto', 'vendedorDependienteController@vista_cambiarFoto');
         Route::post('/guardarFoto', 'vendedorDependienteController@guardar_foto');
-
+        Route::get('/buscador','buscadorController@buscador_ven_inst');
         
 });
 Route::group(['prefix' => 'userIndependiente', 'middleware' => ['vendedor']], function(){
 
-        route::get('/index', function(){
-
-            return "hola mundo del vendedor";
-        });
+        route::get('/inicio', 'vendedorIndependienteController@vista_inicio');
+        Route::get('/cambiarFoto', 'vendedorIndependienteController@vista_cambiarFoto');
+        Route::get('/logout','autenticarController@logout_venIns');
+        Route::get('/buscador','buscadorController@buscador_ven');
 });
-
-
 
 Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');
 Route::get('/desactivarmicro', 'herramientasayudaController@desactivar_microfono');
@@ -88,5 +87,6 @@ Route::get('/traer_mision', 'institucionController@traer_mision');
 Route::get('/traer_vision', 'institucionController@traer_vision');
 Route::post('/traerEncargado', 'areaController@traer_encargado');
 Route::get('/foto-vendedorIns', 'vendedorDependienteController@traerFotoVendedor');
+Route::get('/foto-vendedor', 'vendedorIndependienteController@traerFotoVendedor');
 
 

@@ -41,14 +41,14 @@
                         </ul>
                     </li>
                     <li class="pushy-submenu">
-                        <button>Formularios</button>
+                        <button> <i class="fa fa-floppy-o"></i> Registros</button>
                         <ul>
                             <li class="pushy-link"><a href="/inicio">Registros de usuarios</a></li>
                             <li class="pushy-link"><a href="/formInstitucion">Registro de institución</a></li>
                         </ul>
                     </li>
                     <li class="pushy-submenu">
-                        <button>Login</button>
+                        <button><i class="fa fa-sign-in"></i> Login</button>
                         <ul>
                            <li class="pushy-link"><a href="/login_institucion">Institución</a></li>
                             <li class="pushy-link"><a href="/login_vendedorInst">Vendedor institucional</a></li>

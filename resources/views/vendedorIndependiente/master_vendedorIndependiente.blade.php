@@ -14,12 +14,8 @@
 
 <body onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);">
         
-<div id="master-vendedorDependiente" class="animated fadeIn" >
+<div id="master-vendedorIndependiente" class="animated fadeIn" >
 
-    @if (Session::get('estado') == 2)
-            @yield('esperando')
-    @endif
-    @if (Session::get('estado') == 1)
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
             <div class="pushy-content">
                 <ul>
@@ -30,7 +26,7 @@
                             <p class="nombre-perfil">
                                {{ Auth::user()->nombres.' '.Auth::user()->apellidos }}
                             </p>
-                            <p><a href="logout"><img src="/ico/arrows.png"  alt=""></a></p>
+                            <p><a href="{{ url('userIndependiente/logout') }}"><img src="/ico/arrows.png"  alt=""></a></p>
                         </div>
                         
                         <hr>
@@ -103,7 +99,15 @@
                             </div>  
                             <div class="col-md-4">
 
-                                <input class="form-control"  type="text" name="" placeholder="buscar novedades, instituciones o personas" >
+                                 <form action="{{ url('userIndependiente/buscador') }}" method="get">
+                                    <div class="input-group">
+                                    {{ csrf_field() }}
+                                        <input name="buscador" type="text" class="form-control" placeholder="buscar novedades, instituciones o personas">
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-search" type="submit"><i class="fa fa-search fa-fw"></i></button>
+                                          </span>
+                                    </div>
+                                </form> 
                             </div>
                             <div class="col-md-6">
                                 <div class="container-fluid" >
@@ -114,10 +118,11 @@
                             
                 </nav>
                 
-                @yield('content')
+               <div class="margen">
+                    @yield('content')
 
+               </div>
             </div>
-        @endif 
        
     </div>    
 </body>
@@ -127,7 +132,7 @@
 		<script src="/js/toastr.js" ></script>
 		<script src="/js/vue/vue.js" ></script>
         <script src="/js/vue/vue-resource.js"></script>
-        <script src="/js/vue/vue_master_vendedorInstitucion.js"></script>
+        <script src="/js/vue/vue_master-vendedorIndependiente.js"></script>
         @include('mensajes.activa_desactiva')
 		<script src="/js/pushy.min.js"></script>
 

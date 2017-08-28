@@ -1,15 +1,15 @@
-@extends('institucion.master_institucion')
+@extends('vendedorIndependiente.master_vendedorIndependiente')
 
 @section('content')
 	<div class="body-buscar">
 				
 			@if ($vendedor)
 				<div class="padre-agregar">
-				<br><br>
+				<br><br><br><br>
 				<p><label class="lbl_titulo" >Personas <i class="fa fa-users" aria-hidden="true"></i></label></p>
 				<hr>
 					<div class="row">	
-						<div class="centro1 col-md-offset-2 col-md-7 panel">
+						<div class="centro1 col-md-offset-1 col-md-8 panel">
 							@foreach ($vendedor as $v)
 								<div class="row">
 									<div class="col-md-3">
@@ -32,7 +32,7 @@
 
 			@elseif ($institucion)
 				<div class="padre-agregar">
-				<br><br>
+				<br><br><br><br>
 				<p><label class="lbl_titulo" >Instituciones <i class="fa fa-university" aria-hidden="true"></i></label></p>
 				<hr>
 					<div class="row">

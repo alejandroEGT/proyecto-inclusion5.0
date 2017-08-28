@@ -66,5 +66,11 @@ class Vendedor extends Model
          $id = \DB::select("select * from `vendedor` where id_user = ".$id);
         return $id;
     }
+     protected function fotoVendedor(){
+
+        $datos = \DB::select("CALL `fotoVendedor`(".\Auth::user()->id.");");
+        return $datos[0]->foto;
+
+    }
 
 }

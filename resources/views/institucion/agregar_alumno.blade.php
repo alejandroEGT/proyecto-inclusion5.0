@@ -74,25 +74,6 @@
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-=======
-
-		@if (count($errors))
-				<div class="row">
-					<div class="col-md-offset-3 col-md-6">
-						<div class="alert alert-danger">
-						    <a href="" class="close" data-dismiss="alert">&times;</a>
-						    @foreach ($errors->all() as $e)
-								<ul>
-									<li>{{ $e }}</li>
-								</ul>
-							@endforeach
-						</div>
-					</div>
-				</div>	
-			@endif
-
->>>>>>> a0f1bb656cad8811b6df582a7b12697a640c6712
 	</form>	
 	</div>
 @endsection

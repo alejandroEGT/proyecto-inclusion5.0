@@ -1,0 +1,78 @@
+.zoom{
+		transition: 1.1s ease;
+ 		-moz-transition: 1.1s ease; /* Firefox */
+ 		-webkit-transition: 1.1s ease; /* Chrome - Safari */
+ 		-o-transition: 1.1s ease; /* Opera */
+	}
+	.zoom:hover{
+		background: black;
+		color:white;
+		transform : scale(1.3);
+		-moz-transform : scale(1.3); /* Firefox */
+		-webkit-transform : scale(1.3); /* Chrome - Safari */
+		-o-transform : scale(1.3); /* Opera */
+		-ms-transform : scale(1.3); /* IE9 */
+	}
+
+.centro1{
+	padding-top: 50px;
+	text-align: center;
+}
+.centro2 {
+	/*background:red;*/
+	text-align: center;
+    margin: 0 auto;
+}
+
+.panel {
+    background: #ffffff;
+    box-shadow:0px 0px 5px 5px #C9C9C9;
+    -webkit-box-shadow:2px 2px 5px 5x #C9C9C9;
+    -moz-box-shadow:2px 2px 5px 5px #C9C9C9;
+
+    padding: 20px;
+}
+
+	.foto-buscar{
+
+	height: 130px;
+	width:200px;
+	/*height: 50%; width: 70%;*/
+}
+.body-buscar{
+	background: white;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+.lbl_titulo{
+	font-size: 18px;
+	margin-left:10%;
+}
+.p-nothing{
+	margin-top: 150px;
+	font-size: 20px;
+}
+.margen{
+	padding-left: 20px;
+  padding-top:120px;
+}
+small{
+	margin-left: 20px;
+	margin-right: 40px;
+}
+.ico-security{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 50px;
+	width: 50px;
+	background:url("../ico/security.png");
+	background-size: 100% 100%;
+}
+ /* CSS2 selector to add visible href after links */
+/* a:visited:after {
+  content: " (" attr(href) ") ";
+  font-size: 0.8em;
+  font-weight: normal;
+}*/
+

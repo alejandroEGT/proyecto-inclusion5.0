@@ -2,7 +2,8 @@
 
 @section('content')
 	<div class="body-buscar">
-				
+			
+		
 			@if ($vendedor)
 				<div class="padre-agregar">
 				<br><br>

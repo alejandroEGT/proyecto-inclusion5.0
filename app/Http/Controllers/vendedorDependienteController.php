@@ -8,11 +8,7 @@ use App\User;
 use App\VendedorInstitucion;
 use App\vendedor;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-use App\Fotoperfil;
-=======
 
->>>>>>> a0f1bb656cad8811b6df582a7b12697a640c6712
 class vendedorDependienteController extends Controller
 {
     public function vista_inicio()

@@ -29,41 +29,42 @@
                         
                         <hr/>
                     </li>
-                    <li class="pushy-link"><a href="{{ url('institucion/index') }}">Inicio</a></li>
+                    <li class="pushy-link"><a href="{{ url('institucion/inicio') }}"><i class="fa fa-indent"></i> Inicio</a></li>
                     <li class="pushy-submenu">
-                        <button>Nuestra Información</button>
+                        <button><i class="fa fa-database"></i> Nuestra Información</button>
                         <ul>
                             <li class="pushy-link"><a href="{{ url('institucion/misionyvision') }}">Misión y Visión</a></li>
-                            <li class="pushy-link"><a href="#">Datos específicos</a></li>
+                            <li class="pushy-link"><a href="{{ url('institucion/datos') }}">Datos específicos</a></li>
                             <li class="pushy-link"><a href="noticia">Publicar noticias</a></li>
                         </ul>
                     </li>
                     <li class="pushy-submenu">
-                        <button>Nuestro equipo</button>
+                        <button><i class="fa fa-users"></i> Nuestro equipo</button>
                         <ul>
                             <li class="pushy-link"><a href="#">Inicio</a></li>
                             <li class="pushy-link"><a href="#">Login de institución</a></li>
                             <li class="pushy-link"><a href="#">Item 3</a></li>
                         </ul>
                     </li>
-                    <li class="pushy-submenu">
+                    <!--<li class="pushy-submenu">
                         <button>Submenu 3</button>
                         <ul>
                             <li class="pushy-link"><a href="#">Item 1</a></li>
                             <li class="pushy-link"><a href="#">Item 2</a></li>
                             <li class="pushy-link"><a href="#">Item 3</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li class="pushy-submenu">
                         <button><i class="fa fa-cube"></i> Especialidad / Áreas</button>
                         <ul v-for="item in db_area">
-                            <li class="pushy-link"><a href="#">@{{ item.nombre}}</a></li>
+                            <li class="pushy-link"><a :href="'/institucion/verArea/' + item.id">@{{ item.nombre}}</a></li>
                         </ul>
                     </li>
-                    <li class="pushy-link"><a href="{{ url('institucion/notificacio_vendedor') }}"><i class="fa fa-globe"></i> Notificaciones <span class="badge">@{{ notificacion }}</span></a></li>
-                    <li class="pushy-link"><a href="#">Item 2</a></li>
+                    <li class="pushy-link"><a href="{{ url('institucion/notificacio_vendedor') }}"><i class="fa fa-globe"></i> 
+                    Notificaciones <span class="badge">@{{ notificacion }}</span></a></li>
+                   <!-- <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
-                    <li class="pushy-link"><a href="#">Item 4</a></li>
+                    <li class="pushy-link"><a href="#">Item 4</a></li>-->
                 </ul>
             </div>
         </nav>

@@ -22,10 +22,10 @@
 	function estaPulsadoShift(event){
 		if (event.shiftKey==1)
 			//alert("esta ok");
-		    $("a, p, h1, h2, h3, h4, h5, input, label").addClass('zoom');
+		    $("a, h1, h2, h3, h4, h5, input, label").addClass('zoom');
 		else
 			//alert("no ok");
-		    $("a, p, h1, h2, h3, h4, h5, input, label").removeClass('zoom');
+		    $("a, h1, h2, h3, h4, h5, input, label").removeClass('zoom');
 	}
 
 

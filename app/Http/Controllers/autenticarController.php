@@ -11,11 +11,7 @@ use App\Http\Requests\userloginRequest;
 class autenticarController extends Controller
 {
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
+    
     protected $redirectTo = '/home';
     /*Logear una institucion */////////////////////////////////////////////////////////////////////////////////////
   
@@ -28,7 +24,7 @@ class autenticarController extends Controller
     {
         
     	if (\Auth::guard('institucion')->attempt(['email' => $data->correo, 'password' => $data->clave])) {
-           return redirect('/institucion/index');
+           return redirect('/institucion/inicio');
         }
         return redirect()->back();
     }
@@ -53,7 +49,7 @@ class autenticarController extends Controller
    
                 if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
         
-                    return redirect('/userDependiente/index');    
+                    return redirect('/userDependiente/inicio');    
                 }
                 return redirect()->back();
             }
@@ -78,8 +74,7 @@ class autenticarController extends Controller
 
              if (count($verificar)>0 && $verificar[0]->id_rol == 1) { /**"eres vendedor individual"**/
                 if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
-                    return redirect('/userIndependiente/index');
-                
+                    return redirect('/userIndependiente/inicio');
                 }
                 return redirect()->back();
                 

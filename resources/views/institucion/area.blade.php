@@ -14,6 +14,18 @@
 			<p><label>Agregar encargado</label></p>
 			<small><label>Al registrar un encargado la contraseña temporal se le enviará a su correo, Una vez añadido un encargado podrás visualizar las actividades de esta área</label></small>
 			<hr>
+			@if (count($errors))
+			<div class="row alert alert-danger">
+					<div class="col-md-offset-1 col-md-10">
+						<a href="" class="close" data-dismiss="alert">&times;</a>
+							@foreach ($errors->all() as $error)
+								<ul>
+									<li>{{ $error }}</li>
+								</ul>
+							@endforeach
+					</div>				
+			</div>
+		@endif
 				<form action="{{ url('institucion/agregarUsuario') }}" method="post"  >
 					<div class="row">
 						<div class="col-md-6">
@@ -42,22 +54,7 @@
 					</div>
 				</form>	
 			</div>
-		</div>
-
-		@if (count($errors))
-			<div class="row alert alert-danger">
-					<div class="col-md-offset-1 col-md-10">
-						<a href="" class="close" data-dismiss="alert">&times;</a>
-							@foreach ($errors->all() as $error)
-								<ul>
-									<li>{{ $error }}</li>
-								</ul>
-							@endforeach
-					</div>				
-			</div>
-		@endif
-			
-		
+		</div>	
 
 		<div class="row panel">
 			<div class="col-md-1">
@@ -80,8 +77,7 @@
 									<td>Foto</td>
 									<td>Nombre</td>
 									<td>Correo</td>
-								</tr>
-								
+								</tr>							
 								@foreach ($venInstitucion as $ven)
 									<tr>
 										<td><img height="70" src="{{'/'.$ven->foto}}"></td>

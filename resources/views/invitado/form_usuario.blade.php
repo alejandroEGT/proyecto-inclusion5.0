@@ -17,22 +17,20 @@
 		<div class="container estilo-form animated fadeInUp ">
 
 	<!-- Validacion de campos vacios-->
-				<div class="row" >
+				@if (count($errors))
+				<div class="row">
 					<div class="col-md-offset-3 col-md-6">
-						@if ($errors->any())
-						    <div class="alert alert-danger">
-							        <ul>
-							            @foreach ($errors->all() as $error)
-							                <li>{{ $error }}</li>
-							            @endforeach
-							        </ul>
-						    </div>
-						@endif	
+						<div class="alert alert-danger">
+						    <a href="" class="close" data-dismiss="alert">&times;</a>
+						    @foreach ($errors->all() as $e)
+								<ul>
+									<li>{{ $e }}</li>
+								</ul>
+							@endforeach
+						</div>
 					</div>
-				</div>
-
-				
-
+				</div>	
+			@endif
 			<div class="row">
 					<div class="col-md-offset-3 col-md-3">
 						<label class="p-form">Nombres</label>
@@ -55,11 +53,7 @@
 					</div>
 					<div class="col-md-3">
 						<label class="p-form">Nª telefono</label>
-<<<<<<< HEAD
-						<input name="telefono" class="form-control input" type="numeric" placeholder="Telefono">
-=======
 						<input name="telefono" class="form-control input" type="text" placeholder="Telefono" value="{{ old('telefono') }}">
->>>>>>> a0f1bb656cad8811b6df582a7b12697a640c6712
 						<label class="p-form">Correo</label>
 						<input name="correo" class="form-control input" type="text" placeholder="Correo" value="{{ old('correo') }}">
 						<label class="p-form">Clave</label>
@@ -74,21 +68,5 @@
 				</div>
 			</div>
 		</div>
-
-		@if (count($errors))
-				<div class="row">
-					<div class="col-md-offset-3 col-md-6">
-						<div class="alert alert-danger">
-						    <a href="" class="close" data-dismiss="alert">&times;</a>
-						    @foreach ($errors->all() as $e)
-								<ul>
-									<li>{{ $e }}</li>
-								</ul>
-							@endforeach
-						</div>
-					</div>
-				</div>	
-			@endif
-		
 	</form>	
 @endsection

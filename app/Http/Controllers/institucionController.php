@@ -46,6 +46,11 @@ class institucionController extends Controller
             return view('institucion.noticia');
     }
 
+    public function vista_datos(){
+
+            $datosInstitucion = Institucion::datos();
+            return view('institucion.datos_inst')->with('datos', $datosInstitucion);
+    }
 
     public function agregar_alumno(institucionRequest $datos)
     {
@@ -74,17 +79,6 @@ class institucionController extends Controller
                      }
              }
         }
-    }
-
-    public function buscador(institucionRequest $dato)
-    {   
-         $this->validate($dato, ['buscador' => 'required']);
-        $vendedor = User::buscador($dato->buscador);
-        $institucion = Institucion::buscar($dato->buscador);
-        //return $institucion;
-        return view('institucion.buscador_institucion')
-        ->with('vendedor',$vendedor)
-        ->with('institucion',$institucion);
     }
     /*Peticiones en ajax mediante vue y vue-resource*/
 
@@ -132,7 +126,7 @@ class institucionController extends Controller
     	return $instituto;
     	
     }
-    public function insertarArea(institucionRequest $data){
+    public function insertarArea(Request $data){
         
         $area = Area::insertar($data);
         return $area;
@@ -142,7 +136,7 @@ class institucionController extends Controller
 
         return Area::traer();
     }
-    public function aceptarSolicitudUsuario(institucionRequest $data){
+    public function aceptarSolicitudUsuario(Request $data){
         
         $aceptarUser = Vendedor::aceptarusuario($data[0]);
         $user = User::find($data[0]);

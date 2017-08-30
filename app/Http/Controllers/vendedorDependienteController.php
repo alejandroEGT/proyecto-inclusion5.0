@@ -6,7 +6,7 @@ use App\Fotoperfil;
 use App\Http\Requests\formUsuarioInstitucionRequest;
 use App\User;
 use App\VendedorInstitucion;
-use App\vendedor;
+use App\Vendedor;
 use Illuminate\Http\Request;
 
 class vendedorDependienteController extends Controller
@@ -56,7 +56,7 @@ class vendedorDependienteController extends Controller
         $dato = VendedorInstitucion::fotoVendedorInstitucion();
         return $dato;
     }
-    public function guardar_foto(formUsuarioInstitucionRequest $dato)
+    public function guardar_foto(Request $dato)
     {   
 
         $guardar = Fotoperfil::guardar($dato);

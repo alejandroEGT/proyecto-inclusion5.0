@@ -24,7 +24,7 @@ class formUsuarioInstitucionRequest extends FormRequest
             'id_institucion' => 'required',
             'id_area' => 'required',
             'id_sexo' => 'required',
-            'telefono' => 'required | numeric | max:9',
+            'telefono' => 'required|min:11|numeric',
             'correo' => 'required | email | unique:users,email',
             'clave' => 'required | min:6',
             'rClave' => 'required | min:6'

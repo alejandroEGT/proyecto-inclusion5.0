@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\Fotoperfil;
 use App\Http\Requests\institucionRequest;
+use App\Http\Requests\agregaralumnoRequest;
 use App\Institucion;
 use App\Sexo;
 use App\User;
@@ -52,7 +53,7 @@ class institucionController extends Controller
             return view('institucion.datos_inst')->with('datos', $datosInstitucion);
     }
 
-    public function agregar_alumno(institucionRequest $datos)
+    public function agregar_alumno(agregaralumnoRequest $datos)
     {
         $genclave = $this->genclave();
         $correo = $datos->correo;

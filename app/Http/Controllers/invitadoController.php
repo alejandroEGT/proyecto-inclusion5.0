@@ -15,7 +15,7 @@ class invitadoController extends Controller
     }
     public function vista_formUser(){
     		$sexo = Sexo::all();
-    		return view('invitado.form_Usuario')->with('sexo',$sexo);
+    		return view('invitado.form_usuario')->with('sexo',$sexo);
     }
     public function vista_formUserInstituto(){
             $institucion = Institucion::all();
@@ -37,7 +37,7 @@ class invitadoController extends Controller
     }
 
 
-    public function filtroArea(institucionRequest $dato){
+    public function filtroArea(Request $dato){
             $area = Area::where('id_institucion','=',$dato->id)->get();
             return response()->json($area);
     }

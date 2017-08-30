@@ -47,6 +47,13 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/noticia', 'institucionController@vista_noticia');
         Route::get('/buscador','buscadorController@buscador_inst');
         Route::get('/datos', 'institucionController@vista_datos');
+        Route::post('/actualizar_nombre','institucionController@actualizar_nombre');
+        Route::post('/actualizar_rs','institucionController@actualizar_rs');
+        Route::post('/actualizar_tel1','institucionController@actualizar_tel1');
+        Route::post('/actualizar_tel2','institucionController@actualizar_tel2');
+        Route::post('/actualizar_direccion','institucionController@actualizar_direccion');
+        Route::post('/actualizar_correo','institucionController@actualizar_correo');
+        Route::post('/actualizar_clave','institucionController@actualizar_clave');
 });
 
 Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucional']], function () {

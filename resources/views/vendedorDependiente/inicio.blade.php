@@ -3,12 +3,13 @@
 @section('content')
 			
 			@if ($foto == "ico/default-avatar.png")
-				<div class="papel">
+				<div class="margen"><!--probandi-->
+					<div class="papel">
 					<div class="row">
 						<div class="col-md-offset-1 col-md-2 ">
 							<div class="ico-house" ></div>
 						</div>
-						<div class="col-md-6  ">
+						<div class="col-md-6">
 						<p onmouseover="fun_p(this)" class=" ">Bienvenido <strong>{{ Auth::user()->nombres.' '.Auth::user()->apellidos }}</strong>, en esta plataforma podrás publicar tus productos y/o servicios que tú sepas hacer, también tenemos algunas herramientas que te podrán ayudar en el acceso y navegabilidad en el sitio", para más detalles pulsa <a href="#">aquí</a></p>
 
 						<blockquote >
@@ -20,6 +21,7 @@
 				</div>
 				<div class="centro-link">
 					<a  onmouseover="fun_a(this)" href="logout">Salir</a>
+				</div>
 				</div>
 			@endif
 			@if ($foto != "ico/default-avatar.png")

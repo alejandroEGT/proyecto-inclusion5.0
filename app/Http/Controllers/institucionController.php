@@ -167,13 +167,53 @@ class institucionController extends Controller
       $cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
       $cadena_base .= '0123456789' ;
       $cadena_base .= 'kkck';
- 
       $password = '';
       $limite = strlen($cadena_base) - 1;
  
       for ($i=0; $i < 13; $i++)
         $password .= $cadena_base[rand(0, $limite)];
         return $password;
+    }
+
+    public function actualizar_nombre(Request $data){
+           $this->validate($data,['nombre' => 'required|unique:institucion,nombre',]);
+        //$nombre = Institucion::;
+    }
+    public function actualizar_rs(Request $data){
+          $this->validate($data,['razonSocial' => 'required',]);
+       //$rs = Institucion::; 
+    }
+    public function actualizar_tel1(Request $data){
+            $this->validate($data,['teléfono1' => 'required',]);
+       //$tel1 = Institucion::;
+    }
+    public function actualizar_tel2(Request $data){
+           $this->validate($data,['teléfono2' => 'required',]);
+       //$tel2 = Institucion::;
+    }
+    public function actualizar_direccion(Request $data){
+           $this->validate($data,['dirección' => 'required',]);
+       //$direccion = Institucion::;
+    }
+    public function actualizar_correo(Request $data){
+           $this->validate($data,['correo' => 'required',]);
+       //$correo = Institucion::;
+    }
+    public function actualizar_clave(Request $data){
+
+      $this->validate($data,
+            [
+            'clave_actual' => 'required',
+            'clave_nueva' => 'required',
+            'confirm_clave_nueva' => 'required|same:clave_nueva'
+        ]);
+        $pass = Institucion::find(\Auth::guard('institucion')->user()->id)->get();
+        if (\Hash::check($data->clave_actual, $pass[0]->password)) {
+          return "true";
+        }
+        return redirect()->back()->withErrors(['Clave actual incorrecta']);
+        
+       //$clave = Institucion::;
     }
 
 }

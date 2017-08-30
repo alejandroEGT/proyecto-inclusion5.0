@@ -12,8 +12,22 @@
 			
 		</div>
 		<hr>
-
+		
 		<div class="row">
+		@if (count($errors))
+				<div class="row">
+					<div class="col-md-offset-2 col-md-7">
+						<div class="alert alert-danger">
+						    <a href="" class="close" data-dismiss="alert">&times;</a>
+						    @foreach ($errors->all() as $e)
+								<ul>
+									<li>{{ $e }}</li>
+								</ul>
+							@endforeach
+						</div>
+					</div>
+				</div>	
+			@endif
 			<div class="col-md-offset-2 col-md-7">
 			
 				<label><strong>Nombre </strong></label><small> {{Auth::guard('institucion')->user()->nombre}}</small>
@@ -21,9 +35,12 @@
 
 				<div id="nombre" class="collapse">
 					<div class="alert alert-info" role="alert">
-					  <p><strong>Actualizar Nombre</strong> </p>
-					  <p><input class="" type="" name="">
-							<button>Guardar</button></p>	
+						<form action="{{ url('institucion/actualizar_nombre') }}" method="post">
+						 {{csrf_field()}}
+					  		<p><strong>Actualizar Nombre</strong> </p>
+					  		<p><input class="" type="" name="nombre">
+							<input type="submit" value="Guardar" name=""></p>	
+						</form>	
 					</div>
 												
 				</div>
@@ -33,9 +50,12 @@
 
 				<div id="rs" class="collapse">
 							<div class="alert alert-info" role="alert">
-							  <p><strong>Actualizar Razón Social</strong> </p>
-							  <p><input class="" type="" name="">
-									<button>Guardar</button></p>	
+								<form action="{{ url('institucion/actualizar_rs') }}" method="post">
+								{{csrf_field()}}
+							  		<p><strong>Actualizar Razón Social</strong> </p>
+							  		<p><input class="" type="" name="razonSocial">
+									<input type="submit" value="Guardar" name=""></p>	
+								</form>	
 							</div>					
 								
 				</div>
@@ -45,9 +65,12 @@
 
 				<div id="tel1" class="collapse">
 							<div class="alert alert-info" role="alert">
-							  <p><strong>Actualizar Teléfono 1</strong> </p>
-							  <p><input class="" type="" name="">
-									<button>Guardar</button></p>	
+								<form action="{{ url('institucion/actualizar_tel1') }}" method="post">
+								{{csrf_field()}}
+							  		<p><strong>Actualizar Teléfono 1</strong> </p>
+							  		<p><input class="" type="" name="télefono1">
+									<input type="submit" value="Guardar" name=""></p>	
+								</form>	
 							</div>
 				</div>
 				<hr>
@@ -56,9 +79,12 @@
 
 				<div id="tel2" class="collapse">
 						<div class="alert alert-info" role="alert">
-						  <p><strong>Actualizar Teléfono 2</strong> </p>
-						  <p><input class="" type="" name="">
-								<button>Guardar</button></p>	
+							<form action="{{ url('institucion/actualizar_tel2') }}" method="post">
+							{{csrf_field()}}
+						  		<p><strong>Actualizar Teléfono 2</strong> </p>
+						  		<p><input class="" type="" name="télefono2">
+								<input type="submit" value="Guardar"></p>	
+							</form>	
 						</div>
 
 				</div>
@@ -68,9 +94,12 @@
 
 				<div id="dir" class="collapse">
 							<div class="alert alert-info" role="alert">
-							  <p><strong>Actualizar Dirección</strong> </p>
-							  <p><input class="" type="" name="">
-									<button>Guardar</button></p>	
+								<form action="{{ url('institucion/actualizar_direccion') }}" method="post">
+								{{csrf_field()}}
+							  		<p><strong>Actualizar Dirección</strong> </p>
+							  		<p><input class="" type="" name="dirección">
+									<input type="submit" value="Guardar" name="direccion"></p>	
+								</form>	
 							</div>
 
 				</div>
@@ -80,9 +109,12 @@
 
 				<div id="correo" class="collapse">
 							<div class="alert alert-info" role="alert">
-							  <p><strong>Actualizar Correo</strong> </p>
-							  <p><input class="" type="" name="">
-									<button>Guardar</button></p>	
+								<form action="{{ url('institucion/actualizar_correo') }}" method="post">
+								{{csrf_field()}}
+							  		<p><strong>Actualizar Correo</strong> </p>
+							  		<p><input class="" type="" name="correo">
+									<input type="submit" value="Guardar" name=""></p>	
+								</form>	
 							</div>
 
 				</div>
@@ -92,11 +124,14 @@
 
 				<div id="clave" class="collapse">
 							<div class="alert alert-info" role="alert">
-							  <p><strong>Actualizar Contraseña</strong> </p>
-							  <p><small>Contraseña actual </small><input class="" type="" name="">
-							  <p><small>Contraseña Nueva </small><input class="" type="" name="">
-							  <p><small>Repetir Contraseña Nueva </small><input class="" type="" name="">
-									<button>Guardar</button></p>	
+								<form action="{{ url('institucion/actualizar_clave') }}" method="post">
+								{{ csrf_field() }}
+							  		<p><strong>Actualizar Contraseña</strong> </p>
+							  		<p><small>Contraseña actual </small><input class="" type="password" name="clave_actual">
+							  		<p><small>Contraseña Nueva </small><input class="" type="password" name="clave_nueva">
+							  		<p><small>Repetir Contraseña Nueva </small><input class="" type="password" name="confirm_clave_nueva">
+									<input type="submit" value="Guardar" name=""></p>	
+								</form>	
 							</div>
 
 				</div>

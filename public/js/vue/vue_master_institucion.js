@@ -45,7 +45,7 @@ new Vue({
 				this.$http.get('/mostrarAreas').then(function(response){
 
 					if(this.isEmptyJSON(response.body)){
-						this.db_area = [{ nombre:"no existen areas.." }]
+						this.db_area = [{ nombre:"no existen areas..", id:0 }]
 					}else{
 						this.db_area = response.body;
 						console.log(response.body);

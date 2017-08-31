@@ -16,11 +16,15 @@ class areaController extends Controller
 
     public function vista_area(Request $dato)
     {	
-    	$area = Area::traer_area($dato->id);
-    	$sexo = Sexo::all();
+    	if ($dato->id == 0) {
+            return redirect()->back();
+        }
+
+        $area = Area::traer_area($dato->id);
+        $sexo = Sexo::all();
         $contarusuarios = VendedorInstitucion::contarVendedores($dato->id);
         $datosVendedor = VendedorInstitucion::datosVendedorInstitucion($area->id);
-    	return view('institucion.area')
+        return view('institucion.area')
         ->with('area', $area)
         ->with('sexo', $sexo)
         ->with('contar', $contarusuarios)

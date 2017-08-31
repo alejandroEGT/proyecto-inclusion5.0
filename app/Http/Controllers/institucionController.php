@@ -97,7 +97,7 @@ class institucionController extends Controller
                     return "error";
             
     }
-     public function agregar_vision(institucion $data)
+     public function agregar_vision(Request $data)
     {
              $this->validate($data, ['vision' => 'required']);
 

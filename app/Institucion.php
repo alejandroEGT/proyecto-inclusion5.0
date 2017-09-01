@@ -84,4 +84,68 @@ class Institucion extends Authenticatable
         $resultado = \DB::select("CALL `buscar_institucion`('%".$dato."%');");
         return $resultado;
     }
+
+    protected function actualizarNombre($nombre){
+
+        $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
+        $institucion->nombre = $nombre;
+        if($institucion->save()){
+            return redirect()->back();
+        }
+        return "nada men";
+    }
+    protected function actualizarRs($rs){
+
+        $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
+        $institucion->razonSocial = $rs;
+        if($institucion->save()){
+            return redirect()->back();
+        }
+        return "nada men";
+    }
+     protected function actualizarTel1($tel1){
+
+        $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
+        $institucion->telefono1 = $tel1;
+        if($institucion->save()){
+            return redirect()->back();
+        }
+        return "nada men";
+    }
+    protected function actualizarTel2($tel2){
+
+        $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
+        $institucion->telefono2 = $tel2;
+        if($institucion->save()){
+            return redirect()->back();
+        }
+        return "nada men";
+    }
+    protected function actualizarDireccion($direccion){
+
+        $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
+        $institucion->direccion = $direccion;
+        if($institucion->save()){
+            return redirect()->back();
+        }
+        return "nada men";
+    }
+    protected function actualizarCorreo($correo){
+
+        $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
+        $institucion->email = $correo;
+        if($institucion->save()){
+            return redirect()->back();
+        }
+        return "nada men";
+    }
+    protected function actualizarClave($clave){
+
+        $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
+        $institucion->password = \Hash::make($clave);
+        if($institucion->save()){
+            return redirect()->back();
+        }
+        return "nada men";
+    }
 }

@@ -23,6 +23,11 @@ class Fotoperfil extends Model
         $foto = \DB::select("CALL `traerFotoPerfil`(".\Auth::user()->id.");");
         return $foto[0]->foto;
     }
+    protected function traerFotobyid($iduser){
+
+        $foto = \DB::select("CALL `traerFotoPerfil`(".$iduser.");");
+        return $foto[0]->foto;
+    }
 
     protected function guardar($datos)
     {

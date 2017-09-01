@@ -45,6 +45,12 @@ class vendedorIndependienteController extends Controller
         $dato = Vendedor::fotoVendedor();
         return $dato;
     }
+    public function guardar_foto(Request $dato)
+    {   
+
+        $guardar = Fotoperfil::guardar($dato);
+        return $guardar;
+    }
 }
 
 

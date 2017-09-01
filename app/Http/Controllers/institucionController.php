@@ -52,7 +52,30 @@ class institucionController extends Controller
             $datosInstitucion = Institucion::datos();
             return view('institucion.datos_inst')->with('datos', $datosInstitucion);
     }
-
+     public function vista_perfilVen($iduser){
+        $idu = base64_decode($iduser);
+        $usuario = User::find($idu);
+        $vendedor = Vendedor::where('id_user',$usuario->id)->get();
+        $foto = Fotoperfil::traerFotobyid($idu);
+        
+        return view('institucion.perfil_vendedor')
+        ->with('foto',$foto)
+        ->with('usuario',$usuario)
+        ->with('vendedor',$vendedor[0]->telefono);
+    }
+    public function vista_perfilVenInst($iduser){
+         $idu = base64_decode($iduser);
+        $usuario = User::find($idu);
+        $vendedor = Vendedor::where('id_user',$usuario->id)->get();
+        $foto = Fotoperfil::traerFotobyid($idu);
+        
+        return view('institucion.perfil_vendedor')
+        ->with('foto',$foto)
+        ->with('usuario',$usuario)
+        ->with('vendedor',$vendedor[0]->telefono);
+        
+        return view('institucion.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
+    }
     public function agregar_alumno(agregaralumnoRequest $datos)
     {
         $genclave = $this->genclave();
@@ -177,27 +200,33 @@ class institucionController extends Controller
 
     public function actualizar_nombre(Request $data){
            $this->validate($data,['nombre' => 'required|unique:institucion,nombre',]);
-        //$nombre = Institucion::;
+           $nombre = Institucion::actualizarNombre($data->nombre);
+           return $nombre;
     }
     public function actualizar_rs(Request $data){
           $this->validate($data,['razonSocial' => 'required',]);
-       //$rs = Institucion::; 
+          $rs = Institucion::actualizarRs($data->razonSocial); 
+          return $rs;
     }
     public function actualizar_tel1(Request $data){
-            $this->validate($data,['teléfono1' => 'required',]);
-       //$tel1 = Institucion::;
+            $this->validate($data,['teléfono1' => 'required|max:9',]);
+            $tel1 = Institucion::actualizarTel1($data->teléfono1);
+            return $tel1;
     }
     public function actualizar_tel2(Request $data){
-           $this->validate($data,['teléfono2' => 'required',]);
-       //$tel2 = Institucion::;
+           $this->validate($data,['teléfono2' => 'required|max:9',]);
+           $tel2 = Institucion::actualizarTel2($data->teléfono2);
+           return $tel2;
     }
     public function actualizar_direccion(Request $data){
            $this->validate($data,['dirección' => 'required',]);
-       //$direccion = Institucion::;
+           $direccion = Institucion::actualizarDireccion($data->dirección);
+           return $direccion;
     }
     public function actualizar_correo(Request $data){
            $this->validate($data,['correo' => 'required',]);
-       //$correo = Institucion::;
+           $correo = Institucion::actualizarCorreo($data->correo);
+           return $correo;
     }
     public function actualizar_clave(Request $data){
 
@@ -209,7 +238,8 @@ class institucionController extends Controller
         ]);
         $pass = Institucion::find(\Auth::guard('institucion')->user()->id)->get();
         if (\Hash::check($data->clave_actual, $pass[0]->password)) {
-          return "true";
+                $clave = Institucion::actualizarClave($data->clave_nueva);
+                return $clave;
         }
         return redirect()->back()->withErrors(['Clave actual incorrecta']);
         

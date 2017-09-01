@@ -69,7 +69,31 @@ small{
 	background:url("../ico/security.png");
 	background-size: 100% 100%;
 }
+.borde-left{
+	border-left:1px solid #E6E6E6; 
+	border-right:1px solid #E6E6E6; 
+
+}
+.nombreblue{
+	color: #170B3B;
+	font-size: 20px;
+}
+.correo{
+	color: #0174DF;
+}
+.numero{
+	color: #6E6E6E;	
+}
+.tamanio{
+	height: 300px;
+	width: 310px;
+}
+
+
+
  /* CSS2 selector to add visible href after links */
+
+
 /* a:visited:after {
   content: " (" attr(href) ") ";
   font-size: 0.8em;

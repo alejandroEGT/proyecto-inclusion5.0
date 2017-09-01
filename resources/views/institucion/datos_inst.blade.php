@@ -68,7 +68,7 @@
 								<form action="{{ url('institucion/actualizar_tel1') }}" method="post">
 								{{csrf_field()}}
 							  		<p><strong>Actualizar Teléfono 1</strong> </p>
-							  		<p><input class="" type="" name="télefono1">
+							  		<p><input class="" type="" name="teléfono1">
 									<input type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
@@ -82,7 +82,7 @@
 							<form action="{{ url('institucion/actualizar_tel2') }}" method="post">
 							{{csrf_field()}}
 						  		<p><strong>Actualizar Teléfono 2</strong> </p>
-						  		<p><input class="" type="" name="télefono2">
+						  		<p><input class="" type="" name="teléfono2">
 								<input type="submit" value="Guardar"></p>	
 							</form>	
 						</div>

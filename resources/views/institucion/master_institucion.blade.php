@@ -77,10 +77,10 @@
             <!-- Menu Button -->
                 <nav class="navbar-fixed-top color-verde">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-xs-2">
                                     <button class="menu-btn">&#9776; Menú</button>              
                             </div>  
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-xs-10">
                                 <form action="{{ url('institucion/buscador') }}" method="get">
                                     <div class="input-group">
                                     {{ csrf_field() }}

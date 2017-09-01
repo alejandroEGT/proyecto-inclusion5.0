@@ -15,13 +15,19 @@
 									<div class="col-md-3">
 										<img src="{{'/'.$v->foto}}" class="foto-buscar img-thumbnail"> 
 									</div>
-									<div class="col-md-6">
-										<p><label><strong>{{ $v->nombre}}</strong></label></p>
-										<p>{{ $v->email }}</p>
-										<p>{{ $v->rol }}</p>
+									<div class="col-md-6 borde-left">
+										<p><label><strong class="nombrecss" >{{ $v->nombre}}</strong></label></p>
+										<p><label class="correocss" >{{ $v->email }}</label></p>
+										<p><label class="rolcss">{{ $v->rol }}</label></p>
 									</div>
 									<div class="col-md-2">
-										<input type="button" class="btn"  value="Ver perfil" name="">
+									@if ($v->idrol == 1)
+										<a href="{{ url("institucion/perfil_ven/".base64_encode($v->iduser)."") }}" class="btn btn-default">Ver perfil 1</a>
+									@endif
+									@if ($v->idrol == 2)
+										<a href="{{ url("institucion/perfil_venInst/".base64_encode($v->iduser)."") }}" class="btn btn-default">Ver perfil 2</a>
+									@endif
+										
 									</div>
 								</div>
 								<hr>
@@ -42,14 +48,14 @@
 									<div class="col-md-3">
 										<img src="{{'/'.$i->logo}}" class="foto-buscar img-thumbnail"> 
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-6 borde-left ">
 										<p><label><strong>{{ $i->nombre}}</strong></label></p>
 										<p>{{ $i->razonSocial }}</p>
 										<p>{{ $i->email }}</p>
 										<p>{{ $i->direccion }}</p>
 									</div>
 									<div class="col-md-2">
-										<input type="button" class="btn"  value="Ver perfil" name="">
+										<a class="btn btn-default">Ver perfil</a>
 									</div>
 								</div>
 							@endforeach

@@ -64,7 +64,7 @@
 				<button class="btn btn-success badge1" data-badge="0">Productos y servicios</button>
 			</div>
 			<div class="col-md-5 ">
-				<p><label>Encargado(a):</label> @{{ bd_encargado }}</p>	
+				<p><label>Encargado(a):</label> @{{ bd_encargado }} <a href="" class="btn btn-xs btn-primary" >Eliminar</a></p>	
 			</div>
 		</div>
 		<div class="row">

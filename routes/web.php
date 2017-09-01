@@ -46,6 +46,8 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/misionyvision', 'institucionController@vista_misionyvision');
         Route::get('/noticia', 'institucionController@vista_noticia');
         Route::get('/buscador','buscadorController@buscador_inst');
+        Route::get('/perfil_ven/{iduser}', 'institucionController@vista_perfilVen');
+        Route::get('/perfil_venInst/{iduser}','institucionController@vista_perfilVenInst');
         Route::get('/datos', 'institucionController@vista_datos');
         Route::post('/actualizar_nombre','institucionController@actualizar_nombre');
         Route::post('/actualizar_rs','institucionController@actualizar_rs');
@@ -71,6 +73,7 @@ Route::group(['prefix' => 'userIndependiente', 'middleware' => ['vendedor']], fu
         Route::get('/cambiarFoto', 'vendedorIndependienteController@vista_cambiarFoto');
         Route::get('/logout','autenticarController@logout_venIns');
         Route::get('/buscador','buscadorController@buscador_ven');
+        Route::post('/guardarFoto', 'vendedorIndependienteController@guardar_foto');
 });
 
 Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');

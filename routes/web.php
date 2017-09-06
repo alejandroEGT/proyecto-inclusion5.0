@@ -25,6 +25,9 @@ Route::group(['middleware' => ['web']], function () {
 
          Route::post('/insertar', 'vendedorDependienteController@insertar');
          Route::post('/insertar_vendedor', 'vendedorIndependienteController@insertar_vendedorIndependiente');
+
+         Route::get('/login_encargado','autenticarController@vista_loginEncargado');
+         Route::post('/login_encargado','autenticarController@login_loginEncargado');
 });
 
 Route::group(['prefix' => 'institucion','middleware' => ['institucion']], function () {
@@ -56,6 +59,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_direccion','institucionController@actualizar_direccion');
         Route::post('/actualizar_correo','institucionController@actualizar_correo');
         Route::post('/actualizar_clave','institucionController@actualizar_clave');
+        Route::get('/publicarProducto', 'institucionController@vista_publicarProducto');
 });
 
 Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucional']], function () {
@@ -74,6 +78,15 @@ Route::group(['prefix' => 'userIndependiente', 'middleware' => ['vendedor']], fu
         Route::get('/logout','autenticarController@logout_venIns');
         Route::get('/buscador','buscadorController@buscador_ven');
         Route::post('/guardarFoto', 'vendedorIndependienteController@guardar_foto');
+});
+
+Route::group(['prefix' => 'encargadoArea', 'middleware' => ['vendedor']], function(){
+
+        route::get('/inicio', function(){
+
+            return "jola encargado";
+        });
+       
 });
 
 Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');

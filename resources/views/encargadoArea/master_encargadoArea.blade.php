@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sesión de  {{ Auth::guard('institucion')->user()->email }}</title>
 	<link rel="stylesheet" href="{{asset('css/css.css')}}">
-    <link rel="stylesheet" href="{{asset('css/estilo_institucion.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body onMouseMove="stopScroll();" class="body-institucion">

@@ -4,9 +4,9 @@
 		<div class="padding color-verde">
 			<div class="row">
 					<div class="col-md-offset-3 col-md-6">
-					<h3>Login de Institución</h3>
+					<h3>Login para encargado de área</h3>
 					<h4>Bienvenido a nuestro proyecto</h4>
-					<div class="ico-institution"></div>
+					<div class="ico-speaker"></div>
 					</div>
 			</div>
 		</div>
@@ -25,7 +25,7 @@
 				</div>	
 			@endif
 		<div class="container">
-			<form action="/login_institucion" method="post">
+			<form action="/login_encargado" method="post">
 				<div class="padding container animated fadeInUp">
 						<div class="row">
 							<div class="col-md-offset-4 col-md-4">
@@ -47,21 +47,3 @@
 		
 			
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-

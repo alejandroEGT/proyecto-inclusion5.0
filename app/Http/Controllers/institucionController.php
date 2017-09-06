@@ -76,6 +76,12 @@ class institucionController extends Controller
         
         return view('institucion.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
     }
+
+    public function vista_publicarProducto(){
+        $areas = Area::traer();
+        return view('institucion.publicarProducto')->with('areas',$areas);
+    }
+
     public function agregar_alumno(agregaralumnoRequest $datos)
     {
         $genclave = $this->genclave();

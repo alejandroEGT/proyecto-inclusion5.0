@@ -8,8 +8,7 @@
 			<div class="col-md-12 well">
 				<div class="centro1" >
 					<img src="{{ '/'.$institucion->logo }}" width="100">
-					<p class="p-titulo-inst"> {{ $institucion->nombre }} </p>
-
+					<!--<p class="p-titulo-inst"> {{--$institucion->nombre--}} </p>-->
 				</div>
 			</div>
 		</div>
@@ -22,8 +21,8 @@
 				<div class="papel-body" >
 					<p>Puedes publicar tus novedades cuando gustes, también lo podrán hacer personas que pertenezcan a {{Auth::guard('institucion')->user()->nombre}}</p>
 						<div class="botones-grupo">
-							<button class="btn btn-verde" >Publicar Producto</button>
-							<button class="btn btn-naranja" >Publicar Servicio</button>
+							<a href="{{ url('institucion/publicarProducto') }}" class="btn btn-verde" >Publicar Producto</a>
+							<a href="#" class="btn btn-naranja" >Publicar Servicio</a>
 						</div>
 				</div>
 			</div>

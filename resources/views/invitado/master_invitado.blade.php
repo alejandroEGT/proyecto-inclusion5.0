@@ -50,7 +50,8 @@
                     <li class="pushy-submenu">
                         <button><i class="fa fa-sign-in"></i> Login</button>
                         <ul>
-                           <li class="pushy-link"><a href="/login_institucion">Institución</a></li>
+                            <li class="pushy-link"><a href="/login_institucion">Institución</a></li>
+                            <li class="pushy-link"><a href="/login_encargado">Encargado de área</a></li>
                             <li class="pushy-link"><a href="/login_vendedorInst">Vendedor institucional</a></li>
                             <li class="pushy-link"><a href="/login_vendedor">Vendedor Individual</a></li>
                         </ul>

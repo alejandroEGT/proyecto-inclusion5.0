@@ -54,6 +54,7 @@
 }
 .margen{
 	padding-left: 20px;
+	padding-right: 20px;
   padding-top:120px;
 }
 small{
@@ -67,6 +68,15 @@ small{
 	height: 50px;
 	width: 50px;
 	background:url("../ico/security.png");
+	background-size: 100% 100%;
+}
+.ico-speaker{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 130px;
+	width: 130px;
+	background:url("../ico/speaker.png");
 	background-size: 100% 100%;
 }
 .borde-left{
@@ -88,7 +98,11 @@ small{
 	height: 300px;
 	width: 310px;
 }
-
+.porte{
+	height: 150px;
+	width: 170px;
+	background-size:100% 100%; 
+}
 
 
  /* CSS2 selector to add visible href after links */

@@ -70,13 +70,13 @@ class autenticarController extends Controller
      {
             return view('invitado.login_vendedor');
      }
-     public function login_vendedor(Request $data){
+     public function login_vendedor(userloginRequest $data){
 
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
              if (count($verificar)>0 && $verificar[0]->id_rol == 1) { /**"eres vendedor individual"**/
                 if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
-                    return redirect('/encargadoArea/inicio');
+                    return redirect('/userIndependiente/inicio');
                 }
                 return redirect()->back();
                 
@@ -88,18 +88,17 @@ class autenticarController extends Controller
         
             return view('invitado.login_encargadoArea');
      }
-     public function login_loginEncargado(encargadoRequest $data){
+     public function login_loginEncargado(userloginRequest $data){
         $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
-            if(count($verificar)>0 && $verificar[0]->id_rol == 2){  /**"eres vendedor institucional"**/
-   
+            if(count($verificar)>0 && $verificar[0]->id_rol == 3){  /**"eres encargado de area"**/
+            
                 if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
-        
-                    return redirect('/userDependiente/inicio');    
+                    
+                    return redirect('/encargadoArea/inicio');    
                 }
                 return redirect()->back();
             }
-
-            return redirect()->back();
+              return redirect()->back();
      }
 }

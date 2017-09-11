@@ -98,12 +98,20 @@
             <!-- Menu Button -->
                 <nav class="navbar-fixed-top color-verde">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-xs-2">
                                     <button class="menu-btn">&#9776; Menu</button>              
                             </div>  
-                            <div class="col-md-4">
-
-                                <input class="form-control"  type="text" name="" placeholder="buscar novedades, instituciones o personas" >
+                            <div class="col-md-4 col-xs-10">
+                                <form action="{{ url('userDependiente/buscador') }}" method="get">
+                                    <div class="input-group">
+                                    {{ csrf_field() }}
+                                        <input name="buscador" type="text" class="form-control" placeholder="buscar novedades, instituciones o personas">
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-search" type="submit"><i class="fa fa-search fa-fw"></i></button>
+                                          </span>
+                                    </div>
+                                </form> 
+                                
                             </div>
                             <div class="col-md-6">
                                 <div class="container-fluid" >

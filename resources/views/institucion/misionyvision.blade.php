@@ -36,7 +36,7 @@
 				<div class="col-md-offset-2 col-md-4 badge1">
 					<form method="post" @submit.prevent="guardar_mision" >
 							<center><p><label>Misión</label></p></center>
-							<p><label>@{{ getMision }}</label></p>
+								<p><label>@{{ getMision }}</label></p>		
 					</form>		
 				</div>
 				<div class="col-md-4 badge1">

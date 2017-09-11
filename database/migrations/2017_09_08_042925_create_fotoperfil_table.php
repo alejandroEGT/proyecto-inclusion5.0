@@ -4,24 +4,24 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFotoperfil extends Migration
+class CreateFotoperfilTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-     public function up()
+          public function up()
     {
-        Schema::create('fotoperfilvendedor', function (Blueprint $table) {
+        Schema::create('fotoperfil', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_vendedor')->unsigned();
+            $table->integer('id_user')->unsigned();
             $table->string('foto');
             $table->timestamps();
         });
 
-        Schema::table('fotoperfilvendedor', function($table) {
-            $table->foreign('id_vendedor')->references('id')->on('vendedor');
+        Schema::table('fotoperfil', function($table) {
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 
@@ -32,7 +32,7 @@ class CreateFotoperfil extends Migration
      */
     public function down()
     {
-        Schema::table('fotoperfilvendedor', function (Blueprint $table) {
+        Schema::table('fotoperfil', function (Blueprint $table) {
             //
         });
     }

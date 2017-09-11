@@ -12,6 +12,7 @@
 	var fun_img= function(){}
 	var fun_inputBtn = function(){}
 	var fun_inputTxt = function(){}
+	var fun_a = function(){}
 	/*zom*/
 
 

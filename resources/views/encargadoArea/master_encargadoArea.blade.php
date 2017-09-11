@@ -1,85 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta id="token" name="token" value="{{csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Sesión de  {{ Auth::guard('institucion')->user()->email }}</title>
-	<link rel="stylesheet" href="{{asset('css/css.css')}}">
-	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta id="token" name="token" value="{{csrf_token() }}">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sesión de  {{ Auth::user()->email }}</title>
+    <link rel="stylesheet" href="{{asset('css/css.css')}}">
+    <link rel="stylesheet" href="{{asset('css/estilo_encargado.css')}}">
+
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body onMouseMove="stopScroll();" class="body-institucion">
+
+<body onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);">
         
-    <div id="master" >
+<div id="master-encargado" class="animated fadeIn" >
+
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
             <div class="pushy-content">
                 <ul>
                     <li class="pushy-submenu" >
                         
-                        <div class="min-perfil-institucion" >
-                            <img v-for="item in db_institucion" height="70"  :src="'/'+item.logo" alt=""/>
-                            <p class="nombre-institucion-perfil" v-for="item in db_institucion">
-                                @{{ item.nombre }}
+                        <div class="min-perfil-vendedor" >            
+                              <img :src="'/'+fotoPerfil" height="50" alt="">
+                            <p class="nombre-perfil">
+                                @{{ nombre }}</p>
+                               <p class="nombre-perfil">({{ Auth::user()->nombres.' '.Auth::user()->apellidos }})
+                                
                             </p>
-                            <p><a href="{{ url('institucion/logout') }}"><img src="/ico/arrows.png"  alt=""/></a></p>
+                            <p><a href="{{ url('encargadoArea/logout') }}"><img src="/ico/arrows.png"  alt=""></a></p>
                         </div>
                         
-                        <hr/>
+                        <hr>
                     </li>
-                    <li class="pushy-link"><a href="{{ url('institucion/inicio') }}"><i class="fa fa-indent"></i> Inicio</a></li>
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-database"></i> Nuestra Información</button>
+                        <button id="first-link">¿Te ayudamos?</button>
                         <ul>
-                            <li class="pushy-link"><a href="{{ url('institucion/misionyvision') }}">Misión y Visión</a></li>
-                            <li class="pushy-link"><a href="{{ url('institucion/datos') }}">Datos específicos</a></li>
-                            <li class="pushy-link"><a href="noticia">Publicar noticias</a></li>
+                            @if (Session::has('activarMicro'))
+                                <li class="pushy-link"><a href="/desactivarmicro"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
+                            @endif
+
+                            @if (empty(Session::get('activarMicro')))
+                            <li class="pushy-link"><a href="/activarmicro">
+                                <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
+                            </a></li>
+                            @endif
+                            @if (Session::has('activarText'))
+                                <li class="pushy-link"><a href="/desactivartext"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
+                            @endif
+
+                            @if (empty(Session::get('activarText')))
+                           <li class="pushy-link"><a href="/activartext">
+                                <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
+                            </a></li>
+                            @endif
+                             <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
                     </li>
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/datosAreas') }}">Datos del área</a></li>
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-users"></i> Nuestro equipo</button>
+                        <button>Formularios</button>
                         <ul>
-                            <li class="pushy-link"><a href="#">Inicio</a></li>
-                            <li class="pushy-link"><a href="#">Login de institución</a></li>
+                            <li class="pushy-link"><a href="index">Inicio</a></li>
+                            <li class="pushy-link"><a href="/login">Login de institución</a></li>
                             <li class="pushy-link"><a href="#">Item 3</a></li>
                         </ul>
                     </li>
-                    <!--<li class="pushy-submenu">
-                        <button>Submenu 3</button>
+                    <li class="pushy-submenu">
+                        <button>foto 3</button>
                         <ul>
-                            <li class="pushy-link"><a href="#">Item 1</a></li>
+                            <li class="pushy-link"><a href="foto">foto</a></li>
                             <li class="pushy-link"><a href="#">Item 2</a></li>
                             <li class="pushy-link"><a href="#">Item 3</a></li>
                         </ul>
-                    </li>-->
+                    </li>
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-cube"></i> Especialidad / Áreas</button>
-                        <ul v-for="item in db_area">
-                            <li class="pushy-link"><a :href="'/institucion/verArea/' + item.id">@{{ item.nombre}}</a></li>
+                        <button><i class="fa fa-cube"></i> Especialidad / Areas</button>
+                        <ul>
+                            <li class="pushy-link"><a href="#"><!--Aqui nombe--></a></li>
                         </ul>
                     </li>
-                    <li class="pushy-link"><a href="{{ url('institucion/notificacio_vendedor') }}"><i class="fa fa-globe"></i> 
-                    Notificaciones <span class="badge">@{{ notificacion }}</span></a></li>
-                   <!-- <li class="pushy-link"><a href="#">Item 2</a></li>
+                    <li class="pushy-link"><a href="#"><i class="fa fa-globe"></i> Notificaciones</a></li>
+                    <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
-                    <li class="pushy-link"><a href="#">Item 4</a></li>-->
+                    <li class="pushy-link"><a href="#">Item 4</a></li>
                 </ul>
             </div>
         </nav>
 
         <!-- oscurece pantalla al deslizar menu -->
-            <div class="site-overlay"></div>
+        <div class="site-overlay"></div>
 
-        <!-- contenido -->
-            <div id="container">
+        <!-- Your Content -->
+        <div id="container">
             <!-- Menu Button -->
                 <nav class="navbar-fixed-top color-verde">
                         <div class="row">
                             <div class="col-md-2 col-xs-2">
-                                    <button class="menu-btn">&#9776; Menú</button>              
+                                    <button class="menu-btn">&#9776; Menu</button>              
                             </div>  
                             <div class="col-md-4 col-xs-10">
-                                <form action="{{ url('institucion/buscador') }}" method="get">
+
+                                 <form action="{{ url('userIndependiente/buscador') }}" method="get">
                                     <div class="input-group">
                                     {{ csrf_field() }}
                                         <input name="buscador" type="text" class="form-control" placeholder="buscar novedades, instituciones o personas">
@@ -87,35 +109,34 @@
                                             <button class="btn btn-search" type="submit"><i class="fa fa-search fa-fw"></i></button>
                                           </span>
                                     </div>
-                                </form>    
+                                </form> 
                             </div>
                             <div class="col-md-6">
-                                <div class="container-fluid" v-for="item in db_institucion" >
-
-                                     <p class="p-right">Registrado como: <strong>@{{item.email}}
-                                     </strong><a href="{{ url('institucion/logout') }}"><img src="/ico/arrows.png"  alt=""/></a></p>
-                                     
+                                <div class="container-fluid" >
+                                     <p class="p-right"><label onmouseover="fun_p(this)">Registrado como: {{Auth::user()->email}}</label></p>
                                 </div>
                             </div>
                         </div>
                             
                 </nav>
                 
-    			@yield('content')
+               <div class="margen">
+                    @yield('content')
 
+               </div>
             </div>
+       
     </div>    
 </body>
-	
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="/bootstrap/js/bootstrap.min.js" ></script>
-		<script src="/js/toastr.js" ></script>
-		<script src="/js/vue/vue.js" ></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.min.js" ></script>
+        <script src="/js/toastr.js" ></script>
+        <script src="/js/vue/vue.js" ></script>
         <script src="/js/vue/vue-resource.js"></script>
-        <script src="/js/vue/vue_master_institucion.js"></script>
-        <script src="/js/sweetalert2.js" ></script>
-		<script src="/js/pushy.min.js"></script>
-		@include('mensajes.activa_desactiva')  
-        @yield('js')
+        <script src="/js/vue/vue_master_encargado.js"></script>
+        @include('mensajes.activa_desactiva')
+        <script src="/js/pushy.min.js"></script>
+         @yield('js')
 
 </html>

@@ -12,7 +12,9 @@ new Vue({
 		},
 		getMision:[],
 		getVision:[],
-		bd_encargado:'',
+		bd_encargadoNombre:'',
+		bd_encargadoId:'',
+		existeEncargado : false,
 		
 	},
 	 http: { 
@@ -82,7 +84,7 @@ new Vue({
 								
 						},
 							(error) =>{
-								alert(error);
+								console.log(error);
 							}
 						)
 						.catch((e) => {
@@ -98,7 +100,7 @@ new Vue({
 								this.traerVision();
 						},
 							(error) =>{
-								alert(error);
+								console.log(error);
 							}
 						)
 						.catch((e) => {
@@ -113,7 +115,7 @@ new Vue({
 								
 						},
 							(error) =>{
-								alert(error);
+								console.log(error);
 							}
 						)
 						.catch((e) => {
@@ -127,7 +129,7 @@ new Vue({
 								console.log(response.body);
 						},
 							(error) =>{
-								alert(error);
+								console.log(error);
 							}
 						)
 						.catch((e) => {
@@ -141,8 +143,10 @@ new Vue({
 						this.$http.post('/traerEncargado', $('#v_area').text() ).then(function(response){
 								
 								console.log(response.body);
-								this.bd_encargado = response.body;
-								//this.traerEncargado();
+								this.bd_encargadoId = response.body[0];
+								this.bd_encargadoNombre = response.body[1];
+								this.existeEncargado = true;
+								
 								
 						},
 							(error) =>{
@@ -164,6 +168,23 @@ new Vue({
 
 				})
 		},
+		eliminarEncargado($id){
+			if (confirm("¿Quieres eliminar este encargado?") == true) {
+				    
+						this.$http.get('/eliminarEncargado/'+$id).then(function(response){
+								
+								console.log(response.body);
+								alert("Encargado eliminado");
+								//this.notificar();
+								location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		}
+		,
 		isEmptyJSON(obj) {
 			for(var i in obj) { return false; }
 					return true;
@@ -178,4 +199,11 @@ new Vue({
 		this.traerMision();
 		this.traerVision();
 	}
-})
+},
+/*Vue.component('my-component', {
+  template: '<button>Eliminar</button>'
+})*/
+)
+
+
+

@@ -1,2 +1,2 @@
-Hola {{ Session::get('usuario') }} BienVenido a nuestro proyecto, tu contraseña es : {{ Session::get('clave') }}, recuerda que debes cambiarla cuando inicies tu cuenta.
+Hola {{ Session::get('usuario') }} BienVenido a nuestro proyecto, tu contraseña es : <strong>{{ Session::get('clave') }}</strong>, recuerda que debes cambiarla cuando inicies tu cuenta.
 Atentamente el equipo de "El Arte Escondido.".

@@ -69,6 +69,7 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::get('/cambiarFoto', 'vendedorDependienteController@vista_cambiarFoto');
         Route::post('/guardarFoto', 'vendedorDependienteController@guardar_foto');
         Route::get('/buscador','buscadorController@buscador_ven_inst');
+        Route::post('/actualiza_clave', 'vendedorDependienteController@actualiza_clave');
         
 });
 Route::group(['prefix' => 'userIndependiente', 'middleware' => ['vendedor']], function(){
@@ -80,12 +81,16 @@ Route::group(['prefix' => 'userIndependiente', 'middleware' => ['vendedor']], fu
         Route::post('/guardarFoto', 'vendedorIndependienteController@guardar_foto');
 });
 
-Route::group(['prefix' => 'encargadoArea', 'middleware' => ['vendedor']], function(){
+Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], function(){
 
-        route::get('/inicio', function(){
-
-            return "jola encargado";
-        });
+        route::get('/inicio','encargadoController@vista_inicio');
+        Route::get('/logout','autenticarController@logout');
+        Route::post('/actualiza_clave', 'encargadoController@actializar_clave');
+        Route::get('/datosAreas', 'encargadoController@vista_datosArea');
+        Route::get('/equipo', 'encargadoController@vista_equipo');
+        Route::get('/publicarProducto','encargadoController@vista_publicarproducto');
+        Route::post('/guardarIcono', 'encargadoController@guardarIcono');
+        Route::get('/clave','encargadoController@vista_clave');
        
 });
 
@@ -111,5 +116,8 @@ Route::get('/traer_vision', 'institucionController@traer_vision');
 Route::post('/traerEncargado', 'areaController@traer_encargado');
 Route::get('/foto-vendedorIns', 'vendedorDependienteController@traerFotoVendedor');
 Route::get('/foto-vendedor', 'vendedorIndependienteController@traerFotoVendedor');
+Route::get('/foto-encargado', 'encargadoController@traerFotoVendedor');
+Route::get('/eliminarEncargado/{id}','institucionController@eliminarEncargado');
+Route::get('/traerNombre', 'encargadoController@traerNombre');
 
 

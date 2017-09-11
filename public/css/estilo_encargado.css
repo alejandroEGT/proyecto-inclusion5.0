@@ -1,0 +1,97 @@
+a .ico-small-group{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 50px;
+	width: 50px;
+	background:url("../ico/group.png");
+	background-size: 100% 100%;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+a .ico-small-security{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 50px;
+	width: 50px;
+	background:url("../ico/security.png");
+	background-size: 100% 100%;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+a .ico-small-speaker{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 50px;
+	width: 50px;
+	background:url("../ico/speaker.png");
+	background-size: 100% 100%;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+a .ico-small-service{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 50px;
+	width: 50px;
+	background:url("../ico/important.png");
+	background-size: 100% 100%;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+a .ico-small-pass{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 50px;
+	width: 50px;
+	background:url("../ico/password.png");
+	background-size: 100% 100%;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+a .ico-small-group:hover{
+	-webkit-transform:scale(1.2);
+-moz-transform:scale(1.2);
+-ms-transform:scale(1.2);
+-o-transform:scale(1.2);
+transform:scale(1.2);
+}
+a .ico-small-security:hover{
+	-webkit-transform:scale(1.2);
+-moz-transform:scale(1.2);
+-ms-transform:scale(1.2);
+-o-transform:scale(1.2);
+transform:scale(1.2);
+}
+
+a .ico-small-speaker:hover{
+	-webkit-transform:scale(1.2);
+-moz-transform:scale(1.2);
+-ms-transform:scale(1.2);
+-o-transform:scale(1.2);
+transform:scale(1.2);
+}
+
+a .ico-small-service:hover{
+	-webkit-transform:scale(1.2);
+-moz-transform:scale(1.2);
+-ms-transform:scale(1.2);
+-o-transform:scale(1.2);
+transform:scale(1.2);
+}
+a .ico-small-pass:hover{
+	-webkit-transform:scale(1.2);
+-moz-transform:scale(1.2);
+-ms-transform:scale(1.2);
+-o-transform:scale(1.2);
+transform:scale(1.2);
+}
+.envolver{
+	border-right: 1px red solid;
+}

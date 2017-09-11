@@ -31,4 +31,31 @@ class Area extends Model
         $area = Area::find($id);
         return $area;
     }
+    protected function traerArea(){
+        $logo = \DB::table('area')
+                    ->join('usuario-institucion','usuario-institucion.id_area','=','area.id')
+                    ->where('usuario-institucion.id_user','=',\Auth::user()->id)->get();
+        return $logo;            
+    }
+    protected function guardarIcono($datos){
+
+        $url="logoAreas";
+        $file = $datos->file('fotoP')->getClientOriginalExtension();
+        $imageName = time().'.'.$datos->file('fotoP')->getClientOriginalExtension();//nombre de la imagen como tal.
+
+        $id_area = \DB::table('area')
+                    ->join('usuario-institucion','usuario-institucion.id_area','=','area.id')
+                    ->where('usuario-institucion.id_user','=',\Auth::user()->id)->get();
+        
+        
+        $area = Area::find($id_area[0]->id_area);
+        $area->logo = $url.'/'.$imageName;
+
+        if ($area->save()) {
+
+            $datos->file('fotoP')->move(public_path($url), $imageName);
+            return true;
+        }        
+            return false;
+    }
 }

@@ -1,12 +1,11 @@
-@extends('institucion.master_institucion')
+@extends('vendedorDependiente.master_vendedorDependiente')
 
 @section('content')
-	<div class="body-buscar">
+	<div class="margen-inde body-buscar">
 			
-		
 			@if ($vendedor)
-				<div class="padre-agregar">
-				<br><br>
+				<div class="">
+				
 				<p><label class="lbl_titulo" >Personas <i class="fa fa-users" aria-hidden="true"></i></label></p>
 				<hr>
 					<div class="row">	

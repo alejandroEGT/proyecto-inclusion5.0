@@ -13,7 +13,8 @@ use App\Vendedor;
 use App\VendedorInstitucion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-
+use App\Usuarioinstitucion;
+use App\Passwordcuenta;
 class institucionController extends Controller
 {
     
@@ -54,6 +55,8 @@ class institucionController extends Controller
     }
      public function vista_perfilVen($iduser){
         $idu = base64_decode($iduser);
+        //return $idu;
+
         $usuario = User::find($idu);
         $vendedor = Vendedor::where('id_user',$usuario->id)->get();
         $foto = Fotoperfil::traerFotobyid($idu);
@@ -65,6 +68,7 @@ class institucionController extends Controller
     }
     public function vista_perfilVenInst($iduser){
          $idu = base64_decode($iduser);
+          //return $idu;
         $usuario = User::find($idu);
         $vendedor = Vendedor::where('id_user',$usuario->id)->get();
         $foto = Fotoperfil::traerFotobyid($idu);
@@ -96,14 +100,18 @@ class institucionController extends Controller
                      $id_vendedor = Vendedor::idVendedor($id_user[0]->id);
                      $venDependiente = VendedorInstitucion::insertar_dentro($datos, $id_vendedor[0]->id);
                      if ($venDependiente) {
-                          $foto = Fotoperfil::fotoDefault($id_vendedor[0]->id);
+                          $foto = Fotoperfil::fotoDefault($id_user[0]->id);
                                 if ($foto) {
-                                      Mail::send(['text'=>'emails.clave'],['name','janin'],function ($message) use ($correo)
+                                    $passwordDefault = Passwordcuenta::insertar_clave_default($id_user[0]->id);
+
+                                    if ($passwordDefault) {
+                                         Mail::send(['text'=>'emails.clave'],['name','janin'],function ($message) use ($correo)
                                       {
                                           $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                                           $message->to($correo,'to jano');
                                       });
-                                    return "ok";
+                                    return "ok"; 
+                                    }
                                 }
                                 return "error";
                      }
@@ -250,6 +258,14 @@ class institucionController extends Controller
         return redirect()->back()->withErrors(['Clave actual incorrecta']);
         
        //$clave = Institucion::;
+    }
+    public function eliminarEncargado(Request $encargado){
+      //$eliminarFoto = idF
+      $eliminarEncargado = Usuarioinstitucion::where('id_user',$encargado->id)->delete();
+      $eliminarFoto = Fotoperfil::where('id_user',$encargado->id)->delete();
+      $eliminarPassestado = Passwordcuenta::where('id_user', $encargado->id)->delete();
+      $eliminarusuario = User::where('id',$encargado->id)->delete();
+      return "okaaa";
     }
 
 }

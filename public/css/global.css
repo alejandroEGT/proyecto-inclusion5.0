@@ -35,7 +35,7 @@
 
 	.foto-buscar{
 
-	height: 130px;
+	height: 110px;
 	width:200px;
 	/*height: 50%; width: 70%;*/
 }
@@ -104,9 +104,28 @@ small{
 	background-size:100% 100%; 
 }
 
+.margen-inde{
+	padding-top: 70px;
+}
+.ico-pass{
+	float: none;
+    margin: 0 auto;
+	height: 130px;
+	width: 130px;
+	background:url("../ico/password.png");
+	background-size: 100% 100%;
+}
+.mi-input{
+	border: 1px solid black;
+	width: 260px;
 
  /* CSS2 selector to add visible href after links */
-
+}
+.porte-ico{
+	 height: 70px;
+	 width:100px;
+	 background-size: 100% 100%;
+}
 
 /* a:visited:after {
   content: " (" attr(href) ") ";

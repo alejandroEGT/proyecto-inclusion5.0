@@ -62,7 +62,7 @@ a:focus {
 .navbar-brand h1{
   color: #fff;
   font-size: 20px;
-  line-height: 40px;
+  /**line-height: 40px;**/
 }
 
 .navbar-brand:focus {

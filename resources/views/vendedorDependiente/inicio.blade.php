@@ -1,42 +1,65 @@
 @extends('vendedorDependiente.master_vendedorDependiente')
 
 @section('content')
-			
-			@if ($foto == "ico/default-avatar.png")
-				<div class="margen"><!--probandi-->
-					<div class="papel">
-					<div class="row">
-						<div class="col-md-offset-1 col-md-2 ">
-							<div class="ico-house" ></div>
-						</div>
-						<div class="col-md-6">
-						<p onmouseover="fun_p(this)" class=" ">Bienvenido <strong>{{ Auth::user()->nombres.' '.Auth::user()->apellidos }}</strong>, en esta plataforma podrás publicar tus productos y/o servicios que tú sepas hacer, también tenemos algunas herramientas que te podrán ayudar en el acceso y navegabilidad en el sitio", para más detalles pulsa <a href="#">aquí</a></p>
+	<div class="margen"><!--probandi-->
+		@if ($estado_password == 1)
+				<center><label>Bienvenido {{ Auth::user()->nombres.' '.Auth::user()->nombres }}</label></center>
+				<div class="papelImagen">
+				<div class="cabeza">
+					
+					<div class="ico-pass"></div>
 
-						<blockquote >
-						  	<p onmouseover="fun_p(this)"><strong>Primer paso</strong></p>
-							<p class="pequenio"><i class="fa fa-camera" ></i> <a onmouseover="fun_p(this)" href="{{ url('userDependiente/cambiarFoto') }}">Identíficate con tu foto de perfil</a></p>
-						</blockquote>
+				</div>
+		
+				
+			    <div class="subir">
+			    	<form action="{{ url('userDependiente/actualiza_clave') }}" method="post" enctype='multipart/form-data' >
+			    		{{ csrf_field() }}
+			    		<br>
+			    		<p><label>Para proteger tu seguridad cambia la contraseña que has recibido por una nueva.</label></p>
+						
+						@if (count($errors))
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+						<div class="alert alert-danger">
+						    <a href="" class="close" data-dismiss="alert">&times;</a>
+						    @foreach ($errors->all() as $e)
+								<ul>
+									<li>{{ $e }}</li>
+								</ul>
+							@endforeach
 						</div>
-					</div>
-				</div>
-				<div class="centro-link">
-					<a  onmouseover="fun_a(this)" href="logout">Salir</a>
-				</div>
-				</div>
-			@endif
-			@if ($foto != "ico/default-avatar.png")
-
-				<div class="container">
-					<div class="top-top">
-						BienVenido
 					</div>
 				</div>	
 			@endif
 
+
+			    		<br>
+				    	<label>Ingresa una nueva contraseña</label>
+						<input class="mi-input" type="password" name="nuevaclave">
+						<label>Repita una nueva contraseña</label>
+						<input class="mi-input" type="password" name="rnuevaclave">
+				   		 <input style="display: none;" name="fotoP" id="file-input" type="file"/>
+				   		 <br/><br/>
+				   		 <input type="submit" name="" value="Cambiar clave" class="btn btn-primary" >
+			
+					</form>
+			    </div>
+			</div>
+		@endif
+		@if ($estado_password == 2)
+			
+			<div class="container">
+					<div class="">
+						BienVenido {{ $foto }}
+					</div>
+				</div>
+				
+		@endif	
+		
+
 	</div>
 
-		
-	</div>
 @endsection
 
 @section('esperando')

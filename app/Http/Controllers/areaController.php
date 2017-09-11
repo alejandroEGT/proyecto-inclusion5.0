@@ -10,7 +10,9 @@ use App\User;
 use App\Usuarioinstitucion;
 use App\Institucion;
 use App\VendedorInstitucion;
+use App\Fotoperfil;
 use Illuminate\Support\Facades\Mail;
+use App\Passwordcuenta;
 class areaController extends Controller
 {
 
@@ -47,13 +49,19 @@ class areaController extends Controller
     			$idUser = User::where('email','=', $datos->correo)->get();
     			$userInstitucion = Usuarioinstitucion::insertar($datos, $idUser[0]->id);
     			if($userInstitucion){
-                    
-                        Mail::send(['text'=>'emails.clave'],['name','janin'],function ($message) use ($correo)
-                                      {
-                                          $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
-                                          $message->to($correo,'to jano');
-                                      });
-                    
+                        $foto = Fotoperfil::fotoDefault($idUser[0]->id);
+                        if ($foto) {
+                            $passwordDefault = Passwordcuenta::insertar_clave_default($idUser[0]->id);
+                            if ($passwordDefault) {
+                                Mail::send(['text'=>'emails.clave'],['name','EAE'],function ($message) use ($correo)
+                                {
+                                    $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
+                                    $message->to($correo,'to jano');
+                                });
+                                return "Todo bien....";
+                            }
+                                
+                        }
 
     				return redirect()->back();
     			}
@@ -79,6 +87,6 @@ class areaController extends Controller
     public function traer_encargado(Request $idArea){
 
         $user = Usuarioinstitucion::traerUser($idArea[0]);
-        return response()->json($user->nombres.' '.$user->apellidos);
+        return response()->json([$user->id ,$user->nombres.' '.$user->apellidos]);
     }
 }

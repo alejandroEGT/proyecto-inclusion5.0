@@ -8,7 +8,6 @@ use App\User;
 use App\Vendedor;
 use Illuminate\Http\Request;
 
-
 class vendedorIndependienteController extends Controller
 {
     public function vista_inicio()
@@ -29,9 +28,8 @@ class vendedorIndependienteController extends Controller
                 
             $vendedor = Vendedor::insertar_aprobado($datos, $id_user[0]->id);
             if ($vendedor) {
-                    $id_vendedor = Vendedor::idVendedor($id_user[0]->id);
 
-                    $foto = Fotoperfil::fotoDefault($id_vendedor[0]->id);
+                    $foto = Fotoperfil::fotoDefault($id_user[0]->id);
                     if ($foto) {
                         return "ok";
                     }
@@ -42,7 +40,7 @@ class vendedorIndependienteController extends Controller
     }
      public function traerFotoVendedor(){
 
-        $dato = Vendedor::fotoVendedor();
+        $dato = Fotoperfil::traerFoto();
         return $dato;
     }
     public function guardar_foto(Request $dato)

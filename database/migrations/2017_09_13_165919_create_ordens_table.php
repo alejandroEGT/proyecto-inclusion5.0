@@ -15,13 +15,16 @@ class CreateOrdensTable extends Migration
     {
         Schema::create('ordenes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_user')->unsigned();
+            $table->integer('id_cliente')->unsigned();
             $table->integer('id_estado')->unsigned();
             $table->integer('id_pago')->unsigned();
             $table->string('codigo');
             $table->integer('total');
             $table->dateTime('fecha');
             $table->timestamps();
+        });
+        Schema::table('ordenes', function (Blueprint $table){
+            $table->foreign('id_cliente')->references('id')->on('clientes');
         });
        
     }

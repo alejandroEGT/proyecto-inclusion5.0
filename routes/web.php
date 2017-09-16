@@ -61,6 +61,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_clave','institucionController@actualizar_clave');
         Route::get('/publicarProducto', 'institucionController@vista_publicarProducto');
         Route::get('/paginaweb', 'institucionController@vista_paginaweb');
+        Route::post('/publicarProducto','institucionController@publicarProducto');/*Pendiente*/
         Route::get('/grafico','institucionController@vista_grafico');
 });
 
@@ -99,6 +100,9 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::get('/perfil_ven/{iduser}', 'encargadoController@vista_perfilVen');
         Route::get('/perfil_venInst/{iduser}','encargadoController@vista_perfilVenInst');
         Route::get('/perfil_institucion/{idinstitucion}','encargadoController@vista_perfilInst');
+        Route::post('/publicarProducto','encargadoController@publicarProducto');
+        Route::post('/actualizar_correo','encargadoController@actualizar_correo');
+        Route::post('/actualizar_numero','encargadoController@actualizar_numero');
        
 });
 

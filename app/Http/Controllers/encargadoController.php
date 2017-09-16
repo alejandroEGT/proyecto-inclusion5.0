@@ -12,6 +12,8 @@ use App\Sexo;
 use App\Vendedor;
 use App\VendedorInstitucion;
 use App\Institucion;
+use App\Usuarioinstitucion;
+use App\Http\Requests\productoRequest;
 use App\Http\Requests\agregarAlumnoDesdeAreaRequest;
 use Illuminate\Support\Facades\Mail;
 
@@ -136,7 +138,36 @@ class encargadoController extends Controller
                 }
                 return "Error...";
     }
-     public function agregar_alumno(agregarAlumnoDesdeAreaRequest $datos)
+
+    public function actualizar_correo(Request $dato){
+
+        $this->validate($dato,[
+            'correo' => 'required',
+        ]);
+
+        $actualizarCorreo = User::actualizarCorreo($dato->correo);
+
+        if ($actualizarCorreo) {
+            return redirect()->back();
+        }
+        return "error";
+    }
+    public function actualizar_numero(request $dato){
+
+          $this->validate($dato,[
+            'teléfono' => 'required|numeric',
+          ]);
+
+        $actualizarNumero = Usuarioinstitucion::actualizarNumero($dato->teléfono);
+
+        if ($actualizarNumero == 1) {
+            return redirect()->back();
+        }
+        return "falso falsoe";
+    }
+
+
+    public function agregar_alumno(agregarAlumnoDesdeAreaRequest $datos)
     {
         $datos->flash();
         $genclave = $this->genclave();
@@ -204,5 +235,9 @@ class encargadoController extends Controller
       for ($i=0; $i < 13; $i++)
         $password .= $cadena_base[rand(0, $limite)];
         return $password;
+    }
+    public function publicarproducto(productoRequest $dato){
+       
+        
     }
 }

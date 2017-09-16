@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuarioinstitucion extends Model
 {
-    protected $table = "usuario-institucion";
+    protected $table = "usuario-institucion";/*Encargado de área*/
 
      protected function insertar($datos, $idUser)
       {
@@ -33,5 +33,12 @@ class Usuarioinstitucion extends Model
 
           $user = \DB::select("CALL `traerUsuarioInstitucional`(".$idarea.");");
           return $user[0];
+      }
+
+      protected function actualizarNumero($numero){
+
+          $ususarioInst = Usuarioinstitucion::where('id_user', \Auth::user()->id)
+                                              ->update(['telefono' => $numero ]);
+          return $ususarioInst;
       }
 }

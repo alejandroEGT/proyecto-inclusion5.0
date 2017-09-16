@@ -88,4 +88,13 @@ class User extends Authenticatable
             $resultado = \DB::select("CALL `buscar_vendedor`('%".$dato."%');");
             return $resultado;
     }
+    protected function actualizarCorreo($correo){
+
+            $usuario = User::find(\Auth::user()->id);
+            $usuario->email = $correo;
+            if ($usuario->save()) {
+                return true; 
+            }
+            return false;
+    }
 }

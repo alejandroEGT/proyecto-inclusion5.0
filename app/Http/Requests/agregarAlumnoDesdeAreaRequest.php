@@ -31,7 +31,7 @@ class agregarAlumnoDesdeAreaRequest extends FormRequest
             'anio' => 'required',
             'id_sexo' => 'required',
             'telefono' => 'required',
-            'correo' => 'required'
+            'correo' => 'required | email | unique:users,email'
         ];
     }
 

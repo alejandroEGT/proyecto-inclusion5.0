@@ -16,7 +16,8 @@
 <div class="row">
 	<div class="col-md-offset-2 col-md-9">
 		<div class="row">
-	@foreach ($equipo as $eq)
+	@if (count($equipo)>0)
+		@foreach ($equipo as $eq)
 		<div class="col-md-3 box-perfil">
 			<p><img class="img-circle foto-perfil-vendedor" src="{{ '/'.$eq->foto }}"></p>
 			<p><label>{{ $eq->nombres.' '.$eq->apellidos }}</label></p>
@@ -24,6 +25,7 @@
 		</div>
 		
 	@endforeach
+	@endif
 	
 
 </div>

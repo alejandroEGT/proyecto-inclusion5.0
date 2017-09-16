@@ -16,10 +16,12 @@ class CreateTipoTiendaVendedorsTable extends Migration
         Schema::create('tipo_tienda_vendedores', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_vendedor')->unsigned();
+            $table->integer('id_tipo_tienda')->unsigned();
             $table->timestamps();
         });
         Schema::table('tipo_tienda_vendedores', function(Blueprint $table){
             $table->foreign('id_vendedor')->references('id')->on('vendedor');
+            $table->foreign('id_tipo_tienda')->references('id')->on('tipo_tiendas');
         });
     }
 

@@ -24,7 +24,7 @@ class institucionRequest extends FormRequest
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg | dimensions:max_width=2250,max_height=2680',
             'correo' => 'required | email | unique:users,email',
             'clave' => 'required | min:6',
-            'repeClave' => 'required | min:6',
+            'repeClave' => 'required | min:6 | same:clave',
         ];
     }
 }

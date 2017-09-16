@@ -22,6 +22,7 @@
 			</div>
 		</div>
 		<hr>
+	<form action="{{ url('encargadoArea/publicarProducto') }}" method="post" enctype="multipart/form-data" >
 		<div class="row">
 			
 			<div class="col-md-offset-2 col-md-3">
@@ -38,29 +39,39 @@
 		</div>
 		<hr>
 		<div class="row">
+		{{ csrf_field() }}
 			<div class="col-md-offset-3 col-md-3">
+				<div class="alert alert-info">
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li>{{$error}}</li>
+						@endforeach
+					</ul>
+				</div>
 				<p><label for="file-input" class="label-foto-link">
 				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
 				 	Agregar foto..
 				</label></p>
-				<input style="display: none;" name="fotoP" id="file-input" type="file"/>
+				<input style="display: none;" name="fotoP1" id="file-input" type="file"/>
 
 					<div id="divFoto" hidden="true" >
 						<div id="img_destino" class="porte img-thumbnail" ></div>
 					</div>
+					<input type="submit" name="" value="OK">
 			</div>
+			
 			<div class="col-md-3">
 				<p><label for="file-input2" class="label-foto-link">
 				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
 				 	Agregar foto..
 				</label></p>
-				<input style="display: none;" name="fotoP" id="file-input2" type="file"/>
+				<input style="display: none;" name="fotoP2" id="file-input2" type="file"/>
 				<div id="divFoto2" hidden="true" >
 						<div id="img_destino2" class="porte img-thumbnail" ></div>
 					</div>
 			</div>
 		</div>
-
+	</form>
 @endsection
 
 @section('js')

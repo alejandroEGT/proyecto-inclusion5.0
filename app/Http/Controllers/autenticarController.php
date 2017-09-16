@@ -22,7 +22,8 @@ class autenticarController extends Controller
 	}
 
     public function login(Request $data)/* Logear una institución */
-    {
+    {   
+        $data->flash();
         
     	if (\Auth::guard('institucion')->attempt(['email' => $data->correo, 'password' => $data->clave])) {
            return redirect('/institucion/inicio');
@@ -44,6 +45,7 @@ class autenticarController extends Controller
     
     public function login_vendedorInst(userloginRequest $data){
         
+            $data->flash();
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
             if(count($verificar)>0 && $verificar[0]->id_rol == 2){  /**"eres vendedor institucional"**/
@@ -72,6 +74,7 @@ class autenticarController extends Controller
      }
      public function login_vendedor(userloginRequest $data){
 
+            $data->flash();
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
              if (count($verificar)>0 && $verificar[0]->id_rol == 1) { /**"eres vendedor individual"**/
@@ -89,6 +92,7 @@ class autenticarController extends Controller
             return view('invitado.login_encargadoArea');
      }
      public function login_loginEncargado(userloginRequest $data){
+        $data->flash();
         $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
             if(count($verificar)>0 && $verificar[0]->id_rol == 3){  /**"eres encargado de area"**/

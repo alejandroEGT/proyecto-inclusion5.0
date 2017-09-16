@@ -35,27 +35,27 @@
 				<div class="col-md-offset-3 col-md-3">
 					{{ csrf_field() }}
 					<label  class="p-form">RUT</label>
-					<input  class="form-control input" type="text" name="rut" placeholder="rut" >
+					<input  class="form-control input" type="text" name="rut" placeholder="rut" value="{{ old('rut') }}" >
 					<label  class="p-form">Nombre</label>
-					<input  class="form-control input" type="text" name="nombre" placeholder="nombre" >
+					<input  class="form-control input" type="text" name="nombre" placeholder="nombre" value="{{ old('nombre') }}" >
 					<label  class="p-form">Razón Social</label>
-					<input  class="form-control input" type="text" name="razonSocial" placeholder="razón social" >
+					<input  class="form-control input" type="text" name="razonSocial" placeholder="razón social" value="{{ old('razonSocial') }}" >
 					<label  class="p-form">Teléfono 1</label>
-					<input  class="form-control input" type="numeric" name="telefono1" placeholder="telefono 1" >
+					<input  class="form-control input" type="numeric" name="telefono1" placeholder="telefono 1" value="{{ old('telefono1') }}" >
 					<label class="p-form">Télefono 2</label>
-					<input class="form-control input" type="numeric" name="telefono2" placeholder="telefono 2">
+					<input class="form-control input" type="numeric" name="telefono2" placeholder="telefono 2" value="{{ old('telefono2') }}">
 				</div>
 					<div class="col-md-3">
 						<label  class="p-form">Dirección</label>
-						<input class="form-control input" type="text" name="direccion" placeholder="dirección">
+						<input class="form-control input" type="text" name="direccion" placeholder="dirección" value="{{ old('direccion') }}">
 						<label  class="p-form">Logo</label>
 						<input class="form-control input" type="file" name="logo" placeholder="logo">
 						<label  class="p-form">Correo</label>
-						<input class="form-control input" type="text" name="correo" placeholder="correo">
+						<input class="form-control input" type="text" name="correo" placeholder="correo" value="{{ old('correo') }}">
 						<label  class="p-form">Clave</label>
 						<input class="form-control input" type="password" name="clave" placeholder="clave">
 						<label  class="p-form">Repita Clave</label>
-						<input class="form-control input" type="password" name="repeClave" placeholder="nuevamente clave">
+						<input class="form-control input" type="password" name="repeClave" placeholder="nuevamente clave" >
 					</div>
 			</div>
 			<div class="row top">

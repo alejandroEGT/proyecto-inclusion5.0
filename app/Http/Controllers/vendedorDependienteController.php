@@ -32,6 +32,7 @@ class vendedorDependienteController extends Controller
 
     public function insertar(formUsuarioInstitucionRequest $datos){
 
+            $datos->flash();
             $us = User::insertar_vendedorDependiente($datos);
         	
              if($us){

@@ -60,6 +60,8 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_correo','institucionController@actualizar_correo');
         Route::post('/actualizar_clave','institucionController@actualizar_clave');
         Route::get('/publicarProducto', 'institucionController@vista_publicarProducto');
+        Route::get('/paginaweb', 'institucionController@vista_paginaweb');
+        Route::get('/grafico','institucionController@vista_grafico');
 });
 
 Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucional']], function () {
@@ -90,7 +92,13 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::get('/equipo', 'encargadoController@vista_equipo');
         Route::get('/publicarProducto','encargadoController@vista_publicarproducto');
         Route::post('/guardarIcono', 'encargadoController@guardarIcono');
+        Route::post('/insertarAlumno', 'encargadoController@agregar_alumno');
         Route::get('/clave','encargadoController@vista_clave');
+        Route::get('/agregarAlumno', 'encargadoController@vista_agregarAlumno');
+        Route::get('/buscador','buscadorController@buscador_encargado');
+        Route::get('/perfil_ven/{iduser}', 'encargadoController@vista_perfilVen');
+        Route::get('/perfil_venInst/{iduser}','encargadoController@vista_perfilVenInst');
+        Route::get('/perfil_institucion/{idinstitucion}','encargadoController@vista_perfilInst');
        
 });
 
@@ -98,6 +106,9 @@ Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');
 Route::get('/desactivarmicro', 'herramientasayudaController@desactivar_microfono');
 Route::get('/activartext', 'herramientasayudaController@activar_texto');
 Route::get('/desactivartext','herramientasayudaController@desactivar_texto');
+
+
+
 
 
 /* Peticiones ajax mediante vue y vue-resource */

@@ -5,13 +5,13 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta id="token" name="token" value="{{csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sesión de  {{ Auth::guard('institucion')->user()->email }}</title>
 	<link rel="stylesheet" href="{{asset('css/css.css')}}">
     <link rel="stylesheet" href="{{asset('css/estilo_institucion.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body onMouseMove="stopScroll();" class="body-institucion">
+<body  class="body-institucion">
         
     <div id="master" >
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
@@ -62,6 +62,7 @@
                     </li>
                     <li class="pushy-link"><a href="{{ url('institucion/notificacio_vendedor') }}"><i class="fa fa-globe"></i> 
                     Notificaciones <span class="badge">@{{ notificacion }}</span></a></li>
+                    <li class="pushy-link"><a href="{{ url('institucion/grafico') }}"><i class="fa fa-indent"></i> Grafico</a></li>
                    <!-- <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
                     <li class="pushy-link"><a href="#">Item 4</a></li>-->
@@ -77,10 +78,10 @@
             <!-- Menu Button -->
                 <nav class="navbar-fixed-top color-verde">
                         <div class="row">
-                            <div class="col-md-2 col-xs-2">
+                            <div class="col-md-1 col-xs-2">
                                     <button class="menu-btn">&#9776; Menú</button>              
                             </div>  
-                            <div class="col-md-4 col-xs-10">
+                            <div class="col-md-4 col-xs-offset-1 col-xs-8">
                                 <form action="{{ url('institucion/buscador') }}" method="get">
                                     <div class="input-group">
                                     {{ csrf_field() }}
@@ -91,7 +92,7 @@
                                     </div>
                                 </form>    
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xs-12">
                                 <div class="container-fluid" v-for="item in db_institucion" >
 
                                      <p class="p-right">Registrado como: <strong>@{{item.email}}
@@ -117,7 +118,9 @@
         <script src="/js/vue/vue_master_institucion.js"></script>
         <script src="/js/sweetalert2.js" ></script>
 		<script src="/js/pushy.min.js"></script>
-		@include('mensajes.activa_desactiva')  
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js" ></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js" ></script>
+		{{--@include('mensajes.activa_desactiva') --}}
         @yield('js')
 
 </html>

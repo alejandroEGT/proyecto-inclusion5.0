@@ -23,10 +23,10 @@
 	function estaPulsadoShift(event){
 		if (event.shiftKey==1)
 			//alert("esta ok");
-		    $("a, h1, h2, h3, h4, h5, input, label").addClass('zoom');
+		    $("a, h1, button, h2, h3, h4, h5, input, label").addClass('zoom');
 		else
 			//alert("no ok");
-		    $("a, h1, h2, h3, h4, h5, input, label").removeClass('zoom');
+		    $("a, h1, button, h2, h3, h4, h5, input, label").removeClass('zoom');
 	}
 
 
@@ -234,7 +234,7 @@
 		}
 	// Add a single command
 var comandos = {
-    indexes:["institucion","vendedor institución","vendedor", "registar institución","registrar vendedor","registrar vendedor institución","menú", "desactivar"
+    indexes:["institucion","vendedor institución","vendedor", "registar institución","registrar vendedor","registrar vendedor institución","menú", "desactivar","bajar","subir"
     	
     ], // Decir alguna de estas palabras activara el comando
     action:function(i){ // Acción a ejecutar cuando alguna palabra de los indices es reconocida
@@ -264,57 +264,18 @@ var comandos = {
          if(i == 7){
          	setTimeout(function () { window.location = "desactivarmicro"; }, 1000);
         }
+         if(i == 8){
+         	abajo();
+        }
+         if(i == 9){
+         	subir();
+        }
         
     }
 };
 
 artyom.addCommands(comandos); // Agregar comando
 
-/*var myGroup = [
-    {
-       
-        indexes:["login institución"],
-        action:function(i){
-            var database = ["login institucion"];
-            if(i == 0){
-                setTimeout(function () { window.location = "login_institucion"; }, 2000);
-            }
-        }
-    },
-     {
-    
-        indexes:["login vendedor institución"],
-        action:function(i){
-            var database = ["login vendedor institución"];
-            if(i == 0){
-                setTimeout(function () { window.location = "login_vendedorInst"; }, 2000);
-            }
-        }
-    },
-     {
-     
-        indexes:["login vendedor"],
-        action:function(i){
-            var database = ["login vendedor"];
-            if(i == 0){
-                setTimeout(function () { window.location = "login_vendedor"; }, 2000);
-            }
-        }
-    },
-    {
-        indexes:["Que hora es","Es muy tarde"],
-        action:function(i){
-            if(i == 0){
-                UnaFuncionQueDiceElTiempo(new Date());
-            }else if(i == 1){
-                artyom.say("Nunca es tarde para hacer algo mi amigo!");
-            }
-        }
-    }
-];
-
-artyom.addCommands(myGroup); 
-*/
 	function hablar(texto){
 		
 			if (window.speechSynthesis != 'undefined'){

@@ -2,7 +2,7 @@
 
 @section('content')
 	
-	<div class="top-top container">
+	<div class="margen">
 			<p class="text-center" >Notificacione de vendedores</p>
 			<div class="row papel-blanco">
 				<div class="col-md-12">

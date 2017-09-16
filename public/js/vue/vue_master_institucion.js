@@ -1,3 +1,4 @@
+
 new Vue({
 	el:'#master',
 	data:{
@@ -15,6 +16,7 @@ new Vue({
 		bd_encargadoNombre:'',
 		bd_encargadoId:'',
 		existeEncargado : false,
+  
 		
 	},
 	 http: { 
@@ -199,11 +201,8 @@ new Vue({
 		this.traerMision();
 		this.traerVision();
 	}
-},
-/*Vue.component('my-component', {
-  template: '<button>Eliminar</button>'
-})*/
-)
+})
+
 
 
 

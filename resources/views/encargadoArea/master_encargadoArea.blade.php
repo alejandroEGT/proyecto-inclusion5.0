@@ -99,9 +99,9 @@
                             <div class="col-md-2 col-xs-2">
                                     <button class="menu-btn">&#9776; Menu</button>              
                             </div>  
-                            <div class="col-md-4 col-xs-10">
+                            <div class="col-md-4 col-xs-offset-1 col-xs-8">
 
-                                 <form action="{{ url('userIndependiente/buscador') }}" method="get">
+                                 <form action="{{ url('encargadoArea/buscador') }}" method="get">
                                     <div class="input-group">
                                     {{ csrf_field() }}
                                         <input name="buscador" type="text" class="form-control" placeholder="buscar novedades, instituciones o personas">
@@ -111,9 +111,9 @@
                                     </div>
                                 </form> 
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-5 col-xs-12">
                                 <div class="container-fluid" >
-                                     <p class="p-right"><label onmouseover="fun_p(this)">Registrado como: {{Auth::user()->email}}</label></p>
+                                     <p class="p-right"><label>Registrado como: {{Auth::user()->email}}</label></p>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
         <script src="/js/vue/vue.js" ></script>
         <script src="/js/vue/vue-resource.js"></script>
         <script src="/js/vue/vue_master_encargado.js"></script>
-        @include('mensajes.activa_desactiva')
+        {{--@include('mensajes.activa_desactiva')--}}
         <script src="/js/pushy.min.js"></script>
          @yield('js')
 

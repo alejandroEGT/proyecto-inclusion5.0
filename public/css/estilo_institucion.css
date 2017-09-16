@@ -62,15 +62,7 @@
 	background:url("../ico/push.png");
 	background-size: 100% 100%;
 }
-.ico-add{
-	float: none;
-    margin: 0 auto;
-    margin-top: 6px;
-	height: 130px;
-	width: 130px;
-	background:url("../ico/add.png");
-	background-size: 100% 100%;
-}
+
 .ico-addArea{
 	float: none;
     margin: 0 auto;
@@ -135,7 +127,6 @@
 
 }
 .papel-body{
-	width: 360px;
 	margin: 0 auto;
 	text-align: center;	
 }

@@ -7,11 +7,11 @@
 	.zoom:hover{
 		background: black;
 		color:white;
-		transform : scale(1.3);
-		-moz-transform : scale(1.3); /* Firefox */
-		-webkit-transform : scale(1.3); /* Chrome - Safari */
-		-o-transform : scale(1.3); /* Opera */
-		-ms-transform : scale(1.3); /* IE9 */
+		transform : scale(1.2);
+		-moz-transform : scale(1.2); /* Firefox */
+		-webkit-transform : scale(1.2); /* Chrome - Safari */
+		-o-transform : scale(1.2); /* Opera */
+		-ms-transform : scale(1.2); /* IE9 */
 	}
 
 .centro1{
@@ -79,6 +79,24 @@ small{
 	background:url("../ico/speaker.png");
 	background-size: 100% 100%;
 }
+.ico-internet{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 130px;
+	width: 130px;
+	background:url("../ico/internet.png");
+	background-size: 100% 100%;
+}
+.ico-add{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 130px;
+	width: 130px;
+	background:url("../ico/add.png");
+	background-size: 100% 100%;
+}
 .borde-left{
 	border-left:1px solid #E6E6E6; 
 	border-right:1px solid #E6E6E6; 
@@ -126,7 +144,31 @@ small{
 	 width:100px;
 	 background-size: 100% 100%;
 }
-
+.subir{
+	padding: 20px;
+}
+.foto-perfil-vendedor{
+	margin-top: 5px;
+	height: 120px;
+	width: 130px;
+	background-size: 100% 100%;
+}
+.box-perfil{
+	margin: 5px;
+	text-align: center;
+	border:1px solid #CEECF5;
+	border-radius: 5px;
+}
+.img-logo{
+	height: 90px;
+	width:120px;
+}
+.tamanio-inst{
+	float: none;
+	 margin: 0 auto;
+	height: 150px;
+	width: 200px;
+}
 /* a:visited:after {
   content: " (" attr(href) ") ";
   font-size: 0.8em;

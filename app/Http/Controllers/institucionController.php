@@ -47,11 +47,24 @@ class institucionController extends Controller
     public function vista_noticia(){
             return view('institucion.noticia');
     }
-
+    public function vista_paginaweb(){
+          return view('institucion.paginaweb');
+    }
     public function vista_datos(){
 
             $datosInstitucion = Institucion::datos();
             return view('institucion.datos_inst')->with('datos', $datosInstitucion);
+    }
+    public function vista_grafico(){
+
+          $array[0] = ['Áreas', 'Cantidad de alumnos'];
+          $areas = Area::traer();
+          for ($i=0; $i < count($areas) ; $i++) { 
+            $contarAlumnos = Area::contarAlumnosPorArea($areas[$i]->id);
+            $array[$i+1] = [$areas[$i]->nombre, $contarAlumnos];
+          }
+         
+          return view('institucion.grafico')->with('areas',json_encode($array));
     }
      public function vista_perfilVen($iduser){
         $idu = base64_decode($iduser);
@@ -66,6 +79,7 @@ class institucionController extends Controller
         ->with('usuario',$usuario)
         ->with('vendedor',$vendedor[0]->telefono);
     }
+    
     public function vista_perfilVenInst($iduser){
          $idu = base64_decode($iduser);
           //return $idu;

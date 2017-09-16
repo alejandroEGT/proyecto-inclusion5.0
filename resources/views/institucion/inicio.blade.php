@@ -33,7 +33,7 @@
 					  		<div class="list-group">
 	 							<a class="list-group-item" href="agregarAE"> <i class="fa fa-plus"></i> Agregar Área / Especialidad</a>
 	 							<a class="list-group-item" href="agregarAlumno"> <i class="fa fa-plus"></i> Agregar Alumno</a>
-	 							<a class="list-group-item" href="#"> <i class="fa fa-plus"></i> Agregar mi sitio web</a>
+	 							<a class="list-group-item" href="paginaweb"> <i class="fa fa-plus"></i> Agregar mi sitio web</a>
  						</div>
 					  </div>
 					</div>

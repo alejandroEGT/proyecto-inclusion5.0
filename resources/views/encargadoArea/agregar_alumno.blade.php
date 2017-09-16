@@ -1,8 +1,7 @@
-@extends('institucion.master_institucion')
+@extends('encargadoArea.master_encargadoArea')
 
 @section('content')
-	<div class="padre-agregar margen">
-	<a href="{{ url('institucion/inicio') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
+	<a href="{{ url('encargadoArea/equipo') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
 		<div class="row">
 			<div class="col-md-offset-2 col-md-2">
 				<div class="ico-add"></div>
@@ -16,8 +15,10 @@
 		</div>
 				
 		<!--<form action="/insertar_vendedor" method="Post">-->
-		<form action="agregarAlumno_insert" method="Post">
+		<form action="{{ url('encargadoArea/insertarAlumno') }}" method="Post">
 		{{csrf_field()}}
+		<input type="hidden" value="{{ $id_institucion }}"  name="idInstitucion">
+		<input type="hidden" value="{{ $id_area }}"  name="idArea">
 		<div class="container estilo-form animated fadeInUp ">
 
 				<!-- Validacion de campos vacios-->
@@ -31,20 +32,23 @@
 							            @endforeach
 							        </ul>
 						    </div>
-						@endif	
+						@endif
+						@if (Session::has('registro'))
+								<div class="alert alert-info">{{ Session::get('registro') }}</div>
+							@endif	
 					</div>
 				</div>
 
 			<div class="row">
 					<div class="col-md-offset-2 col-md-4">
 						<p class="p-form">Nombres</p>
-						<input name="nombres" class="form-control input" type="text" value="{{ old('nombres') }}">
+						<input name="nombres" class="form-control input" placeholder="nombres" type="text" value="{{ old('nombres') }}">
 						<p class="p-form">Apellidos</p>
-						<input name="apellidos" class="form-control input" type="text" value="{{ old('apellidos') }}">
+						<input name="apellidos" class="form-control input" placeholder="apellidos" type="text" value="{{ old('apellidos') }}">
 						<p class="p-form">Fecha de Nacimiento</p>
-    						<input name="dia" class="form-control fech" size="2" maxlength="2" type="text" value="{{ old('dia') }}">-
-    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" value="{{ old('mes') }}">-
-    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" value="{{ old('anio') }}">
+    						<input name="dia" class="form-control fech" placeholder="día" size="2" maxlength="2" type="text" value="{{ old('dia') }}">-
+    						<input name="mes" class="form-control fech" size="2" placeholder="mes" maxlength="2" type="text" value="{{ old('mes') }}">-
+    						<input name="anio" class="form-control fech" size="2" placeholder="año" maxlength="4" type="text" value="{{ old('anio') }}">
 					</div>
 					<div class="col-md-4">
 						<p class="p-form">Sexo</p>
@@ -55,17 +59,10 @@
 							@endforeach
 						</select>
 						<p class="p-form">Nª teléfono</p>
-						<input name="telefono" class="form-control input" type="text" value="{{ old('telefono') }}">
+						<input name="telefono" placeholder="teléfono" class="form-control input" type="text" value="{{ old('telefono') }}">
 						
-						<label class="p-form">Área o especialidad</label>
-						<select name="id_area" class="form-control input">
-							<option value="">Seleccione...</option>
-							@foreach ($area as $a)
-								<option value="{{ $a->id }}">{{ $a->nombre }}</option>	
-							@endforeach
-						</select>
 						<p class="p-form">Correo</p>
-						<input name="correo" class="form-control input" type="text" value="{{ old('correo') }}">
+						<input name="correo" placeholder="correo" class="form-control input" type="text" value="{{ old('correo') }}">
 						
 					</div>
 			</div>
@@ -76,5 +73,5 @@
 			</div>
 		</div>
 	</form>	
-	</div>
+	
 @endsection

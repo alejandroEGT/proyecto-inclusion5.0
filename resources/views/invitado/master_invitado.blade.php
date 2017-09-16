@@ -15,30 +15,8 @@
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
             <div class="pushy-content">
                 <ul>
-                    <li class="pushy-submenu">
-                        <button id="first-link">¿Te ayudamos?</button>
-                        <ul>
-                            @if (Session::has('activarMicro'))
-                                <li class="pushy-link"><a href="desactivarmicro"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
-                            @endif
-
-                            @if (empty(Session::get('activarMicro')))
-                            <li class="pushy-link"><a href="activarmicro">
-                                <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
-                            </a></li>
-                            @endif
-                            @if (Session::has('activarText'))
-                                <li class="pushy-link"><a href="desactivartext"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
-                            @endif
-
-                            @if (empty(Session::get('activarText')))
-                           <li class="pushy-link"><a href="activartext">
-                                <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
-                            </a></li>
-                            @endif
-                            <li class="pushy-link"><a><input @click="clickLupa" type="checkbox"> Lupa</a></li>
-                             <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
-                        </ul>
+                    <li>
+                        <label style="color: white; font-size: 9px" >@{{nombreNav}}</label>
                     </li>
                     <li class="pushy-submenu">
                         <button> <i class="fa fa-floppy-o"></i> Registros</button>
@@ -70,6 +48,33 @@
                     <li class="pushy-link"><a href="#">Item 4</a></li>
                 </ul>
             </div>
+            <div v-if="this.navChrome == true">
+                        <li class="pushy-submenu">
+                        <button id="first-link">¿Te ayudamos?</button>
+                        <ul>
+                            @if (Session::has('activarMicro'))
+                                <li class="pushy-link"><a href="desactivarmicro"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
+                            @endif
+
+                            @if (empty(Session::get('activarMicro')))
+                            <li class="pushy-link"><a href="activarmicro">
+                                <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
+                            </a></li>
+                            @endif
+                            @if (Session::has('activarText'))
+                                <li class="pushy-link"><a href="desactivartext"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
+                            @endif
+
+                            @if (empty(Session::get('activarText')))
+                           <li class="pushy-link"><a href="activartext">
+                                <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
+                            </a></li>
+                            @endif
+                            <li class="pushy-link"><a><input @click="clickLupa" type="checkbox"> Lupa</a></li>
+                             <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
+                        </ul>
+                    </li>
+            </div>
         </nav>
 
         <!-- oscurece pantalla al deslizar menu -->
@@ -98,7 +103,7 @@
         <script src="/js/vue/invitado_institucion.js"></script>
 
 		<script src="{{ asset('js/pushy.min.js') }}"></script>
-		@include('mensajes.activa_desactiva')
+		@include('mensajes.activa_desactiva_invitado')
 
 </html>
 

@@ -31,9 +31,9 @@
 							<div class="col-md-offset-4 col-md-4">
 								{{ csrf_field() }}
 								<label for="">Correo</label>
-								<input class="form-control input " type="text" name="correo" >
+								<input class="form-control input " placeholder="correo" type="text" name="correo" value="{{ old('correo') }}" >
 								<label for="">Clave</label>
-								<input class="form-control input" type="password" name="clave">
+								<input class="form-control input" placeholder="clave" type="password" name="clave">
 							</div>
 						</div>
 						<div class="row top">

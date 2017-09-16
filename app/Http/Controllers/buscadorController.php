@@ -35,4 +35,13 @@ class buscadorController extends Controller
         ->with('vendedor',$vendedor)
         ->with('institucion',$institucion);
     }
+     public function buscador_encargado(Request $dato)
+    {   
+        $this->validate($dato, ['buscador' => 'required']);
+        $vendedor = User::buscador($dato->buscador);
+        $institucion = Institucion::buscar($dato->buscador);
+        return view('encargadoArea.buscador_encargado')
+        ->with('vendedor',$vendedor)
+        ->with('institucion',$institucion);
+    }
 }

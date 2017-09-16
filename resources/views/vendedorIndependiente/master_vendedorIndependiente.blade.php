@@ -22,7 +22,7 @@
                     <li class="pushy-submenu" >
                         
                         <div class="min-perfil-vendedor" >            
-                              <img :src="'/'+fotoPerfil" height="50" alt="">
+                              <img  class="img-circle" :src="'/'+fotoPerfil" height="65" width="65" alt="">
                             <p class="nombre-perfil">
                                {{ Auth::user()->nombres.' '.Auth::user()->apellidos }}
                             </p>
@@ -133,7 +133,7 @@
 		<script src="/js/vue/vue.js" ></script>
         <script src="/js/vue/vue-resource.js"></script>
         <script src="/js/vue/vue_master-vendedorIndependiente.js"></script>
-        @include('mensajes.activa_desactiva')
+        {{--@include('mensajes.activa_desactiva')--}}
 		<script src="/js/pushy.min.js"></script>
 
 </html>

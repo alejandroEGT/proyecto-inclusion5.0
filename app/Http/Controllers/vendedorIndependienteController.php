@@ -21,6 +21,7 @@ class vendedorIndependienteController extends Controller
 
      public function insertar_vendedorIndependiente(FormUsuarioRequest $datos)
     {
+        $datos->flash();
         $insert = User::insertar_vendedor($datos);
         if ($insert) {
            

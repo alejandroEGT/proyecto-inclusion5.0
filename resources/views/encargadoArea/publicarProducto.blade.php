@@ -6,6 +6,7 @@
 	
 		<div class="row">
 			<div class="col-md-offset-2 col-md-2">
+			<a href="{{ URL::previous() }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
 				<div class="ico-speaker"></div>
 			</div>
 			<div class="col-md-6">
@@ -23,11 +24,16 @@
 		<hr>
 		<div class="row">
 			
-			<div class="col-md-offset-3 col-md-3">
-				<p><input type="text" placeholder="Descripción o tipo de producto..." class="form-control input" name=""></p>
+			<div class="col-md-offset-2 col-md-3">
+				<p><input type="text" placeholder="Descripción del producto..." class="form-control input" name=""></p>
 			</div>
 			<div class="col-md-2">
 				<p><input type="numeric" placeholder="Cantidad..." class="form-control input" name=""></p>
+			</div>
+			<div class="col-md-2">
+				<p><select class="form-control input" >
+					<option>Seleccione categoria..</option>
+				</select></p>
 			</div>
 		</div>
 		<hr>

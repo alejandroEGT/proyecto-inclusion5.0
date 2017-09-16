@@ -4,6 +4,7 @@
 
 <div class="row">
 			<div class="col-md-12">
+			<a href="{{ URL::previous() }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
 				<center><label>Datos del área</label>
 				<div class="ico-security" ></div></center>
 			</div>

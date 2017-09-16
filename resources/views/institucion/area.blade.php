@@ -5,10 +5,16 @@
 	<div class="container padre-agregar">
 		<div class="row panel">
 			<div class="col-md-offset-1 col-md-4">
+			<a href="{{ URL::previous() }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
 				<p style="text-align: center" class="panel-title-agregar-mv"><label>{{ $area->nombre}}</label></p>
 				<p style="text-align: center" class="panel-body-mst"><label>{{ $area->descripcion }}</label>
 				</p>
-				<div class="ico-news"></div>
+				@if ($area->logo != "")
+					<center><img class="img-logo" src="{{ '/'.$area->logo }}"></center>
+				@endif
+				@if ($area->logo == "")
+					<center><label>(No hay un logo..)</label></center>
+				@endif
 			</div>
 			<div class="col-md-6">
 			<p><label>Agregar encargado</label></p>

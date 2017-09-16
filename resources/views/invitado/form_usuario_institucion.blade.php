@@ -33,13 +33,13 @@
 			<div class="row">
 					<div class="col-md-offset-3 col-md-3">
 						<label class="p-form">Nombres</label>
-						<input name="nombres" class="form-control input" type="text">
+						<input name="nombres" class="form-control input" type="text" placeholder="nombre" value="{{ old('nombres') }}">
 						<label class="p-form">Apellidos</label>
-						<input name="apellidos" class="form-control input" type="text">
+						<input name="apellidos" class="form-control input" type="text" placeholder="apellido" value="{{ old('apellidos') }}">
 						<label class="p-form">Fecha de Nacimiento</label>
-    						<p><input name="dia" class="form-control fech" size="2" maxlength="2" type="text" >-
-    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" >-
-    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text"></p>
+    						<p><input name="dia" class="form-control fech" placeholder="día" size="2" maxlength="2" type="text"  value="{{ old('dia') }}">-
+    						<input name="mes" placeholder="mes" class="form-control fech" size="2" maxlength="2" type="text"  value="{{ old('mes') }}">-
+    						<input name="anio" placeholder="año" class="form-control fech" size="2" maxlength="4" type="text" value="{{ old('anio') }}"></p>
 						<label class="p-form">Institución</label>
 						<select name="id_institucion" @change="filtraArea"  class="form-control input" name="" id="">
 							<option value="">Seleccione...</option>
@@ -62,13 +62,13 @@
 							@endforeach
 						</select>
 						<label class="p-form">Nª teléfono</label>
-						<input name="telefono" class="form-control input" type="text">
+						<input name="telefono" class="form-control input" placeholder="teléfono" type="text" value="{{ old('telefono') }}" >
 						<label class="p-form">Correo</label>
-						<input name="correo" class="form-control input" type="text">
+						<input name="correo" class="form-control input" placeholder="correo" type="text" value="{{ old('correo') }}" >
 						<label class="p-form">Clave</label>
-						<input name="clave" class="form-control input" type="password">
+						<input name="clave" class="form-control input" placeholder="clave" type="password">
 						<label class="p-form">Repita Clave</label>
-						<input name="rClave" class="form-control input" type="password">
+						<input name="rClave" class="form-control input" placeholder="clave nuevamente" type="password">
 					</div>
 			</div>
 			<div class="row top">

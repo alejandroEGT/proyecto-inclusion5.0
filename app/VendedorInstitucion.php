@@ -36,6 +36,19 @@ class VendedorInstitucion extends Model
         }
         return true;
     }
+    protected function insertar_desde_area($datos, $id_ven)
+    {
+        $vendedor = new VendedorInstitucion;
+
+        $vendedor->id_vendedor = $id_ven;
+        $vendedor->id_institucion = $datos->idInstitucion;
+        $vendedor->id_area = $datos->idArea;
+
+        if($vendedor->save()){
+            return true;
+        }
+        return true;
+    }
     protected function idVendedor($id){
 
         $id = \DB::select("select * from `vendedor` where id_user = ".$id);

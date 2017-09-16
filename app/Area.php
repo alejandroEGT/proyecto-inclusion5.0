@@ -58,4 +58,9 @@ class Area extends Model
         }        
             return false;
     }
+    protected function contarAlumnosPorArea($idarea){
+
+        $contar = \DB::table('vendedor-institucion')->select('id')->where('id_area','=',$idarea)->get();
+        return count($contar);
+    }
 }

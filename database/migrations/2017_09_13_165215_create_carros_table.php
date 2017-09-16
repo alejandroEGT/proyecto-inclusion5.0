@@ -15,11 +15,13 @@ class CreateCarrosTable extends Migration
     {
         Schema::create('carros', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_user')->unsigned();
+            $table->integer('id_cliente')->unsigned();
             $table->timestamps();
         });
 
-       
+       Schema::table('carros', function(Blueprint $table){
+            $table->foreign('id_cliente')->references('id')->on('clientes');
+       });
     }
 
     /**

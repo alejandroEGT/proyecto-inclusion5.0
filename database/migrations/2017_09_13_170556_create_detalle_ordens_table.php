@@ -15,12 +15,17 @@ class CreateDetalleOrdensTable extends Migration
     {
         Schema::create('detalle_ordenes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('id_orden')->unsigned();
             $table->integer('id_producto')->unsigned();
+            $table->string('producto');
+            $table->integer('cantidad');
             $table->integer('precio');
             $table->timestamps();
         });
         Schema::table('detalle_ordenes', function($table) {
-             $table->foreign('id_producto')->references('id')->on('productos');
+             $table->foreign('id_producto')->references('id_producto')->on('detalle_carros');            
+            $table->foreign('id_orden')->references('id')->on('ordenes');
+
         });
     }
 

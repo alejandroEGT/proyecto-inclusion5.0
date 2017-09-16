@@ -15,14 +15,11 @@ class CreateFotoServiciosTable extends Migration
     {
        Schema::create('foto_servicios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_servicio')->unsigned();
             $table->string('nombre');
             $table->timestamps();
         });
 
-        Schema::table('foto_servicios', function($table) {
-            $table->foreign('id_servicio')->references('id')->on('servicios');
-        });
+        
     }
 
     /**

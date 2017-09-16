@@ -16,14 +16,12 @@ class CreateServiciosTable extends Migration
         Schema::create('servicios', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_tienda')->unsigned();
-            $table->integer('id_estado')->unsigned();
             $table->string('nombre');
             $table->string('descripcion');
         });
         
-        Schema::create('servicios', function (Blueprint $table) {
+        Schema::table('servicios', function (Blueprint $table) {
              $table->foreign('id_tienda')->references('id')->on('tiendas');
-             $table->foreign('id_estado')->references('id')->on('estado_productos');
         });
     }
 

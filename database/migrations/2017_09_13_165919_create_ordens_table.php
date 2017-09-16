@@ -23,10 +23,7 @@ class CreateOrdensTable extends Migration
             $table->dateTime('fecha');
             $table->timestamps();
         });
-        Schema::table('ordenes', function($table) {
-             $table->foreign('id_estado')->references('id')->on('estado_orden');
-             $table->foreign('id_pago')->references('id')->on('pagos');
-        });
+       
     }
 
     /**

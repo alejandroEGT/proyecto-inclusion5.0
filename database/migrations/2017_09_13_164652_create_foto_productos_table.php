@@ -15,14 +15,10 @@ class CreateFotoProductosTable extends Migration
     {
         Schema::create('foto_productos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_producto')->unsigned();
             $table->string('nombre');
             $table->timestamps();
         });
 
-        Schema::table('foto_productos', function($table) {
-            $table->foreign('id_producto')->references('id')->on('productos');
-        });
     }
 
     /**

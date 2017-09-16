@@ -17,12 +17,12 @@ class CreateTiendasTable extends Migration
             $table->increments('id');
             $table->integer('id_vendedor')->unsigned();
             $table->integer('id_estado')->unsigned();
-            $table->integer('id_imagen');
             $table->string('nombre');
             $table->string('descripcion');
             $table->timestamps();
         });
 
+      
        
     }
 

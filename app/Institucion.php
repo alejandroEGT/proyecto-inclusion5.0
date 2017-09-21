@@ -148,4 +148,15 @@ class Institucion extends Authenticatable
         }
         return "nada men";
     }
+
+    protected function ingresar_paginaweb($paginaweb){
+
+        $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
+        $institucion->sitioWeb = $paginaweb;
+        
+        if ($institucion->save()) {
+            return true;
+        }
+        return false;
+    }
 }

@@ -6,7 +6,7 @@
 <div class="row">
 	<div class="col-md-10 col-xs-12">
 	<p>Cantidad de alumnos por area</p>
-	{{ $areas }}
+
 			<!--<canvas id="myChart" width="100" height="60"></canvas>-->
 			<div id="top_x_div" style="width: 500px; height: 200px;"></div>
 	</div>

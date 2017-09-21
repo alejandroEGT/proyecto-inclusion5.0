@@ -1379,6 +1379,7 @@
          */
         artyom.newDictation = function (settings) {
             if (!artyom.recognizingSupported()) {
+                alert("No soportado en este navegador");
                 console.error("SpeechRecognition is not supported in this browser");
                 return false;
             }

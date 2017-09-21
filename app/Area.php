@@ -28,8 +28,13 @@ class Area extends Model
         return $area;
     }
     protected function traer_area($id){
-        $area = Area::find($id);
-        return $area;
+        $area = Area::where('id',$id)->where('id_institucion', \Auth::guard('institucion')->user()->id)->get();
+    
+
+        if(count($area)>0){
+            return $area[0];
+        }
+        return 0;
     }
     protected function traerArea(){
         $logo = \DB::table('area')

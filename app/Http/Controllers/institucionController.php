@@ -15,6 +15,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Usuarioinstitucion;
 use App\Passwordcuenta;
+use Charts;
+
+//use DB;
 class institucionController extends Controller
 {
     
@@ -66,6 +69,35 @@ class institucionController extends Controller
          
           return view('institucion.grafico')->with('areas',json_encode($array));
     }
+
+    public function graficochart(){
+          
+          $array;
+          $contar;
+      $areas = Area::traer();
+          for ($i=0; $i < count($areas) ; $i++) { 
+            $contarAlumnos = Area::contarAlumnosPorArea($areas[$i]->id);
+            $array[$i] = $areas[$i]->nombre;
+            $contar[$i] = $contarAlumnos;
+          }
+
+          //return $array;
+         $chart = Charts::create('pie', 'highcharts')
+            ->Title('My nice chart')
+            ->Labels($array)
+            ->Values($contar)
+            ->Dimensions(1000,1000)
+            ->Responsive(true);
+
+        //return view('frontend.user.dashboard',['chart'=>$chart]);
+        return view('institucion.graficochart',['chart' => $chart]);
+     
+     
+
+    }
+
+
+
      public function vista_perfilVen($iduser){
         $idu = base64_decode($iduser);
         //return $idu;
@@ -280,6 +312,21 @@ class institucionController extends Controller
       $eliminarPassestado = Passwordcuenta::where('id_user', $encargado->id)->delete();
       $eliminarusuario = User::where('id',$encargado->id)->delete();
       return "okaaa";
+    }
+    public function ingresar_pagweb(Request $dato){
+
+          $this->validate($dato,[
+                'paginaWeb' => 'required | url',
+          ]);
+
+          $ingresarweb = Institucion::ingresar_paginaweb($dato->paginaWeb);
+
+          if ($ingresarweb) {
+              
+              \Session::flash('web', 'Sitio web ingresado');
+              return redirect()->back();
+          }
+
     }
 
 }

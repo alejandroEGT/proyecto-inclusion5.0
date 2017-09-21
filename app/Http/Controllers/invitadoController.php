@@ -8,7 +8,13 @@ use App\Institucion;
 use App\Sexo;
 use Illuminate\Http\Request;
 class invitadoController extends Controller
-{
+{   
+    public function vista_inicio(){
+
+            return view('invitado.inicio');
+    }
+
+
     public function vista_registros(){
 
     	 	return view('invitado.multiRegistro');

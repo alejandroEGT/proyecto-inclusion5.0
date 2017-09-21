@@ -120,6 +120,31 @@
 
 				</div>
 				<hr>
+				<label><strong>Sitio Web </strong></label><small>
+				 
+				 @if (empty(Auth::guard('institucion')->user()->sitioWeb))
+				 	(No existe sitio web)
+				 @else
+					{{Auth::guard('institucion')->user()->sitioWeb}}
+				 @endif
+
+
+				 </small>
+				<button data-toggle="collapse" data-target="#paginaweb" class="btn btn-xs btn-success" >Editar</button>
+
+				<div id="paginaweb" class="collapse">
+							<div class="alert alert-info" role="alert">
+								<form action="{{ url('institucion/ingresar_pagweb') }}" method="post">
+								{{ csrf_field() }}
+							  		<p><strong>Actualizar Sitio Web</strong> </p>
+							  		<p><small>Sitio web</small><input class="" type="text" name="paginaWeb">
+							  	
+									<input type="submit" value="Guardar" name=""></p>	
+								</form>	
+							</div>
+
+				</div>
+				<hr>
 				<label><strong>Contraseña </strong></label><small> (No visible) </small>
 				<button data-toggle="collapse" data-target="#clave" class="btn btn-xs btn-success" >Editar</button>
 

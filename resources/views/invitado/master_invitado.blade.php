@@ -16,7 +16,7 @@
             <div class="pushy-content">
                 <ul>
                     <li>
-                        <label style="color: white; font-size: 9px" >@{{nombreNav}}</label>
+                        <label style="color: white; margin-left:4px; font-size: 10px" >@{{nombreNav}}</label>
                     </li>
                     <li class="pushy-submenu">
                         <button> <i class="fa fa-floppy-o"></i> Registros</button>
@@ -95,9 +95,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" ></script>
 		<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}" ></script>
 		<script src="{{ asset('js/toastr.js')}}" ></script>
-		
-        <script src="/js/invitado/funciones.js">
-        </script>
+		<script src="{{asset('js/artyom.js')}}" ></script>
+        <script src="/js/invitado/funciones.js"></script>
         <script src="/js/vue/vue.js" ></script>
         <script src="/js/vue/vue-resource.js"></script>
         <script src="/js/vue/invitado_institucion.js"></script>

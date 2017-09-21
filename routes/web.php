@@ -6,7 +6,8 @@ Route::group(['middleware' => ['web']], function () {
             return view('welcome');
         });
         /*Redireccion a vistas*/
-        Route::get('/inicio','invitadoController@vista_proyecto');
+        //Route::get('/inicio','invitadoController@vista_proyecto');
+        Route::get('/inicio','invitadoController@vista_inicio');
         Route::get('/ayuda','invitadoController@vista_ayuda');
         Route::get('/registros','invitadoController@vista_registros');
         Route::get('/formUsuario','invitadoController@vista_formUser');
@@ -63,6 +64,10 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/paginaweb', 'institucionController@vista_paginaweb');
         Route::post('/publicarProducto','institucionController@publicarProducto');/*Pendiente*/
         Route::get('/grafico','institucionController@vista_grafico');
+
+        Route::get('my-chart', 'institucionController@graficochart');
+
+        Route::post('ingresar_pagweb', 'institucionController@ingresar_pagweb');
 });
 
 Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucional']], function () {
@@ -110,8 +115,6 @@ Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');
 Route::get('/desactivarmicro', 'herramientasayudaController@desactivar_microfono');
 Route::get('/activartext', 'herramientasayudaController@activar_texto');
 Route::get('/desactivartext','herramientasayudaController@desactivar_texto');
-
-
 
 
 

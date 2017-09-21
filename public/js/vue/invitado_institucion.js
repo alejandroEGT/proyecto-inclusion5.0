@@ -73,11 +73,10 @@ var app = new Vue({
       }
     },
     created(){
-
-    	if(this.navegador() == "Chrome"){
-        this.navChrome = true;
-      //alert(this.navChrome+'== true');
+      if(artyom.recognizingSupported()){
+       this.navChrome = true;
       }
+    	
       this.browsermobil();
     }
   

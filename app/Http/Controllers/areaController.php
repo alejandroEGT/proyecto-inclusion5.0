@@ -18,26 +18,37 @@ class areaController extends Controller
 
     public function vista_area(Request $dato)
     {	
-    	if ($dato->id == 0) {
+        try{
+        	if ($dato->id == 0) {
+                return redirect()->back();
+            }
+
+            $area = Area::traer_area($dato->id);
+            
+            $sexo = Sexo::all();
+            $contarusuarios = VendedorInstitucion::contarVendedores($dato->id);
+            $datosVendedor = VendedorInstitucion::datosVendedorInstitucion($area->id);
+
+
+            return view('institucion.area')
+            ->with('area', $area)
+            ->with('sexo', $sexo)
+            ->with('contar', $contarusuarios)
+            ->with('venInstitucion', $datosVendedor);
+
+        } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back();
         }
-
-        $area = Area::traer_area($dato->id);
-        $sexo = Sexo::all();
-        $contarusuarios = VendedorInstitucion::contarVendedores($dato->id);
-        $datosVendedor = VendedorInstitucion::datosVendedorInstitucion($area->id);
-        return view('institucion.area')
-        ->with('area', $area)
-        ->with('sexo', $sexo)
-        ->with('contar', $contarusuarios)
-        ->with('venInstitucion', $datosVendedor);
+        catch (\Exception $e) {
+            return "<center><h3>Si alguien te dijo que jugaras a romper el sistema, no le creas, te esta engañando</h3></center>";
+        }
     }
 
     public function agregarUsuario(usuarioRequest $datos){
     	
             $existe = Usuarioinstitucion::existeuser($datos->area);
             if(count($existe)){
-                return redirect()->back()->withErrors(['Ya existe un usuarion en esta area']);;
+                return redirect()->back()->withErrors(['Ya existe un usuarion en esta area']);
             } 
 
     		$genclave = $this->genclave();

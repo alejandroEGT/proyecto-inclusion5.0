@@ -63,6 +63,7 @@
                     <li class="pushy-link"><a href="{{ url('institucion/notificacio_vendedor') }}"><i class="fa fa-globe"></i> 
                     Notificaciones <span class="badge">@{{ notificacion }}</span></a></li>
                     <li class="pushy-link"><a href="{{ url('institucion/grafico') }}"><i class="fa fa-indent"></i> Grafico</a></li>
+                     <li class="pushy-link"><a href="{{ url('institucion/my-chart') }}"><i class="fa fa-indent"></i> GraficoChart</a></li>
                    <!-- <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
                     <li class="pushy-link"><a href="#">Item 4</a></li>-->

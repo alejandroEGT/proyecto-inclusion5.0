@@ -169,9 +169,20 @@ small{
 	height: 150px;
 	width: 200px;
 }
+.color-sky{
+	background-color:#E0ECF8;
+}
 /* a:visited:after {
   content: " (" attr(href) ") ";
   font-size: 0.8em;
   font-weight: normal;
 }*/
+.label-institucion{
+	color:white;
+}
+.div-centro {
+	display: inline-block;
+	margin-left: 20px;
 
+  
+}

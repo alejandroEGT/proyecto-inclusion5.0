@@ -1,11 +1,11 @@
 		<script src="{{asset('js/jquery.easing.min.js')}}"></script> 
          <script src="{{asset('js/jquery.scrollTo.js')}}"></script>
          <script src="{{asset('js/wow.min.js')}}"></script>
-			<script src="{{asset('js/artyom.js')}}" ></script>
         <script src="{{ asset('js/artyomCommands.js') }}" ></script>
          
 
 <script>
+
 	var scrolldelay;
 	var fun_p= function(){}
 	var fun_h= function(){}

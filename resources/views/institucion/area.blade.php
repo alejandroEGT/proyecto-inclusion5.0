@@ -71,7 +71,7 @@
 			</div>
 			<div class="col-md-5 ">
 				<div v-if="this.existeEncargado == true">
-					<p><label>Encargado(a):</label>@{{bd_encargadoId}} @{{ bd_encargadoNombre }} <button @click="eliminarEncargado(bd_encargadoId)" class="btn btn-primary btn-xs">Eliminar</button>	
+					<p><label>Encargado(a):</label>@{{ bd_encargadoNombre }} <button @click="eliminarEncargado(bd_encargadoId)" class="btn btn-primary btn-xs">Eliminar</button>	
 				</div>
 				<div v-if="this.existeEncargado == false">
 					<p><label>No existe encargado(a)</label> 

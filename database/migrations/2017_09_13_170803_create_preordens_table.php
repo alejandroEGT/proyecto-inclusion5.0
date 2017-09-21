@@ -15,9 +15,9 @@ class CreatePreordensTable extends Migration
     {
         Schema::create('preordenes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_user')->unsigned();
-            $table->integer('id_estado')->unsigned();
-            $table->integer('id_pago')->unsigned();
+            $table->integer('id_user')->unsigned()->index();
+            $table->integer('id_estado')->unsigned()->index();
+            $table->integer('id_pago')->unsigned()->index();
             $table->integer('total');
             $table->dateTime('fecha');
             $table->timestamps();

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class=" well">
+<div class=" well color-sky">
 <div class="row">
 	<div class="col-md-offset-1 col-md-3">
 		<img src="{{ url($foto) }}" class="img img-thumbnail img-responsive img-circle tamanio" >

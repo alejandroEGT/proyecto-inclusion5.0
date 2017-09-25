@@ -13,15 +13,17 @@
         <!-- Pushy Menu -->
     <div id="master_invitado">    
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
+
             <div class="pushy-content">
                 <ul>
                     <li>
                         <label style="color: white; margin-left:4px; font-size: 10px" >@{{nombreNav}}</label>
                     </li>
+                    <li class="pushy-link"><a href="/inicio">Inicio</a></li>
                     <li class="pushy-submenu">
                         <button> <i class="fa fa-floppy-o"></i> Registros</button>
                         <ul>
-                            <li class="pushy-link"><a href="/inicio">Registros de usuarios</a></li>
+                            <li class="pushy-link"><a href="/ver_usuarios">Registros de usuarios</a></li>
                             <li class="pushy-link"><a href="/formInstitucion">Registro de institución</a></li>
                         </ul>
                     </li>
@@ -94,6 +96,7 @@
 		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" ></script>
 		<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}" ></script>
+        @yield('js')
 		<script src="{{ asset('js/toastr.js')}}" ></script>
 		<script src="{{asset('js/artyom.js')}}" ></script>
         <script src="/js/invitado/funciones.js"></script>
@@ -103,30 +106,6 @@
 
 		<script src="{{ asset('js/pushy.min.js') }}"></script>
 		@include('mensajes.activa_desactiva_invitado')
-
 </html>
 
 
-<!--<nav>
-				<ul>
-				{{--@if (Session::has('activarMicro'))
-					<li><a href="desactivarmicro"><i class="fa fa-microphone fa-3x micro-on" aria-hidden="true"></i></a></li>
-				@endif
-
-				@if (empty(Session::get('activarMicro')))
-				<li><a href="activarmicro">
-					<i class="fa fa-microphone fa-3x micro-off" aria-hidden="true"></i>
-				</a></li>
-				@endif
-				@if (Session::has('activarText'))
-					<li><a href="desactivartext"><i class="fa fa-commenting fa-3x text-on" aria-hidden="true"></i></a></li>
-				@endif
-
-				@if (empty(Session::get('activarText')))
-				<li><a href="activartext">
-					<i class="fa fa-commenting fa-3x text-off" aria-hidden="true"></i></i>
-				</a></li>
-				@endif
-				
-			</ul>
-			</nav>

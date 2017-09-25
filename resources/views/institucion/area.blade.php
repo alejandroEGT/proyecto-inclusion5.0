@@ -6,9 +6,36 @@
 		<div class="row panel">
 			<div class="col-md-offset-1 col-md-4">
 			<a href="{{ URL::previous() }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
-				<p style="text-align: center" class="panel-title-agregar-mv"><label>{{ $area->nombre}}</label></p>
-				<p style="text-align: center" class="panel-body-mst"><label>{{ $area->descripcion }}</label>
+				<p style="text-align: center" class="panel-title-agregar-mv"><label>{{ $area->nombre}}</label>
+				<a data-toggle="collapse" data-target="#campo1" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+				<div id="campo1" class="collapse">
+							<div class="alert alert-info" role="alert">
+								<form action="{{ url('institucion/actualizar_nombreArea') }}" method="post">
+								{{csrf_field()}}
+							  		<p><strong>Actualizar Nombre del Área</strong> </p>
+							  		<input type="hidden" name="idArea" value="{{ $area->id  }}" >
+							  		<p><input class="" type="" name="nombreDeArea">
+									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
+								</form>	
+							</div>
+				</div>
 				</p>
+				<p style="text-align: center" class="panel-body-mst"><label>{{ $area->descripcion }}</label>
+				<a data-toggle="collapse" data-target="#campo2"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
+				<div id="campo2" class="collapse">
+							<div class="alert alert-info" role="alert">
+								<form action="{{ url('institucion/actualizar_descripcionArea') }}" method="post">
+								{{csrf_field()}}
+							  		<p><strong>Actualizar Descripcion del área</strong> </p>
+							  		<input type="hidden" name="idArea" value="{{ $area->id }}" >
+							  		<p>
+							  		<TEXTAREA rows="4" cols="50" name="descripcion" ></TEXTAREA><br>
+									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
+								</form>	
+							</div>
+				</div>
+				</p>
+				<hr>
 				@if ($area->logo != "")
 					<center><img class="img-logo" src="{{ '/'.$area->logo }}"></center>
 				@endif
@@ -26,12 +53,15 @@
 						<a href="" class="close" data-dismiss="alert">&times;</a>
 							@foreach ($errors->all() as $error)
 								<ul>
-									<li>{{ $error }}</li>
+									<li class="validacionRequest">{{ $error }}</li>
 								</ul>
 							@endforeach
 					</div>				
 			</div>
-		@endif
+			@endif
+			@if (Session::has('ingreso'))
+								<div class="alert alert-info">{{ Session::get('ingreso') }}</div>
+							@endif
 				<form action="{{ url('institucion/agregarUsuario') }}" method="post"  >
 					<div class="row">
 						<div class="col-md-6">

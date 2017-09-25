@@ -16,13 +16,14 @@ class CreateValoracionProductosTable extends Migration
         Schema::create('valoracion_productos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_producto')->unsigned();
-            $table->integer('id_user');
+            $table->integer('id_user')->unsigned();
             $table->string('descripcion');
             $table->integer('valoracion');
             $table->timestamps();
         });
         Schema::table('valoracion_productos', function($table) {
              $table->foreign('id_producto')->references('id')->on('productos');
+             $table->foreign('id_user')->references('id')->on('users');
            
         });
     }

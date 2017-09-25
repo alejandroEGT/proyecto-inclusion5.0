@@ -4,7 +4,7 @@
 		<div class="padding color-verde">
 			<div class="row">
 					<div class="col-md-offset-3 col-md-6">
-					<h3>Login de Vendedor Institucional</h3>
+					<h3>Login de Alumno Institucional</h3>
 					<h4>Bienvenido a nuestro proyecto</h4>
 					<div class="ico-people"></div>
 					</div>
@@ -35,8 +35,8 @@
 								<label for="">Clave</label>
 								<input class="form-control input" type="password" name="clave">
 							</div>
-						</div>
-						<div class="row top">
+						</div><br>
+						<div class="row">
 							<div class="col-md-offset-4 col-md-4">
 								<input class="btn btn-info input-btn" type="submit" value="Iniciar">
 							</div>

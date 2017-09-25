@@ -16,7 +16,8 @@ new Vue({
 		bd_encargadoNombre:'',
 		bd_encargadoId:'',
 		existeEncargado : false,
-  
+  		txtBuscar:'',
+        users: [],
 		
 	},
 	 http: { 
@@ -190,7 +191,18 @@ new Vue({
 		isEmptyJSON(obj) {
 			for(var i in obj) { return false; }
 					return true;
-		}
+		},
+		buscarUsuario(){
+            url="";
+	        if(this.txtBuscar == "") url="user/";
+	        else url="institucion/buscarUsuarioParaCambiarPassword/"+this.txtBuscar;
+	        
+	        this.$http.get(url).then(function(response){
+	                this.users = response.body;   
+	                console.log(response.body);
+	          })
+      
+        }
 	},
 
 	created (){

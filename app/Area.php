@@ -68,4 +68,22 @@ class Area extends Model
         $contar = \DB::table('vendedor-institucion')->select('id')->where('id_area','=',$idarea)->get();
         return count($contar);
     }
+    protected function actualizar_nombre($dato){
+
+        $area = Area::find($dato->idArea);
+        $area->nombre = $dato->nombreDeArea;
+        if ($area->save()) {
+            return true;
+        }
+        return false;
+    }
+    protected function actualizar_descripcion($dato){
+
+        $area = Area::find($dato->idArea);
+        $area->descripcion = $dato->descripcion;
+        if ($area->save()) {
+            return true;
+        }
+        return false;
+    }
 }

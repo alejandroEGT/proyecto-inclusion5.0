@@ -15,8 +15,8 @@ class CreateDetalleOrdensTable extends Migration
     {
         Schema::create('detalle_ordenes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_orden')->unsigned();
-            $table->integer('id_producto')->unsigned();
+            $table->integer('id_orden')->unsigned()->index();
+            $table->integer('id_producto')->unsigned()->index();
             $table->string('producto');
             $table->integer('cantidad');
             $table->integer('precio');

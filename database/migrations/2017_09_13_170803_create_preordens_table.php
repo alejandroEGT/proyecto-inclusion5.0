@@ -22,6 +22,12 @@ class CreatePreordensTable extends Migration
             $table->dateTime('fecha');
             $table->timestamps();
         });
+
+        Schema::table('preordenes', function (Blueprint $table) {
+             $table->foreign('id_user')->references('id')->on('users');
+             $table->foreign('id_estado')->references('id')->on('estado_ordenes');
+             $table->foreign('id_pago')->references('id')->on('pagos');
+        });
     }
 
     /**

@@ -188,6 +188,10 @@
    box-shadow:0 0 1px #333;
 }
 
+<<<<<<< HEAD
+.validacionRequest { 
+	margin-left: 10px;
+=======
 .nombrecss{
 	color: #424242;
 }
@@ -196,4 +200,5 @@
 }
 .rolcss{
 	color:#088A4B;
+>>>>>>> 4024e16259e8c09e62b35edb88d63d7fbbef9a68
 }

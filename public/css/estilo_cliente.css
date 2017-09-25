@@ -1,0 +1,86 @@
+body {  
+	background-color: #F5FCFD;
+}
+a:link {   
+ text-decoration:none;   
+}   
+ #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+.carousel, .carousel-inner > .carousel-item > img {
+  height: 400px;
+  width: 100%;
+}
+
+.carousel{
+	margin-top: 20px;
+}
+
+.colorLista{
+	color: black;
+}
+
+.fondo > img {
+	width: 300px;
+	height: 200px;
+	margin-top: 10px;
+}
+.productos h1{
+	color: black;
+	margin-left: 20px;
+}
+
+.categorias{
+	height: 500px;
+}
+
+.porteimg > img{
+	height: 150px;
+	width: 100px;
+}
+
+.piePagina{
+background-color: #D0D0D0;
+margin-left: -20px;
+margin-right: -20px;
+
+}
+
+.piePagina > img{
+	width: 110px;
+	height: 110px;
+	margin-top: 70px;
+
+}
+
+.contenido-sesion{
+
+	margin: 10px 10px 10px 10px;
+
+}
+.caja-sesion{
+
+	display:flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.boton-sesion >button{
+	margin:10px 10px 10px 10px;
+	display:flex;
+	justify-content: center;
+
+}
+
+.registro-sesion >a{
+	
+	margin:10px 10px 10px 10px;
+	text-align:right;
+}

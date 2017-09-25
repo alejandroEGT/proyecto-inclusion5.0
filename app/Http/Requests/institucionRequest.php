@@ -27,4 +27,41 @@ class institucionRequest extends FormRequest
             'repeClave' => 'required | min:6 | same:clave',
         ];
     }
+
+    public function messages() {
+
+
+        return [
+
+                'rut.max' => 'Ingrese un maximo de 9 numeros',
+                'rut.required'=>'No puedes dejar vacio el campo rut',
+                'rut.numeric' => 'Solo puedes ingresar numeros en el campo rut',
+                'rut.unique' => 'El rut ingresado ya existe en la base de datos',
+
+                'nombre.required' => 'No puedes dejar vacio el campo nombre',
+                'nombre.unique' => 'La institucion ingresada ya existe en la base de datos',
+
+                'razonSocial.required' => 'No puedes dejar vacio el campo razon social',               
+                'telefono1.required' => 'No puedes dejar vacio el campo telefono 1',
+                'telefono1.min' => 'Ingrese un minimo de 11 numeros',
+                'telefono1.numeric' => 'Solo puedes ingresar numeros en el campo telefono 1',
+
+                'telefono2.required' => 'No puedes dejar vacio el campo telefono 2',
+                'telefono2.min' => 'Ingrese un minimo de 11 numeros',
+                'telefono2.numeric' => 'Solo puedes ingresar numeros en el campo telefono 2',
+
+                'logo.required' => 'No puedes dejar vacio el campo logo',
+                'logo.image' => 'Debes ingresar una imagen',
+
+                'correo.required' => 'No puedes dejar vacio el campo correo',
+                'correo.email' => 'Debes ingresar un formato de correo valido',
+                'correo.unique' => 'El correo ingresado ya existe en la base de datos',
+
+                'clave.required' => 'No puedes dejar vacio el campo clave',
+                'clave.min' => 'La contraseña debe tener un minimo de 6 caracteres',
+                'repeClave.required' => 'No puedes dejar vacio el campo Repita Clave',
+                'repeClave.min' => 'La contraseña debe tener un minimo de 6 caracteres',
+             ];
+        
+    }
 }

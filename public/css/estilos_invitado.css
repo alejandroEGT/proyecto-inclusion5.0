@@ -335,3 +335,16 @@ h1 {
 	border :solid black 1px;
 }
 /** Hasta aqui borrar el estilo **/
+.logo-ayuda{
+	height: 100px;
+	width: 100px;
+}
+.ulli{
+	margin-left: 40px;
+}
+ul li a .logo{
+	margin-top: 10px;
+	height:30px;
+	width: 30px;
+}
+

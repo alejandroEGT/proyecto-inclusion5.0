@@ -35,8 +35,8 @@
 								<label for="">Clave</label>
 								<input class="form-control input" placeholder="clave" type="password" name="clave">
 							</div>
-						</div>
-						<div class="row top">
+						</div><br>
+						<div class="row">
 							<div class="col-md-offset-4 col-md-4">
 								<input class="btn btn-info input-btn" type="submit" value="Iniciar">
 							</div>

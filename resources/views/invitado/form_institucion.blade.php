@@ -20,7 +20,7 @@
 			    <a href="" class="close" data-dismiss="alert">&times;</a>
 				        <ul>
 				            @foreach ($errors->all() as $error)
-				                <li><label>{{ $error }}</label></li>
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
 				            @endforeach
 				        </ul>
 			    </div>

@@ -15,8 +15,8 @@ class CreateDetalleCarrosTable extends Migration
     {
         Schema::create('detalle_carros', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_carro')->unsigned();
-            $table->integer('id_producto')->unsigned();
+            $table->integer('id_carro')->unsigned()->index();
+            $table->integer('id_producto')->unsigned()->index();
             $table->timestamps();
         });
         Schema::table('detalle_carros', function($table) {

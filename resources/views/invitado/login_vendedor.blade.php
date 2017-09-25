@@ -36,7 +36,8 @@
 								<input class="form-control input" type="password" name="clave">
 							</div>
 						</div>
-						<div class="row top">
+						<br>
+						<div class="row">
 							<div class="col-md-offset-4 col-md-4">
 								<input class="btn btn-info input-btn" type="submit" value="Iniciar">
 							</div>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Area;
 use App\Fotoperfil;
+//use App\Http\Requests\agregaralumnoRequest;
+//use App\Http\Requests\institucionRequest;
+
 use App\Http\Requests\institucionRequest;
 use App\Http\Requests\agregaralumnoRequest;
 use App\Institucion;
@@ -91,8 +94,6 @@ class institucionController extends Controller
 
         //return view('frontend.user.dashboard',['chart'=>$chart]);
         return view('institucion.graficochart',['chart' => $chart]);
-     
-     
 
     }
 
@@ -131,6 +132,10 @@ class institucionController extends Controller
         $areas = Area::traer();
         return view('institucion.publicarProducto')->with('areas',$areas);
     }
+    public function vitsa_generarPassword($value='')
+    {
+        return view('institucion.generarPassword');
+    }
 
     public function agregar_alumno(agregaralumnoRequest $datos)
     {
@@ -152,7 +157,7 @@ class institucionController extends Controller
 
                                     if ($passwordDefault) {
                                          Mail::send(['text'=>'emails.clave'],['name','janin'],function ($message) use ($correo)
-                                      {
+                                        {
                                           $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                                           $message->to($correo,'to jano');
                                       });
@@ -326,7 +331,41 @@ class institucionController extends Controller
               \Session::flash('web', 'Sitio web ingresado');
               return redirect()->back();
           }
+    }
 
+    public function actualizar_nombreArea(Request $dato){
+           $this->validate($dato,[
+                'nombreDeArea' => 'required',
+          ]);
+
+            $ingresarNombre = Area::actualizar_nombre($dato); 
+            if ($ingresarNombre) {
+
+              \Session::flash('ingreso', 'Operación exitosa');
+                return redirect()->back();
+            }
+            return redirect()->back()->withErrors(['Error en la operación']);
+    }
+
+    public function actualizar_descripcion(request $dato)
+    {
+        $this->validate($dato,[
+                'descripcion' => 'required',
+          ]);
+
+            $ingresarDesc = Area::actualizar_descripcion($dato); 
+            if ($ingresarDesc) {
+
+              \Session::flash('ingreso', 'Operación exitosa');
+                return redirect()->back();
+            }
+            return redirect()->back()->withErrors(['Error en la operación']);
+    }
+
+    public function buscarUsuarioParaCambiarPassword(Request $dato)
+    {
+        $user = User::filtroBusarUser($dato->buscar);
+        return response()->json($user);
     }
 
 }

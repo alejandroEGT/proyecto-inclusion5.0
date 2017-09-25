@@ -6,7 +6,7 @@ Route::group(['middleware' => ['web']], function () {
             return view('welcome');
         });
         /*Redireccion a vistas*/
-        //Route::get('/inicio','invitadoController@vista_proyecto');
+        Route::get('/ver_usuarios','invitadoController@vista_proyecto');
         Route::get('/inicio','invitadoController@vista_inicio');
         Route::get('/ayuda','invitadoController@vista_ayuda');
         Route::get('/registros','invitadoController@vista_registros');
@@ -67,7 +67,12 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
 
         Route::get('my-chart', 'institucionController@graficochart');
 
-        Route::post('ingresar_pagweb', 'institucionController@ingresar_pagweb');
+        Route::post('/ingresar_pagweb', 'institucionController@ingresar_pagweb');
+        Route::post('/actualizar_nombreArea', 'institucionController@actualizar_nombreArea');
+        Route::post('/actualizar_descripcionArea', 'institucionController@actualizar_descripcion');
+        Route::get('/generarPassword', 'institucionController@vitsa_generarPassword');
+        Route::get('/buscarUsuarioParaCambiarPassword/{buscar}', 'institucionController@buscarUsuarioParaCambiarPassword');
+
 });
 
 Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucional']], function () {
@@ -139,3 +144,7 @@ Route::get('/eliminarEncargado/{id}','institucionController@eliminarEncargado');
 Route::get('/traerNombre', 'encargadoController@traerNombre');
 
 
+/*inicio de usuarios*/
+ Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
+ Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
+ Route::get('/registro_cliente' , 'clienteController@registro_cliente');

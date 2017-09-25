@@ -24,10 +24,10 @@
 				<div class="row" >
 					<div class="col-md-offset-3 col-md-6">
 						@if ($errors->any())
-						    <div class="alert alert-danger">
+						    <div class=" alert alert-danger ">
 							        <ul>
 							            @foreach ($errors->all() as $error)
-							                <li>{{ $error }}</li>
+							                <li class="validacionRequest">{{ $error }}</li>
 							            @endforeach
 							        </ul>
 						    </div>

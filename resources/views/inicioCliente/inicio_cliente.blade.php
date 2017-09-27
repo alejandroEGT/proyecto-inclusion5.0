@@ -5,7 +5,7 @@
    
 	<!--Carousel-->
 	<div class="container">
-			<div class="row">
+		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12">
 				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
@@ -42,8 +42,9 @@
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Recomendados</div>
 	  <div class="android-card-container mdl-grid">
 	    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
+
 	      <div class="mdl-card__media">
-	        <img src="productos/IMG_4212.jpg">
+	        <img src="productos/IMG_4224.jpg">
 	      </div>
 	      <div class="mdl-card__title">
 	         <h4 class="mdl-card__title-text">Florero</h4>
@@ -61,7 +62,7 @@
 
 	    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 	      <div class="mdl-card__media">
-	        <img src="productos/IMG_4248.jpg">
+	        <img src="productos/IMG_4249.jpg">
 	      </div>
 	      <div class="mdl-card__title">
 	         <h4 class="mdl-card__title-text">Llavero</h4>
@@ -79,7 +80,7 @@
 
 	    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 	      <div class="mdl-card__media">
-	        <img src="productos/IMG_4234.jpg">
+	        <img src="productos/IMG_4253.jpg">
 	      </div>
 	      <div class="mdl-card__title">
 	         <h4 class="mdl-card__title-text">Llaverito</h4>
@@ -97,7 +98,7 @@
 
 	    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 	      <div class="mdl-card__media">
-	        <img src="productos/IMG_4302.jpg">
+	        <img src="productos/IMG_4274.jpg">
 	      </div>
 	      <div class="mdl-card__title">
 	         <h4 class="mdl-card__title-text">Elastico para el pelo</h4>

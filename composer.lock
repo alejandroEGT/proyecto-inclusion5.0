@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a02608a7d75c17afe457fd6f099446ed",
+    "content-hash": "adfcd0e746cc80154e7d47eceeb61af7",
     "packages": [
         {
             "name": "consoletvs/charts",
-            "version": "5.1.2",
+            "version": "5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ConsoleTVs/Charts.git",
-                "reference": "18dc7881b74ec1d01e65390563a992e6fc76c2b8"
+                "reference": "353039ae19488c0ddd33213f5506548ef8b77558"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/18dc7881b74ec1d01e65390563a992e6fc76c2b8",
-                "reference": "18dc7881b74ec1d01e65390563a992e6fc76c2b8",
+                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/353039ae19488c0ddd33213f5506548ef8b77558",
+                "reference": "353039ae19488c0ddd33213f5506548ef8b77558",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +54,7 @@
                 }
             ],
             "description": "Create charts for laravel using different charts libraries",
-            "time": "2017-08-18T23:42:27+00:00"
+            "time": "2017-09-28T14:44:56+00:00"
         },
         {
             "name": "consoletvs/support",

@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Usuarioinstitucion;
 use App\Passwordcuenta;
-use Charts;
+use ConsoleTVs\Charts\Charts;
 
 //use DB;
 class institucionController extends Controller

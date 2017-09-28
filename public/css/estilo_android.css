@@ -127,10 +127,10 @@ a img{
 
   .android-search-box {
     -webkit-order: 2;
-        -ms-flex-order: 2;
-            order: 2;
-    margin-left: 16px;
-    margin-right: 16px;
+        -ms-flex-order: 1;
+            order: 1;
+    margin-left: 20px;
+    margin-right: 20px;
   }
 
   .android-more-button {
@@ -161,14 +161,14 @@ a img{
 
   .android-drawer .mdl-layout-title {
     position: relative;
-    background: #3915EA;
+    background: grey;
     height: 160px;
   }
 
     .android-drawer .android-logo-image {
       position: absolute;
       bottom: 16px;
-      margin-left: -20px;
+      margin-left: -5px;
     }
 
 .android-be-together-section {

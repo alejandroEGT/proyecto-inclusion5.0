@@ -10,28 +10,22 @@
 				<div class="col-xs-12 col-sm-12 col-md-6 mdl-shadow--6dp">
 					<form>
 						<div class="contenido-sesion">				
-							  <div class="form-group">
-							    <label for="exampleInputEmail1" class="bmd-label-floating">Nombre</label>
-							    <input type="texr" class="form-control" id="formGroupExampleInput">
-							    <span class="bmd-help">Nunca compartiremos tu correo electrónico con nadie más.</span>
-							  </div>
+								<div class="form-row">
+								  	<div class="col">
+								    <label for="exampleInputEmail1" class="bmd-label-floating">Nombres</label>
+								    <input type="texr" class="form-control" id="formGroupExampleInput">
+								  </div>
 
-							  <div class="form-group">
-								<label for="exampleInputEmail1" class="bmd-label-floating">Apellido Paterno</label>
-							    <input type="text" class="form-control" id="formGroupExampleInput">
-							    <span class="bmd-help">Nunca compartiremos tu correo electrónico con nadie más.</span>
-							  </div>
-
-							  <div class="form-group">
-								<label for="exampleInputEmail1" class="bmd-label-floating">Apellido Materno</label>
-							    <input type="text" class="form-control" id="formGroupExampleInput">
-							    <span class="bmd-help">Nunca compartiremos tu correo electrónico con nadie más.</span>
-							  </div>
+								  <div class="col">
+									<label for="exampleInputEmail1" class="bmd-label-floating">Apellidos</label>
+								    <input type="text" class="form-control" id="formGroupExampleInput">
+								  </div>
+								</div><br>
+						
 
 							  <div class="form-group">
 								<label for="exampleInputEmail1" class="bmd-label-floating">Fecha Nacimiento</label>
 							    <input type="date" class="form-control" id="formGroupExampleInput">
-							    <span class="bmd-help">Nunca compartiremos tu correo electrónico con nadie más.</span>
 							  </div>
 							  
 							  <div class="form-group">

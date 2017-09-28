@@ -84,3 +84,23 @@ margin-right: -20px;
 	margin:10px 10px 10px 10px;
 	text-align:right;
 }
+
+
+.wmuSliderPrev, .wmuSliderNext {
+position: absolute;
+width: 40px;
+height: 80px;
+text-indent: -9999px;
+background: url(../productos/sprites.png) no-repeat 0 0;
+top: 50%;
+margin-top: -40px;
+z-index: 2;
+cursor: pointer;
+}
+.wmuSliderPrev {
+background-position: 100% 0;
+left: 20px;
+}
+.wmuSliderNext {
+right: 20px;
+}

@@ -6930,4 +6930,4 @@ var BootstrapMaterialDesign = function ($) {
 // invalidComponentMatches is currently disabled due to https://github.com/rollup/rollup/issues/428#issuecomment-170066452
 
 }());
-//# sourceMappingURL=bootstrap-material-design.js.map
+

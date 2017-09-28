@@ -40,98 +40,82 @@
 	<!--recomedados-->
 	<div class="android-more-section">
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Recomendados</div>
-	  <div class="android-card-container mdl-grid">
-	    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
+	  		<div class="android-card-container mdl-grid">
+	    		
 
-	      <div class="mdl-card__media">
-	        <img src="productos/IMG_4224.jpg">
-	      </div>
-	      <div class="mdl-card__title">
-	         <h4 class="mdl-card__title-text">Florero</h4>
-	      </div>
-	      <div class="mdl-card__supporting-text">
-	        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Florero fabricado por sonrisas de unpade</span>
-	      </div>
-	      <div class="mdl-card__actions">
-	         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
-	           Ver Producto
-	           <i class="material-icons">chevron_right</i>
-	         </a>
-	      </div>
-	    </div>
+				    <ul id="flexiselDemo1"> 
+					    <li><a href="registro_cliente">
+							<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+								<div class="mdl-card__media porteimg">
+					    			<img src="productos/IMG_4224.jpg"/>
+					    		</div>
+								
+								<div class="mdl-card__title">
+							         <h4 class="mdl-card__title-text">Unpade</h4>
+							    </div>
 
-	    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
-	      <div class="mdl-card__media">
-	        <img src="productos/IMG_4249.jpg">
-	      </div>
-	      <div class="mdl-card__title">
-	         <h4 class="mdl-card__title-text">Llavero</h4>
-	      </div>
-	      <div class="mdl-card__supporting-text">
-	        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Llavero fabricado por sonrisas de unpade</span>
-	      </div>
-	      <div class="mdl-card__actions">
-	         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
-	           Ver Producto
-	           <i class="material-icons">chevron_right</i>
-	         </a>
-	      </div>
-	    </div>
+							    <div class="mdl-card__supporting-text">
+							        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Florero fabricado por sonrisas de unpade</span>
+							    </div>
+							</div>
+					    </li></a>
 
-	    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
-	      <div class="mdl-card__media">
-	        <img src="productos/IMG_4253.jpg">
-	      </div>
-	      <div class="mdl-card__title">
-	         <h4 class="mdl-card__title-text">Llaverito</h4>
-	      </div>
-	      <div class="mdl-card__supporting-text">
-	        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Llaverito fabricado por sonrisas de unpade</span>
-	      </div>
-	      <div class="mdl-card__actions">
-	         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
-	           Ver Producto
-	           <i class="material-icons">chevron_right</i>
-	         </a>
-	      </div>
-	    </div>
+					    <li><a href="carro_cliente">
+							<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+								<div class="mdl-card__media porteimg">
+					    			<img src="productos/IMG_4249.jpg"/>
+					    		</div>
+								
+								<div class="mdl-card__title">
+							         <h4 class="mdl-card__title-text">Unpade</h4>
+							    </div>
 
-	    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
-	      <div class="mdl-card__media">
-	        <img src="productos/IMG_4274.jpg">
-	      </div>
-	      <div class="mdl-card__title">
-	         <h4 class="mdl-card__title-text">Elastico para el pelo</h4>
-	      </div>
-	      <div class="mdl-card__supporting-text">
-	        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Elastico para el pelo fabricado por sonrisas de unpade</span>
-	      </div>
-	      <div class="mdl-card__actions">
-	         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
-	           Ver Producto
-	           <i class="material-icons">chevron_right</i>
-	         </a>
-	      </div>
-	    </div>
-	  </div>
-	  <nav aria-label="...">
-	  <ul class="pagination  justify-content-center">
-	    <li class="page-item disabled">
-	      <span class="page-link">Anterior</span>
-	    </li>
-	    <li class="page-item active">
-	      <span class="page-link">
-	        1
-	        <span class="sr-only">(current)</span>
-	      </span>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">Siguiente</a>
-	    </li>
-	  </ul>
-	</nav>
+							    <div class="mdl-card__supporting-text">
+							        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Florero fabricado por sonrisas de unpade</span>
+							    </div>
+							</div>
+					    </li></a>
+
+					    <li><a href="sesion_cliente">
+							<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+								<div class="mdl-card__media porteimg">
+					    			<img src="productos/IMG_4253.jpg"/>
+					    		</div>
+								
+								<div class="mdl-card__title">
+							         <h4 class="mdl-card__title-text">Unpade</h4>
+							    </div>
+
+							    <div class="mdl-card__supporting-text">
+							        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Florero fabricado por sonrisas de unpade</span>
+							    </div>
+							</div>
+					    </li></a>
+
+					    <li><a href="prueba_cliente">
+							<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+								<div class="mdl-card__media porteimg">
+					    			<img src="productos/IMG_4274.jpg"/>
+					    		</div>
+								
+								<div class="mdl-card__title">
+							         <h4 class="mdl-card__title-text">Unpade</h4>
+							    </div>
+
+							    <div class="mdl-card__supporting-text">
+							        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Florero fabricado por sonrisas de unpade</span>
+							    </div>
+							</div>
+					    </li></a>
+					                                                         
+					</ul>
+						<div class="clearout"></div>  
+				
+
+				
+
+		   
+		</div>
 	</div>
 
 	<!--tiendas-->
@@ -210,24 +194,7 @@
 	      </div>
 	    </div>
 	  </div>
-	  <nav aria-label="...">
-	  <ul class="pagination  justify-content-center">
-	    <li class="page-item disabled">
-	      <span class="page-link">Anterior</span>
-	    </li>
-	    <li class="page-item active">
-	      <span class="page-link">
-	        1
-	        <span class="sr-only">(current)</span>
-	      </span>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">Siguiente</a>
-	    </li>
-	  </ul>
-	</nav>
+	  
 	</div>
 
 	<!--calidad-->

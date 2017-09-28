@@ -8,49 +8,40 @@
 
 		<title>Index</title>
 		<link rel="stylesheet" href="InicioCliente/css.css">
-
+		
 	</head>
 		<body>
-			<!--padre-->
 			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-				<!--navegador-->
-			    <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
+
+			      <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
 			        <div class="mdl-layout__header-row">
 			          <span class="android-title mdl-layout-title">
-			          	<a href="/inicio_cliente"><img class="android-logo-image" src="productos/exodNegro.png"></a>
+			            <a href="/inicio_cliente"><img class="android-logo-image" src="productos/exodNegro.png"></a>
 			          </span>
-
 			          <!--lupa de prueba-->
+			
+						<form action="" class="col-md-6"><br>							
+							
+							    <div class="input-group">
+							      <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
+							      <span class="input-group-btn">
+							        <button class="btn btn-secondary" type="button"><i class="material-icons">search</i></button>
+							      </span>
+							    </div>
+							  
+					  </form>
 
-			          <div class="android-header-spacer mdl-layout-spacer">
-					  <div class=" android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-					    <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
-					      <i class="material-icons">search</i>
-					    </label>
-					    <div class="mdl-textfield__expandable-holder">
-					      <input class="mdl-textfield__input" type="text" id="search-field">
-					    </div>
-					  </div>
-					  </div>
-			          
-					
+
+
+
 			          <!-- Add spacer, to align navigation to the right in desktop -->
-
-			         
-			         
-
-			          			      
+			          <div class="android-header-spacer mdl-layout-spacer"></div>
 			          <!-- Navigation -->
 			    	<div class="android-navigation-container">
 			            <nav class="android-navigation mdl-navigation">
 			              <span><a class="mdl-navigation__link mdl-typography--text-uppercase" href="/carro_cliente"><i class="material-icons">&#xE8CC;</i> Cesta <i class="mdl-badge mdl-badge--no-background" data-badge="3"></i></span></a>
 			            </nav>
-			          </div>
-
-			          <span class="android-mobile-title mdl-layout-title">
-			            <a href="/inicio_cliente"><img class="android-logo-image" src="productos/exodNegro.png"></a>
-			          </span>
-
+			        </div>
 			          <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
 			          	<i class="material-icons">&#xE853;</i>
 			          </button>
@@ -147,10 +138,15 @@
 			</div>		
 		</body>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="../BMD/js/bootstrap-material-design.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js" integrity="sha384-KlVcf2tswD0JOTQnzU4uwqXcbAy57PvV48YUiLjqpk/MJ2wExQhg9tuozn5A1iVw" crossorigin="anonymous"></script>
+
+	<script src="../bdm/js/bootstrap-material-design.js"></script>
 	<script src="mdl/material.min.js"></script>
-	<script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js"></script>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.flexisel.js"></script>
+	<script src="js/slider_productos.js"></script>
 	@yield('js')
 </html>
 

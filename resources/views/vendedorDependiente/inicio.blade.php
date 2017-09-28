@@ -3,7 +3,9 @@
 @section('content')
 	<div class="margen"><!--probandi-->
 		@if ($estado_password == 1)
-				<center><label>Bienvenido {{ Auth::user()->nombres.' '.Auth::user()->nombres }}</label></center>
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+						<center><label>Bienvenido {{ Auth::user()->nombres.' '.Auth::user()->nombres }}</label></center>
 				<div class="papelImagen">
 				<div class="cabeza">
 					
@@ -35,9 +37,9 @@
 
 
 			    		<br>
-				    	<label>Ingresa una nueva contraseña</label>
+				    	<p><label>Ingresa una nueva contraseña</label></p>
 						<input class="mi-input" type="password" name="nuevaclave">
-						<label>Repita una nueva contraseña</label>
+						<p><label>Repita una nueva contraseña</label></p>
 						<input class="mi-input" type="password" name="rnuevaclave">
 				   		 <input style="display: none;" name="fotoP" id="file-input" type="file"/>
 				   		 <br/><br/>
@@ -46,6 +48,8 @@
 					</form>
 			    </div>
 			</div>
+					</div>
+				</div>
 		@endif
 		@if ($estado_password == 2)
 			

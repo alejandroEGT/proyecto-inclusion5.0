@@ -105,9 +105,10 @@
                         </div>
                             
                 </nav>
-                <div class="">
-    			@yield('content')
-                </div>
+                <div class="margen">
+                    @yield('content')
+
+               </div>
             </div>
     </div>    
 </body>

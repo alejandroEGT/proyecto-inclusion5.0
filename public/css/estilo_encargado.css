@@ -95,3 +95,7 @@ transform:scale(1.2);
 .envolver{
 	border-right: 1px red solid;
 }
+.head-color{
+	color:white;
+	background:#1A5276;
+}

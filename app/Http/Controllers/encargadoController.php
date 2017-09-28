@@ -13,6 +13,12 @@ use App\Vendedor;
 use App\VendedorInstitucion;
 use App\Institucion;
 use App\Usuarioinstitucion;
+use App\categoria_producto;
+use App\Tienda_institucion;
+use App\foto_producto;
+use App\producto;
+use App\producto_institucion;
+use App\Tienda_producto_institucion;
 use App\Http\Requests\productoRequest;
 use App\Http\Requests\agregarAlumnoDesdeAreaRequest;
 use Illuminate\Support\Facades\Mail;
@@ -20,14 +26,16 @@ use Illuminate\Support\Facades\Mail;
 class encargadoController extends Controller
 {
     public function vista_inicio(){
-
+        $encargado = Encargado::traerDatos();
+        $productos = producto_institucion::verProductoDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
     	$foto = Fotoperfil::traerFoto();
         $estado_password = Passwordcuenta::traerEstado();
         $logo = Area::traerArea();
     	return view('encargadoArea.inicio')
         ->with('foto',$foto)
         ->with('estado_password',$estado_password)
-        ->with('logo', $logo[0]->logo);
+        ->with('logo', $logo[0]->logo)
+        ->with('productos', $productos);
     }
 
     public function vista_datosArea(){
@@ -43,7 +51,17 @@ class encargadoController extends Controller
 
     public function vista_publicarproducto(){
 
-        return view('encargadoArea.publicarProducto');
+        $encargado = Encargado::traerDatos();
+        $categoria_pro = categoria_producto::all();
+
+        //return $encargado[0]->id_institucion.', '.$encargado[0]->id_area;
+        $productos = producto_institucion::verProductoDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
+
+        //return $productos;
+
+        return view('encargadoArea.publicarProducto')
+            ->with('categoria_pro', $categoria_pro)
+            ->with('productos', $productos);
     }
 
     public function vista_clave(){
@@ -87,7 +105,7 @@ class encargadoController extends Controller
         ->with('vendedor',$vendedor[0]->telefono)
         ->with('institucion', $institucion);
         
-        return view('encargadoArea.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
+        //return view('encargadoArea.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
     }
 
      public function vista_perfilInst($idinstitucion){
@@ -134,6 +152,7 @@ class encargadoController extends Controller
 
                         });
                         \Session::flash('clave', 'Contraseña actualizada correctasmente');
+                        \Session::flash('cambioClave', 'Contraseña actualizada correctasmente');/*Mostrar cambio de clave en el inicio cuando se actualize*/
                         return redirect()->back();
                 }
                 return "Error...";
@@ -236,8 +255,41 @@ class encargadoController extends Controller
         $password .= $cadena_base[rand(0, $limite)];
         return $password;
     }
-    public function publicarproducto(productoRequest $dato){
-       
-        
+
+    public function traerEstadoClave(){
+
+        $traer = Encargado::traerEstadoClave();
+        return $traer;
     }
+    /*PUBLICACION DE LOS PRODUCTOS*/
+    public function publicarproducto(productoRequest $datos){
+       
+       $encargado = Encargado::traerDatos();
+
+       $insertFotoProducto = foto_producto::insertar($datos);
+
+       if ($insertFotoProducto > 0) {
+           
+           $insertProducto = producto_institucion::insertar($datos, $insertFotoProducto);
+
+           if ($insertProducto > 0) {
+
+                $tienda = Tienda_institucion::encargado_id_tienda();
+                
+                $insertTiendaProducto = Tienda_producto_institucion::insertar($insertProducto, $tienda[0]->id, '1', $encargado[0]->id_area);
+               
+               if ($insertTiendaProducto > 0) {
+                   \Session::flash('registro', 'Producto registrado correctasmente');
+                return redirect()->back();
+               }
+               return "Mal todo";
+               /*\Session::flash('registro', 'Producto registrado correctasmente');
+                return redirect()->back();*/
+           }
+           return redirect()->back()->withErrors(['Algo salió mal']);
+        }
+    }
+    /*FIN DE PUBLICACION DE LOS PRODUCTOS*/
+
+    
 }

@@ -3,6 +3,18 @@
 @section('content')
 	
 	<div class="container">
+
+	@if (Session::has('cambio'))
+	            <div class="row">
+					<div class="col-md-offset-3 col-md-6">
+						<div class="alert alert-danger">
+						    <a href="" class="close" data-dismiss="alert">&times;</a>
+						    {{ Session::get('cambio') }}
+						</div>
+					</div>
+				</div>	
+	@endif
+
 		<div class="top-top">
 			<div class="papelImagen">
 				<div class="cabeza">

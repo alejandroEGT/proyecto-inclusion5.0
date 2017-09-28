@@ -15,9 +15,12 @@ class encargadoArea
      */
     public function handle($request, Closure $next)
     {
-         if (\Auth::user()->id_rol == 3 && \Auth::check()) {
+         if (\Auth::check()) {
             
-            return $next($request);
+            if(\Auth::user()->id_rol == 3){
+                return $next($request);
+            }
+            return redirect('inicio');
         }
         return redirect('inicio');
     }

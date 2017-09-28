@@ -3,7 +3,7 @@
 @section('content')
 
 @section('content')
-	
+	<form action="{{ url('encargadoArea/guardarProducto') }}" method="post" enctype="multipart/form-data" >
 		<div class="row">
 			<div class="col-md-offset-2 col-md-2">
 			<a href="{{ URL::previous() }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
@@ -16,31 +16,13 @@
 				</p>
 				<div class="row">
 					<div class="col-md-10">
-						<input type="" class="form-control input" placeholder="Ingrese nombre del producto" name="">
+						<input type="" class="form-control input" maxlength="50" placeholder="Ingrese nombre del producto" name="nombre">
 					</div>
 				</div>		
 			</div>
 		</div>
 		<hr>
-	<form action="{{ url('encargadoArea/publicarProducto') }}" method="post" enctype="multipart/form-data" >
-		<div class="row">
-			
-			<div class="col-md-offset-2 col-md-3">
-				<p><input type="text" placeholder="Descripción del producto..." class="form-control input" name=""></p>
-			</div>
-			<div class="col-md-2">
-				<p><input type="numeric" placeholder="Cantidad..." class="form-control input" name=""></p>
-			</div>
-			<div class="col-md-2">
-				<p><select class="form-control input" >
-					<option>Seleccione categoria..</option>
-				</select></p>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-		{{ csrf_field() }}
-			<div class="col-md-offset-3 col-md-3">
+			@if ($errors->all())
 				<div class="alert alert-info">
 					<ul>
 						@foreach ($errors->all() as $error)
@@ -48,6 +30,37 @@
 						@endforeach
 					</ul>
 				</div>
+			@endif
+			@if (Session::has('registro'))
+								<div class="alert alert-info">{{ Session::get('registro') }}</div>
+							@endif
+	
+		<div class="row">
+			
+			<div class="col-md-offset-2 col-md-3">
+				<p><input type="text" placeholder="Descripción del producto..." maxlength="250" class="form-control input" name="descripcion"></p>
+			</div>
+			<div class="col-md-2">
+				<p><input type="numeric" maxlength="4" placeholder="Cantidad..." class="form-control input" name="cantidad"></p>
+			</div>
+			<div class="col-md-2">
+				<p><select name="categoria" class="form-control input" >
+					<option>Seleccione categoría..</option>
+					@foreach ($categoria_pro as $categoria)
+						<option value="{{$categoria->id }}">{{$categoria->nombre }}</option>
+					@endforeach
+					
+				</select></p>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+		{{ csrf_field() }}
+			<div class="col-md-offset-2 col-md-3">
+				<input type="numeric" maxlength="7" minlength="2" name="valor" class="form-control input" placeholder="Ingrese valor">
+			</div>
+			<div class="col-md-3">
+				
 				<p><label for="file-input" class="label-foto-link">
 				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
 				 	Agregar foto..
@@ -57,18 +70,53 @@
 					<div id="divFoto" hidden="true" >
 						<div id="img_destino" class="porte img-thumbnail" ></div>
 					</div>
-					<input type="submit" name="" value="OK">
+					
+			</div>
+			<div class="col-md-2">
+				<input class="btn" type="submit" name="" value="Registrar">
 			</div>
 			
-			<div class="col-md-3">
-				<p><label for="file-input2" class="label-foto-link">
-				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
-				 	Agregar foto..
-				</label></p>
-				<input style="display: none;" name="fotoP2" id="file-input2" type="file"/>
-				<div id="divFoto2" hidden="true" >
-						<div id="img_destino2" class="porte img-thumbnail" ></div>
-					</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				@if (count($productos)>0)
+					<center><label>Productos</label></center>
+				
+			
+				<table class="table table-responsive">
+					 <tr class="head-color" >
+					 	<th>Id</th>
+					    <th>Foto</th>
+					    <th>Nombre</th> 
+					    <th>Descripcion</th>
+					    <th>creado</th>
+					    <th>Opción</th>
+					  </tr>
+					@foreach ($productos as $p)
+
+					<tr>
+						<td>{{ $p->idProducto }}</td>
+						<td><img src="{{ '/'.$p->foto }}" height="70"></td>
+						<td>{{ $p->nombre }}</td>
+						<td>{{ $p->descripcion }}</td>
+						<td>{{ $p->creado }}</td>
+						<td>
+							<a class="btn btn-primary btn-xs" href="#">Ver..</a>
+							<a class="btn btn-warning btn-xs" href="#">Eliminar</a>
+						</td>
+					</tr>
+				    
+				     
+				    @endforeach
+					  
+				</table>
+				{{ $productos->links() }}
+				@endif
+				@if (count($productos)<=0)
+					<center><label>No hay productos</label></center>
+				@endif
+
 			</div>
 		</div>
 	</form>

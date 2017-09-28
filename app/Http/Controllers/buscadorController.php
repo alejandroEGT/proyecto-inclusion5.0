@@ -8,6 +8,18 @@ use App\Institucion;
 
 class buscadorController extends Controller
 {
+
+
+
+
+
+
+
+
+
+
+
+    
      public function buscador_inst(Request $dato)
     {   
         $this->validate($dato, ['buscador' => 'required']);

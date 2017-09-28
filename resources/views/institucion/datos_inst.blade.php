@@ -2,7 +2,7 @@
 
 
 @section('content')
-	<div class="margen">
+	<div class="">
 	<br>
 		<div class="row">
 			<div class="col-md-12">

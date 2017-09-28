@@ -29,7 +29,7 @@
 							  		<p><strong>Actualizar Descripcion del área</strong> </p>
 							  		<input type="hidden" name="idArea" value="{{ $area->id }}" >
 							  		<p>
-							  		<TEXTAREA rows="4" cols="50" name="descripcion" ></TEXTAREA><br>
+							  		<TEXTAREA rows="4" cols="30" name="descripcion" ></TEXTAREA><br>
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
@@ -60,8 +60,9 @@
 			</div>
 			@endif
 			@if (Session::has('ingreso'))
+								<a href="" class="close" data-dismiss="alert">&times;</a>
 								<div class="alert alert-info">{{ Session::get('ingreso') }}</div>
-							@endif
+			@endif
 				<form action="{{ url('institucion/agregarUsuario') }}" method="post"  >
 					<div class="row">
 						<div class="col-md-6">
@@ -101,7 +102,19 @@
 			</div>
 			<div class="col-md-5 ">
 				<div v-if="this.existeEncargado == true">
-					<p><label>Encargado(a):</label>@{{ bd_encargadoNombre }} <button @click="eliminarEncargado(bd_encargadoId)" class="btn btn-primary btn-xs">Eliminar</button>	
+					<p><label>Encargado(a):</label>@{{ bd_encargadoNombre }} <button @click="eliminarEncargado(bd_encargadoId)" class="btn btn-primary btn-xs">Eliminar</button>
+					<a data-toggle="collapse" data-target="#ver"> | <i class="fa fa-eye" aria-hidden="true"></i></a>
+					<br>
+					<div id="ver" class="collapse">
+							<div class="alert alert-success" role="alert">
+									<p><strong>Correo: </strong>
+									@{{ bd_encargadoCorreo }}
+									</p>
+							  		<p><strong>Estado de contraseña: </strong>
+							  		@{{ bd_encargadoClaveEstado }}	</p>
+								
+							</div>
+				    </div>
 				</div>
 				<div v-if="this.existeEncargado == false">
 					<p><label>No existe encargado(a)</label> 
@@ -118,12 +131,14 @@
 									<td>Foto</td>
 									<td>Nombre</td>
 									<td>Correo</td>
+									<td>Estado contraseña</td>
 								</tr>							
 								@foreach ($venInstitucion as $ven)
 									<tr>
 										<td><img height="70" src="{{'/'.$ven->foto}}"></td>
 										<td>{{$ven->nombres.' '.$ven->apellidos}}</td>
 										<td>{{$ven->email}}</td>
+										<td>{{$ven->nombre}}</td>
 									</tr>
 								@endforeach
 							</table>

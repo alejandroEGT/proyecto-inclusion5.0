@@ -24,11 +24,12 @@ class productoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' = > 'required|max:50',
-            'descripcion' => 'required'
+            'nombre' => 'required|max:50 | min:3',
+            'descripcion' => 'required | max:250 | min:3',
             'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=2500,max_height=2850',
-            'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=2500,max_height=2850',
-            
+            'valor' => 'required| numeric',
+            'categoria' => 'required',
+            'cantidad' => 'required | numeric ',
         ];
     }
 }

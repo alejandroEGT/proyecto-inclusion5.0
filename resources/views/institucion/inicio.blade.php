@@ -3,7 +3,7 @@
 @section('content')
 
 @if (isset($institucion))
-	<div class="padre" >
+	<div class="" >
 		<div class="row">
 			<div class="col-md-12 well">
 				<div class="centro1" >

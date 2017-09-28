@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTiendasTable extends Migration
+class CreateTiendaVendedorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,19 @@ class CreateTiendasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tiendas', function (Blueprint $table) {
+        Schema::create('tienda_vendedor', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_estado')->unsigned();
-            $table->integer('id_tipo')->unsigned();
             $table->string('nombre');
             $table->string('descripcion');
+            $table->integer('id_estado')->unsigned();
+            $table->integer('id_vendedor')->unsigned();
             $table->timestamps();
         });
 
-        Schema::table('tiendas', function($table) {
-            
+        Schema::table('tienda_vendedor', function($table) {
             $table->foreign('id_estado')->references('id')->on('estado_tienda');
-            $table->foreign('id_tipo')->references('id')->on('tipo_tiendas');
+            $table->foreign('id_vendedor')->references('id')->on('vendedor');
         });
-   
-
     }
 
     /**
@@ -38,6 +35,6 @@ class CreateTiendasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tiendas');
+        Schema::dropIfExists('tienda_vendedor');
     }
 }

@@ -33,6 +33,7 @@
                         
                         <hr>
                     </li>
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/inicio') }}">Inicio</a></li>
                     <li class="pushy-submenu">
                         <button id="first-link">¿Te ayudamos?</button>
                         <ul>
@@ -97,7 +98,9 @@
                 <nav class="navbar-fixed-top color-verde">
                         <div class="row">
                             <div class="col-md-2 col-xs-2">
-                                    <button class="menu-btn">&#9776; Menu</button>              
+                                <div v-if="estadoPassword != 1"><!--contraseña sin cambiar no permite interactuar con menu-->
+                                    <button class="menu-btn">&#9776; Menu</button> 
+                                </div>             
                             </div>  
                             <div class="col-md-4 col-xs-offset-1 col-xs-8">
 

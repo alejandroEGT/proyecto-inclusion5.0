@@ -49,4 +49,8 @@ class Passwordcuenta extends Model
         }
         return false;
     }
+    protected function actualizar_estado_password()
+    {
+        # code...
+    }
 }

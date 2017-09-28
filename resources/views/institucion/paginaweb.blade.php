@@ -1,6 +1,5 @@
 @extends('institucion.master_institucion')
 @section('content')
-	<div class="margen">
 		<div class="row">
 			<div class="col-md-offset-3 col-md-5">
 				<div class="papelImagen">
@@ -44,5 +43,4 @@
 		</div>
 			</div>
 		</div>
-	</div>
 @endsection

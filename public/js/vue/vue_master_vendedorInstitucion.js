@@ -2,7 +2,8 @@ new Vue({
 	el:'#master-vendedorDependiente',
 	data:{
 		
-		fotoPerfil :''
+		fotoPerfil :'',
+		estadoPassword:''
 		
 	},
 	 http: { 
@@ -20,10 +21,19 @@ new Vue({
 					console.log(response.body);
 				})
 		}
+		,
+		estadoClave(){
+			  this.$http.get('/estadoClaveAlumno').then(function(response){
+
+					this.estadoPassword = response.body;
+					console.log(response.body);
+				})
+		}
 		
 	},
 
 	created (){
 		this.traerFoto();
+		this.estadoClave();
 	}
 })

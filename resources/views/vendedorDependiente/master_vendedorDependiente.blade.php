@@ -20,6 +20,7 @@
             @yield('esperando')
     @endif
     @if (Session::get('estado') == 1)
+
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
             <div class="pushy-content">
                 <ul>
@@ -99,7 +100,9 @@
                 <nav class="navbar-fixed-top color-verde">
                         <div class="row">
                             <div class="col-md-2 col-xs-2">
-                                    <button class="menu-btn">&#9776; Menu</button>              
+                                <div v-if="estadoPassword != 1"><!--contraseña sin cambiar no permite interactuar con menu-->
+                                    <button class="menu-btn">&#9776; Menu</button> 
+                                </div>             
                             </div>  
                             <div class="col-md-4 col-xs-10">
                                 <form action="{{ url('userDependiente/buscador') }}" method="get">
@@ -136,7 +139,7 @@
 		<script src="/js/vue/vue.js" ></script>
         <script src="/js/vue/vue-resource.js"></script>
         <script src="/js/vue/vue_master_vendedorInstitucion.js"></script>
-        @include('mensajes.activa_desactiva')
+        {{--@include('mensajes.activa_desactiva')--}}
 		<script src="/js/pushy.min.js"></script>
 
 </html>

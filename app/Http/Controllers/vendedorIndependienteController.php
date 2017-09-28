@@ -46,9 +46,10 @@ class vendedorIndependienteController extends Controller
     }
     public function guardar_foto(Request $dato)
     {   
-
+         $this->validate($dato, ['fotoP' => 'required']);
         $guardar = Fotoperfil::guardar($dato);
-        return $guardar;
+         \Session::flash('cambio', 'Foto cambiada');
+        return redirect()->back();
     }
 }
 

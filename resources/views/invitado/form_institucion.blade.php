@@ -25,6 +25,12 @@
 				        </ul>
 			    </div>
 			@endif
+			@if (Session::has('ingresado'))
+				<div class="alert alert-info">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        {{ Session::get('ingresado') }}
+			    </div>
+			@endif
 			
 		</div>
 	</div>

@@ -2,6 +2,24 @@
 
 @section('content')
 
+		@if (Session::has('cambio'))
+	            <div class="row">
+						<div class="alert alert-info">
+						    <a href="" class="close" data-dismiss="alert">&times;</a>
+						    <center>{{ Session::get('cambio') }}</center>
+						</div>
+				</div>	
+		@endif
+		@if ($errors->any())
+			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				            @endforeach
+				        </ul>
+			    </div>
+		@endif
 			<div class="papelImagen">
 				<div class="cabeza">
 					

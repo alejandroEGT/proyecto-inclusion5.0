@@ -18,30 +18,29 @@ class areaController extends Controller
 
     public function vista_area(Request $dato)
     {	
+       
         try{
-        	if ($dato->id == 0) {
+            if ($dato->id == 0) {
                 return redirect()->back();
             }
-
             $area = Area::traer_area($dato->id);
             
             $sexo = Sexo::all();
             $contarusuarios = VendedorInstitucion::contarVendedores($dato->id);
             $datosVendedor = VendedorInstitucion::datosVendedorInstitucion($area->id);
-
-
             return view('institucion.area')
             ->with('area', $area)
             ->with('sexo', $sexo)
             ->with('contar', $contarusuarios)
             ->with('venInstitucion', $datosVendedor);
-
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back();
         }
         catch (\Exception $e) {
             return "<center><h3>Si alguien te dijo que jugaras a romper el sistema, no le creas, te esta engañando</h3></center>";
         }
+
+        
     }
 
     public function agregarUsuario(usuarioRequest $datos){
@@ -69,7 +68,9 @@ class areaController extends Controller
                                     $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                                     $message->to($correo,'to jano');
                                 });
-                                return "Todo bien....";
+                                //return "Todo bien....";
+                                \Session::flash('ingreso', 'Encargado registrado');
+                                return redirect()->back();
                             }
                                 
                         }
@@ -97,7 +98,8 @@ class areaController extends Controller
 
     public function traer_encargado(Request $idArea){
 
+        //return $idArea[0];
         $user = Usuarioinstitucion::traerUser($idArea[0]);
-        return response()->json([$user->id ,$user->nombres.' '.$user->apellidos]);
+        return response()->json([$user->idUser ,$user->nombre, $user->estado, $user->email]);
     }
 }

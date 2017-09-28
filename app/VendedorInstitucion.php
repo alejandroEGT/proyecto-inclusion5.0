@@ -80,7 +80,12 @@ class VendedorInstitucion extends Model
         }
         return null;
         
+    }
 
+    protected function traerEstadoClave(){
+
+        $estado = \DB::table('password-cuenta')->where('id_user', \Auth::user()->id )->get(); 
+        return $estado[0]->id_estado;
     }
 
 }

@@ -4,6 +4,7 @@ new Vue({
 		
 		fotoPerfil :'',
 		nombre:'',
+		estadoPassword:'',
 		
 	},
 	 http: { 
@@ -28,11 +29,20 @@ new Vue({
 					console.log(response.body);
 				})
 		}
+		,
+		estadoClave(){
+			  this.$http.get('/estadoClaveEncargado').then(function(response){
+
+					this.estadoPassword = response.body;
+					console.log(response.body);
+				})
+		}
 		
 	},
 
 	created (){
 		this.traerFoto();
 		this.traerNombre();
+		this.estadoClave();
 	}
 })

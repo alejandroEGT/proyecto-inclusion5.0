@@ -38,7 +38,15 @@
 						</div><br>
 						<div class="row">
 							<div class="col-md-offset-4 col-md-4">
-								<input class="btn btn-info input-btn" type="submit" value="Iniciar">
+								<input class="btn btn-primary btn-block" type="submit" value="Iniciar">
+
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-offset-4 col-md-4">
+								<center><a href="{{ url('/formInstitucion') }}">Crear una cuenta de institución</a></center>
+								
 							</div>
 						</div>
 				</div>		

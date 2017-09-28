@@ -14,7 +14,9 @@ new Vue({
 		getMision:[],
 		getVision:[],
 		bd_encargadoNombre:'',
+		bd_encargadoCorreo:'',
 		bd_encargadoId:'',
+		bd_encargadoClaveEstado:'',
 		existeEncargado : false,
   		txtBuscar:'',
         users: [],
@@ -145,9 +147,11 @@ new Vue({
 
 						this.$http.post('/traerEncargado', $('#v_area').text() ).then(function(response){
 								
-								console.log(response.body);
+								console.log('consola '+response.body);
 								this.bd_encargadoId = response.body[0];
 								this.bd_encargadoNombre = response.body[1];
+								this.bd_encargadoClaveEstado = response.body[2];
+								this.bd_encargadoCorreo = response.body[3];
 								this.existeEncargado = true;
 								
 								
@@ -202,6 +206,24 @@ new Vue({
 	                console.log(response.body);
 	          })
       
+        },
+        generarClave($id){
+
+        	if (confirm("¿Quieres genera una nueva contraseña para este usuario?") == true) {
+				    
+
+						this.$http.get('/generarClave/'+$id).then(function(response){
+								
+								console.log(response.body);
+								alert(response.body);
+								//this.notificar();
+								//location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
         }
 	},
 

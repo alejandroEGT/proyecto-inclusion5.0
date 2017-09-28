@@ -15,7 +15,6 @@ class CreateProductosTable extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_tienda')->unsigned();
             $table->integer('id_foto')->unsigned();
             $table->integer('id_categoria')->unsigned();
             $table->string('nombre');
@@ -27,7 +26,6 @@ class CreateProductosTable extends Migration
         });
 
         Schema::table('productos', function (Blueprint $table) {
-             $table->foreign('id_tienda')->references('id')->on('tiendas');
              $table->foreign('id_foto')->references('id')->on('foto_productos');
              $table->foreign('id_categoria')->references('id')->on('categoria_productos');
 

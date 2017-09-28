@@ -112,20 +112,29 @@ class institucionController extends Controller
         ->with('usuario',$usuario)
         ->with('vendedor',$vendedor[0]->telefono);
     }
-    
+    public function vista_perfilInst($idinstitucion){
+
+        $idI = base64_decode($idinstitucion);
+        $institucion = Institucion::find($idI);
+
+        return view('institucion.perfil_institucion')->with('institucion', $institucion);
+    }
     public function vista_perfilVenInst($iduser){
          $idu = base64_decode($iduser);
           //return $idu;
         $usuario = User::find($idu);
         $vendedor = Vendedor::where('id_user',$usuario->id)->get();
-        $foto = Fotoperfil::traerFotobyid($idu);
+        $vendedorInstitucion = VendedorInstitucion::where('id_vendedor',$vendedor[0]->id)->get();
+        $institucion = Institucion::find($vendedorInstitucion[0]->id_institucion);
+         $foto = Fotoperfil::traerFotobyid($idu);
         
-        return view('institucion.perfil_vendedor')
+        return view('institucion.perfil_vendedorInstitucion')
         ->with('foto',$foto)
         ->with('usuario',$usuario)
-        ->with('vendedor',$vendedor[0]->telefono);
+        ->with('vendedor',$vendedor[0]->telefono)
+         ->with('institucion', $institucion);
         
-        return view('institucion.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
+        //return view('institucion.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
     }
 
     public function vista_publicarProducto(){
@@ -368,4 +377,31 @@ class institucionController extends Controller
         return response()->json($user);
     }
 
+    /*PUBLICACION DE LOS PRODUCTOS*/
+    public function publicarproducto(productoRequest $datos){
+
+       $insertFotoProducto = foto_producto::insertar($datos);
+
+       if ($insertFotoProducto > 0) {
+           
+           $insertProducto = producto_institucion::insertar($datos, $insertFotoProducto);
+
+           if ($insertProducto > 0) {
+
+                $tienda = Tienda_institucion::encargado_id_tienda();
+                
+                $insertTiendaProducto = Tienda_producto_institucion::insertar($insertProducto, $tienda[0]->id, '1');
+               
+               if ($insertTiendaProducto > 0) {
+                   \Session::flash('registro', 'Producto registrado correctasmente');
+                return redirect()->back();
+               }
+               return "Mal todo";
+               /*\Session::flash('registro', 'Producto registrado correctasmente');
+                return redirect()->back();*/
+           }
+           return redirect()->back()->withErrors(['Algo salió mal']);
+        }
+    }
+    /*FIN DE PUBLICACION DE LOS PRODUCTOS*/
 }

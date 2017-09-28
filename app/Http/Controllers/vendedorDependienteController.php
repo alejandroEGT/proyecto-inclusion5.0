@@ -105,6 +105,12 @@ class vendedorDependienteController extends Controller
                 return "Error...";
 
     }
+
+    public function traerEstadoClave(){
+
+        $traer = VendedorInstitucion::traerEstadoClave();
+        return $traer;
+    }
 }
            
              

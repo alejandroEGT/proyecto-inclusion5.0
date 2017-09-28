@@ -35,6 +35,11 @@ class autenticarController extends Controller
         \Auth::guard('institucion')->logout();
         return redirect('/inicio');
     }
+    public function logout_encargado()
+    {
+         \Auth::logout();
+            return redirect('/inicio');
+    }
     /*****************************************************************************************************************
     /**Logear un Vendedor institucionql**/////////////////////////////////////////////////////////////
 

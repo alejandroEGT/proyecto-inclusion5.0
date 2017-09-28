@@ -51,6 +51,9 @@
 @if ($estado_password == 2)
 			
 	<div class="container">
+	@if (Session::has('cambioClave'))
+					<div class="alert alert-info">{{ Session::get('cambioClave') }}</div>
+			@endif
 		<div class="row">
 			@if ($logo != null)
 				<div class="col-md-2">
@@ -58,8 +61,9 @@
 						<hr>
 				</div>
 			@endif
+			
 			<div class="col-md-10">
-				<div class="row well">
+				<div class="row">
 					<div class="col-md-2 col-sm-1 ">
 						<a href="{{ url('encargadoArea/equipo') }}"><div class="ico-small-group"></div></a>
 						<center><label>Nuestro equipo</label></center>
@@ -83,6 +87,21 @@
 				</div>
 			</div>
 
+		</div>
+	<hr>
+		<div class="row">
+			<div class="col-md-12">
+				@if (count($productos)>0)
+				ver productos..
+				@endif
+				@if (count($productos)<=0)
+					<h4><center><label style="color:#A4A4A4">No existen producto y servicios en esta área<br><br> <i class="fa fa-camera fa-4x" aria-hidden="true"></i></label></center></h4>
+				@endif
+			
+				
+					{{-- expr --}}
+				
+			</div>	
 		</div>
 	</div>
 				

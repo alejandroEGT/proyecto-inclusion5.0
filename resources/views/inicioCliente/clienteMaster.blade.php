@@ -19,11 +19,7 @@
 			            <a href="/inicio_cliente"><img class="android-logo-image" src="productos/exodNegro.png"></a>
 			          </span>
 			          <!--lupa de prueba-->
-<<<<<<< HEAD
-			
-=======
-		
->>>>>>> 3b4278c47b927faeb94a4d332fb2403ec90cadd3
+
 						<form action="" class="col-md-4"><br>							
 							
 							    <div class="input-group">

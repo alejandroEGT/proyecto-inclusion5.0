@@ -4,8 +4,7 @@
 @import url('http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
 
 @import url('../mdl/material.min.css');
-@import url('https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/css/bootstrap-material-design.min.css');
-
+@import url('../bdm/css/bootstrap-material-design.min.css');
 
 @import url('../css/estilo_cliente.css');
-@import url('../css/styles.css');
+@import url('../css/estilo_android.css');

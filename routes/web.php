@@ -154,3 +154,7 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
  Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
  Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
  Route::get('/registro_cliente' , 'clienteController@registro_cliente');
+ Route::get('/carro_cliente' , 'clienteController@carro_cliente');
+ Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
+ 
+

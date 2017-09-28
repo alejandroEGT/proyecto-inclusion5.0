@@ -17,4 +17,14 @@ class clienteController extends Controller
     public function registro_cliente(){
     	return view('inicioCliente.registro_cliente');
     }
+
+       public function carro_cliente()
+    {
+   		return view('inicioCliente.carro_cliente');
+    }
+
+        public function prueba_cliente()
+    {
+   		return view('inicioCliente.prueba');
+    }
 }

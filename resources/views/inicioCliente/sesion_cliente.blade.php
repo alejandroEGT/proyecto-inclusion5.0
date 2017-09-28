@@ -11,18 +11,19 @@
 	<div class="container ">
 		<div class="row caja-sesion">
 			<div class="col-xs-12 col-sm-12 col-md-6 mdl-shadow--6dp">
-				<form>
+				<form action="" method="post">
+					{{csrf_field}}
 					<div class="contenido-sesion">
 										
 					  <div class="form-group">
 					    <label for="exampleInputEmail1" class="bmd-label-floating">Correo electronico</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1">
+					    <input type="email" class="form-control" id="exampleInputEmail1" name="correo">
 					    <span class="bmd-help">Nunca compartiremos tu correo electrónico con nadie más.</span>
 					  </div>
 					
 					  <div class="form-group">
 					    <label for="exampleInputPassword1" class="bmd-label-floating">Contraseña</label>
-					    <input type="password" class="form-control" id="exampleInputPassword1">
+					    <input type="password" class="form-control" id="exampleInputPassword1" name="pass">
 					    <br><a href="">¿Olvido su contraseña?</a>
 					  </div>		
 

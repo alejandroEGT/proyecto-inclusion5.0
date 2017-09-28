@@ -27,4 +27,14 @@ class clienteController extends Controller
     {
    		return view('inicioCliente.prueba');
     }
+
+       public function guardar_cliente()
+    {
+   		
+    }
+
+        public function iniciar_cliente()
+    {
+   		
+    }
 }

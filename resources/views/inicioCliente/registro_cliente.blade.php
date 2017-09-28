@@ -1,3 +1,4 @@
+<title>Registro</title>
 @extends('inicioCliente.clienteMaster')
 
 @section('content')
@@ -8,24 +9,25 @@
 		<div class="container ">
 			<div class="row caja-sesion">
 				<div class="col-xs-12 col-sm-12 col-md-6 mdl-shadow--6dp">
-					<form>
+					<form action="" method="post">
+						{{csrf_field()}}
 						<div class="contenido-sesion">				
 								<div class="form-row">
 								  	<div class="col">
 								    <label for="exampleInputEmail1" class="bmd-label-floating">Nombres</label>
-								    <input type="texr" class="form-control" id="formGroupExampleInput">
+								    <input type="text" class="form-control" id="formGroupExampleInput" name="nombres">
 								  </div>
 
 								  <div class="col">
 									<label for="exampleInputEmail1" class="bmd-label-floating">Apellidos</label>
-								    <input type="text" class="form-control" id="formGroupExampleInput">
+								    <input type="text" class="form-control" id="formGroupExampleInput" name="apellidos">
 								  </div>
 								</div><br>
 						
 
 							  <div class="form-group">
 								<label for="exampleInputEmail1" class="bmd-label-floating">Fecha Nacimiento</label>
-							    <input type="date" class="form-control" id="formGroupExampleInput">
+							    <input type="date" class="form-control" id="formGroupExampleInput" name="fecha">
 							  </div>
 							  
 							  <div class="form-group">
@@ -40,24 +42,24 @@
 
 							<div class="form-group">
 								<label for="exampleInputEmail1" class="bmd-label-floating">Telefono</label>
-							    <input type="number" class="form-control" id="formGroupExampleInput">
+							    <input type="number" class="form-control" id="formGroupExampleInput" name="telefono">
 							    <span class="bmd-help">Nunca compartiremos tu correo electrónico con nadie más.</span>
 							  </div>
 
 							   <div class="form-group">
 							    <label for="exampleInputEmail1" class="bmd-label-floating">Correo electronico</label>
-							    <input type="email" class="form-control" id="exampleInputEmail1">
+							    <input type="email" class="form-control" id="exampleInputEmail1" name="correo">
 							    <span class="bmd-help">Nunca compartiremos tu correo electrónico con nadie más.</span>
 							  </div>
 
 							  <div class="form-group">
 							    <label for="exampleInputPassword1" class="bmd-label-floating">Contraseña</label>
-							    <input type="password" class="form-control" id="exampleInputPassword1">
+							    <input type="password" class="form-control" id="exampleInputPassword1" name="pass">
 							  </div>
 
 							  <div class="form-group">
 							    <label for="exampleInputPassword1" class="bmd-label-floating">Repita Contraseña</label>
-							    <input type="password" class="form-control" id="exampleInputPassword1">
+							    <input type="password" class="form-control" id="exampleInputPassword1" name="repPass">
 							  </div>
 						</div>
 

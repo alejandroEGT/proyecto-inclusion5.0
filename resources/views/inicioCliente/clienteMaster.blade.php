@@ -19,8 +19,8 @@
 			            <a href="/inicio_cliente"><img class="android-logo-image" src="productos/exodNegro.png"></a>
 			          </span>
 			          <!--lupa de prueba-->
-			
-						<form action="" class="col-md-6"><br>							
+		
+						<form action="" class="col-md-4"><br>							
 							
 							    <div class="input-group">
 							      <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">

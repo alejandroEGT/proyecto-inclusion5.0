@@ -37,16 +37,14 @@
 							    </select>
 							</div>
 
-							<div class="form-group">
+							  <div class="form-group">
 								<label for="exampleInputEmail1" class="bmd-label-floating">Telefono</label>
 							    <input type="number" class="form-control" id="formGroupExampleInput" name="telefono">
-							    <span class="bmd-help">Nunca compartiremos tu correo electrónico con nadie más.</span>
 							  </div>
 
 							   <div class="form-group">
 							    <label for="exampleInputEmail1" class="bmd-label-floating">Correo electronico</label>
 							    <input type="email" class="form-control" id="exampleInputEmail1" name="correo">
-							    <span class="bmd-help">Nunca compartiremos tu correo electrónico con nadie más.</span>
 							  </div>
 
 							  <div class="form-group">
@@ -67,26 +65,29 @@
 								<a href="inicio_cliente" class="btn btn-primary btn-outline-info">Atras</a>	
 							</div>
 						</div>
+					</form>
 
 						  <div class="android-drawer-separator"></div>
 						  <p class="contenido-sesion">Entra con:</p>
+						<form action="" method="">
+							{{csrf_field()}}
+							  <div class="form-group text-center">
+								  <button type="button" class="btn btn-info bmd-btn-fab">
+								  <i class="ion-social-facebook"></i>
+								  </button>
 
-						  <div class="form-group text-center">
-							  <button type="button" class="btn btn-info bmd-btn-fab">
-							  <i class="ion-social-facebook"></i>
-							  </button>
+								  <button type="button" class="btn btn-danger bmd-btn-fab">
+								  <i class="ion-social-googleplus"></i>
+								  </button>
+							  </div>
+						</form>  
+					</div>
 
-							  <button type="button" class="btn btn-danger bmd-btn-fab">
-							  <i class="ion-social-googleplus"></i>
-							  </button>
-						  </div>
-						</div>
-
-					</form>
+					
 			
 				</div>
 				<div class="android-drawer-separator"></div>
-			</div>
+			</<div></div>>
 
 
 @endsection

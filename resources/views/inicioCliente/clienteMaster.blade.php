@@ -12,24 +12,22 @@
 	</head>
 		<body>
 			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-
 			      <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
 			        <div class="mdl-layout__header-row">
-			          <span class="android-title mdl-layout-title">
+			          <span class="android-title mdl-layout-title col-md-3">
 			            <a href="/inicio_cliente"><img class="android-logo-image" src="productos/exodNegro.png"></a>
 			          </span>
 			          <!--lupa de prueba-->
-
-						<form action="" class="col-md-4"><br>							
-							
+					<div class="col-md-6 lupa">
+						<form action="" method=""><br>							
 							    <div class="input-group">
-							      <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
+							      <input type="text" class="form-control" placeholder="Buscar productos, servicios..." aria-label="Search for...">
 							      <span class="input-group-btn">
-							        <button class="btn btn-secondary" type="button"><i class="material-icons">search</i></button>
+							        <button class="btn btn-search" type="submit"><i class="material-icons">search</i></button>
 							      </span>
 							    </div>
-							  
-					  </form>
+					  	</form>
+					  </div>
 
 
 
@@ -37,7 +35,7 @@
 			          <!-- Add spacer, to align navigation to the right in desktop -->
 			          <div class="android-header-spacer mdl-layout-spacer"></div>
 			          <!-- Navigation -->
-			    	<div class="android-navigation-container">
+			    	<div class="android-navigation-container col-md-3">
 			            <nav class="android-navigation mdl-navigation">
 			              <span><a class="mdl-navigation__link mdl-typography--text-uppercase" href="/carro_cliente"><i class="material-icons">&#xE8CC;</i> Cesta <i class="mdl-badge mdl-badge--no-background" data-badge="3"></i></span></a>
 			            </nav>

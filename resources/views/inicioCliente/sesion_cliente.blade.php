@@ -11,11 +11,11 @@
 	<div class="container ">
 		<div class="row caja-sesion">
 			<div class="col-xs-12 col-sm-12 col-md-6 mdl-shadow--6dp">
-<<<<<<< HEAD
+
 				<form action="/sesion_cliente" method="post">
-=======
+
 				<form action="" method="post">
->>>>>>> 9ac3340fc5a565e32ef1115b55b844863d3b6a9c
+
 					{{csrf_field()}}
 					<div class="contenido-sesion">
 										

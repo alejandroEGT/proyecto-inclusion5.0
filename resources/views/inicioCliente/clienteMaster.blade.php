@@ -20,11 +20,11 @@
 			            <a href="/inicio_cliente"><img class="android-logo-image" src="productos/exodNegro.png"></a>
 			          </span>
 			          <!--lupa de prueba-->
-					<div class="col-md-6 lupa">
+					<div class="col-md-6">
 						<form action="" method="get"><br>
 						{{csrf_field()}}							
 							    <div class="input-group">
-							      <input name="buscador" type="text" class="form-control" placeholder="Buscar productos, servicios...">
+							      <input name="buscador" type="text" class="form-control caja_lupa" placeholder="Buscar productos, servicios...">
 							      <span class="input-group-btn">
 							        <button class="btn btn-search bmd-btn-fab" type="submit"><i class="material-icons">search</i></button>
 							      </span>

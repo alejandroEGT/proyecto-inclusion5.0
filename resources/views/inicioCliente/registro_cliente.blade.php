@@ -5,11 +5,11 @@
 
 <h1 class="text-center">Registrate</h1>
 	<div class="android-drawer-separator"></div>
-
+<br>
 		<div class="container ">
 			<div class="row caja-sesion">
 				<div class="col-xs-12 col-sm-12 col-md-6 mdl-shadow--6dp">
-					<form action="" method="post">
+					<form action="/registro_cliente" method="post">
 						{{csrf_field()}}
 						<div class="contenido-sesion">				
 								<div class="form-row">
@@ -23,20 +23,17 @@
 								    <input type="text" class="form-control" id="formGroupExampleInput" name="apellidos">
 								  </div>
 								</div><br>
-						
-
-							  <div class="form-group">
-								<label for="exampleInputEmail1" class="bmd-label-floating">Fecha Nacimiento</label>
-							    <input type="date" class="form-control" id="formGroupExampleInput" name="fecha">
-							  </div>
 							  
 							  <div class="form-group">
 							    <label for="exampleSelect1" class="bmd-label-floating">Sexo</label>
-							    <select class="form-control" id="exampleSelect1">
-							      <option>Seleccione</option>
-							      <option>Hombre</option>
-							      <option>Mujer</option>
-							      <option>No especificar</option>
+							    <select class="form-control" id="exampleSelect1" name="sexo">
+
+							     @foreach ($sexo as $sex)
+
+									<option value="{{$sex->id}}">{{ $sex->nombre }}</option>
+
+								 @endforeach
+
 							    </select>
 							</div>
 
@@ -65,7 +62,8 @@
 
 						<div class="form-group text-center">
 							<div class="boton-sesion">	
-							  	<a href="#" class="btn btn-primary btn-outline-success">Registrate</a>
+							  	<button type="submit" class="btn btn-primary btn-outline-success">Registrarse</button>
+
 								<a href="inicio_cliente" class="btn btn-primary btn-outline-info">Atras</a>	
 							</div>
 						</div>

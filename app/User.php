@@ -105,4 +105,22 @@ class User extends Authenticatable
             $resultado = \DB::select("CALL `buscaralumno`('".\Auth::guard('institucion')->user()->id."','%".$buscar."%');");
             return $resultado;
     }
+
+    protected function insertarCliente($datos){
+
+        $user = new User;
+
+            $user->nombres = $datos->nombres;
+            $user->apellidos = $datos->apellidos;
+            $user->email = $datos->correo;
+            $user->password = \Hash::make($datos->clave);
+            $user->id_rol = "4";
+            $user->id_sexo = $datos->sexo;
+
+                if($user->save()){
+                    return true;
+                }else{
+                    return false;
+                }
+    }
 }

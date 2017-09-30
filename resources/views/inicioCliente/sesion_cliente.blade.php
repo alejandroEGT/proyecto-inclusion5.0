@@ -11,8 +11,8 @@
 	<div class="container ">
 		<div class="row caja-sesion">
 			<div class="col-xs-12 col-sm-12 col-md-6 mdl-shadow--6dp">
-				<form action="" method="post">
-					{{csrf_field}}
+				<form action="/sesion_cliente" method="post">
+					{{csrf_field()}}
 					<div class="contenido-sesion">
 										
 					  <div class="form-group">

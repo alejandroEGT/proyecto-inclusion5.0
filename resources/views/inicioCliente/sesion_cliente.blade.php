@@ -22,7 +22,7 @@
 					  <div class="form-group">
 					    <label for="exampleInputEmail1" class="bmd-label-floating">Correo electronico</label>
 					    <input type="email" class="form-control" id="exampleInputEmail1" name="correo">
-					    <span class="bmd-help">Nunca compartiremos tu correo electrónico con nadie más.</span>
+					  
 					  </div>
 					
 					  <div class="form-group">
@@ -34,7 +34,7 @@
 					</div>
 
 					<div class="boton-sesion">	
-					  	<button type="submit" class="btn btn-primary btn-raised">Iniciar sesión</button>
+					  	<button type="submit" class="btn btn-primary btn-outline-success">Iniciar sesión</button>
 					</div>
 					  	<br><p align="right"><a href="registro_cliente" class="registro-sesion">¡Regístrate gratis!</a></p>
 				</form>

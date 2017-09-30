@@ -48,6 +48,7 @@ class clienteController extends Controller
 
             if($cliente){
               return "oka";
+              
             }else{
               return "caca2";
             }
@@ -65,6 +66,7 @@ class clienteController extends Controller
               if (Auth::attempt(['email' => $datos->correo, 'password' => $datos->pass])) {
 
                 return "oka";
+
 
               }else{
                 return "caca2";

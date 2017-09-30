@@ -8,6 +8,7 @@ use App\cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class clienteController extends Controller
 {
     public function inicio_cliente(){
@@ -57,22 +58,7 @@ class clienteController extends Controller
           }
     }
 
-    public function authCliente(Request $datos){
-
-           $finduser = User::where('email', $datos->correo)->first();
-
-           if(count($finduser)>0 && $finduser->id_rol == 4){
-
-              if (Auth::attempt(['email' => $datos->correo, 'password' => $datos->pass])) {
-
-                return "oka";
 
 
-              }else{
-                return "caca2";
-              }
-           }else{
-            return "caca1";
-           }
-    }
+    
 }

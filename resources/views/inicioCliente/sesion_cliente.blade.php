@@ -14,8 +14,6 @@
 
 				<form action="/sesion_cliente" method="post">
 
-				<form action="" method="post">
-
 					{{csrf_field()}}
 					<div class="contenido-sesion">
 										
@@ -42,14 +40,18 @@
 
 					  <div class="android-drawer-separator"></div>
 					  <p class="contenido-sesion">Entra con:</p>
-					<form action="" method="post">
+
+					<form class="form-horizontal" action="/login/facebook" method="post">
 						{{csrf_field()}}
 					  <div class="form-group text-center">
-						  <button type="button" class="btn btn-info bmd-btn-fab">
+						  <button type="submit" class="btn btn-info bmd-btn-fab">
 						  <i class="ion-social-facebook"></i>
 						  </button>
+					</form>
 
-						  <button type="button" class="btn btn-danger bmd-btn-fab">
+					 <form class="form-horizontal" action="/login/google" method="post">
+                     {{ csrf_field() }}
+						  <button type="submit" class="btn btn-danger bmd-btn-fab">
 						  <i class="ion-social-googleplus"></i>
 						  </button>
 					  </div>

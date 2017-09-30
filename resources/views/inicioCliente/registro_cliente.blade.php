@@ -58,11 +58,12 @@
 							  </div>
 						</div>
 
-						<div class="form-group text-center">
-							<div class="boton-sesion">	
+						<div class="form-group">
+							<div class="boton-sesion text-center">	
+							  	<p>
 							  	<button type="submit" class="btn btn-primary btn-outline-success">Registrarse</button>
-
 								<a href="inicio_cliente" class="btn btn-primary btn-outline-info">Atras</a>	
+								</p>
 							</div>
 						</div>
 					</form>

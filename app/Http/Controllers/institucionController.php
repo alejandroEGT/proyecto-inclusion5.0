@@ -9,13 +9,23 @@ use App\Fotoperfil;
 
 use App\Http\Requests\institucionRequest;
 use App\Http\Requests\agregaralumnoRequest;
+use App\Http\Requests\productoInstiRequest;
 use App\Institucion;
 use App\Sexo;
 use App\User;
 use App\Vendedor;
 use App\VendedorInstitucion;
+use App\categoria_producto;
+use App\Tienda_institucion;
+use App\foto_producto;
+use App\foto_producto_institucion;
+use App\producto_institucion;
+use App\Tienda_producto_institucion;
+use App\estado_tienda_producto;
 use Illuminate\Http\Request;
+use App\Http\Requests\productoRequest;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use App\Usuarioinstitucion;
 use App\Passwordcuenta;
 use Charts;
@@ -73,29 +83,7 @@ class institucionController extends Controller
           return view('institucion.grafico')->with('areas',json_encode($array));
     }
 
-    public function graficochart(){
-          
-          $array;
-          $contar;
-      $areas = Area::traer();
-          for ($i=0; $i < count($areas) ; $i++) { 
-            $contarAlumnos = Area::contarAlumnosPorArea($areas[$i]->id);
-            $array[$i] = $areas[$i]->nombre;
-            $contar[$i] = $contarAlumnos;
-          }
-
-          //return $array;
-         $chart = Charts::create('pie', 'highcharts')
-            ->Title('My nice chart')
-            ->Labels($array)
-            ->Values($contar)
-            ->Dimensions(1000,1000)
-            ->Responsive(true);
-
-        //return view('frontend.user.dashboard',['chart'=>$chart]);
-        return view('institucion.graficochart',['chart' => $chart]);
-
-    }
+    
 
 
 
@@ -138,12 +126,33 @@ class institucionController extends Controller
     }
 
     public function vista_publicarProducto(){
+
         $areas = Area::traer();
-        return view('institucion.publicarProducto')->with('areas',$areas);
+        $categoria_pro = categoria_producto::all();
+        $productos = producto_institucion::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id);
+        
+        return view('institucion.publicarProducto')
+        ->with('areas',$areas)
+        ->with('categoria_pro', $categoria_pro)
+        ->with('productos', $productos);
     }
     public function vitsa_generarPassword($value='')
     {
         return view('institucion.generarPassword');
+    }
+    public function ver_detalleProducto(Request $dato)
+    {
+      $getId = base64_decode($dato->id);
+      $categoria = categoria_producto::all();
+      $estadoP = estado_tienda_producto::limit(2)->get();
+      $area = Area::all();
+
+      $productos = producto_institucion::detalleProducto($getId);
+      return view('institucion.verDetalleProducto')
+      ->with('productos', $productos)
+      ->with('categoria', $categoria)
+      ->with('estadoP', $estadoP)
+      ->with('area', $area);
     }
 
     public function agregar_alumno(agregaralumnoRequest $datos)
@@ -165,7 +174,7 @@ class institucionController extends Controller
                                     $passwordDefault = Passwordcuenta::insertar_clave_default($id_user[0]->id);
 
                                     if ($passwordDefault) {
-                                         Mail::send(['text'=>'emails.clave'],['name','janin'],function ($message) use ($correo)
+                                         Mail::send(['html'=>'emails.clave'],['name','janin'],function ($message) use ($correo)
                                         {
                                           $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                                           $message->to($correo,'to jano');
@@ -243,7 +252,7 @@ class institucionController extends Controller
              
         if($aceptarUser == 1){
                 
-                 Mail::send(['text'=>'emails.mail'],['name','janin'],function ($message) use ($user)
+                 Mail::send(['html'=>'emails.mail'],['name','janin'],function ($message) use ($user)
                 {
                     $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                     $message->to($user['email'],'to jano');
@@ -378,19 +387,21 @@ class institucionController extends Controller
     }
 
     /*PUBLICACION DE LOS PRODUCTOS*/
-    public function publicarproducto(productoRequest $datos){
+    public function publicarproducto(productoInstiRequest $datos){
+      
+       $institucion = Area::traer();
 
-       $insertFotoProducto = foto_producto::insertar($datos);
+       $insertProducto = producto_institucion::insertar($datos);
 
-       if ($insertFotoProducto > 0) {
+       if ($insertProducto > 0) {
            
-           $insertProducto = producto_institucion::insertar($datos, $insertFotoProducto);
+            $insertFotoProducto = foto_producto_institucion::insertar($datos, $insertProducto);
 
-           if ($insertProducto > 0) {
+           if ($insertFotoProducto > 0) {
 
-                $tienda = Tienda_institucion::encargado_id_tienda();
-                
-                $insertTiendaProducto = Tienda_producto_institucion::insertar($insertProducto, $tienda[0]->id, '1');
+                $tienda = Tienda_institucion::id_tienda_by_institucion(\Auth::guard('institucion')->user()->id);
+                //dd($tienda[0]->id);
+                $insertTiendaProducto = Tienda_producto_institucion::insertar($insertProducto, $tienda[0]->id, '1', $datos->area);
                
                if ($insertTiendaProducto > 0) {
                    \Session::flash('registro', 'Producto registrado correctasmente');
@@ -404,4 +415,134 @@ class institucionController extends Controller
         }
     }
     /*FIN DE PUBLICACION DE LOS PRODUCTOS*/
+
+    public function eliminar_producto_institucion(Request $dato)
+    {
+      $getId= base64_decode($dato->idProducto);
+      $getFoto = foto_producto_institucion::where('id_producto',$getId)->get();
+      //return $getFoto[0]->foto;
+      \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
+      
+      $foto_prod = foto_producto_institucion::borrar($getFoto[0]->id);
+      $tienda_prod_inst = Tienda_producto_institucion::borrar($getId);
+      $prod_insti = producto_institucion::borrar($getId);
+
+      return redirect()->back();
+    }
+    public function actualizar_producto_foto(Request $dato)
+    {
+      $this->validate($dato,[
+                'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=3200,max_height=2850',
+          ]);
+      //dd($dato->idProducto);
+      $actualizar = foto_producto_institucion::actualizar_foto($dato);
+      if ($actualizar > 0) {
+          \Session::flash('correcto', 'Foto actualizada correctamente');
+          return redirect()->back();
+      }
+      return redirect()->back();
+    }
+    public function actualizar_producto_nombre(Request $dato)
+    {
+      $this->validate($dato,[
+                'nombre' => 'required | max:50',
+          ]);
+          $nombre = producto_institucion::actualizar_nombre($dato);
+          if ($nombre) {
+            \Session::flash('correcto', 'Nombre actualizado correctamente');
+            return redirect()->back();
+          }
+          return redirect()->back();
+    }
+    public function actualizar_producto_descripcion(Request $dato)
+    {
+      $this->validate($dato,[
+                'descripcion' => 'required | max:250',
+          ]);
+          $desc = producto_institucion::actualizar_descripcion($dato);
+          if ($desc) {
+            \Session::flash('correcto', 'Descripcion actualizada correctamente');
+            return redirect()->back();
+          }
+          return redirect()->back();
+    }
+     public function actualizar_producto_precio(Request $dato)
+    {
+      $this->validate($dato,[
+                'precio' => 'required | numeric',
+          ]);
+          $cant = producto_institucion::actualizar_precio($dato);
+          if ($cant) {
+            \Session::flash('correcto', 'Precio actualizado correctamente');
+            return redirect()->back();
+          }
+          return redirect()->back();
+
+    }
+    public function actualizar_producto_cantidad(Request $dato)
+    {
+      $this->validate($dato,[
+                'cantidad' => 'required | numeric',
+          ]);
+          $cant = producto_institucion::actualizar_cantidad($dato);
+          if ($cant) {
+            \Session::flash('correcto', 'Cantidad actualizada correctamente');
+            return redirect()->back();
+          }
+          return redirect()->back();
+
+    }
+    public function actualizar_producto_visibilidad(Request $dato)
+    {
+      $this->validate($dato,[
+                'estadoV' => 'required',
+          ]);
+
+          $visibi = producto_institucion::actualizar_visibilidad($dato);
+          if ($visibi) {
+            return redirect()->back();
+          }
+          return redirect()->back();
+
+    }public function actualizar_producto_categoria(Request $dato)
+    {
+      $this->validate($dato,[
+                'categoria' => 'required',
+          ]);
+
+      $categ = producto_institucion::actualizar_categoria($dato);
+          if ($categ) {
+            
+            return redirect()->back();
+          }
+          return redirect()->back();
+
+    }public function actualizar_producto_area(Request $dato)
+    {
+      $this->validate($dato,[
+                'area' => 'required',
+          ]);
+      $area = producto_institucion::actualizar_area($dato);
+          if ($area) {
+            //\Session::flash('correcto', 'Cantidad actualizada correctasmente');
+            return redirect()->back();
+          }
+          return redirect()->back();
+    }
+    /*public function FunctionName($value='')
+    {
+      # code...
+    }
+    public function FunctionName($value='')
+    {
+      # code...
+    }
+    public function FunctionName($value='')
+    {
+      # code...
+    }
+    public function FunctionName($value='')
+    {
+      # code...
+    }*/
 }

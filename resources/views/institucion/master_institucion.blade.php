@@ -63,8 +63,15 @@
                     <li class="pushy-link"><a href="{{ url('institucion/notificacio_vendedor') }}"><i class="fa fa-globe"></i> 
                     Notificaciones <span class="badge">@{{ notificacion }}</span></a></li>
                      <li class="pushy-link"><a href="{{ url('institucion/generarPassword') }}"><i class="fa fa-key"></i> Generar Contraseñas</a></li>
-                    <li class="pushy-link"><a href="{{ url('institucion/grafico') }}"><i class="fa fa-indent"></i> Grafico</a></li>
-                     <li class="pushy-link"><a href="{{ url('institucion/my-chart') }}"><i class="fa fa-indent"></i> GraficoChart</a></li>
+                    <li class="pushy-submenu">
+                        <button><i class="fa fa-bar-chart"></i> Graficos</button>
+                        <ul>
+                            <li class="pushy-link"><a href="{{ url('institucion/grafico_productosAdmin') }}"> Cantidad de productos</a></li>
+                            <li class="pushy-link"><a href="{{ url('institucion/my-chart') }}"> Cantidad de personas</a></li>
+                        </ul>
+                    </li>
+
+                    
                    <!-- <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
                     <li class="pushy-link"><a href="#">Item 4</a></li>-->

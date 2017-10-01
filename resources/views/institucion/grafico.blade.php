@@ -1,7 +1,7 @@
 @extends('institucion.master_institucion')
 
 @section('content')
-<div class="margen">
+<div class="">
 	
 <div class="row">
 	<div class="col-md-10 col-xs-12">

@@ -15,7 +15,6 @@ class CreateProductosInstitucionesTable extends Migration
     {
         Schema::create('productos_instituciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_foto')->unsigned();
             $table->integer('id_categoria')->unsigned();
             $table->string('nombre');
             $table->integer('precio');
@@ -26,7 +25,6 @@ class CreateProductosInstitucionesTable extends Migration
         });
 
         Schema::table('productos_instituciones', function($table) {
-            $table->foreign('id_foto')->references('id')->on('foto_productos');
             $table->foreign('id_categoria')->references('id')->on('categoria_productos');
         });
     }

@@ -15,15 +15,12 @@ class CreateServicioInstitucionesTable extends Migration
     {
         Schema::create('servicio_instituciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_foto')->unsigned()->index();
             $table->string('nombre');
             $table->string('descripcion');
             $table->timestamps();
         });
 
-        Schema::table('servicio_instituciones', function (Blueprint $table) {
-             $table->foreign('id_foto')->references('id')->on('foto_servicios');
-        });
+      
     }
 
     /**

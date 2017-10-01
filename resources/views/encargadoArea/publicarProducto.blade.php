@@ -1,6 +1,6 @@
 @extends('encargadoArea.master_encargadoArea')
 
-@section('content')
+{{--@section('content')--}}
 
 @section('content')
 	<form action="{{ url('encargadoArea/guardarProducto') }}" method="post" enctype="multipart/form-data" >
@@ -45,7 +45,7 @@
 			</div>
 			<div class="col-md-2">
 				<p><select name="categoria" class="form-control input" >
-					<option>Seleccione categoría..</option>
+					<option value="">Seleccione categoría..</option>
 					@foreach ($categoria_pro as $categoria)
 						<option value="{{$categoria->id }}">{{$categoria->nombre }}</option>
 					@endforeach
@@ -102,7 +102,7 @@
 						<td>{{ $p->descripcion }}</td>
 						<td>{{ $p->creado }}</td>
 						<td>
-							<a class="btn btn-primary btn-xs" href="#">Ver..</a>
+							<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleProducto/".base64_encode($p->idProducto)) }}">Ver..</a>
 							<a class="btn btn-warning btn-xs" href="#">Eliminar</a>
 						</td>
 					</tr>
@@ -161,4 +161,4 @@
                 });
         </script>
 @endsection
-@endsection
+{{--@endsection--}}

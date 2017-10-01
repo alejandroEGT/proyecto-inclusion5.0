@@ -5,7 +5,7 @@
 	<form action="{{ url('institucion/publicarProducto') }}" method="post" enctype="multipart/form-data" >
 		<div class="row">
 			<div class="col-md-offset-2 col-md-2">
-			<a href="{{ URL::previous() }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
+			<a href="{{ url('institucion/inicio') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
 				<div class="ico-speaker"></div>
 			</div>
 			<div class="col-md-6">
@@ -15,7 +15,7 @@
 				</p>
 				<div class="row">
 					<div class="col-md-10">
-						<input type="" class="form-control input" placeholder="Ingrese nombre del producto" name="nombre">
+						<input type="" class="form-control input" maxlength="50" placeholder="Ingrese nombre del producto" name="nombre">
 					</div>
 				</div>		
 			</div>
@@ -37,14 +37,14 @@
 		<div class="row">
 			
 			<div class="col-md-offset-2 col-md-3">
-				<p><input type="text" placeholder="Descripción del producto..." class="form-control input" name="descripcion"></p>
+				<p><input type="text" placeholder="Descripción del producto..." maxlength="250" class="form-control input" name="descripcion"></p>
 			</div>
 			<div class="col-md-2">
-				<p><input type="numeric" placeholder="Cantidad..." class="form-control input" name="cantidad"></p>
+				<p><input type="numeric" maxlength="4" placeholder="Cantidad..." class="form-control input" name="cantidad"></p>
 			</div>
 			<div class="col-md-2">
 				<p><select name="categoria" class="form-control input" >
-					<option>Seleccione categoría..</option>
+					<option value="" >Seleccione categoría..</option>
 					@foreach ($categoria_pro as $categoria)
 						<option value="{{$categoria->id }}">{{$categoria->nombre }}</option>
 					@endforeach
@@ -55,10 +55,10 @@
 		<hr>
 		<div class="row">
 		{{ csrf_field() }}
-			<div class="col-md-offset-2 col-md-3">
-				<input type="text" name="valor" class="form-control input" placeholder="Ingrese valor">
+			<div class="col-md-offset-2 col-md-2">
+				<input type="numeric" maxlength="7" minlength="2" name="valor" class="form-control input" placeholder="Ingrese valor">
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				
 				<p><label for="file-input" class="label-foto-link">
 				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
@@ -72,11 +72,68 @@
 					
 			</div>
 			<div class="col-md-2">
+				<select name="area" class="form-control input">
+					<option value="" >Seleccione área o especilidad....</option>
+					@foreach ($areas as $a)
+						<option value="{{$a->id}}" >{{ $a->nombre }}</option>
+					@endforeach
+				</select>
+			</div>
+			<div class="col-md-offset-1 col-md-2">
 				<input class="btn" type="submit" name="" value="Registrar">
 			</div>
 			
 		</div>
+		
 	</form>
+
+	<hr>
+		<div class="row">
+			<div class="col-md-12">
+				@if (count($productos)>0)
+					<center><label>Productos</label></center>
+				
+			
+				<table class="table table-responsive">
+					 <tr class="head-color" >
+					 	<th>Id</th>
+					    <th>Foto</th>
+					    <th>Nombre</th> 
+					    <th>Descripcion</th>
+					    <th>creado</th>
+					    <th>Opción</th>
+					  </tr>
+					@foreach ($productos as $p)
+
+					<tr>
+						<td>{{ $p->idProducto }}</td>
+						<td><img src="{{ '/'.$p->foto }}" height="70"></td>
+						<td>{{ $p->nombre }}</td>
+						<td>{{ $p->descripcion }}</td>
+						<td>{{ $p->creado }}</td>
+						<td>
+							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($p->idProducto)) }}">Ver..</a>
+						<form id="eliminar" action="{{ url("institucion/eliminar_producto_institucion") }}" method="post">
+							{{ csrf_field() }}
+							<input type="hidden" value="{{ base64_encode($p->idProducto) }}" name="idProducto">	
+							<br>
+							<input type="button" @click="eliminarProducto" class="btn btn-warning btn-xs" value="Eliminar" >
+						</form>	
+						</td>
+					</tr>
+				    
+				     
+				    @endforeach
+					  
+				</table>
+				{{ $productos->links() }}
+				@endif
+				@if (count($productos)<=0)
+					<center><label>No hay productos</label></center>
+				@endif
+
+			</div>
+		</div>
 @endsection
 
 @section('js')

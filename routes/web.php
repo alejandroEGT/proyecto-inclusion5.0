@@ -66,13 +66,25 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/publicarProducto','institucionController@publicarproducto');
         Route::get('/grafico','institucionController@vista_grafico');
 
-        Route::get('my-chart', 'institucionController@graficochart');
+        Route::get('/my-chart', 'graficosAdminController@graficochart');
+        Route::get('/grafico_productosAdmin', 'graficosAdminController@grafico_productosAdmin');
 
         Route::post('/ingresar_pagweb', 'institucionController@ingresar_pagweb');
         Route::post('/actualizar_nombreArea', 'institucionController@actualizar_nombreArea');
         Route::post('/actualizar_descripcionArea', 'institucionController@actualizar_descripcion');
         Route::get('/generarPassword', 'institucionController@vitsa_generarPassword');
         Route::get('/buscarUsuarioParaCambiarPassword/{buscar}', 'institucionController@buscarUsuarioParaCambiarPassword');
+        Route::get('/detalleProducto/{id}', 'institucionController@ver_detalleProducto');
+        Route::post('/eliminar_producto_institucion', 'institucionController@eliminar_producto_institucion');
+        Route::post('/actualizar_producto_foto', 'institucionController@actualizar_producto_foto');
+        Route::post('/actualizar_producto_nombre','institucionController@actualizar_producto_nombre');
+        Route::post('/actualizar_producto_descripcion','institucionController@actualizar_producto_descripcion');
+        Route::post('/actualizar_producto_cantidad','institucionController@actualizar_producto_cantidad');
+        Route::post('/actualizar_producto_visibilidad','institucionController@actualizar_producto_visibilidad');
+        Route::post('/actualizar_producto_categoria', 'institucionController@actualizar_producto_categoria');
+        Route::post('/actualizar_producto_area', 'institucionController@actualizar_producto_area');
+        Route::post('/actualizar_producto_precio', 'institucionController@actualizar_producto_precio');
+
 
 });
 
@@ -115,6 +127,16 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::post('/publicarProducto','encargadoController@publicarProducto');
         Route::post('/actualizar_correo','encargadoController@actualizar_correo');
         Route::post('/actualizar_numero','encargadoController@actualizar_numero');
+        Route::get('/detalleProducto/{id}', 'encargadoController@ver_detalleProducto');
+        Route::get('/eliminar_producto_institucion', 'encargadoAreaController@eliminar_producto_institucion');
+        Route::post('/actualizar_producto_foto', 'institucionController@actualizar_producto_foto');
+        Route::post('/actualizar_producto_nombre','institucionController@actualizar_producto_nombre');
+        Route::post('/actualizar_producto_descripcion','institucionController@actualizar_producto_descripcion');
+        Route::post('/actualizar_producto_cantidad','institucionController@actualizar_producto_cantidad');
+        Route::post('/actualizar_producto_visibilidad','institucionController@actualizar_producto_visibilidad');
+        Route::post('/actualizar_producto_categoria', 'institucionController@actualizar_producto_categoria');
+        Route::post('/actualizar_producto_area', 'institucionController@actualizar_producto_area');
+        Route::post('/actualizar_producto_precio', 'institucionController@actualizar_producto_precio');
        
 });
 

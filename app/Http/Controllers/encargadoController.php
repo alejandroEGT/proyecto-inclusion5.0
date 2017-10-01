@@ -15,6 +15,7 @@ use App\Institucion;
 use App\Usuarioinstitucion;
 use App\categoria_producto;
 use App\Tienda_institucion;
+use App\estado_tienda_producto;
 use App\foto_producto;
 use App\producto;
 use App\producto_institucion;
@@ -122,6 +123,21 @@ class encargadoController extends Controller
         return view('encargadoArea.agregar_alumno')->with('sexo', $sexo)->with('id_institucion', $id_institucion[0]->id_institucion)
               ->with('id_area', $id_area[0]->id_area);
     }
+    public function ver_detalleProducto(Request $dato)
+    {
+      $getId = base64_decode($dato->id);
+      $categoria = categoria_producto::all();
+      $estadoP = estado_tienda_producto::limit(2)->get();
+      $area = Area::all();
+
+      $productos = producto_institucion::detalleProducto($getId);
+      
+      return view('encargadoArea.verDetalleProducto')
+      ->with('productos', $productos)
+      ->with('categoria', $categoria)
+      ->with('estadoP', $estadoP)
+      ->with('area', $area);
+    }
 
     public function actializar_clave(request $dato){
 
@@ -145,7 +161,7 @@ class encargadoController extends Controller
 
                     $correo = \Auth::user()->email;
 
-                        Mail::send(['text'=>'emails.cambioClave'],['name','janin'],function ($message) use ($correo)
+                        Mail::send(['html'=>'emails.cambioClave'],['name','janin'],function ($message) use ($correo)
                         {
                             $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                             $message->to($correo,'to jano');
@@ -206,7 +222,7 @@ class encargadoController extends Controller
                                     $passwordDefault = Passwordcuenta::insertar_clave_default($id_user[0]->id);
 
                                     if ($passwordDefault) {
-                                         Mail::send(['text'=>'emails.clave'],['name','janin'],function ($message) use ($correo)
+                                         Mail::send(['html'=>'emails.clave'],['name','janin'],function ($message) use ($correo)
                                       {
                                           $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                                           $message->to($correo,'to jano');
@@ -266,15 +282,16 @@ class encargadoController extends Controller
        
        $encargado = Encargado::traerDatos();
 
-       $insertFotoProducto = foto_producto::insertar($datos);
+       
+       $insertProducto = producto_institucion::insertar($datos);
 
-       if ($insertFotoProducto > 0) {
+       if ($insertProducto > 0) {
            
-           $insertProducto = producto_institucion::insertar($datos, $insertFotoProducto);
+           $insertFotoProducto = foto_producto::insertar($datos, $insertProducto);
 
-           if ($insertProducto > 0) {
+           if ($insertFotoProducto > 0) {
 
-                $tienda = Tienda_institucion::encargado_id_tienda();
+                $tienda = Tienda_institucion::id_tienda(\Auth::user()->id);/*Modifique aqui hoy*/
                 
                 $insertTiendaProducto = Tienda_producto_institucion::insertar($insertProducto, $tienda[0]->id, '1', $encargado[0]->id_area);
                
@@ -291,5 +308,92 @@ class encargadoController extends Controller
     }
     /*FIN DE PUBLICACION DE LOS PRODUCTOS*/
 
+      public function actualizar_producto_foto(Request $dato)
+    {
+      $this->validate($dato,[
+                'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=2500,max_height=2850',
+          ]);
+      //dd($dato->idProducto);
+      $actualizar = foto_producto_institucion::actualizar_foto($dato);
+      if ($actualizar > 0) {
+          \Session::flash('correcto', 'Foto actualizada correctasmente');
+          return redirect()->back();
+      }
+      return redirect()->back();
+    }
+    public function actualizar_producto_nombre(Request $dato)
+    {
+      $this->validate($dato,[
+                'nombre' => 'required | max:50',
+          ]);
+          $nombre = producto_institucion::actualizar_nombre($dato);
+          if ($nombre) {
+            \Session::flash('correcto', 'Nombre actualizado correctasmente');
+            return redirect()->back();
+          }
+          return redirect()->back();
+    }
+    public function actualizar_producto_descripcion(Request $dato)
+    {
+      $this->validate($dato,[
+                'descripcion' => 'required | max:250',
+          ]);
+          $desc = producto_institucion::actualizar_descripcion($dato);
+          if ($desc) {
+            \Session::flash('correcto', 'Descripcion actualizada correctasmente');
+            return redirect()->back();
+          }
+          return redirect()->back();
+    }
+    public function actualizar_producto_cantidad(Request $dato)
+    {
+      $this->validate($dato,[
+                'cantidad' => 'required | numeric',
+          ]);
+          $cant = producto_institucion::actualizar_cantidad($dato);
+          if ($cant) {
+            \Session::flash('correcto', 'Cantidad actualizada correctasmente');
+            return redirect()->back();
+          }
+          return redirect()->back();
+
+    }
+    public function actualizar_producto_visibilidad(Request $dato)
+    {
+      $this->validate($dato,[
+                'estadoV' => 'required',
+          ]);
+
+          $visibi = producto_institucion::actualizar_visibilidad($dato);
+          if ($visibi) {
+            return redirect()->back();
+          }
+          return redirect()->back();
+
+    }public function actualizar_producto_categoria(Request $dato)
+    {
+      $this->validate($dato,[
+                'categoria' => 'required',
+          ]);
+
+      $categ = producto_institucion::actualizar_categoria($dato);
+          if ($categ) {
+            
+            return redirect()->back();
+          }
+          return redirect()->back();
+
+    }public function actualizar_producto_area(Request $dato)
+    {
+      $this->validate($dato,[
+                'area' => 'required',
+          ]);
+      $area = producto_institucion::actualizar_area($dato);
+          if ($area) {
+            //\Session::flash('correcto', 'Cantidad actualizada correctasmente');
+            return redirect()->back();
+          }
+          return redirect()->back();
+    }
     
 }

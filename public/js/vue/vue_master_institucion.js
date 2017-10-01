@@ -224,7 +224,22 @@ new Vue({
 				else {
 				    alert("Operación cancelada!");
 				}
-        }
+        },
+        eliminarProducto($id){
+			if (confirm("¿Quieres eliminar este producto?") == true) {
+				    
+						$('#eliminar').submit();
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		}
+		,
+		cambiarGrafico(){
+			//alert($('#tipo').val());
+			$('#tipo_form').submit();
+		}
 	},
 
 	created (){

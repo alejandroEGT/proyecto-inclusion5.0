@@ -8,7 +8,7 @@ class foto_producto extends Model
 {
     protected $table = "foto_productos";
 
-    protected function insertar($datos)
+    protected function insertar($datos, $idprod)
     {
 
     	 $url="foto_productos";
@@ -16,6 +16,7 @@ class foto_producto extends Model
         $imageName = time().'.'.$datos->file('fotoP1')->getClientOriginalExtension();//nombre de la imagen como tal.
 
     	$insert = new foto_producto;
+        $insert->id_producto = $idprod;
     	$insert->nombre = $url.'/'.$imageName;
 
     	if ($insert->save()) {
@@ -23,5 +24,11 @@ class foto_producto extends Model
     		return $insert->id;
     	}
     	return 0;
+    }
+
+    protected function borrar($id)
+    {
+        $tpi = \DB::table('foto_productos')->where('id', '=', $id)->delete();
+        return $tpi;
     }
 }

@@ -12,7 +12,10 @@ class alumnoController extends Controller
 	public function generarClave(Request $id){
 
         $genclave = $this->genclave();
-        //$estadoPass =       CAMBIAR ESTADO A NO CAMBIADA DE LA CONTRASEÑA DEL USUARIO
+        $estadoPass =  \DB::table('password-cuenta')
+                        ->where('id_user', $id->id)
+                        ->update(['id_estado' => 1]);
+                        
 
         $alumno = User::find($id->id);
         $correo = $alumno->email;

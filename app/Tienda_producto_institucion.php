@@ -23,4 +23,10 @@ class Tienda_producto_institucion extends Model
     	}
     	 return 0;
     }
+
+    protected function borrar($idP)
+    {
+        $tpi = \DB::table('tienda_producto_instituciones')->where('id_producto', '=', $idP)->delete();
+        return $tpi;
+    }
 }

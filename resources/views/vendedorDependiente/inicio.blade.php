@@ -5,7 +5,7 @@
 		@if ($estado_password == 1)
 				<div class="row">
 					<div class="col-md-offset-3 col-md-6">
-						<center><label>Bienvenido {{ Auth::user()->nombres.' '.Auth::user()->nombres }}</label></center>
+						<center><label>Bienvenido {{ Auth::user()->nombres.' '.Auth::user()->apellidos }}</label></center>
 				<div class="papelImagen">
 				<div class="cabeza">
 					

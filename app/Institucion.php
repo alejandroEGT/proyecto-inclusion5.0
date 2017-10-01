@@ -159,4 +159,9 @@ class Institucion extends Authenticatable
         }
         return false;
     }
+    protected function traerId()
+    {
+        $id = Institucion::find(\Auth::guard('institucion')->user()->id);
+        return $id;
+    }
 }

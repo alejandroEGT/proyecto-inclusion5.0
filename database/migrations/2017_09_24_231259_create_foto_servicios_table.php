@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFotoProductosTable extends Migration
+class CreateFotoServiciosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,18 @@ class CreateFotoProductosTable extends Migration
      */
     public function up()
     {
-        Schema::create('foto_productos', function (Blueprint $table) {
+       Schema::create('foto_servicios', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('id_servicio')->unsigned();
             $table->string('nombre');
             $table->timestamps();
         });
 
+       Schema::table('foto_servicios', function($table) {
+            $table->foreign('id_servicio')->references('id')->on('servicios');
+       });
+
+        
     }
 
     /**
@@ -28,6 +34,6 @@ class CreateFotoProductosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foto_productos');
+        Schema::dropIfExists('foto_servicios');
     }
 }

@@ -4,7 +4,8 @@
 <div class="">
 	
 <div class="container">
-<form id="tipo_form" action="{{ url('institucion/my-chart') }}" method="get" >
+
+<form id="tipo_form" action="{{ url('institucion/grafico_productosAdmin') }}" method="get" >
 	<select id="tipo" name="tipo"  @change="cambiarGrafico" class="form-control" name="tipo" >
 	<option value="">Seleccione tipo de grafico..</option>
 	<option value="pie">Circular</option>
@@ -13,10 +14,11 @@
 </select>
 </form>
 
-    {!! Charts::assets() !!}
-    {!! $chart->render() !!}
+ {!! Charts::assets() !!}
 
-  </div>
+ {!! $chart_productos->render() !!}
+
+   </div>
 
 </div>
 @endsection

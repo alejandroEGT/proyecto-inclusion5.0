@@ -62,27 +62,27 @@ a img{
 
 
 .android-logo-image {
-  height: 50px;
+  height: 30px;
   width: 180px;
 }
 
 
 .android-header {
   overflow: visible;
-  background-color: #F0EFF2;
+  background-color: #1A5276;
 }
 
   .android-header .material-icons {
-    color: #767777 !important;
+    color: white !important;
   }
 
   .android-header .mdl-layout__drawer-button {
     background: transparent;
-    color: #767777;
+    color: white;
   }
 
   .android-header .mdl-navigation__link {
-    color: #757575;
+    color: white;
     font-weight: 700;
     font-size: 14px;
   }
@@ -161,8 +161,8 @@ a img{
 
   .android-drawer .mdl-layout-title {
     position: relative;
-    background: grey;
-    height: 160px;
+    background: #1A5276;
+    height: 80px;
   }
 
     .android-drawer .android-logo-image {

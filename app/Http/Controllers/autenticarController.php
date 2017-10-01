@@ -110,4 +110,8 @@ class autenticarController extends Controller
             }
               return redirect()->back();
      }
+
+      /*login Cliente*/
+
+    
 }

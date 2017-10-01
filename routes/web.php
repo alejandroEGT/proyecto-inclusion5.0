@@ -174,9 +174,19 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
 
 /*inicio de usuarios*/
  Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
+
  Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
+ Route::post('/sesion_cliente', 'loginClienteController@authCliente');
+
  Route::get('/registro_cliente' , 'clienteController@registro_cliente');
+ Route::post('/registro_cliente' , 'clienteController@guardar_cliente');
+  
  Route::get('/carro_cliente' , 'clienteController@carro_cliente');
  Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
  
+ Route::get('/logout','loginClienteController@logout');
 
+
+//Socialite Login
+Route::post('login/{service}', 'loginClienteController@redirectToProvider');
+Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');

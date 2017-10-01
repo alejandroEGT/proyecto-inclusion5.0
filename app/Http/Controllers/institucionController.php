@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Usuarioinstitucion;
 use App\Passwordcuenta;
-use Charts;
+use ConsoleTVs\Charts\Charts;
 
 //use DB;
 class institucionController extends Controller

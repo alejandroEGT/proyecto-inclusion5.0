@@ -3,9 +3,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons');
 @import url('http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
 
-@import url('../mdl/material.min.css');
-@import url('../bdm/css/bootstrap-material-design.min.css');
+
+@import url('../mdl/material.css');
+@import url('../bdm/css/bootstrap-material-design.css');
 @import url('../css/estilo_carousel.css');
+
 
 @import url('../css/estilo_cliente.css');
 @import url('../css/estilo_android.css');

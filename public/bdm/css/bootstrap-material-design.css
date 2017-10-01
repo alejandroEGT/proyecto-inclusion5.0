@@ -1360,7 +1360,7 @@ pre {
     border: 0; }
   .form-control:focus, .custom-file-control:focus {
     color: #495057;
-    background-color: transparent;
+    background-color: white;
     border-color: #9acffa;
     outline: none;
     box-shadow: none, 0 0 0 3px rgba(33, 150, 243, 0.25); }

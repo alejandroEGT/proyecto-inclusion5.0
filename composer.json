@@ -6,11 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "consoletvs/charts": "^5.1",
+        "consoletvs/charts": "5.*",
         "fx3costa/laravelchartjs": "^2.3",
         "guzzlehttp/guzzle": "^6.3",
         "jrm2k6/cloudder": "0.4.*",
         "laravel/framework": "5.4.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0"
     },
     "require-dev": {

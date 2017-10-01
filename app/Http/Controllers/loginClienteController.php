@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\cliente;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,19 +30,27 @@ class loginClienteController extends Controller
             return "oka";
         }else{
 
-        	/*
-            $user = new User;
+             $user = User::insertarCliente($social);
 
-        $user->name = $social->name;
-        $user->email = $social->email;
-        $user->password = bcrypt($social->id.'_'.$social->name.'_'.$social->email);
-        $user->save();
- 
-       Auth::login($user);
+        	 if($user){
 
-        return redirect('/home');
+            $idUser  = User::where('email', $social->email)->first();
 
-        */
+            $cliente = cliente::guardarCliente($social, $idUser);
+
+            if($cliente){
+
+              $finduser = User::where('email', $social->email)->first();
+              Auth::login($finduser);
+
+              return "oka";
+              
+            }else{
+              return "caca2";
+            }
+          }else{
+            return "caca1";
+          }
         }
 
     }
@@ -64,7 +73,7 @@ class loginClienteController extends Controller
     }
 
     public function logout(){
-    	Auth::logout();
+    	dd(Auth::check());
     }
 
 }

@@ -88,7 +88,7 @@
 			
 				</div>
 				<div class="android-drawer-separator"></div>
-			</<div></div>>
+			
 
 
 @endsection

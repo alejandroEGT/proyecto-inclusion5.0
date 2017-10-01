@@ -110,17 +110,33 @@ class User extends Authenticatable
 
         $user = new User;
 
-            $user->nombres = $datos->nombres;
-            $user->apellidos = $datos->apellidos;
-            $user->email = $datos->correo;
-            $user->password = \Hash::make($datos->clave);
-            $user->id_rol = "4";
-            $user->id_sexo = $datos->sexo;
+            if(array_has($datos, 'id')){
 
+                $user->nombres = $datos->name;
+                $user->apellidos = "null";
+                $user->email = $datos->email;
+                $user->password = \Hash::make("porconfirmar");
+                $user->id_rol = "4";
+                $user->id_sexo = "3";
+               
                 if($user->save()){
-                    return true;
-                }else{
-                    return false;
+                        return true;
+                    }else{
+                        return false;
+                    }
+            }else{
+                $user->nombres = $datos->nombres;
+                $user->apellidos = $datos->apellidos;
+                $user->email = $datos->correo;
+                $user->password = \Hash::make($datos->clave);
+                $user->id_rol = "4";
+                $user->id_sexo = $datos->sexo;
+
+                    if($user->save()){
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }
     }
 }

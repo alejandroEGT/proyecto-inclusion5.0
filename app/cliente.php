@@ -11,8 +11,19 @@ class cliente extends Model
     	$cliente = new cliente;
 
     		$cliente->id_user = $idUser->id;
-    		$cliente->telefono = $datos->telefono;
-    		$cliente->id_estado = "2";
+
+            if(array_has($datos, 'id')){
+                $cliente->facebook_id = $datos->id;
+                $cliente->telefono = "0";
+                $cliente->id_estado = "2";
+
+            }else{
+
+            $cliente->telefono = $datos->telefono;
+            $cliente->id_estado = "2";
+
+            }
+    		
 
     		if($cliente->save()){
     			return true;

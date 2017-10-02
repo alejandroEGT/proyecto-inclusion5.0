@@ -21,10 +21,6 @@
 			          </span>
 			          <!--lupa de prueba-->
 
-			
-						<form action="" class="col-md-4"><br>							
-							
-
 					<div class="col-md-6">
 						<form action="" method="get"><br>
 						{{csrf_field()}}							
@@ -141,9 +137,9 @@
 				</div>
 			</div>
 
-</div>
-			</div>		
-		</body>
+		</div>
+	</div>		
+</body>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js" integrity="sha384-KlVcf2tswD0JOTQnzU4uwqXcbAy57PvV48YUiLjqpk/MJ2wExQhg9tuozn5A1iVw" crossorigin="anonymous"></script>

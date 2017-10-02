@@ -58,56 +58,7 @@
 							        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Florero fabricado por sonrisas de unpade</span>
 							    </div>
 							</div>
-					    </li></a>
-
-					    <li><a href="carro_cliente">
-							<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
-								<div class="mdl-card__media porteimg">
-					    			<img src="productos/IMG_4249.jpg"/>
-					    		</div>
-								
-								<div class="mdl-card__title">
-							         <h4 class="mdl-card__title-text">Unpade</h4>
-							    </div>
-
-							    <div class="mdl-card__supporting-text">
-							        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Florero fabricado por sonrisas de unpade</span>
-							    </div>
-							</div>
-					    </li></a>
-
-					    <li><a href="sesion_cliente">
-							<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
-								<div class="mdl-card__media porteimg">
-					    			<img src="productos/IMG_4253.jpg"/>
-					    		</div>
-								
-								<div class="mdl-card__title">
-							         <h4 class="mdl-card__title-text">Unpade</h4>
-							    </div>
-
-							    <div class="mdl-card__supporting-text">
-							        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Florero fabricado por sonrisas de unpade</span>
-							    </div>
-							</div>
-					    </li></a>
-
-					    <li><a href="prueba_cliente">
-							<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
-								<div class="mdl-card__media porteimg">
-					    			<img src="productos/IMG_4274.jpg"/>
-					    		</div>
-								
-								<div class="mdl-card__title">
-							         <h4 class="mdl-card__title-text">Unpade</h4>
-							    </div>
-
-							    <div class="mdl-card__supporting-text">
-							        <span class="mdl-typography--font-light mdl-typography--subhead">Lindo Florero fabricado por sonrisas de unpade</span>
-							    </div>
-							</div>
-					    </li></a>
-					                                                         
+					    </li></a>	                                                         
 					</ul>
 						<div class="clearout"></div>  
 				

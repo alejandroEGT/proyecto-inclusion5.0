@@ -32,6 +32,12 @@ class clienteController extends Controller
    		return view('inicioCliente.carro_cliente');
     }
 
+
+    public function vista_productos()
+    {
+      return view('inicioCliente.vista_productos');
+    }
+
         public function prueba_cliente()
     {
    		return view('inicioCliente.prueba');

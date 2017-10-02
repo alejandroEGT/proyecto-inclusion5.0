@@ -21,8 +21,7 @@
 			          </span>
 			          <!--lupa de prueba-->
 
-			
-						<form action="" class="col-md-4"><br>							
+									
 							
 
 					<div class="col-md-6">
@@ -50,11 +49,22 @@
 			          	<i class="material-icons">&#xE853;</i>
 			          </button>
 			          <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-			            <li class="mdl-menu__item" ><a href="/sesion_cliente">Iniciar Sesion</a></li>
-			            <li class="mdl-menu__item"><a href="/registro_cliente">Registrate</a></li>
+
+			          	@if (Auth::guest())
+
+                            <li class="mdl-menu__item" ><a href="/sesion_cliente">Iniciar Sesion</a></li>
+			            	<li class="mdl-menu__item"><a href="/registro_cliente">Registrate</a></li>
+                        @else
+                        <li class="mdl-menu__item" ><a href="">{{ Auth::user()->nombres }}</a></li>
+                        
+			            <li class="mdl-menu__item" ><a href="/logoutCliente">Logout</a></li>
 			          </ul>
+			          @endif
 			        </div>
+
 			    </div>
+
+
 
 				<!--barra lateral-->
 			    <div class="android-drawer mdl-layout__drawer">

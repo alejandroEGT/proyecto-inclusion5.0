@@ -22,6 +22,8 @@ class loginClienteController extends Controller
     {
         $social = Socialite::driver($service)->user();
 
+       
+
         $finduser = User::where('email', $social->email)->first();
 
         if ($finduser) {
@@ -43,7 +45,7 @@ class loginClienteController extends Controller
               $finduser = User::where('email', $social->email)->first();
               Auth::login($finduser);
 
-              return "oka";
+              return redirect('/inicio_cliente');
               
             }else{
               return "caca2";
@@ -63,7 +65,7 @@ class loginClienteController extends Controller
 
                 Auth::login($finduser);
 
-                return "oka";
+                return redirect('/inicio_cliente');
 
            }else{
 
@@ -73,7 +75,8 @@ class loginClienteController extends Controller
     }
 
     public function logout(){
-    	dd(Auth::check());
+    	Auth::logout();
+       return redirect('/inicio_cliente');
     }
 
 }

@@ -110,6 +110,8 @@ class User extends Authenticatable
 
         $user = new User;
 
+
+
             if(array_has($datos, 'id')){
 
                 $user->nombres = $datos->name;

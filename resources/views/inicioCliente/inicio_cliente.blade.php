@@ -38,12 +38,11 @@
 	</div>
 
 	<!--recomedados-->
-	<div class="android-more-section">
+<div class="android-more-section">
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Recomendados</div>
 	  		<div class="android-card-container mdl-grid">
-
-			<ul id="flexiselDemo1">
-			@foreach($productos as $producto) 
+					<ul id="flexiselDemo1">
+						@foreach($productos as $producto) 
 					    <li><a href="registro_cliente">
 							<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
 								<div class="mdl-card__media porteimg">
@@ -57,22 +56,16 @@
 							    <div class="mdl-card__supporting-text">
 							        <span class="mdl-typography--font-light mdl-typography--subhead">{{ $producto->descripcion }}</span>
 							    </div>
+
 							</div>
-<<<<<<< HEAD
-					    </li></a>	                                                         
-					</ul>
 						<div class="clearout"></div>  
-				
-=======
+
 					    </a></li>
-@endforeach
+			@endforeach
 			</ul>
 
 			<div class="clearout"></div> 
 		</div>
->>>>>>> caf0cf190c68ec99cb2ea2d08993f859d8dd24ab
-
-
 	</div>
 
 	<!--tiendas-->

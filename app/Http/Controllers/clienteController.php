@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Sexo;
 use App\User;
 use App\cliente;

@@ -184,7 +184,7 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
  Route::get('/carro_cliente' , 'clienteController@carro_cliente');
  Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 
- Route::get('/vista_productos' , 'clienteController@vista_productos');
+ Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
 
  
  Route::get('/logoutCliente','loginClienteController@logout');

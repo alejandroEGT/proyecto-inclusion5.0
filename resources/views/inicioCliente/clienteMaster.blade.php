@@ -7,7 +7,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<title>Index</title>
-		<link rel="stylesheet" href="InicioCliente/css.css">
+		<link rel="stylesheet" href="/InicioCliente/css.css">
 		
 	</head>
 		<body>
@@ -17,7 +17,7 @@
 			      <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
 			        <div class="mdl-layout__header-row">
 			          <span class="android-title mdl-layout-title col-md-3">
-			            <a href="/inicio_cliente"><img class="android-logo-image" src="productos/exodNegro.png"></a>
+			            <a href="/inicio_cliente"><img class="android-logo-image" src="/productos/exodNegro.png"></a>
 			          </span>
 			          <!--lupa de prueba-->
 					<div class="col-md-6">
@@ -53,7 +53,7 @@
                         @else
                         <li class="mdl-menu__item" ><a href="">{{ Auth::user()->nombres }}</a></li>
                         
-			            <li class="mdl-menu__item" ><a href="/logoutCliente">Logout</a></li>
+			            <li class="mdl-menu__item" ><a href="/logoutCliente">Logout </a></li>
 			          </ul>
 			          @endif
 			        </div>
@@ -65,13 +65,18 @@
 				<!--barra lateral-->
 			    <div class="android-drawer mdl-layout__drawer">
 			      	<span class="mdl-layout-title">
-			          <a href="/inicio_cliente"><img class="android-logo-image" src="productos/exodNegro.png"></a>
+			          <a href="/inicio_cliente"><img class="android-logo-image" src="/productos/exodNegro.png"></a>
 			        </span>
 			        <nav class="mdl-navigation">
 
 			          <span class="mdl-navigation__link" href="#"><i class="material-icons">&#xE853;</i> Usuario</span>
+			          @if (Auth::guest())
 			          <a class="mdl-navigation__link" href="/sesion_cliente">Iniciar Sesión</a>
 			          <a class="mdl-navigation__link" href="/registro_cliente">Registrate</a>
+			           @else
+                        <a class="mdl-navigation__link" href="">{{ Auth::user()->nombres }}</a>
+			            <a class="mdl-navigation__link" href="/logoutCliente">Logout <i class="material-icons">exit_to_app</i></a>
+			            @endif
 			          <div class="android-drawer-separator"></div>
 
 			          <span><a class="mdl-navigation__link" href="/carro_cliente"><i class="material-icons">&#xE8CC;</i>Cesta<i class="mdl-badge" data-badge="3"></i></span></a>

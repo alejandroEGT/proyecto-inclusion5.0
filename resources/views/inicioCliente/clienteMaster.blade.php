@@ -20,7 +20,10 @@
 			            <a href="/inicio_cliente"><img class="android-logo-image" src="productos/exodNegro.png"></a>
 			          </span>
 			          <!--lupa de prueba-->
+<<<<<<< HEAD
 
+=======
+>>>>>>> e1aaf30f7657473ae9e1aeaab8e7a93282a1f755
 					<div class="col-md-6">
 						<form action="" method="get"><br>
 						{{csrf_field()}}							
@@ -46,11 +49,22 @@
 			          	<i class="material-icons">&#xE853;</i>
 			          </button>
 			          <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-			            <li class="mdl-menu__item" ><a href="/sesion_cliente">Iniciar Sesion</a></li>
-			            <li class="mdl-menu__item"><a href="/registro_cliente">Registrate</a></li>
+
+			          	@if (Auth::guest())
+
+                            <li class="mdl-menu__item" ><a href="/sesion_cliente">Iniciar Sesion</a></li>
+			            	<li class="mdl-menu__item"><a href="/registro_cliente">Registrate</a></li>
+                        @else
+                        <li class="mdl-menu__item" ><a href="">{{ Auth::user()->nombres }}</a></li>
+                        
+			            <li class="mdl-menu__item" ><a href="/logoutCliente">Logout</a></li>
 			          </ul>
+			          @endif
 			        </div>
+
 			    </div>
+
+
 
 				<!--barra lateral-->
 			    <div class="android-drawer mdl-layout__drawer">
@@ -137,9 +151,9 @@
 				</div>
 			</div>
 
-</div>
-			</div>		
-		</body>
+		</div>
+	</div>		
+</body>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js" integrity="sha384-KlVcf2tswD0JOTQnzU4uwqXcbAy57PvV48YUiLjqpk/MJ2wExQhg9tuozn5A1iVw" crossorigin="anonymous"></script>

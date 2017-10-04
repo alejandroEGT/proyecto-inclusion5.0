@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Sexo;
 use App\User;
 use App\cliente;
+use App\producto_institucion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Auth;
 class clienteController extends Controller
 {
     public function inicio_cliente(){
-    	return view('inicioCliente.inicio_cliente');
+
+      $productos =  producto_institucion::all();
+    	return view('inicioCliente.inicio_cliente')->with('productos',$productos);
+
+      
     }
 
 	public function sesion_cliente(){
@@ -22,14 +26,22 @@ class clienteController extends Controller
     public function registro_cliente(){
     	
       $sexo = Sexo::all();
+      
 
       return view('inicioCliente.registro_cliente')->with('sexo',$sexo);
+
 
     }
 
        public function carro_cliente()
     {
    		return view('inicioCliente.carro_cliente');
+    }
+
+
+    public function vista_productos()
+    {
+      return view('inicioCliente.vista_productos');
     }
 
         public function prueba_cliente()

@@ -106,39 +106,39 @@ class User extends Authenticatable
             return $resultado;
     }
 
-    protected function insertarCliente($datos){
+    protected function insertarCliente($datos, $tipo){
 
         $user = new User;
 
-
-
-            if(array_has($datos, 'id')){
-
-                $user->nombres = $datos->name;
-                $user->apellidos = "null";
-                $user->email = $datos->email;
-                $user->password = \Hash::make("porconfirmar");
-                $user->id_rol = "4";
-                $user->id_sexo = "3";
-               
-                if($user->save()){
-                        return true;
-                    }else{
-                        return false;
-                    }
-            }else{
-                $user->nombres = $datos->nombres;
-                $user->apellidos = $datos->apellidos;
-                $user->email = $datos->correo;
-                $user->password = \Hash::make($datos->clave);
-                $user->id_rol = "4";
-                $user->id_sexo = $datos->sexo;
+        switch ($tipo) {
+            case '1':
+                    $user->nombres = $datos->nombres;
+                    $user->apellidos = $datos->apellidos;
+                    $user->email = $datos->correo;
+                    $user->password = \Hash::make($datos->clave);
+                    $user->id_rol = "4";
+                    $user->id_sexo = $datos->sexo;
 
                     if($user->save()){
                         return true;
                     }else{
                         return false;
                     }
-                }
+                    
+                break;
+
+            case '2':
+                # code...
+                break;
+
+            case '3':
+                # code...
+                break;
+            default:
+                # code...
+                break;
+        }
+
+         
     }
 }

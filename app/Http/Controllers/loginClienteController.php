@@ -20,38 +20,54 @@ class loginClienteController extends Controller
 
     public function handleProviderCallback($service)
     {
-        $social = Socialite::driver($service)->user();
 
-       
+        if($service == "facebook"){
 
-        $finduser = User::where('email', $social->email)->first();
+          $social = Socialite::driver($service)->fields([
+                    'id',
+                    'first_name', 
+                    'last_name', 
+                    'email', 
+                    'gender', 
+                ]);
+        }else{
+
+          $social = Socialite::driver($service);
+
+        }
+
+        $userSocial = $social->user();
+
+        $finduser = User::where('email', $userSocial->email)->first();
 
         if ($finduser) {
             Auth::login($finduser);
+            return redirect('/inicio_cliente');
 
-            return "oka";
         }else{
 
-             $user = User::insertarCliente($social);
+             $user = User::insertarCliente($userSocial , 1);
+
+             dd($user);
 
         	 if($user){
 
-            $idUser  = User::where('email', $social->email)->first();
+            $idUser  = User::where('email', $userSocial->email)->first();
 
-            $cliente = cliente::guardarCliente($social, $idUser);
+            $cliente = cliente::guardarCliente($userSocial, $idUser);
 
             if($cliente){
 
-              $finduser = User::where('email', $social->email)->first();
-              Auth::login($finduser);
+              $finduser = User::where('email', $userSocial->email)->first();
 
+              Auth::login($finduser);
               return redirect('/inicio_cliente');
               
             }else{
-              return "caca2";
+              return "NO User Encontrado";
             }
           }else{
-            return "caca1";
+            return "NO Cliente Encontrado";
           }
         }
 
@@ -69,7 +85,7 @@ class loginClienteController extends Controller
 
            }else{
 
-               return "caca1";
+               return "NO User Encontrado";
 
            }
     }

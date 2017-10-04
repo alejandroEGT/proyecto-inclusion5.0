@@ -38,18 +38,17 @@ class producto_institucion extends Model
         $traer = \DB::table('tienda_producto_instituciones')
                 ->select([
                         'tienda_producto_instituciones.id_producto as idProducto',
-                        'foto_productos.nombre as foto',
+                        'foto_productos_instituciones.foto as foto',
                         'productos_instituciones.nombre as nombre',
                         'productos_instituciones.descripcion as descripcion',
                         'productos_instituciones.created_at as creado',
                     ])
                 ->join('productos_instituciones','productos_instituciones.id','=','tienda_producto_instituciones.id_producto')
-                ->join('foto_productos','foto_productos.id','=','productos_instituciones.id_foto')
+                ->join('foto_productos_instituciones','foto_productos_instituciones.id_producto','=','productos_instituciones.id')
                 ->join('estado_tienda_producto','estado_tienda_producto.id','=','tienda_producto_instituciones.id_estado')
                 ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
                 ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
-                ->where('institucion.id','=', $idIns)
                 ->where('area.id','=', $idarea)->paginate(2);
 
                 return $traer;
@@ -72,9 +71,12 @@ class producto_institucion extends Model
                 ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
                 ->where('institucion.id','=', $idInst)
-                ->paginate(2);
+                ->paginate(5);
 
-                return $traer;
+                //return $traer;
+               
+                    return $traer;
+                
     }
     protected function detalleProducto($id)
     {
@@ -99,6 +101,35 @@ class producto_institucion extends Model
                 ->join('categoria_productos','categoria_productos.id','=','productos_instituciones.id_categoria')
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
                 ->where('tienda_producto_instituciones.id_producto','=', $id)
+                ->where('Institucion.id','=', \Auth::guard('institucion')->user()->id)/*AGREGADA QUISAS DE ERRORES*/
+                ->paginate(2);
+
+                return $traer;
+    }
+     protected function detalleProducto_area($id, $areaId)
+    {
+        $traer = \DB::table('tienda_producto_instituciones')
+                ->select([
+                        'tienda_producto_instituciones.id_producto as idProducto',
+                        'foto_productos_instituciones.foto as foto',
+                        'productos_instituciones.nombre as nombre',
+                        'productos_instituciones.descripcion as descripcion',
+                        'productos_instituciones.created_at as creado',
+                        'estado_tienda_producto.estado as estadoProducto',
+                        'area.nombre as nombreArea',
+                        'productos_instituciones.cantidad as cantidad',
+                        'categoria_productos.nombre as nombreCategoria',
+                        'productos_instituciones.precio as precio'
+                    ])
+                ->join('productos_instituciones','productos_instituciones.id','=','tienda_producto_instituciones.id_producto')
+                 ->join('foto_productos_instituciones','foto_productos_instituciones.id_producto','=','productos_instituciones.id')
+                ->join('estado_tienda_producto','estado_tienda_producto.id','=','tienda_producto_instituciones.id_estado')
+                ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
+                ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
+                ->join('categoria_productos','categoria_productos.id','=','productos_instituciones.id_categoria')
+                ->join('area','area.id','=','tienda_producto_instituciones.id_area')
+                ->where('tienda_producto_instituciones.id_producto','=', $id)
+                ->where('area.id','=', $areaId)/*AGREGADA QUISAS DE ERRORES*/
                 ->paginate(2);
 
                 return $traer;

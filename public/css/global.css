@@ -186,3 +186,30 @@ small{
 
   
 }
+.deta_producto{
+	height: 70%;
+	width: 70%;
+}
+.deta_alumno{
+	height: 20%;
+	width: 20%;
+}
+.box-producto{
+	display: inline-block;
+	padding: 10px;
+	height: 130px;
+	width: 150px;
+	border-left:1px solid #E6E6E6; 
+	border-right:1px solid #E6E6E6; 
+	
+}
+.img-prod{
+	height:80px; width:80px;
+}
+.img-notix{
+	float: left;
+}
+.img-titu{
+	color: black;
+	padding-left:100px;
+}

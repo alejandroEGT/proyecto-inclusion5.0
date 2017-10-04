@@ -42,6 +42,11 @@ class Vendedor extends Model
         return false;
 
     }
+    protected function eliminar($idu)
+    {
+        $eliminar = Vendedor::where('id_user', $idu)->delete();
+        return $eliminar;
+    }
     protected function filtrar($idUser){
     	$filtro = \DB::table('vendedor')->select('id')->where('id_user','=', $idUser)->get();
     	return $filtro;
@@ -63,7 +68,8 @@ class Vendedor extends Model
     }
     protected function idVendedor($id){
         
-         $id = \DB::select("select * from `vendedor` where id_user = ".$id);
+         //$id = \DB::select("select * from `vendedor` where id_user = ".$id);
+         $id = Vendedor::where('id_user', $id)->get();
         return $id;
     }
      protected function fotoVendedor(){

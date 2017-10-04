@@ -21,14 +21,14 @@
                     </li>
                     <li class="pushy-link"><a href="/inicio">Inicio</a></li>
                     <li class="pushy-submenu">
-                        <button> <i class="fa fa-floppy-o"></i> Registros</button>
+                        <button id="registrobtn"> <i class="fa fa-floppy-o"></i> Registros</button>
                         <ul>
-                            <li class="pushy-link"><a href="/ver_usuarios">Registros de usuarios</a></li>
-                            <li class="pushy-link"><a href="/formInstitucion">Registro de institución</a></li>
+                            <li class="pushy-link"><a href="/ver_usuarios">crear usuarios</a></li>
+                            <li class="pushy-link"><a href="/formInstitucion">crear institución</a></li>
                         </ul>
                     </li>
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-sign-in"></i> Login</button>
+                        <button id="loginbtn"><i class="fa fa-sign-in"></i> Login</button>
                         <ul>
                             <li class="pushy-link"><a href="/login_institucion">Institución</a></li>
                             <li class="pushy-link"><a href="/login_encargado">Encargado de área</a></li>

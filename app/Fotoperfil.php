@@ -50,5 +50,9 @@ class Fotoperfil extends Model
             return 0;
         }
     }
+    protected function eliminar($id){
+
+        $eliminar = Fotoperfil::where('id_user', $id)->delete();
+    }
 }
 

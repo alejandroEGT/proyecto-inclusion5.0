@@ -21,7 +21,7 @@
 		<div class="col-md-3 box-perfil">
 			<p><img class="img-circle foto-perfil-vendedor" src="{{ '/'.$eq->foto }}"></p>
 			<p><label>{{ $eq->nombres.' '.$eq->apellidos }}</label></p>
-			<button class="btn btn-primary btn-xs btn-block" >ver.. | <i class="fa fa-eye" aria-hidden="true"></i></button>
+			<a href="{{ url('encargadoArea/verDetalleAlumno/'.base64_encode($eq->id_user)) }}" class="btn btn-primary btn-xs btn-block" >ver.. | <i class="fa fa-eye" aria-hidden="true"></i></a>
 		</div>
 		
 	@endforeach

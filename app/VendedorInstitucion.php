@@ -8,7 +8,11 @@ class VendedorInstitucion extends Model
 {
     protected $table = "vendedor-institucion";
 
-
+    protected function eliminar($idv)
+    {
+        $eliminar = VendedorInstitucion::where('id_vendedor', $idv)->delete();
+        return $eliminar;
+    }
     protected function insertar($datos, $id_ven){
 
     	$vendedor = new VendedorInstitucion;
@@ -57,7 +61,7 @@ class VendedorInstitucion extends Model
     protected function traerFoto ($id){
 
         //return $id;
-       $id = \DB::select("CALL `traerFotoPerfil`('".$id."'');");
+       $id = \DB::select("CALL `traerFotoPerfil`('".$id."');");
         return $id;
     }
     protected function contarVendedores($id){
@@ -80,6 +84,88 @@ class VendedorInstitucion extends Model
         }
         return null;
         
+    }
+    protected function detalleAlumno($idAlumno)
+    {
+        $traer = \DB::table('vendedor-institucion')
+                  ->select([
+                        'users.id as idUser',
+                        'fotoperfil.foto as foto',
+                        'users.nombres as nombre',
+                        'users.apellidos as apellidos',
+                        'users.email as correo',
+                        'vendedor.telefono as telefono',
+                  ])
+                  ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
+                  ->join('users','users.id','=','Vendedor.id_user')
+                  ->join('estado', 'estado.id','=','vendedor.id_estado')
+                  ->join('area','area.id','=','vendedor-institucion.id_area')
+                  ->join('institucion','institucion.id','=','area.id_institucion')
+                  ->join('fotoperfil','fotoperfil.id_user','=','users.id')
+                  ->where('users.id', $idAlumno)
+                  ->where('Institucion.id', \Auth::guard('institucion')->user()->id)
+                  ->get();
+        
+        if (count($traer)>0) {
+          return $traer;
+        }
+        return null;
+    }
+    protected function detalleAlumno_enc($idAlumno, $areaId)
+    {
+        $traer = \DB::table('vendedor-institucion')
+                  ->select([
+                        'users.id as idUser',
+                        'fotoperfil.foto as foto',
+                        'users.nombres as nombre',
+                        'users.apellidos as apellidos',
+                         'users.email as correo',
+                         'vendedor.telefono as telefono',
+
+                  ])
+                  ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
+                  ->join('users','users.id','=','Vendedor.id_user')
+                  ->join('estado', 'estado.id','=','vendedor.id_estado')
+                  ->join('area','area.id','=','vendedor-institucion.id_area')
+                  ->join('institucion','institucion.id','=','area.id_institucion')
+                  ->join('fotoperfil','fotoperfil.id_user','=','users.id')
+                  ->where('users.id', $idAlumno)
+                  ->where('area.id', $areaId)
+                  ->get();
+        
+        if (count($traer)>0) {
+          return $traer;
+        }
+        return null;
+    }
+
+    protected function datosAlumnoById($id)
+    {
+        $traer = \DB::table('vendedor-institucion')
+                  ->select([
+                        'users.id as idUser',
+                        'fotoperfil.foto as foto',
+                        'users.nombres as nombre',
+                        'users.apellidos as apellidos',
+                        'users.email as correo',
+                        'vendedor.telefono as telefono',
+                        'area.nombre as nombreArea',
+                        'institucion.nombre as nombreInstitucion',
+
+                  ])
+                  ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
+                  ->join('users','users.id','=','Vendedor.id_user')
+                  ->join('estado', 'estado.id','=','vendedor.id_estado')
+                  ->join('area','area.id','=','vendedor-institucion.id_area')
+                  ->join('institucion','institucion.id','=','area.id_institucion')
+                  ->join('fotoperfil','fotoperfil.id_user','=','users.id')
+                  ->where('users.id', $id)
+                  ->get();
+        
+        if (count($traer)>0) {
+          return $traer;
+        }
+        return null;
     }
 
     protected function traerEstadoClave(){

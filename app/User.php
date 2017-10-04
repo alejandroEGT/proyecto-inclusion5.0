@@ -17,7 +17,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+    protected function eliminar($id)
+    {
+        $user = User::find($id);
+        if($user->delete()){
+            return true;
+        }
+        return false;
+    }
     protected function insertar_vendedor($datos){
 
             $user = new User;

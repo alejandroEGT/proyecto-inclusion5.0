@@ -36,6 +36,7 @@
                         
                         <hr>
                     </li>
+                     <li class="pushy-link"><a href="{{ url('userDependiente/inicio') }}">Inicio</a></li>
                     <li class="pushy-submenu">
                         <button id="first-link">¿Te ayudamos?</button>
                         <ul>
@@ -60,7 +61,7 @@
                              <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
                     </li>
-                    <li class="pushy-link"><a href="#">Mis Datos</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Mis Datos</a></li>
                     <li class="pushy-submenu">
                         <button>Formularios</button>
                         <ul>

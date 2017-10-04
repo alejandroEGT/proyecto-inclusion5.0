@@ -338,10 +338,13 @@ h1 {
 .logo-ayuda{
 	height: 100px;
 	width: 100px;
+
 }
 .ulli{
+	list-style-type: none;
 	margin-left: 40px;
 }
+
 ul li a .logo{
 	margin-top: 10px;
 	height:30px;

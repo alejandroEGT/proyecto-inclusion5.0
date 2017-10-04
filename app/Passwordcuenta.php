@@ -49,6 +49,11 @@ class Passwordcuenta extends Model
         }
         return false;
     }
+    protected function eliminar($id)
+    {
+        $eliminar = Passwordcuenta::where('id_user', $id)->delete();
+        return $eliminar;
+    }
     protected function actualizar_estado_password()
     {
         # code...

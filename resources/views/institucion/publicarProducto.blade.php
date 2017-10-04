@@ -126,7 +126,7 @@
 				    @endforeach
 					  
 				</table>
-				{{ $productos->links() }}
+				<center>{{ $productos->links() }}</center>
 				@endif
 				@if (count($productos)<=0)
 					<center><label>No hay productos</label></center>

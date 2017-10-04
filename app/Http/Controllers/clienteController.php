@@ -30,9 +30,6 @@ class clienteController extends Controller
      public function vista_productos($id){
 
         $productos = \DB::select('SELECT * from fProducto');
-
-
-
         return view('inicioCliente.vista_productos')->with('productos',$productos);
                                                   
     }       

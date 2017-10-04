@@ -63,7 +63,7 @@ class areaController extends Controller
                         if ($foto) {
                             $passwordDefault = Passwordcuenta::insertar_clave_default($idUser[0]->id);
                             if ($passwordDefault) {
-                                Mail::send(['text'=>'emails.clave'],['name','EAE'],function ($message) use ($correo)
+                                Mail::send(['html'=>'emails.clave'],['name','EAE'],function ($message) use ($correo)
                                 {
                                     $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                                     $message->to($correo,'to jano');

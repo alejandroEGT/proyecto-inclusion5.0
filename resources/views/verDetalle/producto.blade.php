@@ -1,10 +1,18 @@
+
+@if (is_null($productos[0]))
+	<center><p style="font-size: 19px" >Nada para mostrar</p></center>
+@endif
+@if (!is_null($productos[0]))
+	{{-- expr --}}
+
+
 <div class="row">
 	<br>
 	<center><label>Detalle del producto</label></center>
 	<hr>
 			
 	<div class="col-md-offset-1 col-md-3">
-		<img src="{{ '/'.$productos[0]->foto }}" height="170">
+		<img src="{{ '/'.$productos[0]->foto }}" class="img img-thumbnail deta_producto">
 	</div>
 	<div class="col-md-3">
 		<a data-toggle="collapse" data-target="#campo1" ><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
@@ -166,4 +174,4 @@
 		</div>
 	</div>
 
-
+@endif

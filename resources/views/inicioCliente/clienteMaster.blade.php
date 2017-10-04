@@ -20,6 +20,10 @@
 			            <a href="/inicio_cliente"><img class="android-logo-image" src="/productos/exodNegro.png"></a>
 			          </span>
 			          <!--lupa de prueba-->
+<<<<<<< HEAD
+
+=======
+>>>>>>> e1aaf30f7657473ae9e1aeaab8e7a93282a1f755
 					<div class="col-md-6">
 						<form action="" method="get"><br>
 						{{csrf_field()}}							

@@ -37,7 +37,10 @@ class institucionController extends Controller
     public function vista_institucion(){
 
           $datosInstitucion = Institucion::datos();
-            return view('institucion.inicio')->with('institucion', $datosInstitucion);
+          $productos = producto_institucion::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id);
+            return view('institucion.inicio')
+            ->with('institucion', $datosInstitucion)
+            ->with('productos', $productos);
       
     }
     public function vista_agregarAE(){
@@ -142,6 +145,7 @@ class institucionController extends Controller
     }
     public function ver_detalleProducto(Request $dato)
     {
+
       $getId = base64_decode($dato->id);
       $categoria = categoria_producto::all();
       $estadoP = estado_tienda_producto::limit(2)->get();

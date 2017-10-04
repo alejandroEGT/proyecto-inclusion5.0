@@ -20,6 +20,8 @@ new Vue({
 		existeEncargado : false,
   		txtBuscar:'',
         users: [],
+         navChrome:false,
+        nombreNav:'',
 		
 	},
 	 http: { 
@@ -236,13 +238,54 @@ new Vue({
 				}
 		}
 		,
+		eliminarAlumno(){
+				if (confirm("¿Quieres eliminar este producto?") == true) {
+				    
+						$('#form_eliminarAlumno').submit();
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		}
+		,
 		cambiarGrafico(){
 			//alert($('#tipo').val());
 			$('#tipo_form').submit();
-		}
+		},
+		browsermobil(){
+          // android
+        var ua = navigator.userAgent.toLowerCase();
+        var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+        if(isAndroid) {
+          // Do something!
+          // Redirect to Android-site?
+          this.nombreNav="Navegando en android";
+            //window.location = 'http://android.davidwalsh.name';
+        }
+
+        // ipad
+        // For use within normal web clients 
+        var isiPad = navigator.userAgent.match(/iPad/i) != null;
+
+        // For use within iPad developer UIWebView
+        // Thanks to Andrew Hedges!
+        var ua = navigator.userAgent;
+        var isiPad = /iPad/i.test(ua) || /iPhone OS 3_1_2/i.test(ua) || /iPhone OS 3_2_2/i.test(ua);
+
+        // iphone/ipod
+        if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+           if (document.cookie.indexOf("iphone_redirect=false") == -1) this.nombreNav="Navegando en iphone";
+        }
+      }
 	},
 
 	created (){
+		if(artyom.recognizingSupported()){
+           this.navChrome = true;
+        }
+    	
+      	this.browsermobil();
 		this.datosInstituto();
 		this.llenarTablaArea();
 		this.notificar();

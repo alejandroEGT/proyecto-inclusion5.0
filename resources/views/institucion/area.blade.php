@@ -132,6 +132,7 @@
 									<td>Nombre</td>
 									<td>Correo</td>
 									<td>Estado contraseña</td>
+									<td>Opciones</td>
 								</tr>							
 								@foreach ($venInstitucion as $ven)
 									<tr>
@@ -139,6 +140,15 @@
 										<td>{{$ven->nombres.' '.$ven->apellidos}}</td>
 										<td>{{$ven->email}}</td>
 										<td>{{$ven->nombre}}</td>
+										<td>
+											<form id="form_eliminarAlumno" action="{{ url('institucion/eliminar_alumno') }}" method="post" >
+												{{csrf_field()}}
+												<a class="btn btn-primary btn-xs" href="{{ url("institucion/verDetalleAlumno/".base64_encode($ven->id)) }}">Ver..</a>
+
+												<input type="hidden" name="id_alumno" value="{{ $ven->id }}" >
+												<input @click="eliminarAlumno" type="button" value="Eliminar" class="btn btn-danger btn-xs" name="">
+											</form>
+										</td>
 									</tr>
 								@endforeach
 							</table>

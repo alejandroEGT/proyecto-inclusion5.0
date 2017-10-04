@@ -2,7 +2,7 @@
 @extends('inicioCliente.clienteMaster')
 
 @section('content')
-   
+
 	<!--Carousel-->
 	<div class="container">
 		<div class="row">
@@ -38,7 +38,7 @@
 	</div>
 
 	<!--recomedados-->
-<div class="android-more-section">
+	<div class="android-more-section">
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Recomendados</div>
 	  		<div class="android-card-container mdl-grid">
 					<ul id="flexiselDemo1">
@@ -94,8 +94,7 @@
 
 	   
 	  
-	  </div>
-	  
+	  </div>	  
 	</div>
 
 	<!--calidad-->

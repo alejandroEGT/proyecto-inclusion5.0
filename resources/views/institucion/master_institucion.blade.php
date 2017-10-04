@@ -70,7 +70,34 @@
                             <li class="pushy-link"><a href="{{ url('institucion/my-chart') }}"> Cantidad de personas</a></li>
                         </ul>
                     </li>
+                    
+                    <div v-if="this.navChrome == true">
+                        <li class="pushy-submenu">
+                        <button id="first-link">¿Te ayudamos?</button>
+                        <ul>
+                            @if (Session::has('activarMicro'))
+                                <li class="pushy-link"><a href="desactivarmicro"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
+                            @endif
 
+                            @if (empty(Session::get('activarMicro')))
+                            <li class="pushy-link"><a href="activarmicro">
+                                <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
+                            </a></li>
+                            @endif
+                            @if (Session::has('activarText'))
+                                <li class="pushy-link"><a href="desactivartext"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
+                            @endif
+
+                            @if (empty(Session::get('activarText')))
+                           <li class="pushy-link"><a href="activartext">
+                                <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
+                            </a></li>
+                            @endif
+                            <li class="pushy-link"><a><input  type="checkbox"> Lupa</a></li>
+                             <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
+                        </ul>
+                    </li>
+            </div>
                     
                    <!-- <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
@@ -122,15 +149,17 @@
 	
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="/bootstrap/js/bootstrap.min.js" ></script>
-		<script src="/js/toastr.js" ></script>
+		
 		<script src="/js/vue/vue.js" ></script>
         <script src="/js/vue/vue-resource.js"></script>
+        <script src="{{ asset('js/toastr.js')}}" ></script>
+        <script src="{{asset('js/artyom.js')}}" ></script>
         <script src="/js/vue/vue_master_institucion.js"></script>
         <script src="/js/sweetalert2.js" ></script>
 		<script src="/js/pushy.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js" ></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js" ></script>
-		{{--@include('mensajes.activa_desactiva') --}}
+		@include('mensajes.activa_desactiva_institucion')
         @yield('js')
 
 </html>

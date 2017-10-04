@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Sexo;
+use App\Tienda_institucion;
 use App\User;
 use App\cliente;
+use App\foto_producto_institucion;
 use App\producto_institucion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +15,25 @@ class clienteController extends Controller
 {
     public function inicio_cliente(){
 
-      $productos =  producto_institucion::all();
-    	return view('inicioCliente.inicio_cliente')->with('productos',$productos);
+      $tiendas = Tienda_institucion::all();
+      $productos = \DB::select('SELECT * from fProducto');
+      //una consulta que traiga los productos con la foto
 
+    	return view('inicioCliente.inicio_cliente')->with('productos',$productos)
+                                                 ->with('tiendas',$tiendas);
+      
+
+                
       
     }
+
+     public function vista_productos($id){
+
+        $productos = \DB::select('SELECT * from fProducto');
+        return view('inicioCliente.vista_productos')->with('productos',$productos);
+                                                  
+    }       
+
 
 	public function sesion_cliente(){
     	return view('inicioCliente.sesion_cliente');
@@ -38,6 +53,7 @@ class clienteController extends Controller
     {
    		return view('inicioCliente.carro_cliente');
     }
+
 
         public function prueba_cliente()
     {

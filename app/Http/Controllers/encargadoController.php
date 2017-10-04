@@ -45,7 +45,7 @@ class encargadoController extends Controller
     }
 
     public function vista_equipo(){
-
+        
         $equipo = Encargado::traerEquipo();
         return view('encargadoArea.equipo')->with('equipo', $equipo);
     }
@@ -129,8 +129,9 @@ class encargadoController extends Controller
       $categoria = categoria_producto::all();
       $estadoP = estado_tienda_producto::limit(2)->get();
       $area = Area::all();
+      $encargado = Encargado::traerDatos();
 
-      $productos = producto_institucion::detalleProducto($getId);
+      $productos = producto_institucion::detalleProducto_area($getId, $encargado[0]->id_area);
       
       return view('encargadoArea.verDetalleProducto')
       ->with('productos', $productos)

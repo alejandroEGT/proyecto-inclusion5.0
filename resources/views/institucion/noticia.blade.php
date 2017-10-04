@@ -1,7 +1,7 @@
 @extends('institucion.master_institucion')
 
 @section('content')
-	<div class="padre-agregar">
+	
 		<div class="row">
 			<div class="col-md-offset-2 col-md-2">
 				<div class="ico-news"></div>
@@ -16,5 +16,5 @@
 		<div class="row">
 			
 		</div>
-	</div>
+	
 @endsection

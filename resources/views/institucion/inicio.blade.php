@@ -41,6 +41,52 @@
 
 			</div>
 		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-offset-1 col-md-7">
+				@if (count($productos)>0)
+					<div class="row">
+						<div class="col-md-11 panel">
+							<center><label>Productos</label></center>
+							<hr>
+							
+							@foreach ($productos as $producto)
+							<div class="box-producto">
+								<center>
+									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
+									<p>{{ $producto->nombre }}</p>
+									<p><a href="" class="btn btn-primary btn-xs">Ver</a></p>
+								</center>
+
+							</div>	
+							@endforeach
+							<center>{{ $productos->links() }}</center>
+						</div>
+
+					</div>
+
+				@endif
+				@if (!count($productos))
+					<center><label for="">No Existen productos para mostrar</label></center>
+				@endif
+			</div>
+			<div class="col-md-3 panel">
+				<center><label>Noticias</label></center>
+				<hr>
+				<img class="img-notix"  src="http://www.uaa.mx/rectoria/dcrp/wp-content/uploads/2015/05/184-Reuni%C3%B3n-SICOM.jpg" height="70" width="90">
+				<p class="img-titu" ><label>reunión en los angeles con canciller y ministors del interior y de educación</label></p>
+				<p class="img-titu" ><a href="#" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+				
+
+
+
+				<hr>
+				<img class="img-notix"  src="https://jazminoddy.files.wordpress.com/2016/04/12002982_1648419215376199_7949008010979303282_n-770x400.jpg?w=662" height="70" width="90">
+				<p class="img-titu"><label>Jovenes crean nuevos productos de innovación</label></p>
+				<p class="img-titu" ><a href="#" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+				
+			</div>
+		</div>
 	</div>
 @endif
 

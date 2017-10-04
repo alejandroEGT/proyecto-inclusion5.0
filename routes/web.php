@@ -33,10 +33,10 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['prefix' => 'institucion','middleware' => ['institucion']], function () {
 
-        /*Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');
+        Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');
         Route::get('/desactivarmicro', 'herramientasayudaController@desactivar_microfono');
         Route::get('/activartext', 'herramientasayudaController@activar_texto');
-        Route::get('/desactivartext','herramientasayudaController@desactivar_texto');*/
+        Route::get('/desactivartext','herramientasayudaController@desactivar_texto');
 
         Route::get('/logout','autenticarController@logout');
         Route::get("/inicio", 'institucionController@vista_institucion');
@@ -84,6 +84,8 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_producto_categoria', 'institucionController@actualizar_producto_categoria');
         Route::post('/actualizar_producto_area', 'institucionController@actualizar_producto_area');
         Route::post('/actualizar_producto_precio', 'institucionController@actualizar_producto_precio');
+        Route::post('/eliminar_alumno','alumnoController@eliminar_alumno');
+        Route::get('/verDetalleAlumno/{id}', 'alumnoController@vista_detalleAlumno_inst');
 
 
 });
@@ -96,6 +98,14 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::post('/guardarFoto', 'vendedorDependienteController@guardar_foto');
         Route::get('/buscador','buscadorController@buscador_ven_inst');
         Route::post('/actualiza_clave', 'vendedorDependienteController@actualiza_clave');
+        Route::get('/datos','vendedorDependienteController@vista_datos');
+        Route::post('/actualizar_nombre', 'alumnoController@actualizar_nombre');
+        Route::post('/actualizar_apellido', 'alumnoController@actualizar_apellido');
+        Route::post('/actualizar_tel', 'alumnoController@actualizar_tel');
+        Route::post('/actualizar_direccion', 'alumnoController@actualizar_direccion');
+        Route::post('/actualizar_correo', 'alumnoController@actualizar_correo');
+        Route::post('/actualizar_clave', 'alumnoController@actualizar_clave');
+       
         
 });
 Route::group(['prefix' => 'userIndependiente','middleware'=>['md_vendedor']], function(){
@@ -137,6 +147,7 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::post('/actualizar_producto_categoria', 'institucionController@actualizar_producto_categoria');
         Route::post('/actualizar_producto_area', 'institucionController@actualizar_producto_area');
         Route::post('/actualizar_producto_precio', 'institucionController@actualizar_producto_precio');
+        Route::get('/verDetalleAlumno/{id}', 'alumnoController@vista_detalleAlumno_enc');
        
 });
 
@@ -183,6 +194,9 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
   
  Route::get('/carro_cliente' , 'clienteController@carro_cliente');
  Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
+
+ Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
+
  
  Route::get('/logoutCliente','loginClienteController@logout');
 

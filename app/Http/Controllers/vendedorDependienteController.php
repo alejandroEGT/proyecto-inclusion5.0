@@ -25,6 +25,13 @@ class vendedorDependienteController extends Controller
             ->with('foto', $foto)
             ->with('estado_password', $estado_password);
     }
+
+    public function vista_datos()
+    {
+         $alumno = VendedorInstitucion::datosAlumnoById(\Auth::user()->id);
+         
+         return view('vendedorDependiente.misDatos')->with('alumno', $alumno);
+    }
     public function vista_cambiarFoto()
     {
         return view('vendedorDependiente.cambiarFoto');

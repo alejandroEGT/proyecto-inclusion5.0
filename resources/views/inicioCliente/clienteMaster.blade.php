@@ -60,6 +60,8 @@
 					            	<li class="mdl-menu__item"><a href="/registro_cliente">Registrate</a></li>
 		                        @else
 			                        <li class="mdl-menu__item" ><a href="">{{ Auth::user()->nombres }}</a></li>
+			                        <div class="android-drawer-separator"></div>
+			                        <li class="mdl-menu__item" ><a href="">Mi perfil</a></li>
 						            <li class="mdl-menu__item" ><a href="/logoutCliente">Logout</a></li>
 					        </ul>
 					         	@endif

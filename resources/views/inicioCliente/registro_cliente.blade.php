@@ -58,7 +58,7 @@
 							    <input type="password" class="form-control" id="exampleInputPassword1" name="repPass">
 						    </div>
 						</div>
-					
+
 
 						<div class="form-group">
 							<div class="boton-sesion text-center">	
@@ -71,24 +71,21 @@
 					</form>
 
 					<div class="android-drawer-separator"></div>
-					<p class="contenido-sesion">Entra con:</p>
-				<form class="form-horizontal" action="" method="post">
-					{{csrf_field()}}
-					<div class="form-group text-center">
-					  <button type="submit" class="btn btn-info bmd-btn-fab">
-					  <i class="ion-social-facebook"></i>
-					  </button>
-					</div>  
-				</form>
+						<form class="form-horizontal" action="/login/facebook" method="post">
+							{{csrf_field()}}
+							<div class="form-group text-center">
+							 <button type="submit" class="btn btn-raised btn-info"> Registrarse con <i class="ion-social-facebook"></i>
+							  </button>
+							</div>  
+						</form>
 
-				<form class="form-horizontal" action="" method="post">
-                 	{{ csrf_field() }}
-                 	<div class="form-group text-center">
-					  <button type="submit" class="btn btn-danger bmd-btn-fab">
-					  <i class="ion-social-googleplus"></i>
-					  </button>
-					</div>
-				</form>
+						<form class="form-horizontal" action="/login/google" method="post">
+		                 	{{ csrf_field() }}
+		                 	<div class="form-group text-center">
+							  <button type="submit" class="btn btn-raised btn-danger"> Registrarse con <i class="ion-social-googleplus"></i>
+							  </button>
+							</div>
+						</form>
 
 				</div>
 			</div>

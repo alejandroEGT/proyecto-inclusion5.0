@@ -39,22 +39,18 @@
 				</form>
 
 			    <div class="android-drawer-separator"></div>
-			    <p class="contenido-sesion">Entra con:</p>
-
 				<form class="form-horizontal" action="/login/facebook" method="post">
 					{{csrf_field()}}
-					<div class="form-group text-center">
-					  <button type="submit" class="btn btn-info bmd-btn-fab">
-					  <i class="ion-social-facebook"></i>
+					<div class="form-group text-center">	
+					   <button type="submit" class="btn btn-raised btn-info"> Ingresar con <i class="ion-social-facebook"></i>
 					  </button>
 					</div>  
 				</form>
 
 				<form class="form-horizontal" action="/login/google" method="post">
                  	{{ csrf_field() }}
-                 	<div class="form-group text-center">
-					  <button type="submit" class="btn btn-danger bmd-btn-fab">
-					  <i class="ion-social-googleplus"></i>
+                 	<div class="form-group text-center">	
+					  <button type="submit" class="btn btn-raised btn-danger"> Ingresar con <i class="ion-social-googleplus"></i>
 					  </button>
 					</div>
 				</form>

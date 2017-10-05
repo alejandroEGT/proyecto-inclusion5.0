@@ -8,6 +8,7 @@
 	<h1 class="text-center">Iniciar Sesion</h1>
 	<div class="android-drawer-separator"></div>
 
+
 	<div class="container">
 		<div class="row caja-sesion">
 			<div class="col-xs-12 col-sm-12 col-md-6 mdl-shadow--6dp">
@@ -62,7 +63,6 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="android-drawer-separator"></div><br><br><br>
+	<div class="android-drawer-separator"></div>
 
 @endsection

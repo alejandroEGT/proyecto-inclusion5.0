@@ -4,7 +4,7 @@
 @section('content')
 
 	<h1 class="text-center">Registrate</h1>
-	<div class="android-drawer-separator"></div><br>
+	<div class="android-drawer-separator"></div>
 
 		<div class="container">
 			<div class="row caja-sesion">
@@ -14,7 +14,7 @@
 						{{csrf_field()}}
 						<div class="contenido-sesion">				
 							<div class="form-row">
-							  	<div class="col">
+							  <div class="col">
 							    <label for="exampleInputEmail1" class="bmd-label-floating">Nombres</label>
 							    <input type="text" class="form-control" id="formGroupExampleInput" name="nombres">
 							  </div>
@@ -58,6 +58,7 @@
 							    <input type="password" class="form-control" id="exampleInputPassword1" name="repPass">
 						    </div>
 						</div>
+					
 
 						<div class="form-group">
 							<div class="boton-sesion text-center">	
@@ -71,22 +72,28 @@
 
 					<div class="android-drawer-separator"></div>
 					<p class="contenido-sesion">Entra con:</p>
-					<form action="" method="">
-						{{csrf_field()}}
-						  <div class="form-group text-center">
-							  <button type="button" class="btn btn-info bmd-btn-fab">
-							  <i class="ion-social-facebook"></i>
-							  </button>
+				<form class="form-horizontal" action="" method="post">
+					{{csrf_field()}}
+					<div class="form-group text-center">
+					  <button type="submit" class="btn btn-info bmd-btn-fab">
+					  <i class="ion-social-facebook"></i>
+					  </button>
+					</div>  
+				</form>
 
-							  <button type="button" class="btn btn-danger bmd-btn-fab">
-							  <i class="ion-social-googleplus"></i>
-							  </button>
-						  </div>
-					</form>
+				<form class="form-horizontal" action="" method="post">
+                 	{{ csrf_field() }}
+                 	<div class="form-group text-center">
+					  <button type="submit" class="btn btn-danger bmd-btn-fab">
+					  <i class="ion-social-googleplus"></i>
+					  </button>
+					</div>
+				</form>
 
 				</div>
 			</div>
 		</div>
+
 
 	<div class="android-drawer-separator"></div>
 			

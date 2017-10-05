@@ -11,7 +11,7 @@
 		
 	</head>
 		<body>
-			<div class="row">
+
 				<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
 		      		<div class="android-header mdl-layout__header mdl-layout__header--waterfall">
@@ -23,7 +23,7 @@
 				          	<!--lupa de prueba-->
 							<div class="col-md-6">
 								<form action="" method="get"><br>
-								{{csrf_field()}}							
+									{{csrf_field()}}							
 
 									    <div class="input-group">
 									      <input name="buscador" type="text" class="form-control caja_lupa" placeholder="Buscar productos, servicios...">
@@ -102,12 +102,11 @@
 
 					<!--cuerpo-->
 					<div class="android-content mdl-layout__content">
-
-						@yield('content')
-
-							<!--footer-->
-							<footer class="mdl-mega-footer">
-							  <div class="mdl-mega-footer__middle-section">
+						@yield('content')		
+						
+						<!--footer-->
+						<footer class="mdl-mega-footer">
+						  <div class="mdl-mega-footer__middle-section">
 
 							    <div class="mdl-mega-footer__drop-down-section">
 							      <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
@@ -151,14 +150,13 @@
 							        <li><a href="#">Contact us</a></li>
 							      </ul>
 							    </div>
-
-							  </div>
-
-							</footer>
+						  </div>
+						</footer>
 					</div>
+				</div>
 
-				</div>	
-			 </div>
+								
+		
 
 
 			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">

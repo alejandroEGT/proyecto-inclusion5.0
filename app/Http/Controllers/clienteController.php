@@ -29,8 +29,8 @@ class clienteController extends Controller
 
      public function vista_productos($id){
 
-        $productos = \DB::select('SELECT * from fProducto');
-        return view('inicioCliente.vista_productos')->with('productos',$productos);
+        $productos = \DB::select('SELECT * from fProducto where id ='.$id);
+        return view('inicioCliente.vista_productos')->with('productos',$productos[0]);
                                                   
     }       
 

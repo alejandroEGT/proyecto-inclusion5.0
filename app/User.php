@@ -118,6 +118,7 @@ class User extends Authenticatable
         $user = new User;
 
         switch ($tipo) {
+
             case '1':
                     $user->nombres = $datos->nombres;
                     $user->apellidos = $datos->apellidos;
@@ -135,17 +136,51 @@ class User extends Authenticatable
                 break;
 
             case '2':
-                # code...
+                    $user->nombres = $datos['first_name'];
+                    $user->apellidos = $datos['last_name'];
+                    $user->email = $datos['email'];
+                    $user->password = \Hash::make("porconfirmar");
+                    $user->id_rol = "4";
+
+                    if($datos['gender'] == "male"){
+                        $user->id_sexo = "2";
+                    }else{
+                        $user->id_sexo = "1";
+                    }
+                    
+                if($user->save()){
+                        return true;
+                    }else{
+                        return false;
+                    }
                 break;
 
             case '3':
-                # code...
+
+                $datosG= array_dot($datos->user);
+            
+                    $user->nombres = $datosG['name.givenName'];
+                    $user->apellidos = $datosG['name.familyName'];
+                    $user->email = $datosG['emails.0.value'];
+                    $user->password = \Hash::make("porconfirmar");
+                    $user->id_rol = "4";
+
+                    if($datosG['gender'] == "male"){
+                        $user->id_sexo = "2";
+                    }else{
+                        $user->id_sexo = "1";
+                    }
+                    
+                if($user->save()){
+                        return true;
+                    }else{
+                        return false;
+                    }
                 break;
             default:
-                # code...
+                return "caca";
                 break;
         }
-
          
     }
 }

@@ -12,6 +12,15 @@ use Laravel\Socialite\Facades\Socialite;
 class loginClienteController extends Controller
 {
 
+private $tipo;
+
+public function setTipo($tipo) {
+       $this->tipo = $tipo;
+  }
+
+  public function getTipo() {
+      return $this->tipo;
+  }
 
     public function redirectToProvider($service)
     {
@@ -30,10 +39,12 @@ class loginClienteController extends Controller
                     'email', 
                     'gender', 
                 ]);
+          $this->setTipo(2);
+
         }else{
 
           $social = Socialite::driver($service);
-
+          $this->setTipo(3);
         }
 
         $userSocial = $social->user();
@@ -46,9 +57,7 @@ class loginClienteController extends Controller
 
         }else{
 
-             $user = User::insertarCliente($userSocial , 1);
-
-             dd($user);
+             $user = User::insertarCliente($userSocial , $this->getTipo());
 
         	 if($user){
 

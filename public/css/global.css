@@ -88,6 +88,15 @@ small{
 	background:url("../ico/internet.png");
 	background-size: 100% 100%;
 }
+.ico-producto{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 130px;
+	width: 130px;
+	background:url("../ico/producto.png");
+	background-size: 100% 100%;
+}
 .ico-add{
 	float: none;
     margin: 0 auto;
@@ -133,6 +142,14 @@ small{
 	background:url("../ico/password.png");
 	background-size: 100% 100%;
 }
+.ico-servicio{
+	float: none;
+    margin: 0 auto;
+	height: 130px;
+	width: 130px;
+	background:url("../ico/servicio.png");
+	background-size: 100% 100%;
+}
 .mi-input{
 	border: 1px solid black;
 	width: 260px;
@@ -166,8 +183,8 @@ small{
 .tamanio-inst{
 	float: none;
 	 margin: 0 auto;
-	height: 150px;
-	width: 200px;
+	height: 200px;
+	width: 280px;
 }
 .color-sky{
 	background-color:#E0ECF8;
@@ -212,4 +229,38 @@ small{
 .img-titu{
 	color: black;
 	padding-left:100px;
+}
+.papel-noticia{
+	background-color: white;
+	margin-left: 20px;
+	border:1px solid #81BEF7;
+
+}
+.papel-prod{
+	background-color: white;
+	margin-left: 20px;
+	border:1px solid #81BEF7;
+
+}
+.lineas{
+	border:1px solid #81BEF7;
+}
+.fondo-blanco{
+	background:white;
+}
+.lineas-border{
+	margin-left: 10px;
+	border: 1px solid #F2F2F2;
+}
+.linea-arriba{
+	border-top: 1px solid #A9E2F3;
+}
+.center-top{
+	margin-top:30px;
+}
+.linea-gris{
+	border: 1px solid #F2F2F2;
+}
+.txt-gris{
+	color:#848484;
 }

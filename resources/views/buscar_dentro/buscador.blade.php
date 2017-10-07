@@ -60,7 +60,10 @@
 				</div>
 			@else	
 				<div class="">
-					<center><p class="p-nothing" >nada para mostrar</p></center>
+					<center>
+						<p class="p-nothing" >nada para mostrar</p>
+						<img src="/ico/sad.png">
+					</center>
 				</div>
 			@endif
 		

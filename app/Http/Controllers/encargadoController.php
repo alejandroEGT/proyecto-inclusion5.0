@@ -18,7 +18,6 @@ use App\Tienda_institucion;
 use App\estado_tienda_producto;
 use App\foto_producto;
 use App\producto;
-use App\producto_institucion;
 use App\Tienda_producto_institucion;
 use App\Http\Requests\productoRequest;
 use App\Http\Requests\agregarAlumnoDesdeAreaRequest;
@@ -28,7 +27,7 @@ class encargadoController extends Controller
 {
     public function vista_inicio(){
         $encargado = Encargado::traerDatos();
-        $productos = producto_institucion::verProductoDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
+        $productos = producto::verProductoDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
     	$foto = Fotoperfil::traerFoto();
         $estado_password = Passwordcuenta::traerEstado();
         $logo = Area::traerArea();
@@ -56,7 +55,7 @@ class encargadoController extends Controller
         $categoria_pro = categoria_producto::all();
 
         //return $encargado[0]->id_institucion.', '.$encargado[0]->id_area;
-        $productos = producto_institucion::verProductoDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
+        $productos = producto::verProductoDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
 
         //return $productos;
 
@@ -113,8 +112,11 @@ class encargadoController extends Controller
 
         $idI = base64_decode($idinstitucion);
         $institucion = Institucion::find($idI);
+        $productos = producto::traetProductosDesdeAdmin($institucion->id, 5);
 
-        return view('encargadoArea.perfil_institucion')->with('institucion', $institucion);
+        return view('encargadoArea.perfil_institucion')
+        ->with('institucion', $institucion)
+        ->with('productos', $productos);
     }
     public function vista_agregarAlumno(){
         $id_area = Encargado::traerDatos();
@@ -131,7 +133,7 @@ class encargadoController extends Controller
       $area = Area::all();
       $encargado = Encargado::traerDatos();
 
-      $productos = producto_institucion::detalleProducto_area($getId, $encargado[0]->id_area);
+      $productos = producto::detalleProducto_area($getId, $encargado[0]->id_area);
       
       return view('encargadoArea.verDetalleProducto')
       ->with('productos', $productos)
@@ -282,9 +284,8 @@ class encargadoController extends Controller
     public function publicarproducto(productoRequest $datos){
        
        $encargado = Encargado::traerDatos();
-
        
-       $insertProducto = producto_institucion::insertar($datos);
+       $insertProducto = producto::insertar($datos);
 
        if ($insertProducto > 0) {
            
@@ -315,7 +316,7 @@ class encargadoController extends Controller
                 'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=2500,max_height=2850',
           ]);
       //dd($dato->idProducto);
-      $actualizar = foto_producto_institucion::actualizar_foto($dato);
+      $actualizar = foto_producto::actualizar_foto($dato);
       if ($actualizar > 0) {
           \Session::flash('correcto', 'Foto actualizada correctasmente');
           return redirect()->back();
@@ -327,7 +328,7 @@ class encargadoController extends Controller
       $this->validate($dato,[
                 'nombre' => 'required | max:50',
           ]);
-          $nombre = producto_institucion::actualizar_nombre($dato);
+          $nombre = producto::actualizar_nombre($dato);
           if ($nombre) {
             \Session::flash('correcto', 'Nombre actualizado correctasmente');
             return redirect()->back();
@@ -339,7 +340,7 @@ class encargadoController extends Controller
       $this->validate($dato,[
                 'descripcion' => 'required | max:250',
           ]);
-          $desc = producto_institucion::actualizar_descripcion($dato);
+          $desc = producto::actualizar_descripcion($dato);
           if ($desc) {
             \Session::flash('correcto', 'Descripcion actualizada correctasmente');
             return redirect()->back();
@@ -351,7 +352,7 @@ class encargadoController extends Controller
       $this->validate($dato,[
                 'cantidad' => 'required | numeric',
           ]);
-          $cant = producto_institucion::actualizar_cantidad($dato);
+          $cant = producto::actualizar_cantidad($dato);
           if ($cant) {
             \Session::flash('correcto', 'Cantidad actualizada correctasmente');
             return redirect()->back();
@@ -365,7 +366,7 @@ class encargadoController extends Controller
                 'estadoV' => 'required',
           ]);
 
-          $visibi = producto_institucion::actualizar_visibilidad($dato);
+          $visibi = producto::actualizar_visibilidad($dato);
           if ($visibi) {
             return redirect()->back();
           }
@@ -377,7 +378,7 @@ class encargadoController extends Controller
                 'categoria' => 'required',
           ]);
 
-      $categ = producto_institucion::actualizar_categoria($dato);
+      $categ = producto::actualizar_categoria($dato);
           if ($categ) {
             
             return redirect()->back();
@@ -389,7 +390,7 @@ class encargadoController extends Controller
       $this->validate($dato,[
                 'area' => 'required',
           ]);
-      $area = producto_institucion::actualizar_area($dato);
+      $area = producto::actualizar_area($dato);
           if ($area) {
             //\Session::flash('correcto', 'Cantidad actualizada correctasmente');
             return redirect()->back();

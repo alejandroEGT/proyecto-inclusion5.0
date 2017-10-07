@@ -53,11 +53,71 @@
 		@endif
 		@if ($estado_password == 2)
 			
-			<div class="container">
-					<div class="">
-						BienVenido {{ $foto }}
+			<div class="container"><!-- PRIMERA VISTA PARA EL ALUMNO  -->
+				<br>
+					<div class="row">
+						<div class="col-md-12 ">
+							<center><p><label>Publicar productos o servicios para que sean visualizados en tu intitución</label></p></center>
+							<div class="row">
+								<div class="col-md-offset-2 col-md-4 well lineas">
+									<center>
+										<div class="ico-producto"></div>
+										<a href="#"><label>Publicar Producto</label></a>
+									</center>
+
+								</div>
+								<div class="col-md-4 well lineas">
+									<center>
+										<div class="ico-speaker"></div>
+										<a href="#"><label>Publicar Servicio</label></a>
+									</center>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
+				<hr>
+					<div class="row">
+			
+						<div class="col-md-3 papel-noticia">
+							<center><label>Noticias</label></center>
+							<hr>
+							<img class="img-notix"  src="http://www.uaa.mx/rectoria/dcrp/wp-content/uploads/2015/05/184-Reuni%C3%B3n-SICOM.jpg" height="70" width="90">
+							<p class="img-titu" ><label>reunión en los angeles con canciller y ministors del interior y de educación</label></p>
+							<p class="img-titu" ><a href="#" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+							
+
+
+
+							<hr>
+							<img class="img-notix"  src="https://jazminoddy.files.wordpress.com/2016/04/12002982_1648419215376199_7949008010979303282_n-770x400.jpg?w=662" height="70" width="90">
+							<p class="img-titu"><label>Jovenes crean nuevos productos de innovación</label></p>
+							<p class="img-titu" ><a href="#" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+							
+						</div>
+						<div class="col-md-8 papel-noticia lineas">
+							<center><label>Productos</label> <i class="fa fa-tags" aria-hidden="true"></i></center>
+							<hr>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<center><label><a href="">Ver mas..</a></label></center>
+							<hr>
+
+							<center><label>Servicios</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
+							<hr>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<center><label><a href="">Ver mas..</a></label></center>
+						</div>
+					</div>
+			</div><!-- PRIMERA VISTA PARA EL ALUMNO  -->
 				
 		@endif	
 		

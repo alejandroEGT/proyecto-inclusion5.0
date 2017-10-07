@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Sexo;
 use App\User;
 use App\cliente;
-use App\producto_institucion;
+use App\producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +13,7 @@ class clienteController extends Controller
 {
     public function inicio_cliente(){
 
-      $productos =  producto_institucion::all();
+      $productos =  producto::all();
     	return view('inicioCliente.inicio_cliente')->with('productos',$productos);
 
       

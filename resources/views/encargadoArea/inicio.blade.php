@@ -107,7 +107,8 @@
 
 							</div>	
 							@endforeach
-							<center>{{ $productos->links() }}</center>
+							<!--<center>{{--$productos->links() --}}</center>-->
+							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>

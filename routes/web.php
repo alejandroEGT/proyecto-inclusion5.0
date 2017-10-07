@@ -86,6 +86,8 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_producto_precio', 'institucionController@actualizar_producto_precio');
         Route::post('/eliminar_alumno','alumnoController@eliminar_alumno');
         Route::get('/verDetalleAlumno/{id}', 'alumnoController@vista_detalleAlumno_inst');
+        Route::get('/publicarServicio', 'institucionController@vista_publicarServicio'); 
+        Route::post('/publicarServicio', 'institucionController@publicarservicio');
 
 
 });

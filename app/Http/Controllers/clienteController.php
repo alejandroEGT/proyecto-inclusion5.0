@@ -5,12 +5,7 @@ use App\Sexo;
 use App\Tienda_institucion;
 use App\User;
 use App\cliente;
-<<<<<<< HEAD
 use App\producto;
-=======
-use App\foto_producto_institucion;
-use App\producto_institucion;
->>>>>>> a36c0b397ec07d32283a6f45695fd163da7b7b6f
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,15 +13,9 @@ use Illuminate\Support\Facades\Auth;
 class clienteController extends Controller
 {
     public function inicio_cliente(){
-
-<<<<<<< HEAD
-      $productos =  producto::all();
-    	return view('inicioCliente.inicio_cliente')->with('productos',$productos);
-=======
       $tiendas = Tienda_institucion::all();
       $productos = \DB::select('SELECT * from fProducto');
       //una consulta que traiga los productos con la foto
->>>>>>> a36c0b397ec07d32283a6f45695fd163da7b7b6f
 
     	return view('inicioCliente.inicio_cliente')->with('productos',$productos)
                                                  ->with('tiendas',$tiendas);

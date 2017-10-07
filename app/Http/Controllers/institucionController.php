@@ -16,12 +16,15 @@ use App\User;
 use App\Vendedor;
 use App\VendedorInstitucion;
 use App\categoria_producto;
+use App\categoria_servicio;
 use App\Tienda_institucion;
 use App\foto_producto;
-use App\foto_producto_institucion;
-use App\producto_institucion;
+use App\foto_servicio;
+use App\producto;
 use App\Tienda_producto_institucion;
+use App\Tienda_servicio_institucion;
 use App\estado_tienda_producto;
+use App\servicio;
 use Illuminate\Http\Request;
 use App\Http\Requests\productoRequest;
 use Illuminate\Support\Facades\Mail;
@@ -37,7 +40,7 @@ class institucionController extends Controller
     public function vista_institucion(){
 
           $datosInstitucion = Institucion::datos();
-          $productos = producto_institucion::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id);
+          $productos = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 4);
             return view('institucion.inicio')
             ->with('institucion', $datosInstitucion)
             ->with('productos', $productos);
@@ -107,8 +110,11 @@ class institucionController extends Controller
 
         $idI = base64_decode($idinstitucion);
         $institucion = Institucion::find($idI);
-
-        return view('institucion.perfil_institucion')->with('institucion', $institucion);
+        //return $institucion->id;
+        $productos = producto::traetProductosDesdeAdmin($institucion->id, 5);
+        return view('institucion.perfil_institucion')
+        ->with('institucion', $institucion)
+        ->with('productos', $productos);
     }
     public function vista_perfilVenInst($iduser){
          $idu = base64_decode($iduser);
@@ -132,14 +138,14 @@ class institucionController extends Controller
 
         $areas = Area::traer();
         $categoria_pro = categoria_producto::all();
-        $productos = producto_institucion::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id);
+        $productos = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 5);
         
         return view('institucion.publicarProducto')
         ->with('areas',$areas)
         ->with('categoria_pro', $categoria_pro)
         ->with('productos', $productos);
     }
-    public function vitsa_generarPassword($value='')
+    public function vitsa_generarPassword()
     {
         return view('institucion.generarPassword');
     }
@@ -151,12 +157,21 @@ class institucionController extends Controller
       $estadoP = estado_tienda_producto::limit(2)->get();
       $area = Area::all();
 
-      $productos = producto_institucion::detalleProducto($getId);
+      $productos = producto::detalleProducto($getId);
       return view('institucion.verDetalleProducto')
       ->with('productos', $productos)
       ->with('categoria', $categoria)
       ->with('estadoP', $estadoP)
       ->with('area', $area);
+    }
+
+    public function vista_publicarServicio()
+    {
+      $areas = Area::traer();
+      $categoria_serv = categoria_servicio::all();
+      return view('institucion.publicarServicio')
+              ->with('categoria_serv', $categoria_serv)
+              ->with('areas',$areas);
     }
 
     public function agregar_alumno(agregaralumnoRequest $datos)
@@ -395,11 +410,11 @@ class institucionController extends Controller
       
        $institucion = Area::traer();
 
-       $insertProducto = producto_institucion::insertar($datos);
+       $insertProducto = producto::insertar($datos);
 
        if ($insertProducto > 0) {
            
-            $insertFotoProducto = foto_producto_institucion::insertar($datos, $insertProducto);
+            $insertFotoProducto = foto_producto::insertar($datos, $insertProducto);
 
            if ($insertFotoProducto > 0) {
 
@@ -408,6 +423,7 @@ class institucionController extends Controller
                 $insertTiendaProducto = Tienda_producto_institucion::insertar($insertProducto, $tienda[0]->id, '1', $datos->area);
                
                if ($insertTiendaProducto > 0) {
+
                    \Session::flash('registro', 'Producto registrado correctasmente');
                 return redirect()->back();
                }
@@ -420,16 +436,39 @@ class institucionController extends Controller
     }
     /*FIN DE PUBLICACION DE LOS PRODUCTOS*/
 
+    /*PUBLICACION DE LOS SERVICIOS*/
+    public function publicarservicio(Request $datos)
+    {
+      $insertarServicio = servicio::insertar($datos);
+
+      if ($insertarServicio > 0) {
+        
+        $insertarFotoServicio = foto_servicio::insertar($datos, $insertarServicio);
+
+        if ($insertarFotoServicio > 0) {
+           $tienda = Tienda_institucion::id_tienda_by_institucion(\Auth::guard('institucion')->user()->id);
+           $insertTiendaServicio = Tienda_servicio_institucion::insertar($insertarServicio, $tienda[0]->id, '1', $datos->area);
+           if ($insertTiendaServicio > 0) {
+               \Session::flash('registro', 'Producto registrado correctasmente');
+                return redirect()->back();
+           }
+             return "Mal todo";
+        }
+         return redirect()->back()->withErrors(['Algo salió mal']);
+      }
+       
+    }
+     /*FIN DE PUBLICACION DE LOS SERVICIOS*/
     public function eliminar_producto_institucion(Request $dato)
     {
       $getId= base64_decode($dato->idProducto);
-      $getFoto = foto_producto_institucion::where('id_producto',$getId)->get();
+      $getFoto = foto_producto::where('id_producto',$getId)->get();
       //return $getFoto[0]->foto;
       \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
       
-      $foto_prod = foto_producto_institucion::borrar($getFoto[0]->id);
+      $foto_prod = foto_producto::borrar($getFoto[0]->id);
       $tienda_prod_inst = Tienda_producto_institucion::borrar($getId);
-      $prod_insti = producto_institucion::borrar($getId);
+      $prod_insti = producto::borrar($getId);
 
       return redirect()->back();
     }
@@ -439,7 +478,7 @@ class institucionController extends Controller
                 'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=3200,max_height=2850',
           ]);
       //dd($dato->idProducto);
-      $actualizar = foto_producto_institucion::actualizar_foto($dato);
+      $actualizar = foto_producto::actualizar_foto($dato);
       if ($actualizar > 0) {
           \Session::flash('correcto', 'Foto actualizada correctamente');
           return redirect()->back();
@@ -451,7 +490,7 @@ class institucionController extends Controller
       $this->validate($dato,[
                 'nombre' => 'required | max:50',
           ]);
-          $nombre = producto_institucion::actualizar_nombre($dato);
+          $nombre = producto::actualizar_nombre($dato);
           if ($nombre) {
             \Session::flash('correcto', 'Nombre actualizado correctamente');
             return redirect()->back();
@@ -463,7 +502,7 @@ class institucionController extends Controller
       $this->validate($dato,[
                 'descripcion' => 'required | max:250',
           ]);
-          $desc = producto_institucion::actualizar_descripcion($dato);
+          $desc = producto::actualizar_descripcion($dato);
           if ($desc) {
             \Session::flash('correcto', 'Descripcion actualizada correctamente');
             return redirect()->back();
@@ -475,7 +514,7 @@ class institucionController extends Controller
       $this->validate($dato,[
                 'precio' => 'required | numeric',
           ]);
-          $cant = producto_institucion::actualizar_precio($dato);
+          $cant = producto::actualizar_precio($dato);
           if ($cant) {
             \Session::flash('correcto', 'Precio actualizado correctamente');
             return redirect()->back();
@@ -488,7 +527,7 @@ class institucionController extends Controller
       $this->validate($dato,[
                 'cantidad' => 'required | numeric',
           ]);
-          $cant = producto_institucion::actualizar_cantidad($dato);
+          $cant = producto::actualizar_cantidad($dato);
           if ($cant) {
             \Session::flash('correcto', 'Cantidad actualizada correctamente');
             return redirect()->back();
@@ -502,7 +541,7 @@ class institucionController extends Controller
                 'estadoV' => 'required',
           ]);
 
-          $visibi = producto_institucion::actualizar_visibilidad($dato);
+          $visibi = producto::actualizar_visibilidad($dato);
           if ($visibi) {
             return redirect()->back();
           }
@@ -514,7 +553,7 @@ class institucionController extends Controller
                 'categoria' => 'required',
           ]);
 
-      $categ = producto_institucion::actualizar_categoria($dato);
+      $categ = producto::actualizar_categoria($dato);
           if ($categ) {
             
             return redirect()->back();
@@ -526,7 +565,7 @@ class institucionController extends Controller
       $this->validate($dato,[
                 'area' => 'required',
           ]);
-      $area = producto_institucion::actualizar_area($dato);
+      $area = producto::actualizar_area($dato);
           if ($area) {
             //\Session::flash('correcto', 'Cantidad actualizada correctasmente');
             return redirect()->back();

@@ -22,7 +22,7 @@ class CreateTiendaProductoInstitucionesTable extends Migration
         });
 
          Schema::table('tienda_producto_instituciones', function($table) {
-            $table->foreign('id_producto')->references('id')->on('productos_instituciones');
+            $table->foreign('id_producto')->references('id')->on('productos');
             $table->foreign('id_tienda')->references('id')->on('tiendas_instituciones');
             $table->foreign('id_estado')->references('id')->on('estado_tienda_producto');
         });

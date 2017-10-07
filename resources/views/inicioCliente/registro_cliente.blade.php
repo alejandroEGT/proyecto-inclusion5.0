@@ -88,9 +88,15 @@
 						</form>
 
 				</div>
+<<<<<<< HEAD
+				<div class="android-drawer-separator"></div>
+			
+		
+=======
 			</div>
 		</div>
 
+>>>>>>> a36c0b397ec07d32283a6f45695fd163da7b7b6f
 
 	<div class="android-drawer-separator"></div>
 			

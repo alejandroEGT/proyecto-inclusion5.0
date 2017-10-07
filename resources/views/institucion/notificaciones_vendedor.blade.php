@@ -2,8 +2,8 @@
 
 @section('content')
 	
-	<div class="margen">
-			<p class="text-center" >Notificacione de vendedores</p>
+	<div class="">
+			<p class="text-center" >Notificacione de Alumnos</p>
 			<div class="row papel-blanco">
 				<div class="col-md-12">
 					@if (count($userEsperando)>0)

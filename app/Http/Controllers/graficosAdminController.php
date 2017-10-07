@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Area;
-use App\producto_institucion;
+use App\producto;
 use Charts;
 
 class graficosAdminController extends Controller
@@ -50,7 +50,7 @@ class graficosAdminController extends Controller
           $contar;
       	  $areas = Area::traer();
           for ($i=0; $i < count($areas) ; $i++) { 
-            $contarProductos = producto_institucion::traerProductosByArea($areas[$i]->id);
+            $contarProductos = producto::traerProductosByArea($areas[$i]->id);
             $array[$i] = $areas[$i]->nombre;
             $contar[$i] = $contarProductos;
           }

@@ -10,7 +10,7 @@
 			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
 			  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-expanded="true">Mis Datos</a>
 			  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-expanded="true">Mis Compras</a>
-			  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-expanded="true">Por definir</a>
+			  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-expanded="true">Mis Valoraciones</a>
 			</div>
 		</div>
 
@@ -177,6 +177,5 @@
 	</div>
 </div>
 
-</div>
-
+<br>
 @endsection 

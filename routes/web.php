@@ -186,6 +186,9 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
 
 
 /*inicio de usuarios*/
+
+
+
  Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
 
  Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
@@ -198,7 +201,7 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
  Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 
  Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
- Route::get('/perfil_cliente' , 'clienteController@perfil_cliente');
+ Route::get('/perfil_cliente' , 'clienteController@perfil_cliente')->middleware('cliente');
 
  
  Route::get('/logoutCliente','loginClienteController@logout');

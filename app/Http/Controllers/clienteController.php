@@ -31,7 +31,6 @@ class clienteController extends Controller
 
     public function perfil_cliente(){
       $id_cliente = cliente::where('id_user', Auth::user()->id)->first();
-
       return view('inicioCliente.perfil_cliente')->with('id_cliente',$id_cliente);
     }     
 

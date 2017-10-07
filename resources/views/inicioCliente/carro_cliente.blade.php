@@ -10,6 +10,7 @@
 	<div class="container ">
 		<div class="row caja-sesion">
 			<div class="col-xs-12 col-sm-12 col-md-10 mdl-shadow--6dp">
+				
 				<form action="" method="post">
 					{{csrf_field()}}
 					<p class="contenido-sesion">Tienda:</p>
@@ -108,6 +109,6 @@
 		</div>
 	</div>
 
-
+<div class="android-drawer-separator"></div>
 
 @endsection

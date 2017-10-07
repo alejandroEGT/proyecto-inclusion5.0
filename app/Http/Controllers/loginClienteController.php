@@ -12,6 +12,15 @@ use Laravel\Socialite\Facades\Socialite;
 class loginClienteController extends Controller
 {
 
+private $tipo;
+
+public function setTipo($tipo) {
+       $this->tipo = $tipo;
+  }
+
+  public function getTipo() {
+      return $this->tipo;
+  }
 
     public function redirectToProvider($service)
     {
@@ -20,38 +29,54 @@ class loginClienteController extends Controller
 
     public function handleProviderCallback($service)
     {
-        $social = Socialite::driver($service)->user();
 
-       
+        if($service == "facebook"){
 
-        $finduser = User::where('email', $social->email)->first();
+          $social = Socialite::driver($service)->fields([
+                    'id',
+                    'first_name', 
+                    'last_name', 
+                    'email', 
+                    'gender', 
+                ]);
+          $this->setTipo(2);
+
+        }else{
+
+          $social = Socialite::driver($service);
+          $this->setTipo(3);
+        }
+
+        $userSocial = $social->user();
+
+        $finduser = User::where('email', $userSocial->email)->first();
 
         if ($finduser) {
             Auth::login($finduser);
+            return redirect('/inicio_cliente');
 
-            return "oka";
         }else{
 
-             $user = User::insertarCliente($social);
+             $user = User::insertarCliente($userSocial , $this->getTipo());
 
         	 if($user){
 
-            $idUser  = User::where('email', $social->email)->first();
+            $idUser  = User::where('email', $userSocial->email)->first();
 
-            $cliente = cliente::guardarCliente($social, $idUser);
+            $cliente = cliente::guardarCliente($userSocial, $idUser);
 
             if($cliente){
 
-              $finduser = User::where('email', $social->email)->first();
-              Auth::login($finduser);
+              $finduser = User::where('email', $userSocial->email)->first();
 
+              Auth::login($finduser);
               return redirect('/inicio_cliente');
               
             }else{
-              return "caca2";
+              return "NO User Encontrado";
             }
           }else{
-            return "caca1";
+            return "NO Cliente Encontrado";
           }
         }
 
@@ -69,7 +94,7 @@ class loginClienteController extends Controller
 
            }else{
 
-               return "caca1";
+               return "NO User Encontrado";
 
            }
     }

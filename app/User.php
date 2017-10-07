@@ -113,39 +113,74 @@ class User extends Authenticatable
             return $resultado;
     }
 
-    protected function insertarCliente($datos){
+    protected function insertarCliente($datos, $tipo){
 
         $user = new User;
 
+        switch ($tipo) {
 
-
-            if(array_has($datos, 'id')){
-
-                $user->nombres = $datos->name;
-                $user->apellidos = "null";
-                $user->email = $datos->email;
-                $user->password = \Hash::make("porconfirmar");
-                $user->id_rol = "4";
-                $user->id_sexo = "3";
-               
-                if($user->save()){
-                        return true;
-                    }else{
-                        return false;
-                    }
-            }else{
-                $user->nombres = $datos->nombres;
-                $user->apellidos = $datos->apellidos;
-                $user->email = $datos->correo;
-                $user->password = \Hash::make($datos->clave);
-                $user->id_rol = "4";
-                $user->id_sexo = $datos->sexo;
+            case '1':
+                    $user->nombres = $datos->nombres;
+                    $user->apellidos = $datos->apellidos;
+                    $user->email = $datos->correo;
+                    $user->password = \Hash::make($datos->clave);
+                    $user->id_rol = "4";
+                    $user->id_sexo = $datos->sexo;
 
                     if($user->save()){
                         return true;
                     }else{
                         return false;
                     }
-                }
+                    
+                break;
+
+            case '2':
+                    $user->nombres = $datos['first_name'];
+                    $user->apellidos = $datos['last_name'];
+                    $user->email = $datos['email'];
+                    $user->password = \Hash::make("porconfirmar");
+                    $user->id_rol = "4";
+
+                    if($datos['gender'] == "male"){
+                        $user->id_sexo = "2";
+                    }else{
+                        $user->id_sexo = "1";
+                    }
+                    
+                if($user->save()){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                break;
+
+            case '3':
+
+                $datosG= array_dot($datos->user);
+            
+                    $user->nombres = $datosG['name.givenName'];
+                    $user->apellidos = $datosG['name.familyName'];
+                    $user->email = $datosG['emails.0.value'];
+                    $user->password = \Hash::make("porconfirmar");
+                    $user->id_rol = "4";
+
+                    if($datosG['gender'] == "male"){
+                        $user->id_sexo = "2";
+                    }else{
+                        $user->id_sexo = "1";
+                    }
+                    
+                if($user->save()){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                break;
+            default:
+                return "caca";
+                break;
+        }
+         
     }
 }

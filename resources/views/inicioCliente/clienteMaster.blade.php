@@ -82,6 +82,7 @@
 				          <a class="mdl-navigation__link" href="/registro_cliente">Registrate</a>
 					      @else
 	                      <a class="mdl-navigation__link" href="">{{ Auth::user()->nombres }}</a>
+	                      <a class="mdl-navigation__link" href="/perfil_cliente">Mi perfil</a>
 				          <a class="mdl-navigation__link" href="/logoutCliente">Logout <i class="material-icons">exit_to_app</i></a>
 					      @endif
 				          <div class="android-drawer-separator"></div>

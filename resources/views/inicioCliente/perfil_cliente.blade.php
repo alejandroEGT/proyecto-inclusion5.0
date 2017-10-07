@@ -6,7 +6,7 @@
 <div class="container-fluid">
 	<div class="row">
 
-		<div class="col-md-2">
+		<div class="col-md-2"><br>
 			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
 			  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-expanded="true">Mis Datos</a>
 			  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-expanded="true">Mis Compras</a>
@@ -61,7 +61,7 @@
 							  <div class="form-group row">
 							    <label for="staticEmail" class="col-sm-3 col-form-label">Repita correo</label>
 							    <div class="col-sm-5">
-							      <input type="email" class="form-control" id="exampleInputEmail1" name="correo" placeholder="email@ejemplo.cl">
+							      <input type="email" class="form-control" id="exampleInputEmail1" name="rCorreo" placeholder="email@ejemplo.cl">
 							    </div>
 							  </div>
 
@@ -91,21 +91,21 @@
 				  			  <div class="form-group row">
 							    <label for="staticEmail" class="col-sm-3 col-form-label">Contraseña antigua</label>
 							    <div class="col-sm-5">  
-							       <input type="password" class="form-control" id="exampleInputEmail1" name="correo" placeholder="******">
+							       <input type="password" class="form-control" id="exampleInputEmail1" name="passAntigua" placeholder="******">
 							    </div>
 							  </div>
 
 							  <div class="form-group row">
 							    <label for="staticEmail" class="col-sm-3 col-form-label">Nuevo contraseña</label>
 							    <div class="col-sm-5">  
-							       <input type="password" class="form-control" id="exampleInputEmail1" name="correo" placeholder="******">
+							       <input type="password" class="form-control" id="exampleInputEmail1" name="passNueva" placeholder="******">
 							    </div>
 							  </div>
 
 							  <div class="form-group row">
 							    <label for="staticEmail" class="col-sm-3 col-form-label">Repita contraseña</label>
 							    <div class="col-sm-5">
-							      <input type="password" class="form-control" id="exampleInputEmail1" name="correo" placeholder="******">
+							      <input type="password" class="form-control" id="exampleInputEmail1" name="repPassNueva" placeholder="******">
 							    </div>
 							  </div>
 
@@ -135,14 +135,14 @@
 							  <div class="form-group row">
 							    <label for="staticEmail" class="col-sm-3 col-form-label">Nuevo  N° Telefono</label>
 							    <div class="col-sm-5">  
-							       <input type="number" class="form-control" id="exampleInputEmail1" name="correo" placeholder="+56998765432">
+							       <input type="number" class="form-control" id="exampleInputEmail1" name="telefono" placeholder="+56998765432">
 							    </div>
 							  </div>
 
 							  <div class="form-group row">
 							    <label for="staticEmail" class="col-sm-3 col-form-label">Repita N° Telefono</label>
 							    <div class="col-sm-5">
-							      <input type="number" class="form-control" id="exampleInputEmail1" name="correo" placeholder="+56998765432">
+							      <input type="number" class="form-control" id="exampleInputEmail1" name="repTelefono" placeholder="+56998765432">
 							    </div>
 							  </div>
 

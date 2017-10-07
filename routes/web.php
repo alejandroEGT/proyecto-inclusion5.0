@@ -196,6 +196,7 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
  Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 
  Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
+ Route::get('/perfil_cliente' , 'clienteController@perfil_cliente');
 
  
  Route::get('/logoutCliente','loginClienteController@logout');

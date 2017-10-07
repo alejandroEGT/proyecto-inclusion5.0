@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+
 	<!-- Required meta tags -->
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -61,7 +62,7 @@
 		                        @else
 			                        <li class="mdl-menu__item" ><a href="">{{ Auth::user()->nombres }}</a></li>
 			                        <div class="android-drawer-separator"></div>
-			                        <li class="mdl-menu__item" ><a href="">Mi perfil</a></li>
+			                        <li class="mdl-menu__item" ><a href="/perfil_cliente">Mi perfil</a></li>
 						            <li class="mdl-menu__item" ><a href="/logoutCliente">Logout</a></li>
 					        </ul>
 					         	@endif
@@ -165,11 +166,11 @@
 			</script>
 			<script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js" integrity="sha384-KlVcf2tswD0JOTQnzU4uwqXcbAy57PvV48YUiLjqpk/MJ2wExQhg9tuozn5A1iVw" crossorigin="anonymous">
 			</script>
-			<script src="../bdm/js/bootstrap-material-design.js"></script>
-			<script src="mdl/material.min.js"></script>
-			<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-			<script type="text/javascript" src="js/jquery.flexisel.js"></script>
-			<script src="js/slider_productos.js"></script>
+			<script src="{{asset('../bdm/js/bootstrap-material-design.js')}}"></script>
+			<script src="{{asset('mdl/material.min.js')}}"></script>
+			<script type="text/javascript" src="{{asset('https://code.jquery.com/jquery-1.7.1.min.js')}}"></script>
+			<script type="text/javascript" src="{{asset('js/jquery.flexisel.js')}}"></script>
+			<script src="{{asset('js/slider_productos.js')}}"></script>
 			@yield('js')
 		</body>
 </html>

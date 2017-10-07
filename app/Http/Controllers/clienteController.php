@@ -21,10 +21,7 @@ class clienteController extends Controller
 
     	return view('inicioCliente.inicio_cliente')->with('productos',$productos)
                                                  ->with('tiendas',$tiendas);
-      
-
-                
-      
+    
     }
 
      public function vista_productos($id){
@@ -32,7 +29,13 @@ class clienteController extends Controller
         $productos = \DB::select('SELECT * from fProducto where id ='.$id);
         return view('inicioCliente.vista_productos')->with('productos',$productos[0]);
                                                   
-    }       
+    }  
+
+    public function perfil_cliente(){
+      $id_cliente = cliente::where('id_user', Auth::user()->id)->first();
+
+      return view('inicioCliente.perfil_cliente')->with('id_cliente',$id_cliente);
+    }     
 
 
 	public function sesion_cliente(){

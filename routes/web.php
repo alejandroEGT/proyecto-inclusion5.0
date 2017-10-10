@@ -197,16 +197,24 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
  Route::get('/registro_cliente' , 'clienteController@registro_cliente');
  Route::post('/registro_cliente' , 'clienteController@guardar_cliente');
   
- Route::get('/carro_cliente' , 'clienteController@carro_cliente');
+
  Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 
  Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
- Route::get('/perfil_cliente' , 'clienteController@perfil_cliente')->middleware('cliente');
-
- 
- Route::get('/logoutCliente','loginClienteController@logout');
 
 
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');
+
+
+Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
+
+     Route::get('/perfil_cliente' , 'clienteController@perfil_cliente');
+     Route::get('/logoutCliente','loginClienteController@logout');
+     Route::post('/updCorreo', 'clienteController@updCorreo');
+     Route::post('/updTelefono', 'clienteController@updTelefono');
+     Route::post('/updClave', 'clienteController@updClave');
+     Route::get('/carro_cliente' , 'clienteController@carro_cliente');
+
+});

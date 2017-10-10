@@ -16,7 +16,13 @@
 
 		<div class="col-md-3">
 			<br><div class="card" style="width: 100%">
-			 <img class="card-img-top" src="../foto_productos/1507269297.jpg" alt="Card image cap">
+
+				@if($foto === "ico/default-avatar.png")
+				 <img class="card-img-top" src="{{ '/'.$foto }}" alt="Card image cap">
+				@else
+				 <img class="card-img-top" src="{{ $foto }}" alt="Card image cap">
+				@endif
+			
 			  <div class="card-body">
 			    <h5 class="card-text misDatos">Nombre:</h5>
 			    <p class="card-text">{{Auth::user()->nombres}}</p>
@@ -48,7 +54,7 @@
 
 				    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
 				      <div class="card-body">
-				  			<form action="" method="">
+				  			<form action="{{ url('cliente/updCorreo') }}" method="post">
 				  				{{csrf_field()}}
 
 							  <div class="form-group row">
@@ -85,7 +91,7 @@
 
 				    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
 				      <div class="card-body">
-				    		<form action="" method="">
+				    		<form action="{{ url('cliente/updClave') }}" method="post">
 				  				{{csrf_field()}}
 
 				  			  <div class="form-group row">
@@ -129,7 +135,7 @@
 
 				    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
 				      <div class="card-body">
-				       	<form action="" method="">
+				       	<form action="{{ url('cliente/updTelefono') }}" method="post">
 				  				{{csrf_field()}}
 
 							  <div class="form-group row">

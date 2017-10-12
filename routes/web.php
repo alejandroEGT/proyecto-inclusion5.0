@@ -208,8 +208,6 @@ Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');
 
 
-<<<<<<< HEAD
-=======
 Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
 
      Route::get('/perfil_cliente' , 'clienteController@perfil_cliente');
@@ -220,4 +218,4 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::get('/carro_cliente' , 'clienteController@carro_cliente');
 
 });
->>>>>>> 20769f1f026b6e48693fbc1edeb4484238b4bd32
+

@@ -42,11 +42,7 @@
 					    	<div class="android-navigation-container col-md-3">
 					            <nav class="android-navigation mdl-navigation">
 					              	<span>
-<<<<<<< HEAD
-					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{ url('carro_cliente')}}">
-=======
 					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{ url('cliente/carro_cliente') }}">
->>>>>>> 20769f1f026b6e48693fbc1edeb4484238b4bd32
 					              			<i class="material-icons">&#xE8CC;</i> Cesta 
 					              			<span class="mdl-badge mdl-badge--no-background" data-badge="2"></span>
 					              		</a>
@@ -66,13 +62,8 @@
 		                        @else
 			                        <li class="mdl-menu__item" ><a href="">{{ Auth::user()->nombres }}</a></li>
 			                        <div class="android-drawer-separator"></div>
-<<<<<<< HEAD
-			                        <li class="mdl-menu__item" ><a href="{{ url('perfil_cliente')}}">Mi perfil</a></li>
-						            <li class="mdl-menu__item" ><a href="{{ url('logoutCliente')}}">Logout</a></li>
-=======
 			                        <li class="mdl-menu__item" ><a href="{{ url('cliente/perfil_cliente') }}">Mi perfil</a></li>
 						            <li class="mdl-menu__item" ><a href="{{ url('cliente/logoutCliente') }}">Logout</a></li>
->>>>>>> 20769f1f026b6e48693fbc1edeb4484238b4bd32
 					        </ul>
 					         	@endif
 
@@ -91,21 +82,14 @@
 				          <a class="mdl-navigation__link" href="{{ url('registro_cliente')}}">Registrate</a>
 					      @else
 	                      <a class="mdl-navigation__link" href="">{{ Auth::user()->nombres }}</a>
-<<<<<<< HEAD
-	                      <a class="mdl-navigation__link" href="{{ url('perfil_cliente')}}">Mi perfil</a>
-				          <a class="mdl-navigation__link" href="{{ url('logoutCliente')}}">Logout <i class="material-icons">exit_to_app</i></a>
-					      @endif
-				          <div class="android-drawer-separator"></div>
-				          <span>
-			          	  <a class="mdl-navigation__link" href="{{ url('carro_cliente')}}">
-=======
-	                      <a class="mdl-navigation__link" href="{{ url('cliente/perfil_cliente') }}">Mi perfil</a>
-				          <a class="mdl-navigation__link" href="{{ url('cliente/logoutCliente') }}">Logout <i class="material-icons">exit_to_app</i></a>
+
+	                      <a class="mdl-navigation__link" href="{{ url('cliente/perfil_cliente')}}">Mi perfil</a>
+				          <a class="mdl-navigation__link" href="{{ url('cliente/logoutCliente')}}">Logout <i class="material-icons">exit_to_app</i></a>
 					      @endif
 				          <div class="android-drawer-separator"></div>
 				          <span>
 			          	  <a class="mdl-navigation__link" href="{{ url('cliente/carro_cliente') }}">
->>>>>>> 20769f1f026b6e48693fbc1edeb4484238b4bd32
+
 			          	  <i class="material-icons">&#xE8CC;</i>Cesta
 			          	  <i class="mdl-badge" data-badge="3"></i>
 			          	  </a>

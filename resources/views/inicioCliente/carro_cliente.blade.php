@@ -99,10 +99,11 @@
 								<label for="">$19.980</label>
 							</p>
 							
+							<form action="" method="">
 							<div class="boton-sesion">	
 							  	<p align="right"><a href="#" class="btn btn-primary btn-outline-success">Comprar</a></p>
 							</div>
-
+							</form>
 						</div>
 				</form>
 			</div>

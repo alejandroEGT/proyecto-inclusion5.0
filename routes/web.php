@@ -207,3 +207,5 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');
+
+

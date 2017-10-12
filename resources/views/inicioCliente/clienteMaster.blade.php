@@ -42,9 +42,9 @@
 					    	<div class="android-navigation-container col-md-3">
 					            <nav class="android-navigation mdl-navigation">
 					              	<span>
-					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="/carro_cliente">
+					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{ url('carro_cliente')}}">
 					              			<i class="material-icons">&#xE8CC;</i> Cesta 
-					              			<span class="mdl-badge mdl-badge--no-background" data-badge="3"></span>
+					              			<span class="mdl-badge mdl-badge--no-background" data-badge="2"></span>
 					              		</a>
 					              	</span>
 					            </nav>
@@ -57,13 +57,13 @@
 					        <!--autentificacion cliente-->
 					        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
 					          	@if (Auth::guest())
-		                            <li class="mdl-menu__item" ><a href="/sesion_cliente">Iniciar Sesion</a></li>
-					            	<li class="mdl-menu__item"><a href="/registro_cliente">Registrate</a></li>
+		                            <li class="mdl-menu__item" ><a href="{{ url('sesion_cliente')}}">Iniciar Sesion</a></li>
+					            	<li class="mdl-menu__item"><a href="{{ url('registro_cliente')}}">Registrate</a></li>
 		                        @else
 			                        <li class="mdl-menu__item" ><a href="">{{ Auth::user()->nombres }}</a></li>
 			                        <div class="android-drawer-separator"></div>
-			                        <li class="mdl-menu__item" ><a href="/perfil_cliente">Mi perfil</a></li>
-						            <li class="mdl-menu__item" ><a href="/logoutCliente">Logout</a></li>
+			                        <li class="mdl-menu__item" ><a href="{{ url('perfil_cliente')}}">Mi perfil</a></li>
+						            <li class="mdl-menu__item" ><a href="{{ url('logoutCliente')}}">Logout</a></li>
 					        </ul>
 					         	@endif
 
@@ -78,16 +78,16 @@
 				        <nav class="mdl-navigation">
 				          <span class="mdl-navigation__link" href="#"><i class="material-icons">&#xE853;</i> Usuario</span>
 		    		      @if (Auth::guest())
-				          <a class="mdl-navigation__link" href="/sesion_cliente">Iniciar Sesión</a>
-				          <a class="mdl-navigation__link" href="/registro_cliente">Registrate</a>
+				          <a class="mdl-navigation__link" href="{{ url('sesion_cliente')}}">Iniciar Sesión</a>
+				          <a class="mdl-navigation__link" href="{{ url('registro_cliente')}}">Registrate</a>
 					      @else
 	                      <a class="mdl-navigation__link" href="">{{ Auth::user()->nombres }}</a>
-	                      <a class="mdl-navigation__link" href="/perfil_cliente">Mi perfil</a>
-				          <a class="mdl-navigation__link" href="/logoutCliente">Logout <i class="material-icons">exit_to_app</i></a>
+	                      <a class="mdl-navigation__link" href="{{ url('perfil_cliente')}}">Mi perfil</a>
+				          <a class="mdl-navigation__link" href="{{ url('logoutCliente')}}">Logout <i class="material-icons">exit_to_app</i></a>
 					      @endif
 				          <div class="android-drawer-separator"></div>
 				          <span>
-			          	  <a class="mdl-navigation__link" href="/carro_cliente">
+			          	  <a class="mdl-navigation__link" href="{{ url('carro_cliente')}}">
 			          	  <i class="material-icons">&#xE8CC;</i>Cesta
 			          	  <i class="mdl-badge" data-badge="3"></i>
 			          	  </a>

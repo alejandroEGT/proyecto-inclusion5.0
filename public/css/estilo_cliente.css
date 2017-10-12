@@ -118,3 +118,9 @@ right: 20px;
 	background-color: white;
 	padding-left: 10px;
 }
+
+.imagen-producto > img{
+	width:300px;
+	height:300px;
+	margin: 5px 30px 5px 5px;
+}

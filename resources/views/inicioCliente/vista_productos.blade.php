@@ -6,7 +6,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 mdl-shadow--6dp">
+				<div class="imagen-producto">
 				<img class="mdl-card__media porteimg" src="{{ '/'.$productos->foto }}">
+				</div>
 			</div>
 			<div class="col-md-8 mdl-shadow--6dp">
 				<h3>{{$productos->nombre}}</h3>

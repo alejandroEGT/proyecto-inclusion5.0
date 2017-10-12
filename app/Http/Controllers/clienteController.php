@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Fotoperfil;
+use App\Http\Requests\clienteRequest;
 use App\Sexo;
 use App\Tienda_institucion;
 use App\User;
@@ -30,8 +32,15 @@ class clienteController extends Controller
     }  
 
     public function perfil_cliente(){
+
+
       $id_cliente = cliente::where('id_user', Auth::user()->id)->first();
-      return view('inicioCliente.perfil_cliente')->with('id_cliente',$id_cliente);
+
+      $foto = Fotoperfil::traerFotobyid(Auth::user()->id);
+      
+      return view('inicioCliente.perfil_cliente')->with('id_cliente',$id_cliente)
+                                                 ->with('foto', $foto);
+
     }     
 
 
@@ -62,7 +71,7 @@ class clienteController extends Controller
 
        public function guardar_cliente(Request $datos){
 
-   		    $user = User::insertarCliente($datos);
+   		    $user = User::insertarCliente($datos,1);
 
           if($user){
 
@@ -71,6 +80,9 @@ class clienteController extends Controller
            $cliente = cliente::guardarCliente($datos, $idUser);
 
             if($cliente){
+
+              $foto = Fotoperfil::fotoDefault($idUser->id);
+
               return "oka";
               
             }else{
@@ -81,7 +93,41 @@ class clienteController extends Controller
           }
     }
 
+    public function updCorreo (Request $datos){
 
+     $update = cliente::updCorreo($datos);
+
+     if($update){
+      return "oka";
+     }else{
+      return "caca";
+     }
+
+    }
+
+    public function updTelefono (Request $datos){
+
+     $update = cliente::updTelefono($datos);
+
+     if($update){
+      return "oka";
+     }else{
+      return "caca";
+     }
+
+    }
+
+    public function updClave (Request $datos){
+
+     $update = cliente::updClave($datos);
+
+     if($update){
+      return "oka";
+     }else{
+      return "caca";
+     }
+
+    }
 
     
 }

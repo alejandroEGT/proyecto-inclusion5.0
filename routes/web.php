@@ -186,6 +186,9 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
 
 
 /*inicio de usuarios*/
+
+
+
  Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
 
  Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
@@ -194,14 +197,10 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
  Route::get('/registro_cliente' , 'clienteController@registro_cliente');
  Route::post('/registro_cliente' , 'clienteController@guardar_cliente');
   
- Route::get('/carro_cliente' , 'clienteController@carro_cliente');
+
  Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 
  Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
- Route::get('/perfil_cliente' , 'clienteController@perfil_cliente');
-
- 
- Route::get('/logoutCliente','loginClienteController@logout');
 
 
 //Socialite Login
@@ -209,3 +208,16 @@ Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');
 
 
+<<<<<<< HEAD
+=======
+Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
+
+     Route::get('/perfil_cliente' , 'clienteController@perfil_cliente');
+     Route::get('/logoutCliente','loginClienteController@logout');
+     Route::post('/updCorreo', 'clienteController@updCorreo');
+     Route::post('/updTelefono', 'clienteController@updTelefono');
+     Route::post('/updClave', 'clienteController@updClave');
+     Route::get('/carro_cliente' , 'clienteController@carro_cliente');
+
+});
+>>>>>>> 20769f1f026b6e48693fbc1edeb4484238b4bd32

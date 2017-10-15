@@ -180,6 +180,10 @@ small{
 	height: 90px;
 	width:120px;
 }
+.img-logo_noticia{
+	height: 50px;
+	width:50px;
+}
 .tamanio-inst{
 	float: none;
 	 margin: 0 auto;
@@ -263,4 +267,21 @@ small{
 }
 .txt-gris{
 	color:#848484;
+}
+.foto-update{
+	height: 140px;
+	width: 170px;
+}
+.color-blue{
+	color:#345A94;
+	font-weight:bold;	
+}
+.foto-noticia{
+	height:300px; width:870px;
+}
+.pushy-link{
+	font-size: 12px;
+}
+.pushy-submenu button{
+	font-size: 12px;
 }

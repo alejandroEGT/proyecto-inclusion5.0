@@ -5,18 +5,12 @@
 @if (!is_null($productos[0]))
 	{{-- expr --}}
 
-
-<div class="row">
-	<br>
+<br>
 	<center><label>Detalle del producto</label></center>
 	<hr>
-			
-	<div class="col-md-offset-1 col-md-3">
-		<img src="{{ '/'.$productos[0]->foto }}" class="img img-thumbnail deta_producto">
-	</div>
-	<div class="col-md-3">
-		<a data-toggle="collapse" data-target="#campo1" ><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
-		@if (count($errors))
+<div class="row panel">
+
+	@if (count($errors))
 				
 						<div class="alert alert-danger">
 						    <a href="" class="close" data-dismiss="alert">&times;</a>
@@ -34,6 +28,11 @@
 				        {{ Session::get('correcto') }}
 			    </div>
 		@endif
+			
+	<div class="col-md-offset-1 col-md-3">
+		<img src="{{ '/'.$productos[0]->foto }}" class="img-thumbnail img-responsive"><br>
+		<center><a data-toggle="collapse" data-target="#campo1" > Actualizar foto del producto <i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></center>
+		
 		<div id="campo1" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url($ruta.'/actualizar_producto_foto') }}" enctype="multipart/form-data" method="post">
@@ -47,10 +46,8 @@
 							</div>
 		</div>
 	</div>
-</div>	
-	<hr>
-	<div class="row">
-		<div class="col-md-offset-1 col-md-10 panel">
+	<div class="col-md-6">
+		
 			<p><label><strong>Nombre:</strong></label> {{ $productos[0]->nombre }} <a data-toggle="collapse" data-target="#nombre" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="nombre" class="collapse">
 							<div class="alert alert-info" role="alert">
@@ -173,5 +170,7 @@
 			
 		</div>
 	</div>
+	
+</div>	
 
 @endif

@@ -78,43 +78,113 @@
 				<hr>
 					<div class="row">
 			
-						<div class="col-md-3 papel-noticia">
-							<center><label>Noticias</label></center>
-							<hr>
-							<img class="img-notix"  src="http://www.uaa.mx/rectoria/dcrp/wp-content/uploads/2015/05/184-Reuni%C3%B3n-SICOM.jpg" height="70" width="90">
-							<p class="img-titu" ><label>reunión en los angeles con canciller y ministors del interior y de educación</label></p>
-							<p class="img-titu" ><a href="#" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
-							
+						<div class="col-md-3">
+							@if(count($noticias_generales)>0)
+					<center><label>Noticias Generales</label></center>
+					
+					@foreach ($noticias_generales as $ng)
+						<hr>
+						<img class="img-notix"  src="{{ '/'.$ng->foto }}" height="70" width="90">
+						<p class="img-titu" ><label>{{ $ng->titulo}}</label></p>
+						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+					@endforeach
+					<hr>
+					<p><label><small><a href="#">Ver todas las noticias...</a></small></label></p>
 
-
-
-							<hr>
-							<img class="img-notix"  src="https://jazminoddy.files.wordpress.com/2016/04/12002982_1648419215376199_7949008010979303282_n-770x400.jpg?w=662" height="70" width="90">
-							<p class="img-titu"><label>Jovenes crean nuevos productos de innovación</label></p>
-							<p class="img-titu" ><a href="#" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+					<hr>
+				@endif
+				@if (!count($noticias_generales))
+						<p>No existen noticias</p>
+						<hr>
+				@endif	
+				
+				@if(count($noticias_locales)>0)
+					<center><label>Noticias Locales</label></center>
+					@foreach ($noticias_locales as $nl)
+						<hr>
+						<img class="img-notix"  src="{{ '/'.$nl->foto }}" height="70" width="90">
+						@if ($nl->id_estado == 1)
+							<p class="img-titu" ><label>{{ $nl->titulo}}</label> <img src="/ico/world.png"></p>
+						@endif
+						@if ($nl->id_estado == 2)
+							<p class="img-titu" ><label>{{ $nl->titulo}}</label> <img src="/ico/padlock.png"></p>
+						@endif
+						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+					@endforeach
+					<hr>
+					<p><label><small><a href="#">Ver todas las noticias...</a></small></label></p>
+					<hr>
+				@endif	
+				@if (!count($noticias_locales))
+					<p>No existen noticias</p>
+						<hr>
+				@endif
 							
 						</div>
-						<div class="col-md-8 papel-noticia lineas">
-							<center><label>Productos</label> <i class="fa fa-tags" aria-hidden="true"></i></center>
-							<hr>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							<center><label><a href="">Ver mas..</a></label></center>
+						<div class="col-md-8">
+							
+
+							@if (count($productos)>0)
+								<div class="row">
+									<div class="col-md-12">
+										<center><label>Productos</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
+										<hr>
+										
+										@foreach ($productos as $producto)
+										<div class="box-producto">
+											<center>
+												<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
+												<p>{{ $producto->nombre }}</p>
+											</center>
+
+										</div>	
+										@endforeach
+
+										<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+									</div>
+
+								</div>
+
+							@endif
+							@if (!count($productos))
+								<center>
+									<label for="">No Existen Productos para mostrar</label>
+									<br>
+									<img src="/ico/sad.png">
+								</center>
+							@endif
+
 							<hr>
 
-							<center><label>Servicios</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
-							<hr>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							<center><label><a href="">Ver mas..</a></label></center>
+							@if (count($servicios)>0)
+								<div class="row">
+									<div class="col-md-12">
+										<center><label>Productos</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
+										<hr>
+										
+										@foreach ($servicios as $servicio)
+										<div class="box-producto">
+											<center>
+												<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
+												<p>{{ $servicio->nombre }}</p>
+											</center>
+
+										</div>	
+										@endforeach
+
+										<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+									</div>
+
+								</div>
+
+							@endif
+							@if (!count($servicios))
+								<center>
+									<label for="">No Existen Servicios para mostrar</label>
+									<br>
+									<img src="/ico/sad.png">
+								</center>
+							@endif
 						</div>
 					</div>
 			</div><!-- PRIMERA VISTA PARA EL ALUMNO  -->

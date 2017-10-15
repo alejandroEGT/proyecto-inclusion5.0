@@ -61,6 +61,7 @@ class institucionRequest extends FormRequest
                 'clave.min' => 'La contraseña debe tener un minimo de 6 caracteres',
                 'repeClave.required' => 'No puedes dejar vacio el campo Repita Clave',
                 'repeClave.min' => 'La contraseña debe tener un minimo de 6 caracteres',
+                'repeClave.same' => 'Las contraseñas no son iguales'
              ];
         
     }

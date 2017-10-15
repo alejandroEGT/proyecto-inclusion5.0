@@ -8,6 +8,8 @@ new Vue({
 		  nombre:"", desc:""
 		}, 
 		notificacion:'',
+		notificacion_prod:'',
+		notificacion_serv:'',
 		bd_mv:{
 			mision:'', vision:''
 		},
@@ -65,7 +67,7 @@ new Vue({
 		aceptarSolicitud($val){
 				
 
-				if (confirm("¿Quieres aceptar este vendedor?") == true) {
+				if (confirm("¿Quieres aceptar este alumno?") == true) {
 				    
 
 						this.$http.post('/aceptarSolicitudUsuario', $val).then(function(response){
@@ -177,6 +179,22 @@ new Vue({
 
 				})
 		},
+		notificar_producto(){
+			this.$http.get('/traerNotificaciones_prod').then(function(response){
+
+					console.log(response.body);
+					this.notificacion_prod = response.body;
+
+				})
+		},
+		notificar_servicio(){
+			this.$http.get('/traerNotificaciones_serv').then(function(response){
+
+					console.log(response.body);
+					this.notificacion_serv = response.body;
+
+				})
+		},
 		eliminarEncargado($id){
 			if (confirm("¿Quieres eliminar este encargado?") == true) {
 				    
@@ -238,8 +256,19 @@ new Vue({
 				}
 		}
 		,
+		eliminarServicio(){
+			if (confirm("¿Quieres eliminar este servicio?") == true) {
+				    
+						$('#eliminar').submit();
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		}
+		,
 		eliminarAlumno(){
-				if (confirm("¿Quieres eliminar este producto?") == true) {
+				if (confirm("¿Quieres eliminar este alumno?") == true) {
 				    
 						$('#form_eliminarAlumno').submit();
 
@@ -249,6 +278,21 @@ new Vue({
 				}
 		}
 		,
+		aceptarProducto($id){
+				if (confirm("¿Quieres Aceptar este producto?") == true) {
+				    
+						this.$http.post('/aceptarSolicitudProducto', $id).then(function(response){
+								
+								console.log(response.body);
+								this.notificar();
+								location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		},
 		cambiarGrafico(){
 			//alert($('#tipo').val());
 			$('#tipo_form').submit();
@@ -289,6 +333,8 @@ new Vue({
 		this.datosInstituto();
 		this.llenarTablaArea();
 		this.notificar();
+		this.notificar_producto();
+		this.notificar_servicio();
 		this.traerEncargado();
 		this.traerMision();
 		this.traerVision();

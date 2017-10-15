@@ -19,6 +19,11 @@
 					</div>
 				</div>		
 			</div>
+			<div class="col-md-2">
+				<div id="divFoto" hidden="true" >
+						<div id="img_destino" class="porte img-thumbnail" ></div>
+				</div>
+			</div>
 		</div>
 		<hr>
 			@if ($errors->all())
@@ -66,10 +71,6 @@
 				</label></p>
 				<input style="display: none;" name="fotoP1" id="file-input" type="file"/>
 
-					<div id="divFoto" hidden="true" >
-						<div id="img_destino" class="porte img-thumbnail" ></div>
-					</div>
-					
 			</div>
 			<div class="col-md-2">
 				<select name="area" class="form-control input">
@@ -112,11 +113,11 @@
 						<td>{{ $p->descripcion }}</td>
 						<td>{{ $p->creado }}</td>
 						<td>
-							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($p->idProducto)) }}">Ver..</a>
 						<form id="eliminar" action="{{ url("institucion/eliminar_producto_institucion") }}" method="post">
 							{{ csrf_field() }}
+							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($p->idProducto)) }}">Ver..</a>
 							<input type="hidden" value="{{ base64_encode($p->idProducto) }}" name="idProducto">	
-							<br>
+							
 							<input type="button" @click="eliminarProducto" class="btn btn-warning btn-xs" value="Eliminar" >
 						</form>	
 						</td>

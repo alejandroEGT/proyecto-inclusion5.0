@@ -78,5 +78,14 @@ class Vendedor extends Model
         return $datos[0]->foto;
 
     }
+    protected function actualizar_numero($numero, $iduser)
+    {
+        $vendedor = Vendedor::where('id_user', $iduser)->first();
+        $vendedor->telefono = $numero;
+        if ($vendedor->save()) {
+            return true;
+        }
+        return false;
+    }
 
 }

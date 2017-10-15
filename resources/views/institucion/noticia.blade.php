@@ -2,19 +2,45 @@
 
 @section('content')
 	
-		<div class="row">
-			<div class="col-md-offset-2 col-md-2">
-				<div class="ico-news"></div>
-			</div>
-			<div class="col-md-6">
-				<p class="panel-title-agregar-mv"><label>¿Tienes algo para contar en la comunidad?</label></p>
-				<p class="panel-body-mst"><label>
-					En este formulario de manera opcional puedes publicar noticias respecto a las actividades internas y externas de la institución.</label>
-				</p>
-			</div>
-		</div>
-		<div class="row">
-			
-		</div>
+		@include('verDetalle.noticia', ['ruta' => 'institucion'])
 	
+@endsection
+@section('js')
+	<script>
+            function mostrarImagen(input) {
+                if (input.files && input.files[0]) 
+                {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+    
+                        $('#img_destino').attr('style', 'background-image:url('+e.target.result+');');
+                        $('#divFoto').attr('hidden', false);
+   
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            function mostrarImagen2(input) {
+                if (input.files && input.files[0]) 
+                {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+    
+                        $('#img_destino2').attr('style', 'background-image:url('+e.target.result+');');
+                        $('#divFoto2').attr('hidden', false);
+   
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+ 
+                $("#file-input").change(function(){
+                 mostrarImagen(this);
+                 
+                });
+                $("#file-input2").change(function(){
+                 mostrarImagen2(this);
+                 
+                });
+        </script>
 @endsection

@@ -37,4 +37,5 @@ class Encargado extends Model
         $estado = \DB::table('password-cuenta')->where('id_user', \Auth::user()->id )->get(); 
         return $estado[0]->id_estado;
     }
+    
 }

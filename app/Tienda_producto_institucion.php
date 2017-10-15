@@ -29,4 +29,14 @@ class Tienda_producto_institucion extends Model
         $tpi = \DB::table('tienda_producto_instituciones')->where('id_producto', '=', $idP)->delete();
         return $tpi;
     }
+    protected function productoEnEspera()
+    {
+        $dato = \DB::table('tienda_producto_instituciones')
+                    ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
+                    ->join('institucion','institucion.id','=','tiendas_instituciones.id')
+                    ->where('institucion.id', \Auth::guard('institucion')->user()->id)
+                    ->where('tienda_producto_instituciones.id_estado', 3)->get();
+
+        return count($dato);            
+    }
 }

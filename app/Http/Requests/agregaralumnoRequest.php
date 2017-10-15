@@ -22,7 +22,7 @@ class agregaralumnoRequest extends FormRequest
             'mes' => 'required | numeric',
             'anio' => 'required | numeric',
             'id_sexo' => 'required',   
-            'telefono' => 'required | numeric ',
+            'telefono' => 'required|min:11|numeric',
             'id_area' => 'required',    
             'correo' => 'required | email | unique:users,email'
         ];

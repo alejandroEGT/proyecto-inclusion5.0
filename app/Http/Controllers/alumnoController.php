@@ -10,6 +10,7 @@ use App\Fotoperfil;
 use App\Vendedor;
 use App\Passwordcuenta;
 use App\Encargado;
+use App\Area;
 use Illuminate\Support\Facades\Mail;
 
 class alumnoController extends Controller
@@ -17,10 +18,13 @@ class alumnoController extends Controller
   public function vista_detalleAlumno_inst(request $dato)
   {
         $getId = base64_decode($dato->id);
+        $area = Area::traer();
         $alumno = VendedorInstitucion::detalleAlumno($getId);
 
         //return $alumno;
-        return view('institucion.verDetalleAlumno')->with('alumno', $alumno);
+        return view('institucion.verDetalleAlumno')
+        ->with('alumno', $alumno)
+        ->with('area', $area);
 
   }
 public function vista_detalleAlumno_enc(request $dato)
@@ -90,8 +94,8 @@ public function vista_detalleAlumno_enc(request $dato)
       }
       //return "0";
         $foto = Fotoperfil::where('id_user', $dato->id_alumno)->get();
-        dd($foto[0]->foto);/*CODIGO PENDIENTE PARA BORRAR EN CASO DE QUE SI CAMBIO DE FOTO DEFAULT DE PARTE DEL USUARIO*/
-        \File::delete();
+        //dd($foto[0]->foto);/*CODIGO PENDIENTE PARA BORRAR EN CASO DE QUE SI CAMBIO DE FOTO DEFAULT DE PARTE DEL USUARIO*/
+        \File::delete($foto[0]->foto);
         $eliminarFoto = Fotoperfil::eliminar($dato->id_alumno);
         $eliminarVi = VendedorInstitucion::eliminar($vendedor[0]->id);
         $eliminarvendedor = Vendedor::eliminar($dato->id_alumno);

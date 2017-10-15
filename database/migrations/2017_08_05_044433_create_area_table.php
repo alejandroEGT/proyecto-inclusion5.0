@@ -17,7 +17,7 @@ class CreateAreaTable extends Migration
             $table->increments('id');
             $table->integer('id_institucion')->unsigned();
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->text('descripcion');
             $table->timestamps();
         });
         Schema::table('area', function($table) {

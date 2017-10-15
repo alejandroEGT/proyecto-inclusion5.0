@@ -54,5 +54,42 @@ class Fotoperfil extends Model
 
         $eliminar = Fotoperfil::where('id_user', $id)->delete();
     }
+    protected function actualizar_foto($dato)
+    {
+
+        $url="fotoPerfil";
+        $getFoto = Fotoperfil::where('id_user',$dato->idUser)->get();
+
+        if ($getFoto[0]->foto === "ico/default-avatar.png") {
+            
+                $file = $dato->file('foto')->getClientOriginalExtension();
+                $imageName = time().'.'.$dato->file('foto')->getClientOriginalExtension();//nombre de la imagen como tal.
+
+                $update = Fotoperfil::find($getFoto[0]->id);
+                $update->foto = $url.'/'.$imageName;
+                if ($update->save()) {
+                      $dato->file('foto')->move(public_path($url), $imageName);
+                      return 1;
+                }
+                return 0;
+
+        }
+        
+         \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
+                $file = $dato->file('foto')->getClientOriginalExtension();
+                $imageName = time().'.'.$dato->file('foto')->getClientOriginalExtension();//nombre de la imagen como tal.
+
+                $update = Fotoperfil::find($getFoto[0]->id);
+                $update->foto = $url.'/'.$imageName;
+                if ($update->save()) {
+                      $dato->file('foto')->move(public_path($url), $imageName);
+                      return 1;
+                }
+                return 0;
+
+
+
+       
+    }
 }
 

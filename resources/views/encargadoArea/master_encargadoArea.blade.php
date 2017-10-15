@@ -59,28 +59,29 @@
                         </ul>
                     </li>
                     <li class="pushy-link"><a href="{{ url('encargadoArea/datosAreas') }}">Datos del área</a></li>
-                    <li class="pushy-submenu">
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/equipo') }}">Nuestro equipo</a></li>
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/publicarProducto') }}">Publicar producto</a></li>
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/publicarServicio') }}">Publicar servicio</a></li>
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/publicarNoticia') }}">Publicar noticia</a></li>
+
+                       <li class="pushy-link"><a href="{{ url('encargadoArea/clave') }}">Cambiar contraseña</a></li>
+                   <!-- <li class="pushy-submenu">
                         <button>Formularios</button>
                         <ul>
                             <li class="pushy-link"><a href="index">Inicio</a></li>
                             <li class="pushy-link"><a href="/login">Login de institución</a></li>
                             <li class="pushy-link"><a href="#">Item 3</a></li>
                         </ul>
-                    </li>
-                    <li class="pushy-submenu">
+                    </li>-->
+                    <!--<li class="pushy-submenu">
                         <button>foto 3</button>
                         <ul>
                             <li class="pushy-link"><a href="foto">foto</a></li>
                             <li class="pushy-link"><a href="#">Item 2</a></li>
                             <li class="pushy-link"><a href="#">Item 3</a></li>
                         </ul>
-                    </li>
-                    <li class="pushy-submenu">
-                        <button><i class="fa fa-cube"></i> Especialidad / Areas</button>
-                        <ul>
-                            <li class="pushy-link"><a href="#"><!--Aqui nombe--></a></li>
-                        </ul>
-                    </li>
+                    </li>-->
+                  
                     <li class="pushy-link"><a href="#"><i class="fa fa-globe"></i> Notificaciones</a></li>
                     <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>

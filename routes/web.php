@@ -74,7 +74,10 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_descripcionArea', 'institucionController@actualizar_descripcion');
         Route::get('/generarPassword', 'institucionController@vitsa_generarPassword');
         Route::get('/buscarUsuarioParaCambiarPassword/{buscar}', 'institucionController@buscarUsuarioParaCambiarPassword');
+        Route::get('/detalleServicio/{id}','institucionController@ver_detalleServicio');
+        Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'institucionController@ver_detalleServicio_institucion_local');
         Route::get('/detalleProducto/{id}', 'institucionController@ver_detalleProducto');
+        Route::get('/detalleProducto/{idProducto}/{idInstitucion}', 'institucionController@ver_detalleProducto_institucion_local');
         Route::post('/eliminar_producto_institucion', 'institucionController@eliminar_producto_institucion');
         Route::post('/actualizar_producto_foto', 'institucionController@actualizar_producto_foto');
         Route::post('/actualizar_producto_nombre','institucionController@actualizar_producto_nombre');
@@ -88,7 +91,25 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/verDetalleAlumno/{id}', 'alumnoController@vista_detalleAlumno_inst');
         Route::get('/publicarServicio', 'institucionController@vista_publicarServicio'); 
         Route::post('/publicarServicio', 'institucionController@publicarservicio');
-
+        Route::post('/eliminar_servicio_institucion', 'institucionController@eliminar_servicio_institucion');
+        Route::get('/filtrarProducto', 'institucionController@filtrarProducto');
+        Route::get('/filtrarServicio', 'institucionController@filtrarServicio');
+        Route::get('/productosOcultos','institucionController@productos_oclutos');
+        Route::get('/serviciosOcultos', 'institucionController@servicios_ocultos');
+        Route::post('/publicarNoticia', 'institucionController@publicarNoticia');
+        Route::post('/actualizar_nombre_alumno', 'institucionController@actualizar_nombre_alumno');
+        Route::post('/actualizar_apellido_alumno', 'institucionController@actualizar_apellido_alumno');
+        Route::post('/actualizar_correo_alumno', 'institucionController@actualizar_correo_alumno');
+        Route::post('/actualizar_area_alumno', 'institucionController@actualizar_area_alumno');
+        Route::post('/actualizar_numero_alumno', 'institucionController@actualizar_numero_alumno');
+        Route::post('/actualizar_foto_alumno', 'institucionController@actualizar_foto_alumno');
+        Route::get('/verNoticiasLocales', 'institucionController@todas_noticias_locales');
+        Route::get('/verNoticiasGenerales', 'institucionController@todas_noticias_generales');
+        Route::post('/actualizar_titulo_noticia', 'institucionController@actualizar_titulo_noticia');
+        Route::post('/actualizar_texto_noticia', 'institucionController@actualizar_texto_noticia');
+        Route::post('/actualizar_estado_noticia', 'institucionController@actualizar_estado_noticia');
+        Route::get('/traerProductoEnEspera','institucionController@traerProductoEnEspera');
+        Route::get('/traerServicioEnEspera','institucionController@vista_serviciosEspera');
 
 });
 
@@ -107,6 +128,7 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::post('/actualizar_direccion', 'alumnoController@actualizar_direccion');
         Route::post('/actualizar_correo', 'alumnoController@actualizar_correo');
         Route::post('/actualizar_clave', 'alumnoController@actualizar_clave');
+
        
         
 });
@@ -133,6 +155,7 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::get('/clave','encargadoController@vista_clave');
         Route::get('/agregarAlumno', 'encargadoController@vista_agregarAlumno');
         Route::get('/buscador','buscadorController@buscador_encargado');
+        Route::get('/traerProductoEnEspera','institucionController@traerProductoEnEspera');
         Route::get('/perfil_ven/{iduser}', 'encargadoController@vista_perfilVen');
         Route::get('/perfil_venInst/{iduser}','encargadoController@vista_perfilVenInst');
         Route::get('/perfil_institucion/{idinstitucion}','encargadoController@vista_perfilInst');
@@ -150,6 +173,23 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::post('/actualizar_producto_area', 'institucionController@actualizar_producto_area');
         Route::post('/actualizar_producto_precio', 'institucionController@actualizar_producto_precio');
         Route::get('/verDetalleAlumno/{id}', 'alumnoController@vista_detalleAlumno_enc');
+        Route::get('/publicarServicio', 'encargadoController@vista_publicarServicio');
+        Route::post('/publicarServicio', 'encargadoController@publicarServicio');
+        Route::get('/publicarNoticia', 'encargadoController@vista_publicarNoticia');
+        Route::post('/publicarNoticia', 'encargadoController@publicarNoticia');
+        Route::post('/actualizar_foto_alumno', 'institucionController@actualizar_foto_alumno');
+        Route::post('/actualizar_nombre_alumno', 'institucionController@actualizar_nombre_alumno');
+        Route::post('/actualizar_apellido_alumno', 'institucionController@actualizar_apellido_alumno');
+        Route::post('/actualizar_correo_alumno', 'institucionController@actualizar_correo_alumno');
+        Route::post('/actualizar_area_alumno', 'institucionController@actualizar_area_alumno');
+        Route::post('/actualizar_numero_alumno', 'institucionController@actualizar_numero_alumno');
+        Route::get('/verNoticiasLocales', 'encargadoController@todas_noticias_locales');
+        Route::post('/actualizar_titulo_noticia', 'institucionController@actualizar_titulo_noticia');
+        Route::post('/actualizar_texto_noticia', 'institucionController@actualizar_texto_noticia');
+        Route::post('/actualizar_estado_noticia', 'institucionController@actualizar_estado_noticia');
+        Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'encargadoController@ver_detalleServicio_institucion_local');
+        Route::get('/detalleProducto/{idProducto}/{idInstitucion}', 'encargadoController@ver_detalleProducto_institucion_local');
+        Route::get('/vista_serviciosEspera','institucionController@vista_serviciosEspera');
        
 });
 
@@ -169,6 +209,8 @@ Route::get('/mostrarAreas', 'institucionController@traerAreas');
 Route::get('/filtrarArea/{id}','invitadoController@filtroArea');
 Route::post('/aceptarSolicitudUsuario','institucionController@aceptarSolicitudUsuario');
 Route::get('/traerNotificaciones', 'institucionController@traerNotificaciones');
+Route::get('/traerNotificaciones_prod','institucionController@traerNotificaciones_prod');
+Route::get('/traerNotificaciones_serv','institucionController@traerNotificaciones_serv');
 Route::get('/foto','vendedorDependienteController@fotoPerfil');
 Route::post('/agregar_mision', 'institucionController@agregar_mision');
 Route::post('/agregar_vision', 'institucionController@agregar_vision');
@@ -183,7 +225,7 @@ Route::get('/traerNombre', 'encargadoController@traerNombre');
 Route::get('/estadoClaveAlumno', 'vendedorDependienteController@traerEstadoClave');
 Route::get('/estadoClaveEncargado', 'encargadoController@traerEstadoClave');
 Route::get('generarClave/{id}', 'alumnoController@generarClave');
-
+Route::post('/aceptarSolicitudProducto', 'institucionController@aceptarProducto');
 
 /*inicio de usuarios*/
  Route::get('/inicio_cliente', 'clienteController@inicio_cliente');

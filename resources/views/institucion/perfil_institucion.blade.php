@@ -2,6 +2,6 @@
 
 @section('content')
 	
-	@include('buscar_dentro.perfil_institucion')
+	@include('buscar_dentro.perfil_institucion', ['ruta' => 'institucion'])
 
 @endsection

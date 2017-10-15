@@ -10,6 +10,8 @@ use App\Fotoperfil;
 use App\Http\Requests\institucionRequest;
 use App\Http\Requests\agregaralumnoRequest;
 use App\Http\Requests\productoInstiRequest;
+use App\Http\Requests\noticiaRequest;
+use App\Http\Requests\servicioInstRequest;
 use App\Institucion;
 use App\Sexo;
 use App\User;
@@ -24,7 +26,10 @@ use App\producto;
 use App\Tienda_producto_institucion;
 use App\Tienda_servicio_institucion;
 use App\estado_tienda_producto;
+use App\estado_tienda_servicio;
+use App\estado_noticia;
 use App\servicio;
+use App\noticia;
 use Illuminate\Http\Request;
 use App\Http\Requests\productoRequest;
 use Illuminate\Support\Facades\Mail;
@@ -41,9 +46,16 @@ class institucionController extends Controller
 
           $datosInstitucion = Institucion::datos();
           $productos = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 4);
+          $servicios = servicio::mostrarServicioDesdeAdmin(\Auth::guard('institucion')->user()->id, 4);
+          $noticias_generales = noticia::noticias_generales();
+          $noticias_locales = noticia::noticias_locales(\Auth::guard('institucion')->user()->id);
+
             return view('institucion.inicio')
             ->with('institucion', $datosInstitucion)
-            ->with('productos', $productos);
+            ->with('productos', $productos)
+            ->with('servicios', $servicios)
+            ->with('noticias_generales',$noticias_generales)
+            ->with('noticias_locales',$noticias_locales);
       
     }
     public function vista_agregarAE(){
@@ -67,7 +79,8 @@ class institucionController extends Controller
     }
 
     public function vista_noticia(){
-            return view('institucion.noticia');
+            $estado_noticia = estado_noticia::all();
+            return view('institucion.noticia')->with('estado_noticia', $estado_noticia);
     }
     public function vista_paginaweb(){
           return view('institucion.paginaweb');
@@ -89,10 +102,6 @@ class institucionController extends Controller
           return view('institucion.grafico')->with('areas',json_encode($array));
     }
 
-    
-
-
-
      public function vista_perfilVen($iduser){
         $idu = base64_decode($iduser);
         //return $idu;
@@ -107,14 +116,26 @@ class institucionController extends Controller
         ->with('vendedor',$vendedor[0]->telefono);
     }
     public function vista_perfilInst($idinstitucion){
+      try{
+            $idI = base64_decode($idinstitucion);
+            $institucion = Institucion::find($idI);
+            //return $institucion->id;
+            $productos = producto::verProductosVisibles($institucion->id, 5);
+            $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
+            return view('institucion.perfil_institucion')
+            ->with('institucion', $institucion)
+            ->with('productos', $productos)
+            ->with('servicios', $servicios)
+            ->with('idInstitucion', $idinstitucion);
 
-        $idI = base64_decode($idinstitucion);
-        $institucion = Institucion::find($idI);
-        //return $institucion->id;
-        $productos = producto::traetProductosDesdeAdmin($institucion->id, 5);
-        return view('institucion.perfil_institucion')
-        ->with('institucion', $institucion)
-        ->with('productos', $productos);
+        } catch (\Exception $e) {
+          return redirect()->back();
+        }
+    }
+    public function vista_serviciosEspera()
+    {
+       $servicios = servicio::traer_ServicioEnEspera(\Auth::guard('institucion')->user()->id, 5);
+       return view('institucion.servicioEspera')->with('serv_esp', $servicios);
     }
     public function vista_perfilVenInst($iduser){
          $idu = base64_decode($iduser);
@@ -157,7 +178,7 @@ class institucionController extends Controller
       $estadoP = estado_tienda_producto::limit(2)->get();
       $area = Area::all();
 
-      $productos = producto::detalleProducto($getId);
+      $productos = producto::detalleProducto($getId, \Auth::guard('institucion')->user()->id);
       return view('institucion.verDetalleProducto')
       ->with('productos', $productos)
       ->with('categoria', $categoria)
@@ -165,13 +186,86 @@ class institucionController extends Controller
       ->with('area', $area);
     }
 
+    public function ver_detalleProducto_institucion_local(Request $dato)
+    {
+
+      $getId = base64_decode($dato->idProducto);
+      $getIdInst = base64_decode($dato->idInstitucion);
+      $categoria = categoria_producto::all();
+      $estadoP = estado_tienda_producto::limit(2)->get();
+      $area = Area::all();
+
+      $productos = producto::detalleProducto($getId, $getIdInst);
+      return view('institucion.verDetalleProductoInstitucionBuscador')
+      ->with('productos', $productos)
+      ->with('categoria', $categoria)
+      ->with('estadoP', $estadoP)
+      ->with('area', $area);
+    }
+    public function ver_detalleServicio(Request $dato)
+    {
+      $getId = base64_decode($dato->id);
+      $categoria = categoria_servicio::all();
+      $estadoS = estado_tienda_servicio::limit(2)->get();
+      $area = Area::all();
+
+      $servicio = servicio::detalleServicio($getId, \Auth::guard('institucion')->user()->id);
+      //return $servicio;
+      return view('institucion.verDetalleServicio')
+              ->with('categoria',$categoria)
+              ->with('estadoS',$estadoS)
+              ->with('area',$area)
+              ->with('servicio',$servicio);
+    }
+    public function ver_detalleServicio_institucion_local(Request $dato)
+    {
+      
+      $getId = base64_decode($dato->idServicio);
+      $getIdInst = base64_decode($dato->idInstitucion);
+      $categoria = categoria_servicio::all();
+      $estadoS = estado_tienda_servicio::limit(2)->get();
+      $area = Area::all();
+
+      $servicio = servicio::detalleServicio($getId, $getIdInst);
+      //return $servicio;
+      return view('institucion.verDetalleServicioInstitucionBuscador')
+              ->with('categoria',$categoria)
+              ->with('estadoS',$estadoS)
+              ->with('area',$area)
+              ->with('servicio',$servicio);
+    }
+    public function traerProductoEnEspera()
+    {
+      $prod_esp = producto::traerProductoEnEspera(\Auth::guard('institucion')->user()->id, 10);
+       return view('institucion.productoEspera', ['prod_esp' => $prod_esp]);
+    }
+    public function traerServicioEnEspera()
+    {
+       $serv_esp = Tienda_servicio_institucion::traerServicioEnEspera(\Auth::guard('institucion')->user()->id, 10);
+       return view('institucion.servicioEspera', ['serv_esp' => $serv_esp]);
+    }
     public function vista_publicarServicio()
     {
       $areas = Area::traer();
       $categoria_serv = categoria_servicio::all();
+      $servicios = servicio::mostrarServicioDesdeAdmin(\Auth::guard('institucion')->user()->id, 1);
       return view('institucion.publicarServicio')
               ->with('categoria_serv', $categoria_serv)
+              ->with('servicios', $servicios)
               ->with('areas',$areas);
+    }
+    public function todas_noticias_locales()
+    {
+      $estado_noticia = estado_noticia::all();
+      $noticias_locales = noticia::detalleNoticia(\Auth::guard('institucion')->user()->id);
+      return view('institucion.noticias_locales')
+      ->with('noticias_locales', $noticias_locales)
+      ->with('estado_noticia',$estado_noticia);
+    }
+    public function todas_noticias_generales()
+    {
+       $noticias_generales = noticia::todas();
+       return view('institucion.noticias_generales')->with('noticias_generales',$noticias_generales);
     }
 
     public function agregar_alumno(agregaralumnoRequest $datos)
@@ -280,6 +374,16 @@ class institucionController extends Controller
         }
         return "error";
     }
+    public function aceptarProducto(Request $dato)
+    {
+      
+      $aceptar = Tienda_producto_institucion::find($dato[0]);
+      $aceptar->id_estado = '1';
+      if ($aceptar->save()) {
+         return "Todo Bien";
+      }
+      return "Algo salió mal";
+    }
     public function traerNotificaciones(){
 
        $notificar = Institucion::notificaciones();
@@ -287,6 +391,17 @@ class institucionController extends Controller
           foreach ($notificar as $not) {
              return $not->notificar;
           }
+    }
+    public function traerNotificaciones_prod()
+    {
+      $notificar_pod = Tienda_producto_institucion::productoEnEspera();
+
+      return $notificar_pod;
+    }
+    public function traerNotificaciones_serv()/*cantidad de solicitudes*/
+    {
+       $notificar_serv = Tienda_servicio_institucion::traer_ServicioEnEspera();
+       return $notificar_serv;
     }
     public function genclave(){
       $cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -437,7 +552,7 @@ class institucionController extends Controller
     /*FIN DE PUBLICACION DE LOS PRODUCTOS*/
 
     /*PUBLICACION DE LOS SERVICIOS*/
-    public function publicarservicio(Request $datos)
+    public function publicarservicio(servicioInstRequest $datos)
     {
       $insertarServicio = servicio::insertar($datos);
 
@@ -461,7 +576,7 @@ class institucionController extends Controller
      /*FIN DE PUBLICACION DE LOS SERVICIOS*/
     public function eliminar_producto_institucion(Request $dato)
     {
-      $getId= base64_decode($dato->idProducto);
+      $getId = base64_decode($dato->idProducto);
       $getFoto = foto_producto::where('id_producto',$getId)->get();
       //return $getFoto[0]->foto;
       \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
@@ -471,6 +586,18 @@ class institucionController extends Controller
       $prod_insti = producto::borrar($getId);
 
       return redirect()->back();
+    }
+    public function eliminar_servicio_institucion(Request $dato)
+    { 
+      $getId =base64_decode($dato->idServicio);
+       $getFoto = foto_servicio::where('id_servicio',$getId)->get();
+       \File::delete($getFoto[0]->nombre);/*ELIMINAR FOTO*/
+       $foto_servicio = foto_servicio::borrar($getFoto[0]->id);
+       $tienda_serv_inst = Tienda_servicio_institucion::borrar($getId);
+       $serv_insti = servicio::borrar($getId);
+
+       return redirect()->back();
+      
     }
     public function actualizar_producto_foto(Request $dato)
     {
@@ -572,20 +699,166 @@ class institucionController extends Controller
           }
           return redirect()->back();
     }
-    /*public function FunctionName($value='')
+
+    public function filtrarProducto(Request $datos)
     {
-      # code...
+      $this->validate($datos,[
+                'buscar' => 'required',
+          ]);
+      $productos = producto::filtrar_desde_admin($datos->buscar);
+
+      return view('institucion.nuestroProducto')
+      ->with('productos', $productos)
+      ->with('titulo', "Filtrado de productos");
     }
-    public function FunctionName($value='')
+    public function filtrarServicio(Request $datos)
     {
-      # code...
+      $this->validate($datos,[
+                'buscar' => 'required',
+          ]);
+      $servicios = servicio::filtrar_desde_admin($datos->buscar);
+
+      return view('institucion.nuestroServicio')
+      ->with('servicios', $servicios)
+      ->with('titulo', "Filtrado de servicios");
     }
-    public function FunctionName($value='')
+
+    public function publicarNoticia(noticiaRequest $datos)
     {
-      # code...
+      $noticia = noticia::insertar($datos, \Auth::guard('institucion')->user()->id);
+      if ($noticia > 0) {
+        \Session::flash('correcto', 'Noticia ingresada');
+         return redirect()->back();
+      }
+      return redirect()->back()->withErrors(['Algo salió mal']);
     }
-    public function FunctionName($value='')
+
+    public function actualizar_nombre_alumno(Request $dato)
     {
-      # code...
-    }*/
+       $this->validate($dato,[
+                'nombres' => 'required',
+          ]);
+
+         $update = User::actualizarNombres($dato->nombres, $dato->idUser);
+
+         if ($update) {
+              \Session::flash('correcto', 'Nombres actualizados');
+              return redirect()->back();
+         }
+
+    }
+     public function actualizar_apellido_alumno(Request $dato)
+    {
+       $this->validate($dato,[
+                'apellidos' => 'required',
+          ]);
+
+         $update = User::actualizarApellidos($dato->apellidos, $dato->idUser);
+
+         if ($update) {
+              \Session::flash('correcto', 'Apellidos actualizados');
+              return redirect()->back();
+         }
+
+    }
+    public function actualizar_correo_alumno(Request $dato)
+    {
+       $this->validate($dato,[
+                'correo' => 'required',
+          ]);
+
+         $update = User::actualizar_Correo($dato->correo, $dato->idUser);
+
+         if ($update) {
+              \Session::flash('correcto', 'Correo actualizado');
+              return redirect()->back();
+         }
+
+    }
+    public function actualizar_area_alumno(Request $dato)
+    {
+       $this->validate($dato,[
+                'area' => 'required',
+          ]);
+
+         $vendedor = Vendedor::where('id_user', $dato->idUser)->first();
+         $update = VendedorInstitucion::actualizar_area_alumno($dato->area, $vendedor->id);
+
+         if ($update) {
+              \Session::flash('correcto', 'Área actualizada');
+              return redirect()->back();
+         }
+
+    }
+    public function actualizar_numero_alumno(Request $dato)
+    {
+       $this->validate($dato,[
+                'numero' => 'required|min:11|numeric',
+          ]);
+
+         $update = Vendedor::actualizar_numero($dato->numero, $dato->idUser);
+
+         if ($update) {
+              \Session::flash('correcto', 'Número actualizado');
+              return redirect()->back();
+         }
+
+    }
+    public function actualizar_foto_alumno(Request $dato)
+    {
+        $this->validate($dato,[
+                'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
+          ]);
+
+
+         $update = Fotoperfil::actualizar_foto($dato);
+
+         return $update;
+    }
+
+    public function actualizar_titulo_noticia(Request $datos)
+    {
+       $this->validate($datos,['titulo' => 'required|max:150',]);
+       $noticia = noticia::find($datos->noticia);
+       $noticia->titulo = $datos->titulo;
+       if ($noticia->save()) {
+            \Session::flash('correcto', 'Título actualizado');
+              return redirect()->back();
+       }
+    }
+    public function actualizar_texto_noticia(Request $datos)
+    {
+       $this->validate($datos,['texto' => 'required|max:3500',]);
+        $noticia = noticia::find($datos->noticia);
+        $noticia->texto = $datos->texto;
+        if ($noticia->save()) {
+            \Session::flash('correcto', 'Título actualizado');
+              return redirect()->back();
+       }
+    }
+    public function actualizar_estado_noticia(Request $datos)
+    {
+       $this->validate($datos,['estado' => 'required',]);
+       $noticia = noticia::find($datos->noticia);
+       $noticia->id_estado = $datos->estado;
+       if ($noticia->save()) {
+            \Session::flash('correcto', 'Estado actualizado');
+              return redirect()->back();
+       }
+    }
+    public function productos_oclutos()
+    {
+      $productos = producto::productosOcultosDesdeAdmin();
+      return view('institucion.nuestroProducto')
+      ->with('productos', $productos)
+      ->with('titulo', "Productos ocultos"); 
+    }
+    public function servicios_ocultos($value='')
+    {
+       $servicios = servicio::serviciosOcultosDesdeAdmin();
+       return view('institucion.nuestroProducto')
+       ->with('productos', $servicios)
+       ->with('titulo', "Servicios ocultos"); 
+    }
+  
 }

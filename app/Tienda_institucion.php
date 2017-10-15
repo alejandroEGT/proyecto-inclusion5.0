@@ -36,7 +36,7 @@ class Tienda_institucion extends Model
         $traer = Tienda_institucion::where('id_institucion', $idInst)->get();
         return $traer;
     }
-   
+    
 
 
 }

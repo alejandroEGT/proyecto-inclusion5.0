@@ -58,7 +58,7 @@
 		<div class="clearout"></div>
 	</div>
 
-	<!--tiendas-->
+	<!--tienda-->
 	<div class="android-more-section">
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Tiendas</div>
 		<div class="android-card-container mdl-grid">

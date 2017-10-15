@@ -1,14 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Fotoperfil;
+use App\Http\Requests\clienteRequest;
 use App\Sexo;
 use App\Tienda_institucion;
 use App\User;
 use App\cliente;
 use App\producto;
+<<<<<<< HEAD
 
 use App\foto_producto;
 
+=======
+>>>>>>> 92b7ad0282efcc4072fbfea61503115507c0a127
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,19 +21,26 @@ use Illuminate\Support\Facades\Auth;
 class clienteController extends Controller
 {
     public function inicio_cliente(){
+<<<<<<< HEAD
 
 
       $productos =  producto::all();
     	return view('inicioCliente.inicio_cliente')->with('productos',$productos);
 
+=======
+>>>>>>> 92b7ad0282efcc4072fbfea61503115507c0a127
       $tiendas = Tienda_institucion::all();
       $productos = \DB::select('SELECT * from fProducto');
       //una consulta que traiga los productos con la foto
 
     	return view('inicioCliente.inicio_cliente')->with('productos',$productos)
                                                  ->with('tiendas',$tiendas);
+<<<<<<< HEAD
                 
       
+=======
+    
+>>>>>>> 92b7ad0282efcc4072fbfea61503115507c0a127
     }
 
      public function vista_productos($id){
@@ -36,7 +48,19 @@ class clienteController extends Controller
         $productos = \DB::select('SELECT * from fProducto where id ='.$id);
         return view('inicioCliente.vista_productos')->with('productos',$productos[0]);
                                                   
-    }       
+    }  
+
+    public function perfil_cliente(){
+
+
+      $id_cliente = cliente::where('id_user', Auth::user()->id)->first();
+
+      $foto = Fotoperfil::traerFotobyid(Auth::user()->id);
+      
+      return view('inicioCliente.perfil_cliente')->with('id_cliente',$id_cliente)
+                                                 ->with('foto', $foto);
+
+    }     
 
 
 	public function sesion_cliente(){
@@ -66,7 +90,7 @@ class clienteController extends Controller
 
        public function guardar_cliente(Request $datos){
 
-   		    $user = User::insertarCliente($datos);
+   		    $user = User::insertarCliente($datos,1);
 
           if($user){
 
@@ -75,6 +99,9 @@ class clienteController extends Controller
            $cliente = cliente::guardarCliente($datos, $idUser);
 
             if($cliente){
+
+              $foto = Fotoperfil::fotoDefault($idUser->id);
+
               return "oka";
               
             }else{
@@ -85,7 +112,41 @@ class clienteController extends Controller
           }
     }
 
+    public function updCorreo (Request $datos){
 
+     $update = cliente::updCorreo($datos);
+
+     if($update){
+      return "oka";
+     }else{
+      return "caca";
+     }
+
+    }
+
+    public function updTelefono (Request $datos){
+
+     $update = cliente::updTelefono($datos);
+
+     if($update){
+      return "oka";
+     }else{
+      return "caca";
+     }
+
+    }
+
+    public function updClave (Request $datos){
+
+     $update = cliente::updClave($datos);
+
+     if($update){
+      return "oka";
+     }else{
+      return "caca";
+     }
+
+    }
 
     
 }

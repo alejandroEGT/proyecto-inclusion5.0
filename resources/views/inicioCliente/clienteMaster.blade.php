@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+
 	<!-- Required meta tags -->
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -41,9 +42,9 @@
 					    	<div class="android-navigation-container col-md-3">
 					            <nav class="android-navigation mdl-navigation">
 					              	<span>
-					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="/carro_cliente">
+					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{ url('cliente/carro_cliente') }}">
 					              			<i class="material-icons">&#xE8CC;</i> Cesta 
-					              			<span class="mdl-badge mdl-badge--no-background" data-badge="3"></span>
+					              			<span class="mdl-badge mdl-badge--no-background" data-badge="2"></span>
 					              		</a>
 					              	</span>
 					            </nav>
@@ -56,13 +57,13 @@
 					        <!--autentificacion cliente-->
 					        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
 					          	@if (Auth::guest())
-		                            <li class="mdl-menu__item" ><a href="/sesion_cliente">Iniciar Sesion</a></li>
-					            	<li class="mdl-menu__item"><a href="/registro_cliente">Registrate</a></li>
+		                            <li class="mdl-menu__item" ><a href="{{ url('sesion_cliente')}}">Iniciar Sesion</a></li>
+					            	<li class="mdl-menu__item"><a href="{{ url('registro_cliente')}}">Registrate</a></li>
 		                        @else
 			                        <li class="mdl-menu__item" ><a href="">{{ Auth::user()->nombres }}</a></li>
 			                        <div class="android-drawer-separator"></div>
-			                        <li class="mdl-menu__item" ><a href="">Mi perfil</a></li>
-						            <li class="mdl-menu__item" ><a href="/logoutCliente">Logout</a></li>
+			                        <li class="mdl-menu__item" ><a href="{{ url('cliente/perfil_cliente') }}">Mi perfil</a></li>
+						            <li class="mdl-menu__item" ><a href="{{ url('cliente/logoutCliente') }}">Logout</a></li>
 					        </ul>
 					         	@endif
 
@@ -77,15 +78,18 @@
 				        <nav class="mdl-navigation">
 				          <span class="mdl-navigation__link" href="#"><i class="material-icons">&#xE853;</i> Usuario</span>
 		    		      @if (Auth::guest())
-				          <a class="mdl-navigation__link" href="/sesion_cliente">Iniciar Sesión</a>
-				          <a class="mdl-navigation__link" href="/registro_cliente">Registrate</a>
+				          <a class="mdl-navigation__link" href="{{ url('sesion_cliente')}}">Iniciar Sesión</a>
+				          <a class="mdl-navigation__link" href="{{ url('registro_cliente')}}">Registrate</a>
 					      @else
 	                      <a class="mdl-navigation__link" href="">{{ Auth::user()->nombres }}</a>
-				          <a class="mdl-navigation__link" href="/logoutCliente">Logout <i class="material-icons">exit_to_app</i></a>
+
+	                      <a class="mdl-navigation__link" href="{{ url('cliente/perfil_cliente')}}">Mi perfil</a>
+				          <a class="mdl-navigation__link" href="{{ url('cliente/logoutCliente')}}">Logout <i class="material-icons">exit_to_app</i></a>
 					      @endif
 				          <div class="android-drawer-separator"></div>
 				          <span>
-			          	  <a class="mdl-navigation__link" href="/carro_cliente">
+			          	  <a class="mdl-navigation__link" href="{{ url('cliente/carro_cliente') }}">
+
 			          	  <i class="material-icons">&#xE8CC;</i>Cesta
 			          	  <i class="mdl-badge" data-badge="3"></i>
 			          	  </a>
@@ -165,11 +169,11 @@
 			</script>
 			<script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js" integrity="sha384-KlVcf2tswD0JOTQnzU4uwqXcbAy57PvV48YUiLjqpk/MJ2wExQhg9tuozn5A1iVw" crossorigin="anonymous">
 			</script>
-			<script src="../bdm/js/bootstrap-material-design.js"></script>
-			<script src="mdl/material.min.js"></script>
-			<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-			<script type="text/javascript" src="js/jquery.flexisel.js"></script>
-			<script src="js/slider_productos.js"></script>
+			<script src="{{asset('../bdm/js/bootstrap-material-design.js')}}"></script>
+			<script src="{{asset('mdl/material.min.js')}}"></script>
+			<script type="text/javascript" src="{{asset('https://code.jquery.com/jquery-1.7.1.min.js')}}"></script>
+			<script type="text/javascript" src="{{asset('js/jquery.flexisel.js')}}"></script>
+			<script src="{{asset('js/slider_productos.js')}}"></script>
 			@yield('js')
 		</body>
 </html>

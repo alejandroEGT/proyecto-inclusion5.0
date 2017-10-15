@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Fotoperfil;
 use App\User;
 use App\cliente;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -37,7 +37,8 @@ public function setTipo($tipo) {
                     'first_name', 
                     'last_name', 
                     'email', 
-                    'gender', 
+                    'gender',
+                    'picture',
                 ]);
           $this->setTipo(2);
 
@@ -48,6 +49,7 @@ public function setTipo($tipo) {
         }
 
         $userSocial = $social->user();
+        
 
         $finduser = User::where('email', $userSocial->email)->first();
 
@@ -66,6 +68,8 @@ public function setTipo($tipo) {
             $cliente = cliente::guardarCliente($userSocial, $idUser);
 
             if($cliente){
+
+              $foto = Fotoperfil::fotoSocial($userSocial ,$idUser->id);
 
               $finduser = User::where('email', $userSocial->email)->first();
 

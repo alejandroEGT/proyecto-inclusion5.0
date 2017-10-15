@@ -59,6 +59,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="android-drawer-separator"></div>
+	<div class="android-drawer-separator"></div><br>
 
 @endsection

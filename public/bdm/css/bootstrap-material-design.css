@@ -2612,7 +2612,7 @@ tbody.collapse.show {
   .nav-pills .nav-link.active,
   .show > .nav-pills .nav-link {
     color: #fff;
-    background-color: #2196f3; }
+    background-color: blue; }
 
 .nav-fill .nav-item {
   flex: 1 1 auto;

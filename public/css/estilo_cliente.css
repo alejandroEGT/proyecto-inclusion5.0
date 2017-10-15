@@ -47,6 +47,12 @@ a:link {
 	width: 100px;
 }
 
+.misDatos{
+
+	font-weight:bold;
+}
+
+
 .piePagina{
 background-color: #D0D0D0;
 margin-left: -20px;
@@ -111,4 +117,10 @@ right: 20px;
 .caja_lupa{
 	background-color: white;
 	padding-left: 10px;
+}
+
+.imagen-producto > img{
+	width:300px;
+	height:300px;
+	margin: 5px 30px 5px 5px;
 }

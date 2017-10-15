@@ -54,6 +54,7 @@ class Fotoperfil extends Model
 
         $eliminar = Fotoperfil::where('id_user', $id)->delete();
     }
+<<<<<<< HEAD
     protected function actualizar_foto($dato)
     {
 
@@ -90,6 +91,18 @@ class Fotoperfil extends Model
 
 
        
+=======
+
+    protected function fotoSocial($datos, $iduser){
+
+        $foto = new Fotoperfil;
+        $foto->id_user = $iduser;
+        $foto->foto =  $datos->avatar_original;
+        if ($foto->save()) {
+            return true;
+        }
+        return false;
+>>>>>>> 92b7ad0282efcc4072fbfea61503115507c0a127
     }
 }
 

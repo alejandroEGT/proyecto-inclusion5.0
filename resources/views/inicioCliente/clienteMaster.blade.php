@@ -42,7 +42,7 @@
 					    	<div class="android-navigation-container col-md-3">
 					            <nav class="android-navigation mdl-navigation">
 					              	<span>
-					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{ url('cliente/carro_cliente') }}">
+					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{ url('carro/carro_cliente') }}">
 					              			<i class="material-icons">&#xE8CC;</i> Cesta 
 					              			<span class="mdl-badge mdl-badge--no-background" data-badge="2"></span>
 					              		</a>
@@ -88,7 +88,7 @@
 					      @endif
 				          <div class="android-drawer-separator"></div>
 				          <span>
-			          	  <a class="mdl-navigation__link" href="{{ url('cliente/carro_cliente') }}">
+			          	  <a class="mdl-navigation__link" href="{{ url('carro/carro_cliente') }}">
 
 			          	  <i class="material-icons">&#xE8CC;</i>Cesta
 			          	  <i class="mdl-badge" data-badge="3"></i>

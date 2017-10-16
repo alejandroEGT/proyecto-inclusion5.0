@@ -83,6 +83,8 @@ class clienteController extends Controller
 
               $foto = Fotoperfil::fotoDefault($idUser->id);
 
+             
+
               return "oka";
               
             }else{

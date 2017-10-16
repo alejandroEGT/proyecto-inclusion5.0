@@ -43,7 +43,7 @@
 	  		<div class="android-card-container mdl-grid">
 				<ul id="flexiselDemo1">
 					@foreach($productos as $producto)	
-				    <li><a href="/vista_productos/{{$producto->id}}">
+				    <li><a href="{{ url('producto/vista_productos/'.$producto->id)}}">
 					<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
 						<div class="mdl-card__media porteimg"><img src="{{ '/'.$producto->foto }}"></div>							
 						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $producto->nombre }}</h4></div>

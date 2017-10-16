@@ -200,12 +200,13 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
 
  Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 
- Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
+
 
 
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');
+
 
 
 Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
@@ -215,7 +216,19 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::post('/updCorreo', 'clienteController@updCorreo');
      Route::post('/updTelefono', 'clienteController@updTelefono');
      Route::post('/updClave', 'clienteController@updClave');
-     Route::get('/carro_cliente' , 'clienteController@carro_cliente');
 
 });
 
+Route::group(['prefix' => 'producto'], function(){
+   
+     Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
+     
+
+});
+
+Route::group(['prefix' => 'carro'], function(){
+   
+    Route::get('/carro_cliente' , 'clienteController@carro_cliente');
+    Route::post('/ingCarro' , 'carroController@ingProducto');
+
+});

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Fotoperfil;
 use App\User;
+use App\carro;
 use App\cliente;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -72,6 +73,8 @@ public function setTipo($tipo) {
               $foto = Fotoperfil::fotoSocial($userSocial ,$idUser->id);
 
               $finduser = User::where('email', $userSocial->email)->first();
+
+              $carro = carro::crearCarro($finduser);
 
               Auth::login($finduser);
               return redirect('/inicio_cliente');

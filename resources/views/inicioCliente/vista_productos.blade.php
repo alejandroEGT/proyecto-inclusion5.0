@@ -39,7 +39,8 @@
 					<button type="submit" class="btn btn-primary btn-outline-success">Comprar ahora</button>
 					</form>
 					
-					<form action="" method="">
+					<form action="{{ url('carro/ingCarro') }}" method="post">
+						{{ csrf_field() }}
 					<button type="submit" class="btn btn-primary btn-outline-danger">Añadir a la cesta</button>
 					</form>
 

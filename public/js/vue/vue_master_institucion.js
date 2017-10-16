@@ -284,7 +284,24 @@ new Vue({
 						this.$http.post('/aceptarSolicitudProducto', $id).then(function(response){
 								
 								console.log(response.body);
-								this.notificar();
+								alert("Producto aceptado");
+								this.notificar_producto()
+								location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		},
+		aceptarServicio($id){
+			if (confirm("¿Quieres Aceptar este servicio?") == true) {
+				    
+						this.$http.post('/aceptarSolicitudServicio', $id).then(function(response){
+								
+								console.log(response.body);
+								alert("Servicio aceptado");
+								this.notificar_servicio();
 								location.reload();
 						})
 

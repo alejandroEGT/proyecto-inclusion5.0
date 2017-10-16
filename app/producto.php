@@ -230,7 +230,8 @@ class producto extends Model
                         'productos.nombre as nombre',
                         'productos.descripcion as descripcion',
                         'productos.created_at as creado',
-                        'estado_tienda_producto.estado as nombreEstado'
+                        'estado_tienda_producto.estado as nombreEstado',
+                        'area.nombre as nombreArea'
                     ])
                 ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
                 ->join('foto_productos','foto_productos.id_producto','=','productos.id')
@@ -239,6 +240,34 @@ class producto extends Model
                 ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
                 ->where('institucion.id','=', $idInstitucion)
+                ->where('tienda_producto_instituciones.id_estado', 3)
+                ->orderBy('productos.created_at', 'desc')
+                ->paginate($cantidad);
+
+                //return $traer;
+               
+                    return $traer;
+    }
+     protected function traerProductoEnEspera_desdeArea($idInstitucion, $idArea,$cantidad)
+    {
+        $traer = \DB::table('tienda_producto_instituciones')
+                ->select([
+                        'tienda_producto_instituciones.id_producto as idProducto',
+                        'foto_productos.foto as foto',
+                        'productos.nombre as nombre',
+                        'productos.descripcion as descripcion',
+                        'productos.created_at as creado',
+                        'estado_tienda_producto.estado as nombreEstado',
+                        'area.nombre as nombreArea'
+                    ])
+                ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
+                ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+                ->join('estado_tienda_producto','estado_tienda_producto.id','=','tienda_producto_instituciones.id_estado')
+                ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
+                ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
+                ->join('area','area.id','=','tienda_producto_instituciones.id_area')
+                ->where('institucion.id','=', $idInstitucion)
+                ->where('area.id', $idArea)
                 ->where('tienda_producto_instituciones.id_estado', 3)
                 ->orderBy('productos.created_at', 'desc')
                 ->paginate($cantidad);
@@ -293,7 +322,7 @@ class producto extends Model
     }
     protected function actualizar_descripcion($dato)
     {
-        $pi = producto_institucion::find($dato->idProducto);
+        $pi = producto::find($dato->idProducto);
         $pi->descripcion = $dato->descripcion;
         if ($pi->save()) {
             return true;
@@ -302,7 +331,7 @@ class producto extends Model
     }
     protected function actualizar_precio($dato)
     {
-        $pi = producto_institucion::find($dato->idProducto);
+        $pi = producto::find($dato->idProducto);
         $pi->precio = $dato->precio;
         if ($pi->save()) {
             return true;
@@ -311,7 +340,7 @@ class producto extends Model
     }
     protected function actualizar_cantidad($dato)
     {
-        $pi = producto_institucion::find($dato->idProducto);
+        $pi = producto::find($dato->idProducto);
         $pi->cantidad = $dato->cantidad;
         if ($pi->save()) {
             return true;
@@ -331,7 +360,7 @@ class producto extends Model
     }
     protected function actualizar_categoria($dato)
     {
-        $pi = producto_institucion::find($dato->idProducto);
+        $pi = producto::find($dato->idProducto);
         $pi->id_categoria = $dato->categoria;
             if ($pi->save()) {
                 return true;

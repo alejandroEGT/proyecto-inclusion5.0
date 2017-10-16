@@ -1,8 +1,8 @@
-@extends('institucion.master_institucion')
+@extends('encargadoArea.master_encargadoArea')
 
 @section('content')
 
-	@include('verDetalle.servicio', ['ruta' => 'institucion', 'user' => 1])
+	@include('verDetalle.servicio', ['ruta' => 'encargadoArea', 'user' => 2])
 
 @endsection
 @section('js')

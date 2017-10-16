@@ -1,11 +1,13 @@
- @extends('institucion.master_institucion')
+@extends('encargadoArea.master_encargadoArea')
 
 @section('content')
+
+	@section('content')
 <center><label>{{$titulo}}</label></center>
 <hr>
 <div class="row">
 	<div class="col-md-offset-2 col-md-8 panel">
-		<form action="{{ url('institucion/filtrarServicio') }}" method="GET"> 
+		<form action="{{ url('encargadoArea/filtrarServicio') }}" method="GET"> 
 								  <div class="row">
 								    <div class="col-md-12">
 								      <div class="input-group">
@@ -19,7 +21,7 @@
 								   </div>
 								    </div>
 								  </div>
-						</form>	
+							</form>	
 	</div>
 </div>
 <div class="row">
@@ -34,12 +36,12 @@
 						<p><label>{{ $servicio->nombre }}</label></p>
 						<p><label style="color:#85929E" >{{ $servicio->descripcion }}</label></p>
 						<p>
-							<form id="eliminar" action="{{ url("institucion/eliminar_servicio_institucion") }}" method="post">
+							<form id="eliminar" action="{{ url("encargadoArea/eliminar_servicio_institucion") }}" method="post">
 							{{ csrf_field() }}
-							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleServicio/".base64_encode($servicio->id)) }}">Ver..</a>
+							<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleServicio/".base64_encode($servicio->id)) }}">Ver..</a>
 							<input type="hidden" value="{{ base64_encode($servicio->id) }}" name="idProducto">	
 							
-							<input type="button" @click="eliminarServicio" class="btn btn-warning btn-xs" value="Eliminar" >
+							<input type="button" {{--@click="eliminarServicio" --}} class="btn btn-warning btn-xs" value="Eliminar" >
 						</form>	
 						</p>
 					</div>
@@ -51,5 +53,7 @@
 		@endif
 	</div>
 </div>
+
+@endsection
 
 @endsection

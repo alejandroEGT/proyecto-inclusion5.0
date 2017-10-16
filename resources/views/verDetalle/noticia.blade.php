@@ -46,7 +46,7 @@
 			<div class="row">
 				<div class="col-md-offset-1 col-md-3">
 					<p><label>Titulo</label></p>
-					<input type="text" name="titulo" class="form-control">
+					<input type="text" name="titulo" class="form-control" value="{{ old('titulo') }}" >
 				</div>
 				<div class="col-md-2">
 					<p><label>Tipo de noticia</label></p>
@@ -62,7 +62,7 @@
 			<div class="row">
 				<div class="col-md-offset-1 col-md-3">
 					<p><label>Texto</label></p>
-					<textarea name="texto" class="form-control" ></textarea>
+					<textarea name="texto" class="form-control"  value="{{ old('texto') }}" ></textarea>
 				</div>
 				<div class="col-md-2">
 					<br><br>

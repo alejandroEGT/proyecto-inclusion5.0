@@ -50,6 +50,7 @@
 			</div>
 					</div>
 				</div>
+				<center><a href="{{ url('userDependiente/logout') }}"><label>Salir</label></a></center>
 		@endif
 		@if ($estado_password == 2)
 			
@@ -134,7 +135,7 @@
 										<div class="box-producto">
 											<center>
 												<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
-												<p>{{ $producto->nombre }}</p>
+												<p>{{ str_limit($producto->nombre, 10) }}</p>
 											</center>
 
 										</div>	
@@ -166,7 +167,7 @@
 										<div class="box-producto">
 											<center>
 												<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
-												<p>{{ $servicio->nombre }}</p>
+												<p>{{ str_limit($servicio->nombre, 10) }}</p>
 											</center>
 
 										</div>	

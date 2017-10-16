@@ -27,6 +27,7 @@ class Encargado extends Model
      			  ->join('vendedor-institucion','vendedor-institucion.id_vendedor','=','vendedor.id')
      			  ->join('area','area.id','=','vendedor-institucion.id_area')
      			  ->join('fotoperfil','fotoperfil.id_user','=','users.id')
+                  ->where('vendedor.id_estado', 1)
      			  ->where('area.id','=', $area[0]->id_area)->get();
 
      	return $equipo;

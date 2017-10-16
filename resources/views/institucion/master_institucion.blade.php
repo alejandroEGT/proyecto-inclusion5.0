@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('css/estilo_institucion.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body  class="body-institucion">
+<body  class="body-institucion" onMouseMove="stopScroll();">
         
     <div id="master" >
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
@@ -31,7 +31,7 @@
                     </li>
                     <li class="pushy-link"><a href="{{ url('institucion/inicio') }}"><i class="fa fa-indent"></i> Inicio</a></li>
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-database"></i> Nuestra Información</button>
+                        <button id="ni"><i class="fa fa-database"></i> Nuestra Información</button>
                         <ul>
                             <li class="pushy-link"><a href="{{ url('institucion/misionyvision') }}">Misión y Visión</a></li>
                             <li class="pushy-link"><a href="{{ url('institucion/datos') }}">Datos específicos</a></li>
@@ -39,7 +39,7 @@
                         </ul>
                     </li>
                      <li class="pushy-submenu">
-                        <button><i class="fa fa-database"></i> Ocultos</button>
+                        <button id="oc"><i class="fa fa-database"></i> Ocultos</button>
                         <ul>
                             <li class="pushy-link"><a href="{{ url('institucion/productosOcultos') }}"><i class="fa fa-indent"></i> Productos Ocultos</a>
                             <li class="pushy-link"><a href="{{ url('institucion/serviciosOcultos') }}"><i class="fa fa-indent"></i> Servicios Ocultos</a>

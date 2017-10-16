@@ -11,7 +11,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-offset-1 col-md-10">
-								<p>{{ $ng->texto }}</p>
+								<p><label>{{ $ng->texto }}</label></p>
 							</div>
 						</div>
 						<div class="row">

@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Area;
 use App\Fotoperfil;
-//use App\Http\Requests\agregaralumnoRequest;
-//use App\Http\Requests\institucionRequest;
-
 use App\Http\Requests\institucionRequest;
 use App\Http\Requests\agregaralumnoRequest;
 use App\Http\Requests\productoInstiRequest;
@@ -38,7 +35,6 @@ use App\Usuarioinstitucion;
 use App\Passwordcuenta;
 use ConsoleTVs\Charts\Charts;
 
-//use DB;
 class institucionController extends Controller
 {
     
@@ -380,9 +376,20 @@ class institucionController extends Controller
       $aceptar = Tienda_producto_institucion::find($dato[0]);
       $aceptar->id_estado = '1';
       if ($aceptar->save()) {
-         return "Todo Bien";
+         return redirect()->back();
+         \Session::flash('correcto', 'Producto aceptado');
       }
-      return "Algo salió mal";
+      return redirect()->back();
+    }
+    public function aceptarSolicitudServicio(Request $dato)
+    {
+      $aceptar = Tienda_servicio_institucion::find($dato[0]);
+      $aceptar->id_estado = '1';
+      if ($aceptar->save()) {
+          return redirect()->back();
+          \Session::flash('correcto', 'Servicio aceptado');
+      }
+      return redirect()->back();
     }
     public function traerNotificaciones(){
 
@@ -725,11 +732,13 @@ class institucionController extends Controller
 
     public function publicarNoticia(noticiaRequest $datos)
     {
+     
       $noticia = noticia::insertar($datos, \Auth::guard('institucion')->user()->id);
       if ($noticia > 0) {
         \Session::flash('correcto', 'Noticia ingresada');
          return redirect()->back();
       }
+       $datos->flash();
       return redirect()->back()->withErrors(['Algo salió mal']);
     }
 
@@ -853,12 +862,85 @@ class institucionController extends Controller
       ->with('productos', $productos)
       ->with('titulo', "Productos ocultos"); 
     }
-    public function servicios_ocultos($value='')
+    public function servicios_ocultos()
     {
        $servicios = servicio::serviciosOcultosDesdeAdmin();
-       return view('institucion.nuestroProducto')
-       ->with('productos', $servicios)
+       return view('institucion.nuestroServicio')
+       ->with('servicios', $servicios)
        ->with('titulo', "Servicios ocultos"); 
+    }
+    public function actualizar_servicio_nombre(Request $dato)
+    {
+      $this->validate($dato,['nombre' => 'required|max:50',]);
+
+      $servicio = servicio::find($dato->idServicio);
+      $servicio->nombre = $dato->nombre;
+      if ($servicio->save()) {
+          \Session::flash('correcto', 'Nombre actualizado');
+          return redirect()->back();
+       } 
+    }
+    public function actualizar_servicio_descripcion(Request $dato)
+    {
+      $this->validate($dato,['descripcion' => 'required|max:250',]);
+
+      $servicio = servicio::find($dato->idServicio);
+      $servicio->descripcion = $dato->descripcion;
+      if ($servicio->save()) {
+          \Session::flash('correcto', 'Descripción actualizada');
+          return redirect()->back();
+       } 
+    }
+    public function actualizar_servicio_categoria(Request $dato)
+    {
+      $this->validate($dato,['categoria' => 'required',]);
+
+      $servicio = servicio::find($dato->idServicio);
+      $servicio->id_categoria = $dato->categoria;
+      if ($servicio->save()) {
+          \Session::flash('correcto', 'Categoría actualizada');
+          return redirect()->back();
+       } 
+    }
+    public function actualizar_servicio_visibilidad(Request $dato)
+    {
+      $this->validate($dato,['estado' => 'required',]);
+
+      $servicio = Tienda_servicio_institucion::where('id_servicio',$dato->idServicio)->first();
+      $servicio->id_estado = $dato->estado;
+      if ($servicio->save()) {
+          \Session::flash('correcto', 'Estado actualizado');
+          return redirect()->back();
+       } 
+    }
+    public function actualizar_servicio_area(Request $dato)
+    {
+      $this->validate($dato,['area' => 'required',]);
+
+      $servicio = Tienda_servicio_institucion::where('id_servicio',$dato->idServicio)->first();
+      $servicio->id_area = $dato->area;
+      if ($servicio->save()) {
+          \Session::flash('correcto', 'Estado actualizado');
+          return redirect()->back();
+       } 
+    }
+     public function actualizar_servicio_foto(Request $dato)
+    {
+      $this->validate($dato,['foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',]);
+
+      $foto = foto_servicio::where('id_servicio',$dato->idServicio)->first();
+
+      \File::delete($foto->nombre);/*ELIMINAR FOTO*/
+      $url="foto_servicios";
+      $file = $dato->file('foto')->getClientOriginalExtension();
+      $imageName = time().'.'.$dato->file('foto')->getClientOriginalExtension();//nombre de la imagen como tal.
+      $foto->nombre = $url.'/'.$imageName;
+      if ($foto->save()) {
+            $dato->file('foto')->move(public_path($url), $imageName);
+           
+            \Session::flash('correcto', 'Foto actualizada');
+            return redirect()->back();
+       } 
     }
   
 }

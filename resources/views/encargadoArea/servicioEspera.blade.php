@@ -1,8 +1,8 @@
-@extends('institucion.master_institucion')
+@extends('encargadoArea.master_encargadoArea')
 
 @section('content')
 	<div class="">
-			<p class="text-center" >Notificacione de Integración de servicios</p>
+			<p class="text-center" >Servicios en espera</p>
 			<div class="row papel-blanco">
 				@if (Session::has('correcto'))
 				<div class="alert alert-info">
@@ -15,7 +15,7 @@
 						
 						<div class="table-responsive">
 							<table class="table table-hover">
-			  					<tr class="fondo-color-blue">
+			  					<tr>
 			  						<td><strong>Foto</strong></td>
 			  						<td><strong>Nombre</strong></td>
 			  						<td><strong>descripción</strong></td>
@@ -32,14 +32,14 @@
 										<td>{{ $es->nombreArea}}</td>
 										<td>{{ $es->creado }}</td>
 										<td>{{ $es->nombreEstado}}</td>
-										<td><a  class="btn btn-success" @click="aceptarServicio({{ $es->id }})" >Aceptar</a> | <input class="btn btn-danger" type="button" value="Cancelar"></td>
+										<td><input class="btn btn-danger" type="button" value="Cancelar"></td>
 									</tr>	
 								@endforeach	
 							</table>	
 						</div>	
 					@endif	
 					@if (count($serv_esp)==0)
-						<center><h5>No hay Notificaciones...</h5></center>
+						<center><h5>No hay Servicios solicitados...</h5></center>
 					@endif
 				</div>
 			</div>

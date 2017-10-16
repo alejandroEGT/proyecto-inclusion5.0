@@ -102,9 +102,9 @@
 						<td>{{ $s->descripcion }}</td>
 						
 						<td>
-							<form id="form_eliminarAlumno" action="{{ url('institucion/eliminar_alumno') }}" method="post" >
+							<form id="form_eliminarAlumno" action="{{ url('institucion/eliminar_servicio') }}" method="post" >
 												{{csrf_field()}}
-												<a class="btn btn-primary btn-xs" href="{{ url("institucion/verDetalleAlumno/".base64_encode($s->id)) }}">Ver..</a>
+												<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleServicio/".base64_encode($s->id)) }}">Ver..</a>
 
 												<input type="hidden" name="id_servicio" value="{{ $s->id }}" >
 												<input  type="button" value="Eliminar" class="btn btn-danger btn-xs" name="">

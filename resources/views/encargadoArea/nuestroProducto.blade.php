@@ -1,11 +1,11 @@
- @extends('institucion.master_institucion')
+@extends('encargadoArea.master_encargadoArea')
 
 @section('content')
 <center><label>{{$titulo}}</label></center>
 <hr>
 <div class="row">
 	<div class="col-md-offset-2 col-md-8 panel">
-		<form action="{{ url('institucion/filtrarProducto') }}" method="GET"> 
+		<form action="{{ url('encargadoArea/filtrarProducto') }}" method="GET"> 
 						  <div class="row">
 						    <div class="col-md-12">
 						      <div class="input-group">
@@ -34,12 +34,12 @@
 						<p><label>{{ $producto->nombre }}</label></p>
 						<p><label style="color:#85929E" >{{ $producto->descripcion }}</label></p>
 						<p>
-							<form id="eliminar" action="{{ url("institucion/eliminar_producto_institucion") }}" method="post">
+							<form action="{{ url('encargadoArea/filtrarProducto') }}" method="GET"> 
 							{{ csrf_field() }}
-							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($producto->idProducto)) }}">Ver..</a>
+							<a class="btn btn-primary btn-xs" href="{{ url('encargadoArea/detalleProducto/'.base64_encode($producto->idProducto)) }}">Ver..</a>
 							<input type="hidden" value="{{ base64_encode($producto->idProducto) }}" name="idProducto">	
 							
-							<input type="button" @click="eliminarProducto" class="btn btn-warning btn-xs" value="Eliminar" >
+							<input type="button" {{--@click="eliminarProducto"--}} class="btn btn-warning btn-xs" value="Eliminar">
 						</form>	
 						</p>
 					</div>

@@ -108,8 +108,7 @@ class User extends Authenticatable
 
      static public function filtroBusarUser($buscar){
 
-            
-
+        
             $resultado = \DB::select("CALL `buscaralumno`('".\Auth::guard('institucion')->user()->id."','%".$buscar."%');");
             return $resultado;
     }

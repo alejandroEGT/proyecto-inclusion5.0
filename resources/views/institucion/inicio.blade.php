@@ -54,7 +54,7 @@
 						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
 					@endforeach
 					<hr>
-					<p><label><small><a href="{{ url('institucion/verNoticiasGenerales') }}">Ver todas las noticias...</a></small></label></p>
+					<label><a href="{{ url('institucion/verNoticiasGenerales') }}">Ver todas las noticias...</a></label>
 
 					<hr>
 				@endif
@@ -77,7 +77,7 @@
 						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
 					@endforeach
 					<hr>
-					<p><label><small><a href="{{ url('institucion/verNoticiasLocales') }}">Ver todas las noticias...</a></small></label></p>
+					<label><a href="{{ url('institucion/verNoticiasLocales') }}">Ver todas las noticias...</a></label>
 					<hr>
 				@endif	
 				@if (!count($noticias_locales))

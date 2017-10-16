@@ -110,6 +110,12 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_estado_noticia', 'institucionController@actualizar_estado_noticia');
         Route::get('/traerProductoEnEspera','institucionController@traerProductoEnEspera');
         Route::get('/traerServicioEnEspera','institucionController@vista_serviciosEspera');
+        Route::post('/actualizar_servicio_nombre','institucionController@actualizar_servicio_nombre');
+        Route::post('/actualizar_servicio_descripcion','institucionController@actualizar_servicio_descripcion');
+        Route::post('/actualizar_servicio_categoria','institucionController@actualizar_servicio_categoria');
+        Route::post('/actualizar_servicio_visibilidad','institucionController@actualizar_servicio_visibilidad');
+        Route::post('/actualizar_servicio_area','institucionController@actualizar_servicio_area');
+        Route::post('/actualizar_servicio_foto','institucionController@actualizar_servicio_foto');
 
 });
 
@@ -163,6 +169,7 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::post('/actualizar_correo','encargadoController@actualizar_correo');
         Route::post('/actualizar_numero','encargadoController@actualizar_numero');
         Route::get('/detalleProducto/{id}', 'encargadoController@ver_detalleProducto');
+        Route::get('/detalleServicio/{id}','encargadoController@ver_detalleServicio');
         Route::get('/eliminar_producto_institucion', 'encargadoAreaController@eliminar_producto_institucion');
         Route::post('/actualizar_producto_foto', 'institucionController@actualizar_producto_foto');
         Route::post('/actualizar_producto_nombre','institucionController@actualizar_producto_nombre');
@@ -184,12 +191,23 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::post('/actualizar_area_alumno', 'institucionController@actualizar_area_alumno');
         Route::post('/actualizar_numero_alumno', 'institucionController@actualizar_numero_alumno');
         Route::get('/verNoticiasLocales', 'encargadoController@todas_noticias_locales');
+        Route::get('/verNoticiasGenerales', 'encargadoController@todas_noticias_generales');
         Route::post('/actualizar_titulo_noticia', 'institucionController@actualizar_titulo_noticia');
         Route::post('/actualizar_texto_noticia', 'institucionController@actualizar_texto_noticia');
         Route::post('/actualizar_estado_noticia', 'institucionController@actualizar_estado_noticia');
         Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'encargadoController@ver_detalleServicio_institucion_local');
         Route::get('/detalleProducto/{idProducto}/{idInstitucion}', 'encargadoController@ver_detalleProducto_institucion_local');
         Route::get('/vista_serviciosEspera','institucionController@vista_serviciosEspera');
+        Route::get('/filtrarProducto', 'encargadoController@filtrarProducto');
+        Route::get('/filtrarServicio', 'encargadoController@filtrarServicio');
+        Route::get('/traerProductoEnEspera','encargadoController@traerProductoEnEspera');
+        Route::get('/traerServicioEnEspera','encargadoController@vista_serviciosEspera');
+        Route::post('/actualizar_servicio_nombre','institucionController@actualizar_servicio_nombre');
+        Route::post('/actualizar_servicio_descripcion','institucionController@actualizar_servicio_descripcion');
+        Route::post('/actualizar_servicio_categoria','institucionController@actualizar_servicio_categoria');
+        Route::post('/actualizar_servicio_visibilidad','institucionController@actualizar_servicio_visibilidad');
+        Route::post('/actualizar_servicio_area','institucionController@actualizar_servicio_area');
+        Route::post('/actualizar_servicio_foto','institucionController@actualizar_servicio_foto');
        
 });
 
@@ -226,6 +244,7 @@ Route::get('/estadoClaveAlumno', 'vendedorDependienteController@traerEstadoClave
 Route::get('/estadoClaveEncargado', 'encargadoController@traerEstadoClave');
 Route::get('generarClave/{id}', 'alumnoController@generarClave');
 Route::post('/aceptarSolicitudProducto', 'institucionController@aceptarProducto');
+Route::post('/aceptarSolicitudServicio','institucionController@aceptarSolicitudServicio');
 
 /*inicio de usuarios*/
 

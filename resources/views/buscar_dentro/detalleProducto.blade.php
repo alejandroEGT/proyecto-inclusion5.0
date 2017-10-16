@@ -50,7 +50,7 @@
 			<p><label><strong>Visibilidad:</strong></label> {{ $productos[0]->estadoProducto }}. (Apto para la visualización en la tienda)</p>
 			
 
-			<p><label><strong>Categoría:</strong></label> {{ $productos[0]->nombreCategoria }} <a data-toggle="collapse" data-target="#cat" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+			<p><label><strong>Categoría:</strong></label> {{ $productos[0]->nombreCategoria }}</p>
 			
 
 			<p><label><strong>Área o especialidad:</strong></label> {{ $productos[0]->nombreArea }}</p>

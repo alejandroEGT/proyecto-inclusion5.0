@@ -54,25 +54,42 @@
 					}
 
 
-	                $( "label" ).mouseover(function(event) {
+	                $( "label, a" ).mouseover(function(event) {
 				  				//var p = $(this).text();
 				  					hablar($(event.target).text());
+							 	//hablar($(event.target).text());
+							});
+	                $( "label, a" ).mouseout(function(event) {
+				  				//var p = $(this).text();
+				  					callar();
 							 	//hablar($(event.target).text());
 							});
 	                 $( "select" ).mouseover(function(event) {
 				  					texto = $(event.target).text();
 				  					hablar(texto);
 							 	//hablar($(event.target).text());
-							});
+					});
+	                 $( "select" ).mouseout(function(event) {
+				  					callar();
+							 	//hablar($(event.target).text());
+					});
 							
 							$( "button" ).mouseover(function(event) {
 									var ph = $(this).text();
 				  					hablar("Botón "+ph);
 							 	//hablar($(event.target).text());
 							});
-							$( "input[type='text'], input[type='password'], input[type='file']" ).mouseover(function(event) {
+							$( "button" ).mouseout(function(event) {
+									callar();
+							 	//hablar($(event.target).text());
+							});
+							$( "input[type='text'], input[type='password'], input[type='file'], input[type='numeric']" ).mouseover(function(event) {
 									var ph = $(this).attr("placeholder");
 				  					hablar("ingrese aqui "+ph);
+							 	//hablar($(event.target).text());
+							});
+							$( "input[type='text'], input[type='password'], input[type='file'], input[type='numeric']" ).mouseout(function(event) {
+									callar();
 							 	//hablar($(event.target).text());
 							});
 							$( "input[type='button'], input[type='submit']" ).mouseover(function(event) {
@@ -80,14 +97,22 @@
 				  					hablar("Botón para "+ph);
 							 	//hablar($(event.target).text());
 							});
+							$( "input[type='button'], input[type='submit']" ).mouseout(function(event) {
+									callar();
+							 	//hablar($(event.target).text());
+							});
 							$( "textarea" ).mouseover(function(event) {
 									var ph = $(this).attr("placeholder");
 				  					hablar("ingrese aqui "+ph);
 							 	//hablar($(event.target).text());
 							});
+							$( "textarea" ).mouseout(function(event) {
+									callar();
+							 	//hablar($(event.target).text());
+							});
 							
 
-							$( "a img" ).mouseover(function(event) {
+							$( "img" ).mouseover(function(event) {
 
 				  				var alt = $(this).attr("alt");
 				  				hablar(alt);
@@ -234,35 +259,35 @@
 		}
 	// Add a single command
 var comandos = {
-    indexes:["institucion","alumno","vendedor", "crear institución","crear vendedor","crear vendedor alumno","menú", "desactivar","bajar","subir","crear usuarios","registros","inicio","login","atras"
+    indexes:["nuestra informacion","mision y vision","datos especificos", "publicar noticia","ocultos","productos ocultos","menú", "desactivar","bajar","subir","servicios ocultos","registros","inicio","login","atras","parar"
     	
     ], // Decir alguna de estas palabras activara el comando
     action:function(i){ // Acción a ejecutar cuando alguna palabra de los indices es reconocida
         
         if(i == 0){
 
-        	setTimeout(function () { window.location = "login_institucion"; }, 0);
+        	$('#ni').click();
         }
          if(i == 1){
-        	setTimeout(function () { window.location = "login_vendedorInst"; }, 0);
+        	setTimeout(function () { window.location = "misionyvision"; }, 0);
         }
         if(i == 2){
-        	setTimeout(function () { window.location = "login_vendedor"; }, 0);
+        	setTimeout(function () { window.location = "datos"; }, 0);
         }
         if(i == 3){
-        	setTimeout(function () { window.location = "formInstitucion"; }, 0);
+        	setTimeout(function () { window.location = "noticia"; }, 0);
         }
         if(i == 4){
-        	setTimeout(function () { window.location = "formUsuario"; }, 0);
+        	$('#oc').click();
         }
          if(i == 5){
-        	setTimeout(function () { window.location = "formUsuarioInstitucion"; }, 0);
+        	setTimeout(function () { window.location = "productosOcultos"; }, 0);
         }
          if(i == 6){
         	$(".menu-btn").click();
         }
          if(i == 7){
-         	setTimeout(function () { window.location = "desactivarmicro"; }, 0);
+         	setTimeout(function () { window.location = ""; }, 0);
         }
          if(i == 8){
          	abajo();
@@ -271,7 +296,7 @@ var comandos = {
          	subir();
         }
          if(i == 10){
-         	setTimeout(function () { window.location = "ver_usuarios"; }, 0);
+         	setTimeout(function () { window.location = "serviciosOcultos"; }, 0);
         }
         if(i == 11){
          	$('#registrobtn').click();
@@ -284,6 +309,9 @@ var comandos = {
         }
         if(i == 14){
         	window.history.back();
+        }
+         if(i == 15){
+         	stopScroll();
         }
         
     }
@@ -301,6 +329,17 @@ artyom.addCommands(comandos); // Agregar comando
 		        	voz.name = "Google Español",
 		        	voz.voiceURI = "Google Español",
 					window.speechSynthesis.speak(voz);
+					
+					
+			}
+			else{
+				alert("disculpa, speechSynthesis no definidido");
+			}
+	}
+	function callar() {
+		if (window.speechSynthesis != 'undefined'){
+				
+					window.speechSynthesis.cancel();
 					
 					
 			}

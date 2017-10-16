@@ -44,6 +44,7 @@
 					
 					</form>
 			    </div>
+			    <center><label><a href="{{ url('encargadoArea/logout') }}">Salir</a></label></center>
 			</div>
 		</div>
 </div>		
@@ -101,7 +102,7 @@
 						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
 					@endforeach
 					<hr>
-					<p><label><small><a href="#">Ver todas las noticias...</a></small></label></p>
+					<p><label><small><a href="{{ url('encargadoArea/verNoticiasGenerales') }}">Ver todas las noticias...</a></small></label></p>
 
 					<hr>
 				@endif
@@ -137,8 +138,8 @@
 				@if (count($productos)>0)
 					<div class="row">
 						<div class="col-md-11 linea-gris fondo-blanco">
-							<center><label>Productos</label></center>
-							<form action="{{ url('encargadoArea/filtrarProducto') }}" method="POST"> 
+							<center><label>Productos del área o especialidad</label></center>
+						<form action="{{ url('encargadoArea/filtrarProducto') }}" method="GET"> 
 						  <div class="row">
 						    <div class="col-md-12">
 						      <div class="input-group">
@@ -160,7 +161,7 @@
 								<center>
 									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($producto->nombre, 10) }}</p>
-									<p><a href="" class="btn btn-primary btn-xs">Ver</a></p>
+									<p><a href="{{ url('encargadoArea/detalleProducto/'.base64_encode($producto->idProducto)) }}" class="btn btn-primary btn-xs">Ver</a></p>
 								</center>
 
 							</div>	
@@ -179,22 +180,22 @@
 				@if (count($servicios)>0)
 					<div class="row">
 						<div class="col-md-11 linea-gris fondo-blanco">
-							<center><label>Servicios</label></center>
-							<form action="{{ url('encargadoArea/filtrarProducto') }}" method="POST"> 
-						  <div class="row">
-						    <div class="col-md-12">
-						      <div class="input-group">
-						      	{{ csrf_field() }}
-						   <input type="text" class="form-control" placeholder="Buscar servicios" name="buscar"/>
-						   <div class="input-group-btn">
-						        <button class="btn btn-primary" type="submit">
-						        <span class="glyphicon glyphicon-search"></span>
-						        </button>
-						   </div>
-						   </div>
-						    </div>
-						  </div>
-						</form>	
+							<center><label>Servicios del área o especialidad</label></center>
+							<form action="{{ url('encargadoArea/filtrarServicio') }}" method="GET"> 
+								  <div class="row">
+								    <div class="col-md-12">
+								      <div class="input-group">
+								      	{{ csrf_field() }}
+								   <input type="text" class="form-control" placeholder="Buscar servicios" name="buscar"/>
+								   <div class="input-group-btn">
+								        <button class="btn btn-primary" type="submit">
+								        <span class="glyphicon glyphicon-search"></span>
+								        </button>
+								   </div>
+								   </div>
+								    </div>
+								  </div>
+							</form>	
 							<hr>
 							
 							@foreach ($servicios as $servicio)
@@ -202,7 +203,7 @@
 								<center>
 									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($servicio->nombre, 10) }}</p>
-									<p><a href="" class="btn btn-primary btn-xs">Ver</a></p>
+									<p><a href="{{ url("encargadoArea/detalleServicio/".base64_encode($servicio->id)) }}" class="btn btn-primary btn-xs">Ver</a></p>
 								</center>
 
 							</div>	

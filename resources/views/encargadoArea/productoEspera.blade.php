@@ -1,4 +1,4 @@
-@extends('institucion.master_institucion')
+@extends('encargadoArea.master_encargadoArea')
 
 @section('content')
 	<div class="">
@@ -15,7 +15,7 @@
 						
 						<div class="table-responsive">
 							<table class="table table-hover">
-			  					<tr class="fondo-color-blue">
+			  					<tr>
 			  						<td><strong>Foto</strong></td>
 			  						<td><strong>Nombre</strong></td>
 			  						<td><strong>descripción</strong></td>
@@ -34,14 +34,14 @@
 									<td>{{ $esp->nombreArea }}</td>
 									<td>{{ $esp->creado }}</td>
 									<td>{{ $esp->nombreEstado}}</td>
-									<td><a  class="btn btn-success" @click="aceptarProducto({{ $esp->idProducto }})" >Aceptar</a> | <input class="btn btn-danger" type="button" value="Cancelar"></td>
+									<td><input class="btn btn-danger" type="button" value="Cancelar"></td>
 								</tr>
 								@endforeach		
 							</table>	
 						</div>	
 					@endif	
 					@if (count($prod_esp)==0)
-						<center><h5>No hay Notificaciones...</h5></center>
+						<center><h5>No hay productos en espera...</h5></center>
 					@endif
 				</div>
 			</div>

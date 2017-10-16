@@ -121,7 +121,7 @@
 										</div>
 			</div>
 
-			<p><label><strong>Categoría:</strong></label> {{ $productos[0]->nombreCategoria }} <a data-toggle="collapse" data-target="#cat" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+			<p><label><strong>Categoría:</strong></label> {{ $productos[0]->nombreCategoria }} <a data-toggle="collapse" data-target="#cat" ><i class="fa fa-pencil" aria-hidden="true"></i></a> </p>
 			<div id="cat" class="collapse">
 										<div class="alert alert-info" role="alert">
 											<form action="{{ url($ruta.'/actualizar_producto_categoria') }}" method="post">

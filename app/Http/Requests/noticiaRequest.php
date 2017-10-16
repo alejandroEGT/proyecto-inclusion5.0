@@ -27,7 +27,7 @@ class noticiaRequest extends FormRequest
             'titulo' => 'required',
             'texto' => 'required',
             'estado' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg | dimensions:max_width=2250,max_height=2680'
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg | dimensions:max_width=5500,max_height=5500'
         ];
     }
 

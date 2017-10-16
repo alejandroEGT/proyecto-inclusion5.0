@@ -32,8 +32,13 @@
 									{{csrf_field()}}
 								  		<p><strong>Actualizar Foto</strong> </p>
 								  	
-								  		<p><input class="" type="file" name="fotoP1">
-								  			<input type="hidden" name="idProducto" value="{{$servicio[0]->id}}">
+								  		<p>
+								  		<label for="file-input" class="label-foto-link">
+				 							<img src="/ico/image.png" for="file-input" class="label-foto-link">
+										 	Agregar foto..
+										</label>
+										<input style="display: none;" name="foto" id="file-input" type="file"/>	
+								  			<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
 										<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 									</form>	
 								</div>
@@ -44,10 +49,10 @@
 			<p><label><strong>Nombre:</strong></label> {{ $servicio[0]->nombre }} <a data-toggle="collapse" data-target="#nombre" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="nombre" class="collapse">
 							<div class="alert alert-info" role="alert">
-								<form action="{{ url($ruta.'/actualizar_producto_nombre') }}" method="post">
+								<form action="{{ url($ruta.'/actualizar_servicio_nombre') }}" method="post">
 								{{csrf_field()}}
 							  		<p><strong>Actualizar Nombre</strong> </p>
-							  		<input type="hidden" name="idProducto" value="{{$servicio[0]->id}}">
+							  		<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
 							  		<p><input class="" type="text" maxlength="50" name="nombre">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	
@@ -57,10 +62,10 @@
 			<p><label><strong>Descripción:</strong></label> {{ $servicio[0]->descripcion }} <a data-toggle="collapse" data-target="#des" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="des" class="collapse">
 							<div class="alert alert-info" role="alert">
-								<form action="{{ url($ruta.'/actualizar_producto_descripcion') }}" method="post">
+								<form action="{{ url($ruta.'/actualizar_servicio_descripcion') }}" method="post">
 								{{csrf_field()}}
 							  		<p><strong>Actualizar Descripción</strong> </p>
-							  		<input type="hidden" name="idProducto" value="{{$servicio[0]->id}}">
+							  		<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
 							  		<p><input class="" type="text" maxlength="250" name="descripcion">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	
@@ -69,11 +74,16 @@
 			<p><label><strong>Categoría:</strong></label> {{ $servicio[0]->nombreCategoria }} <a data-toggle="collapse" data-target="#can" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="can" class="collapse">
 							<div class="alert alert-info" role="alert">
-								<form action="{{ url($ruta.'/actualizar_producto_cantidad') }}" method="post">
+								<form action="{{ url($ruta.'/actualizar_servicio_categoria') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Cantidad</strong> </p>
+							  		<p><strong>Actualizar Categoría</strong> </p>
 							  		<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
-							  		<p><input class="" type="numeric" maxlength="4"  name="cantidad">
+							  		<p><select name="categoria">
+							  			<option value="" >Seleccione..</option>
+							  			@foreach ($categoria as $c)
+							  				<option value="{{$c->id}}" >{{ $c->nombre }}</option>
+							  			@endforeach
+							  		</select>
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
@@ -82,12 +92,12 @@
 			<p><label><strong>Visibilidad:</strong></label> {{ $servicio[0]->nombreEstado }} <a data-toggle="collapse" data-target="#vis" ><i class="fa fa-pencil" aria-hidden="true"></i></a>. (Apto para la visualización en la tienda)</p>
 			<div id="vis" class="collapse">
 										<div class="alert alert-info" role="alert">
-											<form action="{{ url($ruta.'/actualizar_producto_visibilidad') }}" method="post">
+											<form action="{{ url($ruta.'/actualizar_servicio_visibilidad') }}" method="post">
 											{{csrf_field()}}
 										  		<p><strong>Actualizar Estado</strong> </p>
-										  		<input type="hidden" name="idProducto" value="{{$servicio[0]->id}}">
+										  		<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
 										  		<p>
-										  			<select name="estadoV" >
+										  			<select name="estado" >
 										  				<option value="">Seleccione..</option>
 										  				@foreach ($estadoS as $e)
 										  					<option value="{{ $e->id }}">{{ $e->estado }}</option>
@@ -102,9 +112,9 @@
 				<p><label><strong>Área o especialidad:</strong></label> {{ $servicio[0]->nombreArea }} <a data-toggle="collapse" data-target="#area" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 				<div id="area" class="collapse">
 										<div class="alert alert-info" role="alert">
-											<form action="{{ url($ruta.'/actualizar_producto_area') }}" method="post">
+											<form action="{{ url($ruta.'/actualizar_servicio_area') }}" method="post">
 											{{csrf_field()}}
-										  		<p><strong>Actualizar Categoría</strong> </p>
+										  		<p><strong>Actualizar área o especialidad</strong> </p>
 										  		<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
 										  		<p>
 										  			<select name="area">

@@ -112,6 +112,7 @@ class VendedorInstitucion extends Model
                   ->join('area','area.id','=','vendedor-institucion.id_area')
                   ->join('institucion','institucion.id','=','area.id_institucion')
                   ->join('fotoperfil','fotoperfil.id_user','=','users.id')
+                  ->where('vendedor.id_estado', 1)/*posible falla*/
                   ->where('users.id', $idAlumno)
                   ->where('Institucion.id', \Auth::guard('institucion')->user()->id)
                   ->get();
@@ -141,6 +142,7 @@ class VendedorInstitucion extends Model
                   ->join('fotoperfil','fotoperfil.id_user','=','users.id')
                   ->where('users.id', $idAlumno)
                   ->where('area.id', $areaId)
+                  ->where('vendedor.id_estado', 1)/*posible falla*/
                   ->get();
         
         if (count($traer)>0) {
@@ -170,6 +172,7 @@ class VendedorInstitucion extends Model
                   ->join('institucion','institucion.id','=','area.id_institucion')
                   ->join('fotoperfil','fotoperfil.id_user','=','users.id')
                   ->where('users.id', $id)
+                  ->where('vendedor.id_estado', 1)/*posible falla*/
                   ->get();
         
         if (count($traer)>0) {

@@ -65,14 +65,13 @@
                     <li class="pushy-link"><a href="{{ url('encargadoArea/publicarNoticia') }}">Publicar noticia</a></li>
 
                        <li class="pushy-link"><a href="{{ url('encargadoArea/clave') }}">Cambiar contraseña</a></li>
-                   <!-- <li class="pushy-submenu">
-                        <button>Formularios</button>
+                    <li class="pushy-submenu">
+                        <button>En espera</button>
                         <ul>
-                            <li class="pushy-link"><a href="index">Inicio</a></li>
-                            <li class="pushy-link"><a href="/login">Login de institución</a></li>
-                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                            <li class="pushy-link"><a href="{{ url('encargadoArea/traerProductoEnEspera') }}">Productos</a></li>
+                            <li class="pushy-link"><a href="{{ url('encargadoArea/traerServicioEnEspera') }}">Servicios</a></li>
                         </ul>
-                    </li>-->
+                    </li>
                     <!--<li class="pushy-submenu">
                         <button>foto 3</button>
                         <ul>

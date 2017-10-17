@@ -86,6 +86,21 @@ class institucionController extends Controller
             $datosInstitucion = Institucion::datos();
             return view('institucion.datos_inst')->with('datos', $datosInstitucion);
     }
+    public function ver_detalleNoticia_general(Request $dato)
+    {   
+        $noticia = noticia::unica_general(base64_decode($dato->idNoticia));
+        //dd($noticia);
+        return view('institucion.noticia_individual_general')->with('noticia', $noticia);
+    }
+    public function ver_detalleNoticia_local(Request $dato)
+    {
+         $noticia = noticia::unica_local(base64_decode($dato->idNoticia), \Auth::guard('institucion')->user()->id);
+        //dd($noticia);
+         $estado_noticia = estado_noticia::all();
+        return view('institucion.noticia_individual_local')
+               ->with('noticia', $noticia)
+               ->with('estado_noticia', $estado_noticia);
+    }
     public function vista_grafico(){
 
           $array[0] = ['Áreas', 'Cantidad de alumnos'];
@@ -97,7 +112,18 @@ class institucionController extends Controller
          
           return view('institucion.grafico')->with('areas',json_encode($array));
     }
-
+    public function ver_todo_producto()
+    {
+        $producto = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 5);
+        //dd ($producto);
+        return view('institucion.verTodoProducto')->with('productos', $producto);
+    }
+     public function ver_todo_servicio()
+    {
+        $servicios = servicio::mostrarServicioDesdeAdmin(\Auth::guard('institucion')->user()->id, 5);
+        //dd($producto);
+        return view('institucion.verTodoServicio')->with('servicios', $servicios);
+    }
      public function vista_perfilVen($iduser){
         $idu = base64_decode($iduser);
         //return $idu;
@@ -172,7 +198,7 @@ class institucionController extends Controller
       $getId = base64_decode($dato->id);
       $categoria = categoria_producto::all();
       $estadoP = estado_tienda_producto::limit(2)->get();
-      $area = Area::all();
+      $area = Area::traer();
 
       $productos = producto::detalleProducto($getId, \Auth::guard('institucion')->user()->id);
       return view('institucion.verDetalleProducto')
@@ -203,7 +229,7 @@ class institucionController extends Controller
       $getId = base64_decode($dato->id);
       $categoria = categoria_servicio::all();
       $estadoS = estado_tienda_servicio::limit(2)->get();
-      $area = Area::all();
+      $area = Area::traer();
 
       $servicio = servicio::detalleServicio($getId, \Auth::guard('institucion')->user()->id);
       //return $servicio;
@@ -571,7 +597,7 @@ class institucionController extends Controller
            $tienda = Tienda_institucion::id_tienda_by_institucion(\Auth::guard('institucion')->user()->id);
            $insertTiendaServicio = Tienda_servicio_institucion::insertar($insertarServicio, $tienda[0]->id, '1', $datos->area);
            if ($insertTiendaServicio > 0) {
-               \Session::flash('registro', 'Producto registrado correctasmente');
+               \Session::flash('registro', 'Servicio registrado correctasmente');
                 return redirect()->back();
            }
              return "Mal todo";
@@ -583,27 +609,26 @@ class institucionController extends Controller
      /*FIN DE PUBLICACION DE LOS SERVICIOS*/
     public function eliminar_producto_institucion(Request $dato)
     {
-      $getId = base64_decode($dato->idProducto);
-      $getFoto = foto_producto::where('id_producto',$getId)->get();
+
+      $getFoto = foto_producto::where('id_producto',$dato->idProducto)->get();
       //return $getFoto[0]->foto;
       \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
       
       $foto_prod = foto_producto::borrar($getFoto[0]->id);
-      $tienda_prod_inst = Tienda_producto_institucion::borrar($getId);
-      $prod_insti = producto::borrar($getId);
+      $tienda_prod_inst = Tienda_producto_institucion::borrar($dato->idProducto);
+      $prod_insti = producto::borrar($dato->idProducto);
 
-      return redirect()->back();
+      return "true";
     }
     public function eliminar_servicio_institucion(Request $dato)
     { 
-      $getId =base64_decode($dato->idServicio);
-       $getFoto = foto_servicio::where('id_servicio',$getId)->get();
+       $getFoto = foto_servicio::where('id_servicio',$dato->idServicio)->get();
        \File::delete($getFoto[0]->nombre);/*ELIMINAR FOTO*/
        $foto_servicio = foto_servicio::borrar($getFoto[0]->id);
-       $tienda_serv_inst = Tienda_servicio_institucion::borrar($getId);
-       $serv_insti = servicio::borrar($getId);
+       $tienda_serv_inst = Tienda_servicio_institucion::borrar($dato->idServicio);
+       $serv_insti = servicio::borrar($dato->idServicio);
 
-       return redirect()->back();
+       return "true";
       
     }
     public function actualizar_producto_foto(Request $dato)

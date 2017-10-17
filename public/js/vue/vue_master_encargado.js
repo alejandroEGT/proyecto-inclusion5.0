@@ -36,7 +36,42 @@ new Vue({
 					this.estadoPassword = response.body;
 					console.log(response.body);
 				})
+		},
+		eliminarProducto($this){
+			if (confirm("¿Quieres eliminar este producto?") == true) {
+				    
+				    
+						this.$http.get('encargadoArea/eliminar_producto_institucion/'+$this).then(function(response){
+								
+								console.log(response.body);
+								alert("producto eliminado");
+								//this.notificar();
+								location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
 		}
+		,
+		eliminarServicio($this){
+			if (confirm("¿Quieres eliminar este servicio?") == true) {
+				    
+						this.$http.get('encargadoArea/eliminar_servicio_institucion/'+$this).then(function(response){
+								
+								console.log(response.body);
+								alert("servicio eliminado");
+								//this.notificar();
+								location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		}
+		,
 		
 	},
 

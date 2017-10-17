@@ -116,7 +116,20 @@ class encargadoController extends Controller
         ->with('usuario',$usuario)
         ->with('vendedor',$vendedor[0]->telefono);
     }
-    
+    public function ver_todo_producto()
+    {
+        $encargado = Encargado::traerDatos();
+        $producto = producto::verProductoDesdeArea($encargado[0]->id_area, 5);
+        //dd ($producto);
+        return view('encargadoArea.verTodoProducto')->with('productos', $producto);
+    }
+     public function ver_todo_servicio()
+    {
+        $encargado = Encargado::traerDatos();
+        $servicios = servicio::mostrarServicioDesdeArea($encargado[0]->id_area, 5);
+        //dd($producto);
+        return view('encargadoArea.verTodoServicio')->with('servicios', $servicios);
+    }
     public function vista_perfilVenInst($iduser){
         $idu = base64_decode($iduser);
           //return $idu;
@@ -162,7 +175,7 @@ class encargadoController extends Controller
       $getId = base64_decode($dato->id);
       $categoria = categoria_producto::all();
       $estadoP = estado_tienda_producto::limit(2)->get();
-      $area = Area::all();
+      $area = Area::traerArea();
       $encargado = Encargado::traerDatos();
 
       $productos = producto::detalleProducto_area($getId, $encargado[0]->id_area);
@@ -592,6 +605,22 @@ class encargadoController extends Controller
        $encargado = encargado::traerDatos();
        $servicios = servicio::traer_ServicioEnEspera($encargado[0]->id_institucion, $encargado[0]->id_area,5);
        return view('encargadoArea.servicioEspera')->with('serv_esp', $servicios);
+    }
+     public function productos_oclutos()
+    {
+      $encargado = encargado::traerDatos();
+      $productos = producto::productosOcultosDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
+      return view('encargadoArea.nuestroProducto')
+      ->with('productos', $productos)
+      ->with('titulo', "Productos ocultos"); 
+    }
+    public function servicios_ocultos()
+    {
+       $encargado = encargado::traerDatos();
+       $servicios = servicio::serviciosOcultosDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
+       return view('encargadoArea.nuestroServicio')
+       ->with('servicios', $servicios)
+       ->with('titulo', "Servicios ocultos"); 
     }
     
 }

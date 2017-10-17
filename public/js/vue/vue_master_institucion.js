@@ -245,10 +245,17 @@ new Vue({
 				    alert("Operación cancelada!");
 				}
         },
-        eliminarProducto($id){
+		eliminarProducto($this){
 			if (confirm("¿Quieres eliminar este producto?") == true) {
 				    
-						$('#eliminar').submit();
+				    
+						this.$http.get('institucion/eliminar_producto_institucion/'+$this).then(function(response){
+								
+								console.log(response.body);
+								alert("producto eliminado");
+								//this.notificar();
+								location.reload();
+						})
 
 				} 
 				else {
@@ -256,10 +263,16 @@ new Vue({
 				}
 		}
 		,
-		eliminarServicio(){
+		eliminarServicio($this){
 			if (confirm("¿Quieres eliminar este servicio?") == true) {
 				    
-						$('#eliminar').submit();
+						this.$http.get('institucion/eliminar_servicio_institucion/'+$this).then(function(response){
+								
+								console.log(response.body);
+								alert("servicio eliminado");
+								//this.notificar();
+								location.reload();
+						})
 
 				} 
 				else {
@@ -267,7 +280,7 @@ new Vue({
 				}
 		}
 		,
-		eliminarAlumno(){
+		eliminarAlumno($this){//reparar este codigo//////////////////////////////////////////////
 				if (confirm("¿Quieres eliminar este alumno?") == true) {
 				    
 						$('#form_eliminarAlumno').submit();

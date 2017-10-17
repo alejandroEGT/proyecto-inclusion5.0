@@ -12,7 +12,7 @@
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
 
-<body onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);">
+<body>
         
 <div id="master-encargado" class="animated fadeIn" >
 
@@ -70,6 +70,13 @@
                         <ul>
                             <li class="pushy-link"><a href="{{ url('encargadoArea/traerProductoEnEspera') }}">Productos</a></li>
                             <li class="pushy-link"><a href="{{ url('encargadoArea/traerServicioEnEspera') }}">Servicios</a></li>
+                        </ul>
+                    </li>
+                     <li class="pushy-submenu">
+                        <button id="oc"><i class="fa fa-database"></i> Ocultos</button>
+                        <ul>
+                            <li class="pushy-link"><a href="{{ url('encargadoArea/productosOcultos') }}"><i class="fa fa-indent"></i> Productos Ocultos</a>
+                            <li class="pushy-link"><a href="{{ url('encargadoArea/serviciosOcultos') }}"><i class="fa fa-indent"></i> Servicios Ocultos</a>
                         </ul>
                     </li>
                     <!--<li class="pushy-submenu">

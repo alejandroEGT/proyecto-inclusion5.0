@@ -161,13 +161,17 @@
 								<center>
 									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($producto->nombre, 10) }}</p>
-									<p><a href="{{ url('encargadoArea/detalleProducto/'.base64_encode($producto->idProducto)) }}" class="btn btn-primary btn-xs">Ver</a></p>
+							
+										<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleProducto/".base64_encode($producto->idProducto)) }}">Ver..</a>
+										
+										<input type="button" @click="eliminarProducto({!! $producto->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
+
 								</center>
 
 							</div>	
 							@endforeach
 							<!--<center>{{--$productos->links() --}}</center>-->
-							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+							<center class="center-top" ><label><small><a href="{{ url('encargadoArea/ver_todo_producto') }}">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>
@@ -203,13 +207,16 @@
 								<center>
 									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($servicio->nombre, 10) }}</p>
-									<p><a href="{{ url("encargadoArea/detalleServicio/".base64_encode($servicio->id)) }}" class="btn btn-primary btn-xs">Ver</a></p>
+									
+									<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleServicio/".base64_encode($servicio->id)) }}">Ver..</a>
+									<input type="button" @click="eliminarServicio({!! $servicio->id !!});"  class="btn btn-danger btn-xs" value="Eliminar" >
+						
 								</center>
 
 							</div>	
 							@endforeach
 							<!--<center>{{--$productos->links() --}}</center>-->
-							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+							<center class="center-top" ><label><small><a href="{{ url('encargadoArea/ver_todo_servicio') }}">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>

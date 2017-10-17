@@ -34,13 +34,9 @@
 						<p><label>{{ $producto->nombre }}</label></p>
 						<p><label style="color:#85929E" >{{ $producto->descripcion }}</label></p>
 						<p>
-							<form action="{{ url('encargadoArea/filtrarProducto') }}" method="GET"> 
-							{{ csrf_field() }}
-							<a class="btn btn-primary btn-xs" href="{{ url('encargadoArea/detalleProducto/'.base64_encode($producto->idProducto)) }}">Ver..</a>
-							<input type="hidden" value="{{ base64_encode($producto->idProducto) }}" name="idProducto">	
-							
-							<input type="button" {{--@click="eliminarProducto"--}} class="btn btn-warning btn-xs" value="Eliminar">
-						</form>	
+							<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleProducto/".base64_encode($producto->idProducto)) }}">Ver..</a>
+										
+								<input type="button" @click="eliminarProducto({!! $producto->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
 						</p>
 					</div>
 				</div>

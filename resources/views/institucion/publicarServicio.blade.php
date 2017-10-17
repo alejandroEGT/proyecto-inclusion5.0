@@ -109,7 +109,7 @@
 						
 						<td>
 							
-						<form id="eliminar" action="{{ url("institucion/eliminar_servicio_institucion") }}" method="post">
+						<form id="eliminar_servicio" action="{{ url("institucion/eliminar_servicio_institucion") }}" method="post">
 							{{ csrf_field() }}
 							<input type="hidden" value="{{ base64_encode($s->id) }}" name="idServicio">	
 							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleServicio/".base64_encode($s->id)) }}">Ver..</a>

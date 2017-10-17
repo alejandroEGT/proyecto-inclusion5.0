@@ -113,7 +113,7 @@
 						<td>{{ $p->descripcion }}</td>
 						<td>{{ $p->creado }}</td>
 						<td>
-						<form id="eliminar" action="{{ url("institucion/eliminar_producto_institucion") }}" method="post">
+						<form id="eliminar_producto" action="{{ url("institucion/eliminar_producto_institucion") }}" method="post">
 							{{ csrf_field() }}
 							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($p->idProducto)) }}">Ver..</a>
 							<input type="hidden" value="{{ base64_encode($p->idProducto) }}" name="idProducto">	

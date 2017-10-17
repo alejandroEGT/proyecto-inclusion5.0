@@ -102,13 +102,8 @@
 						<td>{{ $s->descripcion }}</td>
 						
 						<td>
-							<form id="form_eliminarAlumno" action="{{ url('institucion/eliminar_servicio') }}" method="post" >
-												{{csrf_field()}}
-												<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleServicio/".base64_encode($s->id)) }}">Ver..</a>
-
-												<input type="hidden" name="id_servicio" value="{{ $s->id }}" >
-												<input  type="button" value="Eliminar" class="btn btn-danger btn-xs" name="">
-											</form>
+							<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleServicio/".base64_encode($s->id)) }}">Ver..</a>
+							<input type="button" @click="eliminarServicio({!! $s->id !!});"  class="btn btn-danger btn-xs" value="Eliminar" >
 						</td>
 					</tr>
 				    

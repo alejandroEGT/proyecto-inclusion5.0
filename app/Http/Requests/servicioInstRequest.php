@@ -28,7 +28,7 @@ class servicioInstRequest extends FormRequest
             'descripcion' => 'required',
             'categoria' => 'required',
             'area' => 'required',
-            'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=2500,max_height=2850',
+            'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
         ];
     }
     public function messages(){

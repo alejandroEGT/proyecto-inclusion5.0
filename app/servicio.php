@@ -218,6 +218,33 @@ class servicio extends Model
                     //->paginate($cant);
         return $mostrar;
     }
+     protected function serviciosOcultosDesdeArea($institucion, $area)
+    {
+         $mostrar = \DB::table("servicios")
+                    ->select([
+                        'servicios.id as id',
+                        'foto_servicios.nombre as foto',
+                        'servicios.nombre as nombre',
+                        'servicios.descripcion as descripcion',
+                        'categoria_servicio.nombre as nombreCategoria',
+                        'estado_tienda_servicio.estado as nombreEstado',
+                        'area.nombre as nombreArea',
+                    ])
+                    ->join("foto_servicios","foto_servicios.id_servicio","=","servicios.id")
+                    ->join("tienda_servicio_instituciones","tienda_servicio_instituciones.id_servicio","=","servicios.id")
+                    ->join("tiendas_instituciones","tiendas_instituciones.id","=","tienda_servicio_instituciones.id_tienda")
+                    ->join("estado_tienda_servicio","estado_tienda_servicio.id","=","tienda_servicio_instituciones.id_Estado")
+                    ->join("institucion","institucion.id","=","tiendas_instituciones.id_institucion")
+                    ->join("area","area.id","=","tienda_servicio_instituciones.id_area")
+                    ->join("categoria_servicio", "categoria_servicio.id","=","servicios.id_categoria")
+                    ->where('institucion.id','=', $institucion)
+                    ->where('area.id', $area)
+                    ->where('tienda_servicio_instituciones.id_estado', 2)
+                    ->get();
+                    //->orderBy('productos.created_at', 'desc')/*Posible error*/
+                    //->paginate($cant);
+        return $mostrar;
+    }
     protected function traer_ServicioEnEspera($idInst, $cant)
     {
         $mostrar = \DB::table("servicios")

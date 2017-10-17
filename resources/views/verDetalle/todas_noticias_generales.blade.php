@@ -11,6 +11,12 @@
 						</div>
 						<div class="row">
 							<div class="col-md-offset-1 col-md-10">
+								<center><label><h4 style="color:black;" >{{ $ng->titulo }}</h4></label></center>
+								<hr>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-offset-1 col-md-10">
 								<p><label>{{ $ng->texto }}</label></p>
 							</div>
 						</div>
@@ -26,4 +32,5 @@
 			@endif
 		</div>
 	</div>
+	<center>{{ $noticias_generales->links() }}</center>
 </div>

@@ -85,4 +85,45 @@ class noticia extends Model
         ->paginate(10);
         return $noticia;
     }
+    protected function unica_general($idNoticia)
+    {
+        $noticia = \DB::table('noticias')
+                    ->select([
+                        'noticias.id as id',
+                        'noticias.foto as foto',
+                        'noticias.titulo as titulo',
+                        'noticias.texto as texto',
+                        'noticias.created_at as creado',
+                        'institucion.id as idInstitucion',
+                        'institucion.nombre as nombreInstitucion',
+                        'institucion.logo as logoInstitucion'
+
+                    ])
+                    ->join('institucion','institucion.id','=','noticias.id_institucion')
+                    ->where('noticias.id_estado', 1)
+                    ->where('noticias.id', $idNoticia)->first();
+
+        return $noticia;
+    }
+    protected function unica_local($idNoticia, $idInstitucion)
+    {
+        $noticia = \DB::table('noticias')
+         ->select([     'noticias.id as id',
+                        'noticias.foto as foto',
+                        'noticias.titulo as titulo',
+                        'noticias.texto as texto',
+                        'noticias.created_at as creado',
+                        'estado_noticias.nombre as nombreEstado',
+                        'institucion.id as idInstitucion',
+                        'institucion.nombre as nombreInstitucion',
+                        'institucion.logo as logoInstitucion'
+                   ])
+        ->join('estado_noticias','estado_noticias.id','=','noticias.id_estado')
+        ->join('institucion','institucion.id','=','noticias.id_institucion')
+        ->where('noticias.id_institucion', $idInstitucion)
+        ->where('noticias.id', $idNoticia)->first()
+        /*->orderBy('noticias.created_at', 'desc')
+        ->paginate(10)*/;
+        return $noticia;
+    }
 }

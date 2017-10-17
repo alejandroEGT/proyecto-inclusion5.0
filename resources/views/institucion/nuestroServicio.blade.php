@@ -34,13 +34,11 @@
 						<p><label>{{ $servicio->nombre }}</label></p>
 						<p><label style="color:#85929E" >{{ $servicio->descripcion }}</label></p>
 						<p>
-							<form id="eliminar" action="{{ url("institucion/eliminar_servicio_institucion") }}" method="post">
-							{{ csrf_field() }}
-							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleServicio/".base64_encode($servicio->id)) }}">Ver..</a>
-							<input type="hidden" value="{{ base64_encode($servicio->id) }}" name="idProducto">	
 							
-							<input type="button" @click="eliminarServicio" class="btn btn-warning btn-xs" value="Eliminar" >
-						</form>	
+							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleServicio/".base64_encode($servicio->id)) }}">Ver..</a>
+							
+							<input type="button" @click="eliminarServicio({!! $servicio->id !!});"  class="btn btn-danger btn-xs" value="Eliminar" >
+						
 						</p>
 					</div>
 				</div>

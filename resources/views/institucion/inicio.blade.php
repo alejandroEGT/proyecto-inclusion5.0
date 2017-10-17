@@ -51,7 +51,7 @@
 						<hr>
 						<img class="img-notix"  src="{{ '/'.$ng->foto }}" height="70" width="90">
 						<p class="img-titu" ><label>{{ $ng->titulo}}</label></p>
-						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+						<p class="img-titu" ><a href="{{ url('institucion/detalleNoticia_general/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
 					@endforeach
 					<hr>
 					<label><a href="{{ url('institucion/verNoticiasGenerales') }}">Ver todas las noticias...</a></label>
@@ -74,7 +74,7 @@
 						@if ($nl->id_estado == 2)
 							<p class="img-titu" ><label>{{ $nl->titulo}}</label> <img src="/ico/padlock.png"></p>
 						@endif
-						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+						<p class="img-titu" ><a href="{{ url('institucion/detalleNoticia_local/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
 					@endforeach
 					<hr>
 					<label><a href="{{ url('institucion/verNoticiasLocales') }}">Ver todas las noticias...</a></label>
@@ -115,13 +115,15 @@
 								<center>
 									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($producto->nombre,10) }}</p>
-									<p><a href="{{ url('institucion/detalleProducto/'.base64_encode($producto->idProducto)) }}" class="btn btn-primary btn-xs">Ver</a></p>
+									<p><a href="{{ url('institucion/detalleProducto/'.base64_encode($producto->idProducto)) }}" class="btn btn-primary btn-xs">Ver</a>
+									<input type="button" @click="eliminarProducto({!! $producto->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
+									</p>
 								</center>
 
 							</div>	
 							@endforeach
 								<!--<center>{{-- $productos->links() --}}</center>-->
-							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_producto') }}">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>
@@ -162,13 +164,16 @@
 								<center>
 									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($servicio->nombre, 10) }}</p>
-									<p><a href="{{ url('institucion/detalleServicio/'.base64_encode($servicio->id)) }}" class="btn btn-primary btn-xs">Ver</a></p>
+									<p><a href="{{ url('institucion/detalleServicio/'.base64_encode($servicio->id)) }}" class="btn btn-primary btn-xs">Ver</a>
+										
+									<input type="button" @click="eliminarServicio({!! $servicio->id !!});"  class="btn btn-danger btn-xs" value="Eliminar" >
+									</p>
 								</center>
 
 							</div>	
 							@endforeach
 							<!--<center>{{-- $productos->links() --}}</center>-->
-							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_servicio') }}">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>

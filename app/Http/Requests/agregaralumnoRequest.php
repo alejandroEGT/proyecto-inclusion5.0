@@ -18,7 +18,7 @@ class agregaralumnoRequest extends FormRequest
         return [
             'nombres' => 'required',
             'apellidos' => 'required',
-            'fecha' => 'date_format:"d-m-Y"|required',
+            'fecha' => 'date|required',
             'id_sexo' => 'required',   
             'telefono' => 'required|min:11|numeric',
             'id_area' => 'required',    

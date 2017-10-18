@@ -14,7 +14,7 @@ class Vendedor extends Model
 
      protected function insertar_aprobado($datos, $idUser){
 
-        $date = new \DateTime($datos->get('dia').'-'.$datos->get('mes').'-'.$datos->get('anio'));
+        $date = new \DateTime($datos->fecha);
         $vendedor = new Vendedor;
         $vendedor->id_user = $idUser;
         $vendedor->telefono = $datos->telefono;

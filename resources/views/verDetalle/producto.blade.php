@@ -39,7 +39,7 @@
 								{{csrf_field()}}
 							  		<p><strong>Actualizar Foto</strong> </p>
 							  	
-							  		<p><input class="" type="file" name="fotoP1">
+							  		<p><input class="" type="file" name="foto">
 							  			<input type="hidden" name="idProducto" value="{{$productos[0]->idProducto}}">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	

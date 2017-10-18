@@ -292,6 +292,7 @@ class institucionController extends Controller
 
     public function agregar_alumno(agregaralumnoRequest $datos)
     {
+      try{
         $genclave = $this->genclave();
         $correo = $datos->correo;
         \Session::put('usuario',$datos->nombres.' '.$datos->apellidos);//obtener usuario y enviarlo a clave.blade.php
@@ -314,13 +315,19 @@ class institucionController extends Controller
                                           $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                                           $message->to($correo,'to jano');
                                       });
-                                    return "ok"; 
+                                         \Session::flash('ingresado', 'Alumno ingresado');
+                                    return redirect()->back();
+                                     
                                     }
                                 }
-                                return "error";
+                                return redirect()->back()->withErrors(['algo salió mal']);
                      }
              }
         }
+      } catch (\Illuminate\Database\QueryException $e) {
+                return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }
+            
     }
     /*Peticiones en ajax mediante vue y vue-resource*/
 
@@ -556,6 +563,7 @@ class institucionController extends Controller
     /*PUBLICACION DE LOS PRODUCTOS*/
     public function publicarproducto(productoInstiRequest $datos){
       
+      try{
        $institucion = Area::traer();
 
        $insertProducto = producto::insertar($datos);
@@ -572,7 +580,7 @@ class institucionController extends Controller
                
                if ($insertTiendaProducto > 0) {
 
-                   \Session::flash('registro', 'Producto registrado correctasmente');
+                   \Session::flash('registro', 'Producto registrado correctamente');
                 return redirect()->back();
                }
                return "Mal todo";
@@ -581,6 +589,9 @@ class institucionController extends Controller
            }
            return redirect()->back()->withErrors(['Algo salió mal']);
         }
+      } catch (\Illuminate\Database\QueryException $e) {
+                return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+      }
     }
     /*FIN DE PUBLICACION DE LOS PRODUCTOS*/
 
@@ -633,103 +644,141 @@ class institucionController extends Controller
     }
     public function actualizar_producto_foto(Request $dato)
     {
-      $this->validate($dato,[
-                'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=3200,max_height=2850',
-          ]);
-      //dd($dato->idProducto);
-      $actualizar = foto_producto::actualizar_foto($dato);
-      if ($actualizar > 0) {
-          \Session::flash('correcto', 'Foto actualizada correctamente');
+      try{
+          $this->validate($dato,[
+                    'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
+              ]);
+          //dd($dato->idProducto);
+          $actualizar = foto_producto::actualizar_foto($dato);
+          if ($actualizar > 0) {
+              \Session::flash('correcto', 'Foto actualizada correctamente');
+              return redirect()->back();
+          }
           return redirect()->back();
-      }
-      return redirect()->back();
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }
     }
     public function actualizar_producto_nombre(Request $dato)
     {
-      $this->validate($dato,[
-                'nombre' => 'required | max:50',
-          ]);
-          $nombre = producto::actualizar_nombre($dato);
-          if ($nombre) {
-            \Session::flash('correcto', 'Nombre actualizado correctamente');
-            return redirect()->back();
-          }
-          return redirect()->back();
+        try{
+               $this->validate($dato,[
+                    'nombre' => 'required | max:50',
+              ]);
+              $nombre = producto::actualizar_nombre($dato);
+              if ($nombre) {
+                \Session::flash('correcto', 'Nombre actualizado correctamente');
+                return redirect()->back();
+              }
+              return redirect()->back();
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }
     }
     public function actualizar_producto_descripcion(Request $dato)
     {
-      $this->validate($dato,[
-                'descripcion' => 'required | max:250',
-          ]);
-          $desc = producto::actualizar_descripcion($dato);
-          if ($desc) {
-            \Session::flash('correcto', 'Descripcion actualizada correctamente');
-            return redirect()->back();
-          }
-          return redirect()->back();
+      try{
+            $this->validate($dato,[
+                    'descripcion' => 'required | max:250',
+              ]);
+              $desc = producto::actualizar_descripcion($dato);
+              if ($desc) {
+                \Session::flash('correcto', 'Descripcion actualizada correctamente');
+                return redirect()->back();
+              }
+              return redirect()->back();
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }
     }
      public function actualizar_producto_precio(Request $dato)
     {
-      $this->validate($dato,[
-                'precio' => 'required | numeric',
-          ]);
-          $cant = producto::actualizar_precio($dato);
-          if ($cant) {
-            \Session::flash('correcto', 'Precio actualizado correctamente');
+        try{
+             $this->validate($dato,[
+                  'precio' => 'required | numeric',
+            ]);
+            $cant = producto::actualizar_precio($dato);
+            if ($cant) {
+              \Session::flash('correcto', 'Precio actualizado correctamente');
+              return redirect()->back();
+            }
             return redirect()->back();
-          }
-          return redirect()->back();
+
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }
 
     }
     public function actualizar_producto_cantidad(Request $dato)
     {
-      $this->validate($dato,[
-                'cantidad' => 'required | numeric',
-          ]);
-          $cant = producto::actualizar_cantidad($dato);
-          if ($cant) {
-            \Session::flash('correcto', 'Cantidad actualizada correctamente');
+      try{
+            $this->validate($dato,[
+                  'cantidad' => 'required | numeric',
+            ]);
+            $cant = producto::actualizar_cantidad($dato);
+            if ($cant) {
+              \Session::flash('correcto', 'Cantidad actualizada correctamente');
+              return redirect()->back();
+            }
             return redirect()->back();
-          }
-          return redirect()->back();
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }     
 
     }
     public function actualizar_producto_visibilidad(Request $dato)
     {
-      $this->validate($dato,[
-                'estadoV' => 'required',
-          ]);
+      try{
+               $this->validate($dato,[
+                    'estadoV' => 'required',
+              ]);
 
-          $visibi = producto::actualizar_visibilidad($dato);
-          if ($visibi) {
-            return redirect()->back();
-          }
-          return redirect()->back();
+              $visibi = producto::actualizar_visibilidad($dato);
+              if ($visibi) {
+                return redirect()->back();
+              }
+              return redirect()->back();
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }       
 
     }public function actualizar_producto_categoria(Request $dato)
     {
-      $this->validate($dato,[
-                'categoria' => 'required',
-          ]);
+      try{
+            $this->validate($dato,[
+                    'categoria' => 'required',
+              ]);
 
-      $categ = producto::actualizar_categoria($dato);
-          if ($categ) {
-            
-            return redirect()->back();
-          }
-          return redirect()->back();
+            $categ = producto::actualizar_categoria($dato);
+              if ($categ) {
+                
+                return redirect()->back();
+              }
+              return redirect()->back();
+
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
 
     }public function actualizar_producto_area(Request $dato)
     {
-      $this->validate($dato,[
-                'area' => 'required',
-          ]);
-      $area = producto::actualizar_area($dato);
-          if ($area) {
-            //\Session::flash('correcto', 'Cantidad actualizada correctasmente');
-            return redirect()->back();
-          }
-          return redirect()->back();
+      try{
+          $this->validate($dato,[
+                    'area' => 'required',
+              ]);
+          $area = producto::actualizar_area($dato);
+              if ($area) {
+                //\Session::flash('correcto', 'Cantidad actualizada correctasmente');
+                return redirect()->back();
+              }
+              return redirect()->back();
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }          
     }
 
     public function filtrarProducto(Request $datos)
@@ -769,116 +818,154 @@ class institucionController extends Controller
 
     public function actualizar_nombre_alumno(Request $dato)
     {
-       $this->validate($dato,[
-                'nombres' => 'required',
-          ]);
+      try{
+         $this->validate($dato,[
+                  'nombres' => 'required',
+            ]);
 
-         $update = User::actualizarNombres($dato->nombres, $dato->idUser);
+           $update = User::actualizarNombres($dato->nombres, $dato->idUser);
 
-         if ($update) {
-              \Session::flash('correcto', 'Nombres actualizados');
-              return redirect()->back();
-         }
+           if ($update) {
+                \Session::flash('correcto', 'Nombres actualizados');
+                return redirect()->back();
+           }
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
 
     }
      public function actualizar_apellido_alumno(Request $dato)
     {
-       $this->validate($dato,[
-                'apellidos' => 'required',
-          ]);
+      try{
+           $this->validate($dato,[
+                    'apellidos' => 'required',
+              ]);
 
-         $update = User::actualizarApellidos($dato->apellidos, $dato->idUser);
+             $update = User::actualizarApellidos($dato->apellidos, $dato->idUser);
 
-         if ($update) {
-              \Session::flash('correcto', 'Apellidos actualizados');
-              return redirect()->back();
-         }
+             if ($update) {
+                  \Session::flash('correcto', 'Apellidos actualizados');
+                  return redirect()->back();
+             }
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
 
     }
     public function actualizar_correo_alumno(Request $dato)
     {
-       $this->validate($dato,[
-                'correo' => 'required',
-          ]);
+      try{
+         $this->validate($dato,[
+                  'correo' => 'required',
+            ]);
 
-         $update = User::actualizar_Correo($dato->correo, $dato->idUser);
+           $update = User::actualizar_Correo($dato->correo, $dato->idUser);
 
-         if ($update) {
-              \Session::flash('correcto', 'Correo actualizado');
-              return redirect()->back();
-         }
+           if ($update) {
+                \Session::flash('correcto', 'Correo actualizado');
+                return redirect()->back();
+           }
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
 
     }
     public function actualizar_area_alumno(Request $dato)
     {
-       $this->validate($dato,[
-                'area' => 'required',
-          ]);
+      try{
+            $this->validate($dato,[
+                  'area' => 'required',
+            ]);
 
-         $vendedor = Vendedor::where('id_user', $dato->idUser)->first();
-         $update = VendedorInstitucion::actualizar_area_alumno($dato->area, $vendedor->id);
+           $vendedor = Vendedor::where('id_user', $dato->idUser)->first();
+           $update = VendedorInstitucion::actualizar_area_alumno($dato->area, $vendedor->id);
 
-         if ($update) {
-              \Session::flash('correcto', 'Área actualizada');
-              return redirect()->back();
-         }
+           if ($update) {
+                \Session::flash('correcto', 'Área actualizada');
+                return redirect()->back();
+           }
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
 
     }
     public function actualizar_numero_alumno(Request $dato)
     {
-       $this->validate($dato,[
-                'numero' => 'required|min:11|numeric',
-          ]);
+      try{
+           $this->validate($dato,[
+                    'numero' => 'required|min:11|numeric',
+              ]);
 
-         $update = Vendedor::actualizar_numero($dato->numero, $dato->idUser);
+             $update = Vendedor::actualizar_numero($dato->numero, $dato->idUser);
 
-         if ($update) {
-              \Session::flash('correcto', 'Número actualizado');
-              return redirect()->back();
-         }
+             if ($update) {
+                  \Session::flash('correcto', 'Número actualizado');
+                  return redirect()->back();
+             }
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }          
 
     }
     public function actualizar_foto_alumno(Request $dato)
     {
-        $this->validate($dato,[
-                'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
-          ]);
+      try{
+          $this->validate($dato,[
+                  'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
+            ]);
 
 
-         $update = Fotoperfil::actualizar_foto($dato);
+           $update = Fotoperfil::actualizar_foto($dato);
 
-         return $update;
+           return $update;
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }         
     }
 
     public function actualizar_titulo_noticia(Request $datos)
     {
-       $this->validate($datos,['titulo' => 'required|max:150',]);
-       $noticia = noticia::find($datos->noticia);
-       $noticia->titulo = $datos->titulo;
-       if ($noticia->save()) {
-            \Session::flash('correcto', 'Título actualizado');
-              return redirect()->back();
-       }
+      try{
+         $this->validate($datos,['titulo' => 'required|max:150',]);
+         $noticia = noticia::find($datos->noticia);
+         $noticia->titulo = $datos->titulo;
+         if ($noticia->save()) {
+              \Session::flash('correcto', 'Título actualizado');
+                return redirect()->back();
+         }
+
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
     }
     public function actualizar_texto_noticia(Request $datos)
     {
-       $this->validate($datos,['texto' => 'required|max:3500',]);
-        $noticia = noticia::find($datos->noticia);
-        $noticia->texto = $datos->texto;
-        if ($noticia->save()) {
-            \Session::flash('correcto', 'Título actualizado');
-              return redirect()->back();
-       }
+      try{
+         $this->validate($datos,['texto' => 'required|max:3500',]);
+          $noticia = noticia::find($datos->noticia);
+          $noticia->texto = $datos->texto;
+          if ($noticia->save()) {
+              \Session::flash('correcto', 'Título actualizado');
+                return redirect()->back();
+         }
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }      
     }
     public function actualizar_estado_noticia(Request $datos)
     {
-       $this->validate($datos,['estado' => 'required',]);
-       $noticia = noticia::find($datos->noticia);
-       $noticia->id_estado = $datos->estado;
-       if ($noticia->save()) {
-            \Session::flash('correcto', 'Estado actualizado');
-              return redirect()->back();
-       }
+      try{
+         $this->validate($datos,['estado' => 'required',]);
+         $noticia = noticia::find($datos->noticia);
+         $noticia->id_estado = $datos->estado;
+         if ($noticia->save()) {
+              \Session::flash('correcto', 'Estado actualizado');
+                return redirect()->back();
+         }
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
     }
     public function productos_oclutos()
     {
@@ -896,76 +983,101 @@ class institucionController extends Controller
     }
     public function actualizar_servicio_nombre(Request $dato)
     {
-      $this->validate($dato,['nombre' => 'required|max:50',]);
+      try{
+          $this->validate($dato,['nombre' => 'required|max:50',]);
 
-      $servicio = servicio::find($dato->idServicio);
-      $servicio->nombre = $dato->nombre;
-      if ($servicio->save()) {
-          \Session::flash('correcto', 'Nombre actualizado');
-          return redirect()->back();
-       } 
+          $servicio = servicio::find($dato->idServicio);
+          $servicio->nombre = $dato->nombre;
+          if ($servicio->save()) {
+              \Session::flash('correcto', 'Nombre actualizado');
+              return redirect()->back();
+           } 
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
     }
     public function actualizar_servicio_descripcion(Request $dato)
     {
-      $this->validate($dato,['descripcion' => 'required|max:250',]);
+      try{
+          $this->validate($dato,['descripcion' => 'required|max:250',]);
 
-      $servicio = servicio::find($dato->idServicio);
-      $servicio->descripcion = $dato->descripcion;
-      if ($servicio->save()) {
-          \Session::flash('correcto', 'Descripción actualizada');
-          return redirect()->back();
-       } 
+          $servicio = servicio::find($dato->idServicio);
+          $servicio->descripcion = $dato->descripcion;
+          if ($servicio->save()) {
+              \Session::flash('correcto', 'Descripción actualizada');
+              return redirect()->back();
+           } 
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }        
     }
     public function actualizar_servicio_categoria(Request $dato)
     {
-      $this->validate($dato,['categoria' => 'required',]);
+      try{
+            $this->validate($dato,['categoria' => 'required',]);
 
-      $servicio = servicio::find($dato->idServicio);
-      $servicio->id_categoria = $dato->categoria;
-      if ($servicio->save()) {
-          \Session::flash('correcto', 'Categoría actualizada');
-          return redirect()->back();
-       } 
+            $servicio = servicio::find($dato->idServicio);
+            $servicio->id_categoria = $dato->categoria;
+            if ($servicio->save()) {
+                \Session::flash('correcto', 'Categoría actualizada');
+                return redirect()->back();
+             } 
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }          
     }
     public function actualizar_servicio_visibilidad(Request $dato)
     {
-      $this->validate($dato,['estado' => 'required',]);
+      try{
+          $this->validate($dato,['estado' => 'required',]);
 
-      $servicio = Tienda_servicio_institucion::where('id_servicio',$dato->idServicio)->first();
-      $servicio->id_estado = $dato->estado;
-      if ($servicio->save()) {
-          \Session::flash('correcto', 'Estado actualizado');
-          return redirect()->back();
-       } 
+          $servicio = Tienda_servicio_institucion::where('id_servicio',$dato->idServicio)->first();
+          $servicio->id_estado = $dato->estado;
+          if ($servicio->save()) {
+              \Session::flash('correcto', 'Estado actualizado');
+              return redirect()->back();
+           } 
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }        
     }
     public function actualizar_servicio_area(Request $dato)
     {
-      $this->validate($dato,['area' => 'required',]);
+      try{
+            $this->validate($dato,['area' => 'required',]);
 
-      $servicio = Tienda_servicio_institucion::where('id_servicio',$dato->idServicio)->first();
-      $servicio->id_area = $dato->area;
-      if ($servicio->save()) {
-          \Session::flash('correcto', 'Estado actualizado');
-          return redirect()->back();
-       } 
+            $servicio = Tienda_servicio_institucion::where('id_servicio',$dato->idServicio)->first();
+            $servicio->id_area = $dato->area;
+            if ($servicio->save()) {
+                \Session::flash('correcto', 'Estado actualizado');
+                return redirect()->back();
+             } 
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }         
     }
      public function actualizar_servicio_foto(Request $dato)
     {
-      $this->validate($dato,['foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',]);
+      try{
+          $this->validate($dato,['foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',]);
 
-      $foto = foto_servicio::where('id_servicio',$dato->idServicio)->first();
+          $foto = foto_servicio::where('id_servicio',$dato->idServicio)->first();
 
-      \File::delete($foto->nombre);/*ELIMINAR FOTO*/
-      $url="foto_servicios";
-      $file = $dato->file('foto')->getClientOriginalExtension();
-      $imageName = time().'.'.$dato->file('foto')->getClientOriginalExtension();//nombre de la imagen como tal.
-      $foto->nombre = $url.'/'.$imageName;
-      if ($foto->save()) {
-            $dato->file('foto')->move(public_path($url), $imageName);
-           
-            \Session::flash('correcto', 'Foto actualizada');
-            return redirect()->back();
-       } 
+          \File::delete($foto->nombre);/*ELIMINAR FOTO*/
+          $url="foto_servicios";
+          $file = $dato->file('foto')->getClientOriginalExtension();
+          $imageName = time().'.'.$dato->file('foto')->getClientOriginalExtension();//nombre de la imagen como tal.
+          $foto->nombre = $url.'/'.$imageName;
+          if ($foto->save()) {
+                $dato->file('foto')->move(public_path($url), $imageName);
+               
+                \Session::flash('correcto', 'Foto actualizada');
+                return redirect()->back();
+           } 
+
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }        
     }
   
 }

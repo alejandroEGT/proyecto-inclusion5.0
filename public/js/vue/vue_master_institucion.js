@@ -282,8 +282,9 @@ new Vue({
 		,
 		eliminarAlumno($this){//reparar este codigo//////////////////////////////////////////////
 				if (confirm("¿Quieres eliminar este alumno?") == true) {
-				    
-						$('#form_eliminarAlumno').submit();
+				    	
+				    	alert($this);
+						//$('#form_eliminarAlumno').submit();
 
 				} 
 				else {

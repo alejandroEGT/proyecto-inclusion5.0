@@ -12,20 +12,28 @@ class crud_institucionController extends Controller
 {
     public function insertar(institucionRequest $datos)
     {
-    	$datos->flash();
-    	$retornar = Institucion::insertar($datos);
+        try{
+        	
+        	$retornar = Institucion::insertar($datos);
 
-    	if($retornar > 0){
+        	if($retornar > 0){
 
-    		$idInstitucion = Institucion::where('email', $datos->correo)->get();
+        		$idInstitucion = Institucion::where('email', $datos->correo)->get();
 
-    		$creartienda = Tienda_institucion::insertar($idInstitucion[0]->id);
-    		if ($creartienda) {
-    			\Session::flash('ingresado', 'Institución registrada');
-    			return redirect()->back();
-    		}
-    		return redirect()->back()->withErrors(['Algo salió mal']);
-    	}
-    	return redirect()->back()->withErrors(['Algo salió mal']);
-}
+        		$creartienda = Tienda_institucion::insertar($idInstitucion[0]->id);
+        		if ($creartienda) {
+        			\Session::flash('ingresado', 'Institución registrada');
+        			return redirect()->back();
+        		}
+                $datos->flash();
+        		return redirect()->back()->withErrors(['Algo salió mal']);
+        	}
+            $datos->flash();
+        	return redirect()->back()->withErrors(['Algo salió mal']);
+
+        } catch (\Illuminate\Database\QueryException $e) {
+                $datos->flash();
+                return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+      }
+    }
  }

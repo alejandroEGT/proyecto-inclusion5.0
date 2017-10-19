@@ -8,6 +8,12 @@ use App\Tienda_institucion;
 use App\User;
 use App\cliente;
 use App\producto;
+<<<<<<< HEAD
+
+use App\foto_producto;
+
+=======
+>>>>>>> 92b7ad0282efcc4072fbfea61503115507c0a127
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,21 +21,52 @@ use Illuminate\Support\Facades\Auth;
 class clienteController extends Controller
 {
     public function inicio_cliente(){
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+      $productos =  producto::all();
+    	return view('inicioCliente.inicio_cliente')->with('productos',$productos);
+
+=======
+>>>>>>> 92b7ad0282efcc4072fbfea61503115507c0a127
       $tiendas = Tienda_institucion::all();
       $productos = \DB::select('SELECT * from fProducto');
       //una consulta que traiga los productos con la foto
+>>>>>>> 2d5c0191f3a63efb66ad305d110ff314931919ad
 
-    	return view('inicioCliente.inicio_cliente')->with('productos',$productos)
+       
+
+      $tiendas = Tienda_institucion::traerTiendas();
+      //dd($tiendas);
+      $ver_producto = producto::ver_producto();
+     //dd($ver_producto);
+      return view('inicioCliente.inicio_cliente')->with('ver_producto',$ver_producto)
                                                  ->with('tiendas',$tiendas);
+<<<<<<< HEAD
+                
+      
+=======
     
+>>>>>>> 92b7ad0282efcc4072fbfea61503115507c0a127
     }
 
      public function vista_productos($id){
 
-        $productos = \DB::select('SELECT * from fProducto where id ='.$id);
-        return view('inicioCliente.vista_productos')->with('productos',$productos[0]);
-                                                  
+            
+        $producto = producto::producto_id($id);
+        return view('inicioCliente.vista_productos')->with('producto',$producto);
+                                                 
     }  
+
+    public function ver_mas_producto(){
+      $ver_mas = producto::ver_mas_producto();
+       $tiendas = Tienda_institucion::traerTiendas();
+      return view ('inicioCliente.inicio_cliente_mas')->with('ver_mas',$ver_mas)
+                                                      ->with('tiendas',$tiendas);
+    }
+
 
     public function perfil_cliente(){
 
@@ -66,7 +103,11 @@ class clienteController extends Controller
 
         public function prueba_cliente()
     {
-   		return view('inicioCliente.prueba');
+     
+        $ver_producto = producto::ver_producto();
+        return view('inicioCliente.prueba')->with('ver_producto',$ver_producto);
+
+
     }
 
        public function guardar_cliente(Request $datos){

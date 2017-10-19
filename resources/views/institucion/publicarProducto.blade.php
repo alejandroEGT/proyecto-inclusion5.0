@@ -19,10 +19,16 @@
 					</div>
 				</div>		
 			</div>
+			<div class="col-md-2">
+				<div id="divFoto" hidden="true" >
+						<div id="img_destino" class="porte img-thumbnail" ></div>
+				</div>
+			</div>
 		</div>
 		<hr>
 			@if ($errors->all())
 				<div class="alert alert-info">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
 					<ul>
 						@foreach ($errors->all() as $error)
 							<li>{{$error}}</li>
@@ -31,7 +37,9 @@
 				</div>
 			@endif
 			@if (Session::has('registro'))
-								<div class="alert alert-info">{{ Session::get('registro') }}</div>
+					<div class="alert alert-info">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+								{{ Session::get('registro') }}</div>
 							@endif
 	
 		<div class="row">
@@ -55,7 +63,15 @@
 		<hr>
 		<div class="row">
 		{{ csrf_field() }}
-			<div class="col-md-offset-2 col-md-2">
+		<div class="col-md-offset-2 col-md-3">
+				<select name="area" class="form-control input">
+					<option value="" >Seleccione área o especilidad....</option>
+					@foreach ($areas as $a)
+						<option value="{{$a->id}}" >{{ $a->nombre }}</option>
+					@endforeach
+				</select>
+			</div>
+			<div class="col-md-2">
 				<input type="numeric" maxlength="7" minlength="2" name="valor" class="form-control input" placeholder="Ingrese valor">
 			</div>
 			<div class="col-md-2">
@@ -64,25 +80,17 @@
 				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
 				 	Agregar foto..
 				</label></p>
-				<input style="display: none;" name="fotoP1" id="file-input" type="file"/>
+				<input style="display: none;" name="foto" id="file-input" type="file"/>
 
-					<div id="divFoto" hidden="true" >
-						<div id="img_destino" class="porte img-thumbnail" ></div>
-					</div>
-					
-			</div>
-			<div class="col-md-2">
-				<select name="area" class="form-control input">
-					<option value="" >Seleccione área o especilidad....</option>
-					@foreach ($areas as $a)
-						<option value="{{$a->id}}" >{{ $a->nombre }}</option>
-					@endforeach
-				</select>
-			</div>
-			<div class="col-md-offset-1 col-md-2">
-				<input class="btn" type="submit" name="" value="Registrar">
 			</div>
 			
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-7">
+				
+				<input class="btn btn-block" type="submit" name="" value="Registrar">
+		
+			</div>
 		</div>
 		
 	</form>
@@ -112,13 +120,9 @@
 						<td>{{ $p->descripcion }}</td>
 						<td>{{ $p->creado }}</td>
 						<td>
-							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($p->idProducto)) }}">Ver..</a>
-						<form id="eliminar" action="{{ url("institucion/eliminar_producto_institucion") }}" method="post">
-							{{ csrf_field() }}
-							<input type="hidden" value="{{ base64_encode($p->idProducto) }}" name="idProducto">	
-							<br>
-							<input type="button" @click="eliminarProducto" class="btn btn-warning btn-xs" value="Eliminar" >
-						</form>	
+						<p><a href="{{ url('institucion/detalleProducto/'.base64_encode($p->idProducto)) }}" class="btn btn-primary btn-xs">Ver</a>
+									<input type="button" @click="eliminarProducto({!! $p->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
+									</p>
 						</td>
 					</tr>
 				    

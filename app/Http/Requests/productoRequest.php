@@ -25,8 +25,8 @@ class productoRequest extends FormRequest
     {
         return [
             'nombre' => 'required|max:50 | min:3',
-            'descripcion' => 'required | max:250 | min:3',
-            'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=2500,max_height=2850',
+            'descripcion' => 'required | max:191 | min:3',
+            'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
             'valor' => 'required| numeric',
             'categoria' => 'required',
             'cantidad' => 'required | numeric ',

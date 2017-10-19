@@ -6,7 +6,11 @@ use App\Fotoperfil;
 use App\Http\Requests\formUsuarioInstitucionRequest;
 use App\User;
 use App\VendedorInstitucion;
+use App\Area;
 use App\Vendedor;
+use App\producto;
+use App\servicio;
+use App\noticia;
 use Illuminate\Http\Request;
 use App\Passwordcuenta;
 use Illuminate\Support\Facades\Mail;
@@ -14,16 +18,26 @@ use Illuminate\Support\Facades\Mail;
 class vendedorDependienteController extends Controller
 {
     public function vista_inicio()
-    {       
+    {     
+            $alumno = VendedorInstitucion::id_institucion();
+            $area = Area::traer_aerea_para_alumno();
             $foto = Fotoperfil::traerFoto();
             $verificEstado = Vendedor::verificEstado(\Auth::user()->id);
             $estado_password = Passwordcuenta::traerEstado();
-             $estado = $verificEstado[0]->id_estado;
+            $productos = producto::verProductoDesdeArea( $area[0]->id_area, 4);
+            $servicios = servicio::mostrarServicioDesdeArea($area[0]->id_area, 4);
+            $estado = $verificEstado[0]->id_estado;
+            $noticias_generales = noticia::noticias_generales();
+            $noticias_locales = noticia::noticias_locales($alumno->id_institucion);
             \Session::put('estado', $estado);
-            
+        
         	return view('vendedorDependiente.inicio')
             ->with('foto', $foto)
-            ->with('estado_password', $estado_password);
+            ->with('estado_password', $estado_password)
+            ->with('productos',$productos)
+            ->with('servicios',$servicios)
+            ->with('noticias_generales',$noticias_generales)
+            ->with('noticias_locales',$noticias_locales);
     }
 
     public function vista_datos()

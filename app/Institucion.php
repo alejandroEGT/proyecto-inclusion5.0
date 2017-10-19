@@ -66,8 +66,9 @@ class Institucion extends Authenticatable
     }
 
     protected function datos(){
-            $datos = \DB::select('select * from `institucion` where id ='.\Auth::guard('institucion')->user()->id);
-            return $datos[0];
+            //$datos = \DB::select('select * from `institucion` where id ='.\Auth::guard('institucion')->user()->id);
+            $datos = Institucion::find(\Auth::guard('institucion')->user()->id);
+            return $datos;
     }
     protected function traerMision()
     {
@@ -147,6 +148,23 @@ class Institucion extends Authenticatable
             return redirect()->back();
         }
         return "nada men";
+    }
+    protected function actualizarLogo($datos)
+    {
+        $url="logo";
+        $file = $datos->file('logo')->getClientOriginalExtension();
+        $imageName = time().'.'.$datos->file('logo')->getClientOriginalExtension();//nombre del logo como tal.
+
+        $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
+
+        \File::delete($institucion->logo);/*ELIMINAR logo actual*/
+
+        $institucion->logo = $url.'/'.$imageName;
+        if ($institucion->save()) {
+             $datos->file('logo')->move(public_path($url), $imageName);
+             return true;
+        }
+        return false;
     }
 
     protected function ingresar_paginaweb($paginaweb){

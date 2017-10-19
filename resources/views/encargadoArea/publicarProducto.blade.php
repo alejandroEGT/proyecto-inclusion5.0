@@ -65,7 +65,7 @@
 				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
 				 	Agregar foto..
 				</label></p>
-				<input style="display: none;" name="fotoP1" id="file-input" type="file"/>
+				<input style="display: none;" name="foto" id="file-input" type="file"/>
 
 					<div id="divFoto" hidden="true" >
 						<div id="img_destino" class="porte img-thumbnail" ></div>
@@ -77,6 +77,7 @@
 			</div>
 			
 		</div>
+	</form>	
 		<hr>
 		<div class="row">
 			<div class="col-md-12">
@@ -103,7 +104,8 @@
 						<td>{{ $p->creado }}</td>
 						<td>
 							<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleProducto/".base64_encode($p->idProducto)) }}">Ver..</a>
-							<a class="btn btn-warning btn-xs" href="#">Eliminar</a>
+										
+							<input type="button" @click="eliminarProducto({!! $p->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
 						</td>
 					</tr>
 				    
@@ -119,7 +121,7 @@
 
 			</div>
 		</div>
-	</form>
+	
 @endsection
 
 @section('js')

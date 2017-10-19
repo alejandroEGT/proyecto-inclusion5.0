@@ -49,8 +49,8 @@
 							<div class="box-producto">
 								<center>
 									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
-									<p>{{ $producto->nombre }}</p>
-									<p><a href="" class="btn btn-primary btn-xs">Ver</a></p>
+									<p>{{ str_limit($producto->nombre, 10) }}</p>
+									<p><a href="{{ url($ruta.'/detalleProducto/'.base64_encode($producto->idProducto).'/'.$idInstitucion) }}" class="btn btn-primary btn-xs">Ver</a></p>
 								</center>
 
 							</div>	
@@ -63,6 +63,39 @@
 
 				@endif
 				@if (!count($productos))
+					<center>
+						<label for="">No Existen Producto para mostrar</label>
+						<br>
+						<img src="/ico/sad.png">
+					</center>
+				@endif
+
+				<hr>
+
+				@if (count($servicios)>0)
+					<div class="row">
+						<div class="col-md-12">
+							<center><label>Servicios</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
+							<hr>
+							
+							@foreach ($servicios as $servicio)
+							<div class="box-producto">
+								<center>
+									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
+									<p>{{ str_limit($servicio->nombre, 10) }}</p>
+									<p><a href="{{ url($ruta.'/detalleServicio/'.base64_encode($servicio->id).'/'.$idInstitucion) }}" class="btn btn-primary btn-xs">Ver</a></p>
+								</center>
+
+							</div>	
+							@endforeach
+
+							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+						</div>
+
+					</div>
+
+				@endif
+				@if (!count($servicios))
 					<center>
 						<label for="">No Existen Servicios para mostrar</label>
 						<br>

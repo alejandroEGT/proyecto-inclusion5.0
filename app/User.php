@@ -105,10 +105,10 @@ class User extends Authenticatable
             return false;
     }
 
+
      static public function filtroBusarUser($buscar){
 
-            
-
+        
             $resultado = \DB::select("CALL `buscaralumno`('".\Auth::guard('institucion')->user()->id."','%".$buscar."%');");
             return $resultado;
     }
@@ -182,5 +182,32 @@ class User extends Authenticatable
                 break;
         }
          
+    }
+    protected function actualizarNombres($nombres, $idUser)
+    {
+          $usuario = User::find($idUser);
+            $usuario->nombres = $nombres;
+            if ($usuario->save()) {
+                return true; 
+            }
+            return false;
+    }
+    protected function actualizarApellidos($apellidos, $idUser)
+    {
+          $usuario = User::find($idUser);
+            $usuario->apellidos = $apellidos;
+            if ($usuario->save()) {
+                return true; 
+            }
+            return false;
+    }
+    protected function actualizar_Correo($correo, $idUser)
+    {
+          $usuario = User::find($idUser);
+            $usuario->email = $correo;
+            if ($usuario->save()) {
+                return true; 
+            }
+            return false;
     }
 }

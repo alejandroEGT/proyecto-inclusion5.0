@@ -40,6 +40,7 @@
 	<!--recomedados-->
 	<div class="android-more-section">
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Recomendados</div>
+<<<<<<< HEAD
 	  		<div class="android-card-container mdl-grid">
 				<ul id="flexiselDemo1">
 					@foreach($productos as $producto)	
@@ -47,15 +48,24 @@
 					<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
 						<div class="mdl-card__media porteimg"><img src="{{ '/'.$producto->foto }}"></div>							
 						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $producto->nombre }}</h4></div>
+=======
+	  		<div class="android-card-container mdl-grid">		
+			@foreach($ver_producto as $producto)	
+				
+					<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
+						<div class="imagen-producto">
+						<a class="mdl-card__media porteimg" href="/vista_productos/{{$producto->idProducto}}"><img src="{{ '/'.$producto->fotoProducto }}"></a>
+						</div>							
+						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $producto->nombreProducto }}</h4></div>
+>>>>>>> b29555e98724d88745d9749b67c1952d867254e3
 						<div class="mdl-card__supporting-text">
-						<span class="mdl-typography--font-light mdl-typography--subhead">{{ $producto->descripcion }}</span>
+						<span class="mdl-typography--font-light mdl-typography--subhead">{{ $producto->descripcionProducto }}</span>
 						</div>
-					</div>				 
-					</a></li>
-					@endforeach
-				</ul>	 
+					</div>
+
+			@endforeach
+			<a class="text-center" href="/inicio_cliente_mas">Ver Mas</a>
 			</div>
-		<div class="clearout"></div>
 	</div>
 
 	<!--tienda-->
@@ -64,7 +74,7 @@
 		<div class="android-card-container mdl-grid">
 		  	@foreach($tiendas as $tienda) 
 		    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
-		      <div class="mdl-card__media porteimg"><img src="productos/unpade.jpg"></div>
+		      <div class="mdl-card__media porteimg"><img src="{{'/'.$tienda->logo}}"></div>
 		      <div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $tienda->nombre }}</h4></div>
 		      <div class="mdl-card__supporting-text">
 		      <span class="mdl-typography--font-light mdl-typography--subhead">{{ $tienda->descripcion }}</span>

@@ -10,6 +10,7 @@ use App\Fotoperfil;
 use App\Vendedor;
 use App\Passwordcuenta;
 use App\Encargado;
+use App\Area;
 use Illuminate\Support\Facades\Mail;
 
 class alumnoController extends Controller
@@ -17,10 +18,13 @@ class alumnoController extends Controller
   public function vista_detalleAlumno_inst(request $dato)
   {
         $getId = base64_decode($dato->id);
+        $area = Area::traer();
         $alumno = VendedorInstitucion::detalleAlumno($getId);
 
         //return $alumno;
-        return view('institucion.verDetalleAlumno')->with('alumno', $alumno);
+        return view('institucion.verDetalleAlumno')
+        ->with('alumno', $alumno)
+        ->with('area', $area);
 
   }
 public function vista_detalleAlumno_enc(request $dato)
@@ -70,36 +74,44 @@ public function vista_detalleAlumno_enc(request $dato)
         return $password;
     }
 
-    public function eliminar_alumno(Request $dato)
+    public function eliminar_alumno($dato)
     {
-      $vendedor = Vendedor::idVendedor($dato->id_alumno);
-      //return $vendedor;
+         //return response()->json($dato[0]);
+          try{
+           
+              $vendedor = Vendedor::idVendedor($dato);
 
-      $fotoalumno = VendedorInstitucion::traerFoto($dato->id_alumno);
-      if ("ico/default-avatar.png" === $fotoalumno[0]->foto) {
-        
-        $eliminarFoto = Fotoperfil::eliminar($dato->id_alumno);
-        $eliminarVi = VendedorInstitucion::eliminar($vendedor[0]->id);
-        $eliminarvendedor = Vendedor::eliminar($dato->id_alumno);
-        $eliminarpasswordcuenta = Passwordcuenta::eliminar($dato->id_alumno);
-        $eliminaruser = User::eliminar($dato->id_alumno);
-                  
-        \Session::flash('correcto', 'Alumno borrado con exito');
-        return redirect()->back();
+              $fotoalumno = VendedorInstitucion::traerFoto($dato);
+              if ("ico/default-avatar.png" === $fotoalumno[0]->foto) {
+                
+                $eliminarFoto = Fotoperfil::eliminar($dato);
+                $eliminarVi = VendedorInstitucion::eliminar($vendedor[0]->id);
+                $eliminarvendedor = Vendedor::eliminar($dato);
+                $eliminarpasswordcuenta = Passwordcuenta::eliminar($dato);
+                $eliminaruser = User::eliminar($dato);
+                          
+                \Session::flash('correcto', 'Alumno borrado con exito');
+                return redirect()->back();
 
-      }
-      //return "0";
-        $foto = Fotoperfil::where('id_user', $dato->id_alumno)->get();
-        dd($foto[0]->foto);/*CODIGO PENDIENTE PARA BORRAR EN CASO DE QUE SI CAMBIO DE FOTO DEFAULT DE PARTE DEL USUARIO*/
-        \File::delete();
-        $eliminarFoto = Fotoperfil::eliminar($dato->id_alumno);
-        $eliminarVi = VendedorInstitucion::eliminar($vendedor[0]->id);
-        $eliminarvendedor = Vendedor::eliminar($dato->id_alumno);
-        $eliminarpasswordcuenta = Passwordcuenta::eliminar($dato->id_alumno);
-        $eliminaruser = User::eliminar($dato->id_alumno);
-                  
-        \Session::flash('correcto', 'Alumno borrado con exito');
-        return redirect()->back();
+              }
+              //return "0";
+                $foto = Fotoperfil::where('id_user', $dato)->get();
+                //dd($foto[0]->foto);/*CODIGO PENDIENTE PARA BORRAR EN CASO DE QUE SI CAMBIO DE FOTO DEFAULT DE PARTE DEL USUARIO*/
+                \File::delete($foto[0]->foto);
+                $eliminarFoto = Fotoperfil::eliminar($dato);
+                $eliminarVi = VendedorInstitucion::eliminar($vendedor[0]->id);
+                $eliminarvendedor = Vendedor::eliminar($dato);
+                $eliminarpasswordcuenta = Passwordcuenta::eliminar($dato);
+                $eliminaruser = User::eliminar($dato);
+                          
+                \Session::flash('correcto', 'Alumno borrado con exito');
+                return redirect()->back();
+            }catch (\Illuminate\Database\QueryException $e) {
+                return false;
+            }  catch (\Exception $e) {
+                 return false;
+            }
+       
     }
 
     public function actualizar_nombre(Request $dato)

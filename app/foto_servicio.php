@@ -25,4 +25,11 @@ class foto_servicio extends Model
         }
         return 0;
     }
+     protected function borrar($id)
+    {
+        $getFoto = foto_servicio::find($id);
+        \File::delete($getFoto->foto);/*ELIMINAR FOTO*/
+        $tpi = \DB::table('foto_servicios')->where('id', '=', $id)->delete();
+        return $tpi;
+    }
 }

@@ -162,9 +162,50 @@
 
 				</div>
 				<hr>
-		
+				<img src="{{ '/'.Auth::guard('institucion')->user()->logo }}" class="img img-thumbnail" height="100" width="130">
+				 <button data-toggle="collapse" data-target="#logo" class="btn btn-xs btn-success" >Editar</button>
+
+				<div id="logo" class="collapse">
+							<div class="alert alert-info" role="alert">
+								<form action="{{ url('institucion/actualizar_logo') }}" method="post" enctype="multipart/form-data">
+									{{ csrf_field() }}
+							  		<p><label for="file-input" class="label-foto-link">
+									 		<img src="/ico/image.png" for="file-input" class="label-foto-link">
+									 			Actualizar logo..
+										</label>
+								    </p>
+									<input style="display: none;" name="logo" id="file-input" type="file"/>
+														<input type="submit" value="Guardar" name="">	
+								</form>	
+							</div>
+
+				</div>
 			</div>
 
 		</div>
 	</div>
+@endsection
+@section('js')
+	<script>
+            function mostrarImagen(input) {
+                if (input.files && input.files[0]) 
+                {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+    
+                        $('#img_destino').attr('style', 'background-image:url('+e.target.result+');');
+                        $('#divFoto').attr('hidden', false);
+   
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+           
+ 
+                $("#file-input").change(function(){
+                 mostrarImagen(this);
+                 
+                });
+                
+        </script>
 @endsection

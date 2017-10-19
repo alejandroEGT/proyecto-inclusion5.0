@@ -15,21 +15,33 @@ use Illuminate\Support\Facades\Auth;
 class clienteController extends Controller
 {
     public function inicio_cliente(){
-      $tiendas = Tienda_institucion::all();
-      $productos = \DB::select('SELECT * from fProducto');
-      //una consulta que traiga los productos con la foto
 
-    	return view('inicioCliente.inicio_cliente')->with('productos',$productos)
+       
+
+      $tiendas = Tienda_institucion::traerTiendas();
+      //dd($tiendas);
+      $ver_producto = producto::ver_producto();
+     //dd($ver_producto);
+      return view('inicioCliente.inicio_cliente')->with('ver_producto',$ver_producto)
                                                  ->with('tiendas',$tiendas);
     
     }
 
      public function vista_productos($id){
 
-        $productos = \DB::select('SELECT * from fProducto where id ='.$id);
-        return view('inicioCliente.vista_productos')->with('productos',$productos[0]);
-                                                  
+            
+        $producto = producto::producto_id($id);
+        return view('inicioCliente.vista_productos')->with('producto',$producto);
+                                                 
     }  
+
+    public function ver_mas_producto(){
+      $ver_mas = producto::ver_mas_producto();
+       $tiendas = Tienda_institucion::traerTiendas();
+      return view ('inicioCliente.inicio_cliente_mas')->with('ver_mas',$ver_mas)
+                                                      ->with('tiendas',$tiendas);
+    }
+
 
     public function perfil_cliente(){
 
@@ -66,7 +78,11 @@ class clienteController extends Controller
 
         public function prueba_cliente()
     {
-   		return view('inicioCliente.prueba');
+     
+        $ver_producto = producto::ver_producto();
+        return view('inicioCliente.prueba')->with('ver_producto',$ver_producto);
+
+
     }
 
        public function guardar_cliente(Request $datos){

@@ -210,4 +210,69 @@ class producto extends Model
         }   
         return false;  
     }
+
+
+//NO TOCAR
+protected function ver_producto()
+    {
+        $datos = \DB::table('tienda_producto_instituciones')
+        ->select([
+                        'tienda_producto_instituciones.id_producto as idProducto',
+                        'productos.nombre as nombreProducto',
+                        'productos.precio as precioProducto',
+                        'productos.descripcion as descripcionProducto',
+                        'productos.cantidad as cantidadProducto',
+                        'foto_productos.id as idFotoProducto',
+                        'foto_productos.foto as fotoProducto'
+
+                    ])
+                      ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
+                      ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+                      ->where('tienda_producto_instituciones.id_estado',1)->take(4)->get();
+
+        return $datos;
+    }
+
+protected function ver_mas_producto()
+    {
+        $ver_mas = \DB::table('tienda_producto_instituciones')
+        ->select([
+                        'tienda_producto_instituciones.id_producto as idProducto',
+                        'productos.nombre as nombreProducto',
+                        'productos.precio as precioProducto',
+                        'productos.descripcion as descripcionProducto',
+                        'productos.cantidad as cantidadProducto',
+                        'foto_productos.id as idFotoProducto',
+                        'foto_productos.foto as fotoProducto'
+
+                    ])
+                      ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
+                      ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+                      ->where('tienda_producto_instituciones.id_estado',1)->get();
+
+        return $ver_mas;
+    }
+    protected function producto_id($id)
+    {
+
+         $producto = \DB::table('productos')
+         ->select([
+                        'productos.id as idProducto',
+                        'productos.nombre as nombreProducto',
+                        'productos.precio as precioProducto',
+                        'productos.descripcion as descripcionProducto',
+                        'productos.cantidad as cantidadProducto',
+                        'foto_productos.id as idFotoProducto',
+                        'foto_productos.foto as fotoProducto'
+
+                    ])
+                      ->join('foto_productos','productos.id','=','foto_productos.id_producto')
+                      ->join('tienda_producto_instituciones','productos.id','=','tienda_producto_instituciones.id_producto')
+                      ->join('estado_tienda_producto','tienda_producto_instituciones.id_estado','=','estado_tienda_producto.id')
+                      ->where('tienda_producto_instituciones.id_estado',1)
+                      ->where('productos.id', $id)->first();
+                      return $producto;
+    }
+
 }
+

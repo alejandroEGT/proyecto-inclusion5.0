@@ -117,6 +117,13 @@ Route::group(['prefix' => 'userIndependiente','middleware'=>['md_vendedor']], fu
         Route::get('/logout','autenticarController@logout_venIns');
         Route::get('/buscador','buscadorController@buscador_ven');
         Route::post('/guardarFoto', 'vendedorIndependienteController@guardar_foto');
+
+        //mis Rutas
+        Route::get('/mis_datos' , 'vendedorIndependienteController@mis_datos'); 
+        Route::get('/ingresar_productos' , 'vendedorIndependienteController@ingresar_productos');
+        Route::get('/ingresar_servicios' , 'vendedorIndependienteController@ingresar_servicios');
+        Route::get('/modificar_productos' , 'vendedorIndependienteController@modificar_productos');
+        Route::get('/modificar_servicios' , 'vendedorIndependienteController@modificar_servicios');
 });
 
 Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], function(){
@@ -190,6 +197,7 @@ Route::get('generarClave/{id}', 'alumnoController@generarClave');
 
 
  Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
+ Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
 
  Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
  Route::post('/sesion_cliente', 'loginClienteController@authCliente');
@@ -218,4 +226,6 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::get('/carro_cliente' , 'clienteController@carro_cliente');
 
 });
+
+
 

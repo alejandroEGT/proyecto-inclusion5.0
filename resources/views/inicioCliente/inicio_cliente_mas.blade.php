@@ -41,7 +41,7 @@
 	<div class="android-more-section">
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Recomendados</div>
 	  		<div class="android-card-container mdl-grid">		
-			@foreach($ver_producto as $producto)	
+			@foreach($ver_mas as $producto)	
 				
 					<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 						<div class="imagen-producto">
@@ -52,9 +52,8 @@
 						<span class="mdl-typography--font-light mdl-typography--subhead">{{ $producto->descripcionProducto }}</span>
 						</div>
 					</div>
-
+			
 			@endforeach
-			<a class="text-center" href="/inicio_cliente_mas">Ver Mas</a>
 			</div>
 	</div>
 
@@ -76,6 +75,7 @@
 	   		@endforeach
 	  	</div>	  
 	</div>
+	<img src="" alt="" style="">
 
 	<!--calidad-->
 	<div class="container-fluid">

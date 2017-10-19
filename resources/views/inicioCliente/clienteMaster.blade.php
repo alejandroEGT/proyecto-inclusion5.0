@@ -8,7 +8,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<title>Index</title>
-		<link rel="stylesheet" href="/inicioCliente/css.css">
+		<link rel="stylesheet" href="{{asset('inicioCliente/css.css')}}">
 		
 	</head>
 		<body>

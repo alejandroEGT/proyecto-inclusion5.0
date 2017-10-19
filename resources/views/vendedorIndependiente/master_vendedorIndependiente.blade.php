@@ -8,11 +8,12 @@
 	<title>Sesión de  {{ Auth::user()->email }}</title>
 	<link rel="stylesheet" href="{{asset('css/css.css')}}">
     <link rel="stylesheet" href="{{asset('css/estilo_vendedor.css')}}">
+        <link rel="stylesheet" href="{{asset('css/estilo_institucion.css')}}">
 
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
 
-<body onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);">
+<body>
         
 <div id="master-vendedorIndependiente" class="animated fadeIn" >
 
@@ -32,7 +33,7 @@
                         <hr>
                     </li>
                     <li class="pushy-submenu">
-                        <button id="first-link">¿Te ayudamos?</button>
+                        <button id="first-link"><i class="fa fa-info-circle"></i> ¿Te ayudamos?</button>
                         <ul>
                             @if (Session::has('activarMicro'))
                                 <li class="pushy-link"><a href="/desactivarmicro"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
@@ -55,33 +56,17 @@
                              <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
                     </li>
-                    <li class="pushy-link"><a href="#">Mis Datos</a></li>
+                    <li class="pushy-link"><a href="/userIndependiente/mis_datos"><i class="fa fa-user"></i> Mis Datos</a></li>
                     <li class="pushy-submenu">
-                        <button>Formularios</button>
+                        <button><i class="fa fa-plus-square-o"></i> Formularios</button>
                         <ul>
-                            <li class="pushy-link"><a href="index">Inicio</a></li>
-                            <li class="pushy-link"><a href="/login">Login de institución</a></li>
-                            <li class="pushy-link"><a href="#">Item 3</a></li>
-                        </ul>
-                    </li>
-                    <li class="pushy-submenu">
-                        <button>foto 3</button>
-                        <ul>
-                            <li class="pushy-link"><a href="foto">foto</a></li>
-                            <li class="pushy-link"><a href="#">Item 2</a></li>
-                            <li class="pushy-link"><a href="#">Item 3</a></li>
-                        </ul>
-                    </li>
-                    <li class="pushy-submenu">
-                        <button><i class="fa fa-cube"></i> Especialidad / Areas</button>
-                        <ul>
-                            <li class="pushy-link"><a href="#"><!--Aqui nombe--></a></li>
+                            <li class="pushy-link"><a href="/userIndependiente/ingresar_productos">Ingresar productos</a></li>
+                            <li class="pushy-link"><a href="/userIndependiente/ingresar_servicios">Ingresar servicios</a></li>
+                            <li class="pushy-link"><a href="/userIndependiente/modificar_productos">Ver y modificar productos</a></li>
+                            <li class="pushy-link"><a href="/userIndependiente/modificar_servicios">Ver y modificar servicios</a></li>
                         </ul>
                     </li>
                     <li class="pushy-link"><a href="#"><i class="fa fa-globe"></i> Notificaciones</a></li>
-                    <li class="pushy-link"><a href="#">Item 2</a></li>
-                    <li class="pushy-link"><a href="#">Item 3</a></li>
-                    <li class="pushy-link"><a href="#">Item 4</a></li>
                 </ul>
             </div>
         </nav>

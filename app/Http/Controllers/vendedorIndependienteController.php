@@ -7,6 +7,7 @@ use App\Http\Requests\FormUsuarioRequest;
 use App\User;
 use App\Vendedor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class vendedorIndependienteController extends Controller
 {
@@ -51,6 +52,38 @@ class vendedorIndependienteController extends Controller
          \Session::flash('cambio', 'Foto cambiada');
         return redirect()->back();
     }
+
+
+       public function mis_datos()
+    {
+
+
+        $foto = Fotoperfil::traerFotobyid(Auth::user()->id);
+        return view('vendedorIndependiente.mis_datos')->with('foto', $foto);
+                                                     
+    }
+
+    public function ingresar_productos()
+    {
+        return view('vendedorIndependiente.ingresar_productos');
+    }
+
+      public function ingresar_servicios()
+    {
+        return view('vendedorIndependiente.ingresar_servicios');
+    }
+
+       public function modificar_productos()
+    {
+        return view('vendedorIndependiente.modificar_productos');
+    }
+
+         public function modificar_servicios()
+    {
+        return view('vendedorIndependiente.modificar_servicios');
+    }
+
+
 }
 
 

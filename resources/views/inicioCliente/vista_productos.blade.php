@@ -7,32 +7,32 @@
 		<div class="row">
 			<div class="col-md-4 mdl-shadow--6dp">
 				<div class="imagen-producto">
-				<img class="mdl-card__media porteimg" src="{{ '/'.$productos->foto }}">
+				<img class="mdl-card__media porteimg" src="{{ '/'.$producto->fotoProducto }}">
 				</div>
 			</div>
 			<div class="col-md-8 mdl-shadow--6dp">
-				<h3>{{$productos->nombre}}</h3>
+				<h3>{{$producto->nombreProducto}}</h3>
 				<dl>
 					<dt>
 						Descripción del producto
 					</dt>
 					<dd>
-						{{$productos->descripcion}}
+						{{$producto->descripcionProducto}}
 					</dd>
 
 					<dt>
 						Precio
 					</dt>
 					<dd>
-						<label class="bmd-label-floating">$ {{$productos->precio}} </label> 
+						<label class="bmd-label-floating">$ {{$producto->precioProducto}} </label> 
 					</dd>
 
 					<dt>
 						Cantidad
 					</dt>
 					<dd>
-						<input type="number" value="1" class="col-xs-12 col-sm-12 col-md-2" name="cantidad" max="{{$productos->cantidad}}" min="1">
-						<label class="bmd-label-floating">{{$productos->cantidad}} unidades disponibles</label>
+						<input type="number" value="1" class="col-xs-12 col-sm-12 col-md-2" name="cantidad" max="{{$producto->cantidadProducto}}" min="1">
+						<label class="bmd-label-floating">{{$producto->cantidadProducto}} unidades disponibles</label>
 						
 					</dd>
 					<form action="" method="">

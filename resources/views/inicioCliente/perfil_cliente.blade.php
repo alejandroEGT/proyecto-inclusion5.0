@@ -11,7 +11,7 @@
 			  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-expanded="true">Mis Datos</a>
 			  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-expanded="true">Mis Compras</a>
 			  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-expanded="true">Mis Valoraciones</a>
-			  <a class="nav-link" id="v-pills-prueba-tab" data-toggle="pill" href="#v-pills-prueba" role="tab" aria-controls="v-pills-prueba" aria-expanded="true"> <img class="card-img-top" src="../foto_productos/1507269297.jpg" alt="Card image cap"></a>
+			  <a class="nav-link" id="v-pills-prueba-tab" data-toggle="pill" href="#v-pills-prueba" role="tab" aria-controls="v-pills-prueba" aria-expanded="true">prueba</a>
 
 			</div>
 		</div>
@@ -205,7 +205,7 @@
 				<!--prueba de productos-->
 			  	<div class="tab-pane fade" id="v-pills-prueba" role="tabpanel" aria-labelledby="v-pills-prueba-tab">
 
-			     <img class="card-img-top" src="../foto_productos/1507269297.jpg" alt="Card image cap">
+		
 			  	</div>
 
 			</div>

@@ -69,15 +69,15 @@
 							{{ csrf_field() }}
 							<input name="area" type="hidden" value="{{ $area->id }}">
 							<label>Nombres</label>
-							<input type="" name="nombres" class="form-control " >
+							<input type="" name="nombres" class="form-control" value="{{ old('nombres') }}" >
 							<label>Apellidos</label>
-							<input type="" name="apellidos" class="form-control " >
+							<input type="" name="apellidos" class="form-control " value="{{ old('apellidos') }}" >
 							<label>Correo</label>
-							<input name="correo" type="text" name="" class="form-control ">
+							<input name="correo" type="text" name="" class="form-control " value="{{ old('correo') }}">
 						</div>
 						<div class="col-md-6">
 							<label>Nª Teléfono</label>
-							<input type="numeric" name="telefono" class="form-control ">
+							<input type="numeric" name="telefono" class="form-control" value="{{ old('telefono') }}">
 							<p class="p-form">Sexo</p>
 							<select name="id_sexo"  class="form-control input" name="" id="">
 								<option value="">Seleccione...</option>
@@ -141,12 +141,12 @@
 										<td>{{$ven->email}}</td>
 										<td>{{$ven->nombre}}</td>
 										<td>
-											<form id="form_eliminarAlumno" action="{{ url('institucion/eliminar_alumno') }}" method="post" >
+											<form>
 												{{csrf_field()}}
 												<a class="btn btn-primary btn-xs" href="{{ url("institucion/verDetalleAlumno/".base64_encode($ven->id)) }}">Ver..</a>
 
 												<input type="hidden" name="id_alumno" value="{{ $ven->id }}" >
-												<input @click="eliminarAlumno" type="button" value="Eliminar" class="btn btn-danger btn-xs" name="">
+												<input @click="eliminarAlumno({{ $ven->id }})" type="button" value="Eliminar" class="btn btn-danger btn-xs" name="">
 											</form>
 										</td>
 									</tr>

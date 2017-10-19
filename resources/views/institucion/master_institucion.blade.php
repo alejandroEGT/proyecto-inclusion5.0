@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('css/estilo_institucion.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body  class="body-institucion">
+<body  class="body-institucion" onMouseMove="stopScroll();">
         
     <div id="master" >
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
@@ -20,7 +20,7 @@
                     <li class="pushy-submenu" >
                         
                         <div class="min-perfil-institucion" >
-                            <img v-for="item in db_institucion" height="70"  :src="'/'+item.logo" alt=""/>
+                            <img v-for="item in db_institucion" height="70" width="120"  :src="'/'+item.logo" alt=""/>
                             <p class="nombre-institucion-perfil" v-for="item in db_institucion">
                                 @{{ item.nombre }}
                             </p>
@@ -31,37 +31,36 @@
                     </li>
                     <li class="pushy-link"><a href="{{ url('institucion/inicio') }}"><i class="fa fa-indent"></i> Inicio</a></li>
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-database"></i> Nuestra Información</button>
+                        <button id="ni"><i class="fa fa-database"></i> Nuestra Información</button>
                         <ul>
                             <li class="pushy-link"><a href="{{ url('institucion/misionyvision') }}">Misión y Visión</a></li>
                             <li class="pushy-link"><a href="{{ url('institucion/datos') }}">Datos específicos</a></li>
-                            <li class="pushy-link"><a href="noticia">Publicar noticias</a></li>
+                            <li class="pushy-link"><a href="{{ url('institucion/noticia') }}">Publicar noticias</a></li>
                         </ul>
                     </li>
-                    <li class="pushy-submenu">
-                        <button><i class="fa fa-users"></i> Nuestro equipo</button>
+                     <li class="pushy-submenu">
+                        <button id="oc"><i class="fa fa-database"></i> Ocultos</button>
                         <ul>
-                            <li class="pushy-link"><a href="#">Inicio</a></li>
-                            <li class="pushy-link"><a href="#">Login de institución</a></li>
-                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                            <li class="pushy-link"><a href="{{ url('institucion/productosOcultos') }}"><i class="fa fa-indent"></i> Productos Ocultos</a>
+                            <li class="pushy-link"><a href="{{ url('institucion/serviciosOcultos') }}"><i class="fa fa-indent"></i> Servicios Ocultos</a>
                         </ul>
                     </li>
-                    <!--<li class="pushy-submenu">
-                        <button>Submenu 3</button>
-                        <ul>
-                            <li class="pushy-link"><a href="#">Item 1</a></li>
-                            <li class="pushy-link"><a href="#">Item 2</a></li>
-                            <li class="pushy-link"><a href="#">Item 3</a></li>
-                        </ul>
-                    </li>-->
+                    
                     <li class="pushy-submenu">
                         <button><i class="fa fa-cube"></i> Especialidad / Áreas</button>
                         <ul v-for="item in db_area">
                             <li class="pushy-link"><a :href="'/institucion/verArea/' + item.id">@{{ item.nombre}}</a></li>
                         </ul>
                     </li>
+                   
                     <li class="pushy-link"><a href="{{ url('institucion/notificacio_vendedor') }}"><i class="fa fa-globe"></i> 
-                    Notificaciones <span class="badge">@{{ notificacion }}</span></a></li>
+                    Solicitud de ingreso de alumnos <span class="badge">@{{ notificacion }}</span></a></li>
+                     <li class="pushy-link"><a href="{{ url('institucion/traerProductoEnEspera') }}"><i class="fa fa-globe"></i> 
+                    Solicitud de ingreso de productos <span class="badge">@{{ notificacion_prod }}</span></a>
+                    </li>
+                     <li class="pushy-link"><a href="{{ url('institucion/traerServicioEnEspera') }}"><i class="fa fa-globe"></i> 
+                    Solicitud de ingreso de servicios <span class="badge">@{{ notificacion_serv }}</span></a>
+                    </li>
                      <li class="pushy-link"><a href="{{ url('institucion/generarPassword') }}"><i class="fa fa-key"></i> Generar Contraseñas</a></li>
                     <li class="pushy-submenu">
                         <button><i class="fa fa-bar-chart"></i> Graficos</button>

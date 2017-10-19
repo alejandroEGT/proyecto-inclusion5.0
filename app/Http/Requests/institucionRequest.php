@@ -16,13 +16,13 @@ class institucionRequest extends FormRequest
     {
         return [
             'rut' => 'max:9 | required | numeric | unique:institucion,rut',
-            'nombre' => 'required | unique:institucion,nombre',
-            'razonSocial' => 'required',
+            'nombre' => 'required | unique:institucion,nombre | max:50',
+            'razonSocial' => 'required | max:100',
             'telefono1' => 'required|min:11|numeric',
             'telefono2' => 'required|min:11|numeric',
             'direccion' => 'required',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg | dimensions:max_width=2250,max_height=2680',
-            'correo' => 'required | email | unique:users,email',
+            'correo' => 'required | email | unique:users,email | max:80',
             'clave' => 'required | min:6',
             'repeClave' => 'required | min:6 | same:clave',
         ];
@@ -61,6 +61,7 @@ class institucionRequest extends FormRequest
                 'clave.min' => 'La contraseña debe tener un minimo de 6 caracteres',
                 'repeClave.required' => 'No puedes dejar vacio el campo Repita Clave',
                 'repeClave.min' => 'La contraseña debe tener un minimo de 6 caracteres',
+                'repeClave.same' => 'Las contraseñas no son iguales'
              ];
         
     }

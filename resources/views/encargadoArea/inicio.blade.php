@@ -44,6 +44,7 @@
 					
 					</form>
 			    </div>
+			    <center><label><a href="{{ url('encargadoArea/logout') }}">Salir</a></label></center>
 			</div>
 		</div>
 </div>		
@@ -77,7 +78,7 @@
 						<center><label>Publicar productos</label></center>
 					</div>
 					<div class="col-md-2 col-sm-1">
-						<a href="#"><div class="ico-small-service"></div></a>
+						<a href="{{ url('encargadoArea/publicarServicio') }}"><div class="ico-small-service"></div></a>
 						<center><label>Publicar servicio</label></center>
 					</div>
 					<div class="col-md-2 col-sm-1">
@@ -90,50 +91,142 @@
 		</div>
 	<hr>
 		<div class="row">
-			<div class="col-md-offset-1 col-md-7">
+			<div class="col-md-3 linea-gris fondo-blanco">
+				@if(count($noticias_generales)>0)
+					<center><label>Noticias Generales</label></center>
+					
+					@foreach ($noticias_generales as $ng)
+						<hr>
+						<img class="img-notix"  src="{{ '/'.$ng->foto }}" height="70" width="90">
+						<p class="img-titu" ><label>{{ $ng->titulo}}</label></p>
+						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+					@endforeach
+					<hr>
+					<p><label><small><a href="{{ url('encargadoArea/verNoticiasGenerales') }}">Ver todas las noticias...</a></small></label></p>
+
+					<hr>
+				@endif
+				@if (!count($noticias_generales))
+						<p>No existen noticias generales</p>
+						<hr>
+				@endif	
+				
+				@if(count($noticias_locales)>0)
+					<center><label>Noticias Locales</label></center>
+					@foreach ($noticias_locales as $nl)
+						<hr>
+						<img class="img-notix"  src="{{ '/'.$nl->foto }}" height="70" width="90">
+						@if ($nl->id_estado == 1)
+							<p class="img-titu" ><label>{{ $nl->titulo}}</label> <img src="/ico/world.png"></p>
+						@endif
+						@if ($nl->id_estado == 2)
+							<p class="img-titu" ><label>{{ $nl->titulo}}</label> <img src="/ico/padlock.png"></p>
+						@endif
+						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+					@endforeach
+					<hr>
+					<p><label><small><a href="{{ url('encargadoArea/verNoticiasLocales') }}">Ver todas las noticias...</a></small></label></p>
+					<hr>
+				@endif	
+				@if (!count($noticias_locales))
+					<p>No existen noticias locales</p>
+						<hr>
+				@endif
+				
+			</div>
+			<div class="col-md-8">
 				@if (count($productos)>0)
 					<div class="row">
-						<div class="col-md-11 panel">
-							<center><label>Productos</label></center>
+						<div class="col-md-11 linea-gris fondo-blanco">
+							<center><label>Productos del área o especialidad</label></center>
+						<form action="{{ url('encargadoArea/filtrarProducto') }}" method="GET"> 
+						  <div class="row">
+						    <div class="col-md-12">
+						      <div class="input-group">
+						      	{{ csrf_field() }}
+						   <input type="text" class="form-control" placeholder="Buscar productos" name="buscar"/>
+						   <div class="input-group-btn">
+						        <button class="btn btn-primary" type="submit">
+						        <span class="glyphicon glyphicon-search"></span>
+						        </button>
+						   </div>
+						   </div>
+						    </div>
+						  </div>
+						</form>	
 							<hr>
 							
 							@foreach ($productos as $producto)
 							<div class="box-producto">
 								<center>
 									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
-									<p>{{ $producto->nombre }}</p>
-									<p><a href="" class="btn btn-primary btn-xs">Ver</a></p>
+									<p>{{ str_limit($producto->nombre, 10) }}</p>
+							
+										<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleProducto/".base64_encode($producto->idProducto)) }}">Ver..</a>
+										
+										<input type="button" @click="eliminarProducto({!! $producto->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
+
 								</center>
 
 							</div>	
 							@endforeach
 							<!--<center>{{--$productos->links() --}}</center>-->
-							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+							<center class="center-top" ><label><small><a href="{{ url('encargadoArea/ver_todo_producto') }}">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>
-
+					<hr>
 				@endif
 				@if (!count($productos))
 					<center><label for="">No Existen productos para mostrar</label></center>
 				@endif
+
+				@if (count($servicios)>0)
+					<div class="row">
+						<div class="col-md-11 linea-gris fondo-blanco">
+							<center><label>Servicios del área o especialidad</label></center>
+							<form action="{{ url('encargadoArea/filtrarServicio') }}" method="GET"> 
+								  <div class="row">
+								    <div class="col-md-12">
+								      <div class="input-group">
+								      	{{ csrf_field() }}
+								   <input type="text" class="form-control" placeholder="Buscar servicios" name="buscar"/>
+								   <div class="input-group-btn">
+								        <button class="btn btn-primary" type="submit">
+								        <span class="glyphicon glyphicon-search"></span>
+								        </button>
+								   </div>
+								   </div>
+								    </div>
+								  </div>
+							</form>	
+							<hr>
+							
+							@foreach ($servicios as $servicio)
+							<div class="box-producto">
+								<center>
+									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
+									<p>{{ str_limit($servicio->nombre, 10) }}</p>
+									
+									<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleServicio/".base64_encode($servicio->id)) }}">Ver..</a>
+									<input type="button" @click="eliminarServicio({!! $servicio->id !!});"  class="btn btn-danger btn-xs" value="Eliminar" >
+						
+								</center>
+
+							</div>	
+							@endforeach
+							<!--<center>{{--$productos->links() --}}</center>-->
+							<center class="center-top" ><label><small><a href="{{ url('encargadoArea/ver_todo_servicio') }}">Ver mas..</a></small></label></center>
+						</div>
+
+					</div>
+					<hr>
+				@endif
+				@if (!count($servicios))
+					<center><label for="">No Existen servicios para mostrar</label></center>
+				@endif
 			</div>
-			<div class="col-md-3 panel">
-				<center><label>Noticias</label></center>
-				<hr>
-				<img class="img-notix"  src="http://www.uaa.mx/rectoria/dcrp/wp-content/uploads/2015/05/184-Reuni%C3%B3n-SICOM.jpg" height="70" width="90">
-				<p class="img-titu" ><label>reunión en los angeles con canciller y ministors del interior y de educación</label></p>
-				<p class="img-titu" ><a href="#" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
-				
-
-
-
-				<hr>
-				<img class="img-notix"  src="https://jazminoddy.files.wordpress.com/2016/04/12002982_1648419215376199_7949008010979303282_n-770x400.jpg?w=662" height="70" width="90">
-				<p class="img-titu"><label>Jovenes crean nuevos productos de innovación</label></p>
-				<p class="img-titu" ><a href="#" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
-				
-			</div>
+			
 		</div>
 	</div>
 				

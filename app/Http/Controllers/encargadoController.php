@@ -14,28 +14,43 @@ use App\VendedorInstitucion;
 use App\Institucion;
 use App\Usuarioinstitucion;
 use App\categoria_producto;
+use App\categoria_servicio;
 use App\Tienda_institucion;
 use App\estado_tienda_producto;
 use App\foto_producto;
+use App\foto_servicio;
 use App\producto;
+use App\servicio;
+use App\noticia;
+use App\estado_noticia;
+use App\estado_tienda_servicio;
 use App\Tienda_producto_institucion;
+use App\Tienda_servicio_institucion;
 use App\Http\Requests\productoRequest;
 use App\Http\Requests\agregarAlumnoDesdeAreaRequest;
+use App\http\Requests\noticiaRequest;
 use Illuminate\Support\Facades\Mail;
 
 class encargadoController extends Controller
 {
     public function vista_inicio(){
+
         $encargado = Encargado::traerDatos();
-        $productos = producto::verProductoDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
-    	$foto = Fotoperfil::traerFoto();
+        $productos = producto::verProductoDesdeArea($encargado[0]->id_area, 4);
+        $servicios = servicio::verServicioDesdeArea($encargado[0]->id_area, 4);
+    	  $foto = Fotoperfil::traerFoto();
         $estado_password = Passwordcuenta::traerEstado();
         $logo = Area::traerArea();
+        $noticias_generales = noticia::noticias_generales();
+        $noticias_locales = noticia::noticias_locales($encargado[0]->id_institucion);
     	return view('encargadoArea.inicio')
         ->with('foto',$foto)
         ->with('estado_password',$estado_password)
         ->with('logo', $logo[0]->logo)
-        ->with('productos', $productos);
+        ->with('productos', $productos)
+        ->with('servicios', $servicios)
+        ->with('noticias_generales',$noticias_generales)
+        ->with('noticias_locales',$noticias_locales);
     }
 
     public function vista_datosArea(){
@@ -55,7 +70,7 @@ class encargadoController extends Controller
         $categoria_pro = categoria_producto::all();
 
         //return $encargado[0]->id_institucion.', '.$encargado[0]->id_area;
-        $productos = producto::verProductoDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
+        $productos = producto::verProductoDesdeArea($encargado[0]->id_area, $encargado[0]->id_area);
 
         //return $productos;
 
@@ -65,8 +80,22 @@ class encargadoController extends Controller
     }
 
     public function vista_clave(){
-
+      
         return view('encargadoArea.clave');
+    }
+    public function vista_publicarServicio(Request $datos)
+    { 
+       $area = Area::traerArea();
+       $categoria_serv = categoria_servicio::all();
+       $servicios = servicio::mostrarServicioDesdeArea($area[0]->id_area, 2);
+       return view('encargadoArea.publicarServicio')
+       ->with('servicios', $servicios)
+       ->with('categoria_serv', $categoria_serv);
+    }
+    public function vista_publicarNoticia()
+    {
+      $estado_noticia = estado_noticia::all();
+      return view('encargadoArea.publicarNoticia')->with('estado_noticia', $estado_noticia);
     }
 
     public function traerFotoVendedor()
@@ -87,7 +116,20 @@ class encargadoController extends Controller
         ->with('usuario',$usuario)
         ->with('vendedor',$vendedor[0]->telefono);
     }
-    
+    public function ver_todo_producto()
+    {
+        $encargado = Encargado::traerDatos();
+        $producto = producto::verProductoDesdeArea($encargado[0]->id_area, 5);
+        //dd ($producto);
+        return view('encargadoArea.verTodoProducto')->with('productos', $producto);
+    }
+     public function ver_todo_servicio()
+    {
+        $encargado = Encargado::traerDatos();
+        $servicios = servicio::mostrarServicioDesdeArea($encargado[0]->id_area, 5);
+        //dd($producto);
+        return view('encargadoArea.verTodoServicio')->with('servicios', $servicios);
+    }
     public function vista_perfilVenInst($iduser){
         $idu = base64_decode($iduser);
           //return $idu;
@@ -112,11 +154,14 @@ class encargadoController extends Controller
 
         $idI = base64_decode($idinstitucion);
         $institucion = Institucion::find($idI);
-        $productos = producto::traetProductosDesdeAdmin($institucion->id, 5);
+        $productos = producto::verProductosVisibles($institucion->id, 5);
+        $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
 
         return view('encargadoArea.perfil_institucion')
         ->with('institucion', $institucion)
-        ->with('productos', $productos);
+        ->with('servicios', $servicios)
+        ->with('productos', $productos)
+        ->with('idInstitucion', $idinstitucion);
     }
     public function vista_agregarAlumno(){
         $id_area = Encargado::traerDatos();
@@ -130,7 +175,7 @@ class encargadoController extends Controller
       $getId = base64_decode($dato->id);
       $categoria = categoria_producto::all();
       $estadoP = estado_tienda_producto::limit(2)->get();
-      $area = Area::all();
+      $area = Area::traerArea();
       $encargado = Encargado::traerDatos();
 
       $productos = producto::detalleProducto_area($getId, $encargado[0]->id_area);
@@ -140,6 +185,36 @@ class encargadoController extends Controller
       ->with('categoria', $categoria)
       ->with('estadoP', $estadoP)
       ->with('area', $area);
+    }
+    public function ver_detalleServicio(Request $dato)
+    {
+      $getId = base64_decode($dato->id);
+      $categoria = categoria_servicio::all();
+      $estadoS = estado_tienda_servicio::limit(2)->get();
+      $area = Area::all();
+      $encargado = Encargado::traerDatos();
+
+      $servicio = servicio::detalleServicio_desdeArea($getId, $encargado[0]->id_institucion, $encargado[0]->id_area);
+      //return $servicio;
+      return view('encargadoArea.verDetalleServicio')
+              ->with('categoria',$categoria)
+              ->with('estadoS',$estadoS)
+              ->with('area',$area)
+              ->with('servicio',$servicio);
+    }
+    public function todas_noticias_locales()
+    {
+       $encargado = Encargado::traerDatos();
+       $estado_noticia = estado_noticia::all();
+       $noticias_locales = noticia::detalleNoticia($encargado[0]->id_institucion);
+       return view('encargadoArea.noticias_locales')
+       ->with('noticias_locales', $noticias_locales)
+       ->with('estado_noticia',$estado_noticia);
+    }
+     public function todas_noticias_generales()
+    {
+       $noticias_generales = noticia::todas();
+       return view('encargadoArea.noticias_generales')->with('noticias_generales',$noticias_generales);
     }
 
     public function actializar_clave(request $dato){
@@ -295,11 +370,11 @@ class encargadoController extends Controller
 
                 $tienda = Tienda_institucion::id_tienda(\Auth::user()->id);/*Modifique aqui hoy*/
                 
-                $insertTiendaProducto = Tienda_producto_institucion::insertar($insertProducto, $tienda[0]->id, '1', $encargado[0]->id_area);
+                $insertTiendaProducto = Tienda_producto_institucion::insertar($insertProducto, $tienda[0]->id, '3', $encargado[0]->id_area);
                
                if ($insertTiendaProducto > 0) {
-                   \Session::flash('registro', 'Producto registrado correctasmente');
-                return redirect()->back();
+                   \Session::flash('registro', 'Producto registrado correctamente, esperar a que la institución lo analice y acepte');
+                   return redirect()->back();
                }
                return "Mal todo";
                /*\Session::flash('registro', 'Producto registrado correctasmente');
@@ -396,6 +471,156 @@ class encargadoController extends Controller
             return redirect()->back();
           }
           return redirect()->back();
+    }
+
+    public function publicarServicio(Request $datos)
+    {
+      $insertarServicio = servicio::insertar($datos);
+
+      if ($insertarServicio > 0) {
+        
+        $insertarFotoServicio = foto_servicio::insertar($datos, $insertarServicio);
+
+        if ($insertarFotoServicio > 0) {
+          $idInst = encargado::where('id_user', \Auth::user()->id)->first();
+           $tienda = Tienda_institucion::id_tienda_by_institucion($idInst->id_institucion);
+           $insertTiendaServicio = Tienda_servicio_institucion::insertar($insertarServicio, $tienda[0]->id, '3', $idInst->id_area);
+           if ($insertTiendaServicio > 0) {
+               \Session::flash('registro', 'Servicio registrado correctamente, esperar que la institución analice y acepte el servicio');
+                return redirect()->back();
+           }
+             return "Mal todo";
+        }
+         return redirect()->back()->withErrors(['Algo salió mal']);
+      }
+    }
+    public function publicarNoticia(noticiaRequest $datos)
+    {
+      $encargado = Encargado::traerDatos();
+      $noticia = noticia::insertar($datos, $encargado[0]->id_institucion);
+      if ($noticia > 0) {
+        \Session::flash('correcto', 'Noticia ingresada');
+         return redirect()->back();
+      }
+      return redirect()->back()->withErrors(['Algo salió mal']);
+    }
+
+    public function actualizar_titulo_noticia(Request $datos)
+    {
+       $this->validate($datos,['titulo' => 'required|max:150',]);
+       $noticia = noticia::find($datos->noticia);
+       $noticia->titulo = $datos->titulo;
+       if ($noticia->save()) {
+            \Session::flash('correcto', 'Título actualizado');
+              return redirect()->back();
+       }
+    }
+    public function actualizar_texto_noticia(Request $datos)
+    {
+       $this->validate($datos,['texto' => 'required|max:3500',]);
+        $noticia = noticia::find($datos->noticia);
+        $noticia->texto = $datos->texto;
+        if ($noticia->save()) {
+            \Session::flash('correcto', 'Título actualizado');
+              return redirect()->back();
+       }
+    }
+    public function actualizar_estado_noticia(Request $datos)
+    {
+       $this->validate($datos,['estado' => 'required',]);
+       $noticia = noticia::find($datos->noticia);
+       $noticia->id_estado = $datos->estado;
+       if ($noticia->save()) {
+            \Session::flash('correcto', 'Estado actualizado');
+              return redirect()->back();
+       }
+    }
+
+     public function ver_detalleServicio_institucion_local(Request $dato)
+    {
+      
+      $getId = base64_decode($dato->idServicio);
+      $getIdInst = base64_decode($dato->idInstitucion);
+      $categoria = categoria_servicio::all();
+      $estadoS = estado_tienda_servicio::limit(2)->get();
+      $area = Area::all();
+
+      $servicio = servicio::detalleServicio($getId, $getIdInst);
+      //return $servicio;
+      return view('encargadoArea.verDetalleServicioInstitucionBuscador')
+              ->with('categoria',$categoria)
+              ->with('estadoS',$estadoS)
+              ->with('area',$area)
+              ->with('servicio',$servicio);
+    }
+     public function ver_detalleProducto_institucion_local(Request $dato)
+    {
+
+      $getId = base64_decode($dato->idProducto);
+      $getIdInst = base64_decode($dato->idInstitucion);
+      //return $getId.",".$getIdInst;
+      $categoria = categoria_producto::all();
+      $estadoP = estado_tienda_producto::limit(2)->get();
+      $area = Area::all();
+
+      $productos = producto::detalleProducto($getId, $getIdInst);
+      return view('encargadoArea.verDetalleProductoInstitucionBuscador')
+      ->with('productos', $productos)
+      ->with('categoria', $categoria)
+      ->with('estadoP', $estadoP)
+      ->with('area', $area);
+    }
+     public function filtrarProducto(Request $datos)
+    {
+      $this->validate($datos,[
+                'buscar' => 'required',
+          ]);
+      $encargado = encargado::traerDatos();
+      $productos = producto::filtrar_desde_encargado($datos->buscar, $encargado[0]->id_area );
+
+      return view('encargadoArea.nuestroProducto')
+      ->with('productos', $productos)
+      ->with('titulo', "Filtrado de productos");
+    }
+    public function filtrarServicio(Request $datos)
+    {
+      $this->validate($datos,[
+                'buscar' => 'required',
+          ]);
+      $encargado = encargado::traerDatos();
+      $servicios = servicio::filtrar_desde_encargado($datos->buscar, $encargado[0]->id_area, $encargado[0]->id_institucion);
+
+      return view('encargadoArea.nuestroServicio')
+      ->with('servicios', $servicios)
+      ->with('titulo', "Filtrado de servicios");
+    }
+     public function traerProductoEnEspera()
+    {
+      $encargado = encargado::traerDatos();
+      $prod_esp = producto::traerProductoEnEspera_desdeArea($encargado[0]->id_institucion, $encargado[0]->id_area, 10);
+       return view('encargadoArea.productoEspera', ['prod_esp' => $prod_esp]);
+    }
+    public function vista_serviciosEspera()
+    {
+       $encargado = encargado::traerDatos();
+       $servicios = servicio::traer_ServicioEnEspera($encargado[0]->id_institucion, $encargado[0]->id_area,5);
+       return view('encargadoArea.servicioEspera')->with('serv_esp', $servicios);
+    }
+     public function productos_oclutos()
+    {
+      $encargado = encargado::traerDatos();
+      $productos = producto::productosOcultosDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
+      return view('encargadoArea.nuestroProducto')
+      ->with('productos', $productos)
+      ->with('titulo', "Productos ocultos"); 
+    }
+    public function servicios_ocultos()
+    {
+       $encargado = encargado::traerDatos();
+       $servicios = servicio::serviciosOcultosDesdeArea($encargado[0]->id_institucion, $encargado[0]->id_area);
+       return view('encargadoArea.nuestroServicio')
+       ->with('servicios', $servicios)
+       ->with('titulo', "Servicios ocultos"); 
     }
     
 }

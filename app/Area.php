@@ -42,6 +42,14 @@ class Area extends Model
                     ->where('usuario-institucion.id_user','=',\Auth::user()->id)->get();
         return $logo;            
     }
+    protected function traer_aerea_para_alumno()
+    {
+        $area = \DB::table('area')
+                    ->join('vendedor-institucion','vendedor-institucion.id_area','=','area.id')
+                    ->join('vendedor', 'vendedor.id', '=', 'vendedor-institucion.id_vendedor')
+                    ->where('vendedor.id_user','=',\Auth::user()->id)->get();
+        return $area; 
+    }
     protected function guardarIcono($datos){
 
         $url="logoAreas";

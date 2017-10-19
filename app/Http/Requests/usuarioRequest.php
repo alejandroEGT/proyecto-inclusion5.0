@@ -15,8 +15,8 @@ class usuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombres' => 'required',
-            'apellidos' => 'required',
+            'nombres' => 'required | max:50',
+            'apellidos' => 'required | max:50',
             'correo' => 'required | unique:users,email',
             'telefono' => 'required|min:11|numeric',
             'id_sexo' => 'required',

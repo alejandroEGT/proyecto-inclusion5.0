@@ -10,7 +10,7 @@
 						
 						<div class="table-responsive">
 							<table class="table table-hover">
-			  					<tr>
+			  					<tr class="fondo-color-blue">
 			  						<td><strong>Nombre</strong></td>
 			  						<td><strong>Correo</strong></td>
 			  						<td><strong>Telefono</strong></td>

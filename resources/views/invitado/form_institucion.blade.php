@@ -55,7 +55,7 @@
 						<label  class="p-form">Dirección</label>
 						<input class="form-control input" type="text" name="direccion" placeholder="dirección" value="{{ old('direccion') }}">
 						<label  class="p-form">Logo</label>
-						<input class="form-control input" type="file" name="logo" placeholder="logo">
+						<input class="form-control input" type="file" name="logo" placeholder="logo" value="{{ old('logo') }}" >
 						<label  class="p-form">Correo</label>
 						<input class="form-control input" type="text" name="correo" placeholder="correo" value="{{ old('correo') }}">
 						<label  class="p-form">Clave</label>

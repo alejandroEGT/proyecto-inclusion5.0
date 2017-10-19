@@ -8,6 +8,8 @@ new Vue({
 		  nombre:"", desc:""
 		}, 
 		notificacion:'',
+		notificacion_prod:'',
+		notificacion_serv:'',
 		bd_mv:{
 			mision:'', vision:''
 		},
@@ -65,7 +67,7 @@ new Vue({
 		aceptarSolicitud($val){
 				
 
-				if (confirm("¿Quieres aceptar este vendedor?") == true) {
+				if (confirm("¿Quieres aceptar este alumno?") == true) {
 				    
 
 						this.$http.post('/aceptarSolicitudUsuario', $val).then(function(response){
@@ -177,6 +179,22 @@ new Vue({
 
 				})
 		},
+		notificar_producto(){
+			this.$http.get('/traerNotificaciones_prod').then(function(response){
+
+					console.log(response.body);
+					this.notificacion_prod = response.body;
+
+				})
+		},
+		notificar_servicio(){
+			this.$http.get('/traerNotificaciones_serv').then(function(response){
+
+					console.log(response.body);
+					this.notificacion_serv = response.body;
+
+				})
+		},
 		eliminarEncargado($id){
 			if (confirm("¿Quieres eliminar este encargado?") == true) {
 				    
@@ -227,21 +245,17 @@ new Vue({
 				    alert("Operación cancelada!");
 				}
         },
-        eliminarProducto($id){
+		eliminarProducto($this){
 			if (confirm("¿Quieres eliminar este producto?") == true) {
 				    
-						$('#eliminar').submit();
-
-				} 
-				else {
-				    alert("Operación cancelada!");
-				}
-		}
-		,
-		eliminarAlumno(){
-				if (confirm("¿Quieres eliminar este producto?") == true) {
 				    
-						$('#form_eliminarAlumno').submit();
+						this.$http.get('institucion/eliminar_producto_institucion/'+$this).then(function(response){
+								
+								console.log(response.body);
+								alert("producto eliminado");
+								//this.notificar();
+								location.reload();
+						})
 
 				} 
 				else {
@@ -249,6 +263,74 @@ new Vue({
 				}
 		}
 		,
+		eliminarServicio($this){
+			if (confirm("¿Quieres eliminar este servicio?") == true) {
+				    
+						this.$http.get('institucion/eliminar_servicio_institucion/'+$this).then(function(response){
+								
+								console.log(response.body);
+								alert("servicio eliminado");
+								//this.notificar();
+								location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		}
+		,
+		eliminarAlumno($id_alumno){//reparar este codigo//////////////////////////////////////////////
+				if (confirm("¿Quieres eliminar este alumno?") == true) {
+				    	
+				    	//alert($id_alugetmno);
+						//$('#form_eliminarAlumno').submit();
+						this.$http.get('/eliminar_alumno/'+$id_alumno).then(function(response){
+								
+								console.log(response.body);
+								alert("Alumno eliminado");
+								//this.notificar();
+								location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		}
+		,
+		aceptarProducto($id){
+				if (confirm("¿Quieres Aceptar este producto?") == true) {
+				    
+						this.$http.get('/aceptarSolicitudProducto/'+$id).then(function(response){
+								
+								console.log(response.body);
+								alert("Producto aceptado");
+								this.notificar_producto()
+								location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		},
+		aceptarServicio($id){
+			if (confirm("¿Quieres Aceptar este servicio?") == true) {
+				    
+						this.$http.get('/aceptarSolicitudServicio/'+$id).then(function(response){
+								
+								console.log(response.body);
+								alert("Servicio aceptado");
+								this.notificar_servicio();
+								location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
+		},
 		cambiarGrafico(){
 			//alert($('#tipo').val());
 			$('#tipo_form').submit();
@@ -289,6 +371,8 @@ new Vue({
 		this.datosInstituto();
 		this.llenarTablaArea();
 		this.notificar();
+		this.notificar_producto();
+		this.notificar_servicio();
 		this.traerEncargado();
 		this.traerMision();
 		this.traerVision();

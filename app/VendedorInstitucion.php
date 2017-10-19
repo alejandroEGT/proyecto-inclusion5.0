@@ -58,6 +58,14 @@ class VendedorInstitucion extends Model
         $id = \DB::select("select * from `vendedor` where id_user = ".$id);
         return $id;
     }
+    protected function id_institucion()
+    {
+       $dato = \DB::table('vendedor')
+                ->join('vendedor-institucion','vendedor-institucion.id_vendedor','=','vendedor.id')
+                ->where('vendedor.id_user', \Auth::user()->id)->first();
+
+       return $dato;         
+    }
     protected function traerFoto ($id){
 
         //return $id;
@@ -95,6 +103,8 @@ class VendedorInstitucion extends Model
                         'users.apellidos as apellidos',
                         'users.email as correo',
                         'vendedor.telefono as telefono',
+                        'estado.nombre as nombreEstado',
+                        'area.nombre as nombreArea'
                   ])
                   ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
                   ->join('users','users.id','=','Vendedor.id_user')
@@ -102,6 +112,7 @@ class VendedorInstitucion extends Model
                   ->join('area','area.id','=','vendedor-institucion.id_area')
                   ->join('institucion','institucion.id','=','area.id_institucion')
                   ->join('fotoperfil','fotoperfil.id_user','=','users.id')
+                  ->where('vendedor.id_estado', 1)/*posible falla*/
                   ->where('users.id', $idAlumno)
                   ->where('Institucion.id', \Auth::guard('institucion')->user()->id)
                   ->get();
@@ -119,8 +130,8 @@ class VendedorInstitucion extends Model
                         'fotoperfil.foto as foto',
                         'users.nombres as nombre',
                         'users.apellidos as apellidos',
-                         'users.email as correo',
-                         'vendedor.telefono as telefono',
+                        'users.email as correo',
+                        'vendedor.telefono as telefono',
 
                   ])
                   ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
@@ -131,6 +142,7 @@ class VendedorInstitucion extends Model
                   ->join('fotoperfil','fotoperfil.id_user','=','users.id')
                   ->where('users.id', $idAlumno)
                   ->where('area.id', $areaId)
+                  ->where('vendedor.id_estado', 1)/*posible falla*/
                   ->get();
         
         if (count($traer)>0) {
@@ -160,6 +172,7 @@ class VendedorInstitucion extends Model
                   ->join('institucion','institucion.id','=','area.id_institucion')
                   ->join('fotoperfil','fotoperfil.id_user','=','users.id')
                   ->where('users.id', $id)
+                  ->where('vendedor.id_estado', 1)/*posible falla*/
                   ->get();
         
         if (count($traer)>0) {
@@ -173,5 +186,16 @@ class VendedorInstitucion extends Model
         $estado = \DB::table('password-cuenta')->where('id_user', \Auth::user()->id )->get(); 
         return $estado[0]->id_estado;
     }
+
+    protected function actualizar_area_alumno($area, $idVendedor)
+    {
+       $update = VendedorInstitucion::where('id_vendedor', $idVendedor)->first();
+       $update->id_area = $area;
+       if ($update->save()) {
+         return true;
+       }
+       return false;
+    }
+    
 
 }

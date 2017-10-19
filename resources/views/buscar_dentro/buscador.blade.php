@@ -38,7 +38,7 @@
 				<p><label class="lbl_titulo" >Instituciones <i class="fa fa-university" aria-hidden="true"></i></label></p>
 				<hr>
 					<div class="row">
-						<div class="centro1 col-md-offset-2 col-md-7 panel">
+						<div class="centro1 col-md-offset-1 col-md-10 panel">
 							@foreach ($institucion as $i)
 								<div class="row">
 									<div class="col-md-3">

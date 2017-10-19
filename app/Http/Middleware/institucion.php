@@ -10,10 +10,13 @@ class institucion
 
 public function handle($request, Closure $next, $guard = 'institucion')
 {
-    if (!\Auth::guard($guard)->check()) {
-        return redirect('/inicio');
-    }
-    return $next($request);
+	
+		    if (!\Auth::guard($guard)->check()) {
+		        return redirect('/inicio');
+		    }
+		    return $next($request);
+
+	
 }
 
 

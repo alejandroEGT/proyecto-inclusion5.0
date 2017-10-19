@@ -13,15 +13,15 @@ class foto_producto extends Model
     {
 
         $url="foto_productos";
-        $file = $datos->file('fotoP1')->getClientOriginalExtension();
-        $imageName = time().'.'.$datos->file('fotoP1')->getClientOriginalExtension();//nombre de la imagen como tal.
+        $file = $datos->file('foto')->getClientOriginalExtension();
+        $imageName = time().'.'.$datos->file('foto')->getClientOriginalExtension();//nombre de la imagen como tal.
 
         $insert = new foto_producto;
         $insert->id_producto = $idprod;
         $insert->foto = $url.'/'.$imageName;
 
         if ($insert->save()) {
-             $datos->file('fotoP1')->move(public_path($url), $imageName);
+             $datos->file('foto')->move(public_path($url), $imageName);
             return $insert->id;
         }
         return 0;
@@ -40,13 +40,13 @@ class foto_producto extends Model
         $url="foto_productos";
         $getFoto = foto_producto::where('id_producto',$dato->idProducto)->get();
         \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
-        $file = $dato->file('fotoP1')->getClientOriginalExtension();
-        $imageName = time().'.'.$dato->file('fotoP1')->getClientOriginalExtension();//nombre de la imagen como tal.
+        $file = $dato->file('foto')->getClientOriginalExtension();
+        $imageName = time().'.'.$dato->file('foto')->getClientOriginalExtension();//nombre de la imagen como tal.
 
         $update = foto_producto::find($getFoto[0]->id);
         $update->foto = $url.'/'.$imageName;
         if ($update->save()) {
-              $dato->file('fotoP1')->move(public_path($url), $imageName);
+              $dato->file('foto')->move(public_path($url), $imageName);
               return 1;
         }
         return 0;

@@ -14,17 +14,17 @@
 				</p>
 			</div>
 		</div>
-				
+			
 		<!--<form action="/insertar_vendedor" method="Post">-->
 		<form action="agregarAlumno_insert" method="Post">
 		{{csrf_field()}}
 		<div class="container estilo-form animated fadeInUp ">
-
 				<!-- Validacion de campos vacios-->
 				<div class="row" >
 					<div class="col-md-offset-3 col-md-6">
 						@if ($errors->any())
-						    <div class=" alert alert-danger ">
+						    <div class="alert alert-danger">
+			    				<a href="" class="close" data-dismiss="alert">&times;</a>
 							        <ul>
 							            @foreach ($errors->all() as $error)
 							                <li class="validacionRequest">{{ $error }}</li>
@@ -32,6 +32,12 @@
 							        </ul>
 						    </div>
 						@endif	
+						@if (Session::has('ingresado'))
+				<div class="alert alert-info">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        {{ Session::get('ingresado') }}
+			    </div>
+			@endif
 					</div>
 				</div>
 
@@ -42,9 +48,10 @@
 						<p class="p-form">Apellidos</p>
 						<input name="apellidos" class="form-control input" type="text" value="{{ old('apellidos') }}">
 						<p class="p-form">Fecha de Nacimiento</p>
-    						<input name="dia" class="form-control fech" size="2" maxlength="2" type="text" value="{{ old('dia') }}">-
-    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" value="{{ old('mes') }}">-
-    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" value="{{ old('anio') }}">
+    						<!--<input name="dia" class="form-control fech" size="2" maxlength="2" type="text" value="{{-- old('dia')--}}">-
+    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" value="{{-- old('mes') --}}">-
+    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" value="{{-- old('anio') --}}">-->
+    						<input type="date" name="fecha" class="form-control input">
 					</div>
 					<div class="col-md-4">
 						<p class="p-form">Sexo</p>

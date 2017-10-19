@@ -8,6 +8,12 @@ use App\Tienda_institucion;
 use App\User;
 use App\cliente;
 use App\producto;
+<<<<<<< HEAD
+
+use App\foto_producto;
+
+=======
+>>>>>>> 92b7ad0282efcc4072fbfea61503115507c0a127
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +21,20 @@ use Illuminate\Support\Facades\Auth;
 class clienteController extends Controller
 {
     public function inicio_cliente(){
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+      $productos =  producto::all();
+    	return view('inicioCliente.inicio_cliente')->with('productos',$productos);
+
+=======
+>>>>>>> 92b7ad0282efcc4072fbfea61503115507c0a127
+      $tiendas = Tienda_institucion::all();
+      $productos = \DB::select('SELECT * from fProducto');
+      //una consulta que traiga los productos con la foto
+>>>>>>> 2d5c0191f3a63efb66ad305d110ff314931919ad
 
        
 
@@ -24,7 +44,12 @@ class clienteController extends Controller
      //dd($ver_producto);
       return view('inicioCliente.inicio_cliente')->with('ver_producto',$ver_producto)
                                                  ->with('tiendas',$tiendas);
+<<<<<<< HEAD
+                
+      
+=======
     
+>>>>>>> 92b7ad0282efcc4072fbfea61503115507c0a127
     }
 
      public function vista_productos($id){

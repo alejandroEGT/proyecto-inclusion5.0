@@ -14,7 +14,7 @@ class Vendedor extends Model
 
      protected function insertar_aprobado($datos, $idUser){
 
-        $date = new \DateTime($datos->get('dia').'-'.$datos->get('mes').'-'.$datos->get('anio'));
+        $date = new \DateTime($datos->fecha);
         $vendedor = new Vendedor;
         $vendedor->id_user = $idUser;
         $vendedor->telefono = $datos->telefono;
@@ -77,6 +77,15 @@ class Vendedor extends Model
         $datos = \DB::select("CALL `fotoVendedor`(".\Auth::user()->id.");");
         return $datos[0]->foto;
 
+    }
+    protected function actualizar_numero($numero, $iduser)
+    {
+        $vendedor = Vendedor::where('id_user', $iduser)->first();
+        $vendedor->telefono = $numero;
+        if ($vendedor->save()) {
+            return true;
+        }
+        return false;
     }
 
 }

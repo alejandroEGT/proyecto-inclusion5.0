@@ -18,6 +18,11 @@
 					</div>
 				</div>		
 			</div>
+			<div class="col-md-2">
+				<div id="divFoto" hidden="true" >
+						<div id="img_destino" class="porte img-thumbnail" ></div>
+					</div>
+			</div>
 		</div>
 		<hr>
 			@if ($errors->all())
@@ -67,12 +72,7 @@
 				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
 				 	Agregar foto..
 				</label></p>
-				<input style="display: none;" name="fotoP1" id="file-input" type="file"/>
-
-					<div id="divFoto" hidden="true" >
-						<div id="img_destino" class="porte img-thumbnail" ></div>
-					</div>
-					
+				<input style="display: none;" name="fotoP1" id="file-input" type="file"/>	
 			</div>
 			
 			<div class="col-md-offset-1 col-md-2">
@@ -82,6 +82,50 @@
 		</div>
 		
 	</form>
+
+	<hr>
+		<div class="row">
+			<div class="col-md-12">
+				@if (count($servicios)>0)
+					<center><label>Servicios</label></center>
+				
+			
+				<table class="table table-responsive">
+					 <tr class="head-color" >
+					 	<th>Id</th>
+					    <th>Foto</th>
+					    <th>Nombre</th> 
+					    <th>Descripcion</th>
+					    <!--<th>creado</th>-->
+					    <th>Opción</th>
+					  </tr>
+					@foreach ($servicios as $s)
+
+					<tr>
+						<td>{{ $s->id }}</td>
+						<td><img src="{{ '/'.$s->foto }}" height="70" width="90"></td>
+						<td>{{ $s->nombre }}</td>
+						<td>{{ $s->descripcion }}</td>
+						
+						<td>
+							<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleServicio/".base64_encode($s->id)) }}">Ver..</a>
+							<input type="button" @click="eliminarServicio({!! $s->id !!});"  class="btn btn-danger btn-xs" value="Eliminar">	
+						
+						</td>
+					</tr>
+				    
+				     
+				    @endforeach
+					  
+				</table>
+				<center>{{ $servicios->links() }}</center>
+				@endif
+				@if (count($servicios)<=0)
+					<center><label>No hay servicios</label></center>
+				@endif
+
+			</div>
+		</div>
 @endsection
 @section('js')
 	<script>

@@ -61,6 +61,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_direccion','institucionController@actualizar_direccion');
         Route::post('/actualizar_correo','institucionController@actualizar_correo');
         Route::post('/actualizar_clave','institucionController@actualizar_clave');
+        Route::post('/actualizar_logo','institucionController@actualizar_logo');
         Route::get('/publicarProducto', 'institucionController@vista_publicarProducto');
         Route::get('/paginaweb', 'institucionController@vista_paginaweb');
         Route::post('/publicarProducto','institucionController@publicarproducto');
@@ -74,8 +75,12 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_descripcionArea', 'institucionController@actualizar_descripcion');
         Route::get('/generarPassword', 'institucionController@vitsa_generarPassword');
         Route::get('/buscarUsuarioParaCambiarPassword/{buscar}', 'institucionController@buscarUsuarioParaCambiarPassword');
+        Route::get('/detalleServicio/{id}','institucionController@ver_detalleServicio');
+        Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'institucionController@ver_detalleServicio_institucion_local');
         Route::get('/detalleProducto/{id}', 'institucionController@ver_detalleProducto');
-        Route::post('/eliminar_producto_institucion', 'institucionController@eliminar_producto_institucion');
+        Route::get('/detalleProducto/{idProducto}/{idInstitucion}', 'institucionController@ver_detalleProducto_institucion_local');
+         Route::get('/eliminar_producto_institucion/{idProducto}', 'institucionController@eliminar_producto_institucion');
+        Route::get('/eliminar_servicio_institucion/{idServicio}', 'institucionController@eliminar_servicio_institucion');   
         Route::post('/actualizar_producto_foto', 'institucionController@actualizar_producto_foto');
         Route::post('/actualizar_producto_nombre','institucionController@actualizar_producto_nombre');
         Route::post('/actualizar_producto_descripcion','institucionController@actualizar_producto_descripcion');
@@ -88,7 +93,34 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/verDetalleAlumno/{id}', 'alumnoController@vista_detalleAlumno_inst');
         Route::get('/publicarServicio', 'institucionController@vista_publicarServicio'); 
         Route::post('/publicarServicio', 'institucionController@publicarservicio');
-
+        Route::get('/filtrarProducto', 'institucionController@filtrarProducto');
+        Route::get('/filtrarServicio', 'institucionController@filtrarServicio');
+        Route::get('/productosOcultos','institucionController@productos_oclutos');
+        Route::get('/serviciosOcultos', 'institucionController@servicios_ocultos');
+        Route::post('/publicarNoticia', 'institucionController@publicarNoticia');
+        Route::post('/actualizar_nombre_alumno', 'institucionController@actualizar_nombre_alumno');
+        Route::post('/actualizar_apellido_alumno', 'institucionController@actualizar_apellido_alumno');
+        Route::post('/actualizar_correo_alumno', 'institucionController@actualizar_correo_alumno');
+        Route::post('/actualizar_area_alumno', 'institucionController@actualizar_area_alumno');
+        Route::post('/actualizar_numero_alumno', 'institucionController@actualizar_numero_alumno');
+        Route::post('/actualizar_foto_alumno', 'institucionController@actualizar_foto_alumno');
+        Route::get('/verNoticiasLocales', 'institucionController@todas_noticias_locales');
+        Route::get('/verNoticiasGenerales', 'institucionController@todas_noticias_generales');
+        Route::post('/actualizar_titulo_noticia', 'institucionController@actualizar_titulo_noticia');
+        Route::post('/actualizar_texto_noticia', 'institucionController@actualizar_texto_noticia');
+        Route::post('/actualizar_estado_noticia', 'institucionController@actualizar_estado_noticia');
+        Route::get('/traerProductoEnEspera','institucionController@traerProductoEnEspera');
+        Route::get('/traerServicioEnEspera','institucionController@vista_serviciosEspera');
+        Route::post('/actualizar_servicio_nombre','institucionController@actualizar_servicio_nombre');
+        Route::post('/actualizar_servicio_descripcion','institucionController@actualizar_servicio_descripcion');
+        Route::post('/actualizar_servicio_categoria','institucionController@actualizar_servicio_categoria');
+        Route::post('/actualizar_servicio_visibilidad','institucionController@actualizar_servicio_visibilidad');
+        Route::post('/actualizar_servicio_area','institucionController@actualizar_servicio_area');
+        Route::post('/actualizar_servicio_foto','institucionController@actualizar_servicio_foto');
+        Route::get('/ver_todo_producto','institucionController@ver_todo_producto');
+        Route::get('/ver_todo_servicio','institucionController@ver_todo_servicio');
+        Route::get('/detalleNoticia_general/{idNoticia}','institucionController@ver_detalleNoticia_general');
+        Route::get('/detalleNoticia_local/{idNoticia}','institucionController@ver_detalleNoticia_local');
 
 });
 
@@ -107,6 +139,7 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::post('/actualizar_direccion', 'alumnoController@actualizar_direccion');
         Route::post('/actualizar_correo', 'alumnoController@actualizar_correo');
         Route::post('/actualizar_clave', 'alumnoController@actualizar_clave');
+
        
         
 });
@@ -140,6 +173,7 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::get('/clave','encargadoController@vista_clave');
         Route::get('/agregarAlumno', 'encargadoController@vista_agregarAlumno');
         Route::get('/buscador','buscadorController@buscador_encargado');
+        Route::get('/traerProductoEnEspera','institucionController@traerProductoEnEspera');
         Route::get('/perfil_ven/{iduser}', 'encargadoController@vista_perfilVen');
         Route::get('/perfil_venInst/{iduser}','encargadoController@vista_perfilVenInst');
         Route::get('/perfil_institucion/{idinstitucion}','encargadoController@vista_perfilInst');
@@ -147,7 +181,9 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::post('/actualizar_correo','encargadoController@actualizar_correo');
         Route::post('/actualizar_numero','encargadoController@actualizar_numero');
         Route::get('/detalleProducto/{id}', 'encargadoController@ver_detalleProducto');
-        Route::get('/eliminar_producto_institucion', 'encargadoAreaController@eliminar_producto_institucion');
+        Route::get('/detalleServicio/{id}','encargadoController@ver_detalleServicio');
+        Route::get('/eliminar_producto_institucion/{idProducto}', 'institucionController@eliminar_producto_institucion');
+        Route::get('/eliminar_servicio_institucion/{idServicio}', 'institucionController@eliminar_servicio_institucion');
         Route::post('/actualizar_producto_foto', 'institucionController@actualizar_producto_foto');
         Route::post('/actualizar_producto_nombre','institucionController@actualizar_producto_nombre');
         Route::post('/actualizar_producto_descripcion','institucionController@actualizar_producto_descripcion');
@@ -157,6 +193,40 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::post('/actualizar_producto_area', 'institucionController@actualizar_producto_area');
         Route::post('/actualizar_producto_precio', 'institucionController@actualizar_producto_precio');
         Route::get('/verDetalleAlumno/{id}', 'alumnoController@vista_detalleAlumno_enc');
+        Route::get('/publicarServicio', 'encargadoController@vista_publicarServicio');
+        Route::post('/publicarServicio', 'encargadoController@publicarServicio');
+        Route::get('/publicarNoticia', 'encargadoController@vista_publicarNoticia');
+        Route::post('/publicarNoticia', 'encargadoController@publicarNoticia');
+        Route::post('/actualizar_foto_alumno', 'institucionController@actualizar_foto_alumno');
+        Route::post('/actualizar_nombre_alumno', 'institucionController@actualizar_nombre_alumno');
+        Route::post('/actualizar_apellido_alumno', 'institucionController@actualizar_apellido_alumno');
+        Route::post('/actualizar_correo_alumno', 'institucionController@actualizar_correo_alumno');
+        Route::post('/actualizar_area_alumno', 'institucionController@actualizar_area_alumno');
+        Route::post('/actualizar_numero_alumno', 'institucionController@actualizar_numero_alumno');
+        Route::get('/verNoticiasLocales', 'encargadoController@todas_noticias_locales');
+        Route::get('/verNoticiasGenerales', 'encargadoController@todas_noticias_generales');
+        Route::post('/actualizar_titulo_noticia', 'institucionController@actualizar_titulo_noticia');
+        Route::post('/actualizar_texto_noticia', 'institucionController@actualizar_texto_noticia');
+        Route::post('/actualizar_estado_noticia', 'institucionController@actualizar_estado_noticia');
+        Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'encargadoController@ver_detalleServicio_institucion_local');
+        Route::get('/detalleProducto/{idProducto}/{idInstitucion}', 'encargadoController@ver_detalleProducto_institucion_local');
+        Route::get('/vista_serviciosEspera','institucionController@vista_serviciosEspera');
+        Route::get('/filtrarProducto', 'encargadoController@filtrarProducto');
+        Route::get('/filtrarServicio', 'encargadoController@filtrarServicio');
+        Route::get('/traerProductoEnEspera','encargadoController@traerProductoEnEspera');
+        Route::get('/traerServicioEnEspera','encargadoController@vista_serviciosEspera');
+        Route::post('/actualizar_servicio_nombre','institucionController@actualizar_servicio_nombre');
+        Route::post('/actualizar_servicio_descripcion','institucionController@actualizar_servicio_descripcion');
+        Route::post('/actualizar_servicio_categoria','institucionController@actualizar_servicio_categoria');
+        Route::post('/actualizar_servicio_visibilidad','institucionController@actualizar_servicio_visibilidad');
+        Route::post('/actualizar_servicio_area','institucionController@actualizar_servicio_area');
+        Route::post('/actualizar_servicio_foto','institucionController@actualizar_servicio_foto');
+        Route::get('/ver_todo_producto','encargadoController@ver_todo_producto');
+        Route::get('/ver_todo_servicio','encargadoController@ver_todo_servicio');
+        Route::get('/detalleProducto/{id}', 'encargadoController@ver_detalleProducto');
+        Route::get('/detalleServicio/{id}','encargadoController@ver_detalleServicio');
+        Route::get('/productosOcultos','encargadoController@productos_oclutos');
+        Route::get('/serviciosOcultos', 'encargadoController@servicios_ocultos');
        
 });
 
@@ -169,13 +239,15 @@ Route::get('/desactivartext','herramientasayudaController@desactivar_texto');
 
 
 /* Peticiones ajax mediante vue y vue-resource */
-
+Route::get('/eliminar_alumno/{id}','alumnoController@eliminar_alumno');
 Route::get('/traerDatosInstitucion', 'institucionController@traerDatosInstitucion');
 Route::post('/insertarDatosAreas','institucionController@insertarArea');
 Route::get('/mostrarAreas', 'institucionController@traerAreas');
 Route::get('/filtrarArea/{id}','invitadoController@filtroArea');
 Route::post('/aceptarSolicitudUsuario','institucionController@aceptarSolicitudUsuario');
 Route::get('/traerNotificaciones', 'institucionController@traerNotificaciones');
+Route::get('/traerNotificaciones_prod','institucionController@traerNotificaciones_prod');
+Route::get('/traerNotificaciones_serv','institucionController@traerNotificaciones_serv');
 Route::get('/foto','vendedorDependienteController@fotoPerfil');
 Route::post('/agregar_mision', 'institucionController@agregar_mision');
 Route::post('/agregar_vision', 'institucionController@agregar_vision');
@@ -190,7 +262,8 @@ Route::get('/traerNombre', 'encargadoController@traerNombre');
 Route::get('/estadoClaveAlumno', 'vendedorDependienteController@traerEstadoClave');
 Route::get('/estadoClaveEncargado', 'encargadoController@traerEstadoClave');
 Route::get('generarClave/{id}', 'alumnoController@generarClave');
-
+Route::get('/aceptarSolicitudProducto/{id}', 'institucionController@aceptarProducto');
+Route::get('/aceptarSolicitudServicio/{id}','institucionController@aceptarSolicitudServicio');
 
 /*inicio de usuarios*/
 

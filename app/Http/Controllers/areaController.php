@@ -44,6 +44,8 @@ class areaController extends Controller
     }
 
     public function agregarUsuario(usuarioRequest $datos){
+
+    try{
     	
             $existe = Usuarioinstitucion::existeuser($datos->area);
             if(count($existe)){
@@ -74,12 +76,20 @@ class areaController extends Controller
                             }
                                 
                         }
-
-    				return redirect()->back();
+                        $datos->flash();
+    				    return redirect()->back();
     			}
-    			return "other error";
+    			$datos->flash();
+                        return redirect()->back();
     		}
-    		return "error";
+    		$datos->flash();
+                        return redirect()->back();
+        } catch (\Illuminate\Database\QueryException $e) {
+
+            $user = User::where('email', $datos->correo)->delete();
+            $datos->flash();
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }  
     }
 
     public function genclave(){

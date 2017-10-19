@@ -36,7 +36,7 @@ class Tienda_institucion extends Model
         $traer = Tienda_institucion::where('id_institucion', $idInst)->get();
         return $traer;
     }
-<<<<<<< HEAD
+
     protected function traerTiendas()
     {
         $tienda = \DB::table('tiendas_instituciones')
@@ -44,9 +44,5 @@ class Tienda_institucion extends Model
         return $tienda;
     }
    
-=======
-    
->>>>>>> 2d5c0191f3a63efb66ad305d110ff314931919ad
-
 
 }

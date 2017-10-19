@@ -280,11 +280,18 @@ new Vue({
 				}
 		}
 		,
-		eliminarAlumno($this){//reparar este codigo//////////////////////////////////////////////
+		eliminarAlumno($id_alumno){//reparar este codigo//////////////////////////////////////////////
 				if (confirm("¿Quieres eliminar este alumno?") == true) {
 				    	
-				    	alert()
+				    	//alert($id_alugetmno);
 						//$('#form_eliminarAlumno').submit();
+						this.$http.get('/eliminar_alumno/'+$id_alumno).then(function(response){
+								
+								console.log(response.body);
+								alert("Alumno eliminado");
+								//this.notificar();
+								location.reload();
+						})
 
 				} 
 				else {
@@ -295,7 +302,7 @@ new Vue({
 		aceptarProducto($id){
 				if (confirm("¿Quieres Aceptar este producto?") == true) {
 				    
-						this.$http.post('/aceptarSolicitudProducto', $id).then(function(response){
+						this.$http.get('/aceptarSolicitudProducto/'+$id).then(function(response){
 								
 								console.log(response.body);
 								alert("Producto aceptado");
@@ -311,7 +318,7 @@ new Vue({
 		aceptarServicio($id){
 			if (confirm("¿Quieres Aceptar este servicio?") == true) {
 				    
-						this.$http.post('/aceptarSolicitudServicio', $id).then(function(response){
+						this.$http.get('/aceptarSolicitudServicio/'+$id).then(function(response){
 								
 								console.log(response.body);
 								alert("Servicio aceptado");

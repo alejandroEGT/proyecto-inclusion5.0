@@ -23,12 +23,17 @@ class autenticarController extends Controller
 
     public function login(Request $data)/* Logear una institución */
     {   
-        $data->flash();
-        
-    	if (\Auth::guard('institucion')->attempt(['email' => $data->correo, 'password' => $data->clave])) {
-           return redirect('/institucion/inicio');
-        }
-        return redirect()->back();
+        try{  
+          $data->flash();
+            
+        	if (\Auth::guard('institucion')->attempt(['email' => $data->correo, 'password' => $data->clave])) {
+               return redirect('/institucion/inicio');
+            }
+            return redirect()->back();
+
+        }catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien, posiblemente datos mal ingresados o no hay conexión']);
+       }     
     }
 
     public function logout(){
@@ -50,20 +55,24 @@ class autenticarController extends Controller
     
     public function login_vendedorInst(userloginRequest $data){
         
-            $data->flash();
-            $verificar = \DB::select("select * from users where email = '".$data->correo."'");
+           try{
+                  $data->flash();
+                  $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
-            if(count($verificar)>0 && $verificar[0]->id_rol == 2){  /**"eres vendedor institucional"**/
-   
-                if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
-        
-                    return redirect('/userDependiente/inicio');    
-                }
-                return redirect()->back();
-            }
+                  if(count($verificar)>0 && $verificar[0]->id_rol == 2){  /**"eres vendedor institucional"**/
+         
+                      if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
+              
+                          return redirect('/userDependiente/inicio');    
+                      }
+                      return redirect()->back();
+                  }
+                  return redirect()->back();
+            }catch (\Illuminate\Database\QueryException $e) {
+                return redirect()->back()->withErrors(['Algo no anda bien, posiblemente datos mal ingresados o no hay conexión']);
+       } 
 
-            return redirect()->back();
-        }
+    }
         
     public function logout_venIns(){
             \Auth::logout();

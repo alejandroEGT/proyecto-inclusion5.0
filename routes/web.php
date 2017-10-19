@@ -61,6 +61,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_direccion','institucionController@actualizar_direccion');
         Route::post('/actualizar_correo','institucionController@actualizar_correo');
         Route::post('/actualizar_clave','institucionController@actualizar_clave');
+        Route::post('/actualizar_logo','institucionController@actualizar_logo');
         Route::get('/publicarProducto', 'institucionController@vista_publicarProducto');
         Route::get('/paginaweb', 'institucionController@vista_paginaweb');
         Route::post('/publicarProducto','institucionController@publicarproducto');
@@ -231,7 +232,7 @@ Route::get('/desactivartext','herramientasayudaController@desactivar_texto');
 
 
 /* Peticiones ajax mediante vue y vue-resource */
-
+Route::get('/eliminar_alumno/{id}','alumnoController@eliminar_alumno');
 Route::get('/traerDatosInstitucion', 'institucionController@traerDatosInstitucion');
 Route::post('/insertarDatosAreas','institucionController@insertarArea');
 Route::get('/mostrarAreas', 'institucionController@traerAreas');
@@ -254,8 +255,8 @@ Route::get('/traerNombre', 'encargadoController@traerNombre');
 Route::get('/estadoClaveAlumno', 'vendedorDependienteController@traerEstadoClave');
 Route::get('/estadoClaveEncargado', 'encargadoController@traerEstadoClave');
 Route::get('generarClave/{id}', 'alumnoController@generarClave');
-Route::post('/aceptarSolicitudProducto', 'institucionController@aceptarProducto');
-Route::post('/aceptarSolicitudServicio','institucionController@aceptarSolicitudServicio');
+Route::get('/aceptarSolicitudProducto/{id}', 'institucionController@aceptarProducto');
+Route::get('/aceptarSolicitudServicio/{id}','institucionController@aceptarSolicitudServicio');
 
 /*inicio de usuarios*/
 

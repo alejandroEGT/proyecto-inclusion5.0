@@ -27,6 +27,7 @@ use App\estado_tienda_servicio;
 use App\estado_noticia;
 use App\servicio;
 use App\noticia;
+use App\FotoPefil;
 use Illuminate\Http\Request;
 use App\Http\Requests\productoRequest;
 use Illuminate\Support\Facades\Mail;
@@ -325,6 +326,13 @@ class institucionController extends Controller
              }
         }
       } catch (\Illuminate\Database\QueryException $e) {
+                $user = User::where('email', $datos->correo)->first();
+                
+                if (count($user)>0) {
+                      $user->delete();
+                      return redirect()->back()->withErrors(['Algo no anda bien en los campos, eliminamos el registro reciente']);
+                    
+                }
                 return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
         }
             
@@ -403,26 +411,24 @@ class institucionController extends Controller
         }
         return "error";
     }
-    public function aceptarProducto(Request $dato)
+     public function aceptarProducto(Request $dato)
     {
-      
-      $aceptar = Tienda_producto_institucion::find($dato[0]);
+  
+      $aceptar = Tienda_producto_institucion::where('id_producto', $dato->id)->first();
       $aceptar->id_estado = '1';
       if ($aceptar->save()) {
-         return redirect()->back();
-         \Session::flash('correcto', 'Producto aceptado');
+         return "true";
       }
-      return redirect()->back();
+      return "false";
     }
     public function aceptarSolicitudServicio(Request $dato)
     {
-      $aceptar = Tienda_servicio_institucion::find($dato[0]);
+      $aceptar = Tienda_servicio_institucion::where('id_servicio',$dato->id)->first();
       $aceptar->id_estado = '1';
       if ($aceptar->save()) {
-          return redirect()->back();
-          \Session::flash('correcto', 'Servicio aceptado');
+          return "true";
       }
-      return redirect()->back();
+      return "false";
     }
     public function traerNotificaciones(){
 
@@ -456,51 +462,102 @@ class institucionController extends Controller
     }
 
     public function actualizar_nombre(Request $data){
-           $this->validate($data,['nombre' => 'required|unique:institucion,nombre',]);
-           $nombre = Institucion::actualizarNombre($data->nombre);
-           return $nombre;
+          try{ 
+             $this->validate($data,['nombre' => 'required|unique:institucion,nombre | max:50',]);
+             $nombre = Institucion::actualizarNombre($data->nombre);
+             return $nombre;
+          } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          }
+
     }
     public function actualizar_rs(Request $data){
-          $this->validate($data,['razonSocial' => 'required',]);
+      try{
+          $this->validate($data,['razonSocial' => 'required | max:50',]);
           $rs = Institucion::actualizarRs($data->razonSocial); 
           return $rs;
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }
     }
     public function actualizar_tel1(Request $data){
-            $this->validate($data,['teléfono1' => 'required|max:9',]);
-            $tel1 = Institucion::actualizarTel1($data->teléfono1);
-            return $tel1;
+        try{
+              $this->validate($data,['teléfono1' => 'required|max:9',]);
+              $tel1 = Institucion::actualizarTel1($data->teléfono1);
+              return $tel1;
+          } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          }    
     }
     public function actualizar_tel2(Request $data){
-           $this->validate($data,['teléfono2' => 'required|max:9',]);
-           $tel2 = Institucion::actualizarTel2($data->teléfono2);
-           return $tel2;
+        try{
+             $this->validate($data,['teléfono2' => 'required|max:9',]);
+             $tel2 = Institucion::actualizarTel2($data->teléfono2);
+             return $tel2;
+
+          } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          } 
     }
     public function actualizar_direccion(Request $data){
-           $this->validate($data,['dirección' => 'required',]);
-           $direccion = Institucion::actualizarDireccion($data->dirección);
-           return $direccion;
+        try{
+             $this->validate($data,['dirección' => 'required | max:100',]);
+             $direccion = Institucion::actualizarDireccion($data->dirección);
+             return $direccion;
+
+          } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          } 
     }
     public function actualizar_correo(Request $data){
-           $this->validate($data,['correo' => 'required',]);
-           $correo = Institucion::actualizarCorreo($data->correo);
-           return $correo;
+        try{
+             $this->validate($data,['correo' => 'required | email | unique:users,email | max:80',]);
+             $correo = Institucion::actualizarCorreo($data->correo);
+             return $correo;
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          } 
     }
     public function actualizar_clave(Request $data){
-
-      $this->validate($data,
-            [
-            'clave_actual' => 'required',
-            'clave_nueva' => 'required',
-            'confirm_clave_nueva' => 'required|same:clave_nueva'
-        ]);
-        $pass = Institucion::find(\Auth::guard('institucion')->user()->id)->get();
-        if (\Hash::check($data->clave_actual, $pass[0]->password)) {
-                $clave = Institucion::actualizarClave($data->clave_nueva);
-                return $clave;
-        }
-        return redirect()->back()->withErrors(['Clave actual incorrecta']);
-        
+      try{
+          $this->validate($data,
+                [
+                'clave_actual' => 'required | min:6',
+                'clave_nueva' => 'required | min:6',
+                'confirm_clave_nueva' => 'required|same:clave_nueva'
+            ]);
+            $pass = Institucion::find(\Auth::guard('institucion')->user()->id)->get();
+            if (\Hash::check($data->clave_actual, $pass[0]->password)) {
+                    $clave = Institucion::actualizarClave($data->clave_nueva);
+                    return $clave;
+            }
+            return redirect()->back()->withErrors(['Clave actual incorrecta']);
+            
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          } 
        //$clave = Institucion::;
+    }
+    public function actualizar_logo(Request $data)
+    {
+       try{
+              $this->validate($data,['logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg | dimensions:max_width=2250,max_height=2680',]);
+
+              
+              $logo = Institucion::actualizarLogo($data);
+
+              if ($logo) {
+                 return redirect()->back();
+              }
+              return redirect()->back();
+
+
+
+
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          } 
     }
     public function eliminarEncargado(Request $encargado){
       //$eliminarFoto = idF
@@ -513,7 +570,7 @@ class institucionController extends Controller
     public function ingresar_pagweb(Request $dato){
 
           $this->validate($dato,[
-                'paginaWeb' => 'required | url',
+                'paginaWeb' => 'required | url | max:50',
           ]);
 
           $ingresarweb = Institucion::ingresar_paginaweb($dato->paginaWeb);
@@ -526,32 +583,43 @@ class institucionController extends Controller
     }
 
     public function actualizar_nombreArea(Request $dato){
-           $this->validate($dato,[
-                'nombreDeArea' => 'required',
-          ]);
+          try{   
+             $this->validate($dato,[
+                  'nombreDeArea' => 'required',
+            ]);
 
-            $ingresarNombre = Area::actualizar_nombre($dato); 
-            if ($ingresarNombre) {
+              $ingresarNombre = Area::actualizar_nombre($dato); 
+              if ($ingresarNombre) {
 
-              \Session::flash('ingreso', 'Operación exitosa');
-                return redirect()->back();
+                \Session::flash('ingreso', 'Operación exitosa');
+                  return redirect()->back();
+              }
+              return redirect()->back()->withErrors(['Error en la operación']);
+
+            } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
             }
-            return redirect()->back()->withErrors(['Error en la operación']);
+
     }
 
     public function actualizar_descripcion(request $dato)
     {
-        $this->validate($dato,[
-                'descripcion' => 'required',
-          ]);
+      try{
+            $this->validate($dato,[
+                  'descripcion' => 'required',
+            ]);
 
-            $ingresarDesc = Area::actualizar_descripcion($dato); 
-            if ($ingresarDesc) {
+              $ingresarDesc = Area::actualizar_descripcion($dato); 
+              if ($ingresarDesc) {
 
-              \Session::flash('ingreso', 'Operación exitosa');
-                return redirect()->back();
-            }
-            return redirect()->back()->withErrors(['Error en la operación']);
+                \Session::flash('ingreso', 'Operación exitosa');
+                  return redirect()->back();
+              }
+              return redirect()->back()->withErrors(['Error en la operación']);
+
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+      }
     }
 
     public function buscarUsuarioParaCambiarPassword(Request $dato)
@@ -784,7 +852,7 @@ class institucionController extends Controller
     public function filtrarProducto(Request $datos)
     {
       $this->validate($datos,[
-                'buscar' => 'required',
+                'buscar' => 'required | max:100',
           ]);
       $productos = producto::filtrar_desde_admin($datos->buscar);
 

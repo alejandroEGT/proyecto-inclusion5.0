@@ -120,13 +120,9 @@
 						<td>{{ $p->descripcion }}</td>
 						<td>{{ $p->creado }}</td>
 						<td>
-						<form id="eliminar_producto" action="{{ url("institucion/eliminar_producto_institucion") }}" method="post">
-							{{ csrf_field() }}
-							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($p->idProducto)) }}">Ver..</a>
-							<input type="hidden" value="{{ base64_encode($p->idProducto) }}" name="idProducto">	
-							
-							<input type="button" @click="eliminarProducto" class="btn btn-warning btn-xs" value="Eliminar" >
-						</form>	
+						<p><a href="{{ url('institucion/detalleProducto/'.base64_encode($p->idProducto)) }}" class="btn btn-primary btn-xs">Ver</a>
+									<input type="button" @click="eliminarProducto({!! $p->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
+									</p>
 						</td>
 					</tr>
 				    

@@ -25,17 +25,17 @@
 			  						<td><strong>Opciones</strong></td>
 			  					</tr>
 								@foreach ($prod_esp as $esp)
-								<tr>
-									<td>
-										<img src="{{ '/'.$esp->foto}}" height="60" width="75">
-									</td>
-									<td>{{ $esp->nombre }}</td>
-									<td>{{ $esp->descripcion }}</td>
-									<td>{{ $esp->nombreArea }}</td>
-									<td>{{ $esp->creado }}</td>
-									<td>{{ $esp->nombreEstado}}</td>
-									<td><a  class="btn btn-success" @click="aceptarProducto({{ $esp->idProducto }})" >Aceptar</a> | <input class="btn btn-danger" type="button" value="Cancelar"></td>
-								</tr>
+									<tr>
+										<td>
+											<img src="{{ '/'.$esp->foto}}" height="60" width="75">
+										</td>
+										<td>{{ $esp->nombre }}</td>
+										<td>{{ $esp->descripcion }}</td>
+										<td>{{ $esp->nombreArea }}</td>
+										<td>{{ $esp->creado }}</td>
+										<td>{{ $esp->nombreEstado}}</td>
+										<td><a  class="btn btn-success" @click="aceptarProducto({{ $esp->idProducto }})" >Aceptar</a> | <input class="btn btn-danger" type="button" value="Cancelar"></td>
+									</tr>
 								@endforeach		
 							</table>	
 						</div>	

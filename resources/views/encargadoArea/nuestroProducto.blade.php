@@ -43,7 +43,7 @@
 			@endforeach
 		@endif
 		@if (!count($productos))
-			<label>No hay productos ocultos</label>
+			<label>No hay productos <img src="/ico/sad.png"></label>
 		@endif
 	</div>
 </div>

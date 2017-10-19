@@ -65,7 +65,7 @@
 				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
 				 	Agregar foto..
 				</label></p>
-				<input style="display: none;" name="fotoP1" id="file-input" type="file"/>
+				<input style="display: none;" name="foto" id="file-input" type="file"/>
 
 					<div id="divFoto" hidden="true" >
 						<div id="img_destino" class="porte img-thumbnail" ></div>

@@ -44,7 +44,7 @@
 			@endforeach
 		@endif
 		@if (!count($servicios))
-			<label for="">No hay servicios para mostrar</label>
+			<label for="">No hay servicios <img src="/ico/sad.png"></label>
 		@endif
 	</div>
 </div>

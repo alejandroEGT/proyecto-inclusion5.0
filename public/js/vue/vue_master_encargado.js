@@ -70,6 +70,24 @@ new Vue({
 				else {
 				    alert("Operación cancelada!");
 				}
+		},
+		eliminarAlumno($id_alumno){//reparar este codigo//////////////////////////////////////////////
+				if (confirm("¿Quieres eliminar este alumno?") == true) {
+				    	
+				    	//alert($id_alugetmno);
+						//$('#form_eliminarAlumno').submit();
+						this.$http.get('/eliminar_alumno/'+$id_alumno).then(function(response){
+								
+								console.log(response.body);
+								alert("Alumno eliminado");
+								//this.notificar();
+								location.reload();
+						})
+
+				} 
+				else {
+				    alert("Operación cancelada!");
+				}
 		}
 		,
 		

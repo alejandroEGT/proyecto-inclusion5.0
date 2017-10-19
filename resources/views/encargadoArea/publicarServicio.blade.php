@@ -5,7 +5,7 @@
 <form action="{{ url('encargadoArea/publicarServicio') }}" method="post" enctype="multipart/form-data" >
 		<div class="row">
 			<div class="col-md-offset-2 col-md-2">
-			<a href="{{ url('institucion/inicio') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
+			<a href="{{ url('encargadoArea/inicio') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
 				<div class="ico-servicio"></div>
 			</div>
 			<div class="col-md-6">

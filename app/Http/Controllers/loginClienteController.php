@@ -50,7 +50,6 @@ public function setTipo($tipo) {
         }
 
         $userSocial = $social->user();
-        
 
         $finduser = User::where('email', $userSocial->email)->first();
 

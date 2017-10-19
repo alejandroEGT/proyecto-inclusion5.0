@@ -164,7 +164,7 @@ class User extends Authenticatable
                     $user->email = $datosG['emails.0.value'];
                     $user->password = \Hash::make("porconfirmar");
                     $user->id_rol = "4";
-
+                    
                     if($datosG['gender'] == "male"){
                         $user->id_sexo = "2";
                     }else{

@@ -17,14 +17,15 @@ class FormUsuarioRequest extends FormRequest
         return [
             'nombres' => 'required | string',
             'apellidos' => 'required',
-            'dia' => 'required | numeric',
+            /*'dia' => 'required | numeric',
             'mes' => 'required | numeric',
-            'anio' => 'required | numeric',
+            'anio' => 'required | numeric',*/
+            'fecha' => 'date | required',
             'id_sexo' => 'required',
             'telefono' => 'required | numeric ', 
             'correo' => 'required | email | unique:users,email',
-            'clave' => 'required | min:6',
-            'rClave' => 'required | min:6',   
+            'clave' => 'required | min:6 | max:16',
+            'rClave' => 'required | min:6 | max:16 | same:clave',   
         ];
      }
 
@@ -50,6 +51,11 @@ class FormUsuarioRequest extends FormRequest
                 'clave.min' => 'La contraseña debe tener un minimo de 6 caracteres',
                 'rClave.required' => 'No puedes dejar vacio el campo Repita Clave',
                 'rClave.min' => 'La contraseña debe tener un minimo de 6 caracteres',
+                'rClave.max' => 'El campo repetir contraseña debe tener un maximo de 16 caracteres',
+                'clave.max' => 'La contraseña debe tener un maximo de 16 caracteres',
+                'rClave.same' => 'Las contraseñas no coinciden',
+                'fecha.required' => 'El campo fecha de nacimiento es necesario',
+                'fecha.date' => 'El campo fecha de nacimiento tiene formato invalido'
 
  
             ]; 

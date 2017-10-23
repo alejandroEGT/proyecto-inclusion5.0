@@ -30,6 +30,14 @@
 						</div>
 					</div>
 				</div>	
+				@endif
+				@if (Session::has('ingresado'))
+					<div class="col-md-offset-3 col-md-6">
+						<div class="alert alert-info">
+					    <a href="" class="close" data-dismiss="alert">&times;</a>
+						        {{ Session::get('ingresado') }}
+					    </div>
+					</div>    
 			@endif
 			<div class="row">
 					<div class="col-md-offset-3 col-md-3">
@@ -39,9 +47,10 @@
 						<input name="apellidos" class="form-control input" type="text" placeholder="Apellidos" value="{{ old('apellidos') }}">
 						<label class="p-form">Fecha de Nacimiento</label>
     						<p>
-    						<input name="dia" class="form-control fech" size="2" maxlength="2" type="text" placeholder="Día" value="{{ old('dia') }}">-
-    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" placeholder="Mes" value="{{ old('mes') }}">-
-    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" placeholder="Año" value="{{ old('anio') }}" >
+    						<!--<input name="dia" class="form-control fech" size="2" maxlength="2" type="text" placeholder="Día" value="{{--old('dia')--}}">-
+    						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" placeholder="Mes" value="{{--old('mes')--}}">-
+    						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" placeholder="Año" value="{{--old('anio')--}}" >-->
+    						<input type="date" class="form-control input" name="fecha">
     						</p>
 						<label class="p-form">Sexo</label>
 						<select name="id_sexo"  class="form-control input" >

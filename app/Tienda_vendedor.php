@@ -10,7 +10,7 @@ class Tienda_vendedor extends Model
 
      protected function insertar($idVendedor)
     {
-    	$insertar = new Tienda_institucion;
+    	$insertar = new Tienda_vendedor;
     	$insertar->nombre = "por definir";
     	$insertar->descripcion = "por definir";
         $insertar->id_estado = '1';/*Activa por default*/

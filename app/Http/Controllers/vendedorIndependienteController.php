@@ -6,6 +6,7 @@ use App\Fotoperfil;
 use App\Http\Requests\FormUsuarioRequest;
 use App\User;
 use App\Vendedor;
+use App\Tienda_vendedor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,23 +23,32 @@ class vendedorIndependienteController extends Controller
 
      public function insertar_vendedorIndependiente(FormUsuarioRequest $datos)
     {
-        $datos->flash();
-        $insert = User::insertar_vendedor($datos);
-        if ($insert) {
-           
-            $id_user = User::where('email','=',"$datos->correo")->get();
-                
-            $vendedor = Vendedor::insertar_aprobado($datos, $id_user[0]->id);
-            if ($vendedor) {
+        /*try{*/
+            $insert = User::insertar_vendedor($datos);
+            if ($insert) {
+               
+                $id_user = User::where('email','=',"$datos->correo")->get();
+                    
+                $vendedor = Vendedor::insertar_aprobado($datos, $id_user[0]->id);
+                if ($vendedor) {
 
-                    $foto = Fotoperfil::fotoDefault($id_user[0]->id);
-                    if ($foto) {
-                        return "ok";
-                    }
-                    return "error";
-            }        
-        }
-        return "error";
+                        $foto = Fotoperfil::fotoDefault($id_user[0]->id);
+                        if ($foto) {
+                            $getVendedor = Vendedor::where('id_user', $id_user[0]->id)->first();
+                             $insertarTiendaVendedor = Tienda_vendedor::insertar($getVendedor->id);
+                             if ($insertarTiendaVendedor) {
+                                 \Session::flash('ingresado', 'Usuario registrado con exito');
+                                 return redirect()->back();
+                             }
+                        }
+                        $datos->flash();
+                }        
+            }
+            $datos->flash();
+
+       /* } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          } */
     }
      public function traerFotoVendedor(){
 

@@ -29,7 +29,7 @@ class Vendedor extends Model
     }
      protected function insertar_esperando($datos, $idUser){
 
-        $date = new \DateTime($datos->get('dia').'-'.$datos->get('mes').'-'.$datos->get('anio'));
+        $date = new \DateTime($datos->fechaDeNacimiento);
         $vendedor = new Vendedor;
         $vendedor->id_user = $idUser;
         $vendedor->telefono = $datos->telefono;

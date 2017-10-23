@@ -53,7 +53,7 @@ class vendedorDependienteController extends Controller
 
     public function insertar(formUsuarioInstitucionRequest $datos){
 
-            $datos->flash();
+        try{
             $us = User::insertar_vendedorDependiente($datos);
         	
              if($us){
@@ -70,14 +70,28 @@ class vendedorDependienteController extends Controller
                                         {
                                             $passwordDefault = Passwordcuenta::insertar_clave_normal($id_us[0]->id);
                                             if ($passwordDefault) {
-                                                return "ok todo bien...";
+                                                \Session::flash('ingresado', 'Registro con exito, debes esperar la respuesta de la institución.');
+                                                return redirect()->back();
                                             }
+                                             $datos->flash();
                                         }
+                                         $datos->flash();
                                 }
+                                 $datos->flash();
 
                      }
+                      $datos->flash();
 
              }
+         }catch (\Illuminate\Database\QueryException $e) {
+             $datos->flash();
+            $user = User::where('email', $datos->correo)->first();
+            if ($user->delete()) {
+                return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+            }
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+            
+       } 
     }                          
 
     public function traerFotoVendedor(){

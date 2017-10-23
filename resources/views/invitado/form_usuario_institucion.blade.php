@@ -11,23 +11,29 @@
 		<div class="ico-userInstituto-form animated bounceIn"></div>
 	</div>
 
+
 	<form action="/insertar" method="post">
 		{{ csrf_field() }}
 		<div class="container estilo-form animated fadeInUp">
 
 				<!-- Validacion de campos vacios-->
 				<div class="row" >
-					<div class="col-md-offset-3 col-md-6">
-						@if ($errors->any())
-						    <div class="alert alert-danger">
-							        <ul>
-							            @foreach ($errors->all() as $error)
-							                <li>{{ $error }}</li>
-							            @endforeach
-							        </ul>
-						    </div>
-						@endif	
-					</div>
+					@if ($errors->any())
+			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				            @endforeach
+				        </ul>
+			    </div>
+			@endif
+			@if (Session::has('ingresado'))
+				<div class="alert alert-info">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        {{ Session::get('ingresado') }}
+			    </div>
+			@endif
 				</div>
 
 			<div class="row">
@@ -37,9 +43,12 @@
 						<label class="p-form">Apellidos</label>
 						<input name="apellidos" class="form-control input" type="text" placeholder="apellido" value="{{ old('apellidos') }}">
 						<label class="p-form">Fecha de Nacimiento</label>
-    						<p><input name="dia" class="form-control fech" placeholder="día" size="2" maxlength="2" type="text"  value="{{ old('dia') }}">-
-    						<input name="mes" placeholder="mes" class="form-control fech" size="2" maxlength="2" type="text"  value="{{ old('mes') }}">-
-    						<input name="anio" placeholder="año" class="form-control fech" size="2" maxlength="4" type="text" value="{{ old('anio') }}"></p>
+    						<!--<p><input name="dia" class="form-control fech" placeholder="día" size="2" maxlength="2" type="text"  value="{{--old('dia')--}}">-
+    						<input name="mes" placeholder="mes" class="form-control fech" size="2" maxlength="2" type="text"  value="{{--old('mes')--}}">-
+    						<input name="anio" placeholder="año" class="form-control fech" size="2" maxlength="4" type="text" value="{{--old('anio')--}}"></p>-->
+    						<p>
+    							<input type="date" class="form-control input" name="fechaDeNacimiento" value={{ old('fechaDeNacimiento')}}>
+    						</p>
 						<label class="p-form">Institución</label>
 						<select name="id_institucion" @change="filtraArea"  class="form-control input" name="" id="">
 							<option value="">Seleccione...</option>

@@ -18,16 +18,17 @@ class formUsuarioInstitucionRequest extends FormRequest
     
             'nombres' => 'required',
             'apellidos' => 'required',
-            'dia' => 'required | numeric',
+            /*'dia' => 'required | numeric',
             'mes' => 'required | numeric',
-            'anio' => 'required | numeric',
+            'anio' => 'required | numeric',*/
+            'fechaDeNacimiento' => 'date|required',
             'id_institucion' => 'required',
             'id_area' => 'required',
             'id_sexo' => 'required',
             'telefono' => 'required|min:11|numeric',
             'correo' => 'required | email | unique:users,email',
-            'clave' => 'required | min:6',
-            'rClave' => 'required | min:6'
+            'clave' => 'required | min:6 | max:16',
+            'rClave' => 'required | min:6 | max:16 | same:clave'
         ];
     }
 
@@ -57,8 +58,11 @@ class formUsuarioInstitucionRequest extends FormRequest
 
                 'clave.required' => 'No puedes dejar vacio el campo clave',
                 'clave.min' => 'La contraseña debe tener un minimo de 6 caracteres',
+                'clave.max' => 'La contraseña debe tener un maximo de 16 caracteres',
                 'rClave.required' => 'No puedes dejar vacio el campo Repita Clave',
-                'rClave.min' => 'La contraseña debe tener un minimo de 6 caracteres',
+                'rClave.min' => 'El campo repetir contraseña debe tener un minimo de 6 caracteres',
+                'clave.max' => 'El campo repetir contraseña debe tener un maximo de 16 caracteres',
+                'rClave.same' => 'Las contraseñas no coinciden'
 
  
             ]; 

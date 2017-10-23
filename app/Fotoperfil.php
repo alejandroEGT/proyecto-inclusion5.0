@@ -86,9 +86,6 @@ class Fotoperfil extends Model
                       return 1;
                 }
                 return 0;
-
-
-
        
    }
 

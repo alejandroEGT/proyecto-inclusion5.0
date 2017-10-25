@@ -2,6 +2,6 @@
 
 @section('content')
 
-	@include('buscar_dentro.todoServicio',['ruta' => 'institucion'])
+	@include('buscar_dentro.todoServicio',['ruta' => 'institucion', 'user' => 1])
 
 @endsection

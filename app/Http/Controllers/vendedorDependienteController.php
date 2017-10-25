@@ -11,6 +11,7 @@ use App\Vendedor;
 use App\producto;
 use App\servicio;
 use App\noticia;
+use App\Usuarioinstitucion;
 use Illuminate\Http\Request;
 use App\Passwordcuenta;
 use Illuminate\Support\Facades\Mail;
@@ -19,13 +20,13 @@ class vendedorDependienteController extends Controller
 {
     public function vista_inicio()
     {     
-            $alumno = VendedorInstitucion::id_institucion();
+            $alumno = VendedorInstitucion::traerDatos();
             $area = Area::traer_aerea_para_alumno();
             $foto = Fotoperfil::traerFoto();
             $verificEstado = Vendedor::verificEstado(\Auth::user()->id);
             $estado_password = Passwordcuenta::traerEstado();
-            $productos = producto::verProductoDesdeArea( $area[0]->id_area, 4);
-            $servicios = servicio::mostrarServicioDesdeArea($area[0]->id_area, 4);
+            $productos = producto::verProductoDesdeArea( $alumno->id_area, 4);
+            $servicios = servicio::mostrarServicioDesdeArea($alumno->id_area, 4);
             $estado = $verificEstado[0]->id_estado;
             $noticias_generales = noticia::noticias_generales();
             $noticias_locales = noticia::noticias_locales($alumno->id_institucion);

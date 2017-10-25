@@ -12,7 +12,8 @@
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
 
-<body onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);">
+<!-- onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);"-->
+<body>
         
 <div id="master-vendedorDependiente" class="animated fadeIn" >
 
@@ -31,7 +32,7 @@
                             <p class="nombre-perfil">
                                {{ Auth::user()->nombres.' '.Auth::user()->apellidos }}
                             </p>
-                            <p><a href="logout"><img src="/ico/arrows.png"  alt=""></a></p>
+                            <p><a href="{{ url('userDependiente/logout') }}"><img src="/ico/arrows.png"  alt=""></a></p>
                         </div>
                         
                         <hr>
@@ -126,7 +127,9 @@
                             
                 </nav>
                 
-                @yield('content')
+                <div class="margen">
+                    @yield('content')
+                </div>
 
             </div>
         @endif 
@@ -142,5 +145,6 @@
         <script src="/js/vue/vue_master_vendedorInstitucion.js"></script>
         {{--@include('mensajes.activa_desactiva')--}}
 		<script src="/js/pushy.min.js"></script>
+         @yield('js')
 
 </html>

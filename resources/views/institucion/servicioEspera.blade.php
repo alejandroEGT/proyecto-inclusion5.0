@@ -2,7 +2,8 @@
 
 @section('content')
 	<div class="">
-			<p class="text-center" >Notificacione de Integración de servicios</p>
+			<p class="text-center" ><label>Notificacione de Integración de servicios</label></p>
+			<center><small>Antes de aceptar un servicio debes verificar que su información sea correcta y cuidadosa.</small></center>
 			<div class="row papel-blanco">
 				@if (Session::has('correcto'))
 				<div class="alert alert-info">
@@ -32,7 +33,7 @@
 										<td>{{ $es->nombreArea}}</td>
 										<td>{{ $es->creado }}</td>
 										<td>{{ $es->nombreEstado}}</td>
-										<td><a  class="btn btn-success" @click="aceptarServicio({{ $es->id }})" >Aceptar</a> | <input class="btn btn-danger" type="button" value="Cancelar"></td>
+										<td><p><a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleServicio/".base64_encode($es->id)) }}">Ver (Recomendado)</a></p><p><a  class="btn btn-success btn-xs" @click="aceptarServicio({{ $es->id }})" >Aceptar</a></p> <p><input class="btn btn-danger btn-xs" type="button" value="Cancelar"></p></td>
 									</tr>	
 								@endforeach	
 							</table>	

@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-md-12">
 			<a href="{{ url('userDependiente/inicio') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
-				<center><label>Datos de Alumno</label>
+				<center><label>Datos del Alumno</label>
 				<div class="ico-security" ></div></center>
 			</div>
 			
@@ -17,21 +17,44 @@
 		<div class="row">
 		@if (count($errors))
 				<div class="row">
-					<div class="col-md-offset-2 col-md-7">
+					<div class="col-md-12">
 						<div class="alert alert-danger">
 						    <a href="" class="close" data-dismiss="alert">&times;</a>
 						    @foreach ($errors->all() as $e)
 								<ul>
-									<li>{{ $e }}</li>
+									<center><li>{{ $e }}</li></center>
 								</ul>
 							@endforeach
 						</div>
 					</div>
 				</div>	
 			@endif
+			@if (Session::has('ingresado'))
+				<div class="alert alert-info">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <center>{{ Session::get('ingresado') }}</center>
+			    </div>
+			@endif
 			<div class="col-md-offset-2 col-md-7">
 				<img src="{{'/'.$alumno[0]->foto}}" height="100" width="110" ><br>
-				<a href="#"><label>Actualizar foto de perfil</label></a>
+				<a data-toggle="collapse" data-target="#foto" href="#"><label>Actualizar foto de perfil</label></a>
+				
+				<div id="foto" class="collapse">
+					<div class="alert alert-info" role="alert">
+						<form action="{{ url('userDependiente/actualizar_foto') }}" method="post" enctype="multipart/form-data">
+						 {{csrf_field()}}
+					  		<p>
+								<label for="file-input" class="label-foto-link">
+				 				<img src="/ico/image.png" for="file-input" class="label-foto-link">
+										 	Agregar foto..
+								</label>
+								<input style="display: none;" name="foto" id="file-input" type="file"/>	
+								  	<input type="hidden" name="idUser" value="{{Auth::user()->id}}">
+								<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
+						</form>	
+					</div>
+												
+				</div>
 				<hr>
 			
 				<label><strong>Nombres </strong></label><small> {{Auth::user()->nombres}}</small>

@@ -51,6 +51,7 @@ class graficosAdminController extends Controller
       	  $areas = Area::traer();
           for ($i=0; $i < count($areas) ; $i++) { 
             $contarProductos = producto::traerProductosByArea($areas[$i]->id);
+            $contarTodoProducto = producto::traerTodosProductosByAdmin(\Auth::guard('institucion')->user()->id);
             $array[$i] = $areas[$i]->nombre;
             $contar[$i] = $contarProductos;
           }
@@ -68,7 +69,8 @@ class graficosAdminController extends Controller
 
 
             return view('institucion.grafico_cantidad_productos', [
-              'chart_productos' => $chart_productos
+              'chart_productos' => $chart_productos,
+              'contarTodoProducto' => $contarTodoProducto
             ]);
     }
 }

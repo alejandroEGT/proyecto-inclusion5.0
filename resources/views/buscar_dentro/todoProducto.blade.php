@@ -30,7 +30,11 @@
 									<p>{{ str_limit($producto->nombre,10) }}</p>
 									<p><a href="{{ url($ruta.'/detalleProducto/'.base64_encode($producto->idProducto)) }}" class="btn btn-primary btn-xs">Ver</a>
 									
-									<input type="button" @click="eliminarProducto({!! $producto->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
+									@if ($user == 1 || $user == 2)
+										<input type="button" @click="eliminarProducto({!! $producto->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
+									@endif
+
+
 									</p>
 								</center>
 

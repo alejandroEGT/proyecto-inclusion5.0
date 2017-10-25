@@ -133,13 +133,27 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::get('/buscador','buscadorController@buscador_ven_inst');
         Route::post('/actualiza_clave', 'vendedorDependienteController@actualiza_clave');
         Route::get('/datos','vendedorDependienteController@vista_datos');
+        Route::post('/actualizar_foto','alumnoController@actualizar_foto');
         Route::post('/actualizar_nombre', 'alumnoController@actualizar_nombre');
         Route::post('/actualizar_apellido', 'alumnoController@actualizar_apellido');
         Route::post('/actualizar_tel', 'alumnoController@actualizar_tel');
         Route::post('/actualizar_direccion', 'alumnoController@actualizar_direccion');
         Route::post('/actualizar_correo', 'alumnoController@actualizar_correo');
         Route::post('/actualizar_clave', 'alumnoController@actualizar_clave');
-
+        Route::get('/publicarProducto', 'alumnoController@vista_publicarProducto');
+        Route::post('/guardarProducto', 'alumnoController@publicarproducto');
+        Route::get('/publicarServicio', 'alumnoController@vista_publicarServicio');
+        Route::post('/publicarServicio', 'alumnoController@publicarServicio');
+        Route::get('/filtrarProducto', 'alumnoController@filtrarProducto');
+        Route::get('/filtrarServicio', 'alumnoController@filtrarServicio');
+        Route::get('/detalleProducto/{id}', 'alumnoController@ver_detalleProducto');
+        Route::get('/detalleServicio/{id}','alumnoController@ver_detalleServicio');
+        Route::post('/actualizar_producto_foto', 'institucionController@actualizar_producto_foto');
+        Route::post('/actualizar_producto_nombre','institucionController@actualizar_producto_nombre');
+        Route::post('/actualizar_producto_descripcion','institucionController@actualizar_producto_descripcion');
+        Route::post('/actualizar_producto_categoria', 'institucionController@actualizar_producto_categoria');
+        Route::get('/ver_todo_producto','alumnoController@ver_todo_producto');
+        Route::get('/ver_todo_servicio','alumnoController@ver_todo_servicio');
        
         
 });

@@ -70,7 +70,7 @@ class encargadoController extends Controller
         $categoria_pro = categoria_producto::all();
 
         //return $encargado[0]->id_institucion.', '.$encargado[0]->id_area;
-        $productos = producto::verProductoDesdeArea($encargado[0]->id_area, $encargado[0]->id_area);
+        $productos = producto::verProductoDesdeArea($encargado[0]->id_area, 5);
 
         //return $productos;
 
@@ -358,30 +358,36 @@ class encargadoController extends Controller
     /*PUBLICACION DE LOS PRODUCTOS*/
     public function publicarproducto(productoRequest $datos){
        
-       $encargado = Encargado::traerDatos();
-       
-       $insertProducto = producto::insertar($datos);
-
-       if ($insertProducto > 0) {
+       try{
+        
+           $encargado = Encargado::traerDatos();
            
-           $insertFotoProducto = foto_producto::insertar($datos, $insertProducto);
+           $insertProducto = producto::insertar($datos);
 
-           if ($insertFotoProducto > 0) {
-
-                $tienda = Tienda_institucion::id_tienda(\Auth::user()->id);/*Modifique aqui hoy*/
-                
-                $insertTiendaProducto = Tienda_producto_institucion::insertar($insertProducto, $tienda[0]->id, '3', $encargado[0]->id_area);
+           if ($insertProducto > 0) {
                
-               if ($insertTiendaProducto > 0) {
-                   \Session::flash('registro', 'Producto registrado correctamente, esperar a que la institución lo analice y acepte');
-                   return redirect()->back();
+               $insertFotoProducto = foto_producto::insertar($datos, $insertProducto);
+
+               if ($insertFotoProducto > 0) {
+
+                    $tienda = Tienda_institucion::id_tienda(\Auth::user()->id);/*Modifique aqui hoy*/
+                    
+                    $insertTiendaProducto = Tienda_producto_institucion::insertar($insertProducto, $tienda[0]->id, '3', $encargado[0]->id_area);
+                   
+                   if ($insertTiendaProducto > 0) {
+                       \Session::flash('registro', 'Producto registrado correctamente, esperar a que la institución lo analice y acepte');
+                       return redirect()->back();
+                   }
+                   return "Mal todo";
+                   /*\Session::flash('registro', 'Producto registrado correctasmente');
+                    return redirect()->back();*/
                }
-               return "Mal todo";
-               /*\Session::flash('registro', 'Producto registrado correctasmente');
-                return redirect()->back();*/
-           }
-           return redirect()->back()->withErrors(['Algo salió mal']);
-        }
+               return redirect()->back()->withErrors(['Algo salió mal']);
+            }
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        } 
     }
     /*FIN DE PUBLICACION DE LOS PRODUCTOS*/
 

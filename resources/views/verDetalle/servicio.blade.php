@@ -89,6 +89,8 @@
 							</div>
 			</div>
 
+			@if ($user == 1 || $user == 2)
+			{{-- expr --}}
 			<p><label><strong>Visibilidad:</strong></label> {{ $servicio[0]->nombreEstado }} <a data-toggle="collapse" data-target="#vis" ><i class="fa fa-pencil" aria-hidden="true"></i></a>. (Apto para la visualización en la tienda)</p>
 			<div id="vis" class="collapse">
 										<div class="alert alert-info" role="alert">
@@ -108,6 +110,7 @@
 											</form>	
 										</div>
 			</div>
+			@endif	
 			@if ($user == 1)
 				<p><label><strong>Área o especialidad:</strong></label> {{ $servicio[0]->nombreArea }} <a data-toggle="collapse" data-target="#area" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 				<div id="area" class="collapse">

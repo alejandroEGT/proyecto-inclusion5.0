@@ -29,7 +29,10 @@
 									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($servicio->nombre, 10) }}</p>
 									<p><a href="{{ url($ruta.'/detalleServicio/'.base64_encode($servicio->id)) }}" class="btn btn-primary btn-xs">Ver</a>
+									@if ($user == 1 || $user == 2)
+									
 									<input type="button" @click="eliminarServicio({!! $servicio->id !!});"  class="btn btn-danger btn-xs" value="Eliminar" >
+									@endif
 									</p>
 								</center>
 

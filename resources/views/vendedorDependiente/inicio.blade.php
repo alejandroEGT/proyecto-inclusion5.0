@@ -1,7 +1,7 @@
 @extends('vendedorDependiente.master_vendedorDependiente')
 
 @section('content')
-	<div class="margen"><!--probandi-->
+	<div class=""><!--probandi-->
 		@if ($estado_password == 1)
 				<div class="row">
 					<div class="col-md-offset-3 col-md-6">
@@ -26,9 +26,9 @@
 						<div class="alert alert-danger">
 						    <a href="" class="close" data-dismiss="alert">&times;</a>
 						    @foreach ($errors->all() as $e)
-								<ul>
+								<center><ul>
 									<li>{{ $e }}</li>
-								</ul>
+								</ul></center>
 							@endforeach
 						</div>
 					</div>
@@ -63,14 +63,14 @@
 								<div class="col-md-offset-2 col-md-4 well lineas">
 									<center>
 										<div class="ico-producto"></div>
-										<a href="#"><label>Publicar Producto</label></a>
+										<a href="{{ url('userDependiente/publicarProducto') }}"><label>Publicar Producto</label></a>
 									</center>
 
 								</div>
 								<div class="col-md-4 well lineas">
 									<center>
 										<div class="ico-speaker"></div>
-										<a href="#"><label>Publicar Servicio</label></a>
+										<a href="{{ url('userDependiente/publicarServicio') }}"><label>Publicar Servicio</label></a>
 									</center>
 								</div>
 							</div>
@@ -124,11 +124,26 @@
 						</div>
 						<div class="col-md-8">
 							
-
 							@if (count($productos)>0)
 								<div class="row">
 									<div class="col-md-12">
-										<center><label>Productos</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
+										<center><label>Productos en mi área</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
+
+										<form action="{{ url('userDependiente/filtrarProducto') }}" method="GET"> 
+										  <div class="row">
+										    <div class="col-md-12">
+										      <div class="input-group">
+										      	{{ csrf_field() }}
+										   <input type="text" class="form-control" placeholder="Buscar productos" name="buscar"/>
+										   <div class="input-group-btn">
+										        <button class="btn btn-primary" type="submit">
+										        <span class="glyphicon glyphicon-search"></span>
+										        </button>
+										   </div>
+										   </div>
+										    </div>
+										  </div>
+						</form>	
 										<hr>
 										
 										@foreach ($productos as $producto)
@@ -141,7 +156,7 @@
 										</div>	
 										@endforeach
 
-										<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+										<center class="center-top" ><label><small><a href="{{ url('userDependiente/ver_todo_producto') }}">Ver mas..</a></small></label></center>
 									</div>
 
 								</div>
@@ -160,7 +175,22 @@
 							@if (count($servicios)>0)
 								<div class="row">
 									<div class="col-md-12">
-										<center><label>Productos</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
+										<center><label>Servicios en mi área</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
+										<form action="{{ url('userDependiente/filtrarServicio') }}" method="GET"> 
+										  <div class="row">
+										    <div class="col-md-12">
+										      <div class="input-group">
+										      	{{ csrf_field() }}
+										   <input type="text" class="form-control" placeholder="Buscar servicios" name="buscar"/>
+										   <div class="input-group-btn">
+										        <button class="btn btn-primary" type="submit">
+										        <span class="glyphicon glyphicon-search"></span>
+										        </button>
+										   </div>
+										   </div>
+										    </div>
+										  </div>
+									</form>	
 										<hr>
 										
 										@foreach ($servicios as $servicio)
@@ -173,7 +203,7 @@
 										</div>	
 										@endforeach
 
-										<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+										<center class="center-top" ><label><small><a href="{{ url('userDependiente/ver_todo_servicio') }}">Ver mas..</a></small></label></center>
 									</div>
 
 								</div>

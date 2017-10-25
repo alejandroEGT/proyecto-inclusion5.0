@@ -35,7 +35,7 @@
 			@endif
 @if (Session::has('correcto'))
 								<div class="row">
-									<div class="col-md-offset-2 col-md-7">
+									<div class="col-md-12">
 										<div class="alert alert-info">
 										    <a href="" class="close" data-dismiss="alert">&times;</a>
 										     {{ Session::get('correcto') }}

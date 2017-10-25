@@ -26,7 +26,18 @@ class producto extends Model
     }
     protected function traerProductosByArea($idarea)
     {
-        $traer = \DB::table('tienda_producto_instituciones')->where('id_area', $idarea)->get();
+        $traer = \DB::table('tienda_producto_instituciones')
+        ->where('id_area', $idarea)
+        ->where('id_estado', 1)->get();
+        return count($traer);
+    }
+     protected function traerTodosProductosByAdmin($idInst)
+    {
+        $traer = \DB::table('tienda_producto_instituciones')
+                  ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
+
+                  ->where('id_institucion', $idInst)
+                  ->where('tienda_producto_instituciones.id_estado', 1)->get();
         return count($traer);
     }
 
@@ -225,11 +236,14 @@ class producto extends Model
     {
         $traer = \DB::table('tienda_producto_instituciones')
                 ->select([
+                        'productos.id as idProductos',
                         'tienda_producto_instituciones.id_producto as idProducto',
                         'foto_productos.foto as foto',
                         'productos.nombre as nombre',
                         'productos.descripcion as descripcion',
                         'productos.created_at as creado',
+                        'productos.precio as precio',
+                        'productos.cantidad as cantidad',
                         'estado_tienda_producto.estado as nombreEstado',
                         'area.nombre as nombreArea'
                     ])

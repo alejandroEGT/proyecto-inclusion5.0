@@ -2,7 +2,8 @@
 
 @section('content')
 	<div class="">
-			<p class="text-center" >Notificacione de Integración de productos</p>
+			<p class="text-center" ><label>Notificacione de Integración de productos</label></p>
+			<center><label><small>Antes de aceptar un producto debes verificar que su información sea correcta y cuidadosa.</small></label></center>
 			<div class="row papel-blanco">
 				@if (Session::has('correcto'))
 				<div class="alert alert-info">
@@ -19,6 +20,7 @@
 			  						<td><strong>Foto</strong></td>
 			  						<td><strong>Nombre</strong></td>
 			  						<td><strong>descripción</strong></td>
+			  						
 			  						<td><strong>Área o especialdiad</strong></td>
 			  						<td><strong>Fecha de creación</strong></td>
 			  						<td><strong>Estado</strong></td>
@@ -31,10 +33,11 @@
 										</td>
 										<td>{{ $esp->nombre }}</td>
 										<td>{{ $esp->descripcion }}</td>
+										
 										<td>{{ $esp->nombreArea }}</td>
 										<td>{{ $esp->creado }}</td>
 										<td>{{ $esp->nombreEstado}}</td>
-										<td><a  class="btn btn-success" @click="aceptarProducto({{ $esp->idProducto }})" >Aceptar</a> | <input class="btn btn-danger" type="button" value="Cancelar"></td>
+										<td><p><a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($esp->idProducto)) }}">Ver (recomendado)</a></p><p><a  class="btn btn-success btn-xs" @click="aceptarProducto({{ $esp->idProducto }})" >Aceptar</a></p><p> <input class="btn btn-danger btn-xs" type="button" value="Cancelar"></p></td>
 									</tr>
 								@endforeach		
 							</table>	

@@ -74,7 +74,7 @@
 								</form>	
 							</div>
 			</div>
-			
+		@if ($user == 1 or $user == 2)	
 			<p><label><strong>Precio:</strong></label> {{ $productos[0]->precio }} <a data-toggle="collapse" data-target="#pre" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="pre" class="collapse">
 							<div class="alert alert-info" role="alert">
@@ -100,7 +100,7 @@
 								</form>	
 							</div>
 			</div>
-			
+		
 			<p><label><strong>Visibilidad:</strong></label> {{ $productos[0]->estadoProducto }} <a data-toggle="collapse" data-target="#vis" ><i class="fa fa-pencil" aria-hidden="true"></i></a>. (Apto para la visualización en la tienda)</p>
 			<div id="vis" class="collapse">
 										<div class="alert alert-info" role="alert">
@@ -120,7 +120,7 @@
 											</form>	
 										</div>
 			</div>
-
+		@endif
 			<p><label><strong>Categoría:</strong></label> {{ $productos[0]->nombreCategoria }} <a data-toggle="collapse" data-target="#cat" ><i class="fa fa-pencil" aria-hidden="true"></i></a> </p>
 			<div id="cat" class="collapse">
 										<div class="alert alert-info" role="alert">

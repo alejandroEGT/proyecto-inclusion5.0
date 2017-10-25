@@ -196,6 +196,15 @@ class VendedorInstitucion extends Model
        }
        return false;
     }
+    protected function traerDatos()
+      {
+         $traer = \DB::table('vendedor-institucion')
+                  ->join('vendedor', 'vendedor.id','=','vendedor-institucion.id_vendedor')
+                  ->join('users','users.id','=','vendedor.id_user')
+                  ->where('users.id', \Auth::user()->id)->first();
+
+          return $traer;
+      }
     
 
 }

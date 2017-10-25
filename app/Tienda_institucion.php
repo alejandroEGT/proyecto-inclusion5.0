@@ -31,6 +31,16 @@ class Tienda_institucion extends Model
         return $traer;        
 
     }
+    protected function id_tienda_alumno($iduser)
+    {
+         $traer = \DB::table('tiendas_instituciones')
+                ->select('tiendas_instituciones.id')
+                ->join('vendedor-institucion','vendedor-institucion.id_institucion','=','tiendas_instituciones.id_institucion')
+                ->join('vendedor','vendedor.id','=','vendedor-institucion.id_vendedor')
+                ->where('vendedor.id_user','=', $iduser)->get();
+        return $traer;       
+
+    }
     protected function id_tienda_by_institucion($idInst)
     {
         $traer = Tienda_institucion::where('id_institucion', $idInst)->get();

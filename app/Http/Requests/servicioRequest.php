@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class servicioInstRequest extends FormRequest
+class servicioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,8 @@ class servicioInstRequest extends FormRequest
     {
         return [
             'nombre' => 'required | min:3 | max:50',
-            'descripcion' => 'required | min:3  ',
+            'descripcion' => 'required | min:3 | max:190',
             'categoria' => 'required',
-            'area' => 'required',
             'fotoP1' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
         ];
     }
@@ -37,7 +36,6 @@ class servicioInstRequest extends FormRequest
                 'fotoP1.required' => 'el campo foto es obligatorio',
                 'fotoP1.mimes' => 'Formato de foto desconocido',
                 'fotoP1.dimensions' => 'Dimensiones desconocidas de la foto',
-                'area.required' => 'El campo área o especialidad es obligatorio, puede que no tengas áreas o especialidades registradas, debes tener registrada alguna'
         ];
     }
 }

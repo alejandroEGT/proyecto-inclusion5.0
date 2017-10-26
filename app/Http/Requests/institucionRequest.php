@@ -15,14 +15,14 @@ class institucionRequest extends FormRequest
     public function rules()
     {
         return [
-            'rut' => 'max:9 | required | numeric | unique:institucion,rut',
-            'nombre' => 'required | unique:institucion,nombre | max:50',
+            'rut' => 'max:9 | required | numeric | unique:institucion,rut,'. $this->rut,
+            'nombre' => 'required | max:50',
             'razonSocial' => 'required | max:100',
             'telefono1' => 'required|min:11|numeric',
             'telefono2' => 'required|min:11|numeric',
             'direccion' => 'required',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg | dimensions:max_width=2250,max_height=2680',
-            'correo' => 'required | email | unique:users,email | max:80',
+            'correo' => 'required | email | max:80 | unique:institucion,email,'. $this->correo,
             'clave' => 'required | min:6',
             'repeClave' => 'required | min:6 | same:clave',
         ];

@@ -511,7 +511,7 @@ class institucionController extends Controller
     }
     public function actualizar_correo(Request $data){
         try{
-             $this->validate($data,['correo' => 'required | email | unique:users,email | max:80',]);
+             $this->validate($data,['correo' => 'required | max:80 |email | unique:institucion,email,'. $data->email]);
              $correo = Institucion::actualizarCorreo($data->correo);
              return $correo;
 

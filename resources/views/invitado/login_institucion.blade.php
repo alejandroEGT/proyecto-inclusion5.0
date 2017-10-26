@@ -45,7 +45,10 @@
 						<br>
 						<div class="row">
 							<div class="col-md-offset-4 col-md-4">
-								<center><a href="{{ url('/formInstitucion') }}">Crear una cuenta de institución</a></center>
+								<center>
+									<label><a href="{{ url('/formInstitucion') }}">Crear una cuenta de institución</a></label>
+									<label><a href="{{ url('/recuperarPassword') }}">¿ Olvidaste tu contraseña ?</a></label>
+								</center>
 								
 							</div>
 						</div>

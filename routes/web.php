@@ -29,6 +29,10 @@ Route::group(['middleware' => ['web']], function () {
 
          Route::get('/login_encargado','autenticarController@vista_loginEncargado');
          Route::post('/login_encargado','autenticarController@login_loginEncargado');
+         Route::get('/recuperarPassword', 'invitadoController@vista_recuperarPassword');
+         Route::post('/resetPass','invitadoController@resetPass');
+         Route::get('/codigo_reset','invitadoController@vista_codigo_reset');
+         Route::post('/resetPassGo','invitadoController@resetPassGo');
 });
 
 Route::group(['prefix' => 'institucion','middleware' => ['institucion']], function () {
@@ -154,6 +158,10 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::post('/actualizar_producto_categoria', 'institucionController@actualizar_producto_categoria');
         Route::get('/ver_todo_producto','alumnoController@ver_todo_producto');
         Route::get('/ver_todo_servicio','alumnoController@ver_todo_servicio');
+        Route::get('/verNoticiasGenerales', 'alumnoController@todas_noticias_generales');
+        Route::get('/verNoticiasLocales', 'alumnoController@todas_noticias_locales');
+        Route::get('/detalleNoticia_general/{idNoticia}','alumnoController@ver_detalleNoticia_general');
+        Route::get('/detalleNoticia_local/{idNoticia}','alumnoController@ver_detalleNoticia_local');
        
         
 });
@@ -241,6 +249,8 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::get('/detalleServicio/{id}','encargadoController@ver_detalleServicio');
         Route::get('/productosOcultos','encargadoController@productos_oclutos');
         Route::get('/serviciosOcultos', 'encargadoController@servicios_ocultos');
+        Route::get('/detalleNoticia_general/{idNoticia}','encargadoController@ver_detalleNoticia_general');
+        Route::get('/detalleNoticia_local/{idNoticia}','encargadoController@ver_detalleNoticia_local');
        
 });
 

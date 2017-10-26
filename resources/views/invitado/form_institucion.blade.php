@@ -35,7 +35,7 @@
 		</div>
 	</div>
 
-	<form action="/guardarInstitucion" method="post" enctype="multipart/form-data" >
+	<form action="{{ url('/guardarInstitucion') }}" method="post" enctype="multipart/form-data" >
 		<div class="container estilo-form animated fadeInUp">
 			<div class="row">
 				<div class="col-md-offset-3 col-md-3">

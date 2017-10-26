@@ -24,6 +24,8 @@ use App\Tienda_producto_institucion;
 use App\Tienda_servicio_institucion;
 use App\estado_tienda_servicio;
 use App\estado_tienda_producto;
+use App\noticia;
+use App\estado_noticia;
 use Illuminate\Support\Facades\Mail;
 
 class alumnoController extends Controller
@@ -398,6 +400,36 @@ public function ver_todo_producto()
         $servicios = servicio::mostrarServicioDesdeArea($alumno->id_area, 5);
         //dd($producto);
         return view('vendedorDependiente.verTodoServicio')->with('servicios', $servicios);
+    }
+     public function todas_noticias_generales()
+    {
+       $noticias_generales = noticia::todas();
+       return view('vendedorDependiente.noticias_generales')->with('noticias_generales',$noticias_generales);
+    }
+      public function todas_noticias_locales()
+    {
+       $alumno = VendedorInstitucion::traerDatos();
+       $estado_noticia = estado_noticia::all();
+       $noticias_locales = noticia::detalleNoticia($alumno->id_institucion);
+       return view('vendedorDependiente.noticias_locales')
+       ->with('noticias_locales', $noticias_locales)
+       ->with('estado_noticia',$estado_noticia);
+    }
+    public function ver_detalleNoticia_general(Request $dato)
+    {   
+        $noticia = noticia::unica_general(base64_decode($dato->idNoticia));
+        //dd($noticia);
+        return view('vendedorDependiente.noticia_individual_general')->with('noticia', $noticia);
+    }
+    public function ver_detalleNoticia_local(Request $dato)
+    {   
+         $alumno = VendedorInstitucion::traerDatos();
+         $noticia = noticia::unica_local(base64_decode($dato->idNoticia), $alumno->id_institucion);
+        //dd($noticia);
+         $estado_noticia = estado_noticia::all();
+        return view('vendedorDependiente.noticia_individual_local')
+               ->with('noticia', $noticia)
+               ->with('estado_noticia', $estado_noticia);
     }
 
     

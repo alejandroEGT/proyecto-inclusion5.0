@@ -1,5 +1,8 @@
 <div class="row">
 	<div class="col-md-12 well">
+		<center>
+			<p><label><h3 class="th3">Noticias Generales</h3> <img src="/ico/news.png" height="40"></label></p>
+		</center>
 		<div class="row">
 			@if (count($noticias_generales))
 				@foreach ($noticias_generales as $ng)

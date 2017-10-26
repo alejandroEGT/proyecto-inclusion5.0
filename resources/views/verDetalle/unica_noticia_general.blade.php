@@ -1,5 +1,8 @@
 <div class="row">
 	<div class="col-md-12 well">
+		<center>
+			<p><label><h3 class="th3">Noticia General</h3> <img src="/ico/news.png" height="40"></label></p>
+		</center>
 		<div class="row">
 			
 					<div class="col-md-offset-1 col-md-10  fondo-blanco top">

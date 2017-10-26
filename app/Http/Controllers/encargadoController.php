@@ -628,5 +628,21 @@ class encargadoController extends Controller
        ->with('servicios', $servicios)
        ->with('titulo', "Servicios ocultos"); 
     }
+    public function ver_detalleNoticia_general(Request $dato)
+    {   
+        $noticia = noticia::unica_general(base64_decode($dato->idNoticia));
+        //dd($noticia);
+        return view('encargadoArea.noticia_individual_general')->with('noticia', $noticia);
+    }
+    public function ver_detalleNoticia_local(Request $dato)
+    {   
+        $encargado = encargado::traerDatos();
+        $noticia = noticia::unica_local(base64_decode($dato->idNoticia), $encargado[0]->id_institucion);
+        //dd($noticia);
+         $estado_noticia = estado_noticia::all();
+        return view('encargadoArea.noticia_individual_local')
+               ->with('noticia', $noticia)
+               ->with('estado_noticia', $estado_noticia);
+    }
     
 }

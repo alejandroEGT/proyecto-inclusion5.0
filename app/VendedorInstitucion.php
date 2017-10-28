@@ -132,6 +132,8 @@ class VendedorInstitucion extends Model
                         'users.apellidos as apellidos',
                         'users.email as correo',
                         'vendedor.telefono as telefono',
+                        'vendedor.fecha_nac as fecha'
+                        //\DB::raw("DATE_FORMAT(vendedor.fecha_nac, '%d-%M-%Y') as fecha"),
 
                   ])
                   ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
@@ -163,6 +165,7 @@ class VendedorInstitucion extends Model
                         'vendedor.telefono as telefono',
                         'area.nombre as nombreArea',
                         'institucion.nombre as nombreInstitucion',
+                        'vendedor.fecha_nac as fecha'
 
                   ])
                   ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')

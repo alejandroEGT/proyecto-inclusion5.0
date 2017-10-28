@@ -58,6 +58,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/perfil_venInst/{iduser}','institucionController@vista_perfilVenInst');
         Route::get('/perfil_institucion/{idinstitucion}','institucionController@vista_perfilInst');
         Route::get('/datos', 'institucionController@vista_datos');
+        Route::post('/actualizar_rut','institucionController@actualizar_rut');
         Route::post('/actualizar_nombre','institucionController@actualizar_nombre');
         Route::post('/actualizar_rs','institucionController@actualizar_rs');
         Route::post('/actualizar_tel1','institucionController@actualizar_tel1');
@@ -142,6 +143,7 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::post('/actualizar_apellido', 'alumnoController@actualizar_apellido');
         Route::post('/actualizar_tel', 'alumnoController@actualizar_tel');
         Route::post('/actualizar_direccion', 'alumnoController@actualizar_direccion');
+        Route::post('/actualizar_fecha', 'alumnoController@actualizar_fecha');
         Route::post('/actualizar_correo', 'alumnoController@actualizar_correo');
         Route::post('/actualizar_clave', 'alumnoController@actualizar_clave');
         Route::get('/publicarProducto', 'alumnoController@vista_publicarProducto');
@@ -220,6 +222,7 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::get('/publicarNoticia', 'encargadoController@vista_publicarNoticia');
         Route::post('/publicarNoticia', 'encargadoController@publicarNoticia');
         Route::post('/actualizar_foto_alumno', 'institucionController@actualizar_foto_alumno');
+        Route::post('/actualizar_fecha_alumno', 'institucionController@actualizar_fecha_alumno');
         Route::post('/actualizar_nombre_alumno', 'institucionController@actualizar_nombre_alumno');
         Route::post('/actualizar_apellido_alumno', 'institucionController@actualizar_apellido_alumno');
         Route::post('/actualizar_correo_alumno', 'institucionController@actualizar_correo_alumno');

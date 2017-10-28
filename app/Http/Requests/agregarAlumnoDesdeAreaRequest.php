@@ -26,9 +26,7 @@ class agregarAlumnoDesdeAreaRequest extends FormRequest
         return [
             'nombres' => 'required',
             'apellidos' => 'required',
-            'dia' => 'required',
-            'mes' => 'required',
-            'anio' => 'required',
+            'fecha' => 'date|required',
             'id_sexo' => 'required',
             'telefono' => 'required|min:11|numeric',
             'correo' => 'required | email | unique:users,email'

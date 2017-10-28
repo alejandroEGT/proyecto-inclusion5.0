@@ -138,14 +138,16 @@ class encargadoController extends Controller
         $vendedorInstitucion = VendedorInstitucion::where('id_vendedor',$vendedor[0]->id)->get();
         $institucion = Institucion::find($vendedorInstitucion[0]->id_institucion);
       
-
+        $productos = producto::verProductoDesdeArea($vendedorInstitucion[0]->id_area , 5);
         $foto = Fotoperfil::traerFotobyid($idu);
         
         return view('encargadoArea.perfil_vendedorInstitucion')
         ->with('foto',$foto)
         ->with('usuario',$usuario)
         ->with('vendedor',$vendedor[0]->telefono)
-        ->with('institucion', $institucion);
+        ->with('institucion', $institucion)
+        ->with('productos', $productos)
+        ->with('idInstitucion', base64_encode($vendedorInstitucion[0]->id_institucion));;
         
         //return view('encargadoArea.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
     }
@@ -255,12 +257,13 @@ class encargadoController extends Controller
     public function actualizar_correo(Request $dato){
 
         $this->validate($dato,[
-            'correo' => 'required',
+            'correo' => 'required | email | unique:users,email',
         ]);
 
         $actualizarCorreo = User::actualizarCorreo($dato->correo);
 
         if ($actualizarCorreo) {
+            \Session::flash('ingresado', 'Correo actualizado');
             return redirect()->back();
         }
         return "error";
@@ -274,6 +277,7 @@ class encargadoController extends Controller
         $actualizarNumero = Usuarioinstitucion::actualizarNumero($dato->teléfono);
 
         if ($actualizarNumero == 1) {
+            \Session::flash('ingresado', 'Nº telefónico actualizado');
             return redirect()->back();
         }
         return "falso falsoe";

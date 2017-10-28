@@ -13,9 +13,9 @@ class producto extends Model
 
         $insertar = new producto;
         $insertar->id_categoria = $datos->categoria;
-        $insertar->nombre = $datos->nombre;
+        $insertar->nombre = ucfirst($datos->nombre);
         $insertar->precio = $datos->valor;
-        $insertar->descripcion = $datos->descripcion;
+        $insertar->descripcion = ucfirst($datos->descripcion);
         $insertar->cantidad = $datos->cantidad;
         $insertar->vista = '0';/*Valor inicial de vistas*/
 
@@ -352,13 +352,17 @@ class producto extends Model
    
     protected function borrar($idP)
     {
-        $tpi = \DB::table('productos')->where('id', '=', $idP)->delete();
+        //$tpi = \DB::table('productos')->where('id', '=', $idP)->delete();
+         $tpi = \DB::table('tienda_producto_instituciones')->where('id_producto', $idP)
+                ->update([
+                    'id_estado' => 4
+                ]);
         return $tpi;
     }
     protected function actualizar_nombre($dato)
     {
         $pi = producto::find($dato->idProducto);
-        $pi->nombre = $dato->nombre;
+        $pi->nombre = ucfirst($dato->nombre);
         if ($pi->save()) {
             return true;
         }
@@ -367,7 +371,7 @@ class producto extends Model
     protected function actualizar_descripcion($dato)
     {
         $pi = producto::find($dato->idProducto);
-        $pi->descripcion = $dato->descripcion;
+        $pi->descripcion = ucfirst($dato->descripcion);
         if ($pi->save()) {
             return true;
         }

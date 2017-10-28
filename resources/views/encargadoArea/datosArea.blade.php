@@ -3,6 +3,22 @@
 @section('content')
 
 <div class="row">
+	@if ($errors->any())
+			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <center><li class="validacionRequest"><label>{{ $error }}</label></li></center>
+				            @endforeach
+				        </ul>
+			    </div>
+			@endif
+			@if (Session::has('ingresado'))
+				<div class="alert alert-info">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <center>{{ Session::get('ingresado') }}</center>
+			    </div>
+			@endif
 			<div class="col-md-12">
 			<a href="{{ url('encargadoArea/inicio') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
 				<center><label>Datos del área</label>

@@ -85,13 +85,13 @@ public function ver_todo_producto()
     }
 
     public function genclave(){
-      $cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      //$cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
       $cadena_base .= '0123456789' ;
       $cadena_base .= 'kkck';
       $password = '';
       $limite = strlen($cadena_base) - 1;
  
-      for ($i=0; $i < 13; $i++)
+      for ($i=0; $i < 4; $i++)
         $password .= $cadena_base[rand(0, $limite)];
         return $password;
     }
@@ -157,8 +157,11 @@ public function ver_todo_producto()
     public function actualizar_nombre(Request $dato)
     {
         try{
+
+            $this->validate($dato,['nombre' => 'required|max:50|min:3',]);
+
             $user = User::find(\Auth::user()->id);
-            $user->nombres = $dato->nombre;
+            $user->nombres = ucfirst($dato->nombre);
             if ($user->save()) {
                 \Session::flash('ingresado', 'Nombre actualizado');
                 return redirect()->back();
@@ -172,8 +175,10 @@ public function ver_todo_producto()
     public function actualizar_apellido(Request $dato)
     {
         try{
+          $this->validate($dato,['apellido' => 'required|max:50|min:3',]);
+
             $user = User::find(\Auth::user()->id);
-            $user->apellidos =  $dato->apellido;
+            $user->apellidos =  ucfirst($dato->apellido);
             if ($user->save()) {
                 \Session::flash('ingresado', 'Apellido actualizado');
                 return redirect()->back();
@@ -187,6 +192,8 @@ public function ver_todo_producto()
     public function actualizar_tel(Request $dato)
     {
          try{
+            $this->validate($dato,['teléfono' => 'required|numeric',]);
+
             $user = Vendedor::where('id_user', \Auth::user()->id)->first();
             $user->telefono = $dato->teléfono;
             if ($user->save()) {
@@ -199,6 +206,25 @@ public function ver_todo_producto()
         return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
         }
     }
+    public function actualizar_fecha(Request $dato)
+    {
+        try{
+            $this->validate($dato,['fecha' => 'required|date',]);
+
+            //$date = new \DateTime($dato->fecha);
+
+            $user = vendedor::where('id_user', \Auth::user()->id)->first();
+            $user->fecha_nac =  $dato->fecha;
+            if ($user->save()) {
+                \Session::flash('ingresado', 'Fecha actualizada');
+                return redirect()->back();
+            }
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+
+         } catch (\Illuminate\Database\QueryException $e) {
+        return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }   
+    }
     public function actualizar_direccion(Request $dato)
     {
        //$user = User::find(\Auth::user()->id);
@@ -206,6 +232,7 @@ public function ver_todo_producto()
     public function actualizar_correo(Request $dato)
     {
         try{
+          $this->validate($dato,['correo' => 'required|email|unique:users,email',]);
            $user = User::find(\Auth::user()->id);
             $user->email =  $dato->correo;
             if ($user->save()) {

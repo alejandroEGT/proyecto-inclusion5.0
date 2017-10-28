@@ -30,7 +30,22 @@
 				</div>	
 			@endif
 			<div class="col-md-offset-2 col-md-7">
-			
+				
+				<label><strong>Rut </strong></label><small> {{Auth::guard('institucion')->user()->rut}}</small>
+				<button data-toggle="collapse" data-target="#nombre" class="btn btn-xs btn-success" >Editar</button>
+
+				<div id="nombre" class="collapse">
+					<div class="alert alert-info" role="alert">
+						<form action="{{ url('institucion/actualizar_rut') }}" method="post">
+						 {{csrf_field()}}
+					  		<p><strong>Actualizar Rut</strong> </p>
+					  		<p><input class="" type="" name="rut">
+							<input type="submit" value="Guardar" name=""></p>	
+						</form>	
+					</div>
+												
+				</div>
+				<hr>
 				<label><strong>Nombre </strong></label><small> {{Auth::guard('institucion')->user()->nombre}}</small>
 				<button data-toggle="collapse" data-target="#nombre" class="btn btn-xs btn-success" >Editar</button>
 

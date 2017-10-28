@@ -101,6 +101,20 @@
 							</div>
 				</div>
 				<hr>
+				<label><strong>Fecha de Nacimiento </strong></label><small> {{ date('d/m/Y', strtotime($alumno[0]->fecha))}}</small>
+				<button data-toggle="collapse" data-target="#fecha" class="btn btn-xs btn-success" >Editar</button>
+
+				<div id="fecha" class="collapse">
+							<div class="alert alert-info" role="alert">
+								<form action="{{ url('userDependiente/actualizar_fecha') }}" method="post">
+								{{csrf_field()}}
+							  		<p><strong>Actualizar Fecha de nacimiento</strong> </p>
+							  		<p><input class="" type="date" name="fecha">
+									<input type="submit" value="Guardar" name=""></p>	
+								</form>	
+							</div>
+				</div>
+				<hr>
 				
 				<label><strong>Dirección </strong></label><small> (Aún no identificada)</small>
 				<button data-toggle="collapse" data-target="#dir" class="btn btn-xs btn-success" >Editar</button>

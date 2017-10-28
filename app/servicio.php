@@ -12,8 +12,8 @@ class servicio extends Model
     protected function insertar($datos)
     {
     	$insertar = new servicio;
-    	$insertar->nombre = $datos->nombre;
-    	$insertar->descripcion = $datos->descripcion;
+    	$insertar->nombre = ucfirst($datos->nombre);
+    	$insertar->descripcion = ucfirst($datos->descripcion);
         $insertar->id_categoria = $datos->categoria;
     	if ($insertar->save()) {
     		return $insertar->id;

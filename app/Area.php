@@ -79,7 +79,7 @@ class Area extends Model
     protected function actualizar_nombre($dato){
 
         $area = Area::find($dato->idArea);
-        $area->nombre = $dato->nombreDeArea;
+        $area->nombre = ucfirst($dato->nombreDeArea);
         if ($area->save()) {
             return true;
         }
@@ -88,7 +88,7 @@ class Area extends Model
     protected function actualizar_descripcion($dato){
 
         $area = Area::find($dato->idArea);
-        $area->descripcion = $dato->descripcion;
+        $area->descripcion = ucfirst($dato->descripcion);
         if ($area->save()) {
             return true;
         }

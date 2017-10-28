@@ -167,13 +167,17 @@ class institucionController extends Controller
         $vendedor = Vendedor::where('id_user',$usuario->id)->get();
         $vendedorInstitucion = VendedorInstitucion::where('id_vendedor',$vendedor[0]->id)->get();
         $institucion = Institucion::find($vendedorInstitucion[0]->id_institucion);
-         $foto = Fotoperfil::traerFotobyid($idu);
+        $foto = Fotoperfil::traerFotobyid($idu);
+
+        $productos = producto::verProductoDesdeArea($vendedorInstitucion[0]->id_area , 5);
         
         return view('institucion.perfil_vendedorInstitucion')
         ->with('foto',$foto)
         ->with('usuario',$usuario)
         ->with('vendedor',$vendedor[0]->telefono)
-         ->with('institucion', $institucion);
+        ->with('institucion', $institucion)
+        ->with('productos', $productos)
+        ->with('idInstitucion', base64_encode($vendedorInstitucion[0]->id_institucion));
         
         //return view('institucion.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
     }
@@ -460,6 +464,16 @@ class institucionController extends Controller
         $password .= $cadena_base[rand(0, $limite)];
         return $password;
     }
+     public function actualizar_rut(Request $data){
+          try{ 
+             $this->validate($data,['rut' => 'max:9 | required | numeric | unique:institucion,rut,'. $data->rut,]);
+             $rut = Institucion::actualizarRut($data->rut);
+             return $rut;
+          } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          }
+
+    }
 
     public function actualizar_nombre(Request $data){
           try{ 
@@ -695,7 +709,7 @@ class institucionController extends Controller
       
       $foto_prod = foto_producto::borrar($getFoto[0]->id);
       $tienda_prod_inst = Tienda_producto_institucion::borrar($dato->idProducto);
-      $prod_insti = producto::borrar($dato->idProducto);
+      //$prod_insti = producto::borrar($dato->idProducto);
 
       return "true";
     }
@@ -892,6 +906,24 @@ class institucionController extends Controller
             ]);
 
            $update = User::actualizarNombres($dato->nombres, $dato->idUser);
+
+           if ($update) {
+                \Session::flash('correcto', 'Nombres actualizados');
+                return redirect()->back();
+           }
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
+
+    }
+    public function actualizar_fecha_alumno(Request $dato)
+    {
+      try{
+         $this->validate($dato,[
+                  'fecha' => 'required | date',
+            ]);
+
+           $update = vendedor::actualizarFecha($dato->fecha, $dato->idUser);
 
            if ($update) {
                 \Session::flash('correcto', 'Nombres actualizados');

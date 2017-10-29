@@ -491,5 +491,35 @@ protected function ver_mas_producto()
                       return $producto;
     }
 
+    protected function areaYinstitucion($idI, $idA)
+    {
+        $traer = \DB::table('tienda_producto_instituciones')
+                ->select([
+                        'tienda_producto_instituciones.id_producto as idProducto',
+                        'foto_productos.foto as foto',
+                        'productos.nombre as nombre',
+                        'productos.descripcion as descripcion',
+                        'productos.created_at as creado',
+                        'estado_tienda_producto.estado as estadoProducto',
+                        'area.nombre as nombreArea',
+                        'productos.cantidad as cantidad',
+                        'categoria_productos.nombre as nombreCategoria',
+                        'productos.precio as precio'
+                    ])
+                ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
+                 ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+                ->join('estado_tienda_producto','estado_tienda_producto.id','=','tienda_producto_instituciones.id_estado')
+                ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
+                ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
+                ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
+                ->join('area','area.id','=','tienda_producto_instituciones.id_area')
+                ->where('estado_tienda_producto.id', 1)
+                ->where('Institucion.id','=', $idI)
+                ->where('area.id','=', $idA)
+                ->paginate(10);
+
+                return $traer;
+    }
+
 }
 

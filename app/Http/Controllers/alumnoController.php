@@ -26,6 +26,7 @@ use App\estado_tienda_servicio;
 use App\estado_tienda_producto;
 use App\noticia;
 use App\estado_noticia;
+use App\Institucion;
 use Illuminate\Support\Facades\Mail;
 
 class alumnoController extends Controller
@@ -82,6 +83,82 @@ public function ver_todo_producto()
 	        return "operacion exitosa"; 
 	    }
         
+    }
+    public function vista_perfilVenInst($iduser){
+        $idu = base64_decode($iduser);
+          //return $idu;
+        $usuario = User::find($idu);
+        $vendedor = Vendedor::where('id_user',$usuario->id)->get();
+        $vendedorInstitucion = VendedorInstitucion::where('id_vendedor',$vendedor[0]->id)->get();
+        $institucion = Institucion::find($vendedorInstitucion[0]->id_institucion);
+      
+        $productos = producto::verProductoDesdeArea($vendedorInstitucion[0]->id_area , 5);
+        $foto = Fotoperfil::traerFotobyid($idu);
+        
+        return view('vendedorDependiente.perfil_vendedorInstitucion')
+        ->with('foto',$foto)
+        ->with('usuario',$usuario)
+        ->with('vendedor',$vendedor[0]->telefono)
+        ->with('institucion', $institucion)
+        ->with('productos', $productos)
+        ->with('idInstitucion', base64_encode($vendedorInstitucion[0]->id_institucion));;
+        
+        //return view('encargadoArea.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
+    }
+    public function vista_perfilInst($idinstitucion){
+
+        $idI = base64_decode($idinstitucion);
+        $institucion = Institucion::find($idI);
+        $productos = producto::verProductosVisibles($institucion->id, 5);
+        $areas = Area::where('id_institucion', $idI)->get();
+        $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
+
+        return view('vendedorDependiente.perfil_institucion')
+        ->with('institucion', $institucion)
+        ->with('servicios', $servicios)
+        ->with('productos', $productos)
+        ->with('idInstitucion', $idinstitucion)
+        ->with('areas', $areas);
+    }
+    public function vista_areaExterna(Request $dato)
+    {
+        
+            $idI = base64_decode($dato->idInstitucion);
+            $idA = base64_decode($dato->idArea);
+
+            $institucion = Institucion::find($idI);
+            $area = Area::find($idA);
+            $productos = producto::areaYinstitucion($idI, $idA);
+            $servicios = servicio::areaYinstitucion($idI, $idA);
+            $alumnos = VendedorInstitucion::alumnosDeUnArea($idI, $idA);
+            $encargado = Usuarioinstitucion::traerEncargado($idI, $idA);
+            
+            return view('vendedorDependiente.areaExterna')->with([
+                'institucion' => $institucion,
+                'area' => $area,
+                'productos' => $productos,
+                'servicios' => $servicios,
+                'alumnos' => $alumnos,
+                'encargado' => $encargado
+            ]);
+        
+    }
+    public function ver_detalleProducto_institucion_local(Request $dato)
+    {
+
+      $getId = base64_decode($dato->idProducto);
+      $getIdInst = base64_decode($dato->idInstitucion);
+      //return $getId.",".$getIdInst;
+      $categoria = categoria_producto::all();
+      $estadoP = estado_tienda_producto::limit(2)->get();
+      $area = Area::all();
+
+      $productos = producto::detalleProducto($getId, $getIdInst);
+      return view('vendedorDependiente.verDetalleProductoInstitucionBuscar')
+      ->with('productos', $productos)
+      ->with('categoria', $categoria)
+      ->with('estadoP', $estadoP)
+      ->with('area', $area);
     }
 
     public function genclave(){

@@ -142,6 +142,7 @@ class institucionController extends Controller
       try{
             $idI = base64_decode($idinstitucion);
             $institucion = Institucion::find($idI);
+            $areas = Area::where('id_institucion', $idI)->get();
             //return $institucion->id;
             $productos = producto::verProductosVisibles($institucion->id, 5);
             $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
@@ -149,11 +150,37 @@ class institucionController extends Controller
             ->with('institucion', $institucion)
             ->with('productos', $productos)
             ->with('servicios', $servicios)
-            ->with('idInstitucion', $idinstitucion);
+            ->with('idInstitucion', $idinstitucion)
+            ->with('areas', $areas);
 
         } catch (\Exception $e) {
           return redirect()->back();
         }
+    }
+    public function vista_areaExterna(Request $dato)
+    {
+        
+
+            $idI = base64_decode($dato->idInstitucion);
+            $idA = base64_decode($dato->idArea);
+
+            $institucion = Institucion::find($idI);
+            $area = Area::find($idA);
+            $productos = producto::areaYinstitucion($idI, $idA);
+            $servicios = servicio::areaYinstitucion($idI, $idA);
+            $alumnos = VendedorInstitucion::alumnosDeUnArea($idI, $idA);
+            $encargado = Usuarioinstitucion::traerEncargado($idI, $idA);
+            
+            return view('institucion.areaExterna')->with([
+                'institucion' => $institucion,
+                'area' => $area,
+                'productos' => $productos,
+                'servicios' => $servicios,
+                'alumnos' => $alumnos,
+                'encargado' => $encargado
+            ]);
+
+        
     }
     public function vista_serviciosEspera()
     {
@@ -1087,7 +1114,7 @@ class institucionController extends Controller
           $this->validate($dato,['nombre' => 'required|max:50',]);
 
           $servicio = servicio::find($dato->idServicio);
-          $servicio->nombre = $dato->nombre;
+          $servicio->nombre = ucfirst($dato->nombre);
           if ($servicio->save()) {
               \Session::flash('correcto', 'Nombre actualizado');
               return redirect()->back();
@@ -1102,7 +1129,7 @@ class institucionController extends Controller
           $this->validate($dato,['descripcion' => 'required|max:250',]);
 
           $servicio = servicio::find($dato->idServicio);
-          $servicio->descripcion = $dato->descripcion;
+          $servicio->descripcion = ucfirst($dato->descripcion);
           if ($servicio->save()) {
               \Session::flash('correcto', 'Descripción actualizada');
               return redirect()->back();

@@ -157,13 +157,15 @@ class encargadoController extends Controller
         $idI = base64_decode($idinstitucion);
         $institucion = Institucion::find($idI);
         $productos = producto::verProductosVisibles($institucion->id, 5);
+        $areas = Area::where('id_institucion', $idI)->get();
         $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
 
         return view('encargadoArea.perfil_institucion')
         ->with('institucion', $institucion)
         ->with('servicios', $servicios)
         ->with('productos', $productos)
-        ->with('idInstitucion', $idinstitucion);
+        ->with('idInstitucion', $idinstitucion)
+        ->with('areas', $areas);
     }
     public function vista_agregarAlumno(){
         $id_area = Encargado::traerDatos();
@@ -204,6 +206,31 @@ class encargadoController extends Controller
               ->with('area',$area)
               ->with('servicio',$servicio);
     }
+
+    public function vista_areaExterna(Request $dato)
+    {
+        
+            $idI = base64_decode($dato->idInstitucion);
+            $idA = base64_decode($dato->idArea);
+
+            $institucion = Institucion::find($idI);
+            $area = Area::find($idA);
+            $productos = producto::areaYinstitucion($idI, $idA);
+            $servicios = servicio::areaYinstitucion($idI, $idA);
+            $alumnos = VendedorInstitucion::alumnosDeUnArea($idI, $idA);
+            $encargado = Usuarioinstitucion::traerEncargado($idI, $idA);
+            
+            return view('encargadoArea.areaExterna')->with([
+                'institucion' => $institucion,
+                'area' => $area,
+                'productos' => $productos,
+                'servicios' => $servicios,
+                'alumnos' => $alumnos,
+                'encargado' => $encargado
+            ]);
+        
+    }
+
     public function todas_noticias_locales()
     {
        $encargado = Encargado::traerDatos();
@@ -334,12 +361,14 @@ class encargadoController extends Controller
     
     public function guardarIcono(Request $datos){
 
-        $logo = Area::guardarIcono($datos);
+        $encargado = Encargado::traerDatos();
+
+        $logo = Area::guardarIcono($datos, $encargado[0]->id_institucion, $encargado[0]->id_area);
         
         if ($logo) {
-            return "todo bien...";
+            return redirect()->back();
         }
-        return "error masivo..";
+        return redirect()->back();
     }
 
     public function genclave(){

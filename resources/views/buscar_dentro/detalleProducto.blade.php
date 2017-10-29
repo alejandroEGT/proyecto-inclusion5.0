@@ -6,6 +6,9 @@
 	{{-- expr --}}
 
 <br>
+	<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 	<center><label>Detalle del producto</label></center>
 	<hr>
 <div class="row panel">

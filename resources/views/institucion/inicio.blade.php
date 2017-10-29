@@ -81,7 +81,7 @@
 					<hr>
 				@endif	
 				@if (!count($noticias_locales))
-					<p>No existen noticias</p>
+					<p>No existen noticias locales</p>
 						<hr>
 				@endif
 			</div>

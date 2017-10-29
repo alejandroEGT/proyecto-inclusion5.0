@@ -68,7 +68,7 @@
 					 	<img src="/ico/upload.png" for="file-input" class="label-foto-link">
 					 	Agregar logo
 					</label></p>
-					<input style="display: none;" name="fotoP" id="file-input" type="file"/>
+					<input style="display: none;" name="logo" id="file-input" type="file"/>
 				</div>
 				<div class="col-md-8">
 					<div class="row" id="divIco" hidden="true" >

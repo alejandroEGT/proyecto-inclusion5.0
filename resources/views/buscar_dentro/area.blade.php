@@ -79,23 +79,7 @@
 					<div class="row">
 						<div class="col-md-11 linea-gris fondo-blanco">
 							<center><label>Productos del área o especialidad</label></center>
-						<form action="{{ url('encargadoArea/filtrarProducto') }}" method="GET"> 
-						  <div class="row">
-						    <div class="col-md-12">
-						      <div class="input-group">
-						      	{{ csrf_field() }}
-						   <input type="text" class="form-control" placeholder="Buscar productos" name="buscar"/>
-						   <div class="input-group-btn">
-						        <button class="btn btn-primary" type="submit">
-						        <span class="glyphicon glyphicon-search"></span>
-						        </button>
-						   </div>
-						   </div>
-						    </div>
-						  </div>
-						</form>	
-							<hr>
-							
+							<hr>	
 							@foreach ($productos as $producto)
 							<div class="box-producto">
 								<center>
@@ -104,7 +88,6 @@
 							
 										<a class="btn btn-primary btn-xs" href="{{ url($ruta."/detalleProducto/".base64_encode($producto->idProducto).'/'.base64_encode($institucion->id)) }}">Ver..</a>
 										
-
 								</center>
 
 							</div>	
@@ -122,6 +105,36 @@
 						<img src="/ico/sad.png">
 					</center>
 					<hr>
+				@endif
+				@if (count($servicios)>0)
+					<div class="row">
+						<div class="col-md-12">
+							<center><label>Servicios</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
+							<hr>
+							
+							@foreach ($servicios as $servicio)
+							<div class="box-producto">
+								<center>
+									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
+									<p>{{ str_limit($servicio->nombre, 10) }}</p>
+									<p><a href="{{ url($ruta.'/detalleServicio/'.base64_encode($servicio->id).'/'.base64_encode($institucion->id)) }}" class="btn btn-primary btn-xs">Ver</a></p>
+								</center>
+
+							</div>	
+							@endforeach
+
+							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+						</div>
+
+					</div>
+
+				@endif
+				@if (!count($servicios))
+					<center>
+						<label for="">No Existen Servicios para mostrar</label>
+						<br>
+						<img src="/ico/sad.png">
+					</center>
 				@endif
 			</div>
 		</div>

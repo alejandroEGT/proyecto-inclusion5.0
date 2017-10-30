@@ -162,7 +162,7 @@ public function ver_todo_producto()
     }
 
     public function genclave(){
-      //$cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      $cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
       $cadena_base .= '0123456789' ;
       $cadena_base .= 'kkck';
       $password = '';

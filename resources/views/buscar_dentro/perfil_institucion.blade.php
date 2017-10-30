@@ -1,5 +1,9 @@
 <div class=" ">
+	<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 		<div class="row">
+
 			<div class="col-md-3 fondo-blanco lineas-border">
 				<br>
 				<center><img src="{{ '/'.$institucion->logo }}" class="img img-thumbnail tamanio-inst" >

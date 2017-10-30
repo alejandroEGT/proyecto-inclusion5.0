@@ -27,18 +27,19 @@ class producto extends Model
     protected function traerProductosByArea($idarea)
     {
         $traer = \DB::table('tienda_producto_instituciones')
+        ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
         ->where('id_area', $idarea)
-        ->where('id_estado', 1)->get();
-        return count($traer);
+        ->where('id_estado', 1)->sum('productos.cantidad');
+        return $traer;
     }
      protected function traerTodosProductosByAdmin($idInst)
     {
         $traer = \DB::table('tienda_producto_instituciones')
                   ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
-
+                  ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
                   ->where('id_institucion', $idInst)
-                  ->where('tienda_producto_instituciones.id_estado', 1)->get();
-        return count($traer);
+                  ->where('tienda_producto_instituciones.id_estado', 1)->sum('productos.cantidad');
+        return $traer;
     }
 
     protected function verProductoDesdeArea($idarea, $cant)

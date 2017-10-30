@@ -104,7 +104,8 @@ class VendedorInstitucion extends Model
                         'users.email as correo',
                         'vendedor.telefono as telefono',
                         'estado.nombre as nombreEstado',
-                        'area.nombre as nombreArea'
+                        'area.nombre as nombreArea',
+                        'vendedor.fecha_nac as fecha'
                   ])
                   ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
                   ->join('users','users.id','=','Vendedor.id_user')

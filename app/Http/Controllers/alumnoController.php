@@ -535,6 +535,23 @@ public function ver_todo_producto()
                ->with('noticia', $noticia)
                ->with('estado_noticia', $estado_noticia);
     }
+    public function ver_detalleServicio_institucion_local(Request $dato)
+    {
+      
+      $getId = base64_decode($dato->idServicio);
+      $getIdInst = base64_decode($dato->idInstitucion);
+      $categoria = categoria_servicio::all();
+      $estadoS = estado_tienda_servicio::limit(2)->get();
+      $area = Area::all();
+
+      $servicio = servicio::detalleServicio($getId, $getIdInst);
+      //return $servicio;
+      return view('vendedorDependiente.verDetalleServicioInstitucionBuscador')
+              ->with('categoria',$categoria)
+              ->with('estadoS',$estadoS)
+              ->with('area',$area)
+              ->with('servicio',$servicio);
+    }
 
     
 }

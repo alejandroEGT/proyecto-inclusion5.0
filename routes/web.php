@@ -173,6 +173,7 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::post('/actualizar_servicio_descripcion','institucionController@actualizar_servicio_descripcion');
         Route::post('/actualizar_servicio_categoria','institucionController@actualizar_servicio_categoria');
         Route::post('/actualizar_servicio_foto','institucionController@actualizar_servicio_foto');
+        Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'alumnoController@ver_detalleServicio_institucion_local');
 
        
         

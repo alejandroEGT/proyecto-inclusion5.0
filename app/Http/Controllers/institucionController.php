@@ -113,6 +113,18 @@ class institucionController extends Controller
          
           return view('institucion.grafico')->with('areas',json_encode($array));
     }
+    public function vista_detalleAlumno_inst(request $dato)
+  {
+        $getId = base64_decode($dato->id);
+        $area = Area::traer();
+        $alumno = VendedorInstitucion::detalleAlumno($getId);
+
+        //return $alumno;
+        return view('institucion.verDetalleAlumno')
+        ->with('alumno', $alumno)
+        ->with('area', $area);
+
+  }
     public function ver_todo_producto()
     {
         $producto = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 5);

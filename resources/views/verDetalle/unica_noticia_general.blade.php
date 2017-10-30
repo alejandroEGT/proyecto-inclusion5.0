@@ -24,7 +24,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-offset-1 col-md-10">
-								<img src="{{ '/'.$noticia->foto }}" class="img-thumbnail foto-noticia">
+								<center><img src="{{ '/'.$noticia->foto }}" class="img-thumbnail foto-noticia"></center>
 							</div>
 						</div>
 						<hr>

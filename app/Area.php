@@ -14,8 +14,8 @@ class Area extends Model
        $area = new Area;
 
     		$area->id_institucion = \Auth::guard("institucion")->user()->id;
-    		$area->nombre = $datos->nombre;
-    		$area->descripcion = $datos->desc;
+    		$area->nombre = ucfirst($datos->nombre);
+    		$area->descripcion = ucfirst($datos->desc);
         	if($area->save()){
         		return 1;
         	}
@@ -50,26 +50,37 @@ class Area extends Model
                     ->where('vendedor.id_user','=',\Auth::user()->id)->get();
         return $area; 
     }
-    protected function guardarIcono($datos){
+    protected function guardarIcono($datos, $idInstitucion, $idArea){
 
         $url="logoAreas";
-        $file = $datos->file('fotoP')->getClientOriginalExtension();
-        $imageName = time().'.'.$datos->file('fotoP')->getClientOriginalExtension();//nombre de la imagen como tal.
+        $file = $datos->file('logo')->getClientOriginalExtension();
+        $imageName = time().'.'.$datos->file('logo')->getClientOriginalExtension();//nombre de la imagen como tal.
+        $area = Area::find($idArea);
 
-        $id_area = \DB::table('area')
-                    ->join('usuario-institucion','usuario-institucion.id_area','=','area.id')
-                    ->where('usuario-institucion.id_user','=',\Auth::user()->id)->get();
-        
-        
-        $area = Area::find($id_area[0]->id_area);
+        //dd($getLogo->logo );
+        if ($area->logo == null) {
+
+            $area->logo = $url.'/'.$imageName;
+
+            if ($area->save()) {
+
+                $datos->file('logo')->move(public_path($url), $imageName);
+                return true;
+            }        
+                return false;
+        }
+
+        \File::delete($area->logo);/*ELIMINAR logo*/
         $area->logo = $url.'/'.$imageName;
-
         if ($area->save()) {
-
-            $datos->file('fotoP')->move(public_path($url), $imageName);
-            return true;
+        
+                $datos->file('logo')->move(public_path($url), $imageName);
+                return true;
         }        
-            return false;
+        return false;
+
+
+
     }
     protected function contarAlumnosPorArea($idarea){
 
@@ -79,7 +90,7 @@ class Area extends Model
     protected function actualizar_nombre($dato){
 
         $area = Area::find($dato->idArea);
-        $area->nombre = $dato->nombreDeArea;
+        $area->nombre = ucfirst($dato->nombreDeArea);
         if ($area->save()) {
             return true;
         }
@@ -88,7 +99,7 @@ class Area extends Model
     protected function actualizar_descripcion($dato){
 
         $area = Area::find($dato->idArea);
-        $area->descripcion = $dato->descripcion;
+        $area->descripcion = ucfirst($dato->descripcion);
         if ($area->save()) {
             return true;
         }

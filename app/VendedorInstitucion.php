@@ -104,7 +104,8 @@ class VendedorInstitucion extends Model
                         'users.email as correo',
                         'vendedor.telefono as telefono',
                         'estado.nombre as nombreEstado',
-                        'area.nombre as nombreArea'
+                        'area.nombre as nombreArea',
+                        'vendedor.fecha_nac as fecha'
                   ])
                   ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
                   ->join('users','users.id','=','Vendedor.id_user')
@@ -132,6 +133,8 @@ class VendedorInstitucion extends Model
                         'users.apellidos as apellidos',
                         'users.email as correo',
                         'vendedor.telefono as telefono',
+                        'vendedor.fecha_nac as fecha'
+                        //\DB::raw("DATE_FORMAT(vendedor.fecha_nac, '%d-%M-%Y') as fecha"),
 
                   ])
                   ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
@@ -163,6 +166,7 @@ class VendedorInstitucion extends Model
                         'vendedor.telefono as telefono',
                         'area.nombre as nombreArea',
                         'institucion.nombre as nombreInstitucion',
+                        'vendedor.fecha_nac as fecha'
 
                   ])
                   ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
@@ -197,14 +201,25 @@ class VendedorInstitucion extends Model
        return false;
     }
     protected function traerDatos()
-      {
+    {
          $traer = \DB::table('vendedor-institucion')
                   ->join('vendedor', 'vendedor.id','=','vendedor-institucion.id_vendedor')
                   ->join('users','users.id','=','vendedor.id_user')
                   ->where('users.id', \Auth::user()->id)->first();
 
           return $traer;
-      }
+    }
+    protected function alumnosDeUnArea($idI, $idA)
+    {
+       $alumnos = \DB::table('users')
+                  ->join('fotoperfil','fotoperfil.id_user','=','users.id')
+                  ->join('vendedor','vendedor.id_user','=','users.id')
+                  ->join('vendedor-institucion','vendedor-institucion.id_vendedor','=','vendedor.id')
+                  ->where('vendedor-institucion.id_institucion', $idI)
+                  ->where('vendedor-institucion.id_area', $idA)->get();
+
+      return $alumnos;
+    }
     
 
 }

@@ -81,7 +81,7 @@
 					<hr>
 				@endif	
 				@if (!count($noticias_locales))
-					<p>No existen noticias</p>
+					<p>No existen noticias locales</p>
 						<hr>
 				@endif
 			</div>
@@ -130,7 +130,7 @@
 
 				@endif
 				@if (!count($productos))
-					<center><label for="">No Existen productos para mostrar</label></center>
+					<center><label for="">No Existen productos para mostrar <img src="/ico/sad.png"></label></center>
 				@endif
 				
 				<hr>
@@ -180,7 +180,7 @@
 
 				@endif
 				@if (!count($servicios))
-					<center><label for="">No Existen Servicios para mostrar</label></center>
+					<center><label for="">No Existen Servicios para mostrar <img src="/ico/sad.png"></label></center>
 				@endif
 			</div>
 		</div>

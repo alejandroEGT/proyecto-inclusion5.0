@@ -85,24 +85,33 @@ class Institucion extends Authenticatable
         $resultado = \DB::select("CALL `buscar_institucion`('%".$dato."%');");
         return $resultado;
     }
+    protected function actualizarRut($rut)
+    {
+        $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
+        $institucion->rut = $rut;
+        if($institucion->save()){
+            return redirect()->back();
+        }
+        return "nada ";   
+    }
 
     protected function actualizarNombre($nombre){
 
         $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
-        $institucion->nombre = $nombre;
+        $institucion->nombre = ucfirst($nombre);
         if($institucion->save()){
             return redirect()->back();
         }
-        return "nada men";
+        return "nada ";
     }
     protected function actualizarRs($rs){
 
         $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
-        $institucion->razonSocial = $rs;
+        $institucion->razonSocial = ucfirst($rs);
         if($institucion->save()){
             return redirect()->back();
         }
-        return "nada men";
+        return "nada ";
     }
      protected function actualizarTel1($tel1){
 
@@ -111,7 +120,7 @@ class Institucion extends Authenticatable
         if($institucion->save()){
             return redirect()->back();
         }
-        return "nada men";
+        return "nada ";
     }
     protected function actualizarTel2($tel2){
 
@@ -120,16 +129,16 @@ class Institucion extends Authenticatable
         if($institucion->save()){
             return redirect()->back();
         }
-        return "nada men";
+        return "nada ";
     }
     protected function actualizarDireccion($direccion){
 
         $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
-        $institucion->direccion = $direccion;
+        $institucion->direccion = ucfirst($direccion);
         if($institucion->save()){
             return redirect()->back();
         }
-        return "nada men";
+        return "nada ";
     }
     protected function actualizarCorreo($correo){
 
@@ -138,7 +147,7 @@ class Institucion extends Authenticatable
         if($institucion->save()){
             return redirect()->back();
         }
-        return "nada men";
+        return "nada ";
     }
     protected function actualizarClave($clave){
 
@@ -147,7 +156,7 @@ class Institucion extends Authenticatable
         if($institucion->save()){
             return redirect()->back();
         }
-        return "nada men";
+        return "nada ";
     }
     protected function actualizarLogo($datos)
     {

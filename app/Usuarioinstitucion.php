@@ -41,5 +41,15 @@ class Usuarioinstitucion extends Model
                                               ->update(['telefono' => $numero ]);
           return $ususarioInst;
       }
+      protected function traerEncargado($idI, $idA)
+      {
+          $encargado = \DB::table('users')
+                       ->join('fotoperfil','fotoperfil.id_user','=','users.id')
+                       ->join('usuario-institucion','usuario-institucion.id_user','=','users.id')
+                       ->where('usuario-institucion.id_institucion', $idI)
+                       ->where('usuario-institucion.id_area', $idA)->first();
+
+          return $encargado;             
+      }
       
 }

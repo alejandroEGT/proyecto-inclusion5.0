@@ -60,7 +60,7 @@ class invitadoController extends Controller
              $this->validate($dato,['correo' => 'required | max:80 |email | exists:institucion,email']);
              
              $genclave = $this->genclave();
-
+          
              $insertar = reset_password::insertar($dato, $genclave);
              if ($insertar) {
                   $correo = $dato->correo;
@@ -87,7 +87,8 @@ class invitadoController extends Controller
     {
         try{
 
-            $verificarToken = reset_password::where('email', $datos->correo)->where('token', $datos->codigo)->first();
+            $verificarToken = reset_password::where('email', $datos->correo)
+                            ->where('token', $datos->codigo)->first();
 
             if ($verificarToken == true) {
                 
@@ -124,13 +125,13 @@ class invitadoController extends Controller
         
     }
     public function genclave(){
-      $cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-      $cadena_base .= '0123456789' ;
-      $cadena_base .= 'kkck';
+      //$cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      $cadena_base = '0123456789' ;
+      //$cadena_base .= 'kkck';
       $password = '';
       $limite = strlen($cadena_base) - 1;
  
-      for ($i=0; $i < 13; $i++)
+      for ($i=0; $i < 4; $i++)
         $password .= $cadena_base[rand(0, $limite)];
         return $password;
     }

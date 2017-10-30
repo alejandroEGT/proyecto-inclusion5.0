@@ -27,6 +27,8 @@
 				</div>
 			</form>	
 		</center>
+		<br>
+		<center><a href="{{ url('/codigo_reset') }}">Tengo pendiente un codigo de verificación</a></center>
 
 		@if ($errors->any())
 			    <div class="alert alert-danger">

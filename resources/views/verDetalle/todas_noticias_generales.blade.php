@@ -9,7 +9,7 @@
 					<div class="col-md-offset-1 col-md-10  fondo-blanco top">
 						<div class="row">
 							<div class="col-md-4">
-								<p><img src="{{'/'.$ng->logoInstitucion}}" class="img-thumbnail img-circle img-logo_noticia " > <label><small class="color-blue" >{{$ng->nombreInstitucion.' ('.$ng->creado.')'}}</small></label></p>
+								<p><img src="{{'/'.$ng->logoInstitucion}}" class="img-thumbnail img-circle img-logo_noticia " > <label><small class="color-blue" >{{$ng->nombreInstitucion.' ('.date('h:i:s - d/m/Y',strtotime($ng->creado)).')'}}</small></label></p>
 							</div>
 						</div>
 						<div class="row">
@@ -19,13 +19,13 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-offset-1 col-md-10">
+							<div class="col-md-offset-2 col-md-10">
 								<p><label>{{ $ng->texto }}</label></p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-offset-1 col-md-10">
-								<img src="{{ '/'.$ng->foto }}" class="img-thumbnail foto-noticia">
+								<center><img src="{{ '/'.$ng->foto }}" class="img-thumbnail foto-noticia"></center>
 							</div>
 						</div>
 						<hr>

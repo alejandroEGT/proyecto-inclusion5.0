@@ -19,6 +19,30 @@
 					<img src="/ico/map.png" height="40" width="40">
 					<p>{{ $institucion->direccion }}</p>
 				</center>
+				<hr>
+				@if (count($areas)>0)
+					<div class="linea panel-info">
+					  <div class="panel-heading">Áreas o Especialidades</div>
+						  <div class="panel-body">
+						  	@foreach ($areas as $area)
+								
+									@if ($area->logo == null)
+										<p><a href="{{ url($ruta.'/areaExtern/'.$idInstitucion.'/'.base64_encode($area->id)) }}"><label style="margin-left: 20px">{{ $area->nombre }}</label></a></p>
+										<hr>
+									@endif
+									@if (!$area->logo == null)
+										<p><a href="{{ url($ruta.'/areaExtern/'.$idInstitucion.'/'.base64_encode($area->id)) }}"><img src="{{'/'.$area->logo }}" class="sizeLogo">  
+										<label style="margin-left: 20px">{{ $area->nombre }}</label></a></p><hr>
+									@endif
+							@endforeach
+						  </div>
+					</div>
+				
+				@endif
+				@if (!count($areas)>0)
+					<label>no hay áreas</label>
+				@endif
+
 			</div>
 			<div class="col-md-8 fondo-blanco lineas-border">
 				<br>
@@ -64,7 +88,7 @@
 				@endif
 				@if (!count($productos))
 					<center>
-						<label for="">No Existen Producto para mostrar</label>
+						<label for="">No Existen  para mostrar</label>
 						<br>
 						<img src="/ico/sad.png">
 					</center>

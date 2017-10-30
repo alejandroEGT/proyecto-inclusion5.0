@@ -26,6 +26,7 @@ use App\estado_tienda_servicio;
 use App\estado_tienda_producto;
 use App\noticia;
 use App\estado_noticia;
+use App\Institucion;
 use Illuminate\Support\Facades\Mail;
 
 class alumnoController extends Controller
@@ -83,15 +84,91 @@ public function ver_todo_producto()
 	    }
         
     }
+    public function vista_perfilVenInst($iduser){
+        $idu = base64_decode($iduser);
+          //return $idu;
+        $usuario = User::find($idu);
+        $vendedor = Vendedor::where('id_user',$usuario->id)->get();
+        $vendedorInstitucion = VendedorInstitucion::where('id_vendedor',$vendedor[0]->id)->get();
+        $institucion = Institucion::find($vendedorInstitucion[0]->id_institucion);
+      
+        $productos = producto::verProductoDesdeArea($vendedorInstitucion[0]->id_area , 5);
+        $foto = Fotoperfil::traerFotobyid($idu);
+        
+        return view('vendedorDependiente.perfil_vendedorInstitucion')
+        ->with('foto',$foto)
+        ->with('usuario',$usuario)
+        ->with('vendedor',$vendedor[0]->telefono)
+        ->with('institucion', $institucion)
+        ->with('productos', $productos)
+        ->with('idInstitucion', base64_encode($vendedorInstitucion[0]->id_institucion));;
+        
+        //return view('encargadoArea.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
+    }
+    public function vista_perfilInst($idinstitucion){
+
+        $idI = base64_decode($idinstitucion);
+        $institucion = Institucion::find($idI);
+        $productos = producto::verProductosVisibles($institucion->id, 5);
+        $areas = Area::where('id_institucion', $idI)->get();
+        $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
+
+        return view('vendedorDependiente.perfil_institucion')
+        ->with('institucion', $institucion)
+        ->with('servicios', $servicios)
+        ->with('productos', $productos)
+        ->with('idInstitucion', $idinstitucion)
+        ->with('areas', $areas);
+    }
+    public function vista_areaExterna(Request $dato)
+    {
+        
+            $idI = base64_decode($dato->idInstitucion);
+            $idA = base64_decode($dato->idArea);
+
+            $institucion = Institucion::find($idI);
+            $area = Area::find($idA);
+            $productos = producto::areaYinstitucion($idI, $idA);
+            $servicios = servicio::areaYinstitucion($idI, $idA);
+            $alumnos = VendedorInstitucion::alumnosDeUnArea($idI, $idA);
+            $encargado = Usuarioinstitucion::traerEncargado($idI, $idA);
+            
+            return view('vendedorDependiente.areaExterna')->with([
+                'institucion' => $institucion,
+                'area' => $area,
+                'productos' => $productos,
+                'servicios' => $servicios,
+                'alumnos' => $alumnos,
+                'encargado' => $encargado
+            ]);
+        
+    }
+    public function ver_detalleProducto_institucion_local(Request $dato)
+    {
+
+      $getId = base64_decode($dato->idProducto);
+      $getIdInst = base64_decode($dato->idInstitucion);
+      //return $getId.",".$getIdInst;
+      $categoria = categoria_producto::all();
+      $estadoP = estado_tienda_producto::limit(2)->get();
+      $area = Area::all();
+
+      $productos = producto::detalleProducto($getId, $getIdInst);
+      return view('vendedorDependiente.verDetalleProductoInstitucionBuscar')
+      ->with('productos', $productos)
+      ->with('categoria', $categoria)
+      ->with('estadoP', $estadoP)
+      ->with('area', $area);
+    }
 
     public function genclave(){
-      $cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      //$cadena_base =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
       $cadena_base .= '0123456789' ;
       $cadena_base .= 'kkck';
       $password = '';
       $limite = strlen($cadena_base) - 1;
  
-      for ($i=0; $i < 13; $i++)
+      for ($i=0; $i < 4; $i++)
         $password .= $cadena_base[rand(0, $limite)];
         return $password;
     }
@@ -157,8 +234,11 @@ public function ver_todo_producto()
     public function actualizar_nombre(Request $dato)
     {
         try{
+
+            $this->validate($dato,['nombre' => 'required|max:50|min:3',]);
+
             $user = User::find(\Auth::user()->id);
-            $user->nombres = $dato->nombre;
+            $user->nombres = ucfirst($dato->nombre);
             if ($user->save()) {
                 \Session::flash('ingresado', 'Nombre actualizado');
                 return redirect()->back();
@@ -172,8 +252,10 @@ public function ver_todo_producto()
     public function actualizar_apellido(Request $dato)
     {
         try{
+          $this->validate($dato,['apellido' => 'required|max:50|min:3',]);
+
             $user = User::find(\Auth::user()->id);
-            $user->apellidos =  $dato->apellido;
+            $user->apellidos =  ucfirst($dato->apellido);
             if ($user->save()) {
                 \Session::flash('ingresado', 'Apellido actualizado');
                 return redirect()->back();
@@ -187,6 +269,8 @@ public function ver_todo_producto()
     public function actualizar_tel(Request $dato)
     {
          try{
+            $this->validate($dato,['teléfono' => 'required|numeric',]);
+
             $user = Vendedor::where('id_user', \Auth::user()->id)->first();
             $user->telefono = $dato->teléfono;
             if ($user->save()) {
@@ -199,6 +283,25 @@ public function ver_todo_producto()
         return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
         }
     }
+    public function actualizar_fecha(Request $dato)
+    {
+        try{
+            $this->validate($dato,['fecha' => 'required|date',]);
+
+            //$date = new \DateTime($dato->fecha);
+
+            $user = vendedor::where('id_user', \Auth::user()->id)->first();
+            $user->fecha_nac =  $dato->fecha;
+            if ($user->save()) {
+                \Session::flash('ingresado', 'Fecha actualizada');
+                return redirect()->back();
+            }
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+
+         } catch (\Illuminate\Database\QueryException $e) {
+        return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }   
+    }
     public function actualizar_direccion(Request $dato)
     {
        //$user = User::find(\Auth::user()->id);
@@ -206,6 +309,7 @@ public function ver_todo_producto()
     public function actualizar_correo(Request $dato)
     {
         try{
+          $this->validate($dato,['correo' => 'required|email|unique:users,email',]);
            $user = User::find(\Auth::user()->id);
             $user->email =  $dato->correo;
             if ($user->save()) {
@@ -430,6 +534,23 @@ public function ver_todo_producto()
         return view('vendedorDependiente.noticia_individual_local')
                ->with('noticia', $noticia)
                ->with('estado_noticia', $estado_noticia);
+    }
+    public function ver_detalleServicio_institucion_local(Request $dato)
+    {
+      
+      $getId = base64_decode($dato->idServicio);
+      $getIdInst = base64_decode($dato->idInstitucion);
+      $categoria = categoria_servicio::all();
+      $estadoS = estado_tienda_servicio::limit(2)->get();
+      $area = Area::all();
+
+      $servicio = servicio::detalleServicio($getId, $getIdInst);
+      //return $servicio;
+      return view('vendedorDependiente.verDetalleServicioInstitucionBuscador')
+              ->with('categoria',$categoria)
+              ->with('estadoS',$estadoS)
+              ->with('area',$area)
+              ->with('servicio',$servicio);
     }
 
     

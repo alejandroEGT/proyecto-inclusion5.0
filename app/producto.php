@@ -13,9 +13,9 @@ class producto extends Model
 
         $insertar = new producto;
         $insertar->id_categoria = $datos->categoria;
-        $insertar->nombre = $datos->nombre;
+        $insertar->nombre = ucfirst($datos->nombre);
         $insertar->precio = $datos->valor;
-        $insertar->descripcion = $datos->descripcion;
+        $insertar->descripcion = ucfirst($datos->descripcion);
         $insertar->cantidad = $datos->cantidad;
         $insertar->vista = '0';/*Valor inicial de vistas*/
 
@@ -27,18 +27,19 @@ class producto extends Model
     protected function traerProductosByArea($idarea)
     {
         $traer = \DB::table('tienda_producto_instituciones')
+        ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
         ->where('id_area', $idarea)
-        ->where('id_estado', 1)->get();
-        return count($traer);
+        ->where('id_estado', 1)->sum('productos.cantidad');
+        return $traer;
     }
      protected function traerTodosProductosByAdmin($idInst)
     {
         $traer = \DB::table('tienda_producto_instituciones')
                   ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
-
+                  ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
                   ->where('id_institucion', $idInst)
-                  ->where('tienda_producto_instituciones.id_estado', 1)->get();
-        return count($traer);
+                  ->where('tienda_producto_instituciones.id_estado', 1)->sum('productos.cantidad');
+        return $traer;
     }
 
     protected function verProductoDesdeArea($idarea, $cant)
@@ -352,13 +353,17 @@ class producto extends Model
    
     protected function borrar($idP)
     {
-        $tpi = \DB::table('productos')->where('id', '=', $idP)->delete();
+        //$tpi = \DB::table('productos')->where('id', '=', $idP)->delete();
+         $tpi = \DB::table('tienda_producto_instituciones')->where('id_producto', $idP)
+                ->update([
+                    'id_estado' => 4
+                ]);
         return $tpi;
     }
     protected function actualizar_nombre($dato)
     {
         $pi = producto::find($dato->idProducto);
-        $pi->nombre = $dato->nombre;
+        $pi->nombre = ucfirst($dato->nombre);
         if ($pi->save()) {
             return true;
         }
@@ -367,7 +372,7 @@ class producto extends Model
     protected function actualizar_descripcion($dato)
     {
         $pi = producto::find($dato->idProducto);
-        $pi->descripcion = $dato->descripcion;
+        $pi->descripcion = ucfirst($dato->descripcion);
         if ($pi->save()) {
             return true;
         }
@@ -487,6 +492,7 @@ protected function ver_mas_producto()
                       return $producto;
     }
 
+<<<<<<< HEAD
     protected function filtrar_desde_cliente($nombre){
 
         $traer = \DB::table('tienda_producto_instituciones')
@@ -517,6 +523,9 @@ protected function ver_mas_producto()
 
 
      protected function detalleProducto_cliente($id)
+=======
+    protected function areaYinstitucion($idI, $idA)
+>>>>>>> ba2e41cbac4ca79c4d0b12b4b1247fc28abf4be8
     {
         $traer = \DB::table('tienda_producto_instituciones')
                 ->select([
@@ -538,8 +547,15 @@ protected function ver_mas_producto()
                 ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
                 ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
+<<<<<<< HEAD
                 ->where('tienda_producto_instituciones.id_producto','=', $id)
                 ->paginate(2);
+=======
+                ->where('estado_tienda_producto.id', 1)
+                ->where('Institucion.id','=', $idI)
+                ->where('area.id','=', $idA)
+                ->paginate(10);
+>>>>>>> ba2e41cbac4ca79c4d0b12b4b1247fc28abf4be8
 
                 return $traer;
     }

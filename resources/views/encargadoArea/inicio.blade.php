@@ -58,7 +58,7 @@
 		<div class="row">
 			@if ($logo != null)
 				<div class="col-md-2">
-					<center><img src="{{ '/'.$logo }}" height="80" width="120"></center>
+					<center><img src="{{ '/'.$logo }}" height="80" width="120" class="img-thumbnail"></center>
 						<hr>
 				</div>
 			@endif
@@ -178,7 +178,11 @@
 					<hr>
 				@endif
 				@if (!count($productos))
-					<center><label for="">No Existen productos para mostrar</label></center>
+					<center>
+						<label for="">No Existen productos para mostrar</label>
+						<img src="/ico/sad.png">
+					</center>
+					<hr>
 				@endif
 
 				@if (count($servicios)>0)
@@ -223,7 +227,10 @@
 					<hr>
 				@endif
 				@if (!count($servicios))
-					<center><label for="">No Existen servicios para mostrar</label></center>
+					<center>
+						<label for="">No Existen servicios para mostrar</label>
+						<img src="/ico/sad.png">
+					</center>
 				@endif
 			</div>
 			

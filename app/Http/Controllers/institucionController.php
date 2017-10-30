@@ -113,6 +113,18 @@ class institucionController extends Controller
          
           return view('institucion.grafico')->with('areas',json_encode($array));
     }
+    public function vista_detalleAlumno_inst(request $dato)
+  {
+        $getId = base64_decode($dato->id);
+        $area = Area::traer();
+        $alumno = VendedorInstitucion::detalleAlumno($getId);
+
+        //return $alumno;
+        return view('institucion.verDetalleAlumno')
+        ->with('alumno', $alumno)
+        ->with('area', $area);
+
+  }
     public function ver_todo_producto()
     {
         $producto = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 5);
@@ -142,6 +154,7 @@ class institucionController extends Controller
       try{
             $idI = base64_decode($idinstitucion);
             $institucion = Institucion::find($idI);
+            $areas = Area::where('id_institucion', $idI)->get();
             //return $institucion->id;
             $productos = producto::verProductosVisibles($institucion->id, 5);
             $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
@@ -149,11 +162,37 @@ class institucionController extends Controller
             ->with('institucion', $institucion)
             ->with('productos', $productos)
             ->with('servicios', $servicios)
-            ->with('idInstitucion', $idinstitucion);
+            ->with('idInstitucion', $idinstitucion)
+            ->with('areas', $areas);
 
         } catch (\Exception $e) {
           return redirect()->back();
         }
+    }
+    public function vista_areaExterna(Request $dato)
+    {
+        
+
+            $idI = base64_decode($dato->idInstitucion);
+            $idA = base64_decode($dato->idArea);
+
+            $institucion = Institucion::find($idI);
+            $area = Area::find($idA);
+            $productos = producto::areaYinstitucion($idI, $idA);
+            $servicios = servicio::areaYinstitucion($idI, $idA);
+            $alumnos = VendedorInstitucion::alumnosDeUnArea($idI, $idA);
+            $encargado = Usuarioinstitucion::traerEncargado($idI, $idA);
+            
+            return view('institucion.areaExterna')->with([
+                'institucion' => $institucion,
+                'area' => $area,
+                'productos' => $productos,
+                'servicios' => $servicios,
+                'alumnos' => $alumnos,
+                'encargado' => $encargado
+            ]);
+
+        
     }
     public function vista_serviciosEspera()
     {
@@ -167,13 +206,17 @@ class institucionController extends Controller
         $vendedor = Vendedor::where('id_user',$usuario->id)->get();
         $vendedorInstitucion = VendedorInstitucion::where('id_vendedor',$vendedor[0]->id)->get();
         $institucion = Institucion::find($vendedorInstitucion[0]->id_institucion);
-         $foto = Fotoperfil::traerFotobyid($idu);
+        $foto = Fotoperfil::traerFotobyid($idu);
+
+        $productos = producto::verProductoDesdeArea($vendedorInstitucion[0]->id_area , 5);
         
         return view('institucion.perfil_vendedorInstitucion')
         ->with('foto',$foto)
         ->with('usuario',$usuario)
         ->with('vendedor',$vendedor[0]->telefono)
-         ->with('institucion', $institucion);
+        ->with('institucion', $institucion)
+        ->with('productos', $productos)
+        ->with('idInstitucion', base64_encode($vendedorInstitucion[0]->id_institucion));
         
         //return view('institucion.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
     }
@@ -460,6 +503,16 @@ class institucionController extends Controller
         $password .= $cadena_base[rand(0, $limite)];
         return $password;
     }
+     public function actualizar_rut(Request $data){
+          try{ 
+             $this->validate($data,['rut' => 'max:9 | required | numeric | unique:institucion,rut,'. $data->rut,]);
+             $rut = Institucion::actualizarRut($data->rut);
+             return $rut;
+          } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          }
+
+    }
 
     public function actualizar_nombre(Request $data){
           try{ 
@@ -695,7 +748,7 @@ class institucionController extends Controller
       
       $foto_prod = foto_producto::borrar($getFoto[0]->id);
       $tienda_prod_inst = Tienda_producto_institucion::borrar($dato->idProducto);
-      $prod_insti = producto::borrar($dato->idProducto);
+      //$prod_insti = producto::borrar($dato->idProducto);
 
       return "true";
     }
@@ -902,6 +955,24 @@ class institucionController extends Controller
        }    
 
     }
+    public function actualizar_fecha_alumno(Request $dato)
+    {
+      try{
+         $this->validate($dato,[
+                  'fecha' => 'required | date',
+            ]);
+
+           $update = vendedor::actualizarFecha($dato->fecha, $dato->idUser);
+
+           if ($update) {
+                \Session::flash('correcto', 'Nombres actualizados');
+                return redirect()->back();
+           }
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
+
+    }
      public function actualizar_apellido_alumno(Request $dato)
     {
       try{
@@ -1055,7 +1126,7 @@ class institucionController extends Controller
           $this->validate($dato,['nombre' => 'required|max:50',]);
 
           $servicio = servicio::find($dato->idServicio);
-          $servicio->nombre = $dato->nombre;
+          $servicio->nombre = ucfirst($dato->nombre);
           if ($servicio->save()) {
               \Session::flash('correcto', 'Nombre actualizado');
               return redirect()->back();
@@ -1070,7 +1141,7 @@ class institucionController extends Controller
           $this->validate($dato,['descripcion' => 'required|max:250',]);
 
           $servicio = servicio::find($dato->idServicio);
-          $servicio->descripcion = $dato->descripcion;
+          $servicio->descripcion = ucfirst($dato->descripcion);
           if ($servicio->save()) {
               \Session::flash('correcto', 'Descripción actualizada');
               return redirect()->back();

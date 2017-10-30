@@ -23,7 +23,7 @@
 					        </span>
 				          	<!--lupa de prueba-->
 							<div class="col-md-6">
-								<form action="" method="get"><br>
+								<form action="{{ url('cliente/filtrarProducto') }}" method="get"><br>
 									{{csrf_field()}}							
 
 									    <div class="input-group">

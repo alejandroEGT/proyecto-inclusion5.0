@@ -313,7 +313,7 @@ Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');
 
 
-Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
+Route::group(['prefix' => 'cliente', 'middleware' => ['web']], function(){
 
      Route::get('/perfil_cliente' , 'clienteController@perfil_cliente');
      Route::get('/logoutCliente','loginClienteController@logout');
@@ -321,6 +321,8 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::post('/updTelefono', 'clienteController@updTelefono');
      Route::post('/updClave', 'clienteController@updClave');
      Route::get('/carro_cliente' , 'clienteController@carro_cliente');
+     Route::get('/filtrarProducto', 'clienteController@filtrarProducto');
+     Route::get('/verDetalleProducto/{id}', 'clienteController@ver_detalleProducto');
 
 });
 

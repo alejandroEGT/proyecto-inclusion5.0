@@ -3,6 +3,13 @@
 <title>Mi perfil</title>
 @section('content')
 
+		@if (Session::has('Advertencia'))
+			<div class="alert alert-info">
+		    <a href="" class="close" data-dismiss="alert">&times;</a>
+			        {{ Session::get('Advertencia') }}
+		    </div>
+		@endif
+
 <div class="container-fluid">
 	<div class="row">
 		<!--barra lateral-->

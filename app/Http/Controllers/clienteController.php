@@ -111,13 +111,25 @@ class clienteController extends Controller
     }
 
     public function updCorreo (Request $datos){
+      $this->validate($datos,[
+                    'correo' => 'required | max:50 | min:5 | email'
+              ]);
+
+      $cliente = cliente::where('id_user', \Auth::user()->id)->first();
+
+      if($cliente->facebook_id != null){
+        \Session::flash('Advertencia', 'tu correo electronico no puede ser actualizado porque iniciaste la sesion con redes sociales');
+                  return redirect()->back();
+      }
 
      $update = cliente::updCorreo($datos);
 
      if($update){
-      return "oka";
+       \Session::flash('Advertencia', 'Tu correo ha sido actualizado exitosamente');
+                  return redirect()->back();
      }else{
-      return "caca";
+       \Session::flash('Advertencia', 'Lo sentimos no se pudo realizar la operación');
+                  return redirect()->back();
      }
 
     }
@@ -146,5 +158,27 @@ class clienteController extends Controller
 
     }
 
-    
+
+    public function filtrarProducto(Request $datos)
+    {
+      $this->validate($datos,[
+                'buscador' => 'required',
+          ]);
+      $productos = producto::filtrar_desde_cliente($datos->buscador);
+
+      return view('inicioCliente.nuestroProducto')
+      ->with('productos', $productos)
+      ->with('titulo', "Filtrado de productos");
+    }
+
+
+public function ver_detalleProducto(Request $dato)
+    {
+
+      $getId = base64_decode($dato->id);
+      $productos = producto::detalleProducto_cliente($getId);
+
+      return view('inicioCliente.verDetalleProducto')
+      ->with('productos', $productos);
+ }
 }

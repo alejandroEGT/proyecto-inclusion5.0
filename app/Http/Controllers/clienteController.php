@@ -110,10 +110,7 @@ class clienteController extends Controller
           }
     }
 
-    public function updCorreo (Request $datos){
-      $this->validate($datos,[
-                    'correo' => 'required | max:50 | min:5 | email'
-              ]);
+    public function updCorreo (clienteRequest $datos){
 
       $cliente = cliente::where('id_user', \Auth::user()->id)->first();
 
@@ -148,13 +145,18 @@ class clienteController extends Controller
 
     public function updClave (Request $datos){
 
-     $update = cliente::updClave($datos);
+     $this->validate($datos,[
+        'passAntigua' => 'required | min:6 | max:50 ',
+        'passNueva' => 'required | min:6 | max:50',
+        'repPassNueva' => 'required | min:6 | max:50 | same:passNueva'
+     ]);
+     dd($datos);
+     //$update = cliente::updClave($datos);
 
      if($update){
       return "oka";
-     }else{
-      return "caca";
      }
+     return redirect()->back()->withErrors(['No es posible actualizar tu contraseña']);
 
     }
 

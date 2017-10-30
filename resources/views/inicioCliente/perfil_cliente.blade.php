@@ -2,7 +2,16 @@
 
 <title>Mi perfil</title>
 @section('content')
-
+		@if ($errors->any())
+			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				            @endforeach
+				        </ul>
+			    </div>
+			@endif
 		@if (Session::has('Advertencia'))
 			<div class="alert alert-info">
 		    <a href="" class="close" data-dismiss="alert">&times;</a>
@@ -75,7 +84,7 @@
 									  <div class="form-group row">
 									    <label for="staticEmail" class="col-sm-3 col-form-label">Repita correo</label>
 									    <div class="col-sm-5">
-									      <input type="email" class="form-control" id="exampleInputEmail1" name="rCorreo" placeholder="email@ejemplo.cl">
+									      <input type="email" class="form-control" id="exampleInputEmail1" name="repetirCorreo" placeholder="email@ejemplo.cl">
 									    </div>
 									  </div>
 

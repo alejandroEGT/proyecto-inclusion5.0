@@ -24,8 +24,8 @@ class clienteRequest extends FormRequest
     public function rules()
     {
         return [
-            'correo' => 'required:unique'
-            'rCorreo' => 'same:Correo',
+            'correo' => 'required | max:50 | min:5 | unique:users,email',
+            'repetirCorreo' => 'required| max:50 | min:5 | same:correo',
         ];
     }
 }

@@ -58,6 +58,7 @@ class cliente extends Model
         }
     }
 
+
     protected function updClave ($datos){
 
         $user = user::find(\Auth::user()->id);

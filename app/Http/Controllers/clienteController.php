@@ -50,7 +50,7 @@ class clienteController extends Controller
       $id_cliente = cliente::where('id_user', Auth::user()->id)->first();
 
       $foto = Fotoperfil::traerFotobyid(Auth::user()->id);
-      
+
       return view('inicioCliente.perfil_cliente')->with('id_cliente',$id_cliente)
                                                  ->with('foto', $foto);
 
@@ -90,7 +90,6 @@ class clienteController extends Controller
 
    		    $user = User::insertarCliente($datos,1);
 
-          if($user){
 
             $idUser  = User::where('email', $datos->correo)->first();
 
@@ -100,15 +99,20 @@ class clienteController extends Controller
 
               $foto = Fotoperfil::fotoDefault($idUser->id);
 
-              return "oka";
+              \Session::flash('Advertencia', 'Registro exitosamente');
+                  return redirect()->back();
               
             }else{
-              return "caca2";
-            }
-          }else{
-            return "caca1";
+              \Session::flash('Advertencia', 'Lo sentimos, a ocurrido un error en el registro, intentelo nuevamente');
+                  return redirect()->back();
+                }
           }
-    }
+
+              
+              
+
+  
+
 
     public function updCorreo (clienteRequest $datos){
 
@@ -133,28 +137,43 @@ class clienteController extends Controller
 
     public function updTelefono (Request $datos){
 
-     $update = cliente::updTelefono($datos);
+      $this->validate($datos,[
+        'telefono' => 'required | numeric',
+        'repetirTelefono' => 'required |  numeric| same:telefono'
+     ]);
+      $update = cliente::updTelefono($datos);
 
      if($update){
-      return "oka";
+       \Session::flash('Advertencia', 'Tu numero de telefono ha sido actualizado exitosamente');
+                  return redirect()->back();
      }else{
-      return "caca";
+          \Session::flash('Advertencia', 'Lo sentimos no se pudo realizar la operación');
+                  return redirect()->back();
      }
 
     }
 
     public function updClave (Request $datos){
 
+
+      $cliente = cliente::where('id_user', \Auth::user()->id)->first();
+
+      if($cliente->facebook_id != null){
+        \Session::flash('Advertencia', 'tu contraseña no puede ser actualizado porque iniciaste la sesion con redes sociales');
+                  return redirect()->back();
+      }
+
      $this->validate($datos,[
         'passAntigua' => 'required | min:6 | max:50 ',
         'passNueva' => 'required | min:6 | max:50',
         'repPassNueva' => 'required | min:6 | max:50 | same:passNueva'
      ]);
-     dd($datos);
-     //$update = cliente::updClave($datos);
 
-     if($update){
-      return "oka";
+     $update = cliente::updClave($datos);
+
+      if($update){
+       \Session::flash('Advertencia', 'Tu numero de telefono ha sido actualizado exitosamente');
+                  return redirect()->back();
      }
      return redirect()->back()->withErrors(['No es posible actualizar tu contraseña']);
 

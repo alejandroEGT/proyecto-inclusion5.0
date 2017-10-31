@@ -46,7 +46,9 @@
 			    <p class="card-text">{{Auth::user()->nombres}}</p>
 			    <h5 class="card-text misDatos">Apellidos:</h5>
 			    <p class="card-text">{{Auth::user()->apellidos}}</p>
-			    <h5 class="card-text misDatos">Correo electronico:</h5>
+			  	<h5 class="card-text misDatos">Numero Telefonico:</h5>
+			    <p class="card-text">{{ $id_cliente->telefono }}</p>
+			    <h5 class="card-text misDatos">Correo electronico:</h5>			 
 			    <p class="card-text">{{Auth::user()->email}}</p>
 			  </div>
 			</div>
@@ -165,7 +167,7 @@
 									  <div class="form-group row">
 									    <label for="staticEmail" class="col-sm-3 col-form-label">Repita N° Telefono</label>
 									    <div class="col-sm-5">
-									      <input type="number" class="form-control" id="exampleInputEmail1" name="repTelefono" placeholder="+56998765432">
+									      <input type="number" class="form-control" id="exampleInputEmail1" name="repetirTelefono" placeholder="+56998765432">
 									    </div>
 									  </div>
 

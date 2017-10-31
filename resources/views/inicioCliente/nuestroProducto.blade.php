@@ -15,7 +15,7 @@
             <p><label>{{ $producto->nombre }}</label></p>
             <p><label style="color:#85929E" >{{ $producto->descripcion }}</label></p>
             <p>
-              <a class="btn btn-primary btn-xs" href="{{ url("cliente/verDetalleProducto/".base64_encode($producto->idProducto)) }}">Ver..</a>
+              <a class="btn btn-primary btn-xs" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}">Ver..</a>
             </p>
           </div>
         </div>

@@ -127,6 +127,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/detalleNoticia_general/{idNoticia}','institucionController@ver_detalleNoticia_general');
         Route::get('/detalleNoticia_local/{idNoticia}','institucionController@ver_detalleNoticia_local');
         Route::get('/areaExtern/{idInstitucion}/{idArea}', 'institucionController@vista_areaExterna');
+        Route::post('/actualizar_logo_area', 'institucionController@actualizar_logo_area');
 
 });
 

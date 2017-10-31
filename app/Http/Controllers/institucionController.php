@@ -172,7 +172,6 @@ class institucionController extends Controller
     public function vista_areaExterna(Request $dato)
     {
         
-
             $idI = base64_decode($dato->idInstitucion);
             $idA = base64_decode($dato->idArea);
 
@@ -1217,6 +1216,34 @@ class institucionController extends Controller
        } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
        }        
+    }
+    public function actualizar_logo_area(Request $dato)
+    {
+       $this->validate($dato,['logo' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',]);
+
+      //dd($dato->idArea);
+       $url="logoAreas";
+      $logo = Area::find($dato->idArea);
+
+      if($logo->logo == null){
+         $file = $dato->file('logo')->getClientOriginalExtension();
+         $imageName = time().'.'.$dato->file('logo')->getClientOriginalExtension();//nombre de la imagen como tal.
+          $logo->logo = $url.'/'.$imageName;
+          if ($logo->save()) {
+            $dato->file('logo')->move(public_path($url), $imageName);
+            return redirect()->back();
+          }
+          return redirect()->back();
+      }
+      \File::delete($logo->logo);/*ELIMINAR Logo*/
+      $file = $dato->file('logo')->getClientOriginalExtension();
+      $imageName = time().'.'.$dato->file('logo')->getClientOriginalExtension();//nombre de la imagen como tal.
+      $logo->logo = $url.'/'.$imageName;
+      if ($logo->save()) {
+            $dato->file('logo')->move(public_path($url), $imageName);
+            return redirect()->back();
+          }
+          return redirect()->back();
     }
   
 }

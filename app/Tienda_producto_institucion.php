@@ -43,4 +43,38 @@ class Tienda_producto_institucion extends Model
 
         return count($dato);            
     }
+    protected function contarproductos($idA, $idI)
+    {
+       $contar = \DB::table('productos')
+                ->join('tienda_producto_instituciones', 'tienda_producto_instituciones.id_producto', '=', 'productos.id')
+                ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
+                ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
+                ->where('tienda_producto_instituciones.id_area', $idA)
+                ->where('tiendas_instituciones.id_institucion', $idI)
+                ->where('tienda_producto_instituciones.id_estado', 1)
+                ->sum('productos.cantidad');
+
+        return $contar;        
+    }
+    protected function mostrarProductosArea($idA, $idI)
+    {
+         $mostrar = \DB::table('productos')
+                ->select([
+                    'productos.id as id_producto',
+                    'productos.nombre as nombre',
+                    'foto_productos.foto as foto',
+                    'productos.descripcion as descripcion',
+                    'productos.cantidad as cantidad'
+                ])
+                ->join('tienda_producto_instituciones', 'tienda_producto_instituciones.id_producto', '=', 'productos.id')
+                ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
+                ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
+                ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+                ->where('tienda_producto_instituciones.id_area', $idA)
+                ->where('tiendas_instituciones.id_institucion', $idI)
+                ->where('tienda_producto_instituciones.id_estado', 1)
+                ->get();
+
+        return $mostrar; 
+    }
 }

@@ -23,4 +23,8 @@ class carro extends Model
 		}
 
 	}
+
+	protected function traerCarro(){
+		
+	}
 }

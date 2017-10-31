@@ -56,44 +56,6 @@
 							</div>
 
 							<div class="android-drawer-separator"></div>
-
-							<div class="row caja-sesion">
-
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<p>Nombre del producto y detalles</p>
-									<div class="android-drawer-separator"></div>
-								</div>
-
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<p>Cantidad</p>
-									<p>
-										<input type="text" class="col-xs-12 col-sm-12 col-md-3" name="cantidad">
-										<label class="bmd-label-floating">unidades</label>
-									</p>
-									<div class="android-drawer-separator"></div>
-								</div>
-
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<p>Precio</p>
-									
-									<p>
-										<label for="">CLP $9.990</label>
-										<label class="bmd-label-floating">/ unidades</label>
-									</p>
-									<div class="android-drawer-separator"></div>
-								</div>
-
-								<div class="col-xs-12 col-sm-12 col-md-3">
-									<br><p align="right"><a href="#" class="registro-sesion bmd-label-floating">Eliminar</a></p>
-									<br><p align="right">
-											<label for="" class="registro-sesion bmd-label-floating">Subtotal: </label>
-											<label for="">$9.990</label>
-										</p>	
-								</div>
-
-							</div>
-					
-							<div class="android-drawer-separator"></div>
 							<p align="right">
 								<label for="" class="registro-sesion bmd-label-floating">Total: </label>
 								<label for="">$19.980</label>

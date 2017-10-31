@@ -338,8 +338,6 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::post('/updTelefono', 'clienteController@updTelefono');
      Route::post('/updClave', 'clienteController@updClave');
 
-
-
 });
 
 
@@ -347,9 +345,11 @@ Route::group(['prefix' => 'carro'], function(){
 
     Route::post('/agregarProd/{id}', 'carroController@ingProducto');
     Route::get('/miCarro' , 'carroController@miCarro');
-     Route::get('/verDetalleProducto/{id}', 'clienteController@ver_detalleProducto');
 
 });
+
+     Route::get('/filtrarProducto', 'clienteController@filtrarProducto');
+     Route::get('/verDetalleProducto/{id}', 'clienteController@ver_detalleProducto');
 
 
 

@@ -308,27 +308,19 @@ Route::get('/aceptarSolicitudServicio/{id}','institucionController@aceptarSolici
 
 /*inicio de usuarios*/
 
-
-
-         Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
-         Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
-
-         Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
-         Route::post('/sesion_cliente', 'loginClienteController@authCliente');
-
-         Route::get('/registro_cliente' , 'clienteController@registro_cliente');
-         Route::post('/registro_cliente' , 'clienteController@guardar_cliente');
-          
-
-         Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
-
-         Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
+Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
+Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
+Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
+Route::post('/sesion_cliente', 'loginClienteController@authCliente');
+Route::get('/registro_cliente' , 'clienteController@registro_cliente');
+Route::post('/registro_cliente' , 'clienteController@guardar_cliente');         
+Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
+Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
 
 
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');
-
 
 Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
 
@@ -338,6 +330,13 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::post('/updTelefono', 'clienteController@updTelefono');
      Route::post('/updClave', 'clienteController@updClave');
      Route::get('/carro_cliente' , 'clienteController@carro_cliente');
+
+});
+
+Route::group(['prefix' => 'carro'], function(){
+
+    Route::post('/agregarProd/{id}', 'carroController@ingProducto');
+    Route::get('/miCarro' , 'carroController@miCarro');
 });
 
      Route::get('/filtrarProducto', 'clienteController@filtrarProducto');

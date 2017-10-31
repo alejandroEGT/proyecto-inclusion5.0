@@ -71,12 +71,6 @@ class clienteController extends Controller
 
     }
 
-       public function carro_cliente()
-    {
-   		return view('inicioCliente.carro_cliente');
-    }
-
-
         public function prueba_cliente()
     {
      

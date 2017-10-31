@@ -310,7 +310,15 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::post('/updCorreo', 'clienteController@updCorreo');
      Route::post('/updTelefono', 'clienteController@updTelefono');
      Route::post('/updClave', 'clienteController@updClave');
-     Route::get('/carro_cliente' , 'clienteController@carro_cliente');
+
+
+});
+
+
+Route::group(['prefix' => 'carro'], function(){
+
+    Route::post('/agregarProd/{id}', 'carroController@ingProducto');
+    Route::get('/miCarro' , 'carroController@miCarro');
 
 });
 

@@ -93,18 +93,23 @@ public function setTipo($tipo) {
 
            $finduser = User::where('email', $datos->correo)->first();
 
-           if($finduser && $finduser->id_rol == 4){
+           
+             if($finduser && $finduser->id_rol == 4){
+
+              if(\Hash::check($datos->pass, $finduser->password)){
 
                 Auth::login($finduser);
 
                 return redirect('/inicio_cliente');
+              }
 
            }else{
 
                return "NO User Encontrado";
 
            }
-    }
+
+            }
 
     public function logout(){
     	Auth::logout();

@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Area;
 use App\Fotoperfil;
 use App\Http\Requests\clienteRequest;
+use App\Institucion;
 use App\Sexo;
 use App\Tienda_institucion;
 use App\User;
 use App\cliente;
-use App\producto;
-
 use App\foto_producto;
-
+use App\producto;
+use App\servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -196,4 +197,20 @@ public function ver_detalleProducto(Request $dato)
       return view('inicioCliente.verDetalleProducto')
       ->with('productos', $productos);
  }
+
+     public function vista_perfilInst($idinstitucion){
+
+        $idI = base64_decode($idinstitucion);
+        $institucion = Institucion::find($idI);
+        $productos = producto::verProductosVisibles($institucion->id, 5);
+        $areas = Area::where('id_institucion', $idI)->get();
+        $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
+
+        return view('inicioCliente.perfil_institucion')
+        ->with('institucion', $institucion)
+        ->with('servicios', $servicios)
+        ->with('productos', $productos)
+        ->with('idInstitucion', $idinstitucion)
+        ->with('areas', $areas);
+    }
 }

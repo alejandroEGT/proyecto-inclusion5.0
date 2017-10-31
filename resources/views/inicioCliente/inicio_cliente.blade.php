@@ -60,6 +60,7 @@
 
 	<!--tienda-->
 	<div class="android-more-section">
+
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Tiendas</div>
 		<div class="android-card-container mdl-grid">
 		  	@foreach($tiendas as $tienda) 
@@ -70,7 +71,7 @@
 		      <span class="mdl-typography--font-light mdl-typography--subhead">{{ $tienda->descripcion }}</span>
 		      </div>
 		      <div class="mdl-card__actions">
-		         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="#">Ver Tienda<i class="material-icons">chevron_right</i></a>
+		         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}">Ver Tienda<i class="material-icons">chevron_right</i></a>
 		      </div>
 		    </div>
 	   		@endforeach

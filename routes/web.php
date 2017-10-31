@@ -341,6 +341,7 @@ Route::group(['prefix' => 'carro'], function(){
 
      Route::get('/filtrarProducto', 'clienteController@filtrarProducto');
      Route::get('/verDetalleProducto/{id}', 'clienteController@ver_detalleProducto');
+     Route::get('/perfil_institucion/{idinstitucion}','clienteController@vista_perfilInst');
 
 
 

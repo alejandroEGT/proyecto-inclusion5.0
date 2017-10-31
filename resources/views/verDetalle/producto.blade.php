@@ -165,7 +165,7 @@
 			</div>
 			@endif
 			<hr>
-			<p><label><strong>Creado:</strong></label> {{ $productos[0]->creado }}</p>
+			<p><label><strong>Creado:</strong></label> {{ date('h:i:s - d/m/Y',strtotime($productos[0]->creado)) }}</p>
 			
 			
 		</div>

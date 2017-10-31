@@ -12,8 +12,8 @@ class servicio extends Model
     protected function insertar($datos)
     {
     	$insertar = new servicio;
-    	$insertar->nombre = $datos->nombre;
-    	$insertar->descripcion = $datos->descripcion;
+    	$insertar->nombre = ucfirst($datos->nombre);
+    	$insertar->descripcion = ucfirst($datos->descripcion);
         $insertar->id_categoria = $datos->categoria;
     	if ($insertar->save()) {
     		return $insertar->id;
@@ -292,6 +292,32 @@ class servicio extends Model
                     ->where("area.id", $idArea)
                     ->orderBy('servicios.created_at', 'desc')/*Posible error*/
                     ->paginate($cant);
+        return $mostrar;
+    }
+
+    protected function areaYinstitucion($idI, $idA)
+    {
+        $mostrar = \DB::table("servicios")
+                    ->select([
+                        'servicios.id as id',
+                        'foto_servicios.nombre as foto',
+                        'servicios.nombre as nombre',
+                        'servicios.descripcion as descripcion',
+                        'estado_tienda_servicio.estado as nombreEstado',
+                        'area.nombre as nombreArea',
+                        'servicios.created_at as creado'
+                    ])
+                    ->join("foto_servicios","foto_servicios.id_servicio","=","servicios.id")
+                    ->join("tienda_servicio_instituciones","tienda_servicio_instituciones.id_servicio","=","servicios.id")
+                    ->join("tiendas_instituciones","tiendas_instituciones.id","=","tienda_servicio_instituciones.id_tienda")
+                    ->join("estado_tienda_servicio","estado_tienda_servicio.id","=","tienda_servicio_instituciones.id_Estado")
+                    ->join("institucion","institucion.id","=","tiendas_instituciones.id_institucion")
+                    ->join("area","area.id","=","tienda_servicio_instituciones.id_area")
+                    ->where('tienda_servicio_instituciones.id_estado', 1)
+                    ->where("institucion.id", $idI)
+                    ->where("area.id", $idA)
+                    ->orderBy('servicios.created_at', 'desc')/*Posible error*/
+                    ->paginate(10);
         return $mostrar;
     }
     protected function borrar($idS)

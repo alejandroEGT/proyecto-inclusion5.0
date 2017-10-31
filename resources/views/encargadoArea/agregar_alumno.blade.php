@@ -46,9 +46,10 @@
 						<p class="p-form">Apellidos</p>
 						<input name="apellidos" class="form-control input" placeholder="apellidos" type="text" value="{{ old('apellidos') }}">
 						<p class="p-form">Fecha de Nacimiento</p>
-    						<input name="dia" class="form-control fech" placeholder="día" size="2" maxlength="2" type="text" value="{{ old('dia') }}">-
-    						<input name="mes" class="form-control fech" size="2" placeholder="mes" maxlength="2" type="text" value="{{ old('mes') }}">-
-    						<input name="anio" class="form-control fech" size="2" placeholder="año" maxlength="4" type="text" value="{{ old('anio') }}">
+    						<!--<input name="dia" class="form-control fech" placeholder="día" size="2" maxlength="2" type="text" value="{{--old('dia')--}}">-
+    						<input name="mes" class="form-control fech" size="2" placeholder="mes" maxlength="2" type="text" value="{{--old('mes')--}}">-
+    						<input name="anio" class="form-control fech" size="2" placeholder="año" maxlength="4" type="text" value="{{--old('anio')--}}">-->
+    						<input type="date" name="fecha" class="form-control input">
 					</div>
 					<div class="col-md-4">
 						<p class="p-form">Sexo</p>

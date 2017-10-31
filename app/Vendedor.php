@@ -87,5 +87,14 @@ class Vendedor extends Model
         }
         return false;
     }
+    protected function actualizarFecha($fecha, $idUser)
+    {
+        $vendedor = Vendedor::where('id_user', $idUser)->first();
+        $vendedor->fecha_nac = $fecha;
+        if ($vendedor->save()) {
+            return true;
+        }
+        return false;
+    }
 
 }

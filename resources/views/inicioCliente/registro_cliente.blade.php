@@ -2,6 +2,22 @@
 @extends('inicioCliente.clienteMaster')
 
 @section('content')
+@if ($errors->any())
+			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				            @endforeach
+				        </ul>
+			    </div>
+			@endif
+		@if (Session::has('Advertencia'))
+			<div class="alert alert-info">
+		    <a href="" class="close" data-dismiss="alert">&times;</a>
+			        {{ Session::get('Advertencia') }}
+		    </div>
+		@endif
 
 	<h1 class="text-center">Registrate</h1>
 	<div class="android-drawer-separator"></div>

@@ -1,5 +1,8 @@
 @if (count($servicio))
 	<br>
+	<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 	<center><label>Detalle del Servcicio</label></center>
 	<hr>
 	<div class="row panel">

@@ -12,7 +12,7 @@
 									{{ csrf_field() }}
 									<p><label for="file-input" class="label-foto-link">
 									<input type="hidden" name="idUser" value="{{$alumno[0]->idUser}}">
-									 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
+									 	<img src="/ico/image.png" height="50" for="file-input" class="label-foto-link">
 									 	Actualizar foto..
 									</label></p>
 									<input style="display: none;" name="foto" id="file-input" type="file"/>
@@ -73,6 +73,24 @@
 							  		<p><strong>Actualizar Apellidos</strong> </p>
 							  		<input type="hidden" name="idUser" value="{{$alumno[0]->idUser}}">
 							  		<p><input class="" type="text" maxlength="250" name="apellidos">
+									<input class="btn btn-primary btn-xs" type="submit" value="Guardar"></p>	
+								</form>	
+							</div>
+		</div>
+	</div>
+</div>	
+<div class="row">	
+	<div class="col-md-12 ">
+		{{App::setLocale('es_ES')}}
+		<p><label>Fecha de nacimiento:</label> <label>{{ date('d/m/Y', strtotime($alumno[0]->fecha)) }}</label> <a data-toggle="collapse" data-target="#fech"><i class="fa fa-pencil-square" aria-hidden="true"></i></a></p>
+
+		<div id="fech" class="collapse">
+							<div class="alert alert-info" role="alert">
+								<form action="{{ url($ruta.'/actualizar_fecha_alumno') }}" method="post">
+								{{csrf_field()}}
+							  		<p><strong>Actualizar Fecha de nacimiento</strong> </p>
+							  		<input type="hidden" name="idUser" value="{{$alumno[0]->idUser}}">
+							  		<p><input class="" type="date" maxlength="250" name="fecha">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar"></p>	
 								</form>	
 							</div>

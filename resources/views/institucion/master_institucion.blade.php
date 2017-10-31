@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
                     <li class="pushy-submenu" >
                         
                         <div class="min-perfil-institucion" >
-                            <img v-for="item in db_institucion" height="70" width="120"  :src="'/'+item.logo" alt=""/>
+                            <img v-for="item in db_institucion" height="70" width="100"  :src="'/'+item.logo" alt=""/>
                             <p class="nombre-institucion-perfil" v-for="item in db_institucion">
                                 @{{ item.nombre }}
                             </p>

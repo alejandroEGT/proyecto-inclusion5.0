@@ -13,7 +13,7 @@
 </head>
 
 <!-- onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);"-->
-<body>
+<body class="body-vendedor">
         
 <div id="master-vendedorDependiente" class="animated fadeIn" >
 

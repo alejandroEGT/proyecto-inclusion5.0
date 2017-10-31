@@ -2,7 +2,7 @@
 
 @section('content')
 <label id="v_area" hidden="true" >{{ $area->id }}</label>
-	<div class="container padre-agregar">
+	<div class="container ">
 		<div class="row panel">
 			<div class="col-md-offset-1 col-md-4">
 			<a href="{{ URL::previous() }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
@@ -37,7 +37,22 @@
 				</p>
 				<hr>
 				@if ($area->logo != "")
-					<center><img class="img-logo" src="{{ '/'.$area->logo }}"></center>
+					<center>
+						<img class="img-logo" src="{{ '/'.$area->logo }}">
+						<a data-toggle="collapse" data-target="#logo"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
+					</center>
+					<div id="logo" class="collapse">
+							<div class="alert alert-info" role="alert">
+								<form action="{{ url('institucion/actualizar_logo_area') }}" method="post" enctype="multipart/form-data" >
+									{{csrf_field()}}
+							  		<p><strong>Actualizar Logo del área</strong> </p>
+							  		<input type="hidden" name="idArea" value="{{ $area->id }}" >
+							  		<p>
+							  		<input type="file" name="logo"><br>
+									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
+								</form>	
+							</div>
+				</div>
 				@endif
 				@if ($area->logo == "")
 					<center><label>(No hay un logo..)</label></center>
@@ -95,10 +110,13 @@
 
 		<div class="row panel">
 			<div class="col-md-1">
-				<button data-toggle="collapse" data-target="#demo" class="btn btn-info badge1" data-badge="{{ $contar }}">Personas</button>
+				<button data-toggle="collapse" data-target="#demo" class="btn btn-info btn-xs badge1" data-badge="{{ $contarP }}">Personas</button>
 			</div>
-			<div class="col-md-3">
-				<button class="btn btn-success badge1" data-badge="0">Productos y servicios</button>
+			<div class="col-md-1">
+				<button data-toggle="collapse" data-target="#demo2" class="btn btn-danger btn-xs badge1" data-badge="{{$contarProd}}">Productos</button>
+			</div>
+			<div class="col-md-1">
+				<button data-toggle="collapse" data-target="#demo3" class="btn btn-success btn-xs badge1" data-badge="{{$contarS}}">Servicio</button>
 			</div>
 			<div class="col-md-5 ">
 				<div v-if="this.existeEncargado == true">
@@ -136,7 +154,7 @@
 								</tr>							
 								@foreach ($venInstitucion as $ven)
 									<tr>
-										<td><img height="70" src="{{'/'.$ven->foto}}"></td>
+										<td><img class="sizeLogoMin" src="{{'/'.$ven->foto}}"></td>
 										<td>{{$ven->nombres.' '.$ven->apellidos}}</td>
 										<td>{{$ven->email}}</td>
 										<td>{{$ven->nombre}}</td>
@@ -156,6 +174,83 @@
 						@endif
 						@if (is_null($venInstitucion))
 							<p>no existen registros de usuarios..</p>
+						@endif
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div id="demo2" class="collapse">
+						@if (!is_null($productos))
+							
+							<table class="table table-hover">
+								<tr>
+									<td>Foto</td>
+									<td>Nombre</td>
+									<td>Descripción</td>
+									<td>cantidad</td>
+									<td>Opciones</td>
+								</tr>							
+								@foreach ($productos as $p)
+									<tr>
+										<td><img class="sizeLogoMin" src="{{'/'.$p->foto}}"></td>
+										<td>{{$p->nombre}}</td>
+										<td>{{$p->descripcion}}</td>
+										<td>{{$p->cantidad}}</td>
+										<td>
+											<form>
+												{{csrf_field()}}
+												<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($p->id_producto)) }}">Ver..</a>
+
+												<input type="hidden" name="id_alumno" value="{{ $p->id_producto }}" >
+												<input @click="eliminarProducto({{ $p->id_producto }})" type="button" value="Eliminar" class="btn btn-danger btn-xs" name="">
+											</form>
+										</td>
+									</tr>
+								@endforeach
+							</table>
+
+						@endif
+						@if (is_null($productos))
+							<p>no existen productos en el área</p>
+						@endif
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div id="demo3" class="collapse">
+				
+						@if (!is_null($servicios))
+							
+							<table class="table table-hover">
+								<tr>
+									<td>Foto</td>
+									<td>Nombre</td>
+									<td>Descripción</td>
+									<td>Opciones</td>
+								</tr>							
+								@foreach ($servicios as $s)
+									<tr>
+										<td><img class="sizeLogoMin" src="{{'/'.$s->foto}}"></td>
+										<td>{{$s->nombre}}</td>
+										<td>{{$s->descripcion}}</td>
+										<td>
+											<form>
+												{{csrf_field()}}
+												<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleServicio/".base64_encode($s->id_servicio)) }}">Ver..</a>
+
+												<input type="hidden" name="id_alumno" value="{{ $s->id_servicio }}" >
+												<input @click="eliminarServicio({{ $s->id_servicio }})" type="button" value="Eliminar" class="btn btn-danger btn-xs" name="">
+											</form>
+										</td>
+									</tr>
+								@endforeach
+							</table>
+
+						@endif
+						@if (is_null($servicios))
+							<p>no existen servicios en el área</p>
 						@endif
 				</div>
 			</div>

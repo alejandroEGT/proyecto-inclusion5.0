@@ -50,7 +50,7 @@ class clienteController extends Controller
       $id_cliente = cliente::where('id_user', Auth::user()->id)->first();
 
       $foto = Fotoperfil::traerFotobyid(Auth::user()->id);
-      
+
       return view('inicioCliente.perfil_cliente')->with('id_cliente',$id_cliente)
                                                  ->with('foto', $foto);
 
@@ -84,7 +84,6 @@ class clienteController extends Controller
 
    		    $user = User::insertarCliente($datos,1);
 
-          if($user){
 
             $idUser  = User::where('email', $datos->correo)->first();
 
@@ -94,51 +93,107 @@ class clienteController extends Controller
 
               $foto = Fotoperfil::fotoDefault($idUser->id);
 
-              return "oka";
+              \Session::flash('Advertencia', 'Registro exitosamente');
+                  return redirect()->back();
               
             }else{
-              return "caca2";
-            }
-          }else{
-            return "caca1";
+              \Session::flash('Advertencia', 'Lo sentimos, a ocurrido un error en el registro, intentelo nuevamente');
+                  return redirect()->back();
+                }
           }
-    }
 
-    public function updCorreo (Request $datos){
+              
+              
+
+  
+
+
+    public function updCorreo (clienteRequest $datos){
+
+      $cliente = cliente::where('id_user', \Auth::user()->id)->first();
+
+      if($cliente->facebook_id != null){
+        \Session::flash('Advertencia', 'tu correo electronico no puede ser actualizado porque iniciaste la sesion con redes sociales');
+                  return redirect()->back();
+      }
 
      $update = cliente::updCorreo($datos);
 
      if($update){
-      return "oka";
+       \Session::flash('Advertencia', 'Tu correo ha sido actualizado exitosamente');
+                  return redirect()->back();
      }else{
-      return "caca";
+       \Session::flash('Advertencia', 'Lo sentimos no se pudo realizar la operación');
+                  return redirect()->back();
      }
 
     }
 
     public function updTelefono (Request $datos){
 
-     $update = cliente::updTelefono($datos);
+      $this->validate($datos,[
+        'telefono' => 'required | numeric',
+        'repetirTelefono' => 'required |  numeric| same:telefono'
+     ]);
+      $update = cliente::updTelefono($datos);
 
      if($update){
-      return "oka";
+       \Session::flash('Advertencia', 'Tu numero de telefono ha sido actualizado exitosamente');
+                  return redirect()->back();
      }else{
-      return "caca";
+          \Session::flash('Advertencia', 'Lo sentimos no se pudo realizar la operación');
+                  return redirect()->back();
      }
 
     }
 
     public function updClave (Request $datos){
 
+
+      $cliente = cliente::where('id_user', \Auth::user()->id)->first();
+
+      if($cliente->facebook_id != null){
+        \Session::flash('Advertencia', 'tu contraseña no puede ser actualizado porque iniciaste la sesion con redes sociales');
+                  return redirect()->back();
+      }
+
+     $this->validate($datos,[
+        'passAntigua' => 'required | min:6 | max:50 ',
+        'passNueva' => 'required | min:6 | max:50',
+        'repPassNueva' => 'required | min:6 | max:50 | same:passNueva'
+     ]);
+
      $update = cliente::updClave($datos);
 
-     if($update){
-      return "oka";
-     }else{
-      return "caca";
+      if($update){
+       \Session::flash('Advertencia', 'Tu numero de telefono ha sido actualizado exitosamente');
+                  return redirect()->back();
      }
+     return redirect()->back()->withErrors(['No es posible actualizar tu contraseña']);
 
     }
 
-    
+
+    public function filtrarProducto(Request $datos)
+    {
+      $this->validate($datos,[
+                'buscador' => 'required',
+          ]);
+      $productos = producto::filtrar_desde_cliente($datos->buscador);
+
+      return view('inicioCliente.nuestroProducto')
+      ->with('productos', $productos)
+      ->with('titulo', "Filtrado de productos");
+    }
+
+
+public function ver_detalleProducto(Request $dato)
+    {
+
+      $getId = base64_decode($dato->id);
+      $productos = producto::detalleProducto_cliente($getId);
+
+      return view('inicioCliente.verDetalleProducto')
+      ->with('productos', $productos);
+ }
 }

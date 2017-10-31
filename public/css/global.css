@@ -277,7 +277,7 @@ small{
 	font-weight:bold;	
 }
 .foto-noticia{
-	height:300px; width:870px;
+	height:300px; width:470px;
 }
 .pushy-link{
 	font-size: 12px;
@@ -288,4 +288,31 @@ small{
 .fondo-color-blue{
 	background: #1A5276;
 	color:white;
+}
+.th3{
+	color:black;
+}
+
+.sizeLogo{
+	
+	height: 50px;
+	width:60px;
+}
+.sizeFP{
+	width:50px;
+    height:50px;
+    border-radius:150px;
+}
+.sizeLogoMin{
+	height: 40px;
+	width:50px;
+}
+.titulodearea{
+	font-size: 18px;
+}
+.blanco{
+	background: white;
+}
+.letra-pequenia{
+	font-size: 12px;
 }

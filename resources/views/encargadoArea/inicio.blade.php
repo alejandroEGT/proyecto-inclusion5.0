@@ -58,7 +58,7 @@
 		<div class="row">
 			@if ($logo != null)
 				<div class="col-md-2">
-					<center><img src="{{ '/'.$logo }}" height="80" width="120"></center>
+					<center><img src="{{ '/'.$logo }}" height="80" width="120" class="img-thumbnail"></center>
 						<hr>
 				</div>
 			@endif
@@ -99,7 +99,7 @@
 						<hr>
 						<img class="img-notix"  src="{{ '/'.$ng->foto }}" height="70" width="90">
 						<p class="img-titu" ><label>{{ $ng->titulo}}</label></p>
-						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+						<p class="img-titu" ><a href="{{ url('encargadoArea/detalleNoticia_general/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
 					@endforeach
 					<hr>
 					<p><label><small><a href="{{ url('encargadoArea/verNoticiasGenerales') }}">Ver todas las noticias...</a></small></label></p>
@@ -122,7 +122,7 @@
 						@if ($nl->id_estado == 2)
 							<p class="img-titu" ><label>{{ $nl->titulo}}</label> <img src="/ico/padlock.png"></p>
 						@endif
-						<p class="img-titu" ><a href="{{ url('detalleNoticia/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+						<p class="img-titu" ><a href="{{ url('encargadoArea/detalleNoticia_local/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
 					@endforeach
 					<hr>
 					<p><label><small><a href="{{ url('encargadoArea/verNoticiasLocales') }}">Ver todas las noticias...</a></small></label></p>
@@ -178,7 +178,11 @@
 					<hr>
 				@endif
 				@if (!count($productos))
-					<center><label for="">No Existen productos para mostrar</label></center>
+					<center>
+						<label for="">No Existen productos para mostrar</label>
+						<img src="/ico/sad.png">
+					</center>
+					<hr>
 				@endif
 
 				@if (count($servicios)>0)
@@ -223,7 +227,10 @@
 					<hr>
 				@endif
 				@if (!count($servicios))
-					<center><label for="">No Existen servicios para mostrar</label></center>
+					<center>
+						<label for="">No Existen servicios para mostrar</label>
+						<img src="/ico/sad.png">
+					</center>
 				@endif
 			</div>
 			

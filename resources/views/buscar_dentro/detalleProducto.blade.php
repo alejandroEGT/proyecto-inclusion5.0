@@ -6,6 +6,9 @@
 	{{-- expr --}}
 
 <br>
+	<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 	<center><label>Detalle del producto</label></center>
 	<hr>
 <div class="row panel">
@@ -57,7 +60,7 @@
 				
 			
 			<hr>
-			<p><label><strong>Creado:</strong></label> {{ $productos[0]->creado }}</p>
+			<p><label><strong>Creado:</strong></label> {{ date('h:i:s - d/m/Y',strtotime($productos[0]->creado)) }}</p>
 			
 			
 		</div>

@@ -1,7 +1,12 @@
 <div class="body-buscar">
-				
+	<br>
+				<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 			@if ($vendedor)
+
 				<div class="">
+
 				<p><label class="lbl_titulo" >Personas <i class="fa fa-users" aria-hidden="true"></i></label></p>
 				<hr>
 					<div class="row">	

@@ -116,7 +116,7 @@
 				<button data-toggle="collapse" data-target="#demo2" class="btn btn-danger btn-xs badge1" data-badge="{{$contarProd}}">Productos</button>
 			</div>
 			<div class="col-md-1">
-				<button data-toggle="collapse" data-target="#demo3" class="btn btn-success btn-xs badge1" data-badge="0">Servicio</button>
+				<button data-toggle="collapse" data-target="#demo3" class="btn btn-success btn-xs badge1" data-badge="{{$contarS}}">Servicio</button>
 			</div>
 			<div class="col-md-5 ">
 				<div v-if="this.existeEncargado == true">
@@ -202,8 +202,8 @@
 												{{csrf_field()}}
 												<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($p->id_producto)) }}">Ver..</a>
 
-												<input type="hidden" name="id_alumno" value="{{ $ven->id }}" >
-												<input @click="eliminarAlumno({{ $ven->id }})" type="button" value="Eliminar" class="btn btn-danger btn-xs" name="">
+												<input type="hidden" name="id_alumno" value="{{ $p->id_producto }}" >
+												<input @click="eliminarProducto({{ $p->id_producto }})" type="button" value="Eliminar" class="btn btn-danger btn-xs" name="">
 											</form>
 										</td>
 									</tr>
@@ -213,6 +213,44 @@
 						@endif
 						@if (is_null($productos))
 							<p>no existen productos en el área</p>
+						@endif
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div id="demo3" class="collapse">
+				
+						@if (!is_null($servicios))
+							
+							<table class="table table-hover">
+								<tr>
+									<td>Foto</td>
+									<td>Nombre</td>
+									<td>Descripción</td>
+									<td>Opciones</td>
+								</tr>							
+								@foreach ($servicios as $s)
+									<tr>
+										<td><img class="sizeLogoMin" src="{{'/'.$s->foto}}"></td>
+										<td>{{$s->nombre}}</td>
+										<td>{{$s->descripcion}}</td>
+										<td>
+											<form>
+												{{csrf_field()}}
+												<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleServicio/".base64_encode($s->id_servicio)) }}">Ver..</a>
+
+												<input type="hidden" name="id_alumno" value="{{ $s->id_servicio }}" >
+												<input @click="eliminarServicio({{ $s->id_servicio }})" type="button" value="Eliminar" class="btn btn-danger btn-xs" name="">
+											</form>
+										</td>
+									</tr>
+								@endforeach
+							</table>
+
+						@endif
+						@if (is_null($servicios))
+							<p>no existen servicios en el área</p>
 						@endif
 				</div>
 			</div>

@@ -30,16 +30,20 @@ class areaController extends Controller
             $sexo = Sexo::all();
             $contarusuarios = VendedorInstitucion::contarVendedores($dato->id);
             $contarproductos = Tienda_producto_institucion::contarproductos($area->id, \Auth::guard('institucion')->user()->id);
+            $contarServ = Tienda_servicio_institucion::contarservicio($area->id, \Auth::guard('institucion')->user()->id);
 
             $datosVendedor = VendedorInstitucion::datosVendedorInstitucion($area->id);
             $productos = Tienda_producto_institucion::mostrarProductosArea($area->id, \Auth::guard('institucion')->user()->id);
-            //dd($productos);
+            $servicios = Tienda_servicio_institucion::mostrarServiciosArea($area->id, \Auth::guard('institucion')->user()->id);
+            //dd($servicios);
             return view('institucion.area')
             ->with('area', $area)
             ->with('sexo', $sexo)
             ->with('contarP', $contarusuarios)
+            ->with('contarS', $contarServ)
             ->with('contarProd', $contarproductos)
             ->with('productos', $productos)
+            ->with('servicios', $servicios)
             ->with('venInstitucion', $datosVendedor);
            
         } catch (\Illuminate\Database\QueryException $e) {

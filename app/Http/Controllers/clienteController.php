@@ -133,8 +133,8 @@ class clienteController extends Controller
     public function updTelefono (Request $datos){
 
       $this->validate($datos,[
-        'telefono' => 'required | numeric',
-        'repetirTelefono' => 'required |  numeric| same:telefono'
+        'telefono' => 'required | numeric | min:9',
+        'repetirTelefono' => 'required |  numeric | min:9 | same:telefono'
      ]);
       $update = cliente::updTelefono($datos);
 

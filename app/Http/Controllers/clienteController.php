@@ -213,4 +213,21 @@ public function ver_detalleProducto(Request $dato)
         ->with('idInstitucion', $idinstitucion)
         ->with('areas', $areas);
     }
+
+    public function updFoto(Request $dato)
+    {
+
+
+       $this->validate($dato,[
+                    'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
+              ]);
+
+      $update= Fotoperfil::actualizar_foto($dato);
+
+      if($update > 0){
+        \Session::flash('Advertencia', 'Tu foto de perfil ha sido actualizado exitosamente');
+                  return redirect()->back();
+      }
+      return redirect()->back()->withErrors(['No es posible actualizar tu foto de perfil']);
+    }
 }

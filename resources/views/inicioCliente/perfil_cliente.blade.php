@@ -38,7 +38,7 @@
 				@if($foto === "ico/default-avatar.png")
 				 <img class="card-img-top" src="{{ '/'.$foto }}" alt="Card image cap">
 				@else
-				 <img class="card-img-top" src="{{ $foto }}" alt="Card image cap">
+				 <img class="card-img-top" src="{{ '/'.$foto }}" alt="Card image cap">
 				@endif
 			
 			  <div class="card-body">
@@ -191,11 +191,12 @@
 
 						    <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
 							    <div class="card-body">
-							       	<form action="" method="">
+							       	<form action="{{ url('cliente/updFoto') }}" method="post" enctype="multipart/form-data">
 							  		{{csrf_field()}}
 									  <div class="form-group">
 									    <label for="exampleFormControlFile1">Actualizar foto de perfil</label>
-									    <input type="file" class="form-control-file " id="exampleFormControlFile1" name="fotoPerfil">
+									    <input type="hidden" name ="idUser" value="{{Auth::user()->id}}">
+									    <input type="file" class="form-control-file " id="exampleFormControlFile1" name="foto">
 									  </div>
 								      <div class="boton-sesion row">	
 						  				<button type="submit" class="btn btn-primary btn-outline-success">Guardar</button>

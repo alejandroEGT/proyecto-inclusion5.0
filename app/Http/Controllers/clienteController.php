@@ -191,6 +191,7 @@ class clienteController extends Controller
 
     public function filtrarProducto(Request $datos)
     {
+      $this->verificarUser();
       $this->validate($datos,[
                 'buscador' => 'required',
           ]);
@@ -204,7 +205,7 @@ class clienteController extends Controller
 
 public function ver_detalleProducto(Request $dato)
     {
-
+      $this->verificarUser();
       $getId = base64_decode($dato->id);
       $productos = producto::detalleProducto_cliente($getId);
 

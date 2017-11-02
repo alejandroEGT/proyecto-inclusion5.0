@@ -193,6 +193,7 @@ Route::group(['prefix' => 'userIndependiente','middleware'=>['md_vendedor']], fu
         Route::get('/ingresar_servicios' , 'vendedorIndependienteController@ingresar_servicios');
         Route::get('/modificar_productos' , 'vendedorIndependienteController@modificar_productos');
         Route::get('/modificar_servicios' , 'vendedorIndependienteController@modificar_servicios');
+        Route::post('/publicarproducto' , 'vendedorIndependienteController@publicarproducto');
 });
 
 Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], function(){
@@ -316,8 +317,6 @@ Route::get('/registro_cliente' , 'clienteController@registro_cliente');
 Route::post('/registro_cliente' , 'clienteController@guardar_cliente');         
 Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
-
-
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');

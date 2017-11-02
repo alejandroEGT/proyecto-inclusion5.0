@@ -7,6 +7,7 @@ use App\Http\Requests\clienteRequest;
 use App\Institucion;
 use App\Sexo;
 use App\Tienda_institucion;
+use App\Tienda_vendedor;
 use App\User;
 use App\cliente;
 use App\foto_producto;
@@ -21,10 +22,12 @@ class clienteController extends Controller
     public function inicio_cliente(){
 
       $tiendas = Tienda_institucion::traerTiendas();
+      $tiendas_vendedor = Tienda_vendedor::traerTiendas();
       //dd($tiendas);
       $ver_producto = producto::ver_producto();
      //dd($ver_producto);
       return view('inicioCliente.inicio_cliente')->with('ver_producto',$ver_producto)
+                                                 ->with('tiendas_vendedor',$tiendas_vendedor)
                                                  ->with('tiendas',$tiendas);
 
     }
@@ -40,7 +43,9 @@ class clienteController extends Controller
     public function ver_mas_producto(){
       $ver_mas = producto::ver_mas_producto();
        $tiendas = Tienda_institucion::traerTiendas();
+       $tiendas_vendedor = Tienda_vendedor::traerTiendas();
       return view ('inicioCliente.inicio_cliente_mas')->with('ver_mas',$ver_mas)
+                                                      ->with('tiendas_vendedor',$tiendas_vendedor)
                                                       ->with('tiendas',$tiendas);
     }
 

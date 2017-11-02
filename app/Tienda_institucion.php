@@ -53,6 +53,7 @@ class Tienda_institucion extends Model
                     ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')->get();
         return $tienda;
     }
+
    
 
 }

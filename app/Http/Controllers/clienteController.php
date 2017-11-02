@@ -6,11 +6,10 @@ use App\Http\Requests\clienteRequest;
 use App\Sexo;
 use App\Tienda_institucion;
 use App\User;
+use App\carro;
 use App\cliente;
-use App\producto;
-
 use App\foto_producto;
-
+use App\producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -92,6 +91,8 @@ class clienteController extends Controller
             if($cliente){
 
               $foto = Fotoperfil::fotoDefault($idUser->id);
+
+              $carro = carro::crearCarro($idUser);
 
               \Session::flash('Advertencia', 'Registro exitosamente');
                   return redirect()->back();

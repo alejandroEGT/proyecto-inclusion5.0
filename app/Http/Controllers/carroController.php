@@ -11,11 +11,11 @@ use Illuminate\Http\Request;
 class carroController extends Controller
 {
    
-	public function ingProducto(Request $datos, $id){
+	public function ingProducto(Request $datos){
 
-		$producto = producto::producto_id($id);
+		$getId = base64_decode($datos->id);
 
- 		$producto->idProducto;
+		$producto = producto::producto_id($getId);
 
 		$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
 
@@ -24,16 +24,22 @@ class carroController extends Controller
 		$ingresar = detalle_carro::ingProducto($datos, $carro, $producto);
 
 		if($ingresar){
-			return redirect('/inicio_cliente');
+			return redirect()->back();
 		}
 		
 	}
+
+
 
        public function miCarro()
     {
 
 
-    	
+    	$carro = carro::traerDatosCarro();
+
+    	dd($carro);
+
    		return view('inicioCliente.carro_cliente');
     }
 }
+

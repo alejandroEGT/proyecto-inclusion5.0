@@ -333,10 +333,11 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
 
 });
 
-Route::group(['prefix' => 'carro'], function(){
+Route::group(['prefix' => 'carro', 'middleware' => ['cliente']], function(){
 
-    Route::post('/agregarProd/{id}', 'carroController@ingProducto');
+    Route::post('/agregarProd', 'carroController@ingProducto');
     Route::get('/miCarro' , 'carroController@miCarro');
+    
 });
 
      Route::get('/filtrarProducto', 'clienteController@filtrarProducto');

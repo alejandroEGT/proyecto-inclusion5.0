@@ -31,4 +31,13 @@ class Tienda_vendedor extends Model
         return $traer;        
 
     }
+
+     protected function traerTiendas()
+    {
+        $tienda = \DB::table('tienda_vendedor')
+                    ->join('vendedor','vendedor.id','=','tienda_vendedor.id_vendedor')
+                    ->join('users','users.id','=','vendedor.id_user')
+                    ->join('fotoperfil','fotoperfil.id_user','=','users.id')->get();
+        return $tienda;
+    }
 }

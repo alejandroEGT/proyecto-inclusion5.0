@@ -23,7 +23,7 @@
 					        </span>
 				          	<!--lupa de prueba-->
 							<div class="col-md-6">
-								<form action="{{ url('cliente/filtrarProducto') }}" method="get"><br>
+								<form action="{{ url('/filtrarProducto') }}" method="get"><br>
 									{{csrf_field()}}							
 
 									    <div class="input-group">
@@ -42,7 +42,7 @@
 					    	<div class="android-navigation-container col-md-3">
 					            <nav class="android-navigation mdl-navigation">
 					              	<span>
-					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{ url('cliente/carro_cliente') }}">
+					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{ url('carro/miCarro') }}">
 					              			<i class="material-icons">&#xE8CC;</i> Cesta 
 					              			<span class="mdl-badge mdl-badge--no-background" data-badge="2"></span>
 					              		</a>
@@ -88,7 +88,7 @@
 					      @endif
 				          <div class="android-drawer-separator"></div>
 				          <span>
-			          	  <a class="mdl-navigation__link" href="{{ url('cliente/carro_cliente') }}">
+			          	  <a class="mdl-navigation__link" href="{{ url('carro/miCarro') }}">
 
 			          	  <i class="material-icons">&#xE8CC;</i>Cesta
 			          	  <i class="mdl-badge" data-badge="3"></i>
@@ -110,54 +110,7 @@
 					<div class="android-content mdl-layout__content">
 						@yield('content')		
 						
-						<!--footer-->
-						<footer class="mdl-mega-footer">
-						  <div class="mdl-mega-footer__middle-section">
-
-							    <div class="mdl-mega-footer__drop-down-section">
-							      <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-							      <h1 class="mdl-mega-footer__heading">Features</h1>
-							      <ul class="mdl-mega-footer__link-list">
-							        <li><a href="#">About</a></li>
-							        <li><a href="#">Terms</a></li>
-							        <li><a href="#">Partners</a></li>
-							        <li><a href="#">Updates</a></li>
-							      </ul>
-							    </div>
-
-							    <div class="mdl-mega-footer__drop-down-section">
-							      <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-							      <h1 class="mdl-mega-footer__heading">Details</h1>
-							      <ul class="mdl-mega-footer__link-list">
-							        <li><a href="#">Specs</a></li>
-							        <li><a href="#">Tools</a></li>
-							        <li><a href="#">Resources</a></li>
-							      </ul>
-							    </div>
-
-							    <div class="mdl-mega-footer__drop-down-section">
-							      <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-							      <h1 class="mdl-mega-footer__heading">Technology</h1>
-							      <ul class="mdl-mega-footer__link-list">
-							        <li><a href="#">How it works</a></li>
-							        <li><a href="#">Patterns</a></li>
-							        <li><a href="#">Usage</a></li>
-							        <li><a href="#">Products</a></li>
-							        <li><a href="#">Contracts</a></li>
-							      </ul>
-							    </div>
-
-							    <div class="mdl-mega-footer__drop-down-section">
-							      <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
-							      <h1 class="mdl-mega-footer__heading">FAQ</h1>
-							      <ul class="mdl-mega-footer__link-list">
-							        <li><a href="#">Questions</a></li>
-							        <li><a href="#">Answers</a></li>
-							        <li><a href="#">Contact us</a></li>
-							      </ul>
-							    </div>
-						  </div>
-						</footer>
+						
 					</div>
 				</div>
 

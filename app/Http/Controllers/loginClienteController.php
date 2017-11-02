@@ -89,22 +89,32 @@ public function setTipo($tipo) {
 
     }
 
-    public function authCliente(Request $datos){
 
-           $finduser = User::where('email', $datos->correo)->first();
 
-           if($finduser && $finduser->id_rol == 4){
 
-                Auth::login($finduser);
 
-                return redirect('/inicio_cliente');
+ public function authCliente(Request $data){
+        
+           try{
+                  $data->flash();
+                  $verificar = User::where('email', $data->correo)->first();
 
-           }else{
 
-               return "NO User Encontrado";
+                  if(count($verificar)>0 && $verificar->id_rol == 4){  /**"eres vendedor institucional"**/
+         
+                      if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
+              
+                          return redirect('/inicio_cliente');    
+                      }
+                      return redirect()->back();
+                  }
+                  return redirect()->back();
+            }catch (\Illuminate\Database\QueryException $e) {
+                return redirect()->back()->withErrors(['Algo no anda bien, posiblemente datos mal ingresados o no hay conexión']);
+       } 
 
-           }
     }
+
 
     public function logout(){
     	Auth::logout();

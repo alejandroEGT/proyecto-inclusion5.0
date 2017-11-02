@@ -38,7 +38,7 @@
 	</div>
 	<div class="col-md-6">
 		
-			<p><label><strong>Nombre:</strong></label> {{ $productos[0]->nombre }}></p>
+			<p><label><strong>Nombre:</strong></label> {{ $productos[0]->nombre }}</p>
 			
 
 			<p><label><strong>Descripción:</strong></label> {{ $productos[0]->descripcion }}</p>

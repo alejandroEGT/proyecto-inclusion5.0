@@ -193,6 +193,7 @@ Route::group(['prefix' => 'userIndependiente','middleware'=>['md_vendedor']], fu
         Route::get('/ingresar_servicios' , 'vendedorIndependienteController@ingresar_servicios');
         Route::get('/modificar_productos' , 'vendedorIndependienteController@modificar_productos');
         Route::get('/modificar_servicios' , 'vendedorIndependienteController@modificar_servicios');
+        Route::post('/publicarproducto' , 'vendedorIndependienteController@publicarproducto');
 });
 
 Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], function(){
@@ -308,6 +309,7 @@ Route::get('/aceptarSolicitudServicio/{id}','institucionController@aceptarSolici
 
 /*inicio de usuarios*/
 
+<<<<<<< HEAD
 
 
          Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
@@ -324,12 +326,21 @@ Route::get('/aceptarSolicitudServicio/{id}','institucionController@aceptarSolici
          Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
 
 
+=======
+Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
+Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
+Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
+Route::post('/sesion_cliente', 'loginClienteController@authCliente');
+Route::get('/registro_cliente' , 'clienteController@registro_cliente');
+Route::post('/registro_cliente' , 'clienteController@guardar_cliente');         
+Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
+Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
+>>>>>>> ca555ae2ab229255df11f96a43767609e7f14692
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');
 
-
-Route::group(['prefix' => 'cliente', 'middleware' => ['web']], function(){
+Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
 
      Route::get('/perfil_cliente' , 'clienteController@perfil_cliente');
      Route::get('/logoutCliente','loginClienteController@logout');
@@ -337,10 +348,20 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['web']], function(){
      Route::post('/updTelefono', 'clienteController@updTelefono');
      Route::post('/updClave', 'clienteController@updClave');
      Route::get('/carro_cliente' , 'clienteController@carro_cliente');
-     Route::get('/filtrarProducto', 'clienteController@filtrarProducto');
-     Route::get('/verDetalleProducto/{id}', 'clienteController@ver_detalleProducto');
+     Route::post('/updFoto', 'clienteController@updFoto');
 
 });
+
+Route::group(['prefix' => 'carro', 'middleware' => ['cliente']], function(){
+
+    Route::post('/agregarProd', 'carroController@ingProducto');
+    Route::get('/miCarro' , 'carroController@miCarro');
+    
+});
+
+     Route::get('/filtrarProducto', 'clienteController@filtrarProducto');
+     Route::get('/verDetalleProducto/{id}', 'clienteController@ver_detalleProducto');
+     Route::get('/perfil_institucion/{idinstitucion}','clienteController@vista_perfilInst');
 
 
 

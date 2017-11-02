@@ -2,10 +2,10 @@
 
 @section('content')
 
-<form action="" method="" enctype="multipart/form-data" >
+<form action="{{ url('userIndependiente/publicarproducto') }}" method="post" enctype="multipart/form-data" >
 	<div class="row">
 		<div class="col-md-offset-2 col-md-2">
-			<a href="{{ url('institucion/inicio') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
+			<a href="{{ url('userIndependiente/inicio') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
 			<div class="ico-speaker"></div>
 		</div>
 
@@ -23,6 +23,19 @@
 	</div>
 	<hr>
 
+	@if ($errors->all())
+				<div class="alert alert-info">
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li>{{$error}}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+			@if (Session::has('registro'))
+								<div class="alert alert-info">{{ Session::get('registro') }}</div>
+							@endif
+
 		<div class="row">
 			
 			<div class="col-md-offset-2 col-md-3">
@@ -34,10 +47,9 @@
 			<div class="col-md-2">
 				<p><select name="categoria" class="form-control input" >
 					<option value="" >Seleccione categoría..</option>
-				
-						<option value=""></option>
-			
-					
+						@foreach ($categoria_pro as $categoria)
+						<option value="{{$categoria->id }}">{{$categoria->nombre }}</option>
+					@endforeach
 				</select></p>
 			</div>
 		</div>
@@ -54,7 +66,7 @@
 				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
 				 	Agregar foto..
 				</label></p>
-				<input style="display: none;" name="fotoP1" id="file-input" type="file"/>
+				<input style="display: none;" name="foto" id="file-input" type="file"/>
 
 					<div id="divFoto" hidden="true" >
 						<div id="img_destino" class="porte img-thumbnail" ></div>
@@ -75,8 +87,10 @@
 		<div class="row">
 			<div class="col-md-12">
 
+			@if (count($productos)>0)
 					<center><label>Productos</label></center>
-							
+				
+			
 				<table class="table table-responsive">
 					 <tr class="head-color" >
 					 	<th>Id</th>
@@ -85,32 +99,29 @@
 					    <th>Descripcion</th>
 					    <th>creado</th>
 					    <th>Opción</th>
-					 </tr>
-				
+					  </tr>
+					@foreach ($productos as $p)
+
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>{{ $p->idProducto }}</td>
+						<td><img src="{{ '/'.$p->foto }}" height="70"></td>
+						<td>{{ $p->nombre }}</td>
+						<td>{{ $p->descripcion }}</td>
+						<td>{{ $p->creado }}</td>
 						<td>
-							<a class="btn btn-primary btn-xs" href="">Ver..</a>
-						<form id="eliminar" action="" method="post">
-							{{ csrf_field() }}
-							<input type="hidden" value="" name="idProducto">	
-							<br>
-							<input type="button"  class="btn btn-warning btn-xs" value="Eliminar" >
-						</form>	
+							<a class="btn btn-primary btn-xs" href="#">Ver..</a>
 						</td>
 					</tr>
 				    
-		>
+				     
+				    @endforeach
 					  
 				</table>
-				<center></center>
-			
+				{{ $productos->links() }}
+				@endif
+				@if (count($productos)<=0)
 					<center><label>No hay productos</label></center>
-
+				@endif
 			</div>
 		</div>
 

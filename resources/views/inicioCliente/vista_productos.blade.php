@@ -27,19 +27,21 @@
 						<label class="bmd-label-floating">$ {{$producto->precioProducto}} </label> 
 					</dd>
 
-					<dt>
+
+					<form action="{{ url('carro/agregarProd')}}"  method="post">
+						{{ csrf_field() }}
+					<input type="hidden" name="id" value="{{ base64_encode($producto->idProducto) }}">
+
+							<dt>
 						Cantidad
 					</dt>
+
 					<dd>
 						<input type="number" value="1" class="col-xs-12 col-sm-12 col-md-2" name="cantidad" max="{{$producto->cantidadProducto}}" min="1">
 						<label class="bmd-label-floating">{{$producto->cantidadProducto}} unidades disponibles</label>
 						
 					</dd>
-					<form action="" method="">
-					<button type="submit" class="btn btn-primary btn-outline-success">Comprar ahora</button>
-					</form>
-					
-					<form action="" method="">
+				
 					<button type="submit" class="btn btn-primary btn-outline-danger">Añadir a la cesta</button>
 					</form>
 

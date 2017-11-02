@@ -1,45 +1,63 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Area;
 use App\Fotoperfil;
 use App\Http\Requests\clienteRequest;
+use App\Institucion;
 use App\Sexo;
 use App\Tienda_institucion;
+use App\Tienda_vendedor;
 use App\User;
+use App\carro;
 use App\cliente;
-use App\producto;
-
 use App\foto_producto;
-
+use App\producto;
+use App\servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
 class clienteController extends Controller
 {
+
+    public function verificarUser(){
+
+        if(Auth::user() && Auth::user()->id_rol!=4){
+            Auth::logout();
+        }
+    }
+
     public function inicio_cliente(){
 
       $tiendas = Tienda_institucion::traerTiendas();
+      $tiendas_vendedor = Tienda_vendedor::traerTiendas();
       //dd($tiendas);
       $ver_producto = producto::ver_producto();
      //dd($ver_producto);
+
+      $this->verificarUser();
       return view('inicioCliente.inicio_cliente')->with('ver_producto',$ver_producto)
+                                                 ->with('tiendas_vendedor',$tiendas_vendedor)
                                                  ->with('tiendas',$tiendas);
 
     }
 
      public function vista_productos($id){
 
-            
+          $this->verificarUser();  
         $producto = producto::producto_id($id);
         return view('inicioCliente.vista_productos')->with('producto',$producto);
                                                  
     }  
 
     public function ver_mas_producto(){
+      $this->verificarUser();
       $ver_mas = producto::ver_mas_producto();
        $tiendas = Tienda_institucion::traerTiendas();
+       $tiendas_vendedor = Tienda_vendedor::traerTiendas();
       return view ('inicioCliente.inicio_cliente_mas')->with('ver_mas',$ver_mas)
+                                                      ->with('tiendas_vendedor',$tiendas_vendedor)
                                                       ->with('tiendas',$tiendas);
     }
 
@@ -58,10 +76,12 @@ class clienteController extends Controller
 
 
 	public function sesion_cliente(){
+    $this->verificarUser();
     	return view('inicioCliente.sesion_cliente');
     }
 
     public function registro_cliente(){
+      $this->verificarUser();
     	
       $sexo = Sexo::all();
       
@@ -71,14 +91,9 @@ class clienteController extends Controller
 
     }
 
-       public function carro_cliente()
-    {
-   		return view('inicioCliente.carro_cliente');
-    }
-
-
         public function prueba_cliente()
     {
+      $this->verificarUser();
      
         $ver_producto = producto::ver_producto();
         return view('inicioCliente.prueba')->with('ver_producto',$ver_producto);
@@ -98,6 +113,8 @@ class clienteController extends Controller
             if($cliente){
 
               $foto = Fotoperfil::fotoDefault($idUser->id);
+
+              $carro = carro::crearCarro($idUser);
 
               \Session::flash('Advertencia', 'Registro exitosamente');
                   return redirect()->back();
@@ -138,8 +155,8 @@ class clienteController extends Controller
     public function updTelefono (Request $datos){
 
       $this->validate($datos,[
-        'telefono' => 'required | numeric',
-        'repetirTelefono' => 'required |  numeric| same:telefono'
+        'telefono' => 'required | numeric | min:9',
+        'repetirTelefono' => 'required |  numeric | min:9 | same:telefono'
      ]);
       $update = cliente::updTelefono($datos);
 
@@ -182,6 +199,7 @@ class clienteController extends Controller
 
     public function filtrarProducto(Request $datos)
     {
+      $this->verificarUser();
       $this->validate($datos,[
                 'buscador' => 'required',
           ]);
@@ -195,11 +213,44 @@ class clienteController extends Controller
 
 public function ver_detalleProducto(Request $dato)
     {
-
+      $this->verificarUser();
       $getId = base64_decode($dato->id);
       $productos = producto::detalleProducto_cliente($getId);
 
       return view('inicioCliente.verDetalleProducto')
       ->with('productos', $productos);
  }
+
+     public function vista_perfilInst($idinstitucion){
+
+        $idI = base64_decode($idinstitucion);
+        $institucion = Institucion::find($idI);
+        $productos = producto::verProductosVisibles($institucion->id, 5);
+        $areas = Area::where('id_institucion', $idI)->get();
+        $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
+
+        return view('inicioCliente.perfil_institucion')
+        ->with('institucion', $institucion)
+        ->with('servicios', $servicios)
+        ->with('productos', $productos)
+        ->with('idInstitucion', $idinstitucion)
+        ->with('areas', $areas);
+    }
+
+    public function updFoto(Request $dato)
+    {
+
+
+       $this->validate($dato,[
+                    'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
+              ]);
+
+      $update= Fotoperfil::actualizar_foto($dato);
+
+      if($update > 0){
+        \Session::flash('Advertencia', 'Tu foto de perfil ha sido actualizado exitosamente');
+                  return redirect()->back();
+      }
+      return redirect()->back()->withErrors(['No es posible actualizar tu foto de perfil']);
+    }
 }

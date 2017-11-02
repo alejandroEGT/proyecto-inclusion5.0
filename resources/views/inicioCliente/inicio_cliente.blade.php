@@ -60,11 +60,29 @@
 
 	<!--tienda-->
 	<div class="android-more-section">
+
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Tiendas</div>
 		<div class="android-card-container mdl-grid">
 		  	@foreach($tiendas as $tienda) 
 		    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 		      <div class="mdl-card__media porteimg"><img src="{{'/'.$tienda->logo}}"></div>
+		      <div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $tienda->nombre }}</h4></div>
+		      <div class="mdl-card__supporting-text">
+		      <span class="mdl-typography--font-light mdl-typography--subhead">{{ $tienda->descripcion }}</span>
+		      </div>
+		      <div class="mdl-card__actions">
+		         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}">Ver Tienda<i class="material-icons">chevron_right</i></a>
+		      </div>
+		    </div>
+	   		@endforeach
+	   		  </div>
+		    
+			
+		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Vendedores</div>
+		<div class="android-card-container mdl-grid">
+	   		@foreach($tiendas_vendedor as $tienda) 
+		    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
+		      <div class="mdl-card__media porteimg"><img src="{{'/'.$tienda->foto}}"></div>
 		      <div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $tienda->nombre }}</h4></div>
 		      <div class="mdl-card__supporting-text">
 		      <span class="mdl-typography--font-light mdl-typography--subhead">{{ $tienda->descripcion }}</span>
@@ -76,7 +94,6 @@
 	   		@endforeach
 	  	</div>	  
 	</div>
-
 	<!--calidad-->
 	<div class="container-fluid">
 		<div class="row piePagina">

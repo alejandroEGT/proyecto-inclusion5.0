@@ -23,9 +23,6 @@
 						</center>
 					@endif
 					<hr>
-					<center>
-						<label><p>{{ $area->descripcion }}</p></label>
-					</center>
 				</div>
 			</div>
 			@if (!empty($encargado))
@@ -67,10 +64,9 @@
 	<div class="col-md-7">
 		<div class="row">
 			<div class="col-md-12  well blanco">
+					<label class="lbl-desc"><p>{{ $area->descripcion }}</p></label>
 					<p><img src="{{ '/'.$institucion->logo }}" class="sizeLogoMin" ></p>
 					<p><label><strong>Institución: </strong> {{$institucion->nombre}} </label></p>
-					<hr>
-					<p><label><strong>Razón social: </strong> {{$institucion->razonSocial}} </label></p>
 			</div>
 		</div>
 		<div class="row">

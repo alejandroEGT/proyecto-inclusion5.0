@@ -187,8 +187,8 @@ small{
 .tamanio-inst{
 	float: none;
 	 margin: 0 auto;
-	height: 200px;
-	width: 280px;
+	height: 150px;
+	width: 180px;
 }
 .color-sky{
 	background-color:#E0ECF8;
@@ -315,4 +315,12 @@ small{
 }
 .letra-pequenia{
 	font-size: 12px;
+}
+.background-blue{
+	background: url(https://static8.depositphotos.com/1033704/980/i/950/depositphotos_9808899-stock-photo-silver-gray-background.jpg);
+	background-size: 100% 100%; 
+}
+.lbl-desc{
+	color:#5499C7;
+	font-size: 13px;
 }

@@ -1,4 +1,4 @@
-<div class=" well color-sky">
+<div class=" well background-blue">
 	<a href="#" onclick="window.history.back();">
 		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
 	</a>
@@ -17,11 +17,11 @@
 </div>
 <hr>
 <div class="row">
-	<center><label>Productos</label></center>
-	<hr>
 	<div class="col-md-offset-1 col-md-10 panel ">
 		
 		@if (count($productos))
+		<center><label>Productos</label></center>
+		<hr>
 			@foreach ($productos as $producto)
 							<div class="box-producto">
 								<center>
@@ -36,6 +36,25 @@
 		@endif
 		@if (!count($productos))
 			<label>No hay productos</label>
+		@endif
+		<hr>
+		@if (count($productos))
+		<center><label>Servicios</label></center>
+		<hr>
+			@foreach ($servicios as $servicio)
+							<div class="box-producto">
+								<center>
+									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
+									<p>{{ str_limit($servicio->nombre,10) }}</p>
+									<p><a href="{{ url($ruta.'/detalleServicio/'.base64_encode($servicio->id).'/'.$idInstitucion) }}" class="btn btn-primary btn-xs">Ver</a>
+									</p>
+								</center>
+
+							</div>	
+							@endforeach
+		@endif
+		@if (!count($servicios))
+			<label>No hay servicios</label>
 		@endif
 		
 	</div>

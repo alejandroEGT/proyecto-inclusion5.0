@@ -30,7 +30,13 @@ class Tienda_servicio_institucion extends Model
     }
     protected function borrar($ids)
     {
-        $tpi = \DB::table('tienda_servicio_instituciones')->where('id_servicio', '=', $ids)->delete();
+        //$tpi = \DB::table('tienda_servicio_instituciones')->where('id_servicio', '=', $ids)->delete();
+        $tpi = \DB::table('Tienda_servicio_instituciones')->where('id_servicio', $ids)
+                ->update([
+                        'id_estado' => 4
+                ]);
+
+        dd($tpi);
         return $tpi;
     }
     protected function mostrarServiciosArea($idA, $idI)

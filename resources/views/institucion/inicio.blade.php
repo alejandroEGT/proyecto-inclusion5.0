@@ -5,7 +5,7 @@
 @if (isset($institucion))
 	<div class="" >
 		<div class="row">
-			<div class="col-md-12 well">
+			<div class="col-md-12 well background-blue">
 				<div class="centro1" >
 					<img src="{{ '/'.$institucion->logo }}" width="100">
 					<!--<p class="p-titulo-inst"> {{--$institucion->nombre--}} </p>-->

@@ -22,7 +22,7 @@
                     <li class="pushy-submenu" >
                         
                         <div class="min-perfil-vendedor" >            
-                              <img :src="'/'+fotoPerfil" height="50" alt="">
+                              <img :src="'/'+fotoPerfil" alt="" class="img-logo img img-thumbnail">
                             <p class="nombre-perfil">
                                 @{{ nombre }}</p>
                                <p class="nombre-perfil">({{ Auth::user()->nombres.' '.Auth::user()->apellidos }})

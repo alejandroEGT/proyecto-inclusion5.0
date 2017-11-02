@@ -208,6 +208,7 @@ class institucionController extends Controller
         $foto = Fotoperfil::traerFotobyid($idu);
 
         $productos = producto::verProductoDesdeArea($vendedorInstitucion[0]->id_area , 5);
+        $servicios = servicio::mostrarServicioDesdeArea($vendedorInstitucion[0]->id_area, 5);
         
         return view('institucion.perfil_vendedorInstitucion')
         ->with('foto',$foto)
@@ -215,6 +216,7 @@ class institucionController extends Controller
         ->with('vendedor',$vendedor[0]->telefono)
         ->with('institucion', $institucion)
         ->with('productos', $productos)
+        ->with('servicios', $servicios)
         ->with('idInstitucion', base64_encode($vendedorInstitucion[0]->id_institucion));
         
         //return view('institucion.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
@@ -753,13 +755,18 @@ class institucionController extends Controller
     }
     public function eliminar_servicio_institucion(Request $dato)
     { 
-       $getFoto = foto_servicio::where('id_servicio',$dato->idServicio)->get();
-       \File::delete($getFoto[0]->nombre);/*ELIMINAR FOTO*/
-       $foto_servicio = foto_servicio::borrar($getFoto[0]->id);
-       $tienda_serv_inst = Tienda_servicio_institucion::borrar($dato->idServicio);
-       $serv_insti = servicio::borrar($dato->idServicio);
+      try{
+         $getFoto = foto_servicio::where('id_servicio',$dato->idServicio)->get();
+         \File::delete($getFoto[0]->nombre);/*ELIMINAR FOTO*/
+         $foto_servicio = foto_servicio::borrar($getFoto[0]->id);
+         $tienda_serv_inst = Tienda_servicio_institucion::borrar($dato->idServicio);
+         //$serv_insti = servicio::borrar($dato->idServicio);
 
-       return "true";
+         return "true";
+      }
+      catch (\Illuminate\Database\QueryException $e) {
+            return "true";
+      }
       
     }
     public function actualizar_producto_foto(Request $dato)
@@ -1049,6 +1056,7 @@ class institucionController extends Controller
     public function actualizar_foto_alumno(Request $dato)
     {
       try{
+          dd($dato->foto);
           $this->validate($dato,[
                   'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
             ]);

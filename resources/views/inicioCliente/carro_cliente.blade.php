@@ -13,7 +13,14 @@
 				
 				<form action="" method="post">
 					{{csrf_field()}}
-					<p class="contenido-sesion">Tienda:</p>
+
+
+	@foreach($carro as $carros)
+
+				@if(count($carros->nombreTienda))
+
+				@endif
+					<p class="contenido-sesion">Tienda: {{ $carros->nombreTienda  }}</p>
 					<p class="contenido-sesion">Categoria:</p>
 					<div class="android-drawer-separator"></div>
 
@@ -22,15 +29,15 @@
 							<div class="row caja-sesion">
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
-									<p>Nombre del producto y detalles</p>
+									<a href="{{ url('/vista_productos').'/'.$carros->idProducto}}"><p>{{ $carros->nombreProducto }}</p></a>
 									<div class="android-drawer-separator"></div>
 								</div>
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
 									<p>Cantidad</p>
 									<p>
-										<input type="text" class="col-xs-12 col-sm-12 col-md-3" name="cantidad">
-										<label class="bmd-label-floating">unidades</label>
+										<input type="text" class="col-xs-12 col-sm-12 col-md-4" name="cantidad" value="{{ $carros->cantidadProducto }}">
+										<label class="bmd-label-floating"> unidades</label>
 									</p>
 									<div class="android-drawer-separator"></div>
 								</div>
@@ -39,7 +46,7 @@
 									<p>Precio</p>
 									
 									<p>
-										<label for="">CLP $9.990</label>
+										<label for="">{{ '$'.$carros->precioProducto }} CLP </label>
 										<label class="bmd-label-floating">/ unidades</label>
 									</p>
 									<div class="android-drawer-separator"></div>
@@ -49,11 +56,13 @@
 									<br><p align="right"><a href="#" class="registro-sesion bmd-label-floating">Eliminar</a></p>
 									<br><p align="right">
 											<label for="" class="registro-sesion bmd-label-floating">Subtotal: </label>
-											<label for="">$9.990</label>
+											<label for="">{{ '$'.$carros->cantidadProducto*$carros->precioProducto	}} CLP </label>
 										</p>	
 								</div>
 
 							</div>
+
+							@endforeach
 
 							<div class="android-drawer-separator"></div>
 							<p align="right">

@@ -34,12 +34,11 @@ class carroController extends Controller
        public function miCarro()
     {
 
+    	$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
 
-    	$carro = carro::traerDatosCarro();
+    	$carro = carro::traerDatosCarro($id_cliente);
 
-    	dd($carro);
-
-   		return view('inicioCliente.carro_cliente');
+   		return view('inicioCliente.carro_cliente')->with('carro',$carro);
     }
 }
 

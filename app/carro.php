@@ -24,9 +24,9 @@ class carro extends Model
 
 	}
 
-	protected function traerDatosCarro(){
+	protected function traerDatosCarro($idCliente){
 
-		$noticia = \DB::table('carros')
+		$carros = \DB::table('carros')
                     ->select([
                         'carros.id as idCarro',
                         'carros.id_cliente as idCliente',
@@ -43,10 +43,12 @@ class carro extends Model
                     ->join('tienda_producto_instituciones','tienda_producto_instituciones.id_producto','=','productos.id')
                     ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
                     ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
-                    ->where('carros.id_cliente', 5)
+                    ->where('carros.id_cliente', $idCliente->id)
                     ->get();
 
-        return $noticia;
+        return $carros;
+
+        
 		
 	}
 }

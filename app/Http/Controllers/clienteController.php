@@ -22,6 +22,10 @@ class clienteController extends Controller
       //dd($tiendas);
       $ver_producto = producto::ver_producto();
      //dd($ver_producto);
+if(Auth::user()->id_rol!=4){
+    Auth::logout();
+}
+
       return view('inicioCliente.inicio_cliente')->with('ver_producto',$ver_producto)
                                                  ->with('tiendas',$tiendas);
 

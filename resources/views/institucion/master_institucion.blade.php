@@ -20,7 +20,7 @@
                     <li class="pushy-submenu" >
                         
                         <div class="min-perfil-institucion" >
-                            <img v-for="item in db_institucion" height="70" width="100"  :src="'/'+item.logo" alt=""/>
+                            <img v-for="item in db_institucion" :src="'/'+item.logo" alt="" class="img-logo img img-thumbnail"/>
                             <p class="nombre-institucion-perfil" v-for="item in db_institucion">
                                 @{{ item.nombre }}
                             </p>
@@ -70,33 +70,7 @@
                         </ul>
                     </li>
                     
-                    <div v-if="this.navChrome == true">
-                        <li class="pushy-submenu">
-                        <button id="first-link">¿Te ayudamos?</button>
-                        <ul>
-                            @if (Session::has('activarMicro'))
-                                <li class="pushy-link"><a href="desactivarmicro"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
-                            @endif
-
-                            @if (empty(Session::get('activarMicro')))
-                            <li class="pushy-link"><a href="activarmicro">
-                                <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
-                            </a></li>
-                            @endif
-                            @if (Session::has('activarText'))
-                                <li class="pushy-link"><a href="desactivartext"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
-                            @endif
-
-                            @if (empty(Session::get('activarText')))
-                           <li class="pushy-link"><a href="activartext">
-                                <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
-                            </a></li>
-                            @endif
-                            <li class="pushy-link"><a><input  type="checkbox"> Lupa</a></li>
-                             <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
-                        </ul>
-                    </li>
-            </div>
+                  
                     
                    <!-- <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>

@@ -89,6 +89,7 @@ class autenticarController extends Controller
      public function login_vendedor(userloginRequest $data){
 
             $data->flash();
+        try{    
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
              if (count($verificar)>0 && $verificar[0]->id_rol == 1) { /**"eres vendedor individual"**/
@@ -99,6 +100,9 @@ class autenticarController extends Controller
                 
             }
             return redirect()->back();
+        }catch (\Illuminate\Database\QueryException $e) {
+                return redirect()->back()->withErrors(['Algo no anda bien, posiblemente datos mal ingresados o no hay conexión']);
+       }     
      }
 
      public function vista_loginEncargado(){
@@ -107,17 +111,21 @@ class autenticarController extends Controller
      }
      public function login_loginEncargado(userloginRequest $data){
         $data->flash();
-        $verificar = \DB::select("select * from users where email = '".$data->correo."'");
+        try{
+            $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
-            if(count($verificar)>0 && $verificar[0]->id_rol == 3){  /**"eres encargado de area"**/
-            
-                if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
-                    
-                    return redirect('/encargadoArea/inicio');    
+                if(count($verificar)>0 && $verificar[0]->id_rol == 3){  /**"eres encargado de area"**/
+                
+                    if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
+                        
+                        return redirect('/encargadoArea/inicio');    
+                    }
+                    return redirect()->back();
                 }
-                return redirect()->back();
-            }
-              return redirect()->back();
+                  return redirect()->back();
+        } catch (\Illuminate\Database\QueryException $e) {
+                return redirect()->back()->withErrors(['Algo no anda bien, posiblemente datos mal ingresados o no hay conexión']);
+       }      
      }
 
       /*login Cliente*/

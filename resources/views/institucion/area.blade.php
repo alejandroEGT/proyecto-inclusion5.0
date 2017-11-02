@@ -55,7 +55,21 @@
 				</div>
 				@endif
 				@if ($area->logo == "")
-					<center><label>(No hay un logo..)</label></center>
+					<center><label>(No hay un logo..) </label> <a data-toggle="collapse" data-target="#logosin"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></center>
+
+					<div id="logosin" class="collapse">
+							<div class="alert alert-info" role="alert">
+								<form action="{{ url('institucion/actualizar_logo_area') }}" method="post" enctype="multipart/form-data" >
+									{{csrf_field()}}
+							  		<p><strong>Actualizar Logo del área</strong> </p>
+							  		<input type="hidden" name="idArea" value="{{ $area->id }}" >
+							  		<p>
+							  		<input type="file" name="logo"><br>
+									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
+								</form>	
+							</div>
+				</div>
+
 				@endif
 			</div>
 			<div class="col-md-6">
@@ -220,8 +234,8 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div id="demo3" class="collapse">
-				
-						@if (!is_null($servicios))
+						
+						@if (count($servicios)>0)
 							
 							<table class="table table-hover">
 								<tr>
@@ -249,7 +263,7 @@
 							</table>
 
 						@endif
-						@if (is_null($servicios))
+						@if (!count($servicios))
 							<p>no existen servicios en el área</p>
 						@endif
 				</div>

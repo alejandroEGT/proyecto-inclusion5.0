@@ -28,7 +28,7 @@
                     <li class="pushy-submenu" >
                         
                         <div class="min-perfil-vendedor" >            
-                              <img :src="'/'+fotoPerfil" height="50" alt="">
+                              <img :src="'/'+fotoPerfil" height="50" alt="" class="img-logo img img-thumbnail">
                             <p class="nombre-perfil">
                                {{ Auth::user()->nombres.' '.Auth::user()->apellidos }}
                             </p>
@@ -38,7 +38,38 @@
                         <hr>
                     </li>
                      <li class="pushy-link"><a href="{{ url('userDependiente/inicio') }}">Inicio</a></li>
+                    
+                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Mis Datos</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Publicar productos</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Publicar servicios</a></li>
+                    <!--<li class="pushy-submenu">
+                        <button>Formularios</button>
+                        <ul>
+                            <li class="pushy-link"><a href="index">Inicio</a></li>
+                            <li class="pushy-link"><a href="/login">Login de institución</a></li>
+                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                        </ul>
+                    </li>-->
+                    <!--<li class="pushy-submenu">
+                        <button>foto 3</button>
+                        <ul>
+                            <li class="pushy-link"><a href="foto">foto</a></li>
+                            <li class="pushy-link"><a href="#">Item 2</a></li>
+                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                        </ul>
+                    </li>-->
                     <li class="pushy-submenu">
+                        <button><i class="fa fa-cube"></i> Especialidad / Areas</button>
+                        <ul>
+                            <li class="pushy-link"><a href="#"><!--Aqui nombe--></a></li>
+                        </ul>
+                    </li>
+                    <li class="pushy-link"><a href="#"><i class="fa fa-globe"></i> Notificaciones</a></li>
+                    <li class="pushy-link"><a href="#">Item 2</a></li>
+                    <li class="pushy-link"><a href="#">Item 3</a></li>
+                    <li class="pushy-link"><a href="#">Item 4</a></li>
+                </ul>
+                <li class="pushy-submenu">
                         <button id="first-link">¿Te ayudamos?</button>
                         <ul>
                             @if (Session::has('activarMicro'))
@@ -62,34 +93,6 @@
                              <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
                     </li>
-                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Mis Datos</a></li>
-                    <li class="pushy-submenu">
-                        <button>Formularios</button>
-                        <ul>
-                            <li class="pushy-link"><a href="index">Inicio</a></li>
-                            <li class="pushy-link"><a href="/login">Login de institución</a></li>
-                            <li class="pushy-link"><a href="#">Item 3</a></li>
-                        </ul>
-                    </li>
-                    <li class="pushy-submenu">
-                        <button>foto 3</button>
-                        <ul>
-                            <li class="pushy-link"><a href="foto">foto</a></li>
-                            <li class="pushy-link"><a href="#">Item 2</a></li>
-                            <li class="pushy-link"><a href="#">Item 3</a></li>
-                        </ul>
-                    </li>
-                    <li class="pushy-submenu">
-                        <button><i class="fa fa-cube"></i> Especialidad / Areas</button>
-                        <ul>
-                            <li class="pushy-link"><a href="#"><!--Aqui nombe--></a></li>
-                        </ul>
-                    </li>
-                    <li class="pushy-link"><a href="#"><i class="fa fa-globe"></i> Notificaciones</a></li>
-                    <li class="pushy-link"><a href="#">Item 2</a></li>
-                    <li class="pushy-link"><a href="#">Item 3</a></li>
-                    <li class="pushy-link"><a href="#">Item 4</a></li>
-                </ul>
             </div>
         </nav>
 

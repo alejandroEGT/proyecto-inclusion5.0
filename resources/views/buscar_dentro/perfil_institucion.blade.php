@@ -30,14 +30,24 @@
 						  <div class="panel-body">
 						  	@foreach ($areas as $area)
 								
-									@if ($area->logo == null)
-										<p><a href="{{ url($ruta.'/areaExtern/'.$idInstitucion.'/'.base64_encode($area->id)) }}"><label style="margin-left: 20px">{{ $area->nombre }}</label></a></p>
-										<hr>
+									<div class="row">
+										@if ($area->logo == null)
+										
+										<div class="col-md-12">
+											<p><a href="{{ url($ruta.'/areaExtern/'.$idInstitucion.'/'.base64_encode($area->id)) }}">
+											<label style="margin-left: 20px">{{ $area->nombre }}</label></a></p><hr>
+										</div>
+										
 									@endif
 									@if (!$area->logo == null)
-										<p><a href="{{ url($ruta.'/areaExtern/'.$idInstitucion.'/'.base64_encode($area->id)) }}"><img src="{{'/'.$area->logo }}" class="sizeLogo">  
-										<label style="margin-left: 20px">{{ $area->nombre }}</label></a></p><hr>
+										<div class="col-md-2 col-xs-2">
+											<p><a href="{{ url($ruta.'/areaExtern/'.$idInstitucion.'/'.base64_encode($area->id)) }}"><img src="{{'/'.$area->logo }}" class="sizeLogo">  
+										</div>
+										<div class="col-md-10 col-xs-10">
+											<label style="margin-left: 20px">{{ $area->nombre }}</label></a></p><hr>
+										</div>
 									@endif
+									</div>
 							@endforeach
 						  </div>
 					</div>

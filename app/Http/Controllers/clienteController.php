@@ -16,16 +16,22 @@ use Illuminate\Support\Facades\Auth;
 
 class clienteController extends Controller
 {
+
+    public function verificarUser(){
+
+        if(Auth::user() && Auth::user()->id_rol!=4){
+            Auth::logout();
+        }
+    }
+
     public function inicio_cliente(){
 
       $tiendas = Tienda_institucion::traerTiendas();
       //dd($tiendas);
       $ver_producto = producto::ver_producto();
      //dd($ver_producto);
-if(Auth::user()->id_rol!=4){
-    Auth::logout();
-}
 
+      $this->verificarUser();
       return view('inicioCliente.inicio_cliente')->with('ver_producto',$ver_producto)
                                                  ->with('tiendas',$tiendas);
 
@@ -33,13 +39,14 @@ if(Auth::user()->id_rol!=4){
 
      public function vista_productos($id){
 
-            
+          $this->verificarUser();  
         $producto = producto::producto_id($id);
         return view('inicioCliente.vista_productos')->with('producto',$producto);
                                                  
     }  
 
     public function ver_mas_producto(){
+      $this->verificarUser();
       $ver_mas = producto::ver_mas_producto();
        $tiendas = Tienda_institucion::traerTiendas();
       return view ('inicioCliente.inicio_cliente_mas')->with('ver_mas',$ver_mas)
@@ -61,10 +68,12 @@ if(Auth::user()->id_rol!=4){
 
 
 	public function sesion_cliente(){
+    $this->verificarUser();
     	return view('inicioCliente.sesion_cliente');
     }
 
     public function registro_cliente(){
+      $this->verificarUser();
     	
       $sexo = Sexo::all();
       
@@ -76,6 +85,7 @@ if(Auth::user()->id_rol!=4){
 
         public function prueba_cliente()
     {
+      $this->verificarUser();
      
         $ver_producto = producto::ver_producto();
         return view('inicioCliente.prueba')->with('ver_producto',$ver_producto);

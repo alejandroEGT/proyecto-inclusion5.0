@@ -319,7 +319,6 @@ Route::get('/aceptarSolicitudServicio/{id}','institucionController@aceptarSolici
          Route::get('/registro_cliente' , 'clienteController@registro_cliente');
          Route::post('/registro_cliente' , 'clienteController@guardar_cliente');
           
-
          Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 
          Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');

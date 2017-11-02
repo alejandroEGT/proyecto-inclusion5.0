@@ -27,9 +27,10 @@
 						<label class="bmd-label-floating">$ {{$producto->precioProducto}} </label> 
 					</dd>
 
-				
-					<form action="{{ url('carro/agregarProd').'/'.$producto->idProducto}}"  method="post">
+
+					<form action="{{ url('carro/agregarProd')}}"  method="post">
 						{{ csrf_field() }}
+					<input type="hidden" name="id" value="{{ base64_encode($producto->idProducto) }}">
 
 							<dt>
 						Cantidad

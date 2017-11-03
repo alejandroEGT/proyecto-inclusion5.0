@@ -309,6 +309,24 @@ Route::get('/aceptarSolicitudServicio/{id}','institucionController@aceptarSolici
 
 /*inicio de usuarios*/
 
+<<<<<<< HEAD
+
+
+         Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
+         Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
+
+         Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
+         Route::post('/sesion_cliente', 'loginClienteController@authCliente');
+
+         Route::get('/registro_cliente' , 'clienteController@registro_cliente');
+         Route::post('/registro_cliente' , 'clienteController@guardar_cliente');
+          
+         Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
+
+         Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
+
+
+=======
 Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
 Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
 Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
@@ -317,6 +335,7 @@ Route::get('/registro_cliente' , 'clienteController@registro_cliente');
 Route::post('/registro_cliente' , 'clienteController@guardar_cliente');         
 Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
+>>>>>>> ca555ae2ab229255df11f96a43767609e7f14692
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');

@@ -10,6 +10,7 @@
 		<p><strong class="nombreblue" ><i class="fa fa-user" aria-hidden="true"></i> {{$usuario->nombres.' '.$usuario->apellidos}}</strong></p>
 		<p><strong class="correo" ><i class="fa fa-envelope" aria-hidden="true"></i> {{$usuario->email}}</strong></p>
 		<p><strong class="numero" ><label><i class="fa fa-phone" aria-hidden="true"></i> {{$vendedor}}</label></strong></p>
+		<p><strong class="numero" ><label>Alumno</label></strong></p>
 		<p><label>Institución perteneciente: </label> <a href="{{ url($ruta."/perfil_institucion/".base64_encode($institucion->id)."") }}">{{ $institucion->nombre }}
 		<img src="{{ '/'.$institucion->logo}}" height="40"></a></p>
 	</div>

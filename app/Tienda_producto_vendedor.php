@@ -54,6 +54,17 @@ class Tienda_producto_vendedor extends Model
         return $prod;
 
     }
+    protected function actualizar_visibilidad($dato)
+    {
+        $pi = \DB::table('tienda_producto_vendedor')
+                ->where('id_producto', $dato->idProducto)
+                ->update(['id_estado' => $dato->estadoV]);
+
+        if (count($pi)>0) {
+             return true;
+        }   
+        return false;     
+    }
 
     
 }

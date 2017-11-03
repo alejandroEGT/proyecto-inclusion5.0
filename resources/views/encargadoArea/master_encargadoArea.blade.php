@@ -123,7 +123,7 @@
                             </div>
                             <div class="col-md-5 col-xs-12">
                                 <div class="container-fluid" >
-                                     <p class="p-right"><label>Registrado como: {{Auth::user()->email}}</label></p>
+                                     <p class="p-right"><label>{{Auth::user()->email}}</label></p>
                                 </div>
                             </div>
                         </div>

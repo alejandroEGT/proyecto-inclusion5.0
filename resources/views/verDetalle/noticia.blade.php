@@ -1,4 +1,8 @@
+<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 <div class="row">
+
 			<div class="col-md-offset-1 col-md-2">
 				<div class="ico-news"></div>
 			</div>

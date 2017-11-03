@@ -107,7 +107,7 @@
 				    </div>
 
 					<!--cuerpo-->
-					<div class="android-content mdl-layout__content">
+					<div class="android-content mdl-layout__content margen">
 						@yield('content')		
 						
 						

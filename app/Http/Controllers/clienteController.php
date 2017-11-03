@@ -103,26 +103,25 @@ class clienteController extends Controller
 
        public function guardar_cliente(Request $datos){
 
-   		    $user = User::insertarCliente($datos,1);
-
-
-            $idUser  = User::where('email', $datos->correo)->first();
-
-           $cliente = cliente::guardarCliente($datos, $idUser);
-
-            if($cliente){
-
+      try{
+   		  $user = User::insertarCliente($datos,1);
+        $idUser  = User::where('email', $datos->correo)->first();
+        $cliente = cliente::guardarCliente($datos, $idUser);
+          if($cliente){
               $foto = Fotoperfil::fotoDefault($idUser->id);
-
               $carro = carro::crearCarro($idUser);
 
-              \Session::flash('Advertencia', 'Registro exitosamente');
-                  return redirect()->back();
-              
-            }else{
-              \Session::flash('Advertencia', 'Lo sentimos, a ocurrido un error en el registro, intentelo nuevamente');
-                  return redirect()->back();
+            \Session::flash('Advertencia', 'Registro exitosamente');
+             return redirect()->back();
+
+          }else{
+            \Session::flash('Advertencia', 'Lo sentimos, a ocurrido un error en el registro, intentelo nuevamente');
+             return redirect()->back();
                 }
+
+      } catch (\Illuminate\Database\QueryException $e){
+      return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }
           }
 
               
@@ -133,72 +132,85 @@ class clienteController extends Controller
 
     public function updCorreo (clienteRequest $datos){
 
-      $cliente = cliente::where('id_user', \Auth::user()->id)->first();
+      try{
+        $cliente = cliente::where('id_user', \Auth::user()->id)->first();
 
-      if($cliente->facebook_id != null){
-        \Session::flash('Advertencia', 'tu correo electronico no puede ser actualizado porque iniciaste la sesion con redes sociales');
-                  return redirect()->back();
-      }
+        if($cliente->facebook_id != null){
+          \Session::flash('Advertencia', 'tu correo electronico no puede ser actualizado porque iniciaste la sesion con redes sociales');
+                    return redirect()->back();
+        }
 
-     $update = cliente::updCorreo($datos);
+       $update = cliente::updCorreo($datos);
 
-     if($update){
-       \Session::flash('Advertencia', 'Tu correo ha sido actualizado exitosamente');
-                  return redirect()->back();
-     }else{
-       \Session::flash('Advertencia', 'Lo sentimos no se pudo realizar la operación');
-                  return redirect()->back();
-     }
+       if($update){
+         \Session::flash('Advertencia', 'Tu correo ha sido actualizado exitosamente');
+                    return redirect()->back();
+       }else{
+         \Session::flash('Advertencia', 'Lo sentimos no se pudo realizar la operación');
+                    return redirect()->back();
+       }
+     } catch (\Illuminate\Database\QueryException $e){
+        return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }
 
     }
 
     public function updTelefono (Request $datos){
 
-      $this->validate($datos,[
-        'telefono' => 'required | numeric | min:9',
-        'repetirTelefono' => 'required |  numeric | min:9 | same:telefono'
-     ]);
-      $update = cliente::updTelefono($datos);
+    try{
+        $this->validate($datos,[
+          'telefono' => 'required | numeric | min:9',
+          'repetirTelefono' => 'required |  numeric | min:9 | same:telefono'
+       ]);
+        $update = cliente::updTelefono($datos);
 
-     if($update){
-       \Session::flash('Advertencia', 'Tu numero de telefono ha sido actualizado exitosamente');
-                  return redirect()->back();
-     }else{
-          \Session::flash('Advertencia', 'Lo sentimos no se pudo realizar la operación');
-                  return redirect()->back();
-     }
+       if($update){
+         \Session::flash('Advertencia', 'Tu numero de telefono ha sido actualizado exitosamente');
+                    return redirect()->back();
+       }else{
+            \Session::flash('Advertencia', 'Lo sentimos no se pudo realizar la operación');
+                    return redirect()->back();
+       }
+     } catch (\Illuminate\Database\QueryException $e){
+        return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }
 
     }
 
     public function updClave (Request $datos){
 
+    try{
+        $cliente = cliente::where('id_user', \Auth::user()->id)->first();
+      
+        if($cliente->facebook_id != null){
+          \Session::flash('Advertencia', 'tu contraseña no puede ser actualizado porque iniciaste la sesion con redes sociales');
+           return redirect()->back();
+        }
+     
+       $this->validate($datos,[
+          'passAntigua' => 'required | min:6 | max:50 ',
+          'passNueva' => 'required | min:6 | max:50',
+          'repPassNueva' => 'required | min:6 | max:50 | same:passNueva'
+       ]);
 
-      $cliente = cliente::where('id_user', \Auth::user()->id)->first();
+       $update = cliente::updClave($datos);
 
-      if($cliente->facebook_id != null){
-        \Session::flash('Advertencia', 'tu contraseña no puede ser actualizado porque iniciaste la sesion con redes sociales');
-                  return redirect()->back();
-      }
+        if($update){
+         \Session::flash('Advertencia', 'Tu numero de telefono ha sido actualizado exitosamente');
+          return redirect()->back();
+       }
+          return redirect()->back()->withErrors(['No es posible actualizar tu contraseña']);
 
-     $this->validate($datos,[
-        'passAntigua' => 'required | min:6 | max:50 ',
-        'passNueva' => 'required | min:6 | max:50',
-        'repPassNueva' => 'required | min:6 | max:50 | same:passNueva'
-     ]);
-
-     $update = cliente::updClave($datos);
-
-      if($update){
-       \Session::flash('Advertencia', 'Tu numero de telefono ha sido actualizado exitosamente');
-                  return redirect()->back();
-     }
-     return redirect()->back()->withErrors(['No es posible actualizar tu contraseña']);
+    } catch (\Illuminate\Database\QueryException $e){
+          return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+          }
 
     }
 
 
-    public function filtrarProducto(Request $datos)
-    {
+    public function filtrarProducto(Request $datos){
+
+    try{
       $this->verificarUser();
       $this->validate($datos,[
                 'buscador' => 'required',
@@ -208,7 +220,12 @@ class clienteController extends Controller
       return view('inicioCliente.nuestroProducto')
       ->with('productos', $productos)
       ->with('titulo', "Filtrado de productos");
+
+    } catch (\Illuminate\Database\QueryException $e){
+        return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }
     }
+
 
 
 public function ver_detalleProducto(Request $dato)

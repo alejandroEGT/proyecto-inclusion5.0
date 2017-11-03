@@ -45,6 +45,15 @@ class Tienda_producto_vendedor extends Model
           ->where('tienda_vendedor.id_vendedor', $id)->paginate(5);
            return $producto;
     }
+    protected function borrar($idP)
+    {
+        $prod = Tienda_producto_vendedor::where('id_producto', $idP)->update([
+                    'id_estado' => 4
+        ]);
+
+        return $prod;
+
+    }
 
     
 }

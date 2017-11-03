@@ -110,6 +110,7 @@
 						<td>{{ $p->creado }}</td>
 						<td>
 							<a class="btn btn-primary btn-xs" href="#">Ver..</a>
+							<input type="button" @click="eliminarProducto({!! $p->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
 						</td>
 					</tr>
 				    

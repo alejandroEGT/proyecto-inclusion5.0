@@ -142,7 +142,21 @@ class vendedorIndependienteController extends Controller
             } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
             }
-        }
+      }
+      public function eliminar_producto_vendedor(Request $dato)
+      {
+
+        $getFoto = foto_producto::where('id_producto',$dato->idProducto)->get();
+        //return $getFoto[0]->foto;
+        //dd($getFoto[0]->foto);
+        \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
+        
+        $foto_prod = foto_producto::borrar($getFoto[0]->id);
+        $tienda_prod_ven = Tienda_producto_vendedor::borrar($dato->idProducto);
+        //$prod_insti = producto::borrar($dato->idProducto);
+
+        return redirect()->back();
+    }
 
 }
 

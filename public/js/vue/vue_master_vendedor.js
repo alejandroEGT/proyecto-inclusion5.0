@@ -1,30 +1,21 @@
 new Vue({
-	el:'#master-vendedorIndependiente',
+	el:'#vendedor',
 	data:{
-		
-		fotoPerfil :''
-		
-	},
+
+	}
+	,
 	 http: { 
             root: 'http://localhost:8000/',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('#token').getAttribute('value')
             }
     },
-	methods:{
-		
-		traerFoto(){
-				this.$http.get('/foto-vendedor').then(function(response){
-
-					this.fotoPerfil = response.body;
-					console.log(response.body);
-				})
-		},
-		eliminarProducto($this){
+    methods:{
+    	eliminarProducto($this){
 			if (confirm("¿Quieres eliminar este producto?") == true) {
 				    
 				    
-						this.$http.get('userIndependiente/eliminar_producto_vendedor/'+$this).then(function(response){
+						this.$http.get('institucion/eliminar_producto_institucion/'+$this).then(function(response){
 								
 								console.log(response.body);
 								alert("producto eliminado");
@@ -37,10 +28,5 @@ new Vue({
 				    alert("Operación cancelada!");
 				}
 		}
-		
-	},
-
-	created (){
-		this.traerFoto();
-	}
+    }
 })

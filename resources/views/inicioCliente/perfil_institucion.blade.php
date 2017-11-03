@@ -39,7 +39,7 @@
 										<hr>
 									@endif
 									@if (!$area->logo == null)
-										<p><a href="{{ url('/areaExtern/'.$idInstitucion.'/'.base64_encode($area->id)) }}"><img src="{{'/'.$area->logo }}" class="sizeLogo">  
+										<p><a href="{{ url('/areaExtern/'.$idInstitucion.'/'.base64_encode($area->id)) }}"><img src="{{'/'.$area->logo }}" class="img-thumbnail img-prod ">  
 										<label style="margin-left: 20px">{{ $area->nombre }}</label></a></p><hr>
 									@endif
 							@endforeach
@@ -55,6 +55,7 @@
 			<div class="col-md-8 fondo-blanco lineas-border">
 				<br>
 				<div class="row">
+					
 					@if (!empty($institucion->mision))
 					<div class="col-md-offset-1 col-md-4 linea-arriba">
 						
@@ -107,21 +108,21 @@
 				@if (count($servicios)>0)
 					<div class="row">
 						<div class="col-md-12">
-							<center><label>Servicios</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
+							<center><div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Servicios</div></center>
+							</div>
 							<hr>
 							
 							@foreach ($servicios as $servicio)
-							<div class="box-producto">
-								<center>
-									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
-									<p>{{ str_limit($servicio->nombre, 10) }}</p>
+							<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
+								
+									<div class="mdl-card__media porteImgTienda"><img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod "></div>
+									<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ str_limit($servicio->nombre, 10) }}</h4></div>
 									<p><a href="{{ url('/detalleServicio/'.base64_encode($servicio->id).'/'.$idInstitucion) }}" class="btn btn-primary btn-xs">Ver</a></p>
-								</center>
+								
 
 							</div>	
 							@endforeach
 
-							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>

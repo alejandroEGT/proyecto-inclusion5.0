@@ -3,15 +3,16 @@
 @section('content')
 
 
-<div class="row">
-  <div class="col-md-offset-2 col-md-8 panel">
+<div class="container">
+  <div class="row">
+  <div class="col-md-offset-2 col-md-12 panel">
     @if (count($productos)>0)
       @foreach ($productos as $producto)
         <div class="row">
-          <div class="col-md-3  ">
-            <img src="{{'/'.$producto->foto}}" class="img-thumbnail img-responsive " >
+          <div class="col-md-4 imagen-producto  ">
+            <img src="{{'/'.$producto->foto}}" class="img-thumbnail  " >
           </div>
-          <div class="col-md-3  ">
+          <div class="col-md-4  ">
             <p><label>{{ $producto->nombre }}</label></p>
             <p><label style="color:#85929E" >{{ $producto->descripcion }}</label></p>
             <p>
@@ -19,6 +20,7 @@
             </p>
           </div>
         </div>
+        <hr>
       @endforeach
     @endif
     @if (!count($productos))
@@ -27,6 +29,7 @@
   </div>
 </div>
 
+</div>
 
 
 @endsection

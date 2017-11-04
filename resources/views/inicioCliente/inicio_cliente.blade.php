@@ -4,7 +4,7 @@
 @section('content')
 
 	<!--Carousel-->
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12">
 				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -19,10 +19,7 @@
 					    </div>
 					    <div class="carousel-item">
 					      <img class="d-block w-100" src="http://destinonegocio.com/wp-content/uploads/2015/04/artesanias.jpg" alt="Second slide">
-					    </div>
-					    <div class="carousel-item">
-					      <img class="d-block w-100" src="https://interiorismos.com/wp-content/2017/01/geometricos2.jpg" alt="Third slide">
-					    </div>
+					    </div>					    
 					  </div>
 					  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -38,8 +35,8 @@
 	</div>
 
 	<!--recomedados-->
-	<div class="android-more-section">
-		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Recomendados</div>
+	<div class="android-more-section ">
+		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Productos de Instituciones</div>
 	  		<div class="android-card-container mdl-grid">		
 			@foreach($ver_producto as $producto)	
 				
@@ -54,8 +51,10 @@
 					</div>
 
 			@endforeach
-			<a class="text-center" href="/inicio_cliente_mas">Ver Mas</a>
+			
 			</div>
+			<hr>	
+			<center><a href="/inicio_cliente_mas">Ver Mas</a></center>
 	</div>
 
 	<!--tienda-->
@@ -76,6 +75,7 @@
 		    </div>
 	   		@endforeach
 	   		  </div>
+	   		  <hr>
 		    
 			
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Vendedores</div>
@@ -94,6 +94,7 @@
 	   		@endforeach
 	  	</div>	  
 	</div>
+	<hr>
 	<!--calidad-->
 	<div class="container-fluid">
 		<div class="row piePagina">

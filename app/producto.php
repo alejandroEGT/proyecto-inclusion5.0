@@ -580,5 +580,52 @@ protected function ver_mas_producto()
                 return $traer;
     }
 
+    /*Comienzo del vendedor individual (FRONTERA)*/
+
+    protected function verDetalleProducto($idP, $idVen)
+    {
+        $traer = \DB::table('tienda_producto_vendedor')
+                ->select([
+                        'tienda_producto_vendedor.id_producto as idProducto',
+                        'foto_productos.foto as foto',
+                        'productos.nombre as nombre',
+                        'productos.descripcion as descripcion',
+                        'productos.created_at as creado',
+                        'estado_tienda_producto.estado as estadoProducto',
+                        'productos.cantidad as cantidad',
+                        'categoria_productos.nombre as nombreCategoria',
+                        'productos.precio as precio'
+                    ])
+                ->join('tienda_vendedor','tienda_vendedor.id', '=', 'tienda_producto_vendedor.id_tienda')
+                ->join('productos', 'productos.id','=','tienda_producto_vendedor.id_producto')
+                ->join('estado_tienda_producto','estado_tienda_producto.id','=','tienda_producto_vendedor.id_estado')
+                ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+                ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
+                ->where('tienda_vendedor.id_vendedor', $idVen)
+                ->where('productos.id', $idP)->first();
+        return $traer;
+    }
+    protected function traerproductoVendedor($idVen, $cant)
+    {
+        $traer = \DB::table('tienda_producto_vendedor')
+        ->select([
+                        'tienda_producto_vendedor.id_producto as idProducto',
+                        'foto_productos.foto as foto',
+                        'productos.nombre as nombre',
+                        /*'productos.descripcion as descripcion',
+                        'productos.created_at as creado',
+                        'estado_tienda_producto.estado as estadoProducto',
+                        'productos.cantidad as cantidad',
+                        'categoria_productos.nombre as nombreCategoria',
+                        'productos.precio as precio'*/
+                    ])
+         ->join('tienda_vendedor','tienda_vendedor.id', '=', 'tienda_producto_vendedor.id_tienda')
+         ->join('productos', 'productos.id','=','tienda_producto_vendedor.id_producto')
+         ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+         ->where('tienda_vendedor.id_vendedor', $idVen)->take(5)->get();
+
+         return $traer;
+    }
+
 }
 

@@ -104,7 +104,7 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="container-fluid" v-for="item in db_institucion" >
 
-                                     <p class="p-right">Registrado como: <strong>@{{item.email}}
+                                     <p class="p-right"><strong>@{{item.email}}
                                      </strong><a href="{{ url('institucion/logout') }}"><img src="/ico/arrows.png"  alt=""/></a></p>
                                      
                                 </div>

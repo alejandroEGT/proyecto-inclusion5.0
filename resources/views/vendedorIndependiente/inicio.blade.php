@@ -54,7 +54,7 @@
 
 							<hr>
 		<div class="row">
-			<div class="col-md-offset-1 col-md-3 linea-gris fondo-blanco">
+			<div class=" col-md-3 linea-gris fondo-blanco">
 				<center><label>Noticias Generales</label></center>
 				<hr>
 				<img class="img-notix"  src="http://www.uaa.mx/rectoria/dcrp/wp-content/uploads/2015/05/184-Reuni%C3%B3n-SICOM.jpg" height="70" width="90">
@@ -87,27 +87,35 @@
 			</div>
 			<div class="col-md-7  fondo-blanco">
 
+				@if (count($productos)>0)
+					
+				
 					<div class="row">
 						<div class="col-md-12">
 							<center><label>Productos</label>  <i class="fa fa-tags" aria-hidden="true"></i></center>
 							<hr>
 							
 
-							<div class="box-producto">
+							@foreach ($productos as $p)
+								<div class="box-producto">
 								<center>
-									<img class="img-thumbnail img-prod ">
+									<img src="{{'/'.$p->foto}}" class="img-thumbnail img-prod ">
 									<p></p>
 									<p><a href="" class="btn btn-primary btn-xs">Ver</a></p>
 								</center>
 
 							</div>	
+							@endforeach
 
 
 							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>
-
+				@endif
+				@if (!count($productos))
+					<center><label for="">No Existen productos para mostrar</label></center>
+				@endif
 
 					<center><label for="">No Existen productos para mostrar</label></center>
 

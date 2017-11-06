@@ -1,6 +1,9 @@
  @extends('institucion.master_institucion')
 
 @section('content')
+<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 <center><label>{{$titulo}}</label></center>
 <hr>
 <div class="row">

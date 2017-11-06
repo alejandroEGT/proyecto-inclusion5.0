@@ -128,6 +128,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/detalleNoticia_local/{idNoticia}','institucionController@ver_detalleNoticia_local');
         Route::get('/areaExtern/{idInstitucion}/{idArea}', 'institucionController@vista_areaExterna');
         Route::post('/actualizar_logo_area', 'institucionController@actualizar_logo_area');
+        Route::get('/detalleProductoVendedor/{idProducto}/{idVendedor}', 'institucionController@vista_detalleProductoVendedor');
 
 });
 
@@ -197,6 +198,15 @@ Route::group(['prefix' => 'userIndependiente','middleware'=>['md_vendedor']], fu
         Route::get('/eliminar_producto_vendedor/{idProducto}', 'vendedorIndependienteController@eliminar_producto_vendedor');
         Route::post('/publicarServicio' , 'vendedorIndependienteController@publicarServicio');
         Route::get('/eliminar_servicio_vendedor/{idServicio}', 'vendedorIndependienteController@eliminar_servicio_vendedor');
+        Route::get('/detalleProducto/{id}', 'vendedorIndependienteController@ver_detalleProducto');
+        Route::post('/actualizar_producto_foto', 'vendedorIndependienteController@actualizar_producto_foto');
+        Route::post('/actualizar_producto_nombre','vendedorIndependienteController@actualizar_producto_nombre');
+        Route::post('/actualizar_producto_descripcion','vendedorIndependienteController@actualizar_producto_descripcion');
+        Route::post('/actualizar_producto_cantidad','institucionController@actualizar_producto_cantidad');
+        Route::post('/actualizar_producto_visibilidad','vendedorIndependienteController@actualizar_producto_visibilidad');
+        Route::post('/actualizar_producto_categoria', 'vendedorIndependienteController@actualizar_producto_categoria');
+        Route::post('/actualizar_producto_precio', 'vendedorIndependienteController@actualizar_producto_precio');
+
 });
 
 Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], function(){

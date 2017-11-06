@@ -11,6 +11,7 @@ use App\User;
 use App\Vendedor;
 use App\categoria_producto;
 use App\categoria_servicio;
+use App\estado_tienda_producto;
 use App\foto_producto;
 use App\foto_servicio;
 use App\producto;
@@ -21,9 +22,15 @@ use Illuminate\Support\Facades\Auth;
 class vendedorIndependienteController extends Controller
 {
     public function vista_inicio()
-    {
+    {   
+        $vendedor = Vendedor::where('id_user', \Auth::user()->id)->first();
         $foto = Fotoperfil::traerFoto();
-    	return view('vendedorIndependiente.inicio')->with('foto', $foto);
+        $productos = producto::traerproductoVendedor($vendedor->id, 4);
+    	return view('vendedorIndependiente.inicio')
+      ->with([
+        'foto' => $foto,
+        'productos' => $productos
+      ]);
     }
     public function vista_cambiarFoto(){
         return view('vendedorIndependiente.cambiarFoto');
@@ -68,7 +75,7 @@ class vendedorIndependienteController extends Controller
          $this->validate($dato, ['fotoP' => 'required']);
         $guardar = Fotoperfil::guardar($dato);
          \Session::flash('cambio', 'Foto cambiada');
-        return redirect()->back();
+        return redirect('userIndependiente/mis_datos');
     }
 
 
@@ -165,6 +172,145 @@ class vendedorIndependienteController extends Controller
         //$prod_insti = producto::borrar($dato->idProducto);
 
         return redirect()->back();
+    }
+    public function ver_detalleProducto(Request $dato)
+    {
+      $getId = base64_decode($dato->id);
+      $categoria = categoria_producto::all();
+      $estadoP = estado_tienda_producto::limit(2)->get();
+      //$area = Area::traerArea();
+      $vendedor = Vendedor::idVendedor(\Auth::user()->id);
+      //dd($vendedor[0]->id);
+      $productos = producto::verDetalleProducto($getId, $vendedor[0]->id);
+      
+      return view('vendedorIndependiente.verDetalleProducto')
+      ->with('productos', $productos)
+      ->with('categoria', $categoria)
+      ->with('estadoP', $estadoP);
+    }
+
+    public function actualizar_producto_foto(Request $dato)
+    {
+      try{
+          $this->validate($dato,[
+                    'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
+              ]);
+          //dd($dato->idProducto);
+          $actualizar = foto_producto::actualizar_foto($dato);
+          if ($actualizar > 0) {
+              \Session::flash('correcto', 'Foto actualizada correctamente');
+              return redirect()->back();
+          }
+          return redirect()->back();
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }
+    }
+     public function actualizar_producto_nombre(Request $dato)
+    {
+        try{
+               $this->validate($dato,[
+                    'nombre' => 'required | max:50',
+              ]);
+              $nombre = producto::actualizar_nombre($dato);
+              if ($nombre) {
+                \Session::flash('correcto', 'Nombre actualizado correctamente');
+                return redirect()->back();
+              }
+              return redirect()->back();
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }
+    }
+    public function actualizar_producto_descripcion(Request $dato)
+    {
+      try{
+            $this->validate($dato,[
+                    'descripcion' => 'required | max:250',
+              ]);
+              $desc = producto::actualizar_descripcion($dato);
+              if ($desc) {
+                \Session::flash('correcto', 'Descripcion actualizada correctamente');
+                return redirect()->back();
+              }
+              return redirect()->back();
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }
+    }
+     public function actualizar_producto_cantidad(Request $dato)
+     {
+      try{
+            $this->validate($dato,[
+                  'cantidad' => 'required | numeric',
+            ]);
+            $cant = producto::actualizar_cantidad($dato);
+            if ($cant) {
+              \Session::flash('correcto', 'Cantidad actualizada correctamente');
+              return redirect()->back();
+            }
+            return redirect()->back();
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }     
+
+    }
+     public function actualizar_producto_visibilidad(Request $dato)
+    {
+      try{
+               $this->validate($dato,[
+                    'estadoV' => 'required',
+              ]);
+
+              $visibi = Tienda_producto_vendedor::actualizar_visibilidad($dato);
+              if ($visibi) {
+                return redirect()->back();
+              }
+              return redirect()->back();
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }       
+
+    }
+    public function actualizar_producto_categoria(Request $dato)
+    {
+      try{
+            $this->validate($dato,[
+                    'categoria' => 'required',
+              ]);
+
+            $categ = producto::actualizar_categoria($dato);
+              if ($categ) {
+                
+                return redirect()->back();
+              }
+              return redirect()->back();
+
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
+
+    }
+     public function actualizar_producto_precio(Request $dato)
+    {
+        try{
+             $this->validate($dato,[
+                  'precio' => 'required | numeric',
+            ]);
+            $cant = producto::actualizar_precio($dato);
+            if ($cant) {
+              \Session::flash('correcto', 'Precio actualizado correctamente');
+              return redirect()->back();
+            }
+            return redirect()->back();
+
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }
+
     }
 
     public function publicarServicio(Request $datos)

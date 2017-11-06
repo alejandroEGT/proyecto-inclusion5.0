@@ -44,7 +44,7 @@
 			<p><label><strong>Descripción:</strong></label> {{ $producto->descripcion }}</p>
 			
 			
-			<p><label><strong>Precio:</strong></label> {{ $producto->precio }}</p>
+			<p><label><strong>Precio: $ </strong></label> {{ number_format($producto->precio, 0, ',', '.') }}</p>
 			
 
 			<p><label><strong>Cantidad:</strong></label> {{ $producto->cantidad }} </p>

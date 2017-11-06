@@ -102,7 +102,7 @@
 						<td>{{ $s->descripcion }}</td>
 						
 						<td>
-							<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleServicio/".base64_encode($s->id)) }}">Ver..</a>
+							<a class="btn btn-primary btn-xs" href="{{ url("userDependiente/detalleServicio/".base64_encode($s->id)) }}">Ver..</a>
 						</td>
 					</tr>
 				    

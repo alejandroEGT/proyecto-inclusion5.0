@@ -40,8 +40,10 @@
                      <li class="pushy-link"><a href="{{ url('userDependiente/inicio') }}">Inicio</a></li>
                     
                     <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Mis Datos</a></li>
-                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Publicar productos</a></li>
-                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Publicar servicios</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/publicarProducto') }}">Publicar productos</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/publicarServicio') }}">Publicar servicios</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/traerProductoEnEspera') }}">Productos en espera</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/traerServicioEnEspera') }}">Servicios en espera</a></li>
                     <!--<li class="pushy-submenu">
                         <button>Formularios</button>
                         <ul>

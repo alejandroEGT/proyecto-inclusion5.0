@@ -325,4 +325,9 @@ class servicio extends Model
         $tpi = \DB::table('servicios')->where('id', '=', $idS)->delete();
         return $tpi;
     }
+    protected function borrar_espera($idS)
+    {
+        $tpi = \DB::table('servicios')->where('id', '=', $idS)->delete();
+        return $tpi;
+    }
 }

@@ -2,6 +2,7 @@
 
 @section('content')
 	<div class="">
+		
 			<p class="text-center" >Notificacione de Integración de productos</p>
 			<div class="row papel-blanco">
 				@if (Session::has('correcto'))
@@ -32,9 +33,12 @@
 									<td>{{ $esp->nombre }}</td>
 									<td>{{ $esp->descripcion }}</td>
 									<td>{{ $esp->nombreArea }}</td>
-									<td>{{ $esp->creado }}</td>
+									<td>{{ date('h:i:s - d/m/Y', strtotime($esp->creado)) }}</td>
 									<td>{{ $esp->nombreEstado}}</td>
-									<td><input class="btn btn-danger" type="button" value="Cancelar"></td>
+									<td>
+										<a class="btn btn-success" href="{{ url('encargadoArea/detalleProductoEspera/'.base64_encode($esp->idProducto)) }}" >Editar</a>
+										<a class="btn btn-danger" @click="eliminarProductoEspera({{ $esp->idProducto }})" >Cancelar</a>
+									</td>
 								</tr>
 								@endforeach		
 							</table>	

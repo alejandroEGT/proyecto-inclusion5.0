@@ -42,7 +42,7 @@ class Tienda_producto_vendedor extends Model
           ->join('tienda_vendedor','tienda_vendedor.id','=','Tienda_producto_vendedor.id_tienda')
           ->join('estado_tienda_producto','tienda_producto_vendedor.id_estado','=','estado_tienda_producto.id')
           ->where('Tienda_producto_vendedor.id_estado',1)
-          ->where('tienda_vendedor.id_vendedor', $id)->paginate(5);
+          ->where('tienda_vendedor.id_vendedor', $id)->paginate(10);
            return $producto;
     }
     protected function borrar($idP)

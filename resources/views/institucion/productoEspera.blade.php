@@ -35,9 +35,9 @@
 										<td>{{ $esp->descripcion }}</td>
 										
 										<td>{{ $esp->nombreArea }}</td>
-										<td>{{ $esp->creado }}</td>
+										<td>{{ date('h:i:s - d/m/Y', strtotime($esp->creado)) }}</td>
 										<td>{{ $esp->nombreEstado}}</td>
-										<td><p><a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($esp->idProducto)) }}">Ver (recomendado)</a></p><p><a  class="btn btn-success btn-xs" @click="aceptarProducto({{ $esp->idProducto }})" >Aceptar</a></p><p> <input class="btn btn-danger btn-xs" type="button" value="Cancelar"></p></td>
+										<td><p><a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleProducto/".base64_encode($esp->idProducto)) }}">Ver (recomendado)</a></p><p><a  class="btn btn-success btn-xs" @click="aceptarProducto({{ $esp->idProducto }})" >Aceptar</a></p><p> <a class="btn btn-danger btn-xs" @click="eliminarProductoEspera({{ $esp->idProducto }})" >Cancelar</a></td>
 									</tr>
 								@endforeach		
 							</table>	

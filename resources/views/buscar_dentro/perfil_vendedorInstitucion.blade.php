@@ -1,3 +1,4 @@
+
 <div class=" well background-blue">
 	<a href="#" onclick="window.history.back();">
 		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
@@ -28,18 +29,20 @@
 								<center>
 									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($producto->nombre,10) }}</p>
+									<p><label class="lbl-precio" >$ {{ number_format($producto->precio,0,',','.') }}</label></p>
 									<p><a href="{{ url($ruta.'/detalleProducto/'.base64_encode($producto->idProducto).'/'.$idInstitucion) }}" class="btn btn-primary btn-xs">Ver</a>
 									</p>
 								</center>
 
 							</div>	
-							@endforeach
+			@endforeach
+			<center class="center-top" ><label><small><a href="{{ url($ruta.'/ver_todo_producto_alumno/'.base64_encode($vendedor_id)) }}">Ver mas..</a></small></label></center>
 		@endif
 		@if (!count($productos))
 			<label>No hay productos</label>
 		@endif
 		<hr>
-		@if (count($productos))
+		@if (count($servicios))
 		<center><label>Servicios</label></center>
 		<hr>
 			@foreach ($servicios as $servicio)
@@ -53,6 +56,7 @@
 
 							</div>	
 							@endforeach
+							<center class="center-top" ><label><small><a href="{{ url($ruta.'/ver_todo_servicio_alumno/'.base64_encode($vendedor_id)) }}">Ver mas..</a></small></label></center>
 		@endif
 		@if (!count($servicios))
 			<label>No hay servicios</label>

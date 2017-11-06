@@ -35,7 +35,7 @@ class alumnoController extends Controller
   {
         $getId = base64_decode($dato->id);
         $area = Area::traer();
-        $alumno = VendedorInstitucion::detalleAlumno($getId);
+        $alumno = VendedorInstitucion::detalleAlumno($getId, \Auth::guard('institucion')->user()->id);
 
         //return $alumno;
         return view('institucion.verDetalleAlumno')
@@ -93,14 +93,17 @@ public function ver_todo_producto()
         $institucion = Institucion::find($vendedorInstitucion[0]->id_institucion);
       
         $productos = producto::verProductoDesdeArea($vendedorInstitucion[0]->id_area , 5);
+        $servicios = servicio::mostrarServicioDesdeArea($vendedorInstitucion[0]->id_area, 5);
         $foto = Fotoperfil::traerFotobyid($idu);
         
         return view('vendedorDependiente.perfil_vendedorInstitucion')
         ->with('foto',$foto)
         ->with('usuario',$usuario)
         ->with('vendedor',$vendedor[0]->telefono)
+        ->with('vendedor_id', $vendedor[0]->id)
         ->with('institucion', $institucion)
         ->with('productos', $productos)
+        ->with('servicios', $servicios)
         ->with('idInstitucion', base64_encode($vendedorInstitucion[0]->id_institucion));;
         
         //return view('encargadoArea.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
@@ -551,6 +554,128 @@ public function ver_todo_producto()
               ->with('estadoS',$estadoS)
               ->with('area',$area)
               ->with('servicio',$servicio);
+    }
+     public function traerProductoEnEspera()
+    {
+      $alumno = VendedorInstitucion::traerDatos();
+      $prod_esp = producto::traerProductoEnEspera_desdeArea($alumno->id_institucion, $alumno->id_area, 10);
+       return view('vendedorDependiente.productoEspera', ['prod_esp' => $prod_esp]);
+    }
+    public function traerServicioEnEspera()
+    {
+       $alumno = VendedorInstitucion::traerDatos();
+       $serv_esp = servicio::traer_ServicioEnEspera_desdeArea($alumno->id_institucion, $alumno->id_area, 10);
+       return view('vendedorDependiente.servicioEspera', ['serv_esp' => $serv_esp]);
+    }
+
+    public function vista_detalleServicioEspera(Request $dato)
+    {
+
+      $getId = base64_decode($dato->idServicio);
+      $categoria = categoria_servicio::all();
+      $estadoS = estado_tienda_servicio::limit(2)->get();
+      $area = Area::all();
+      $alumno = VendedorInstitucion::traerDatos();
+       //dd($alumno);
+      $servicio = servicio::detalleServicio_desdeArea($getId, $alumno->id_institucion, $alumno->id_area);
+
+      return view('vendedorDependiente.detalleServicioEspera')
+              ->with('categoria',$categoria)
+              ->with('estadoS',$estadoS)
+              ->with('area',$area)
+              ->with('servicio',$servicio);
+    
+    }
+    public function vista_todo_producto_alumno(Request $dato)
+    {
+      $idAlumno = base64_decode($dato->id);
+      $vendedor = Vendedor::find($idAlumno);
+      $vendedorInst = VendedorInstitucion::where('id_vendedor', $vendedor->id)->first();
+      $vista_alumno = VendedorInstitucion::detalleAlumno($vendedor->id_user, $vendedorInst->id_institucion );
+      $alumno = VendedorInstitucion::where('id_vendedor', $idAlumno)->first();
+      
+      $productos = producto::verProductoDesdeArea($alumno->id_area, 10);
+      return view('vendedorDependiente.verTodoProductoAlumno')
+             ->with('alumno', $vista_alumno->first())
+             ->with('institucion_id', $vendedorInst->id_institucion)
+             ->with('productos', $productos);
+    }
+    public function vista_todo_producto_area(Request $dato)
+    {
+      $area_id = base64_decode($dato->id);
+      $area = Area::find($area_id);
+
+      $productos = producto::verProductoDesdeArea($area_id, 10);
+      return view('vendedorDependiente.verTodoProductoArea')
+           ->with('institucion_id', $area->id_institucion)
+           ->with('area', $area)
+           ->with('productos', $productos);
+    }
+
+    public function vista_todo_producto_institucion(request $dato)
+    {
+      $id_institucion = base64_decode($dato->id);
+      $vista_institucion = Institucion::find($id_institucion);
+
+      $productos = producto::traetProductosDesdeAdmin($id_institucion, 10);
+      return view('vendedorDependiente.verTodoProductoInstitucion')
+             ->with('institucion', $vista_institucion)
+             ->with('productos', $productos);
+    }
+    public function vista_todo_producto_vendedor(request $dato)
+    {
+       $id_vendedor =base64_decode($dato->id);
+       $vista_vendedor = Vendedor::traerDatos($id_vendedor);
+       //dd($vista_vendedor);
+
+      $productos = Tienda_producto_vendedor::mostrar_productos_vendedor($id_vendedor);
+      return view('vendedorDependiente.verTodoProductoVendedor')
+             ->with('vendedor', $vista_vendedor)
+             ->with('productos', $productos);
+    }
+    public function vista_todo_servicio_alumno(Request $dato)
+    {
+       $alumno_id = base64_decode($dato->id);
+       $vendedor = Vendedor::find($alumno_id);
+       $vendedorInst = VendedorInstitucion::where('id_vendedor', $vendedor->id)->first();
+       $alumno_vista = Vendedor::traerDatos($vendedor->id);
+       $servicios = servicio::verServicioDesdeArea($vendedorInst->id_area, 10);
+
+       return view('vendedorDependiente.verTodoServicioAlumno')
+              ->with([
+                  'servicios' => $servicios,
+                  'alumno' => $alumno_vista,
+                  'institucion_id' => $vendedorInst->id_ins,
+              ]);
+    }
+    public function vista_todo_servicio_area(Request $dato)
+    {
+       $area_id = base64_decode($dato->id);
+   
+       $area = Area::find($area_id);
+       $servicios = Tienda_servicio_institucion::mostrarServiciosArea_paginador($area_id, $area->id_institucion);
+
+       return view('vendedorDependiente.verTodoServicioArea')
+              ->with([
+                  'servicios' => $servicios,
+                  'area' => $area,
+                  //'institucion_id' => $vendedorInst->id_ins,
+              ]);
+    }
+    public function vista_todo_servicio_institucion(Request $dato)
+    {
+      $institucion_id = base64_decode($dato->id);
+      $institucion = Institucion::find($institucion_id);
+      $servicios = servicio::mostrarServicioDesdeAdmin($institucion_id, 10);
+      //dd($servicios);
+      return view('vendedorDependiente.verTodoServicioInstitucion')->with([
+          'institucion' => $institucion,
+          'servicios' => $servicios
+      ]);
+    }
+    public function vista_todo_servicio_vendedor(Request $dato)
+    {
+      # code... pendiente//////////
     }
 
     

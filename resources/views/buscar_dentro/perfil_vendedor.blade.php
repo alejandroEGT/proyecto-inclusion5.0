@@ -25,13 +25,14 @@
 								<center>
 									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($producto->nombre, 10) }}</p>
+									<p><label class="lbl-precio">{{ '$ '.number_format($producto->precio, 0, ',', '.') }}</label></p>
 									<p><a href="{{ url($ruta.'/detalleProductoVendedor/'.base64_encode($producto->idProducto).'/'.base64_encode($vendedor->id)) }}" class="btn btn-primary btn-xs">Ver</a></p>
 								</center>
 
 							</div>	
 							@endforeach
 
-							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+							<center class="center-top" ><label><small><a href="{{ url($ruta.'/ver_todo_producto_vendedor/'.base64_encode($vendedor->id)) }}">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>

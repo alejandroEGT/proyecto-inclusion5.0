@@ -129,6 +129,15 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/areaExtern/{idInstitucion}/{idArea}', 'institucionController@vista_areaExterna');
         Route::post('/actualizar_logo_area', 'institucionController@actualizar_logo_area');
         Route::get('/detalleProductoVendedor/{idProducto}/{idVendedor}', 'institucionController@vista_detalleProductoVendedor');
+        Route::get('/ver_todo_producto_alumno/{id}', 'institucionController@vista_todo_producto_alumno');
+        Route::get('/ver_todo_producto_area/{id}', 'institucionController@vista_todo_producto_area');
+        Route::get('/ver_todo_producto_institucion/{id}', 'institucionController@vista_todo_producto_institucion');
+        Route::get('/ver_todo_producto_vendedor/{id}', 'institucionController@vista_todo_producto_vendedor');
+
+        Route::get('/ver_todo_servicio_alumno/{id}', 'institucionController@vista_todo_servicio_alumno');
+        Route::get('/ver_todo_servicio_area/{id}', 'institucionController@vista_todo_servicio_area');
+        Route::get('/ver_todo_servicio_institucion/{id}', 'institucionController@vista_todo_servicio_institucion');
+        Route::get('/ver_todo_servicio_vendedor/{id}', 'institucionController@vista_todo_servicio_vendedor');
 
 });
 
@@ -176,6 +185,21 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::post('/actualizar_servicio_categoria','institucionController@actualizar_servicio_categoria');
         Route::post('/actualizar_servicio_foto','institucionController@actualizar_servicio_foto');
         Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'alumnoController@ver_detalleServicio_institucion_local');
+        Route::get('/traerProductoEnEspera','alumnoController@traerProductoEnEspera');
+        Route::get('/traerServicioEnEspera','alumnoController@traerServicioEnEspera');
+        Route::get('/detalleServicioEspera/{idServicio}','alumnoController@vista_detalleServicioEspera');
+
+        Route::get('/ver_todo_producto_alumno/{id}', 'alumnoController@vista_todo_producto_alumno');
+        Route::get('/ver_todo_producto_area/{id}', 'alumnoController@vista_todo_producto_area');
+        Route::get('/ver_todo_producto_institucion/{id}', 'alumnoController@vista_todo_producto_institucion');
+        Route::get('/ver_todo_producto_vendedor/{id}', 'alumnoController@vista_todo_producto_vendedor');
+
+        Route::get('/ver_todo_servicio_alumno/{id}', 'alumnoController@vista_todo_servicio_alumno');
+        Route::get('/ver_todo_servicio_area/{id}', 'alumnoController@vista_todo_servicio_area');
+        Route::get('/ver_todo_servicio_institucion/{id}', 'alumnoController@vista_todo_servicio_institucion');
+        Route::get('/ver_todo_servicio_vendedor/{id}', 'alumnoController@vista_todo_servicio_vendedor');
+
+
 
        
         
@@ -259,7 +283,7 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::post('/actualizar_estado_noticia', 'institucionController@actualizar_estado_noticia');
         Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'encargadoController@ver_detalleServicio_institucion_local');
         Route::get('/detalleProducto/{idProducto}/{idInstitucion}', 'encargadoController@ver_detalleProducto_institucion_local');
-        Route::get('/vista_serviciosEspera','institucionController@vista_serviciosEspera');
+        Route::get('/vista_serviciosEspera','encargadoController@vista_serviciosEspera');
         Route::get('/filtrarProducto', 'encargadoController@filtrarProducto');
         Route::get('/filtrarServicio', 'encargadoController@filtrarServicio');
         Route::get('/traerProductoEnEspera','encargadoController@traerProductoEnEspera');
@@ -279,7 +303,20 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::get('/detalleNoticia_general/{idNoticia}','encargadoController@ver_detalleNoticia_general');
         Route::get('/detalleNoticia_local/{idNoticia}','encargadoController@ver_detalleNoticia_local');
         Route::get('/areaExtern/{idInstitucion}/{idArea}', 'encargadoController@vista_areaExterna');
-        
+        Route::get('/detalleProductoVendedor/{idProducto}/{idVendedor}', 'encargadoController@vista_detalleProductoVendedor');
+        Route::get('/detalleProductoEspera/{idProducto}', 'encargadoController@vista_detalleProductoEspera');
+        Route::get('/detalleServicioEspera/{idServicio}', 'encargadoController@vista_detalleServicioEspera');
+        Route::get('/ver_todo_producto_alumno', 'institucionController@vista_todo_producto_alumno');
+
+        Route::get('/ver_todo_producto_alumno/{id}', 'encargadoController@vista_todo_producto_alumno');
+        Route::get('/ver_todo_producto_area/{id}', 'encargadoController@vista_todo_producto_area');
+        Route::get('/ver_todo_producto_institucion/{id}', 'encargadoController@vista_todo_producto_institucion');
+        Route::get('/ver_todo_producto_vendedor/{id}', 'encargadoController@vista_todo_producto_vendedor');
+
+        Route::get('/ver_todo_servicio_alumno/{id}', 'encargadoController@vista_todo_servicio_alumno');
+        Route::get('/ver_todo_servicio_area/{id}', 'encargadoController@vista_todo_servicio_area');
+        Route::get('/ver_todo_servicio_institucion/{id}', 'encargadoController@vista_todo_servicio_institucion');
+        Route::get('/ver_todo_servicio_vendedor/{id}', 'encargadoController@vista_todo_servicio_vendedor');
        
 });
 
@@ -317,7 +354,8 @@ Route::get('/estadoClaveEncargado', 'encargadoController@traerEstadoClave');
 Route::get('generarClave/{id}', 'alumnoController@generarClave');
 Route::get('/aceptarSolicitudProducto/{id}', 'institucionController@aceptarProducto');
 Route::get('/aceptarSolicitudServicio/{id}','institucionController@aceptarSolicitudServicio');
-
+Route::get('/eliminar_producto_espera/{idProducto}', 'institucionController@eliminar_producto_espera');
+Route::get('/eliminar_servicio_espera/{idServicio}', 'institucionController@eliminar_servicio_espera');
 /*inicio de usuarios*/
 
 

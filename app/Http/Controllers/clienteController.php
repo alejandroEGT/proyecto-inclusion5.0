@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Area;
+use App\ContadorInstitucion;
 use App\Fotoperfil;
 use App\Http\Requests\clienteRequest;
 use App\Institucion;
@@ -14,6 +15,7 @@ use App\cliente;
 use App\foto_producto;
 use App\producto;
 use App\servicio;
+use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -238,9 +240,37 @@ public function ver_detalleProducto(Request $dato)
       ->with('productos', $productos);
  }
 
-     public function vista_perfilInst($idinstitucion){
+     public function vista_perfilInst(request $dato){//////////////////aqui un contador de visitas ////////////////
 
-        $idI = base64_decode($idinstitucion);
+      //prueba de contador de visitas ////
+      //dd(request()->cookie('laravel_session'));
+        $idI = base64_decode($dato->idinstitucion);
+        $tienda_institucion = Tienda_institucion::where('id_institucion', $idI)->first();
+        $contadorTiendaInst = new ContadorInstitucion;
+
+        $contadorTienda = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)->first();
+        
+        if($contadorTienda == true){
+
+          if(Cache::has('usuario')==false){
+            Cache::add('usuario','contador',2.30);
+            $contadorTienda = ContadorInstitucion::where('id_tienda', $tienda_institucion->id )->first();
+            $contadorTienda->cantidad = $contadorTienda->cantidad + 1;
+            $contadorTienda->save();
+          }
+
+        }
+        if(Cache::has('usuario')==false){
+            Cache::add('usuario','contador',0.3);
+            $contadorTiendaInst->id_tienda = $tienda_institucion->id;
+            $contadorTiendaInst->cantidad++;
+            $contadorTiendaInst->save();
+        }
+
+
+      ////////fin de prueba //////////////
+
+        $idI = base64_decode($dato->idinstitucion);
         $institucion = Institucion::find($idI);
         $productos = producto::verProductosVisibles($institucion->id, 5);
         $areas = Area::where('id_institucion', $idI)->get();
@@ -250,7 +280,7 @@ public function ver_detalleProducto(Request $dato)
         ->with('institucion', $institucion)
         ->with('servicios', $servicios)
         ->with('productos', $productos)
-        ->with('idInstitucion', $idinstitucion)
+        ->with('idInstitucion', $dato->idinstitucion)
         ->with('areas', $areas);
     }
 

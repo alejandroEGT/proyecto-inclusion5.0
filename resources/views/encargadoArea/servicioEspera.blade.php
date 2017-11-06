@@ -32,7 +32,10 @@
 										<td>{{ $es->nombreArea}}</td>
 										<td>{{ $es->creado }}</td>
 										<td>{{ $es->nombreEstado}}</td>
-										<td><input class="btn btn-danger" type="button" value="Cancelar"></td>
+										<td>
+											<a class="btn btn-success" href="{{ url('encargadoArea/detalleServicioEspera/'.base64_encode($es->id)) }}">Editar</a>
+											<a class="btn btn-danger" @click="eliminarServicioEspera({{ $es->id }})">Cancelar</a>
+										</td>
 									</tr>	
 								@endforeach	
 							</table>	

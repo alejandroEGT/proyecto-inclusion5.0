@@ -81,7 +81,7 @@
 								<center>
 									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($producto->nombre, 10) }}</p>
-							
+									<p><label class="lbl-precio" > $ {{ number_format($producto->precio, 0, ',','.') }}</label></p>
 										<a class="btn btn-primary btn-xs" href="{{ url($ruta."/detalleProducto/".base64_encode($producto->idProducto).'/'.base64_encode($institucion->id)) }}">Ver..</a>
 										
 								</center>
@@ -89,7 +89,7 @@
 							</div>	
 							@endforeach
 							<!--<center>{{--$productos->links() --}}</center>-->
-							<center class="center-top" ><label><small><a href="{{ url('encargadoArea/ver_todo_producto') }}">Ver mas..</a></small></label></center>
+							<center class="center-top" ><label><small><a href="{{ url($ruta.'/ver_todo_producto_area/'.base64_encode($area->id)) }}">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>
@@ -119,7 +119,7 @@
 							</div>	
 							@endforeach
 
-							<center class="center-top" ><label><small><a href="#">Ver mas..</a></small></label></center>
+							<center class="center-top" ><label><small><a href="{{ url($ruta.'/ver_todo_servicio_area/'.base64_encode($area->id)) }}">Ver mas..</a></small></label></center>
 						</div>
 
 					</div>

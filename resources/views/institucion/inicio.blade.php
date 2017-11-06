@@ -10,6 +10,7 @@
 					<img src="{{ '/'.$institucion->logo }}" width="100">
 					<!--<p class="p-titulo-inst"> {{--$institucion->nombre--}} </p>-->
 				</div>
+				contador: {{ $contador }}
 			</div>
 		</div>
 

@@ -324,3 +324,16 @@ small{
 	color:#5499C7;
 	font-size: 13px;
 }
+.lbl-precio{
+	color:#5DADE1;
+	font-size: 17px;
+}
+.ico-news{
+	float: none;
+    margin: 0 auto;
+    margin-top: 6px;
+	height: 130px;
+	width: 130px;
+	background:url("../ico/news.png");
+	background-size: 100% 100%;
+}

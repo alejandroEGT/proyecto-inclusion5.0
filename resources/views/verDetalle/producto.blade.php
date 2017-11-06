@@ -41,9 +41,13 @@
 								{{csrf_field()}}
 							  		<p><strong>Actualizar Foto</strong> </p>
 							  	
-							  		<p><input class="" type="file" name="foto">
-							  			<input type="hidden" name="idProducto" value="{{$productos[0]->idProducto}}">
-									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
+							  		<p><label for="file-input" class="label-foto-link">
+				 							<img src="/ico/image.png" for="file-input" class="label-foto-link">
+										 	Agregar foto..
+										</label>
+										<input style="display: none;" name="foto" id="file-input" type="file"/>	
+								  			<input type="hidden" name="idProducto" value="{{$productos[0]->idProducto}}">
+										<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
 		</div>
@@ -77,7 +81,7 @@
 							</div>
 			</div>
 		@if ($user == 1 or $user == 2)	
-			<p><label><strong>Precio:</strong></label> {{ $productos[0]->precio }} <a data-toggle="collapse" data-target="#pre" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+			<p><label><strong>Precio: $ </strong></label> {{ number_format($productos[0]->precio, 0, ',', '.') }} <a data-toggle="collapse" data-target="#pre" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="pre" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url($ruta.'/actualizar_producto_precio') }}" method="post">

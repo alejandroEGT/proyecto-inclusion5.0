@@ -96,5 +96,17 @@ class Vendedor extends Model
         }
         return false;
     }
+    protected function traerDatos($idV)
+    {
+        $traer = \DB::table('vendedor')
+                    ->select([
+                        'vendedor.id as id',
+                        'fotoperfil.foto as foto'
+                    ])
+                    ->join('users', 'users.id','=','vendedor.id_user')
+                    ->join('fotoperfil','fotoperfil.id_user','users.id')
+                    ->where('vendedor.id', $idV)->first();
+        return $traer;             
+    }
 
 }

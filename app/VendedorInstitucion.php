@@ -93,7 +93,7 @@ class VendedorInstitucion extends Model
         return null;
         
     }
-    protected function detalleAlumno($idAlumno)
+    protected function  detalleAlumno($idAlumno, $idI)
     {
         $traer = \DB::table('vendedor-institucion')
                   ->select([
@@ -115,7 +115,7 @@ class VendedorInstitucion extends Model
                   ->join('fotoperfil','fotoperfil.id_user','=','users.id')
                   ->where('vendedor.id_estado', 1)/*posible falla*/
                   ->where('users.id', $idAlumno)
-                  ->where('Institucion.id', \Auth::guard('institucion')->user()->id)
+                  ->where('Institucion.id', $idI)
                   ->get();
         
         if (count($traer)>0) {

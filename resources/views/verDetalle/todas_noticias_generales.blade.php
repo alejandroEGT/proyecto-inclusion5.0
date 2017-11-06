@@ -23,7 +23,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-offset-2 col-md-10">
+							<div class="col-md-offset-1 col-md-10">
 								<p><label>{{ $ng->texto }}</label></p>
 							</div>
 						</div>

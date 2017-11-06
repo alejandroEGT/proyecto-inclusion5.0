@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Fotoperfil;
 use App\Http\Requests\FormUsuarioRequest;
 use App\Tienda_producto_vendedor;
+use App\Tienda_servicio_vendedor;
 use App\Tienda_vendedor;
 use App\User;
 use App\Vendedor;
 use App\categoria_producto;
+use App\categoria_servicio;
 use App\estado_tienda_producto;
 use App\foto_producto;
+use App\foto_servicio;
 use App\producto;
+use App\servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -99,10 +103,15 @@ class vendedorIndependienteController extends Controller
         
     }
 
-
       public function ingresar_servicios()
     {
-        return view('vendedorIndependiente.ingresar_servicios');
+        $categoria_serv = categoria_servicio::all();
+        $vendedor = Vendedor::where('id_user',\Auth::user()->id)->first();
+        $servicio = Tienda_servicio_vendedor::mostrar_servicios_vendedor($vendedor->id);
+
+        return view('vendedorIndependiente.ingresar_servicios')
+              ->with('servicio', $servicio)
+              ->with('categoria_serv', $categoria_serv);
     }
 
        public function modificar_productos()
@@ -304,6 +313,52 @@ class vendedorIndependienteController extends Controller
 
     }
 
+    public function publicarServicio(Request $datos)
+      {
+       
+       try{
+
+               $insertServicio = servicio::insertar($datos);
+
+               if ($insertServicio > 0) {
+                //dd($insertProducto);
+                   
+                   $insertFotoServicio = foto_servicio::insertar($datos, $insertServicio);
+                   // dd($insertFotoProducto);
+
+
+                   if ($insertFotoServicio > 0) {
+                        $vendedor = Vendedor::where('id_user',\Auth::user()->id)->first();
+                        $tienda = Tienda_vendedor::where('id_vendedor',$vendedor->id)->first();/*Modifique aqui hoy*/
+                        $insertTiendaServicio = Tienda_servicio_vendedor::insertar($insertServicio, $tienda->id, '1');
+
+
+                       
+                       if ($insertTiendaServicio > 0) {
+                           \Session::flash('registro', 'servicio registrado correctamente');
+                           return redirect()->back();
+                       }
+                       return "Mal todo";
+                   }
+                   return redirect()->back()->withErrors(['Algo salió mal']);
+                }
+
+            } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+            }
+      }
+
+
+       public function eliminar_servicio_vendedor(Request $dato)
+      {
+
+        $getFoto = foto_servicio::where('id_servicio',$dato->idServicio)->get();
+        \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
+        
+        $foto_prod = foto_servicio::borrar($getFoto[0]->id);
+        $tienda_prod_ven = Tienda_servicio_vendedor::borrar($dato->idServicio);
+        return redirect()->back();
+    }
 }
 
 

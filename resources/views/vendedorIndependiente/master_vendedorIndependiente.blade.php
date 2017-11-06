@@ -61,8 +61,8 @@
                     <li class="pushy-submenu">
                         <button><i class="fa fa-plus-square-o"></i> Formularios</button>
                         <ul>
-                            <li class="pushy-link"><a href="/userIndependiente/ingresar_productos">Ingresar productos</a></li>
-                            <li class="pushy-link"><a href="/userIndependiente/ingresar_servicios">Ingresar servicios</a></li>
+                            <li class="pushy-link"><a href="{{url('/userIndependiente/ingresar_productos')}}">Ingresar productos</a></li>
+                            <li class="pushy-link"><a href="{{url('/userIndependiente/ingresar_servicios')}}">Ingresar servicios</a></li>
                             <li class="pushy-link"><a href="/userIndependiente/modificar_productos">Ver y modificar productos</a></li>
                             <li class="pushy-link"><a href="/userIndependiente/modificar_servicios">Ver y modificar servicios</a></li>
                         </ul>

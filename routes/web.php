@@ -195,6 +195,8 @@ Route::group(['prefix' => 'userIndependiente','middleware'=>['md_vendedor']], fu
         Route::get('/modificar_servicios' , 'vendedorIndependienteController@modificar_servicios');
         Route::post('/publicarproducto' , 'vendedorIndependienteController@publicarproducto');
         Route::get('/eliminar_producto_vendedor/{idProducto}', 'vendedorIndependienteController@eliminar_producto_vendedor');
+        Route::post('/publicarServicio' , 'vendedorIndependienteController@publicarServicio');
+        Route::get('/eliminar_servicio_vendedor/{idServicio}', 'vendedorIndependienteController@eliminar_servicio_vendedor');
 });
 
 Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], function(){

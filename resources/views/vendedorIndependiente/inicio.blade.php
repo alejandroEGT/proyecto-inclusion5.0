@@ -40,7 +40,7 @@
 											<p>Puedes publicar tus novedades cuando gustes, también lo podras ver todas tus actividades que realizas</p>
 												<div class="botones-grupo">
 													<a href="{{url('/userIndependiente/ingresar_productos')}}" class="btn btn-verde" >Publicar Producto</a>
-													<a href="#" class="btn btn-naranja" >Publicar Servicio</a>
+													<a href="{{url('/userIndependiente/ingresar_servicios')}}" class="btn btn-naranja" >Publicar Servicio</a>
 												</div>
 										</div>
 									</div>

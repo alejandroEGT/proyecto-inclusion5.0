@@ -139,6 +139,7 @@ class encargadoController extends Controller
         $institucion = Institucion::find($vendedorInstitucion[0]->id_institucion);
       
         $productos = producto::verProductoDesdeArea($vendedorInstitucion[0]->id_area , 5);
+        $servicios = servicio::mostrarServicioDesdeArea($vendedorInstitucion[0]->id_area, 5);
         $foto = Fotoperfil::traerFotobyid($idu);
         
         return view('encargadoArea.perfil_vendedorInstitucion')
@@ -147,6 +148,7 @@ class encargadoController extends Controller
         ->with('vendedor',$vendedor[0]->telefono)
         ->with('institucion', $institucion)
         ->with('productos', $productos)
+        ->with('servicios', $servicios)
         ->with('idInstitucion', base64_encode($vendedorInstitucion[0]->id_institucion));;
         
         //return view('encargadoArea.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);

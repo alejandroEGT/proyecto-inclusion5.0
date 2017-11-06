@@ -1,5 +1,8 @@
 @if (count($servicio))
 	<br>
+	<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 	<center><label>Detalle del Servcicio</label></center>
 	<hr>
 	<div class="row panel">
@@ -134,7 +137,7 @@
 			</div>
 			@endif
 			<hr>
-			<p><label><strong>Creado:</strong></label> {{ $servicio[0]->creado }}</p>
+			<p><label><strong>Creado:</strong></label> {{ date('h:i:s - d/m/Y', strtotime($servicio[0]->creado)) }}</p>
 		</div>
 	</div>
 	

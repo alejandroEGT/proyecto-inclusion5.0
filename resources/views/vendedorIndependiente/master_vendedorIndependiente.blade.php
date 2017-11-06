@@ -32,6 +32,7 @@
                         
                         <hr>
                     </li>
+                    <li class="pushy-link"><a href="{{ url('userIndependiente/inicio') }}"><i class="fa fa-globe"></i> Inicio</a></li>
                     <li class="pushy-submenu">
                         <button id="first-link"><i class="fa fa-info-circle"></i> ¿Te ayudamos?</button>
                         <ul>

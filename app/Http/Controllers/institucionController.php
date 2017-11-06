@@ -142,13 +142,25 @@ class institucionController extends Controller
         //return $idu;
 
         $usuario = User::find($idu);
-        $vendedor = Vendedor::where('id_user',$usuario->id)->get();
+        $vendedor = Vendedor::where('id_user',$usuario->id)->first();
         $foto = Fotoperfil::traerFotobyid($idu);
-        
+        $productos = producto::traerproductoVendedor($vendedor->id, 5);
+
         return view('institucion.perfil_vendedor')
         ->with('foto',$foto)
         ->with('usuario',$usuario)
-        ->with('vendedor',$vendedor[0]->telefono);
+        ->with('vendedor',$vendedor)
+        ->with('productos', $productos);
+    }
+    public function vista_detalleProductoVendedor(Request $datos)
+    {
+     
+      $idProducto = base64_decode($datos->idProducto);
+      $idVendedor = base64_decode($datos->idVendedor);
+
+      $producto = producto::verDetalleProducto($idProducto, $idVendedor);
+      //dd($producto);
+       return view('institucion.detalleProductoVendedor')->with('producto', $producto);
     }
     public function vista_perfilInst($idinstitucion){
       try{
@@ -890,7 +902,8 @@ class institucionController extends Controller
             return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
        }    
 
-    }public function actualizar_producto_area(Request $dato)
+    }
+    public function actualizar_producto_area(Request $dato)
     {
       try{
           $this->validate($dato,[
@@ -1056,15 +1069,15 @@ class institucionController extends Controller
     public function actualizar_foto_alumno(Request $dato)
     {
       try{
-          dd($dato->foto);
+          //dd($dato->foto);
           $this->validate($dato,[
                   'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
             ]);
 
 
            $update = Fotoperfil::actualizar_foto($dato);
-
-           return $update;
+           \Session::flash('correcto', 'Foto actualizada');
+           return redirect()->back();
       } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
        }         

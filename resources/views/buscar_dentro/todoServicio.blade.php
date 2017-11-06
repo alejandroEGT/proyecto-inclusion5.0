@@ -1,4 +1,7 @@
 <div class="col-md-offset-2 col-md-8  fondo-blanco">
+	<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 	@if (count($servicios)>0)
 					<div class="row">
 						<div class="col-md-12">

@@ -240,48 +240,58 @@ public function ver_detalleProducto(Request $dato)
       ->with('productos', $productos);
  }
 
-     public function vista_perfilInst(request $dato){//////////////////aqui un contador de visitas ////////////////
+     public function vista_perfilInst(request $dato){
 
-      //prueba de contador de visitas ////
-      //dd(request()->cookie('laravel_session'));
-        $idI = base64_decode($dato->idinstitucion);
-        $tienda_institucion = Tienda_institucion::where('id_institucion', $idI)->first();
-        $contadorTiendaInst = new ContadorInstitucion;
+        try{
+           //////////////////aqui un contador de visitas ////////////////
 
-        $contadorTienda = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)->first();
-        
-        if($contadorTienda == true){
+            //prueba de contador de visitas ////
+            //dd($dato->cookies);
+            //dd(request()->cookie('laravel_session'));
+              $idI = base64_decode($dato->idinstitucion);
+              $tienda_institucion = Tienda_institucion::where('id_institucion', $idI)->first();
+              $contadorTiendaInst = new ContadorInstitucion;
 
-          if(Cache::has('usuario')==false){
-            Cache::add('usuario','contador',2.30);
-            $contadorTienda = ContadorInstitucion::where('id_tienda', $tienda_institucion->id )->first();
-            $contadorTienda->cantidad = $contadorTienda->cantidad + 1;
-            $contadorTienda->save();
+              $contadorTienda = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)
+                                ->where('laravel_session', request()->cookie('laravel_session'))->first();
+                     
+              
+              if($contadorTienda == true){ /*El usuario si ha visitado el perfil*/
+                  if( !date('d-m-Y')  ==  date('d-m-Y', strtotime($contadorTienda->created_at) )){
+
+                    $contadorTienda->cantidad++;
+                    $contadorTienda->save();
+
+                  }
+            
+              }
+              else{
+              /*o si no*/
+
+                $contadorTiendaInst->id_tienda = $tienda_institucion->id;
+                $contadorTiendaInst->laravel_session = request()->cookie('laravel_session'); 
+                $contadorTiendaInst->cantidad++;
+                $contadorTiendaInst->save();
+              }
+
+            ////////fin de prueba //////////////
+
+              $idI = base64_decode($dato->idinstitucion);
+              $institucion = Institucion::find($idI);
+              $productos = producto::verProductosVisibles($institucion->id, 5);
+              $areas = Area::where('id_institucion', $idI)->get();
+              $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
+
+              return view('inicioCliente.perfil_institucion')
+              ->with('institucion', $institucion)
+              ->with('servicios', $servicios)
+              ->with('productos', $productos)
+              ->with('idInstitucion', $dato->idinstitucion)
+              ->with('areas', $areas);
+         } catch (\Illuminate\Database\QueryException $e){
+            return redirect()->back();
           }
-
-        }
-        if(Cache::has('usuario')==false){
-            Cache::add('usuario','contador',0.3);
-            $contadorTiendaInst->id_tienda = $tienda_institucion->id;
-            $contadorTiendaInst->cantidad++;
-            $contadorTiendaInst->save();
-        }
-
-
-      ////////fin de prueba //////////////
-
-        $idI = base64_decode($dato->idinstitucion);
-        $institucion = Institucion::find($idI);
-        $productos = producto::verProductosVisibles($institucion->id, 5);
-        $areas = Area::where('id_institucion', $idI)->get();
-        $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
-
-        return view('inicioCliente.perfil_institucion')
-        ->with('institucion', $institucion)
-        ->with('servicios', $servicios)
-        ->with('productos', $productos)
-        ->with('idInstitucion', $dato->idinstitucion)
-        ->with('areas', $areas);
+    
     }
 
     public function updFoto(Request $dato)

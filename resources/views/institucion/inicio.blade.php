@@ -75,7 +75,7 @@
 						@if ($nl->id_estado == 2)
 							<p class="img-titu" ><label>{{ $nl->titulo}}</label> <img src="/ico/padlock.png"></p>
 						@endif
-						<p class="img-titu" ><a href="{{ url('institucion/detalleNoticia_local/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+						<p class="img-titu" ><a href="{{ url('institucion/detalleNoticia_local/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver más</a></p>
 					@endforeach
 					<hr>
 					<label><a href="{{ url('institucion/verNoticiasLocales') }}">Ver todas las noticias...</a></label>
@@ -124,7 +124,7 @@
 							</div>	
 							@endforeach
 								<!--<center>{{-- $productos->links() --}}</center>-->
-							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_producto') }}">Ver mas..</a></small></label></center>
+							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_producto') }}">Ver más..</a></small></label></center>
 						</div>
 
 					</div>
@@ -174,7 +174,7 @@
 							</div>	
 							@endforeach
 							<!--<center>{{-- $productos->links() --}}</center>-->
-							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_servicio') }}">Ver mas..</a></small></label></center>
+							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_servicio') }}">Ver más..</a></small></label></center>
 						</div>
 
 					</div>

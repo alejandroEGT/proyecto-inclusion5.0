@@ -16,6 +16,7 @@ class CreateContadorTiendaInstitucionTable extends Migration
         Schema::create('contador_tiendas_instituciones', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_tienda')->unsigned();
+            $table->text('laravel_session');
             $table->bigInteger('cantidad');
             $table->timestamps();
             $table->foreign('id_tienda')->references('id')->on('tiendas_instituciones');

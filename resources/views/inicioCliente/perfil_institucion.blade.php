@@ -1,7 +1,7 @@
 @extends('inicioCliente.clienteMaster')
 
 @section('content')
-	
+	<div id="sfc1tpp2wnu56rs8py9h757hq8haz6jncpx"></div><script type="text/javascript" src="https://counter8.freecounter.ovh/private/counter.js?c=1tpp2wnu56rs8py9h757hq8haz6jncpx&down=async" async></script><noscript><a href="https://www.contadorvisitasgratis.com" title="contador de entradas"><img src="https://counter8.freecounter.ovh/private/contadorvisitasgratis.php?c=1tpp2wnu56rs8py9h757hq8haz6jncpx" border="0" title="contador de entradas" alt="contador de entradas"></a></noscript><a href="https://www.contadorvisitasgratis.com" title="contador de entradas"><img src="https://counter8.freecounter.ovh/private/contadorvisitasgratis.php?c=1tpp2wnu56rs8py9h757hq8haz6jncpx" border="0" title="contador de entradas" alt="contador de entradas"></a>
 	<div class="container-fluid">
 	<a href="#" onclick="window.history.back();">
 		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>

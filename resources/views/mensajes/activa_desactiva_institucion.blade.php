@@ -53,17 +53,29 @@
 				  					hablar("Botón "+ $(event.target).val());
 					}
 
-
-	                $( "label, a" ).mouseover(function(event) {
+					$( "label" ).mouseover(function(event) {
 				  				//var p = $(this).text();
 				  					hablar($(event.target).text());
 							 	//hablar($(event.target).text());
 							});
-	                $( "label, a" ).mouseout(function(event) {
+	                $( "label" ).mouseout(function(event) {
 				  				//var p = $(this).text();
 				  					callar();
 							 	//hablar($(event.target).text());
+					});
+
+
+
+	                $( "a" ).mouseover(function(event) {
+				  				//var p = $(this).text();
+				  					hablar('botón '+$(event.target).text());
+							 	//hablar($(event.target).text());
 							});
+	                $( "a" ).mouseout(function(event) {
+				  				//var p = $(this).text();
+				  					callar();
+							 	//hablar($(event.target).text());
+					});
 	                 $( "select" ).mouseover(function(event) {
 				  					texto = $(event.target).text();
 				  					hablar(texto);

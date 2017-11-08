@@ -17,9 +17,6 @@
 
 	@foreach($carro as $carros)
 
-				@if(count($carros->nombreTienda))
-
-				@endif
 					<p class="contenido-sesion">Tienda: {{ $carros->nombreTienda  }}</p>
 					<p class="contenido-sesion">Categoria:</p>
 					<div class="android-drawer-separator"></div>

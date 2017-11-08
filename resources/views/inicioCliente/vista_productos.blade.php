@@ -28,7 +28,7 @@
 					</dd>
 
 
-					<form action="{{ url('carro/agregarProd')}}"  method="post">
+					<form action="{{ url('/crearCobro')}}"  method="post">
 						{{ csrf_field() }}
 					<input type="hidden" name="id" value="{{ base64_encode($producto->idProducto) }}">
 
@@ -42,7 +42,7 @@
 						
 					</dd>
 				
-					<button type="submit" class="btn btn-primary btn-outline-danger">Añadir a la cesta</button>
+					<button type="submit" class="btn btn-primary btn-outline-danger">Comprar</button>
 					</form>
 
 				</dl>

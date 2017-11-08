@@ -29,6 +29,10 @@ class carroController extends Controller
 		
 	}
 
+	public function delProducto(){
+		
+	}
+
 
 
        public function miCarro()

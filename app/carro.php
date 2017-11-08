@@ -46,9 +46,11 @@ class carro extends Model
                     ->where('carros.id_cliente', $idCliente->id)
                     ->get();
 
+
+
         return $carros;
 
-        
+       
 		
 	}
 }

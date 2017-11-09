@@ -279,6 +279,16 @@ public function ver_detalleProducto(Request $dato)
                 $contadorTiendaInst->laravel_session = $dato->ip(); 
                 $contadorTiendaInst->cantidad++;
                 $contadorTiendaInst->save();
+
+              }
+              
+              }else{
+
+                  $contadorTiendaInst->id_tienda = $tienda_institucion->id;
+                  $contadorTiendaInst->laravel_session = $dato->ip(); 
+                  $contadorTiendaInst->cantidad++;
+                  $contadorTiendaInst->save();
+
               }
 
             ////////fin de prueba //////////////
@@ -298,8 +308,7 @@ public function ver_detalleProducto(Request $dato)
          } catch (\Illuminate\Database\QueryException $e){
             return redirect()->back();
           }
-    
-    }
+  }
 
     public function updFoto(Request $dato)
     {

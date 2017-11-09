@@ -19,9 +19,9 @@
 			<form  @submit.prevent="formArea" method="POST" >
 					<div class="col-md-offset-1 col-md-6">
 						{{ csrf_field() }}
-						<p>Nombre de area o especialdiad</p>
-						<input v-model="inserarArea.nombre" type="text" class="form-control">
-						<p>Nombre descripción</p>
+						<p><label>Nombre de área o especialdiad</label></p>
+						<input  v-model="inserarArea.nombre" type="text" class="form-control" placeholder="Área o especialidad" autofocus>
+						<p><label>Nombre descripción</label></p>
 						<textarea v-model="inserarArea.desc" class="form-control" name="" id="" cols="20" rows="5"></textarea>
 					</div>
 					<div class="col-md-1 padding">

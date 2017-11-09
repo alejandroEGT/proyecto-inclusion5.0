@@ -323,9 +323,9 @@ class encargadoController extends Controller
                             $message->to($correo,'to jano');
 
                         });
-                        \Session::flash('clave', 'Contraseña actualizada correctasmente');
-                        \Session::flash('cambioClave', 'Contraseña actualizada correctasmente');/*Mostrar cambio de clave en el inicio cuando se actualize*/
-                        return redirect()->back();
+                        //\Session::flash('clave', 'Contraseña actualizada correctasmente');
+                        \Session::flash('cambioClave', 'Contraseña actualizada correctamente');/*Mostrar cambio de clave en el inicio cuando se actualize*/
+                        return redirect('encargadoArea/inicio');
                 }
                 return "Error...";
     }
@@ -785,7 +785,7 @@ class encargadoController extends Controller
               ->with([
                   'servicios' => $servicios,
                   'alumno' => $alumno_vista,
-                  'institucion_id' => $vendedorInst->id_ins,
+                  'institucion_id' => $vendedorInst->id_institucion,
               ]);
     }
     public function vista_todo_servicio_area(Request $dato)

@@ -16,7 +16,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-offset-1 col-md-10">
-								<center><label><h4 style="color:black;" >{{ $noticia->titulo }}</h4></label></center>
+								<center><label class="lbl-titulo" >{{ $noticia->titulo }}</label></center>
 								<hr>
 							</div>
 						</div>

@@ -370,6 +370,14 @@ new Vue({
 			//alert($('#tipo').val());
 			$('#tipo_form').submit();
 		},
+		cambiarMes(){
+			//alert($('#tipo').val());
+			$('#form_mes').submit();
+		},
+		cambiarAnio(){
+			//alert($('#tipo').val());
+			$('#form_anio').submit();
+		},
 		browsermobil(){
           // android
         var ua = navigator.userAgent.toLowerCase();

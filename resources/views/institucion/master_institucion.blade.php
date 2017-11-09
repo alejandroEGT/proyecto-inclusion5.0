@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('css/estilo_institucion.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body  class="body-institucion" onMouseMove="stopScroll();">
+<body  class="body-institucion" onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);">
         
     <div id="master" >
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
@@ -20,20 +20,36 @@
                         <button id="first-link">¿Te ayudamos?</button>
                         <ul>
                             @if (Session::has('activarMicro'))
+<<<<<<< HEAD
                                 <li class="pushy-link"><a href="desactivarmicro"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
                             @endif
 
                             @if (empty(Session::get('activarMicro')))
                             <li class="pushy-link"><a href="activarmicro">
+=======
+                                <li class="pushy-link"><a href="{{ url('institucion/desactivarmicro') }}"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
+                            @endif
+
+                            @if (empty(Session::get('activarMicro')))
+                            <li class="pushy-link"><a href="{{ url('institucion/activarmicro') }}">
+>>>>>>> pruebas4.0
                                 <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
                             </a></li>
                             @endif
                             @if (Session::has('activarText'))
+<<<<<<< HEAD
                                 <li class="pushy-link"><a href="desactivartext"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
                             @endif
 
                             @if (empty(Session::get('activarText')))
                            <li class="pushy-link"><a href="activartext">
+=======
+                                <li class="pushy-link"><a href="{{ url('institucion/desactivartext') }}"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
+                            @endif
+
+                            @if (empty(Session::get('activarText')))
+                           <li class="pushy-link"><a href="{{ url('institucion/activartext') }}">
+>>>>>>> pruebas4.0
                                 <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
                             </a></li>
                             @endif
@@ -51,7 +67,7 @@
                             <p class="nombre-institucion-perfil" v-for="item in db_institucion">
                                 @{{ item.nombre }}
                             </p>
-                            <p><a href="{{ url('institucion/logout') }}"><img src="/ico/arrows.png"  alt=""/></a></p>
+                            <p><a href="{{ url('institucion/logout') }}">Salir<img src="/ico/arrows.png"  alt=""/></a></p>
                         </div>
                         
                         <hr/>
@@ -90,10 +106,11 @@
                     </li>
                      <li class="pushy-link"><a href="{{ url('institucion/generarPassword') }}"><i class="fa fa-key"></i> Generar Contraseñas</a></li>
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-bar-chart"></i> Graficos</button>
+                        <button><i class="fa fa-bar-chart"></i> Gráficos</button>
                         <ul>
                             <li class="pushy-link"><a href="{{ url('institucion/grafico_productosAdmin') }}"> Cantidad de productos</a></li>
                             <li class="pushy-link"><a href="{{ url('institucion/my-chart') }}"> Cantidad de personas</a></li>
+                            
                         </ul>
                     </li>
                     
@@ -155,10 +172,10 @@
         <script src="{{ asset('js/toastr.js')}}" ></script>
         <script src="{{asset('js/artyom.js')}}" ></script>
         <script src="/js/vue/vue_master_institucion.js"></script>
-        <script src="/js/sweetalert2.js" ></script>
+       <!-- <script src="/js/sweetalert2.js" ></script>-->
 		<script src="/js/pushy.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js" ></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js" ></script>
+       <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js" ></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js" ></script>-->
 		@include('mensajes.activa_desactiva_institucion')
         @yield('js')
 

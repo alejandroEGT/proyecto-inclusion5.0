@@ -31,9 +31,7 @@
 									</div>
 								</div>	
 							@endif
-							@if (Session::has('clave'))
-								<div class="alert alert-info">{{ Session::get('clave') }}</div>
-							@endif
+							
 
 					    		<br>
 						    	<p><label>Ingresa una nueva contraseña</label></p>

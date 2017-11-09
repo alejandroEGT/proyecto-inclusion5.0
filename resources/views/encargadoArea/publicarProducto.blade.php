@@ -99,9 +99,9 @@
 					<tr>
 						<td>{{ $p->idProducto }}</td>
 						<td><img src="{{ '/'.$p->foto }}" height="70"></td>
-						<td>{{ $p->nombre }}</td>
-						<td>{{ $p->descripcion }}</td>
-						<td>{{ $p->creado }}</td>
+						<td><label>{{ $p->nombre }}</label></td>
+						<td><label>{{ $p->descripcion }}</label></td>
+						<td><label>{{ $p->creado }}</label></td>
 						<td>
 							<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleProducto/".base64_encode($p->idProducto)) }}">Ver..</a>
 										

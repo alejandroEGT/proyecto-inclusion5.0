@@ -5,7 +5,7 @@
 <form action="{{ url('userDependiente/publicarServicio') }}" method="post" enctype="multipart/form-data" >
 		<div class="row">
 			<div class="col-md-offset-2 col-md-2">
-			<a href="{{ url('encargadoArea/inicio') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
+			<a href="{{ url('userDependiente/inicio') }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
 				<div class="ico-servicio"></div>
 			</div>
 			<div class="col-md-6">
@@ -15,7 +15,7 @@
 				</p>
 				<div class="row">
 					<div class="col-md-10">
-						<input type="" class="form-control input" maxlength="50" placeholder="Ingrese nombre del servicio" name="nombre">
+						<input autofocus type="" class="form-control input" maxlength="50" placeholder="Ingrese nombre del servicio" name="nombre">
 					</div>
 				</div>		
 			</div>

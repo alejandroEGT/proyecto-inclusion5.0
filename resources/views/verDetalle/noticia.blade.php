@@ -25,7 +25,7 @@
 						    <a href="" class="close" data-dismiss="alert">&times;</a>
 						    @foreach ($errors->all() as $e)
 								<ul>
-									<li>{{ $e }}</li>
+									<li><label>{{ $e }}</label></li>
 								</ul>
 							@endforeach
 						</div>
@@ -38,7 +38,7 @@
 									<div class="col-md-offset-2 col-md-7">
 										<div class="alert alert-info">
 										    <a href="" class="close" data-dismiss="alert">&times;</a>
-										     {{ Session::get('correcto') }}
+										     <label>{{ Session::get('correcto') }}</label>
 										</div>
 									</div>
 								</div>	
@@ -50,7 +50,7 @@
 			<div class="row">
 				<div class="col-md-offset-1 col-md-3">
 					<p><label>Titulo</label></p>
-					<input type="text" name="titulo" class="form-control" value="{{ old('titulo') }}" >
+					<input type="text" placeholder="Titulo de la noticia" name="titulo" class="form-control" value="{{ old('titulo') }}" >
 				</div>
 				<div class="col-md-2">
 					<p><label>Tipo de noticia</label></p>
@@ -66,12 +66,12 @@
 			<div class="row">
 				<div class="col-md-offset-1 col-md-3">
 					<p><label>Texto</label></p>
-					<textarea name="texto" class="form-control"  value="{{ old('texto') }}" ></textarea>
+					<textarea name="texto" placeholder="Texto de la noticia" class="form-control"  value="{{ old('texto') }}" ></textarea>
 				</div>
 				<div class="col-md-2">
 					<br><br>
 					<p><label for="file-input" class="label-foto-link">
-				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
+				 	<img src="/ico/image.png" alt="" for="file-input" class="label-foto-link">
 				 	Agregar foto..
 					</label></p>
 					<input style="display: none;" name="foto" id="file-input" type="file"/>

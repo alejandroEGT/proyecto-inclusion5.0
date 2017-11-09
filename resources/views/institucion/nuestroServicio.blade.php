@@ -31,7 +31,7 @@
 			@foreach ($servicios as $servicio)
 				<div class="row">
 					<div class="col-md-3  ">
-						<img src="{{'/'.$servicio->foto}}" class="img-thumbnail img-responsive " >
+						<img src="{{'/'.$servicio->foto}}" alt="foto de {{ $servicio->nombre }}" class="img-thumbnail img-responsive " >
 					</div>
 					<div class="col-md-3  ">
 						<p><label>{{ $servicio->nombre }}</label></p>

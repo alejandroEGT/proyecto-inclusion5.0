@@ -243,8 +243,8 @@ public function ver_detalleProducto(Request $dato)
      public function vista_perfilInst(request $dato){
 
         try{
-           //////////////////aqui un contador de visitas ////////////////
-
+            
+            //dd($dato->ip());
             //prueba de contador de visitas ////
             //dd($dato->cookies);
             //dd(request()->cookie('laravel_session'));
@@ -253,23 +253,27 @@ public function ver_detalleProducto(Request $dato)
               $contadorTiendaInst = new ContadorInstitucion;
 
               $contadorTienda = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)
-                                ->where('laravel_session', request()->cookie('laravel_session'))->first();
+                                ->where('laravel_session', $dato->ip())->first();
                      
               
-              if($contadorTienda == true){ /*El usuario si ha visitado el perfil*/
-                  if( !date('d-m-Y')  ==  date('d-m-Y', strtotime($contadorTienda->created_at) )){
 
+              if($contadorTienda == true){ /*El usuario si ha visitado el perfil*/
+
+
+                if(date('d-m-Y')  !=  date('d-m-Y', strtotime($contadorTienda->updated_at) )){
+          
                     $contadorTienda->cantidad++;
                     $contadorTienda->save();
 
                   }
+                  
             
               }
               else{
-              /*o si no*/
-
+              /*o si no*/   
+              
                 $contadorTiendaInst->id_tienda = $tienda_institucion->id;
-                $contadorTiendaInst->laravel_session = request()->cookie('laravel_session'); 
+                $contadorTiendaInst->laravel_session = $dato->ip(); 
                 $contadorTiendaInst->cantidad++;
                 $contadorTiendaInst->save();
               }

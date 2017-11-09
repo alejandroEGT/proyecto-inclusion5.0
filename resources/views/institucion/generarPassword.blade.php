@@ -28,7 +28,7 @@
 	                            <td style="font-size:13px"><strong>Acción</strong></td>
 	                        </tr>
 	                        <tr v-for="d in users" >
-	                        	 <td style="font-size:12px;">@{{d.idUser}}</td>
+	                        	 <td style="font-size:12px;"><label>@{{d.idUser}}</label></td>
 	                       		<td> <img :src="'/'+d.foto" height="50"> </td>
 	                            <td style="font-size:12px;">@{{d.nombres+' '+d.apellidos}}</td>
 	                            <td style="font-size:12px;">@{{d.email}}</td>

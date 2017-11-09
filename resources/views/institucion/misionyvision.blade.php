@@ -21,7 +21,7 @@
 				<div class="col-md-offset-2 col-md-4">
 					<form method="post" @submit.prevent="guardar_mision" >
 							<center><p><label>Misión</label></p></center>
-							<textarea v-model="bd_mv.mision" name="mision" class="form-control" cols="13" rows="6">
+							<textarea placeholder="Misión" v-model="bd_mv.mision" name="mision" class="form-control" cols="13" rows="6">
 							</textarea>
 							<input class="btn btn-success input-btn" type="submit" value="Registrar">
 					</form>		
@@ -29,7 +29,7 @@
 				<div class="col-md-4">
 					<form method="post" @submit.prevent="guardar_vision" >
 							<center><p><label>Visión</label></p></center>
-							<textarea v-model="bd_mv.vision" name="vision" class="form-control" cols="13" rows="6">
+							<textarea  placeholder="Visión" v-model="bd_mv.vision" name="vision" class="form-control" cols="13" rows="6">
 							</textarea>
 							<input class="btn btn-success input-btn" type="submit" value="Registrar">
 					</form>		

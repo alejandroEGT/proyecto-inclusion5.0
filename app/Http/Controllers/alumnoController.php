@@ -645,7 +645,7 @@ public function ver_todo_producto()
               ->with([
                   'servicios' => $servicios,
                   'alumno' => $alumno_vista,
-                  'institucion_id' => $vendedorInst->id_ins,
+                  'institucion_id' => $vendedorInst->id_institucion,
               ]);
     }
     public function vista_todo_servicio_area(Request $dato)

@@ -5,7 +5,7 @@
 		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
 	</a>	
 		<center>
-			<p><label><h3 class="th3">Noticias Generales</h3> <img src="/ico/news.png" height="40"></label></p>
+			<p><label><h3 class="th3">Noticias Locales</h3> <img src="/ico/news.png" height="40"></label></p>
 		</center>
 
 		<div class="row">

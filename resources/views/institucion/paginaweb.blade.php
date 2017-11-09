@@ -33,7 +33,7 @@
 					@endif
 					
 				    	<label>Ingresa sitio web oficial <small>(Ej: www.ejemplo.com)</small></label>
-						<p><input class="mi-input" type="text" name="paginaWeb"></p>
+						<p><input class="mi-input" type="text" name="paginaWeb" placeholder="Sitio Web"></p>
 						
 
 				   		 <input type="submit" name="" value="guardar" class="btn btn-primary" >

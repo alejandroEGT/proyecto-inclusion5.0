@@ -49,7 +49,8 @@ class institucionController extends Controller
           $noticias_generales = noticia::noticias_generales();
           $noticias_locales = noticia::noticias_locales(\Auth::guard('institucion')->user()->id);
           $tienda_institucion = Tienda_institucion::where('id_institucion', \Auth::guard('institucion')->user()->id)->first();
-          $contador_tienda = ContadorInstitucion::find($tienda_institucion->id);
+           $contar  = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)->sum('cantidad');
+          //$contador_tienda = ContadorInstitucion::find($tienda_institucion->id);
           //dd($contador_tienda);
             return view('institucion.inicio')
             ->with('institucion', $datosInstitucion)
@@ -57,7 +58,7 @@ class institucionController extends Controller
             ->with('servicios', $servicios)
             ->with('noticias_generales',$noticias_generales)
             ->with('noticias_locales',$noticias_locales)
-            ->with('contador','1');
+            ->with('contador', $contar);
       
     }
     public function vista_agregarAE(){
@@ -419,7 +420,7 @@ class institucionController extends Controller
               ->with([
                   'servicios' => $servicios,
                   'alumno' => $alumno_vista,
-                  'institucion_id' => $vendedorInst->id_ins,
+                  'institucion_id' => $vendedorInst->id_institucion,
               ]);
     }
     public function vista_todo_servicio_area(Request $dato)

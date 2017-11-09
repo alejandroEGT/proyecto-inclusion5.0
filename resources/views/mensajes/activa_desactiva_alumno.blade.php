@@ -275,29 +275,29 @@
 		}
 	// Add a single command
 var comandos = {
-    indexes:["nuestra informacion","mision y vision","datos especificos", "publicar noticia","ocultos","productos ocultos","menú", "desactivar","bajar","subir","servicios ocultos","registros","inicio","login","atras","parar"
+    indexes:["inicio","mis datos","publicar producto", "publicar servicio","ver productos","ver servicios","menú", "desactivar","bajar","subir","servicios ocultos","registros","inicio","login","atras","parar"
     	
     ], // Decir alguna de estas palabras activara el comando
     action:function(i){ // Acción a ejecutar cuando alguna palabra de los indices es reconocida
         
         if(i == 0){
 
-        	$('#ni').click();
+        	setTimeout(function () { window.location = "inicio"; }, 0);
         }
          if(i == 1){
-        	setTimeout(function () { window.location = "misionyvision"; }, 0);
-        }
-        if(i == 2){
         	setTimeout(function () { window.location = "datos"; }, 0);
         }
+        if(i == 2){
+        	setTimeout(function () { window.location = "publicarProducto"; }, 0);
+        }
         if(i == 3){
-        	setTimeout(function () { window.location = "noticia"; }, 0);
+        	setTimeout(function () { window.location = "publicarServicio"; }, 0);
         }
         if(i == 4){
-        	$('#oc').click();
+        	setTimeout(function () { window.location = "ver_todo_producto"; }, 0);
         }
          if(i == 5){
-        	setTimeout(function () { window.location = "productosOcultos"; }, 0);
+        	setTimeout(function () { window.location = "ver_todo_servicio"; }, 0);
         }
          if(i == 6){
         	$(".menu-btn").click();

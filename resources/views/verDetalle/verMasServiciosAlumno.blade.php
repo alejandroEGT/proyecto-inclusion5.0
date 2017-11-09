@@ -17,7 +17,7 @@
 				@if (count($servicios)>0)
 					<div class="row">
 						<div class="col-md-12">
-							<center><label>Productos</label>  <i class="fa fa-tags" aria-hidden="true"></i></center>
+							<center><label>Servicio</label>  <i class="fa fa-tags" aria-hidden="true"></i></center>
 						
 		
 							<hr>
@@ -27,7 +27,7 @@
 									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
 									<p>{{ str_limit($servicio->nombre,10) }}</p>
 								
-									<p><a href="{{ url($ruta.'/detalleServicio/'.base64_encode($servicio->id).'/'.base64_encode($institucion_id)) }}" class="btn btn-primary btn-xs">Ver a</a>
+									<p><a href="{{ url($ruta.'/detalleServicio/'.base64_encode($servicio->id).'/'.base64_encode($institucion_id)) }}" class="btn btn-primary btn-xs">Ver</a>
 									
 									</p>
 								</center>

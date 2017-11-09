@@ -21,8 +21,8 @@
 </div>
 
 <center>
-	<p><label>Cantidad de productos en la institución:</label> <small>{{ $contarTodoProducto }}</small></p>
-	<p><small>(No seran contados los productos eliminados o en estado de ocultos)</small></p>
+	<p><label>Cantidad de productos en la institución:</label> <small><label>{{ $contarTodoProducto }}</label></small></p>
+	<p><label><small>(No seran contados los productos eliminados o en estado de ocultos)</small></label></p>
 </center>
 </div>
 @endsection

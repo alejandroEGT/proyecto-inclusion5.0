@@ -3,7 +3,7 @@
 	<a href="#" onclick="window.history.back();">
 		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
 	</a>
-	<center><label>Detalle del Servcicio</label></center>
+	<center><label>Detalle del Servicio</label></center>
 	<hr>
 	<div class="row panel">
 		@if (count($errors))
@@ -12,7 +12,7 @@
 						    <a href="" class="close" data-dismiss="alert">&times;</a>
 						    @foreach ($errors->all() as $e)
 								<ul>
-									<li>{{ $e }}</li>
+									<li><label>{{ $e }}</label></li>
 								</ul>
 							@endforeach
 						</div>
@@ -21,11 +21,11 @@
 		@if (Session::has('correcto'))
 				<div class="alert alert-info">
 			    <a href="" class="close" data-dismiss="alert">&times;</a>
-				        {{ Session::get('correcto') }}
+				        <label>{{ Session::get('correcto') }}</label>
 			    </div>
 		@endif
 		<div class="col-md-offset-1 col-md-3 ">
-			<img src="{{ '/'.$servicio[0]->foto }}" class="img-thumbnail img-responsive">
+			<img src="{{ '/'.$servicio[0]->foto }}" alt="foto de {{ $servicio[0]->nombre }}" class="img-thumbnail img-responsive">
 			<br>
 			<center><a data-toggle="collapse" data-target="#campo1" > Actualizar foto del servicio <i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></center>
 			
@@ -33,11 +33,11 @@
 								<div class="alert alert-info" role="alert">
 									<form action="{{ url($ruta.'/actualizar_servicio_foto') }}" enctype="multipart/form-data" method="post">
 									{{csrf_field()}}
-								  		<p><strong>Actualizar Foto</strong> </p>
+								  		<p><label><strong>Actualizar Foto</strong></label> </p>
 								  	
 								  		<p>
 								  		<label for="file-input" class="label-foto-link">
-				 							<img src="/ico/image.png" for="file-input" class="label-foto-link">
+				 							<img src="/ico/image.png" alt="" for="file-input" class="label-foto-link">
 										 	Agregar foto..
 										</label>
 										<input style="display: none;" name="foto" id="file-input" type="file"/>	
@@ -49,37 +49,37 @@
 				<br><br>
 		</div>
 		<div class="col-md-6 ">
-			<p><label><strong>Nombre:</strong></label> {{ $servicio[0]->nombre }} <a data-toggle="collapse" data-target="#nombre" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+			<p><label><strong>Nombre:</strong></label> <label>{{ $servicio[0]->nombre }}</label> <a data-toggle="collapse" data-target="#nombre" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="nombre" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url($ruta.'/actualizar_servicio_nombre') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Nombre</strong> </p>
+							  		<p><label><strong>Actualizar Nombre</strong></label> </p>
 							  		<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
-							  		<p><input class="" type="text" maxlength="50" name="nombre">
+							  		<p><input class="" type="text" maxlength="50" name="nombre" placeholder="Nombre">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
 			</div>
 
-			<p><label><strong>Descripción:</strong></label> {{ $servicio[0]->descripcion }} <a data-toggle="collapse" data-target="#des" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+			<p><label><strong>Descripción:</strong></label> <label>{{ $servicio[0]->descripcion }}</label> <a data-toggle="collapse" data-target="#des" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="des" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url($ruta.'/actualizar_servicio_descripcion') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Descripción</strong> </p>
+							  		<p><label><strong>Actualizar Descripción</strong></label> </p>
 							  		<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
-							  		<p><input class="" type="text" maxlength="250" name="descripcion">
+							  		<p><input class="" type="text" maxlength="250" name="descripcion" placeholder="Descripción">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
 			</div>
-			<p><label><strong>Categoría:</strong></label> {{ $servicio[0]->nombreCategoria }} <a data-toggle="collapse" data-target="#can" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+			<p><label><strong>Categoría:</strong></label> <label>{{ $servicio[0]->nombreCategoria }}</label> <a data-toggle="collapse" data-target="#can" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="can" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url($ruta.'/actualizar_servicio_categoria') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Categoría</strong> </p>
+							  		<p><label><strong>Actualizar Categoría</strong></label> </p>
 							  		<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
 							  		<p><select name="categoria">
 							  			<option value="" >Seleccione..</option>
@@ -94,12 +94,12 @@
 
 			@if ($user == 1 || $user == 2)
 			{{-- expr --}}
-			<p><label><strong>Visibilidad:</strong></label> {{ $servicio[0]->nombreEstado }} <a data-toggle="collapse" data-target="#vis" ><i class="fa fa-pencil" aria-hidden="true"></i></a>. (Apto para la visualización en la tienda)</p>
+			<p><label><strong>Visibilidad:</strong></label> <label>{{ $servicio[0]->nombreEstado }}</label> <a data-toggle="collapse" data-target="#vis" ><i class="fa fa-pencil" aria-hidden="true"></i></a>. (Apto para la visualización en la tienda)</p>
 			<div id="vis" class="collapse">
 										<div class="alert alert-info" role="alert">
 											<form action="{{ url($ruta.'/actualizar_servicio_visibilidad') }}" method="post">
 											{{csrf_field()}}
-										  		<p><strong>Actualizar Estado</strong> </p>
+										  		<p><label><strong>Actualizar Estado</strong></label> </p>
 										  		<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
 										  		<p>
 										  			<select name="estado" >
@@ -115,12 +115,12 @@
 			</div>
 			@endif	
 			@if ($user == 1)
-				<p><label><strong>Área o especialidad:</strong></label> {{ $servicio[0]->nombreArea }} <a data-toggle="collapse" data-target="#area" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+				<p><label><strong>Área o especialidad:</strong></label> <label>{{ $servicio[0]->nombreArea }}</label> <a data-toggle="collapse" data-target="#area" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 				<div id="area" class="collapse">
 										<div class="alert alert-info" role="alert">
 											<form action="{{ url($ruta.'/actualizar_servicio_area') }}" method="post">
 											{{csrf_field()}}
-										  		<p><strong>Actualizar área o especialidad</strong> </p>
+										  		<p><label><strong>Actualizar área o especialidad</strong></label> </p>
 										  		<input type="hidden" name="idServicio" value="{{$servicio[0]->id}}">
 										  		<p>
 										  			<select name="area">
@@ -137,7 +137,7 @@
 			</div>
 			@endif
 			<hr>
-			<p><label><strong>Creado:</strong></label> {{ date('h:i:s - d/m/Y', strtotime($servicio[0]->creado)) }}</p>
+			<p><label><strong>Creado:</strong></label> <label>{{ date('h:i:s - d/m/Y', strtotime($servicio[0]->creado)) }}</label></p>
 		</div>
 	</div>
 	

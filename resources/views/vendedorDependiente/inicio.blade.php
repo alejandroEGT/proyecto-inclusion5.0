@@ -90,12 +90,12 @@
 						<p class="img-titu" ><a href="{{ url('userDependiente/detalleNoticia_general/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
 					@endforeach
 					<hr>
-					<p><label><small><a href="{{ url('userDependiente/verNoticiasGenerales') }}">Ver todas las noticias...</a></small></label></p>
+					<p><small><a href="{{ url('userDependiente/verNoticiasGenerales') }}">Ver todas las noticias...</a></small></p>
 
 					<hr>
 				@endif
 				@if (!count($noticias_generales))
-						<p>No existen noticias</p>
+						<p><label>No existen noticias</label></p>
 						<hr>
 				@endif	
 				
@@ -113,11 +113,11 @@
 						<p class="img-titu" ><a href="{{ url('userDependiente/detalleNoticia_local/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
 					@endforeach
 					<hr>
-					<p><label><small><a href="{{ url('userDependiente/verNoticiasLocales') }}">Ver todas las noticias...</a></small></label></p>
+					<p><small><a href="{{ url('userDependiente/verNoticiasLocales') }}">Ver todas las noticias...</a></small></p>
 					<hr>
 				@endif	
 				@if (!count($noticias_locales))
-					<p>No existen noticias</p>
+					<p><label>No existen noticias</label></p>
 						<hr>
 				@endif
 							
@@ -157,7 +157,7 @@
 										</div>	
 										@endforeach
 
-										<center class="center-top" ><label><small><a href="{{ url('userDependiente/ver_todo_producto') }}">Ver mas..</a></small></label></center>
+										<center class="center-top" ><small><a href="{{ url('userDependiente/ver_todo_producto') }}">Ver mas..</a></small></center>
 									</div>
 
 								</div>
@@ -205,7 +205,7 @@
 										</div>	
 										@endforeach
 
-										<center class="center-top" ><label><small><a href="{{ url('userDependiente/ver_todo_servicio') }}">Ver mas..</a></small></label></center>
+										<center class="center-top" ><small><a href="{{ url('userDependiente/ver_todo_servicio') }}">Ver mas..</a></small></center>
 									</div>
 
 								</div>

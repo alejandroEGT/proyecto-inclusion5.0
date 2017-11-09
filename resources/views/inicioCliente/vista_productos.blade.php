@@ -5,12 +5,17 @@
 <div class="android-drawer-separator"></div>
 	<div class="container">
 		<div class="row">
+
 			<div class="col-md-4 mdl-shadow--6dp">
+
 				<div class="imagen-producto">
 				<img class="mdl-card__media porteimg" src="{{ '/'.$producto->fotoProducto }}">
 				</div>
 			</div>
 			<div class="col-md-8 mdl-shadow--6dp">
+
+					<form action="{{ url('carro/agregarProd')}}"  method="post">
+						{{ csrf_field() }}
 				<h3>{{$producto->nombreProducto}}</h3>
 				<dl>
 					<dt>
@@ -28,8 +33,6 @@
 					</dd>
 
 
-					<form action="{{ url('carro/agregarProd')}}"  method="post">
-						{{ csrf_field() }}
 					<input type="hidden" name="id" value="{{ base64_encode($producto->idProducto) }}">
 
 							<dt>
@@ -42,7 +45,7 @@
 						
 					</dd>
 				
-					<button type="submit" class="btn btn-primary btn-outline-danger">Añadir a la cesta</button>
+					<button type="submit" class="btn btn-primary btn-outline-danger">Agregar al carro</button>
 					</form>
 
 				</dl>

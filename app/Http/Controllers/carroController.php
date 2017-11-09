@@ -29,6 +29,33 @@ class carroController extends Controller
 		
 	}
 
+	public function delProducto($id){
+
+		$getId = base64_decode($id);
+
+		$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
+
+		$carro = carro::where('id_cliente', $id_cliente->id)->first();
+
+		$delete = detalle_carro::delProducto($getId, $carro);
+
+		if($delete){
+			return redirect()->back();
+		}
+	}
+
+	public function actProducto(Request $datos){
+
+		$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
+
+		$carro = carro::where('id_cliente', $id_cliente->id)->first();
+
+		$update = detalle_carro::actProducto($datos, $carro);
+
+		if($update){
+			return redirect()->back();
+		}
+	}
 
 
        public function miCarro()

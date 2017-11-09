@@ -15,6 +15,8 @@ class CreateAlterDetalleCarrosTable extends Migration
     {
        Schema::table('detalle_carros', function($table) {
             $table->integer('cantidad');
+            $table->integer('id_estado')->unsigned();
+            $table->foreign('id_estado')->references('id')->on('estado_carros');
         });
     }
 

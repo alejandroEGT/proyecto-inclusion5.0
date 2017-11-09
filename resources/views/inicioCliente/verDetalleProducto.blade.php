@@ -81,7 +81,8 @@
 			document.getElementById("cantidadProducto").value = ""; 
 		}
 
-		 else if (document.getElementById("cantidadProducto").value < 0 || document.getElementById("cantidadProducto").value == 0)
+		 else if 
+		 	(document.getElementById("cantidadProducto").value < 0 || document.getElementById("cantidadProducto").value == 0)
 		{
 			document.getElementById("mensaje").innerHTML= "La cantidad ingresada no puede ser inferior a 0";
 			document.getElementById("cantidadProducto").value = ""; 

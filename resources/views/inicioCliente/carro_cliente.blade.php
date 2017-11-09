@@ -34,7 +34,7 @@
 								</div>
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
-									<a href="{{ url('/vista_productos').'/'.base64_encode($carros->idProducto)}}"><p>{{ $carros->nombreProducto }}</p></a>
+									<a href="{{ url('/verDetalleProducto').'/'.base64_encode($carros->idProducto)}}"><p>{{ $carros->nombreProducto }}</p></a>
 									<div class="android-drawer-separator"></div>
 
 								</div>

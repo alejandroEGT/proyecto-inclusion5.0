@@ -43,9 +43,6 @@
 					<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 						<div class="imagen-producto">
 
-						<a class="mdl-card__media porteimg" href="/vista_productos/{{base64_encode($producto->idProducto)}}"><img src="{{ '/'.$producto->fotoProducto }}"></a>
-
-
 						<a class="mdl-card__media porteimg" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}"><img src="{{ '/'.$producto->fotoProducto }}"></a>
 
 						</div>							

@@ -330,4 +330,71 @@ class servicio extends Model
         $tpi = \DB::table('servicios')->where('id', '=', $idS)->delete();
         return $tpi;
     }
+
+    protected function ver_detalleServicio($idS, $idVen)
+    {
+        $traer = \DB::table('tienda_servicios_vendedor')
+                ->select([
+                        'tienda_servicios_vendedor.id_servicio as idServicio',
+                        'foto_servicios.nombre as foto',
+                        'servicios.nombre as nombreServicio',
+                        'servicios.descripcion as descripcion',
+                        'servicios.created_at as creado',
+                        'estado_tienda_servicio.estado as estadoServicio',
+                        'categoria_servicio.nombre as nombreCategoria'
+                    ])
+                ->join('tienda_vendedor','tienda_vendedor.id', '=', 'tienda_servicios_vendedor.id_tienda')
+                ->join('servicios', 'servicios.id','=','tienda_servicios_vendedor.id_servicio')
+                ->join('estado_tienda_servicio','estado_tienda_servicio.id','=','tienda_servicios_vendedor.id_estado')
+                ->join('foto_servicios','foto_servicios.id_servicio','=','servicios.id')
+                ->join('categoria_servicio','categoria_servicio.id','=','servicios.id_categoria')
+                ->where('tienda_servicios_vendedor.id_estado', 1)
+                ->where('tienda_vendedor.id_vendedor', $idVen)
+                ->where('servicios.id', $idS)->first();
+        return $traer;
+    }
+
+
+    protected function actualizar_nombre($dato)
+    {
+        $pi = servicio::find($dato->idServicio);
+        $pi->nombre = ucfirst($dato->nombre);
+        if ($pi->save()) {
+            return true;
+        }
+        return false;
+    }
+    protected function actualizar_descripcion($dato)
+    {
+        $pi = servicio::find($dato->idServicio);
+        $pi->descripcion = ucfirst($dato->descripcion);
+        if ($pi->save()) {
+            return true;
+        }
+        return false;
+    }
+    
+    
+    protected function actualizar_visibilidad($dato)
+    {
+        $pi = \DB::table('tienda_producto_instituciones')
+                ->where('id_servicio', $dato->idServicio)
+                ->update(['id_estado' => $dato->estadoV]);
+
+        if (count($pi)>0) {
+             return true;
+        }   
+        return false;     
+    }
+    protected function actualizar_categoria($dato)
+    {
+        $pi = servicio::find($dato->idServicio);
+        $pi->id_categoria = $dato->categoria;
+            if ($pi->save()) {
+                return true;
+            }
+            return false;
+
+    }
+    
 }

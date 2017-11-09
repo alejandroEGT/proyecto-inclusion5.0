@@ -12,6 +12,7 @@ use App\Vendedor;
 use App\categoria_producto;
 use App\categoria_servicio;
 use App\estado_tienda_producto;
+use App\estado_tienda_servicio;
 use App\foto_producto;
 use App\foto_servicio;
 use App\producto;
@@ -359,6 +360,114 @@ class vendedorIndependienteController extends Controller
         $tienda_prod_ven = Tienda_servicio_vendedor::borrar($dato->idServicio);
         return redirect()->back();
     }
+
+    public function ver_detalleServicio(Request $dato)
+    {
+      $getId = base64_decode($dato->id);
+      $categoria = categoria_servicio::all();
+      $estadoP = estado_tienda_servicio::limit(2)->get();
+      //$area = Area::traerArea();
+      $vendedor = Vendedor::idVendedor(\Auth::user()->id);
+      //dd($vendedor[0]->id);
+      $servicios = servicio::ver_detalleServicio($getId, $vendedor[0]->id);
+
+
+      return view('vendedorIndependiente.verDetalleServicio')
+      ->with('servicios', $servicios)
+      ->with('categoria', $categoria)
+      ->with('estadoP', $estadoP);
+    }
+
+
+     public function actualizar_servicio_foto(Request $dato)
+    {
+      try{
+          $this->validate($dato,[
+                    'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
+              ]);
+          //dd($dato->idProducto);
+          $actualizar = foto_servicio::actualizar_foto($dato);
+          if ($actualizar > 0) {
+              \Session::flash('correcto', 'Foto actualizada correctamente');
+              return redirect()->back();
+          }
+          return redirect()->back();
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        }
+    }
+     public function actualizar_servicio_nombre(Request $dato)
+    {
+        try{
+               $this->validate($dato,[
+                    'nombre' => 'required | max:50',
+              ]);
+              $nombre = servicio::actualizar_nombre($dato);
+              if ($nombre) {
+                \Session::flash('correcto', 'Nombre actualizado correctamente');
+                return redirect()->back();
+              }
+              return redirect()->back();
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }
+    }
+    public function actualizar_servicio_descripcion(Request $dato)
+    {
+      try{
+            $this->validate($dato,[
+                    'descripcion' => 'required | max:250',
+              ]);
+              $desc = servicio::actualizar_descripcion($dato);
+              if ($desc) {
+                \Session::flash('correcto', 'Descripcion actualizada correctamente');
+                return redirect()->back();
+              }
+              return redirect()->back();
+       } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }
+    }
+     
+     public function actualizar_servicio_visibilidad(Request $dato)
+    {
+      try{
+               $this->validate($dato,[
+                    'estadoV' => 'required',
+              ]);
+
+              $visibi = Tienda_servicio_vendedor::actualizar_visibilidad($dato);
+              if ($visibi) {
+                return redirect()->back();
+              }
+              return redirect()->back();
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }       
+
+    }
+    public function actualizar_servicio_categoria(Request $dato)
+    {
+      try{
+            $this->validate($dato,[
+                    'categoria' => 'required',
+              ]);
+
+            $categ = servicio::actualizar_categoria($dato);
+              if ($categ) {
+                
+                return redirect()->back();
+              }
+              return redirect()->back();
+
+      } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }    
+
+    }
+
 }
 
 

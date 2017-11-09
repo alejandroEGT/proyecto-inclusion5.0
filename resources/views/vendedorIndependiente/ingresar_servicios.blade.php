@@ -103,7 +103,7 @@
 						<td>{{ $s->descripcion }}</td>
 						<td>{{ $s->creado }}</td>			
 						<td>
-							<a class="btn btn-primary btn-xs" href="#">Ver..</a>
+							<a class="btn btn-primary btn-xs" href="{{ url('userIndependiente/detalleServicio/'.base64_encode($s->idServicio)) }}">Ver..</a>
 							<input type="button" @click="eliminarServicio({!! $s->idServicio  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
 						</td>
 					</tr>

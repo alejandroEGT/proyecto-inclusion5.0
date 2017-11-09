@@ -282,14 +282,6 @@ public function ver_detalleProducto(Request $dato)
 
               }
               
-              }else{
-
-                  $contadorTiendaInst->id_tienda = $tienda_institucion->id;
-                  $contadorTiendaInst->laravel_session = $dato->ip(); 
-                  $contadorTiendaInst->cantidad++;
-                  $contadorTiendaInst->save();
-
-              }
 
             ////////fin de prueba //////////////
 

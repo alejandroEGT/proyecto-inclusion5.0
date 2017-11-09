@@ -220,8 +220,6 @@ Route::group(['prefix' => 'userIndependiente','middleware'=>['md_vendedor']], fu
         Route::get('/modificar_servicios' , 'vendedorIndependienteController@modificar_servicios');
         Route::post('/publicarproducto' , 'vendedorIndependienteController@publicarproducto');
         Route::get('/eliminar_producto_vendedor/{idProducto}', 'vendedorIndependienteController@eliminar_producto_vendedor');
-        Route::post('/publicarServicio' , 'vendedorIndependienteController@publicarServicio');
-        Route::get('/eliminar_servicio_vendedor/{idServicio}', 'vendedorIndependienteController@eliminar_servicio_vendedor');
         Route::get('/detalleProducto/{id}', 'vendedorIndependienteController@ver_detalleProducto');
         Route::post('/actualizar_producto_foto', 'vendedorIndependienteController@actualizar_producto_foto');
         Route::post('/actualizar_producto_nombre','vendedorIndependienteController@actualizar_producto_nombre');
@@ -230,6 +228,15 @@ Route::group(['prefix' => 'userIndependiente','middleware'=>['md_vendedor']], fu
         Route::post('/actualizar_producto_visibilidad','vendedorIndependienteController@actualizar_producto_visibilidad');
         Route::post('/actualizar_producto_categoria', 'vendedorIndependienteController@actualizar_producto_categoria');
         Route::post('/actualizar_producto_precio', 'vendedorIndependienteController@actualizar_producto_precio');
+
+        Route::post('/publicarServicio' , 'vendedorIndependienteController@publicarServicio');
+        Route::get('/eliminar_servicio_vendedor/{idServicio}', 'vendedorIndependienteController@eliminar_servicio_vendedor');
+        Route::get('/detalleServicio/{id}', 'vendedorIndependienteController@ver_detalleServicio');
+        Route::post('/actualizar_servicio_foto', 'vendedorIndependienteController@actualizar_servicio_foto');
+        Route::post('/actualizar_servicio_nombre','vendedorIndependienteController@actualizar_servicio_nombre');
+        Route::post('/actualizar_servicio_descripcion','vendedorIndependienteController@actualizar_servicio_descripcion');
+        Route::post('/actualizar_servicio_categoria', 'vendedorIndependienteController@actualizar_servicio_categoria');
+
 
 });
 

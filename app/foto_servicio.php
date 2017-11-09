@@ -32,4 +32,21 @@ class foto_servicio extends Model
         $tpi = \DB::table('foto_servicios')->where('id', '=', $id)->delete();
         return $tpi;
     }
+
+     protected function actualizar_foto($dato)
+    {
+        $url="foto_productos";
+        $getFoto = foto_servicio::where('id_servicio',$dato->idServicio)->get();
+        \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
+        $file = $dato->file('fotoP1')->getClientOriginalExtension();
+        $imageName = time().'.'.$dato->file('fotoP1')->getClientOriginalExtension();//nombre de la imagen como tal.
+
+        $update = foto_servicio::find($getFoto[0]->id);
+        $update->foto = $url.'/'.$imageName;
+        if ($update->save()) {
+              $dato->file('fotoP1')->move(public_path($url), $imageName);
+              return 1;
+        }
+        return 0;
+    }
 }

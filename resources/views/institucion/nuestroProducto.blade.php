@@ -32,7 +32,7 @@
 			@foreach ($productos as $producto)
 				<div class="row">
 					<div class="col-md-3  ">
-						<img src="{{'/'.$producto->foto}}" class="img-thumbnail img-responsive " >
+						<img src="{{'/'.$producto->foto}}" alt="foto de {{ $producto->nombre }}" class="img-thumbnail img-responsive " >
 					</div>
 					<div class="col-md-3  ">
 						<p><label>{{ $producto->nombre }}</label></p>

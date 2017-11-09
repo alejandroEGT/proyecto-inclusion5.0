@@ -138,6 +138,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/ver_todo_servicio_area/{id}', 'institucionController@vista_todo_servicio_area');
         Route::get('/ver_todo_servicio_institucion/{id}', 'institucionController@vista_todo_servicio_institucion');
         Route::get('/ver_todo_servicio_vendedor/{id}', 'institucionController@vista_todo_servicio_vendedor');
+        Route::get('/ver_vistas_tienda', 'graficosAdminController@vista_grafico_visitas_tienda');
 
 });
 
@@ -200,7 +201,10 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::get('/ver_todo_servicio_vendedor/{id}', 'alumnoController@vista_todo_servicio_vendedor');
 
 
-
+        Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');
+        Route::get('/desactivarmicro', 'herramientasayudaController@desactivar_microfono');
+        Route::get('/activartext', 'herramientasayudaController@activar_texto');
+        Route::get('/desactivartext','herramientasayudaController@desactivar_texto');
        
         
 });

@@ -7,20 +7,20 @@
 		<div class="row">
 			<div class="col-md-12 well background-blue">
 				<div class="centro1" >
-					<img src="{{ '/'.$institucion->logo }}" width="100">
+					<img src="{{ '/'.$institucion->logo }}" alt="Logo de {{ $institucion->nombre }}" width="100">
 					<!--<p class="p-titulo-inst"> {{--$institucion->nombre--}} </p>-->
 				</div>
-				contador: {{ $contador }}
+				<label>vistas <i class="fa fa-eye" aria-hidden="true"></i> : {{ $contador }}</label>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-offset-1 col-md-6 papel-inicio">
 				<div class="papel-titulo">
-					<p>Publicar tus novedades <div class="ico-push" ></div></p>
+					<p><label>Publicar tus novedades</label> <div class="ico-push" ></div></p>
 				</div>
 				<div class="papel-body" >
-					<p>Puedes publicar tus novedades cuando gustes, también lo podrán hacer personas que pertenezcan a {{Auth::guard('institucion')->user()->nombre}}</p>
+					<p><label>Puedes publicar tus novedades cuando gustes, también lo podrán hacer personas que pertenezcan a {{Auth::guard('institucion')->user()->nombre}}</label></p>
 						<div class="botones-grupo">
 							<a href="{{ url('institucion/publicarProducto') }}" class="btn btn-verde" >Publicar Producto</a>
 							<a href="{{ url('institucion/publicarServicio') }}" class="btn btn-naranja" >Publicar Servicio</a>
@@ -50,17 +50,17 @@
 					
 					@foreach ($noticias_generales as $ng)
 						<hr>
-						<img class="img-notix"  src="{{ '/'.$ng->foto }}" height="70" width="90">
+						<img class="img-notix"  src="{{ '/'.$ng->foto }}" alt="foto de noticia" height="70" width="90">
 						<p class="img-titu" ><label>{{ $ng->titulo}}</label></p>
-						<p class="img-titu" ><a href="{{ url('institucion/detalleNoticia_general/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+						<p class="img-titu" ><a href="{{ url('institucion/detalleNoticia_general/'.base64_encode($ng->id)) }}" class="btn btn-info btn-block btn-xs" >Ver más</a></p>
 					@endforeach
 					<hr>
-					<label><a href="{{ url('institucion/verNoticiasGenerales') }}">Ver todas las noticias...</a></label>
+					<a href="{{ url('institucion/verNoticiasGenerales') }}">Ver todas las noticias...</a>
 
 					<hr>
 				@endif
 				@if (!count($noticias_generales))
-						<p>No existen noticias</p>
+						<p><label>No existen noticias</label></p>
 						<hr>
 				@endif	
 				
@@ -68,21 +68,21 @@
 					<center><label>Noticias Locales</label></center>
 					@foreach ($noticias_locales as $nl)
 						<hr>
-						<img class="img-notix"  src="{{ '/'.$nl->foto }}" height="70" width="90">
+						<img class="img-notix"  src="{{ '/'.$nl->foto }}" alt="foto de noticia" height="70" width="90">
 						@if ($nl->id_estado == 1)
 							<p class="img-titu" ><label>{{ $nl->titulo}}</label> <img src="/ico/world.png"></p>
 						@endif
 						@if ($nl->id_estado == 2)
 							<p class="img-titu" ><label>{{ $nl->titulo}}</label> <img src="/ico/padlock.png"></p>
 						@endif
-						<p class="img-titu" ><a href="{{ url('institucion/detalleNoticia_local/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver mas</a></p>
+						<p class="img-titu" ><a href="{{ url('institucion/detalleNoticia_local/'.base64_encode($nl->id)) }}" class="btn btn-info btn-block btn-xs" >Ver más</a></p>
 					@endforeach
 					<hr>
-					<label><a href="{{ url('institucion/verNoticiasLocales') }}">Ver todas las noticias...</a></label>
+					<a href="{{ url('institucion/verNoticiasLocales') }}">Ver todas las noticias...</a>
 					<hr>
 				@endif	
 				@if (!count($noticias_locales))
-					<p>No existen noticias locales</p>
+					<p><label>No existen noticias locales</label></p>
 						<hr>
 				@endif
 			</div>
@@ -114,8 +114,8 @@
 							@foreach ($productos as $producto)
 							<div class="box-producto">
 								<center>
-									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
-									<p>{{ str_limit($producto->nombre,10) }}</p>
+									<img src="{{ '/'.$producto->foto }}" alt="foto de {{ $producto->nombre }}" class="img-thumbnail img-prod ">
+									<p><label>{{ str_limit($producto->nombre,10) }}</label></p>
 									<p><a href="{{ url('institucion/detalleProducto/'.base64_encode($producto->idProducto)) }}" class="btn btn-primary btn-xs">Ver</a>
 									<input type="button" @click="eliminarProducto({!! $producto->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
 									</p>
@@ -124,7 +124,11 @@
 							</div>	
 							@endforeach
 								<!--<center>{{-- $productos->links() --}}</center>-->
-							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_producto') }}">Ver mas..</a></small></label></center>
+<<<<<<< HEAD
+							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_producto') }}">Ver más..</a></small></label></center>
+=======
+							<center class="center-top" ><small><a href="{{ url('institucion/ver_todo_producto') }}">Ver más..</a></small></center>
+>>>>>>> pruebas4.0
 						</div>
 
 					</div>
@@ -163,8 +167,8 @@
 							@foreach ($servicios as $servicio)
 							<div class="box-producto">
 								<center>
-									<img src="{{ '/'.$servicio->foto }}" class="img-thumbnail img-prod ">
-									<p>{{ str_limit($servicio->nombre, 10) }}</p>
+									<img src="{{ '/'.$servicio->foto }}" alt="foto de {{ $servicio->nombre }}" class="img-thumbnail img-prod ">
+									<p><label>{{ str_limit($servicio->nombre, 10) }}</label></p>
 									<p><a href="{{ url('institucion/detalleServicio/'.base64_encode($servicio->id)) }}" class="btn btn-primary btn-xs">Ver</a>
 										
 									<input type="button" @click="eliminarServicio({!! $servicio->id !!});"  class="btn btn-danger btn-xs" value="Eliminar" >
@@ -174,7 +178,11 @@
 							</div>	
 							@endforeach
 							<!--<center>{{-- $productos->links() --}}</center>-->
-							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_servicio') }}">Ver mas..</a></small></label></center>
+<<<<<<< HEAD
+							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_servicio') }}">Ver más..</a></small></label></center>
+=======
+							<center class="center-top" ><small><a href="{{ url('institucion/ver_todo_servicio') }}">Ver más..</a></small></center>
+>>>>>>> pruebas4.0
 						</div>
 
 					</div>

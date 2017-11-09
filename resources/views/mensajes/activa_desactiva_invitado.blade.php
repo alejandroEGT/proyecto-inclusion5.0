@@ -23,10 +23,10 @@
 	function estaPulsadoShift(event){
 		if (event.shiftKey==1)
 			//alert("esta ok");
-		    $("a, h1, button, h2, h3, h4, h5, input, label").addClass('zoom');
+		    $("a, h1, button, h2, h3, h4, h5, input, label, select").addClass('zoom');
 		else
 			//alert("no ok");
-		    $("a, h1, button, h2, h3, h4, h5, input, label").removeClass('zoom');
+		    $("a, h1, button, h2, h3, h4, h5, input, label, select").removeClass('zoom');
 	}
 
 
@@ -54,11 +54,18 @@
 					}
 
 
-	                $( "label" ).mouseover(function(event) {
+	                $( "label a" ).mouseover(function(event) {
 				  				//var p = $(this).text();
 				  					hablar($(event.target).text());
 							 	//hablar($(event.target).text());
-							});
+					});
+					  $( "label, a" ).mouseout(function(event) {
+				  				//var p = $(this).text();
+				  					callar();
+							 	//hablar($(event.target).text());
+					});
+
+
 	                 $( "select" ).mouseover(function(event) {
 				  					texto = $(event.target).text();
 				  					hablar(texto);
@@ -301,6 +308,17 @@ artyom.addCommands(comandos); // Agregar comando
 		        	voz.name = "Google Español",
 		        	voz.voiceURI = "Google Español",
 					window.speechSynthesis.speak(voz);
+					
+					
+			}
+			else{
+				alert("disculpa, speechSynthesis no definidido");
+			}
+	}
+	function callar() {
+		if (window.speechSynthesis != 'undefined'){
+				
+					window.speechSynthesis.cancel();
 					
 					
 			}

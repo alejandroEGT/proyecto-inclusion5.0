@@ -54,7 +54,7 @@
 						<label>Alumnos:</label>
 						<hr>
 						@foreach ($alumnos as $a)
-							<a href="{{ url($ruta.'/perfil_venInst/'.base64_encode($a->id_user)) }}" ><img src="{{'/'.$a->foto}}" class="sizeFP "> </a>
+							<a href="{{ url($ruta.'/perfil_venInst/'.base64_encode($a->id_user)) }}" ><img src="{{'/'.$a->foto}}" class="sizeFP " alt="{{ $a->nombres.' '.$a->apellidos }}" > </a>
 						@endforeach
 					</div>
 				</div>
@@ -79,7 +79,7 @@
 							@foreach ($productos as $producto)
 							<div class="box-producto">
 								<center>
-									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
+									<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod " alt="foto de {{ $producto->nombre }}">
 									<p>{{ str_limit($producto->nombre, 10) }}</p>
 									<p><label class="lbl-precio" > $ {{ number_format($producto->precio, 0, ',','.') }}</label></p>
 										<a class="btn btn-primary btn-xs" href="{{ url($ruta."/detalleProducto/".base64_encode($producto->idProducto).'/'.base64_encode($institucion->id)) }}">Ver..</a>
@@ -97,7 +97,7 @@
 				@endif
 				@if (!count($productos))
 					<center>
-						<label for="">No Existen productos para mostrar</label>
+						<label>No Existen productos para mostrar</label>
 						<img src="/ico/sad.png">
 					</center>
 					<hr>

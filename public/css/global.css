@@ -337,3 +337,6 @@ small{
 	background:url("../ico/news.png");
 	background-size: 100% 100%;
 }
+.lbl-titulo{
+	font-size: 17px;
+}

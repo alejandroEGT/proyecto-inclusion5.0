@@ -34,7 +34,7 @@
 									<td>{{ $esp->nombreArea }}</td>
 									<td>{{ date('h:i:s - d/m/Y', strtotime($esp->creado))}}</td>
 									<td>{{ $esp->nombreEstado}}</td>
-									<td><input class="btn btn-danger" type="button" value="Cancelar"></td>
+									<td><a class="btn btn-danger" @click="eliminarProductoEspera({{ $esp->idProducto }})" >Cancelar</a></td>
 								</tr>
 								@endforeach		
 							</table>	

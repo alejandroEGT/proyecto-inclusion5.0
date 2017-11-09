@@ -14,7 +14,8 @@
 				</p>
 				<div class="row">
 					<div class="col-md-10">
-						<input type="" class="form-control input" maxlength="50" placeholder="Ingrese nombre del servicio" name="nombre">
+						<label>Nombre del servicio</label>
+						<input type="text" class="form-control input" maxlength="50" placeholder="Nombre del servicio" name="nombre" autofocus>
 					</div>
 				</div>		
 			</div>
@@ -26,13 +27,14 @@
 		</div>
 		<hr>
 			@if ($errors->all())
-				<div class="alert alert-info">
-					<ul>
-						@foreach ($errors->all() as $error)
-							<li>{{$error}}</li>
-						@endforeach
-					</ul>
-				</div>
+				 <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				            @endforeach
+				        </ul>
+			    </div>
 			@endif
 			@if (Session::has('registro'))
 				     <div class="alert alert-info">{{ Session::get('registro') }}</div>
@@ -41,10 +43,12 @@
 		<div class="row">
 			
 			<div class="col-md-offset-2 col-md-3">
+				<label>Descripción</label>
 				<p><input type="text" placeholder="Descripción del servicio..." maxlength="250" class="form-control input" name="descripcion"></p>
 			</div>
 		
 			<div class="col-md-2">
+				<label>Categoría</label>
 				<p><select name="categoria" class="form-control input" >
 					<option value="" >Seleccione categoría..</option>
 					@foreach ($categoria_serv as $categoria)
@@ -54,6 +58,7 @@
 				</select></p>
 			</div>
 			<div class="col-md-2">
+				<label>Área o especialidad</label>
 				<select name="area" class="form-control input">
 					<option value="" >Seleccione área o especilidad....</option>
 					@foreach ($areas as $a)
@@ -75,10 +80,11 @@
 				<input style="display: none;" name="fotoP1" id="file-input" type="file"/>	
 			</div>
 			
-			<div class="col-md-offset-1 col-md-2">
-				<input class="btn" type="submit" name="" value="Registrar">
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-7">
+				<input class="btn btn-block" type="submit" name="" value="Registrar">
 			</div>
-			
 		</div>
 		
 	</form>
@@ -92,23 +98,23 @@
 			
 				<table class="table table-responsive">
 					 <tr class="head-color" >
-					 	<th>Id</th>
-					    <th>Foto</th>
-					    <th>Nombre</th> 
-					    <th>Descripcion</th>
+					 	<th><label>Id</label></th>
+					    <th><label>Foto</label></th>
+					    <th><label>Nombre</label></th> 
+					    <th><label>Descripcion</label></th>
 					    <!--<th>creado</th>-->
-					    <th>Opción</th>
+					    <th><label>opción</label></th>
 					  </tr>
 					@foreach ($servicios as $s)
 
 					<tr>
-						<td>{{ $s->id }}</td>
-						<td><img src="{{ '/'.$s->foto }}" height="70" width="90"></td>
-						<td>{{ $s->nombre }}</td>
-						<td>{{ $s->descripcion }}</td>
+						<td><label>{{ $s->id }}</label></td>
+						<td><img src="{{ '/'.$s->foto }}" height="70" width="90" alt="foto de {{ $s->nombre }}" ></td>
+						<td><label>{{ $s->nombre }}</label></td>
+						<td><label>{{ $s->descripcion }}</label></td>
 						
 						<td>
-							<a class="btn btn-primary btn-xs" href="{{ url("encargadoArea/detalleServicio/".base64_encode($s->id)) }}">Ver..</a>
+							<a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleServicio/".base64_encode($s->id)) }}">Ver..</a>
 							<input type="button" @click="eliminarServicio({!! $s->id !!});"  class="btn btn-danger btn-xs" value="Eliminar">	
 						
 						</td>

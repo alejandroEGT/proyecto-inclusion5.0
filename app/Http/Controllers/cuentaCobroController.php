@@ -48,4 +48,8 @@ class cuentaCobroController extends Controller
 
 }
 
+public function testo(Request $datos){
+    dd($datos);
+}
+
 }

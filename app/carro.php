@@ -46,6 +46,8 @@ class carro extends Model
                     ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
                     ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
                     ->where('carros.id_cliente', $idCliente->id)
+                    ->where('detalle_carros.id_estado',4)
+                    ->where('carros.id_estado',1)
                     ->get();
 
 

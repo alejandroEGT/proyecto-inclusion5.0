@@ -11,8 +11,7 @@
 		<div class="row caja-sesion">
 			<div class="col-xs-12 col-sm-12 col-md-10 mdl-shadow--6dp">
 				
-				<form action="" method="post">
-					{{csrf_field()}}
+
 
 
 	@foreach($carro as $carros)
@@ -24,23 +23,38 @@
 
 						<div class="container-fluid">
 							<div class="row caja-sesion">
+								
+
+								<div class="col-xs-12 col-sm-12 col-md-3">
+
+									<div class="imagen-producto">
+										<img class="mdl-card__media porteimg" src="{{ '/'.$carros->fotoProducto }}">
+									</div>
+		
+								</div>
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
 									<a href="{{ url('/vista_productos').'/'.base64_encode($carros->idProducto)}}"><p>{{ $carros->nombreProducto }}</p></a>
 									<div class="android-drawer-separator"></div>
-									<div class="imagen-producto">
-									<img class="mdl-card__media porteimg" src="{{ '/'.$carros->fotoProducto }}">
+
 								</div>
-								</div>
-								
+
+
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
+
+									<form method="post" action="{{ url('carro/actualizarProd') }}">
+										{{csrf_field()}}
+										<input type="hidden" name="id" value="{{ base64_encode($carros->idProducto) }}">
 									<p>Cantidad</p>
 									<p>
 										<input type="text" class="col-xs-12 col-sm-12 col-md-4" name="cantidad" value="{{ $carros->cantidadProducto }}">
 										<label class="bmd-label-floating"> unidades</label>
 									</p>
 									<div class="android-drawer-separator"></div>
+									<input type="submit" value="actualizar">
+
+									</form>
 								</div>
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
@@ -63,6 +77,7 @@
 
 							</div>
 
+
 							@endforeach
 
 							<div class="android-drawer-separator"></div>
@@ -71,11 +86,13 @@
 								<label for="">$19.980</label>
 							</p>
 							
-							<form action="" method="">
+											<form action="/testo" method="post">
+					{{csrf_field()}}
 							<div class="boton-sesion">	
-							  	<p align="right"><a href="#" class="btn btn-primary btn-outline-success">Comprar</a></p>
+							  	<p align="right"><input type="submit" class="btn btn-primary btn-outline-success" value='Comprar'></p>
+
 							</div>
-							</form>
+							
 						</div>
 				</form>
 			</div>

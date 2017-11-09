@@ -29,6 +29,7 @@ class detalle_carro extends Model
 		$agregar->id_carro = $carro->id;
 		$agregar->id_producto = $producto->idProducto;
 		$agregar->cantidad = $datos->cantidad;
+		$agregar->id_estado = 4;
 
 					if($agregar->save()){
 						return true;
@@ -43,13 +44,37 @@ class detalle_carro extends Model
 		$delete = detalle_carro::where('id_carro', $carro->id)
 								->where('id_producto', $id)->first();
 
-		if($delete->delete()){
+		$delete->id_estado = 3;
+
+		if($delete->save()){
 			return true;
 		}else{
 			return false;
 		}
-
-
 	}
+
+	protected function actProducto($datos, $carro){
+
+		$getId = base64_decode($datos->id);
+
+		$producto = producto::where('id',$getId)->first();
+
+		if($datos->cantidad > $producto->cantidad || $datos->cantidad == 0){
+			return "No puede ingresar eso";
+		}else{
+
+		$update = detalle_carro::where('id_carro', $carro->id)
+								->where('id_producto', $getId)->first();
+		
+		$update->cantidad = $datos->cantidad;
+
+		if($update->save()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+}
 
 }

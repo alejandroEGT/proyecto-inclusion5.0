@@ -350,4 +350,6 @@ Route::group(['prefix' => 'carro', 'middleware' => ['cliente']], function(){
 
 Route::get('/test' , 'cuentaCobroController@crearIntegrador');
 
+Route::post('/testo' , 'cuentaCobroController@testo');
+
 Route::post('/crearCobro' , 'cuentaCobroController@crearCobro');

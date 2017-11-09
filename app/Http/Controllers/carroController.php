@@ -44,8 +44,17 @@ class carroController extends Controller
 		}
 	}
 
-	public function actProducto($dato){
-		
+	public function actProducto(Request $datos){
+
+		$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
+
+		$carro = carro::where('id_cliente', $id_cliente->id)->first();
+
+		$update = detalle_carro::actProducto($datos, $carro);
+
+		if($update){
+			return redirect()->back();
+		}
 	}
 
 

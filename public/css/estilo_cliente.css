@@ -46,6 +46,32 @@ a:link {
 	height: 150px;
 	width: 100px;
 }
+.porteimgDetalle > img{
+	height: 400px;
+	width: 600px;
+}
+h1{
+	font-size:40px; 
+	color: grey;
+ 	font-family: fantasy;
+}
+
+.estiloDetalleProducto{
+	font-family: fantasy;
+}
+.estiloDetalleCantidad{
+	font-size: 10px;
+	color: red;
+	font-family: monospace;
+}
+.estiloDetalleTitulos{
+	font-size: 15px;
+	font-family: cursive;
+}
+.estiloDetalleDescripcion{
+	font-size: 13px;
+	font-family: cursive;
+}
 
 .porteImgTienda > img{
 	height: 200px;

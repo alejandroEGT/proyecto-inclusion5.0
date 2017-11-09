@@ -241,28 +241,10 @@ public function ver_detalleProducto(Request $dato)
  }
 
      public function vista_perfilInst(request $dato){
-<<<<<<< HEAD
+
 
         try{
            //////////////////aqui un contador de visitas ////////////////
-
-            //prueba de contador de visitas ////
-            //dd($dato->cookies);
-            //dd(request()->cookie('laravel_session'));
-              $idI = base64_decode($dato->idinstitucion);
-              $tienda_institucion = Tienda_institucion::where('id_institucion', $idI)->first();
-              $contadorTiendaInst = new ContadorInstitucion;
-
-              $contadorTienda = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)
-                                ->where('laravel_session', request()->cookie('laravel_session'))->first();
-                     
-              
-              if($contadorTienda == true){ /*El usuario si ha visitado el perfil*/
-                  if( !date('d-m-Y')  ==  date('d-m-Y', strtotime($contadorTienda->created_at) )){
-
-=======
-
-        try{
             
             //dd($dato->ip());
             //prueba de contador de visitas ////
@@ -282,29 +264,18 @@ public function ver_detalleProducto(Request $dato)
 
                 if(date('d-m-Y')  !=  date('d-m-Y', strtotime($contadorTienda->updated_at) )){
           
->>>>>>> pruebas4.0
+
                     $contadorTienda->cantidad++;
                     $contadorTienda->save();
 
                   }
-<<<<<<< HEAD
-            
-              }
-              else{
-              /*o si no*/
 
-                $contadorTiendaInst->id_tienda = $tienda_institucion->id;
-                $contadorTiendaInst->laravel_session = request()->cookie('laravel_session'); 
-=======
-                  
             
-              }
-              else{
+              }else{
               /*o si no*/   
               
                 $contadorTiendaInst->id_tienda = $tienda_institucion->id;
                 $contadorTiendaInst->laravel_session = $dato->ip(); 
->>>>>>> pruebas4.0
                 $contadorTiendaInst->cantidad++;
                 $contadorTiendaInst->save();
               }

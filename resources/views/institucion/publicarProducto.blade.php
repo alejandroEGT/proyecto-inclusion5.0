@@ -9,13 +9,14 @@
 				<div class="ico-speaker"></div>
 			</div>
 			<div class="col-md-6">
-				<p class="panel-title-agregar-mv"><label>¿Que estas ofreciendo?</label></p>
+				<p class="panel-title-agregar-mv"><label>¿Que estás ofreciendo?</label></p>
 				<p class="panel-body-mst"><label>
 					En este formulario puedes publicar productos de un área de la institución.</label>
 				</p>
 				<div class="row">
 					<div class="col-md-10">
-						<input type="" class="form-control input" maxlength="50" placeholder="Ingrese nombre del producto" name="nombre">
+						<label>Nombre del producto</label>
+						<input autofocus type="text" class="form-control input" maxlength="50" placeholder="Nombre del producto" name="nombre">
 					</div>
 				</div>		
 			</div>
@@ -45,12 +46,15 @@
 		<div class="row">
 			
 			<div class="col-md-offset-2 col-md-3">
+				<label>Descripción</label>
 				<p><input type="text" placeholder="Descripción del producto..." maxlength="250" class="form-control input" name="descripcion"></p>
 			</div>
 			<div class="col-md-2">
+				<label>Cantidad</label>
 				<p><input type="numeric" maxlength="4" placeholder="Cantidad..." class="form-control input" name="cantidad"></p>
 			</div>
 			<div class="col-md-2">
+				<label>Categoría</label>
 				<p><select name="categoria" class="form-control input" >
 					<option value="" >Seleccione categoría..</option>
 					@foreach ($categoria_pro as $categoria)
@@ -64,6 +68,7 @@
 		<div class="row">
 		{{ csrf_field() }}
 		<div class="col-md-offset-2 col-md-3">
+			<label>Área / Especialidad</label>
 				<select name="area" class="form-control input">
 					<option value="" >Seleccione área o especilidad....</option>
 					@foreach ($areas as $a)
@@ -72,12 +77,13 @@
 				</select>
 			</div>
 			<div class="col-md-2">
-				<input type="numeric" maxlength="7" minlength="2" name="valor" class="form-control input" placeholder="Ingrese valor">
+				<label>Precio CLP</label>
+				<input type="numeric" maxlength="7" minlength="2" name="valor" class="form-control input" placeholder="Precio">
 			</div>
 			<div class="col-md-2">
 				
 				<p><label for="file-input" class="label-foto-link">
-				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
+				 	<img alt="foto" src="/ico/image.png" for="file-input" class="label-foto-link">
 				 	Agregar foto..
 				</label></p>
 				<input style="display: none;" name="foto" id="file-input" type="file"/>
@@ -114,11 +120,11 @@
 					@foreach ($productos as $p)
 
 					<tr>
-						<td>{{ $p->idProducto }}</td>
-						<td><img src="{{ '/'.$p->foto }}" height="70" width="90"></td>
-						<td>{{ $p->nombre }}</td>
-						<td>{{ $p->descripcion }}</td>
-						<td>{{ $p->creado }}</td>
+						<td><label>{{ $p->idProducto }}</label></td>
+						<td><img src="{{ '/'.$p->foto }}" height="70" width="90" alt="Foto de {{ $p->nombre  }}"></td>
+						<td><label>{{ $p->nombre }}</label></td>
+						<td><label>{{ $p->descripcion }}</label></td>
+						<td><label>{{ $p->creado }}</label></td>
 						<td>
 						<p><a href="{{ url('institucion/detalleProducto/'.base64_encode($p->idProducto)) }}" class="btn btn-primary btn-xs">Ver</a>
 									<input type="button" @click="eliminarProducto({!! $p->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>

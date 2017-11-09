@@ -33,6 +33,12 @@ class Tienda_producto_institucion extends Model
                 ]);
         return $tpi;
     }
+     protected function borrar_espera($idP)
+    {
+        $tpi = \DB::table('tienda_producto_instituciones')->where('id_producto', '=', $idP)->delete();
+       
+        return $tpi;
+    }
     protected function productoEnEspera()
     {
         $dato = \DB::table('tienda_producto_instituciones')

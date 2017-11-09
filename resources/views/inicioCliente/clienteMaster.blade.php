@@ -43,7 +43,7 @@
 					            <nav class="android-navigation mdl-navigation">
 					              	<span>
 					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{ url('carro/miCarro') }}">
-					              			<i class="material-icons">&#xE8CC;</i> Cesta 
+					              			<i class="material-icons">&#xE87E;</i> Carro
 					              			<span class="mdl-badge mdl-badge--no-background" data-badge="2"></span>
 					              		</a>
 					              	</span>
@@ -90,7 +90,7 @@
 				          <span>
 			          	  <a class="mdl-navigation__link" href="{{ url('carro/miCarro') }}">
 
-			          	  <i class="material-icons">&#xE8CC;</i>Cesta
+			          	  <i class="material-icons">&#xE87E;</i>Carro
 			          	  <i class="mdl-badge" data-badge="3"></i>
 			          	  </a>
 				          </span>
@@ -107,12 +107,14 @@
 				    </div>
 
 					<!--cuerpo-->
-					<div class="android-content mdl-layout__content">
+					<div class="android-content mdl-layout__content margen">
 						@yield('content')		
 						
-						
+						<!--<footer><p>&copy; 2017 Exod.cl<p></footer>-->
 					</div>
 				</div>
+
+
 
 								
 		
@@ -128,7 +130,10 @@
 			<script type="text/javascript" src="{{asset('js/jquery.flexisel.js')}}"></script>
 			<script src="{{asset('js/slider_productos.js')}}"></script>
 			@yield('js')
+
+
 		</body>
+
 </html>
 
 

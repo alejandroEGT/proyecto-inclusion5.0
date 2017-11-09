@@ -1,10 +1,14 @@
  @extends('institucion.master_institucion')
 
 @section('content')
+
 <center><label>{{$titulo}}</label></center>
 <hr>
 <div class="row">
 	<div class="col-md-offset-2 col-md-8 panel">
+		<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 		<form action="{{ url('institucion/filtrarProducto') }}" method="GET"> 
 						  <div class="row">
 						    <div class="col-md-12">
@@ -28,7 +32,7 @@
 			@foreach ($productos as $producto)
 				<div class="row">
 					<div class="col-md-3  ">
-						<img src="{{'/'.$producto->foto}}" class="img-thumbnail img-responsive " >
+						<img src="{{'/'.$producto->foto}}" alt="foto de {{ $producto->nombre }}" class="img-thumbnail img-responsive " >
 					</div>
 					<div class="col-md-3  ">
 						<p><label>{{ $producto->nombre }}</label></p>

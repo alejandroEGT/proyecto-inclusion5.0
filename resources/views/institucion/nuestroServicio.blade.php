@@ -1,6 +1,9 @@
  @extends('institucion.master_institucion')
 
 @section('content')
+<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 <center><label>{{$titulo}}</label></center>
 <hr>
 <div class="row">
@@ -28,7 +31,7 @@
 			@foreach ($servicios as $servicio)
 				<div class="row">
 					<div class="col-md-3  ">
-						<img src="{{'/'.$servicio->foto}}" class="img-thumbnail img-responsive " >
+						<img src="{{'/'.$servicio->foto}}" alt="foto de {{ $servicio->nombre }}" class="img-thumbnail img-responsive " >
 					</div>
 					<div class="col-md-3  ">
 						<p><label>{{ $servicio->nombre }}</label></p>

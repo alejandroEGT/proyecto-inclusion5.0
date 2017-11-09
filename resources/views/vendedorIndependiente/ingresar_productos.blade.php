@@ -109,7 +109,8 @@
 						<td>{{ $p->descripcion }}</td>
 						<td>{{ $p->creado }}</td>
 						<td>
-							<a class="btn btn-primary btn-xs" href="#">Ver..</a>
+							<a class="btn btn-primary btn-xs" href="{{ url('userIndependiente/detalleProducto/'.base64_encode($p->idProducto)) }}">Ver..</a>
+							<input type="button" @click="eliminarProducto({!! $p->idProducto  !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
 						</td>
 					</tr>
 				    

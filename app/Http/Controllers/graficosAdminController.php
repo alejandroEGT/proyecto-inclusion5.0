@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Area;
+use App\ContadorInstitucion;
+use App\Tienda_institucion;
+use App\User;
 use App\producto;
 use Charts;
+use Illuminate\Http\Request;
 
 class graficosAdminController extends Controller
 {
@@ -72,5 +75,26 @@ class graficosAdminController extends Controller
               'chart_productos' => $chart_productos,
               'contarTodoProducto' => $contarTodoProducto
             ]);
+    }
+
+    public function vista_grafico_visitas_tienda(Request $dato)
+    {
+      $dato->flash();
+      $tienda_institucion = Tienda_institucion::where('id_institucion', \Auth::guard('institucion')->user()->id )->first();
+  
+       $vistas =ContadorInstitucion::find(39);
+       $contar  = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)->sum('cantidad');
+      //dd($vistas);
+      $chart = Charts::database( $vistas, $dato->tipo, 'highcharts')
+      ->title('Cronología de visitas de la institución')
+      ->elementLabel("Vistas")
+      ->values('panchito')
+      ->Dimensions(1000, 500)
+      ->Responsive(false)
+       ->groupByDay($dato->mes, $dato->anio);
+
+       return view('institucion.grafico_vista_tienda')
+       ->with('chart_vistas', $chart)
+       ->with('vistastotal', $contar);
     }
 }

@@ -23,10 +23,10 @@
 	function estaPulsadoShift(event){
 		if (event.shiftKey==1)
 			//alert("esta ok");
-		    $("a, h1, button, h2, h3, h4, h5, input, label").addClass('zoom');
+		    $("a, h1, button, h2, h3, h4, h5, input, label, select, img").addClass('zoom');
 		else
 			//alert("no ok");
-		    $("a, h1, button, h2, h3, h4, h5, input, label").removeClass('zoom');
+		    $("a, h1, button, h2, h3, h4, h5, input, label, select, img").removeClass('zoom');
 	}
 
 
@@ -53,17 +53,37 @@
 				  					hablar("Botón "+ $(event.target).val());
 					}
 
-
-	                $( "label, a" ).mouseover(function(event) {
+<<<<<<< HEAD
+					$( "label" ).mouseover(function(event) {
+=======
+					$( "label, h3" ).mouseover(function(event) {
+>>>>>>> pruebas4.0
 				  				//var p = $(this).text();
 				  					hablar($(event.target).text());
 							 	//hablar($(event.target).text());
 							});
-	                $( "label, a" ).mouseout(function(event) {
+<<<<<<< HEAD
+	                $( "label" ).mouseout(function(event) {
+=======
+	                $( "label, h3" ).mouseout(function(event) {
+>>>>>>> pruebas4.0
 				  				//var p = $(this).text();
 				  					callar();
 							 	//hablar($(event.target).text());
+					});
+
+
+
+	                $( "a" ).mouseover(function(event) {
+				  				//var p = $(this).text();
+				  					hablar('botón '+$(event.target).text());
+							 	//hablar($(event.target).text());
 							});
+	                $( "a" ).mouseout(function(event) {
+				  				//var p = $(this).text();
+				  					callar();
+							 	//hablar($(event.target).text());
+					});
 	                 $( "select" ).mouseover(function(event) {
 				  					texto = $(event.target).text();
 				  					hablar(texto);
@@ -116,6 +136,10 @@
 
 				  				var alt = $(this).attr("alt");
 				  				hablar(alt);
+							});
+							$( "img" ).mouseout(function(event) {
+
+				  				callar();
 							});
 	@endif
 

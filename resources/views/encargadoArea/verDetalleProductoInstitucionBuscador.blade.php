@@ -2,6 +2,6 @@
 
 @section('content')
 
-	@include('buscar_dentro.detalleProducto')
+@include('buscar_dentro.detalleProducto')
 
 @endsection

@@ -3,38 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Area;
+use App\ContadorInstitucion;
+use App\FotoPefil;
 use App\Fotoperfil;
-use App\Http\Requests\institucionRequest;
 use App\Http\Requests\agregaralumnoRequest;
-use App\Http\Requests\productoInstiRequest;
+use App\Http\Requests\institucionRequest;
 use App\Http\Requests\noticiaRequest;
+use App\Http\Requests\productoInstiRequest;
+use App\Http\Requests\productoRequest;
 use App\Http\Requests\servicioInstRequest;
 use App\Institucion;
+use App\Passwordcuenta;
 use App\Sexo;
+use App\Tienda_institucion;
+use App\Tienda_producto_institucion;
+use App\Tienda_producto_vendedor;
+use App\Tienda_servicio_institucion;
 use App\User;
+use App\Usuarioinstitucion;
 use App\Vendedor;
 use App\VendedorInstitucion;
 use App\categoria_producto;
 use App\categoria_servicio;
-use App\Tienda_institucion;
-use App\foto_producto;
-use App\foto_servicio;
-use App\producto;
-use App\Tienda_producto_institucion;
-use App\Tienda_servicio_institucion;
+use App\estado_noticia;
 use App\estado_tienda_producto;
 use App\estado_tienda_servicio;
-use App\estado_noticia;
-use App\servicio;
+use App\foto_producto;
+use App\foto_servicio;
 use App\noticia;
-use App\FotoPefil;
+use App\producto;
+use App\servicio;
+use ConsoleTVs\Charts\Charts;
 use Illuminate\Http\Request;
-use App\Http\Requests\productoRequest;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use App\Usuarioinstitucion;
-use App\Passwordcuenta;
-use ConsoleTVs\Charts\Charts;
 
 class institucionController extends Controller
 {
@@ -46,13 +48,17 @@ class institucionController extends Controller
           $servicios = servicio::mostrarServicioDesdeAdmin(\Auth::guard('institucion')->user()->id, 4);
           $noticias_generales = noticia::noticias_generales();
           $noticias_locales = noticia::noticias_locales(\Auth::guard('institucion')->user()->id);
-
+          $tienda_institucion = Tienda_institucion::where('id_institucion', \Auth::guard('institucion')->user()->id)->first();
+           $contar  = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)->sum('cantidad');
+          //$contador_tienda = ContadorInstitucion::find($tienda_institucion->id);
+          //dd($contador_tienda);
             return view('institucion.inicio')
             ->with('institucion', $datosInstitucion)
             ->with('productos', $productos)
             ->with('servicios', $servicios)
             ->with('noticias_generales',$noticias_generales)
-            ->with('noticias_locales',$noticias_locales);
+            ->with('noticias_locales',$noticias_locales)
+            ->with('contador', $contar);
       
     }
     public function vista_agregarAE(){
@@ -113,11 +119,11 @@ class institucionController extends Controller
          
           return view('institucion.grafico')->with('areas',json_encode($array));
     }
-    public function vista_detalleAlumno_inst(request $dato)
+    public function vista_detalleAlumno_inst(request $dato) 
   {
         $getId = base64_decode($dato->id);
         $area = Area::traer();
-        $alumno = VendedorInstitucion::detalleAlumno($getId);
+        $alumno = VendedorInstitucion::detalleAlumno($getId, \Auth::guard('institucion')->user()->id);
 
         //return $alumno;
         return view('institucion.verDetalleAlumno')
@@ -138,17 +144,29 @@ class institucionController extends Controller
         return view('institucion.verTodoServicio')->with('servicios', $servicios);
     }
      public function vista_perfilVen($iduser){
-        $idu = base64_decode($iduser);
+         $idu = base64_decode($iduser);
         //return $idu;
 
         $usuario = User::find($idu);
-        $vendedor = Vendedor::where('id_user',$usuario->id)->get();
+        $vendedor = Vendedor::where('id_user',$usuario->id)->first();
         $foto = Fotoperfil::traerFotobyid($idu);
-        
+        $productos = producto::traerproductoVendedor($vendedor->id, 5);
+
         return view('institucion.perfil_vendedor')
         ->with('foto',$foto)
         ->with('usuario',$usuario)
-        ->with('vendedor',$vendedor[0]->telefono);
+        ->with('vendedor',$vendedor)
+        ->with('productos', $productos);
+    }
+    public function vista_detalleProductoVendedor(Request $datos)
+    {
+     
+      $idProducto = base64_decode($datos->idProducto);
+      $idVendedor = base64_decode($datos->idVendedor);
+
+      $producto = producto::verDetalleProducto($idProducto, $idVendedor);
+      //dd($producto);
+       return view('institucion.detalleProductoVendedor')->with('producto', $producto);
     }
     public function vista_perfilInst($idinstitucion){
       try{
@@ -199,39 +217,53 @@ class institucionController extends Controller
        return view('institucion.servicioEspera')->with('serv_esp', $servicios);
     }
     public function vista_perfilVenInst($iduser){
-         $idu = base64_decode($iduser);
-          //return $idu;
-        $usuario = User::find($idu);
-        $vendedor = Vendedor::where('id_user',$usuario->id)->get();
-        $vendedorInstitucion = VendedorInstitucion::where('id_vendedor',$vendedor[0]->id)->get();
-        $institucion = Institucion::find($vendedorInstitucion[0]->id_institucion);
-        $foto = Fotoperfil::traerFotobyid($idu);
 
-        $productos = producto::verProductoDesdeArea($vendedorInstitucion[0]->id_area , 5);
-        $servicios = servicio::mostrarServicioDesdeArea($vendedorInstitucion[0]->id_area, 5);
-        
-        return view('institucion.perfil_vendedorInstitucion')
-        ->with('foto',$foto)
-        ->with('usuario',$usuario)
-        ->with('vendedor',$vendedor[0]->telefono)
-        ->with('institucion', $institucion)
-        ->with('productos', $productos)
-        ->with('servicios', $servicios)
-        ->with('idInstitucion', base64_encode($vendedorInstitucion[0]->id_institucion));
-        
-        //return view('institucion.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
+      try{
+           $idu = base64_decode($iduser);
+            //return $idu;
+          $usuario = User::find($idu);
+          $vendedor = Vendedor::where('id_user',$usuario->id)->get();
+          $vendedorInstitucion = VendedorInstitucion::where('id_vendedor',$vendedor[0]->id)->get();
+          $institucion = Institucion::find($vendedorInstitucion[0]->id_institucion);
+          $foto = Fotoperfil::traerFotobyid($idu);
+
+          $productos = producto::verProductoDesdeArea($vendedorInstitucion[0]->id_area , 5);
+          $servicios = servicio::mostrarServicioDesdeArea($vendedorInstitucion[0]->id_area, 5);
+          
+          return view('institucion.perfil_vendedorInstitucion')
+          ->with('foto',$foto)
+          ->with('usuario',$usuario)
+          ->with('vendedor',$vendedor[0]->telefono)
+          ->with('vendedor_id', $vendedor[0]->id)
+          ->with('institucion', $institucion)
+          ->with('productos', $productos)
+          ->with('servicios', $servicios)
+          ->with('idInstitucion', base64_encode($vendedorInstitucion[0]->id_institucion));
+          
+          //return view('institucion.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
+        }catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        } catch (\Exception $e) {
+                 return redirect()->back();
+        }
     }
 
     public function vista_publicarProducto(){
+       try{
+          $areas = Area::traer();
+          $categoria_pro = categoria_producto::all();
+          $productos = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 5);
+          
+          return view('institucion.publicarProducto')
+          ->with('areas',$areas)
+          ->with('categoria_pro', $categoria_pro)
+          ->with('productos', $productos);
 
-        $areas = Area::traer();
-        $categoria_pro = categoria_producto::all();
-        $productos = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 5);
-        
-        return view('institucion.publicarProducto')
-        ->with('areas',$areas)
-        ->with('categoria_pro', $categoria_pro)
-        ->with('productos', $productos);
+        }catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        } catch (\Exception $e) {
+                 return redirect()->back();
+        }   
     }
     public function vitsa_generarPassword()
     {
@@ -328,6 +360,97 @@ class institucionController extends Controller
       return view('institucion.noticias_locales')
       ->with('noticias_locales', $noticias_locales)
       ->with('estado_noticia',$estado_noticia);
+    }
+    public function vista_todo_producto_alumno(Request $dato)
+    {
+      $idAlumno = base64_decode($dato->id);
+      $vendedor = Vendedor::find($idAlumno);
+      $vendedorInst = VendedorInstitucion::where('id_vendedor', $vendedor->id)->first();
+      $vista_alumno = VendedorInstitucion::detalleAlumno($vendedor->id_user, $vendedorInst->id_institucion );
+      $alumno = VendedorInstitucion::where('id_vendedor', $idAlumno)->first();
+      
+      $productos = producto::verProductoDesdeArea($alumno->id_area, 10);
+      return view('institucion.verTodoProductoAlumno')
+             ->with('alumno', $vista_alumno->first())
+             ->with('institucion_id', $vendedorInst->id_institucion)
+             ->with('productos', $productos);
+    }
+    public function vista_todo_producto_area(Request $dato)
+    {
+      $area_id = base64_decode($dato->id);
+      $area = Area::find($area_id);
+
+      $productos = producto::verProductoDesdeArea($area_id, 10);
+      return view('institucion.verTodoProductoArea')
+           ->with('institucion_id', $area->id_institucion)
+           ->with('area', $area)
+           ->with('productos', $productos);
+    }
+
+    public function vista_todo_producto_institucion(request $dato)
+    {
+      $id_institucion = base64_decode($dato->id);
+      $vista_institucion = Institucion::find($id_institucion);
+
+      $productos = producto::traetProductosDesdeAdmin($id_institucion, 10);
+      return view('institucion.verTodoProductoInstitucion')
+             ->with('institucion', $vista_institucion)
+             ->with('productos', $productos);
+    }
+    public function vista_todo_producto_vendedor(request $dato)
+    {
+       $id_vendedor =base64_decode($dato->id);
+       $vista_vendedor = Vendedor::traerDatos($id_vendedor);
+       //dd($vista_vendedor);
+
+      $productos = Tienda_producto_vendedor::mostrar_productos_vendedor($id_vendedor);
+      return view('institucion.verTodoProductoVendedor')
+             ->with('vendedor', $vista_vendedor)
+             ->with('productos', $productos);
+    }
+    public function vista_todo_servicio_alumno(Request $dato)
+    {
+       $alumno_id = base64_decode($dato->id);
+       $vendedor = Vendedor::find($alumno_id);
+       $vendedorInst = VendedorInstitucion::where('id_vendedor', $vendedor->id)->first();
+       $alumno_vista = Vendedor::traerDatos($vendedor->id);
+       $servicios = servicio::verServicioDesdeArea($vendedorInst->id_area, 10);
+
+       return view('institucion.verTodoServicioAlumno')
+              ->with([
+                  'servicios' => $servicios,
+                  'alumno' => $alumno_vista,
+                  'institucion_id' => $vendedorInst->id_institucion,
+              ]);
+    }
+    public function vista_todo_servicio_area(Request $dato)
+    {
+       $area_id = base64_decode($dato->id);
+   
+       $area = Area::find($area_id);
+       $servicios = Tienda_servicio_institucion::mostrarServiciosArea_paginador($area_id, $area->id_institucion);
+
+       return view('institucion.verTodoServicioArea')
+              ->with([
+                  'servicios' => $servicios,
+                  'area' => $area,
+                  //'institucion_id' => $vendedorInst->id_ins,
+              ]);
+    }
+    public function vista_todo_servicio_institucion(Request $dato)
+    {
+      $institucion_id = base64_decode($dato->id);
+      $institucion = Institucion::find($institucion_id);
+      $servicios = servicio::mostrarServicioDesdeAdmin($institucion_id, 10);
+      //dd($servicios);
+      return view('institucion.verTodoServicioInstitucion')->with([
+          'institucion' => $institucion,
+          'servicios' => $servicios
+      ]);
+    }
+    public function vista_todo_servicio_vendedor(Request $dato)
+    {
+      # code... pendiente//////////
     }
     public function todas_noticias_generales()
     {
@@ -890,7 +1013,8 @@ class institucionController extends Controller
             return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
        }    
 
-    }public function actualizar_producto_area(Request $dato)
+    }
+    public function actualizar_producto_area(Request $dato)
     {
       try{
           $this->validate($dato,[
@@ -1056,15 +1180,15 @@ class institucionController extends Controller
     public function actualizar_foto_alumno(Request $dato)
     {
       try{
-          dd($dato->foto);
+          //dd($dato->foto);
           $this->validate($dato,[
                   'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
             ]);
 
 
            $update = Fotoperfil::actualizar_foto($dato);
-
-           return $update;
+           \Session::flash('correcto', 'Foto actualizada');
+           return redirect()->back();
       } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
        }         
@@ -1252,6 +1376,34 @@ class institucionController extends Controller
             return redirect()->back();
           }
           return redirect()->back();
+    }
+    public function eliminar_producto_espera(Request $dato)
+    {
+
+      $getFoto = foto_producto::where('id_producto',$dato->idProducto)->get();
+      //return $getFoto[0]->foto;
+      \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
+      
+      $foto_prod = foto_producto::borrar($getFoto[0]->id);
+      $tienda_prod_inst = Tienda_producto_institucion::borrar_espera($dato->idProducto);
+      $prod = producto::borrar_espera($dato->idProducto);
+
+      return "true";
+    }
+    public function eliminar_servicio_espera(Request $dato)
+    {
+      try{
+         $getFoto = foto_servicio::where('id_servicio',$dato->idServicio)->get();
+         \File::delete($getFoto[0]->nombre);/*ELIMINAR FOTO*/
+         $foto_servicio = foto_servicio::borrar($getFoto[0]->id);
+         $tienda_serv_inst = Tienda_servicio_institucion::borrar_espera($dato->idServicio);
+         $serv = servicio::borrar($dato->idServicio);
+
+         return "true";
+      }
+      catch (\Illuminate\Database\QueryException $e) {
+            return "true";
+      }
     }
   
 }

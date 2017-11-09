@@ -31,9 +31,9 @@
 										<td>{{ $es->nombre }}</td>
 										<td>{{ $es->descripcion}}</td>
 										<td>{{ $es->nombreArea}}</td>
-										<td>{{ $es->creado }}</td>
+										<td>{{ date('h:i:s - d/m/Y', strtotime($es->creado)) }}</td>
 										<td>{{ $es->nombreEstado}}</td>
-										<td><p><a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleServicio/".base64_encode($es->id)) }}">Ver (Recomendado)</a></p><p><a  class="btn btn-success btn-xs" @click="aceptarServicio({{ $es->id }})" >Aceptar</a></p> <p><input class="btn btn-danger btn-xs" type="button" value="Cancelar"></p></td>
+										<td><p><a class="btn btn-primary btn-xs" href="{{ url("institucion/detalleServicio/".base64_encode($es->id)) }}">Ver (Recomendado)</a></p><p><a  class="btn btn-success btn-xs" @click="aceptarServicio({{ $es->id }})" >Aceptar</a></p> <p><a class="btn btn-danger btn-xs" @click="eliminarServicioEspera({{ $es->id }})">Cancelar</a></p></td>
 									</tr>	
 								@endforeach	
 							</table>	

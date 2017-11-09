@@ -128,6 +128,17 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/detalleNoticia_local/{idNoticia}','institucionController@ver_detalleNoticia_local');
         Route::get('/areaExtern/{idInstitucion}/{idArea}', 'institucionController@vista_areaExterna');
         Route::post('/actualizar_logo_area', 'institucionController@actualizar_logo_area');
+        Route::get('/detalleProductoVendedor/{idProducto}/{idVendedor}', 'institucionController@vista_detalleProductoVendedor');
+        Route::get('/ver_todo_producto_alumno/{id}', 'institucionController@vista_todo_producto_alumno');
+        Route::get('/ver_todo_producto_area/{id}', 'institucionController@vista_todo_producto_area');
+        Route::get('/ver_todo_producto_institucion/{id}', 'institucionController@vista_todo_producto_institucion');
+        Route::get('/ver_todo_producto_vendedor/{id}', 'institucionController@vista_todo_producto_vendedor');
+
+        Route::get('/ver_todo_servicio_alumno/{id}', 'institucionController@vista_todo_servicio_alumno');
+        Route::get('/ver_todo_servicio_area/{id}', 'institucionController@vista_todo_servicio_area');
+        Route::get('/ver_todo_servicio_institucion/{id}', 'institucionController@vista_todo_servicio_institucion');
+        Route::get('/ver_todo_servicio_vendedor/{id}', 'institucionController@vista_todo_servicio_vendedor');
+        Route::get('/ver_vistas_tienda', 'graficosAdminController@vista_grafico_visitas_tienda');
 
 });
 
@@ -175,7 +186,25 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::post('/actualizar_servicio_categoria','institucionController@actualizar_servicio_categoria');
         Route::post('/actualizar_servicio_foto','institucionController@actualizar_servicio_foto');
         Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'alumnoController@ver_detalleServicio_institucion_local');
+        Route::get('/traerProductoEnEspera','alumnoController@traerProductoEnEspera');
+        Route::get('/traerServicioEnEspera','alumnoController@traerServicioEnEspera');
+        Route::get('/detalleServicioEspera/{idServicio}','alumnoController@vista_detalleServicioEspera');
 
+        Route::get('/ver_todo_producto_alumno/{id}', 'alumnoController@vista_todo_producto_alumno');
+        Route::get('/ver_todo_producto_area/{id}', 'alumnoController@vista_todo_producto_area');
+        Route::get('/ver_todo_producto_institucion/{id}', 'alumnoController@vista_todo_producto_institucion');
+        Route::get('/ver_todo_producto_vendedor/{id}', 'alumnoController@vista_todo_producto_vendedor');
+
+        Route::get('/ver_todo_servicio_alumno/{id}', 'alumnoController@vista_todo_servicio_alumno');
+        Route::get('/ver_todo_servicio_area/{id}', 'alumnoController@vista_todo_servicio_area');
+        Route::get('/ver_todo_servicio_institucion/{id}', 'alumnoController@vista_todo_servicio_institucion');
+        Route::get('/ver_todo_servicio_vendedor/{id}', 'alumnoController@vista_todo_servicio_vendedor');
+
+
+        Route::get('/activarmicro', 'herramientasayudaController@actiar_microfono');
+        Route::get('/desactivarmicro', 'herramientasayudaController@desactivar_microfono');
+        Route::get('/activartext', 'herramientasayudaController@activar_texto');
+        Route::get('/desactivartext','herramientasayudaController@desactivar_texto');
        
         
 });
@@ -194,6 +223,25 @@ Route::group(['prefix' => 'userIndependiente','middleware'=>['md_vendedor']], fu
         Route::get('/modificar_productos' , 'vendedorIndependienteController@modificar_productos');
         Route::get('/modificar_servicios' , 'vendedorIndependienteController@modificar_servicios');
         Route::post('/publicarproducto' , 'vendedorIndependienteController@publicarproducto');
+        Route::get('/eliminar_producto_vendedor/{idProducto}', 'vendedorIndependienteController@eliminar_producto_vendedor');
+        Route::get('/detalleProducto/{id}', 'vendedorIndependienteController@ver_detalleProducto');
+        Route::post('/actualizar_producto_foto', 'vendedorIndependienteController@actualizar_producto_foto');
+        Route::post('/actualizar_producto_nombre','vendedorIndependienteController@actualizar_producto_nombre');
+        Route::post('/actualizar_producto_descripcion','vendedorIndependienteController@actualizar_producto_descripcion');
+        Route::post('/actualizar_producto_cantidad','institucionController@actualizar_producto_cantidad');
+        Route::post('/actualizar_producto_visibilidad','vendedorIndependienteController@actualizar_producto_visibilidad');
+        Route::post('/actualizar_producto_categoria', 'vendedorIndependienteController@actualizar_producto_categoria');
+        Route::post('/actualizar_producto_precio', 'vendedorIndependienteController@actualizar_producto_precio');
+
+        Route::post('/publicarServicio' , 'vendedorIndependienteController@publicarServicio');
+        Route::get('/eliminar_servicio_vendedor/{idServicio}', 'vendedorIndependienteController@eliminar_servicio_vendedor');
+        Route::get('/detalleServicio/{id}', 'vendedorIndependienteController@ver_detalleServicio');
+        Route::post('/actualizar_servicio_foto', 'vendedorIndependienteController@actualizar_servicio_foto');
+        Route::post('/actualizar_servicio_nombre','vendedorIndependienteController@actualizar_servicio_nombre');
+        Route::post('/actualizar_servicio_descripcion','vendedorIndependienteController@actualizar_servicio_descripcion');
+        Route::post('/actualizar_servicio_categoria', 'vendedorIndependienteController@actualizar_servicio_categoria');
+
+
 });
 
 Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], function(){
@@ -248,7 +296,7 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::post('/actualizar_estado_noticia', 'institucionController@actualizar_estado_noticia');
         Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'encargadoController@ver_detalleServicio_institucion_local');
         Route::get('/detalleProducto/{idProducto}/{idInstitucion}', 'encargadoController@ver_detalleProducto_institucion_local');
-        Route::get('/vista_serviciosEspera','institucionController@vista_serviciosEspera');
+        Route::get('/vista_serviciosEspera','encargadoController@vista_serviciosEspera');
         Route::get('/filtrarProducto', 'encargadoController@filtrarProducto');
         Route::get('/filtrarServicio', 'encargadoController@filtrarServicio');
         Route::get('/traerProductoEnEspera','encargadoController@traerProductoEnEspera');
@@ -268,7 +316,20 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::get('/detalleNoticia_general/{idNoticia}','encargadoController@ver_detalleNoticia_general');
         Route::get('/detalleNoticia_local/{idNoticia}','encargadoController@ver_detalleNoticia_local');
         Route::get('/areaExtern/{idInstitucion}/{idArea}', 'encargadoController@vista_areaExterna');
-        
+        Route::get('/detalleProductoVendedor/{idProducto}/{idVendedor}', 'encargadoController@vista_detalleProductoVendedor');
+        Route::get('/detalleProductoEspera/{idProducto}', 'encargadoController@vista_detalleProductoEspera');
+        Route::get('/detalleServicioEspera/{idServicio}', 'encargadoController@vista_detalleServicioEspera');
+        Route::get('/ver_todo_producto_alumno', 'institucionController@vista_todo_producto_alumno');
+
+        Route::get('/ver_todo_producto_alumno/{id}', 'encargadoController@vista_todo_producto_alumno');
+        Route::get('/ver_todo_producto_area/{id}', 'encargadoController@vista_todo_producto_area');
+        Route::get('/ver_todo_producto_institucion/{id}', 'encargadoController@vista_todo_producto_institucion');
+        Route::get('/ver_todo_producto_vendedor/{id}', 'encargadoController@vista_todo_producto_vendedor');
+
+        Route::get('/ver_todo_servicio_alumno/{id}', 'encargadoController@vista_todo_servicio_alumno');
+        Route::get('/ver_todo_servicio_area/{id}', 'encargadoController@vista_todo_servicio_area');
+        Route::get('/ver_todo_servicio_institucion/{id}', 'encargadoController@vista_todo_servicio_institucion');
+        Route::get('/ver_todo_servicio_vendedor/{id}', 'encargadoController@vista_todo_servicio_vendedor');
        
 });
 
@@ -306,8 +367,26 @@ Route::get('/estadoClaveEncargado', 'encargadoController@traerEstadoClave');
 Route::get('generarClave/{id}', 'alumnoController@generarClave');
 Route::get('/aceptarSolicitudProducto/{id}', 'institucionController@aceptarProducto');
 Route::get('/aceptarSolicitudServicio/{id}','institucionController@aceptarSolicitudServicio');
-
+Route::get('/eliminar_producto_espera/{idProducto}', 'institucionController@eliminar_producto_espera');
+Route::get('/eliminar_servicio_espera/{idServicio}', 'institucionController@eliminar_servicio_espera');
 /*inicio de usuarios*/
+
+
+
+
+         Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
+         Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
+
+         Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
+         Route::post('/sesion_cliente', 'loginClienteController@authCliente');
+
+         Route::get('/registro_cliente' , 'clienteController@registro_cliente');
+         Route::post('/registro_cliente' , 'clienteController@guardar_cliente');
+          
+         Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
+
+         Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
+
 
 Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
 Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
@@ -317,6 +396,8 @@ Route::get('/registro_cliente' , 'clienteController@registro_cliente');
 Route::post('/registro_cliente' , 'clienteController@guardar_cliente');         
 Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
+
+
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');

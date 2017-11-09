@@ -27,7 +27,7 @@
 			  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-expanded="true">Mis Datos</a>
 			  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-expanded="true">Mis Compras</a>
 			  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-expanded="true">Mis Valoraciones</a>
-			  <a class="nav-link" id="v-pills-prueba-tab" data-toggle="pill" href="#v-pills-prueba" role="tab" aria-controls="v-pills-prueba" aria-expanded="true">prueba</a>
+			  <a class="nav-link" id="v-pills-favoritos-tab" data-toggle="pill" href="#v-pills-favoritos" role="tab" aria-controls="v-pills-favoritos" aria-expanded="true">favoritos</a>
 
 			</div>
 		</div>
@@ -212,19 +212,19 @@
 				<!--Mis Compras-->
 			  	<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 
-			      {{Auth::user()->email}}
+			      	En Desarrollo
 			  	</div>
 
 				<!--Por Definir-->
 			  	<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 
-			     Valoraciones pichi con kkck
+			     	En Desarrollo
 			  	</div>
 				
 				<!--prueba de productos-->
-			  	<div class="tab-pane fade" id="v-pills-prueba" role="tabpanel" aria-labelledby="v-pills-prueba-tab">
+			  	<div class="tab-pane fade" id="v-pills-favoritos" role="tabpanel" aria-labelledby="v-pills-favoritos-tab">
 
-		
+					En Desarrollo
 			  	</div>
 
 			</div>

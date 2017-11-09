@@ -1,5 +1,8 @@
 <div class="row">
 	<div class="col-md-12 well">
+		<a href="#" onclick="window.history.back();">
+		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+	</a>
 		<center>
 			<p><label><h3 class="th3">Noticia General</h3> <img src="/ico/news.png" height="40"></label></p>
 		</center>
@@ -13,7 +16,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-offset-1 col-md-10">
-								<center><label><h4 style="color:black;" >{{ $noticia->titulo }}</h4></label></center>
+								<center><label class="lbl-titulo" >{{ $noticia->titulo }}</label></center>
 								<hr>
 							</div>
 						</div>

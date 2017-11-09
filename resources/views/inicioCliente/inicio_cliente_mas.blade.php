@@ -4,7 +4,7 @@
 @section('content')
 
 	<!--Carousel-->
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12">
 				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -19,9 +19,6 @@
 					    </div>
 					    <div class="carousel-item">
 					      <img class="d-block w-100" src="http://destinonegocio.com/wp-content/uploads/2015/04/artesanias.jpg" alt="Second slide">
-					    </div>
-					    <div class="carousel-item">
-					      <img class="d-block w-100" src="https://interiorismos.com/wp-content/2017/01/geometricos2.jpg" alt="Third slide">
 					    </div>
 					  </div>
 					  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -39,13 +36,14 @@
 
 	<!--recomedados-->
 	<div class="android-more-section">
-		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Recomendados</div>
+		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Productos de Instituciones</div>
 	  		<div class="android-card-container mdl-grid">		
 			@foreach($ver_mas as $producto)	
 				
 					<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 						<div class="imagen-producto">
-						<a class="mdl-card__media porteimg" href="/vista_productos/{{base64_encode($producto->idProducto)}}"><img src="{{ '/'.$producto->fotoProducto }}"></a>
+
+						<a class="mdl-card__media porteimg" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}"><img src="{{ '/'.$producto->fotoProducto }}"></a>
 
 						</div>							
 						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $producto->nombreProducto }}</h4></div>
@@ -56,6 +54,7 @@
 			
 			@endforeach
 			</div>
+			<hr>
 	</div>
 
 	<!--tienda-->
@@ -75,6 +74,7 @@
 		    </div>
 	   		@endforeach
 	  	</div>
+	  	<hr>
 
 	  	<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Vendedores</div>
 		<div class="android-card-container mdl-grid">
@@ -93,7 +93,7 @@
 	  	</div>
 	  		  
 	</div>
-	<img src="" alt="" style="">
+	<hr>
 
 	<!--calidad-->
 	<div class="container-fluid">

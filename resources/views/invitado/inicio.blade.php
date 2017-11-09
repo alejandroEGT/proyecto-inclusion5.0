@@ -39,7 +39,7 @@
 						    <li><img class="logo-ayuda img-thumbnail" src="logo-static/logo_cidere_biobio_116x110.jpg" /></li>
 						    <li><img class="logo-ayuda img-thumbnail" src="https://pbs.twimg.com/profile_images/866270328577830913/s10Su--x.jpg" /></li>                                                 
 						</ul> 
-
+	
 	</div>
 </div>
 
@@ -112,4 +112,5 @@
 	    
 	});
 </script>
+
 @endsection

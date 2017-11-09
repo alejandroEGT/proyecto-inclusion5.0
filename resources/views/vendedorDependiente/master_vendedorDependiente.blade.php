@@ -13,7 +13,7 @@
 </head>
 
 <!-- onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);"-->
-<body class="body-vendedor">
+<body class="body-vendedor" onmouseover="estaPulsadoShift(event);">
         
 <div id="master-vendedorDependiente" class="animated fadeIn" >
 
@@ -32,7 +32,7 @@
                             <p class="nombre-perfil">
                                {{ Auth::user()->nombres.' '.Auth::user()->apellidos }}
                             </p>
-                            <p><a href="{{ url('userDependiente/logout') }}"><img src="/ico/arrows.png"  alt=""></a></p>
+                            <p><a href="{{ url('userDependiente/logout') }}">Salir</a></p>
                         </div>
                         
                         <hr>
@@ -40,8 +40,10 @@
                      <li class="pushy-link"><a href="{{ url('userDependiente/inicio') }}">Inicio</a></li>
                     
                     <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Mis Datos</a></li>
-                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Publicar productos</a></li>
-                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Publicar servicios</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/publicarProducto') }}">Publicar productos</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/publicarServicio') }}">Publicar servicios</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/traerProductoEnEspera') }}">Productos en espera</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/traerServicioEnEspera') }}">Servicios en espera</a></li>
                     <!--<li class="pushy-submenu">
                         <button>Formularios</button>
                         <ul>
@@ -65,28 +67,28 @@
                         </ul>
                     </li>
                     <li class="pushy-link"><a href="#"><i class="fa fa-globe"></i> Notificaciones</a></li>
-                    <li class="pushy-link"><a href="#">Item 2</a></li>
+                    <!--<li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
-                    <li class="pushy-link"><a href="#">Item 4</a></li>
+                    <li class="pushy-link"><a href="#">Item 4</a></li>-->
                 </ul>
                 <li class="pushy-submenu">
                         <button id="first-link">¿Te ayudamos?</button>
                         <ul>
                             @if (Session::has('activarMicro'))
-                                <li class="pushy-link"><a href="/desactivarmicro"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
+                                <li class="pushy-link"><a href="{{ url('userDependiente/desactivarmicro') }}"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
                             @endif
 
                             @if (empty(Session::get('activarMicro')))
-                            <li class="pushy-link"><a href="/activarmicro">
+                            <li class="pushy-link"><a href="{{ url('userDependiente/activarmicro') }}">
                                 <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
                             </a></li>
                             @endif
                             @if (Session::has('activarText'))
-                                <li class="pushy-link"><a href="/desactivartext"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
+                                <li class="pushy-link"><a href="{{ url('userDependiente/desactivartext') }}"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
                             @endif
 
                             @if (empty(Session::get('activarText')))
-                           <li class="pushy-link"><a href="/activartext">
+                           <li class="pushy-link"><a href="{{ url('userDependiente/activartext') }}">
                                 <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
                             </a></li>
                             @endif
@@ -146,7 +148,8 @@
 		<script src="/js/vue/vue.js" ></script>
         <script src="/js/vue/vue-resource.js"></script>
         <script src="/js/vue/vue_master_vendedorInstitucion.js"></script>
-        {{--@include('mensajes.activa_desactiva')--}}
+        <script src="{{asset('js/artyom.js')}}" ></script>
+        @include('mensajes.activa_desactiva_alumno')
 		<script src="/js/pushy.min.js"></script>
          @yield('js')
 

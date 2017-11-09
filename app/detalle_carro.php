@@ -38,4 +38,18 @@ class detalle_carro extends Model
 			}
 	}
 
+	protected function delProducto($id, $carro){
+
+		$delete = detalle_carro::where('id_carro', $carro->id)
+								->where('id_producto', $id)->first();
+
+		if($delete->delete()){
+			return true;
+		}else{
+			return false;
+		}
+
+
+	}
+
 }

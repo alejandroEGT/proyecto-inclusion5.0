@@ -26,9 +26,13 @@
 							<div class="row caja-sesion">
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
-									<a href="{{ url('/vista_productos').'/'.$carros->idProducto}}"><p>{{ $carros->nombreProducto }}</p></a>
+									<a href="{{ url('/vista_productos').'/'.base64_encode($carros->idProducto)}}"><p>{{ $carros->nombreProducto }}</p></a>
 									<div class="android-drawer-separator"></div>
+									<div class="imagen-producto">
+									<img class="mdl-card__media porteimg" src="{{ '/'.$carros->fotoProducto }}">
 								</div>
+								</div>
+								
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
 									<p>Cantidad</p>
@@ -50,7 +54,7 @@
 								</div>
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
-									<br><p align="right"><a href="#" class="registro-sesion bmd-label-floating">Eliminar</a></p>
+									<br><p align="right"><a href="{{ url('carro/eliminarProd').'/'.base64_encode($carros->idProducto) }}" class="registro-sesion bmd-label-floating">Eliminar</a></p>
 									<br><p align="right">
 											<label for="" class="registro-sesion bmd-label-floating">Subtotal: </label>
 											<label for="">{{ '$'.$carros->cantidadProducto*$carros->precioProducto	}} CLP </label>

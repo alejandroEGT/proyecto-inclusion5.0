@@ -46,7 +46,8 @@ class clienteController extends Controller
      public function vista_productos($id){
 
           $this->verificarUser();  
-        $producto = producto::producto_id($id);
+          $getId = base64_decode($id);
+        $producto = producto::producto_id($getId);
         return view('inicioCliente.vista_productos')->with('producto',$producto);
                                                  
     }  

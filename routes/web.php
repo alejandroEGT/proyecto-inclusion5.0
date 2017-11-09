@@ -336,7 +336,8 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
 Route::group(['prefix' => 'carro', 'middleware' => ['cliente']], function(){
 
     Route::post('/agregarProd', 'carroController@ingProducto');
-    Route::post('/eliminarProd','carroController@delProducto');
+    Route::get('/eliminarProd/{id}','carroController@delProducto');
+    Route::post('/actualizarProd','carroController@actProducto');
     Route::get('/miCarro' , 'carroController@miCarro');
     
 });

@@ -219,6 +219,7 @@ class clienteController extends Controller
           ]);
       $productos = producto::filtrar_desde_cliente($datos->buscador);
 
+
       return view('inicioCliente.nuestroProducto')
       ->with('productos', $productos)
       ->with('titulo', "Filtrado de productos");
@@ -235,8 +236,13 @@ public function ver_detalleProducto(Request $dato)
       $this->verificarUser();
       $getId = base64_decode($dato->id);
       $productos = producto::detalleProducto_cliente($getId);
+      $tiendas = Tienda_institucion::traerTiendas();
+      $ver_producto = producto::ver_productos_tienda();
+
 
       return view('inicioCliente.verDetalleProducto')
+      ->with('ver_producto',$ver_producto)
+      ->with('tiendas',$tiendas)
       ->with('productos', $productos);
  }
 

@@ -47,6 +47,7 @@
 						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $producto->nombreProducto }}</h4></div>
 						<div class="mdl-card__supporting-text">
 						<span class="mdl-typography--font-light mdl-typography--subhead">{{ $producto->descripcionProducto }}</span>
+						<hr><dt><label class="estiloDetalleTitulos"><strong>Valor: $ {{ $producto->precioProducto }}</strong></label></dt>
 						</div>
 					</div>
 			

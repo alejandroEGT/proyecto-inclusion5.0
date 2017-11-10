@@ -23,8 +23,17 @@ class carroController extends Controller
 
 		$ingresar = detalle_carro::ingProducto($datos, $carro, $producto);
 
-		if($ingresar){
+		if(\Session::has('correcto')){
+			\Session::get('correcto');
 			return redirect()->back();
+		}
+
+		if($ingresar){
+			\Session::flash('correcto', 'Producto Agregado Correctamente.');
+             return redirect()->back();
+		}else{
+			\Session::flash('correcto', 'Algo ha ocurrido, Intente nuevamente.');
+             return redirect()->back();
 		}
 		
 	}
@@ -40,7 +49,11 @@ class carroController extends Controller
 		$delete = detalle_carro::delProducto($getId, $carro);
 
 		if($delete){
-			return redirect()->back();
+			\Session::flash('Advertencia', 'Producto eliminado del Carro.');
+             return redirect()->back();
+		}else{
+			\Session::flash('Advertencia', 'Algo ha ocurrido, Intente nuevamente.');
+             return redirect()->back();
 		}
 	}
 
@@ -52,8 +65,16 @@ class carroController extends Controller
 
 		$update = detalle_carro::actProducto($datos, $carro);
 
-		if($update){
+		if(\Session::has('Advertencia')){
+			\Session::get('Advertencia');
 			return redirect()->back();
+		}
+		if($update){
+			\Session::flash('Advertencia', 'Producto Actualizado correctamente.');
+             return redirect()->back();
+		}else{
+			\Session::flash('Advertencia', 'Algo ha ocurrido, Intente nuevamente.');
+             return redirect()->back();
 		}
 	}
 

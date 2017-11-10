@@ -4,6 +4,13 @@
 @section('content')
 
 
+		@if (Session::has('Advertencia'))
+			<div class="alert alert-info">
+		    <a href="" class="close" data-dismiss="alert">&times;</a>
+			        {{ Session::get('Advertencia') }}
+		    </div>
+		@endif
+
 <h1 class="text-center">carro compras</h1>
 <div class="android-drawer-separator"></div>
 
@@ -51,8 +58,9 @@
 										<input type="text" class="col-xs-12 col-sm-12 col-md-4" name="cantidad" value="{{ $carros->cantidadProducto }}">
 										<label class="bmd-label-floating"> unidades</label>
 									</p>
-									<div class="android-drawer-separator"></div>
 									<input type="submit" value="actualizar">
+									<div class="android-drawer-separator"></div>
+									
 
 									</form>
 								</div>
@@ -77,15 +85,15 @@
 
 							</div>
 
+							
 
 							@endforeach
 
 							<div class="android-drawer-separator"></div>
 							<p align="right">
 								<label for="" class="registro-sesion bmd-label-floating">Total: </label>
-								<label for="">$19.980</label>
+								<label for=""></label>
 							</p>
-							
 											<form action="/testo" method="post">
 					{{csrf_field()}}
 							<div class="boton-sesion">	

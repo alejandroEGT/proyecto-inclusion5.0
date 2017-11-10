@@ -10,6 +10,12 @@ class detalle_carro extends Model
     protected function ingProducto($datos,$carro,$producto){
 
 
+		if($datos->cantidad > $producto->cantidadProducto || $datos->cantidad == 0){
+			
+			\Session::flash('correcto', 'La cantidad ingresada es mayor al stock disponible, Intente nuevamente.');
+             return false;
+		
+		}else{
 
 		$update = detalle_carro::where('id_carro', $carro->id)
 								->where('id_producto', $producto->idProducto)->first();
@@ -38,6 +44,7 @@ class detalle_carro extends Model
 					}
 			}
 	}
+}
 
 	protected function delProducto($id, $carro){
 
@@ -60,7 +67,10 @@ class detalle_carro extends Model
 		$producto = producto::where('id',$getId)->first();
 
 		if($datos->cantidad > $producto->cantidad || $datos->cantidad == 0){
-			return "No puede ingresar eso";
+			
+			\Session::flash('Advertencia', 'La cantidad ingresada es mayor al stock disponible, Intente nuevamente.');
+             return false;
+		
 		}else{
 
 		$update = detalle_carro::where('id_carro', $carro->id)

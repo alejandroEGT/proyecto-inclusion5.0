@@ -14,7 +14,9 @@
 	<div class="row panel fondoTienda">
 		<div class="col-md-offset-1 col-md-12">
 			<label>Tienda:</label>
-			<a href="{{ url("/perfil_institucion/".base64_encode($tiendas[0]->id)) }}"> {{ $tiendas[0]->nombre }}</a>	
+			@foreach($tiendas as $tiendas)
+			<a href="{{ url("/perfil_institucion/".base64_encode($tiendas->id)) }}"> {{ $tiendas->nombre }}</a>	
+			@endforeach
 		</div>
 	</div>
 <div class="row panel fondoDescripcion">

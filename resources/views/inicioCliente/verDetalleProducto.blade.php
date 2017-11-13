@@ -8,10 +8,18 @@
 @endif
 @if (!is_null($productos[0]))
 	{{-- expr --}}
-
+	<hr>
 	<center><label><h1>Detalle del producto</h1></label></center>
 	<hr>
-<div class="row panel">
+	<div class="row panel fondoTienda">
+		<div class="col-md-offset-1 col-md-12">
+			<label>Tienda:</label>
+			@foreach($tiendas as $tiendas)
+			<a href="{{ url("/perfil_institucion/".base64_encode($tiendas->id)) }}"> {{ $tiendas->nombre }}</a>	
+			@endforeach
+		</div>
+	</div>
+<div class="row panel fondoDescripcion">
 
 			@if (count($errors))			
 				<div class="alert alert-danger">
@@ -66,8 +74,30 @@
 			</form>
 		</dl>				
 	</div>	
-</div>	
+</div>
+<br><br>	
 
+
+<hr><center><div class="android-section-title mdl-typography--display-1-color-contrast"><h1>Ver mas productos</h1></div></center><hr>
+	  		<div class="android-card-container mdl-grid">		
+			@foreach($ver_producto as $producto)	
+				
+					<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
+						<dl>
+						<div class="imagen-producto">
+						<a class="mdl-card__media porteimg" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}"><img src="{{ '/'.$producto->fotoProducto }}"></a>
+						</div>							
+						<div class="mdl-card__title estiloDetalleTitulos"><h4 class="mdl-card__title-text">{{ $producto->nombreProducto }}</h4></div>
+						<div class="mdl-card__supporting-text">
+						<span class="mdl-typography--font-light mdl-typography--subhead">{{ $producto->descripcionProducto }}</span>
+						<hr><dt><label class="estiloDetalleTitulos"><strong>Valor: $ {{ $producto->precioProducto }}</strong></label></dt>
+						</div>
+						</dl>
+					</div>
+
+			@endforeach
+			
+			</div>
 
 @endif
 

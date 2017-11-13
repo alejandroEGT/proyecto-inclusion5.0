@@ -479,6 +479,27 @@ protected function ver_mas_producto()
 
         return $ver_mas;
     }
+
+    protected function ver_productos_tienda()//$idTienda)
+    {
+        $ver_mas = \DB::table('tienda_producto_instituciones')
+        ->select([
+                        'tienda_producto_instituciones.id_producto as idProducto',
+                        'productos.nombre as nombreProducto',
+                        'productos.precio as precioProducto',
+                        'productos.descripcion as descripcionProducto',
+                        'productos.cantidad as cantidadProducto',
+                        'foto_productos.id as idFotoProducto',
+                        'foto_productos.foto as fotoProducto'
+
+                    ])
+                      ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
+                      ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+                      //->where('tienda_producto_instituciones.id_tienda','=',$idTienda)
+                      ->where('tienda_producto_instituciones.id_estado',1)->get();
+
+        return $ver_mas;
+    }
     protected function producto_id($id)
     {
 

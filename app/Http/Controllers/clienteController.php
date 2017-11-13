@@ -220,6 +220,7 @@ class clienteController extends Controller
           ]);
       $productos = producto::filtrar_desde_cliente($datos->buscador);
 
+
       return view('inicioCliente.nuestroProducto')
       ->with('productos', $productos)
       ->with('titulo', "Filtrado de productos");
@@ -236,8 +237,13 @@ public function ver_detalleProducto(Request $dato)
       $this->verificarUser();
       $getId = base64_decode($dato->id);
       $productos = producto::detalleProducto_cliente($getId);
+      $tiendas = Tienda_institucion::traerTiendas();
+      $ver_producto = producto::ver_productos_tienda();
+
 
       return view('inicioCliente.verDetalleProducto')
+      ->with('ver_producto',$ver_producto)
+      ->with('tiendas',$tiendas)
       ->with('productos', $productos);
  }
 
@@ -264,10 +270,6 @@ public function ver_detalleProducto(Request $dato)
 
 
                 if(date('d-m-Y')  !=  date('d-m-Y', strtotime($contadorTienda->updated_at) )){
-<<<<<<< HEAD
-=======
-
->>>>>>> 0fe987c27ddb4567babbe24ba955d06323a14b64
           
 
                     $contadorTienda->cantidad++;
@@ -276,13 +278,11 @@ public function ver_detalleProducto(Request $dato)
                   }
 
             
-<<<<<<< HEAD
+
               }
              
-              else{
-=======
-              }else{
->>>>>>> 0fe987c27ddb4567babbe24ba955d06323a14b64
+              else{ 
+
               /*o si no*/   
               
                 $contadorTiendaInst->id_tienda = $tienda_institucion->id;

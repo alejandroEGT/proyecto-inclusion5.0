@@ -85,8 +85,10 @@
 								<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 							
 									<div class="mdl-card__media porteImgTienda"><img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod "></div>
-									<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ str_limit($producto->nombre, 10) }}</h4></div>
-									<p><a href="{{ url('/detalleProducto/'.base64_encode($producto->idProducto).'/'.$idInstitucion) }}" class="btn btn-primary btn-xs">Ver</a></p>
+									<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ str_limit($producto->nombre, 10) }}</h4>
+
+									</div>
+									<p><a href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}" class="btn btn-primary btn-xs">Ver mas detalles</a></p>
 							
 								</div>
 							

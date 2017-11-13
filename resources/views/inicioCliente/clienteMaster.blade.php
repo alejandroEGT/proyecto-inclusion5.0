@@ -42,8 +42,13 @@
 					    	<div class="android-navigation-container col-md-3">
 					            <nav class="android-navigation mdl-navigation">
 					              	<span>
+
 					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="#">
 					              			<i class="material-icons">&#xE87E;</i> Lista de deseos 
+
+					              		<a class="mdl-navigation__link mdl-typography--text-uppercase" href="{{ url('carro/miCarro') }}">
+					              			<i class="material-icons">&#xE87E;</i> Carro
+
 					              			<span class="mdl-badge mdl-badge--no-background" data-badge="2"></span>
 					              		</a>
 					              	</span>
@@ -90,7 +95,11 @@
 				          <span>
 			          	  <a class="mdl-navigation__link" href="#">
 
+
 			          	  <i class="material-icons">&#xE87E;</i>Lista de deseos 
+
+			          	  <i class="material-icons">&#xE87E;</i>Carro
+
 			          	  <i class="mdl-badge" data-badge="3"></i>
 			          	  </a>
 				          </span>

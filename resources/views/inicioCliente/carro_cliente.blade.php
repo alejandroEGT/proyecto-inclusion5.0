@@ -4,6 +4,13 @@
 @section('content')
 
 
+		@if (Session::has('Advertencia'))
+			<div class="alert alert-info">
+		    <a href="" class="close" data-dismiss="alert">&times;</a>
+			        {{ Session::get('Advertencia') }}
+		    </div>
+		@endif
+
 <h1 class="text-center">carro compras</h1>
 <div class="android-drawer-separator"></div>
 
@@ -11,15 +18,11 @@
 		<div class="row caja-sesion">
 			<div class="col-xs-12 col-sm-12 col-md-10 mdl-shadow--6dp">
 				
-				<form action="" method="post">
-					{{csrf_field()}}
+
 
 
 	@foreach($carro as $carros)
 
-				@if(count($carros->nombreTienda))
-
-				@endif
 					<p class="contenido-sesion">Tienda: {{ $carros->nombreTienda  }}</p>
 					<p class="contenido-sesion">Categoria:</p>
 					<div class="android-drawer-separator"></div>
@@ -27,19 +30,39 @@
 
 						<div class="container-fluid">
 							<div class="row caja-sesion">
+								
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
-									<a href="{{ url('/vista_productos').'/'.$carros->idProducto}}"><p>{{ $carros->nombreProducto }}</p></a>
-									<div class="android-drawer-separator"></div>
+
+									<div class="imagen-producto">
+										<img class="mdl-card__media porteimg" src="{{ '/'.$carros->fotoProducto }}">
+									</div>
+		
 								</div>
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
+									<a href="{{ url('/verDetalleProducto').'/'.base64_encode($carros->idProducto)}}"><p>{{ $carros->nombreProducto }}</p></a>
+									<div class="android-drawer-separator"></div>
+
+								</div>
+
+
+
+								<div class="col-xs-12 col-sm-12 col-md-3">
+
+									<form method="post" action="{{ url('carro/actualizarProd') }}">
+										{{csrf_field()}}
+										<input type="hidden" name="id" value="{{ base64_encode($carros->idProducto) }}">
 									<p>Cantidad</p>
 									<p>
 										<input type="text" class="col-xs-12 col-sm-12 col-md-4" name="cantidad" value="{{ $carros->cantidadProducto }}">
 										<label class="bmd-label-floating"> unidades</label>
 									</p>
+									<input type="submit" value="actualizar">
 									<div class="android-drawer-separator"></div>
+									
+
+									</form>
 								</div>
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
@@ -53,7 +76,7 @@
 								</div>
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
-									<br><p align="right"><a href="#" class="registro-sesion bmd-label-floating">Eliminar</a></p>
+									<br><p align="right"><a href="{{ url('carro/eliminarProd').'/'.base64_encode($carros->idProducto) }}" class="registro-sesion bmd-label-floating">Eliminar</a></p>
 									<br><p align="right">
 											<label for="" class="registro-sesion bmd-label-floating">Subtotal: </label>
 											<label for="">{{ '$'.$carros->cantidadProducto*$carros->precioProducto	}} CLP </label>
@@ -62,19 +85,22 @@
 
 							</div>
 
+							
+
 							@endforeach
 
 							<div class="android-drawer-separator"></div>
 							<p align="right">
 								<label for="" class="registro-sesion bmd-label-floating">Total: </label>
-								<label for="">$19.980</label>
+								<label for=""></label>
 							</p>
-							
-							<form action="" method="">
+											<form action="/testo" method="post">
+					{{csrf_field()}}
 							<div class="boton-sesion">	
-							  	<p align="right"><a href="#" class="btn btn-primary btn-outline-success">Comprar</a></p>
+							  	<p align="right"><input type="submit" class="btn btn-primary btn-outline-success" value='Comprar'></p>
+
 							</div>
-							</form>
+							
 						</div>
 				</form>
 			</div>

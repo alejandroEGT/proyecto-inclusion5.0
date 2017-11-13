@@ -2,44 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\cuentaCobroInstitucion;
+use App\producto;
 use Illuminate\Http\Request;
+use Khipu;
 
 class cuentaCobroController extends Controller
 {
-   public function crearIntegrador(){
-    
-	$recieverID = env('KHIPU_APP_ID');
-    $recieverKey = env('KHIPU_APP_KEY');
+    public function crearCobro (Request $datos){
+
+    $getId = base64_decode($datos->id);
+
+    $cobro = cuentaCobroInstitucion::datosCuentaCobrador($getId);
+
     $configuration = new Khipu\Configuration();
 
-    $configuration->setReceiverId($recieverID);
-    $configuration->setSecret($recieverKey);
-	$configuration->setPlatform('demo-client', '2.0');
-	# $configuration->setDebug(true);
+    $configuration->setReceiverId($cobro->recieverID);
+    $configuration->setSecret($cobro->secretKey);
 
-	$receivers = new Khipu\Client\ReceiversApi(new Khipu\ApiClient($configuration));
+    $client = new Khipu\ApiClient($configuration);
+    $payments = new Khipu\Client\PaymentsApi($client);
 
-	try {
-    	$response = $receivers->receiversPost('wololo'
-        	, 'Pereira'
-        	, 'pablo@micomercio.com'
-        	, 'CL'
-        	, '123456789'
-       		, 'Varios'
-        	, 'Mi comercio'
-        	, '+565555555'
-        	, 'Mi dirección'
-        	, 'Mi ciudad'
-        	, 'Mi región'
-        	, 'Juan Perez'
-        	, 'encargado de contacto'
-        	,  'contacto@micomercio.com'
-        	, '+566666666');
+    try {
+    $opts = array(
+        "transaction_id" => "MTI-100",
+        "return_url" => "",
+        "cancel_url" => "",
+        "picture_url" => "",
+        "notify_url" => "",
+        "notify_api_version" => "1.3"
+    );
 
-    		dd($response);
+    $response = $payments->paymentsPost($cobro->nombreProducto //Motivo de la compra
+        , "CLP" //Moneda
+        , $cobro->precio*$datos->cantidad //Monto
+        , $opts //campos opcionales
+        );
 
-		} catch (\Khipu\ApiException $e) {
-    			echo print_r($e->getResponseBody(), TRUE);
-			}	
-	}
+
+   return redirect($response->getPaymentUrl());
+    
+} catch (\Khipu\ApiException $e) {
+    echo print_r($e->getResponseBody(), TRUE);
+}
+
+}
+
+public function testo(Request $datos){
+    dd($datos);
+}
+
 }

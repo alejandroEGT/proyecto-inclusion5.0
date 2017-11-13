@@ -23,12 +23,60 @@ class carroController extends Controller
 
 		$ingresar = detalle_carro::ingProducto($datos, $carro, $producto);
 
-		if($ingresar){
+		if(\Session::has('correcto')){
+			\Session::get('correcto');
 			return redirect()->back();
+		}
+
+		if($ingresar){
+			\Session::flash('correcto', 'Producto Agregado Correctamente.');
+             return redirect()->back();
+		}else{
+			\Session::flash('correcto', 'Algo ha ocurrido, Intente nuevamente.');
+             return redirect()->back();
 		}
 		
 	}
 
+	public function delProducto($id){
+
+		$getId = base64_decode($id);
+
+		$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
+
+		$carro = carro::where('id_cliente', $id_cliente->id)->first();
+
+		$delete = detalle_carro::delProducto($getId, $carro);
+
+		if($delete){
+			\Session::flash('Advertencia', 'Producto eliminado del Carro.');
+             return redirect()->back();
+		}else{
+			\Session::flash('Advertencia', 'Algo ha ocurrido, Intente nuevamente.');
+             return redirect()->back();
+		}
+	}
+
+	public function actProducto(Request $datos){
+
+		$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
+
+		$carro = carro::where('id_cliente', $id_cliente->id)->first();
+
+		$update = detalle_carro::actProducto($datos, $carro);
+
+		if(\Session::has('Advertencia')){
+			\Session::get('Advertencia');
+			return redirect()->back();
+		}
+		if($update){
+			\Session::flash('Advertencia', 'Producto Actualizado correctamente.');
+             return redirect()->back();
+		}else{
+			\Session::flash('Advertencia', 'Algo ha ocurrido, Intente nuevamente.');
+             return redirect()->back();
+		}
+	}
 
 
        public function miCarro()

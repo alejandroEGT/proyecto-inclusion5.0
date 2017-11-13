@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\institucionRequest;
 use App\Institucion;
-use App\User;
 use App\Tienda_institucion;
+use App\User;
+use App\cuentaCobroInstitucion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -15,16 +16,19 @@ class crud_institucionController extends Controller
       public function insertar(institucionRequest $datos)
     {
         try{
-            
+
             $retornar = Institucion::insertar($datos);
 
             if($retornar > 0){
 
                 $idInstitucion = Institucion::where('email', $datos->correo)->get();
-
                 $creartienda = Tienda_institucion::insertar($idInstitucion[0]->id);
                 if ($creartienda) {
-                    $correo = $datos->correo;
+
+                    $cCobro = cuentaCobroInstitucion::crearCuenta($datos, $idInstitucion[0]->id);
+
+                    if($cCobro){
+                         $correo = $datos->correo;
                     \Session::put('nombre',$datos->nombre);
                     Mail::send(['html'=>'emails.registroInstitucion'],['name','Alejandro'],function ($message) use ($correo)
                                         {
@@ -33,6 +37,10 @@ class crud_institucionController extends Controller
                     });
                     \Session::flash('ingresado', 'Institución registrada');
                     return redirect()->back();
+                    }
+                     $datos->flash();
+                     return redirect()->back()->withErrors(['Algo salió mal']);
+                   
                 }
                 $datos->flash();
                 return redirect()->back()->withErrors(['Algo salió mal']);

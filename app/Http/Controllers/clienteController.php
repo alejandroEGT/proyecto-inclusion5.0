@@ -48,7 +48,8 @@ class clienteController extends Controller
      public function vista_productos($id){
 
           $this->verificarUser();  
-        $producto = producto::producto_id($id);
+          $getId = base64_decode($id);
+        $producto = producto::producto_id($getId);
         return view('inicioCliente.vista_productos')->with('producto',$producto);
                                                  
     }  
@@ -244,6 +245,7 @@ public function ver_detalleProducto(Request $dato)
 
        
         try{
+           //////////////////aqui un contador de visitas ////////////////
             
             //dd($dato->ip());
             //prueba de contador de visitas ////
@@ -262,6 +264,10 @@ public function ver_detalleProducto(Request $dato)
 
 
                 if(date('d-m-Y')  !=  date('d-m-Y', strtotime($contadorTienda->updated_at) )){
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0fe987c27ddb4567babbe24ba955d06323a14b64
           
 
                     $contadorTienda->cantidad++;
@@ -270,16 +276,22 @@ public function ver_detalleProducto(Request $dato)
                   }
 
             
+<<<<<<< HEAD
               }
              
               else{
+=======
+              }else{
+>>>>>>> 0fe987c27ddb4567babbe24ba955d06323a14b64
               /*o si no*/   
               
                 $contadorTiendaInst->id_tienda = $tienda_institucion->id;
                 $contadorTiendaInst->laravel_session = $dato->ip(); 
                 $contadorTiendaInst->cantidad++;
                 $contadorTiendaInst->save();
+
               }
+              
 
             ////////fin de prueba //////////////
 
@@ -298,8 +310,7 @@ public function ver_detalleProducto(Request $dato)
          } catch (\Illuminate\Database\QueryException $e){
             return redirect()->back();
           }
-    
-    }
+  }
 
     public function updFoto(Request $dato)
     {

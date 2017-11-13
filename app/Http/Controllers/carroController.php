@@ -40,21 +40,14 @@ class carroController extends Controller
 
 	public function delProducto($id){
 
-		$getId = base64_decode($id);
 
 		$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
 
 		$carro = carro::where('id_cliente', $id_cliente->id)->first();
 
-		$delete = detalle_carro::delProducto($getId, $carro);
+		$delete = detalle_carro::delProducto($id, $carro);
 
-		if($delete){
-			\Session::flash('Advertencia', 'Producto eliminado del Carro.');
-             return redirect()->back();
-		}else{
-			\Session::flash('Advertencia', 'Algo ha ocurrido, Intente nuevamente.');
-             return redirect()->back();
-		}
+		return redirect()->back();
 	}
 
 	public function actProducto(Request $datos){

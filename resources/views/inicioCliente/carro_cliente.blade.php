@@ -76,7 +76,10 @@
 								</div>
 
 								<div class="col-xs-12 col-sm-12 col-md-3">
-									<br><p align="right"><a href="{{ url('carro/eliminarProd').'/'.base64_encode($carros->idProducto) }}" class="registro-sesion bmd-label-floating">Eliminar</a></p>
+									<br>
+
+											<input type="button" @click="eliminarProducto({!! $carros->idProducto !!})" class="btn btn-warning btn-xs" value="Eliminar"/>
+
 									<br><p align="right">
 											<label for="" class="registro-sesion bmd-label-floating">Subtotal: </label>
 											<label for="">{{ '$'.$carros->cantidadProducto*$carros->precioProducto	}} CLP </label>

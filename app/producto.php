@@ -637,6 +637,25 @@ protected function ver_mas_producto()
 
          return $traer;
     }
+    protected function ver_productos_tienda()
+    {
+        $ver_mas = \DB::table('productos')
+        ->select([
+                     'productos.id as caca'
+
+                    ])
+                    
+                    ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+                    ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
+                    ->join('tienda_producto_instituciones','tienda_producto_instituciones.id_producto','=','productos.id')
+                    ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
+                    ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
+                    ->join('area','area.id_institucion','=','institucion.id')
+                    ->get();
+                    
+
+        return $ver_mas;
+    }
 
 }
 

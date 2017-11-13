@@ -48,7 +48,7 @@ class detalle_carro extends Model
 
 	protected function delProducto($id, $carro){
 
-		$delete = detalle_carro::where('id_carro', $carro->id)
+		/*$delete = detalle_carro::where('id_carro', $carro->id)
 								->where('id_producto', $id)->first();
 
 		$delete->id_estado = 3;
@@ -58,6 +58,16 @@ class detalle_carro extends Model
 		}else{
 			return false;
 		}
+		*/
+
+
+		$delete = detalle_carro::where('id_carro', $carro->id)
+							->where('id_producto', $id)
+		->update([
+                    'id_estado' => 3
+        ]);
+
+        return $delete;
 	}
 
 	protected function actProducto($datos, $carro){

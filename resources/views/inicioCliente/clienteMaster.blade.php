@@ -6,9 +6,11 @@
 	<!-- Required meta tags -->
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta id="token" name="token" value="{{csrf_token() }}">
 
 		<title>Index</title>
 		<link rel="stylesheet" href="{{asset('inicioCliente/css.css')}}">
+
 		
 	</head>
 		<body>
@@ -116,7 +118,7 @@
 				    </div>
 
 					<!--cuerpo-->
-					<div class="android-content mdl-layout__content margen">
+					<div class="android-content mdl-layout__content margen"  id="cliente">
 						@yield('content')		
 						
 						<!--<footer><p>&copy; 2017 Exod.cl<p></footer>-->
@@ -138,6 +140,9 @@
 			<script type="text/javascript" src="{{asset('https://code.jquery.com/jquery-1.7.1.min.js')}}"></script>
 			<script type="text/javascript" src="{{asset('js/jquery.flexisel.js')}}"></script>
 			<script src="{{asset('js/slider_productos.js')}}"></script>
+			<script src="/js/vue/vue.js" ></script>
+        	<script src="/js/vue/vue-resource.js"></script>
+			<script src="/js/vue/vue_cliente_carro.js"></script>
 			@yield('js')
 
 

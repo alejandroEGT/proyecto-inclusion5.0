@@ -9,9 +9,9 @@
 				<div class="ico-addArea"></div>
 			</div>
 			<div class="col-md-6">
-				<p class="panel-title-agregar">Ingresa un área o especialidad </p>
+				<p class="panel-title-agregar"><label>Ingresa un área o especialidad</label> </p>
 				<p class="panel-body-mst">
-					En este formulario podrás registrar las áreas o especialidades que tenga la institución, también podrás asignar un encargado en cada área o especialidad.
+					<label>En este formulario podrás registrar las áreas o especialidades que tenga la institución, también podrás asignar un encargado en cada área o especialidad.</label>
 				</p>
 			</div>
 		</div>
@@ -22,7 +22,7 @@
 						<p><label>Nombre de área o especialdiad</label></p>
 						<input  v-model="inserarArea.nombre" type="text" class="form-control" placeholder="Área o especialidad" autofocus>
 						<p><label>Nombre descripción</label></p>
-						<textarea v-model="inserarArea.desc" class="form-control" name="" id="" cols="20" rows="5"></textarea>
+						<textarea placeholder="Descripción" v-model="inserarArea.desc" class="form-control" name="" id="" cols="20" rows="5"></textarea>
 					</div>
 					<div class="col-md-1 padding">
 						<input type="submit" class="btn" value="registrar" >

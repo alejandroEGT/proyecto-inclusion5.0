@@ -23,15 +23,25 @@ class invitadoController extends Controller
     	 	return view('invitado.multiRegistro');
     }
     public function vista_formUser(){
+        try{
     		$sexo = Sexo::all();
     		return view('invitado.form_usuario')->with('sexo',$sexo);
+            
+        }catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['No hay conexión a base de datos']);
+        }     
     }
     public function vista_formUserInstituto(){
+        try{
             $institucion = Institucion::all();
             $sexo = Sexo::all();
     		return view('invitado.form_usuario_institucion')
             ->with('institucion', $institucion)
             ->with('sexo', $sexo);
+
+        }catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['No hay conexión a base de datos']);
+        }    
     }
     public function vista_formInstitucion(){
     		return view('invitado.form_institucion');

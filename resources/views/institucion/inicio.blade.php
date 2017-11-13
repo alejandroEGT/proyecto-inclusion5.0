@@ -124,11 +124,9 @@
 							</div>	
 							@endforeach
 								<!--<center>{{-- $productos->links() --}}</center>-->
-<<<<<<< HEAD
-							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_producto') }}">Ver más..</a></small></label></center>
-=======
+
 							<center class="center-top" ><small><a href="{{ url('institucion/ver_todo_producto') }}">Ver más..</a></small></center>
->>>>>>> pruebas4.0
+
 						</div>
 
 					</div>
@@ -178,11 +176,8 @@
 							</div>	
 							@endforeach
 							<!--<center>{{-- $productos->links() --}}</center>-->
-<<<<<<< HEAD
-							<center class="center-top" ><label><small><a href="{{ url('institucion/ver_todo_servicio') }}">Ver más..</a></small></label></center>
-=======
 							<center class="center-top" ><small><a href="{{ url('institucion/ver_todo_servicio') }}">Ver más..</a></small></center>
->>>>>>> pruebas4.0
+
 						</div>
 
 					</div>

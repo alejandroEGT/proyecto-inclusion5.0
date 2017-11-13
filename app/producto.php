@@ -231,6 +231,7 @@ class producto extends Model
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
                 ->where('productos.nombre','like', '%'.$nombre.'%')
                 ->where('area.id','=', $area)
+                ->where('tienda_producto_instituciones.id_estado', 1)
                 ->get();
 
                 return $traer;

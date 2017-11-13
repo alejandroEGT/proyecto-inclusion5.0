@@ -12,9 +12,9 @@
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url('institucion/actualizar_nombreArea') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Nombre del Área</strong> </p>
+							  		<p><label><strong>Actualizar Nombre del Área</strong></label> </p>
 							  		<input type="hidden" name="idArea" value="{{ $area->id  }}" >
-							  		<p><input class="" type="" name="nombreDeArea">
+							  		<p><input class="" type="text" name="nombreDeArea" placeholder="Nombre de área o especialidad">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
@@ -26,10 +26,10 @@
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url('institucion/actualizar_descripcionArea') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Descripcion del área</strong> </p>
+							  		<p><label><strong>Actualizar Descripcion del área</strong></label> </p>
 							  		<input type="hidden" name="idArea" value="{{ $area->id }}" >
 							  		<p>
-							  		<TEXTAREA rows="4" cols="30" name="descripcion" ></TEXTAREA><br>
+							  		<TEXTAREA placeholder="Descripción" rows="4" cols="30" name="descripcion" ></TEXTAREA><br>
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
@@ -38,17 +38,17 @@
 				<hr>
 				@if ($area->logo != "")
 					<center>
-						<img class="img-logo" src="{{ '/'.$area->logo }}">
+						<img class="img-logo" src="{{ '/'.$area->logo }}" alt="Logo">
 						<a data-toggle="collapse" data-target="#logo"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
 					</center>
 					<div id="logo" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url('institucion/actualizar_logo_area') }}" method="post" enctype="multipart/form-data" >
 									{{csrf_field()}}
-							  		<p><strong>Actualizar Logo del área</strong> </p>
+							  		<p><label><strong>Actualizar Logo del área</strong></label> </p>
 							  		<input type="hidden" name="idArea" value="{{ $area->id }}" >
 							  		<p>
-							  		<input type="file" name="logo"><br>
+							  		<input placeholder="un logo" type="file" name="logo"><br>
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
@@ -61,7 +61,7 @@
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url('institucion/actualizar_logo_area') }}" method="post" enctype="multipart/form-data" >
 									{{csrf_field()}}
-							  		<p><strong>Actualizar Logo del área</strong> </p>
+							  		<p><label><strong>Actualizar Logo del área</strong></label> </p>
 							  		<input type="hidden" name="idArea" value="{{ $area->id }}" >
 							  		<p>
 							  		<input type="file" name="logo"><br>
@@ -82,7 +82,7 @@
 						<a href="" class="close" data-dismiss="alert">&times;</a>
 							@foreach ($errors->all() as $error)
 								<ul>
-									<li class="validacionRequest">{{ $error }}</li>
+									<li class="validacionRequest"><label>{{ $error }}</label></li>
 								</ul>
 							@endforeach
 					</div>				
@@ -90,7 +90,7 @@
 			@endif
 			@if (Session::has('ingreso'))
 								<a href="" class="close" data-dismiss="alert">&times;</a>
-								<div class="alert alert-info">{{ Session::get('ingreso') }}</div>
+								<div class="alert alert-info"><label>{{ Session::get('ingreso') }}</label></div>
 			@endif
 				<form action="{{ url('institucion/agregarUsuario') }}" method="post"  >
 					<div class="row">
@@ -98,16 +98,16 @@
 							{{ csrf_field() }}
 							<input name="area" type="hidden" value="{{ $area->id }}">
 							<label>Nombres</label>
-							<input type="" name="nombres" class="form-control" value="{{ old('nombres') }}" >
+							<input placeholder="Nombre" type="text" name="nombres" class="form-control" value="{{ old('nombres') }}" >
 							<label>Apellidos</label>
-							<input type="" name="apellidos" class="form-control " value="{{ old('apellidos') }}" >
+							<input placeholder="Apellido" type="text" name="apellidos" class="form-control " value="{{ old('apellidos') }}" >
 							<label>Correo</label>
-							<input name="correo" type="text" name="" class="form-control " value="{{ old('correo') }}">
+							<input placeholder="Correo electrónico" name="correo" type="email"  class="form-control " value="{{ old('correo') }}">
 						</div>
 						<div class="col-md-6">
 							<label>Nª Teléfono</label>
-							<input type="numeric" name="telefono" class="form-control" value="{{ old('telefono') }}">
-							<p class="p-form">Sexo</p>
+							<input placeholder="Número telefónico" type="numeric" name="telefono" class="form-control" value="{{ old('telefono') }}">
+							<p class="p-form"><label>Sexo</label></p>
 							<select name="id_sexo"  class="form-control input" name="" id="">
 								<option value="">Seleccione...</option>
 								@foreach ($sexo as $sex)
@@ -160,18 +160,18 @@
 							
 							<table class="table table-hover">
 								<tr>
-									<td>Foto</td>
-									<td>Nombre</td>
-									<td>Correo</td>
-									<td>Estado contraseña</td>
-									<td>Opciones</td>
+									<td><label>Foto</label></td>
+									<td><label>Nombre</label></td>
+									<td><label>Correo</label></td>
+									<td><label>Estado contraseña</label></td>
+									<td><label>Opciones</label></td>
 								</tr>							
 								@foreach ($venInstitucion as $ven)
 									<tr>
-										<td><img class="sizeLogoMin" src="{{'/'.$ven->foto}}"></td>
-										<td>{{$ven->nombres.' '.$ven->apellidos}}</td>
-										<td>{{$ven->email}}</td>
-										<td>{{$ven->nombre}}</td>
+										<td><img class="sizeLogoMin" src="{{'/'.$ven->foto}}" alt="$ven->nombres"></td>
+										<td><label>{{$ven->nombres.' '.$ven->apellidos}}</label></td>
+										<td><label>{{$ven->email}}</label></td>
+										<td><label>{{$ven->nombre}}</label></td>
 										<td>
 											<form>
 												{{csrf_field()}}
@@ -187,7 +187,7 @@
 
 						@endif
 						@if (is_null($venInstitucion))
-							<p>no existen registros de usuarios..</p>
+							<p><label>no existen registros de usuarios..</label></p>
 						@endif
 				</div>
 			</div>
@@ -199,18 +199,18 @@
 							
 							<table class="table table-hover">
 								<tr>
-									<td>Foto</td>
-									<td>Nombre</td>
-									<td>Descripción</td>
-									<td>cantidad</td>
-									<td>Opciones</td>
+									<td><label>Foto</label></td>
+									<td><label>Nombre</label></td>
+									<td><label>Descripción</label></td>
+									<td><label>cantidad</label></td>
+									<td><label>Opciones</label></td>
 								</tr>							
 								@foreach ($productos as $p)
 									<tr>
-										<td><img class="sizeLogoMin" src="{{'/'.$p->foto}}"></td>
-										<td>{{$p->nombre}}</td>
-										<td>{{$p->descripcion}}</td>
-										<td>{{$p->cantidad}}</td>
+										<td><img class="sizeLogoMin" src="{{'/'.$p->foto}}" alt="{{ $p->nombre }}"></td>
+										<td><label>{{$p->nombre}}</label></td>
+										<td><label>{{$p->descripcion}}</label></td>
+										<td><label>{{$p->cantidad}}</label></td>
 										<td>
 											<form>
 												{{csrf_field()}}
@@ -226,7 +226,7 @@
 
 						@endif
 						@if (is_null($productos))
-							<p>no existen productos en el área</p>
+							<p><label>no existen productos en el área</label></p>
 						@endif
 				</div>
 			</div>
@@ -239,16 +239,16 @@
 							
 							<table class="table table-hover">
 								<tr>
-									<td>Foto</td>
-									<td>Nombre</td>
-									<td>Descripción</td>
-									<td>Opciones</td>
+									<td><label>Foto</label></td>
+									<td><label>Nombre</label></td>
+									<td><label>Descripción</label></td>
+									<td><label>Opciones</label></td>
 								</tr>							
 								@foreach ($servicios as $s)
 									<tr>
-										<td><img class="sizeLogoMin" src="{{'/'.$s->foto}}"></td>
-										<td>{{$s->nombre}}</td>
-										<td>{{$s->descripcion}}</td>
+										<td><img class="sizeLogoMin" src="{{'/'.$s->foto}}" alt="{{ $s->nombre }}"></td>
+										<td><label>{{$s->nombre}}</label></td>
+										<td><label>{{$s->descripcion}}</label></td>
 										<td>
 											<form>
 												{{csrf_field()}}

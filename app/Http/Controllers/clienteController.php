@@ -242,7 +242,7 @@ public function ver_detalleProducto(Request $dato)
 
      public function vista_perfilInst(request $dato){
 
-
+       
         try{
             
             //dd($dato->ip());
@@ -262,7 +262,21 @@ public function ver_detalleProducto(Request $dato)
 
 
                 if(date('d-m-Y')  !=  date('d-m-Y', strtotime($contadorTienda->updated_at) )){
-     
+          
+
+                    $contadorTienda->cantidad++;
+                    $contadorTienda->save();
+
+                  }
+
+            
+              }
+             
+              else{
+              /*o si no*/   
+              
+                $contadorTiendaInst->id_tienda = $tienda_institucion->id;
+                $contadorTiendaInst->laravel_session = $dato->ip(); 
                 $contadorTiendaInst->cantidad++;
                 $contadorTiendaInst->save();
               }

@@ -12,6 +12,16 @@
 		<div class="ico-delivery animated bounceInDown"></div>
 	</div>
 	<div class="animated bounceIn" >
+		@if ($errors->any())
+			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				            @endforeach
+				        </ul>
+			    </div>
+			@endif
 		<p class="p-center-tittle "><label>Registrate como:</label></p>
 		<div class="salto row">
 			<div class="col-md-offset-2 col-md-4">

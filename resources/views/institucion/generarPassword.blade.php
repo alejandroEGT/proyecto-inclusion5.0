@@ -29,7 +29,7 @@
 	                        </tr>
 	                        <tr v-for="d in users" >
 	                        	 <td style="font-size:12px;"><label>@{{d.idUser}}</label></td>
-	                       		<td> <img :src="'/'+d.foto" height="50"> </td>
+	                       		<td> <img :src="'/'+d.foto" class="sizeFP"> </td>
 	                            <td style="font-size:12px;">@{{d.nombres+' '+d.apellidos}}</td>
 	                            <td style="font-size:12px;">@{{d.email}}</td>
 	                            <td style="font-size:12px;">@{{d.nombreRol}}</td>

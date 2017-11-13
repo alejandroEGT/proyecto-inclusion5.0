@@ -13,50 +13,33 @@
 </head>
 <body  class="body-institucion" onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);">
         
-    <div id="master" >
+    <div id="master">
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
             <div v-if="this.navChrome == true">
-                        <li class="pushy-submenu">
+                    <li class="pushy-submenu">
                         <button id="first-link">¿Te ayudamos?</button>
                         <ul>
                             @if (Session::has('activarMicro'))
-<<<<<<< HEAD
-                                <li class="pushy-link"><a href="desactivarmicro"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
+                                <li class="pushy-link"><a href="{{ url('desactivarmicro') }}"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
                             @endif
 
                             @if (empty(Session::get('activarMicro')))
-                            <li class="pushy-link"><a href="activarmicro">
-=======
-                                <li class="pushy-link"><a href="{{ url('institucion/desactivarmicro') }}"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a></li>
-                            @endif
-
-                            @if (empty(Session::get('activarMicro')))
-                            <li class="pushy-link"><a href="{{ url('institucion/activarmicro') }}">
->>>>>>> pruebas4.0
+                            <li class="pushy-link"><a href="{{ url('activarmicro') }}">
                                 <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
                             </a></li>
                             @endif
                             @if (Session::has('activarText'))
-<<<<<<< HEAD
-                                <li class="pushy-link"><a href="desactivartext"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
+                                <li class="pushy-link"><a href="{{ url('desactivartext') }}"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
                             @endif
 
                             @if (empty(Session::get('activarText')))
-                           <li class="pushy-link"><a href="activartext">
-=======
-                                <li class="pushy-link"><a href="{{ url('institucion/desactivartext') }}"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a></li>
-                            @endif
-
-                            @if (empty(Session::get('activarText')))
-                           <li class="pushy-link"><a href="{{ url('institucion/activartext') }}">
->>>>>>> pruebas4.0
+                           <li class="pushy-link"><a href="{{ url('activartext') }}">
                                 <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
                             </a></li>
                             @endif
-                            <li class="pushy-link"><a><input @click="" type="checkbox"> Lupa</a></li>
                              <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
-                    </li>
+                </li>
             </div>
             <div class="pushy-content">
                 <ul>
@@ -67,7 +50,7 @@
                             <p class="nombre-institucion-perfil" v-for="item in db_institucion">
                                 @{{ item.nombre }}
                             </p>
-                            <p><a href="{{ url('institucion/logout') }}">Salir<img src="/ico/arrows.png"  alt=""/></a></p>
+                            <p><a href="{{ url('institucion/logout') }}">Salir</a></p>
                         </div>
                         
                         <hr/>

@@ -10,7 +10,7 @@
 			<div class="col-md-6">
 				<p class="panel-title-agregar">Ingresa un alumno</p>
 				<p class="panel-body-mst">
-					En este formulario podrás registrar a los alumnos que ayudan a levantar la institución, cabe señalar que ellos mismos también podrán hacerlo desde un formulario que esta fuera de esta sesión, al registrar a un alumno, su clave será enviada a su correo electrónico, la cual será temporal hasta que la actualice.
+					<label>En este formulario podrás registrar a los alumnos que ayudan a levantar la institución, cabe señalar que ellos mismos también podrán hacerlo desde un formulario que esta fuera de esta sesión, al registrar a un alumno, su clave será enviada a su correo electrónico, la cual será temporal hasta que la actualice.</label>
 				</p>
 			</div>
 		</div>
@@ -27,7 +27,7 @@
 			    				<a href="" class="close" data-dismiss="alert">&times;</a>
 							        <ul>
 							            @foreach ($errors->all() as $error)
-							                <li class="validacionRequest">{{ $error }}</li>
+							                <li class="validacionRequest"><label>{{ $error }}</label></li>
 							            @endforeach
 							        </ul>
 						    </div>
@@ -43,36 +43,36 @@
 
 			<div class="row">
 					<div class="col-md-offset-2 col-md-4">
-						<p class="p-form">Nombres</p>
-						<input name="nombres" class="form-control input" type="text" value="{{ old('nombres') }}">
-						<p class="p-form">Apellidos</p>
-						<input name="apellidos" class="form-control input" type="text" value="{{ old('apellidos') }}">
-						<p class="p-form">Fecha de Nacimiento</p>
+						<p class="p-form"><label>Nombres</label></p>
+						<input placeholder="Nombres" name="nombres" class="form-control input" type="text" value="{{ old('nombres') }}">
+						<p class="p-form"><label>Apellidos</label></p>
+						<input placeholder="Apellidos" name="apellidos" class="form-control input" type="text" value="{{ old('apellidos') }}">
+						<p class="p-form"><label>Fecha de Nacimiento</label></p>
     						<!--<input name="dia" class="form-control fech" size="2" maxlength="2" type="text" value="{{-- old('dia')--}}">-
     						<input name="mes" class="form-control fech" size="2" maxlength="2" type="text" value="{{-- old('mes') --}}">-
     						<input name="anio" class="form-control fech" size="2" maxlength="4" type="text" value="{{-- old('anio') --}}">-->
     						<input type="date" name="fecha" class="form-control input">
 					</div>
 					<div class="col-md-4">
-						<p class="p-form">Sexo</p>
+						<p class="p-form"><label>Sexo</label></p>
 						<select name="id_sexo"  class="form-control input">
 							<option value="">Seleccione...</option>
 							@foreach ($sexo as $sex)
 								<option value="{{$sex->id}}">{{ $sex->nombre }}</option>
 							@endforeach
 						</select>
-						<p class="p-form">Nª teléfono</p>
-						<input name="telefono" class="form-control input" type="text" value="{{ old('telefono') }}">
+						<p class="p-form"><label>Nª teléfono</label></p>
+						<input placeholder="Número telefónico" name="telefono" class="form-control input" type="text" value="{{ old('telefono') }}">
 						
-						<label class="p-form">Área o especialidad</label>
+						<label class="p-form"><label>Área o especialidad</label></label>
 						<select name="id_area" class="form-control input">
 							<option value="">Seleccione...</option>
 							@foreach ($area as $a)
 								<option value="{{ $a->id }}">{{ $a->nombre }}</option>	
 							@endforeach
 						</select>
-						<p class="p-form">Correo</p>
-						<input name="correo" class="form-control input" type="text" value="{{ old('correo') }}">
+						<p class="p-form"><label>Correo</label> </p>
+						<input placeholder="Correo electrónico" name="correo" class="form-control input" type="text" value="{{ old('correo') }}">
 						
 					</div>
 			</div>

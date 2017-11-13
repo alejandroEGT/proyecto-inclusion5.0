@@ -22,7 +22,7 @@
 						    <a href="" class="close" data-dismiss="alert">&times;</a>
 						    @foreach ($errors->all() as $e)
 								<ul>
-									<center><li>{{ $e }}</li></center>
+									<center><li><label>{{ $e }}</label></li></center>
 								</ul>
 							@endforeach
 						</div>
@@ -32,12 +32,12 @@
 			@if (Session::has('ingresado'))
 				<div class="alert alert-info">
 			    <a href="" class="close" data-dismiss="alert">&times;</a>
-				        <center>{{ Session::get('ingresado') }}</center>
+				        <center><label>{{ Session::get('ingresado') }}</label></center>
 			    </div>
 			@endif
 			<div class="col-md-offset-2 col-md-7">
-				<img src="{{'/'.$alumno[0]->foto}}" height="100" width="110" ><br>
-				<a data-toggle="collapse" data-target="#foto" href="#"><label>Actualizar foto de perfil</label></a>
+				<a data-toggle="collapse" data-target="#foto" href="#"><img src="{{'/'.$alumno[0]->foto}}" class="sizeLogo" alt="Actualizar mi foto" ></a><br>
+				
 				
 				<div id="foto" class="collapse">
 					<div class="alert alert-info" role="alert">
@@ -45,7 +45,7 @@
 						 {{csrf_field()}}
 					  		<p>
 								<label for="file-input" class="label-foto-link">
-				 				<img src="/ico/image.png" for="file-input" class="label-foto-link">
+				 				<img src="/ico/image.png" alt="" for="file-input" class="label-foto-link">
 										 	Agregar foto..
 								</label>
 								<input style="display: none;" name="foto" id="file-input" type="file"/>	
@@ -57,89 +57,89 @@
 				</div>
 				<hr>
 			
-				<label><strong>Nombres </strong></label><small> {{Auth::user()->nombres}}</small>
+				<label><strong>Nombres </strong></label><small> <label>{{Auth::user()->nombres}}</label></small>
 				<button data-toggle="collapse" data-target="#nombre" class="btn btn-xs btn-success" >Editar</button>
 
 				<div id="nombre" class="collapse">
 					<div class="alert alert-info" role="alert">
 						<form action="{{ url('userDependiente/actualizar_nombre') }}" method="post">
 						 {{csrf_field()}}
-					  		<p><strong>Actualizar Nombres</strong> </p>
-					  		<p><input class="" type="" name="nombre">
+					  		<p><label><strong>Actualizar Nombres</strong></label> </p>
+					  		<p><input class="" type="text" placeholder="Nombre" name="nombre">
 							<input type="submit" value="Guardar" name=""></p>	
 						</form>	
 					</div>
 												
 				</div>
 				<hr>
-				<label><strong>Apellidos </strong></label><small> {{Auth::user()->apellidos}}</small>
+				<label><strong>Apellidos </strong></label><small> <label>{{Auth::user()->apellidos}}</label></small>
 				<button data-toggle="collapse" data-target="#rs" class="btn btn-xs btn-success" >Editar</button>
 
 				<div id="rs" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url('userDependiente/actualizar_apellido') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Apellidos</strong> </p>
-							  		<p><input class="" type="" name="apellido">
+							  		<p><strong><label>Actualizar Apellidos</label></strong> </p>
+							  		<p><input class="" type="text" placeholder="Apellidos" name="apellido">
 									<input type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>					
 								
 				</div>
 				<hr>
-				<label><strong>Nª Teléfono </strong></label><small> {{ $alumno[0]->telefono}}</small>
+				<label><strong>Nª Teléfono </strong></label><small> <label>{{ $alumno[0]->telefono}}</label></small>
 				<button data-toggle="collapse" data-target="#tel1" class="btn btn-xs btn-success" >Editar</button>
 
 				<div id="tel1" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url('userDependiente/actualizar_tel') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Teléfono</strong> </p>
-							  		<p><input class="" type="" name="teléfono">
+							  		<p><label><strong>Actualizar Teléfono</strong></label> </p>
+							  		<p><input class="" type="numeric" name="teléfono" placeholder="Teléfono">
 									<input type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
 				</div>
 				<hr>
-				<label><strong>Fecha de Nacimiento </strong></label><small> {{ date('d/m/Y', strtotime($alumno[0]->fecha))}}</small>
+				<label><strong>Fecha de Nacimiento </strong></label><small> <label>{{ date('d-m-Y', strtotime($alumno[0]->fecha))}}</label></small>
 				<button data-toggle="collapse" data-target="#fecha" class="btn btn-xs btn-success" >Editar</button>
 
 				<div id="fecha" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url('userDependiente/actualizar_fecha') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Fecha de nacimiento</strong> </p>
-							  		<p><input class="" type="date" name="fecha">
+							  		<p><label><strong>Actualizar Fecha de nacimiento</strong></label> </p>
+							  		<p><input class="" type="date" name="fecha" placeholder="Fecha">
 									<input type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
 				</div>
 				<hr>
 				
-				<label><strong>Dirección </strong></label><small> (Aún no identificada)</small>
+				<label><strong>Dirección </strong></label><small> <label>(Aún no identificada)</label></small>
 				<button data-toggle="collapse" data-target="#dir" class="btn btn-xs btn-success" >Editar</button>
 
 				<div id="dir" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url('userDependiente/actualizar_direccion') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Dirección</strong> </p>
-							  		<p><input class="" type="" name="dirección">
-									<input type="submit" value="Guardar" name="direccion"></p>	
+							  		<p><label><strong>Actualizar Dirección</strong></label> </p>
+							  		<p><input class="" type="text" name="dirección" placeholder="Dirección">
+									<input type="submit" value="Guardar" placeholder="Dirección" name="direccion"></p>	
 								</form>	
 							</div>
 
 				</div>
 				<hr>
-				<label><strong>Correo </strong></label><small> {{Auth::user()->email}}</small>
+				<label><strong>Correo </strong></label><small><label>{{Auth::user()->email}}</label></small>
 				<button data-toggle="collapse" data-target="#correo" class="btn btn-xs btn-success" >Editar</button>
 
 				<div id="correo" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url('userDependiente/actualizar_correo') }}" method="post">
 								{{csrf_field()}}
-							  		<p><strong>Actualizar Correo</strong> </p>
-							  		<p><input class="" type="" name="correo">
+							  		<p><label><strong>Actualizar Correo</strong></label> </p>
+							  		<p><input class="" type="email" name="correo" placeholder="Correo">
 									<input type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
@@ -147,25 +147,25 @@
 				</div>
 				
 				<hr>
-				<label><strong>Contraseña </strong></label><small> (No visible) </small>
+				<label><strong>Contraseña </strong></label><small> <label>(No visible)</label> </small>
 				<button data-toggle="collapse" data-target="#clave" class="btn btn-xs btn-success" >Editar</button>
 
 				<div id="clave" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url('userDependiente/actualizar_clave') }}" method="post">
 								{{ csrf_field() }}
-							  		<p><strong>Actualizar Contraseña</strong> </p>
-							  		<p><small>Contraseña actual </small><input class="" type="password" name="clave_actual">
-							  		<p><small>Contraseña Nueva </small><input class="" type="password" name="clave_nueva">
-							  		<p><small>Repetir Contraseña Nueva </small><input class="" type="password" name="confirm_clave_nueva">
+							  		<p><label><strong>Actualizar Contraseña</strong></label> </p>
+							  		<p><label><small>Contraseña actual </small></label><input class="" type="password" name="clave_actual" placeholder="Contraseña actual">
+							  		<p><label><small>Contraseña Nueva </small></label><input class="" type="password" name="clave_nueva" placeholder="Contraseña nueva">
+							  		<p><label><small>Repetir Contraseña Nueva </small></label><input class="" type="password" name="confirm_clave_nueva" placeholder="Confirmar contraseña">
 									<input type="submit" value="Guardar" name=""></p>	
 								</form>	
 							</div>
 
 				</div>
 				<hr>
-				<label><strong>Área </strong></label><small> {{ $alumno[0]->nombreArea }} </small><br>
-				<label><strong>Institución </strong></label><small> {{ $alumno[0]->nombreInstitucion }} </small>
+				<label><strong>Área </strong></label><small> <label>{{ $alumno[0]->nombreArea }}</label> </small><br>
+				<label><strong>Institución </strong></label><small> <label>{{ $alumno[0]->nombreInstitucion }}</label> </small>
 		
 			</div>
 

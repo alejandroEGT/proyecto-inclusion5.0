@@ -32,7 +32,7 @@
                         <ul>
                             <li class="pushy-link"><a href="/login_institucion">Institución</a></li>
                             <li class="pushy-link"><a href="/login_encargado">Encargado de área</a></li>
-                            <li class="pushy-link"><a href="/login_vendedorInst">Vendedor institucional</a></li>
+                            <li class="pushy-link"><a href="/login_vendedorInst">Alumno institucional</a></li>
                             <li class="pushy-link"><a href="/login_vendedor">Vendedor Individual</a></li>
                         </ul>
                     </li>

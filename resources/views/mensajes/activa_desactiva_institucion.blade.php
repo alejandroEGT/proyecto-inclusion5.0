@@ -53,20 +53,16 @@
 				  					hablar("Botón "+ $(event.target).val());
 					}
 
-<<<<<<< HEAD
-					$( "label" ).mouseover(function(event) {
-=======
+
 					$( "label, h3" ).mouseover(function(event) {
->>>>>>> pruebas4.0
+
 				  				//var p = $(this).text();
 				  					hablar($(event.target).text());
 							 	//hablar($(event.target).text());
 							});
-<<<<<<< HEAD
-	                $( "label" ).mouseout(function(event) {
-=======
+
 	                $( "label, h3" ).mouseout(function(event) {
->>>>>>> pruebas4.0
+
 				  				//var p = $(this).text();
 				  					callar();
 							 	//hablar($(event.target).text());

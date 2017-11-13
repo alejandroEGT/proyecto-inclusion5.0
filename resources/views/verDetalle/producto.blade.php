@@ -32,7 +32,7 @@
 		@endif
 			
 	<div class="col-md-offset-1 col-md-3">
-		<img src="{{ '/'.$productos[0]->foto }}" alt="foto de {{ $productos[0]->nombre }}" class="img-thumbnail img-responsive"><br>
+		<img src="{{ '/'.$productos[0]->foto }}" alt="foto de {{ $productos[0]->nombre }}" class="img-thumbnail foto-producto-p"><br>
 		<center><a data-toggle="collapse" data-target="#campo1" > Actualizar foto del producto <i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></center>
 		
 		<div id="campo1" class="collapse">

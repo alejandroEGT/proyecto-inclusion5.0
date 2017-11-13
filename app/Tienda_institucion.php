@@ -54,6 +54,22 @@ class Tienda_institucion extends Model
         return $tienda;
     }
 
+
+   /* protected function traerTiendasId($idTienda)
+    {
+        $tienda = \DB::table('tiendas_instituciones')
+          ->select([
+
+                    'institucion.id as idInstitucion',
+                    'institucion.nombre as nombreInstitucion'
+
+                    ])
+                    ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
+                    ->where('institucion.id','=',$idTienda)->get();
+        return $tienda;
+    }*/
+
+
    
 
 }

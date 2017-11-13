@@ -51,6 +51,6 @@ class crud_institucionController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
                 $datos->flash();
                 return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
-      }
+        }
     }
  }

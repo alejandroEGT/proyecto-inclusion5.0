@@ -220,6 +220,7 @@ class clienteController extends Controller
           ]);
       $productos = producto::filtrar_desde_cliente($datos->buscador);
 
+
       return view('inicioCliente.nuestroProducto')
       ->with('productos', $productos)
       ->with('titulo', "Filtrado de productos");
@@ -236,14 +237,19 @@ public function ver_detalleProducto(Request $dato)
       $this->verificarUser();
       $getId = base64_decode($dato->id);
       $productos = producto::detalleProducto_cliente($getId);
+      $tiendas = Tienda_institucion::traerTiendas();
+      $ver_producto = producto::ver_productos_tienda();
+
 
       return view('inicioCliente.verDetalleProducto')
+      ->with('ver_producto',$ver_producto)
+      ->with('tiendas',$tiendas)
       ->with('productos', $productos);
  }
 
      public function vista_perfilInst(request $dato){
 
-
+       
         try{
            //////////////////aqui un contador de visitas ////////////////
             
@@ -264,7 +270,6 @@ public function ver_detalleProducto(Request $dato)
 
 
                 if(date('d-m-Y')  !=  date('d-m-Y', strtotime($contadorTienda->updated_at) )){
-
           
 
                     $contadorTienda->cantidad++;
@@ -273,7 +278,11 @@ public function ver_detalleProducto(Request $dato)
                   }
 
             
-              }else{
+
+              }
+             
+              else{ 
+
               /*o si no*/   
               
                 $contadorTiendaInst->id_tienda = $tienda_institucion->id;

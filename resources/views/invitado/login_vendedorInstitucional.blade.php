@@ -4,8 +4,8 @@
 		<div class="padding color-verde">
 			<div class="row">
 					<div class="col-md-offset-3 col-md-6">
-					<h3>Login de Alumno Institucional</h3>
-					<h4>Bienvenido a nuestro proyecto</h4>
+					<h3><label>Login de Alumno Institucional</label></h3>
+					<h4><label>Bienvenido a nuestro proyecto</label></h4>
 					<div class="ico-people"></div>
 					</div>
 			</div>
@@ -17,7 +17,7 @@
 						    <a href="" class="close" data-dismiss="alert">&times;</a>
 						    @foreach ($errors->all() as $e)
 								<ul>
-									<li>{{ $e }}</li>
+									<li><label>{{ $e }}</label></li>
 								</ul>
 							@endforeach
 						</div>
@@ -31,9 +31,9 @@
 							<div class="col-md-offset-4 col-md-4">
 								{{ csrf_field() }}
 								<label for="">Correo</label>
-								<input class="form-control input " type="text" name="correo" value="{{ old('correo') }}">
+								<input placeholder="Correo" class="form-control input " type="text" name="correo" value="{{ old('correo') }}">
 								<label for="">Clave</label>
-								<input class="form-control input" type="password" name="clave">
+								<input placeholder="Clave" class="form-control input" type="password" name="clave">
 							</div>
 						</div><br>
 						<div class="row">

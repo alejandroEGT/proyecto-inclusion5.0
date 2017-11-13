@@ -372,22 +372,6 @@ Route::get('/eliminar_servicio_espera/{idServicio}', 'institucionController@elim
 /*inicio de usuarios*/
 
 
-
-
-         Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
-         Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
-
-         Route::get('/sesion_cliente', 'clienteController@sesion_cliente');
-         Route::post('/sesion_cliente', 'loginClienteController@authCliente');
-
-         Route::get('/registro_cliente' , 'clienteController@registro_cliente');
-         Route::post('/registro_cliente' , 'clienteController@guardar_cliente');
-          
-         Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
-
-         Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
-
-
 Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
 Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
 Route::get('/sesion_cliente', 'clienteController@sesion_cliente');

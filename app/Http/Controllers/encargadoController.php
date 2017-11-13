@@ -410,14 +410,18 @@ class encargadoController extends Controller
     
     public function guardarIcono(Request $datos){
 
+        $this->validate($datos,[
+                'logo' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=2500,max_height=2850',
+          ]);
         $encargado = Encargado::traerDatos();
 
         $logo = Area::guardarIcono($datos, $encargado[0]->id_institucion, $encargado[0]->id_area);
         
         if ($logo) {
+            \Session::flash('ingresado', 'Logo actualizado');
             return redirect()->back();
         }
-        return redirect()->back();
+        return redirect()->back()->withErrors(['No se pudo realizar la operación']);
     }
 
     public function genclave(){

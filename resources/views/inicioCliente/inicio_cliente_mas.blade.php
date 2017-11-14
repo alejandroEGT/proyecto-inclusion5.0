@@ -75,9 +75,8 @@
 		    </div>
 	   		@endforeach
 	  	</div>
-	  	<hr>
-
-	  	<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Vendedores</div>
+	  	
+	  	<!--<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Vendedores</div>
 		<div class="android-card-container mdl-grid">
 	   		@foreach($tiendas_vendedor as $tienda) 
 		    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
@@ -91,7 +90,7 @@
 		      </div>
 		    </div>
 	   		@endforeach
-	  	</div>
+	  	</div>-->
 	  		  
 	</div>
 	<hr>

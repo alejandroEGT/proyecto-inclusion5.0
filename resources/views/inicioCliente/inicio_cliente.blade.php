@@ -38,12 +38,9 @@
 	<div class="android-more-section ">
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Productos de Instituciones</div>
 	  		<div class="android-card-container mdl-grid">		
-			@foreach($ver_producto as $producto)	
-				
+			@foreach($ver_producto as $producto)
 					<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 						<div class="imagen-producto">
-						<a class="mdl-card__media porteimg" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}"><img src="{{ '/'.$producto->fotoProducto }}"></a>
-
 						<a class="mdl-card__media porteimg" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto))}}"><img src="{{ '/'.$producto->fotoProducto }}"></a>
 						</div>							
 						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $producto->nombreProducto }}</h4></div>
@@ -78,10 +75,10 @@
 		    </div>
 	   		@endforeach
 	   		  </div>
-	   		  <hr>
+
 		    
 			
-		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Vendedores</div>
+		<!--<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Vendedores</div>
 		<div class="android-card-container mdl-grid">
 	   		@foreach($tiendas_vendedor as $tienda) 
 		    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
@@ -95,7 +92,7 @@
 		      </div>
 		    </div>
 	   		@endforeach
-	  	</div>	  
+	  	</div>-->	  
 	</div>
 	<hr>
 	<!--calidad-->

@@ -12,7 +12,7 @@ class detalle_carro extends Model
 
 		if($datos->cantidad > $producto->cantidadProducto || $datos->cantidad == 0){
 			
-			\Session::flash('correcto', 'La cantidad ingresada es mayor al stock disponible, Intente nuevamente.');
+			\Session::flash('correcto', 'El campo cantidad es requerido, Intente nuevamente.');
              return false;
 		
 		}else{

@@ -118,7 +118,7 @@
 				    </div>
 
 					<!--cuerpo-->
-					<div class="android-content mdl-layout__content margen"  id="cliente">
+					<div class="android-content mdl-layout__content"  id="cliente">
 						@yield('content')		
 						
 						<!--<footer><p>&copy; 2017 Exod.cl<p></footer>-->

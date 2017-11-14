@@ -15,7 +15,6 @@ class carro extends Model
 
 		$carro->id_cliente = $finduser->id;
 		$carro->id_estado = 1;
-        dd($carro);
 		if($carro->save()){
 			return true;
 		}else{

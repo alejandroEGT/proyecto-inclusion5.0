@@ -8,20 +8,8 @@
 @endif
 @if (!is_null($productos[0]))
 	{{-- expr --}}
-	<hr>
-	<center><label><h1>Detalle del producto</h1></label></center>
-	<hr>
-	<div class="row panel fondoTienda">
-		<div class="col-md-offset-1 col-md-12">
-			<label>Tienda:</label>
-			@foreach($tiendas as $tiendas)
-			<a href="{{ url("/perfil_institucion/".base64_encode($tiendas->id)) }}"> {{ $tiendas->nombre }}</a>	
-			@endforeach
-		</div>
-	</div>
-<div class="row panel fondoDescripcion">
 
-			@if (count($errors))			
+	@if (count($errors))			
 				<div class="alert alert-danger">
 				    <a href="" class="close" data-dismiss="alert">&times;</a>
 				    @foreach ($errors->all() as $e)
@@ -39,7 +27,19 @@
 				    </div>
 			@endif
 
-			
+	<hr>
+	<center><label><h1>Detalle del producto</h1></label></center>
+	<hr>
+	<div class="row panel fondoTienda">
+		<div class="col-md-offset-1 col-md-12">
+			<label>Tienda:</label>
+			@foreach($tiendas as $tiendas)
+			<a href="{{ url("/perfil_institucion/".base64_encode($tiendas->id)) }}"> {{ $tiendas->nombre }}</a>	
+			@endforeach
+		</div>
+	</div>
+<div class="row panel fondoDescripcion">
+
 	<div class="col-md-offset-1 col-md-6 porteimgDetalle">
 		<img src="{{ '/'.$productos[0]->foto }}" class="img-thumbnail img-responsive"><br>
 	</div>

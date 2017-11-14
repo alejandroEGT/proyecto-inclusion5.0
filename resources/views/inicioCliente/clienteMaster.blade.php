@@ -24,7 +24,7 @@
 					            <a href="/inicio_cliente"><img class="android-logo-image" src="/productos/exodNegro.png"></a>
 					        </span>
 				          	<!--lupa de prueba-->
-							<div class="col-md-6">
+							<div class="col-md-5">
 								<form action="{{ url('/filtrarProducto') }}" method="get"><br>
 									{{csrf_field()}}							
 
@@ -96,12 +96,12 @@
 				          <div class="android-drawer-separator"></div>
 				          <span>
 			          	  <a class="mdl-navigation__link" href="#">
-
-
 			          	  <i class="material-icons">&#xE87E;</i>Lista de deseos 
+			          	  <i class="mdl-badge" data-badge="3"></i>
+			          	  </a> 
 
+			          	  <a class="mdl-navigation__link" href="#">
 			          	  <i class="material-icons">&#xE87E;</i>Carro
-
 			          	  <i class="mdl-badge" data-badge="3"></i>
 			          	  </a>
 				          </span>
@@ -118,7 +118,7 @@
 				    </div>
 
 					<!--cuerpo-->
-					<div class="android-content mdl-layout__content margen"  id="cliente">
+					<div class="android-content mdl-layout__content"  id="cliente">
 						@yield('content')		
 						
 						<!--<footer><p>&copy; 2017 Exod.cl<p></footer>-->

@@ -47,7 +47,7 @@ class areaController extends Controller
             ->with('venInstitucion', $datosVendedor);
            
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back();
+            return redirect()->back()->withErrors(['Primeramente asegúrese de ingresar productos y servicios en esta área. ']);
         }
         catch (\Exception $e) {
             return "<center><h3>Si alguien te dijo que jugaras a romper el sistema, no le creas, te esta engañando</h3></center>";

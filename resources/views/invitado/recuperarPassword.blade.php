@@ -9,7 +9,8 @@
 					<div class="ico-pass"></div>
 					</div>
 			</div>
-		</div>
+</div>
+
 
 <div class="row top">
 	<div class="col-md-offset-3 col-md-6 panel">

@@ -15,10 +15,10 @@
 					  </ol>
 					  <div class="carousel-inner">
 					    <div class="carousel-item active">
-					      <img class="d-block w-100" src="http://ipcft.santotomas.cl/wp-content/uploads/sites/7/2016/01/gastronomia.jpg" alt="First slide">
+					      <img class="d-block w-100" src="https://ipcft.santotomas.cl/wp-content/uploads/sites/7/2016/01/gastronomia.jpg" alt="First slide">
 					    </div>
 					    <div class="carousel-item">
-					      <img class="d-block w-100" src="http://destinonegocio.com/wp-content/uploads/2015/04/artesanias.jpg" alt="Second slide">
+					      <img class="d-block w-100" src="https://destinonegocio.com/wp-content/uploads/2015/04/artesanias.jpg" alt="Second slide">
 					    </div>
 					  </div>
 					  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -33,6 +33,8 @@
 			</div>
 		</div>
 	</div>
+
+	
 
 	<!--recomedados-->
 	<div class="android-more-section">
@@ -49,13 +51,38 @@
 						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $producto->nombreProducto }}</h4></div>
 						<div class="mdl-card__supporting-text">
 						<span class="mdl-typography--font-light mdl-typography--subhead">{{ $producto->descripcionProducto }}</span>
-						<hr><dt><label class="estiloDetalleTitulos"><strong>Valor: $ {{ $producto->precioProducto }}</strong></label></dt>
 						</div>
 					</div>
 			
 			@endforeach
 			</div>
 			<hr>
+	</div>
+
+	<!--servicios-->
+	<div class="android-more-section ">
+		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Servicios</div>
+	  		<div class="android-card-container mdl-grid">		
+			@foreach($ver_mas_ser as $servicio)	
+				
+					<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
+						<div class="imagen-producto">
+
+
+
+						<a class="mdl-card__media porteimg" href="{{ url('/detalleServicio/'.base64_encode($servicio->idServicio).'/'.base64_encode($servicio->idInstitucion)) }}"><img src="{{ '/'.$servicio->fotoServicio }}"></a>
+
+						</div>							
+						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $servicio->nombreServicio }}</h4></div>
+						<div class="mdl-card__supporting-text">
+						<span class="mdl-typography--font-light mdl-typography--subhead">{{ $servicio->descripcionServicio }}</span>
+						</div>
+					</div>
+
+			@endforeach
+			
+			</div>
+			<hr>	
 	</div>
 
 	<!--tienda-->
@@ -75,7 +102,8 @@
 		    </div>
 	   		@endforeach
 	  	</div>
-	  	
+	  	<hr>
+
 	  	<!--<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Vendedores</div>
 		<div class="android-card-container mdl-grid">
 	   		@foreach($tiendas_vendedor as $tienda) 

@@ -33,7 +33,7 @@ class institucionRequest extends FormRequest
 
         return [
 
-                'rut.max' => 'Ingrese un maximo de 9 numeros',
+                'rut.max' => 'Ingrese un maximo de 9 numeros en el rut',
                 'rut.required'=>'No puedes dejar vacio el campo rut',
                 'rut.numeric' => 'Solo puedes ingresar numeros en el campo rut',
                 'rut.unique' => 'El rut ingresado ya existe en la base de datos',

@@ -8,7 +8,7 @@ new Vue({
 		
 	},
 	 http: { 
-            root: 'http://localhost:8000/',
+            root: 'https://exod.cl/',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('#token').getAttribute('value')
             }

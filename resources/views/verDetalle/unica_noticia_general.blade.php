@@ -11,7 +11,7 @@
 					<div class="col-md-offset-1 col-md-10  fondo-blanco top">
 						<div class="row">
 							<div class="col-md-4">
-								<p><img src="{{'/'.$noticia->logoInstitucion}}" class="img-thumbnail img-circle img-logo_noticia " > <label><small class="color-blue" >{{$noticia->nombreInstitucion.' ('.$noticia->creado.')'}}</small></label></p>
+								<p><img src="{{'/'.$noticia->logoInstitucion}}" class="img-thumbnail img-circle img-logo_noticia " > <label><small class="color-blue" >{{$noticia->nombreInstitucion.' ('.date('h:i:s - d-m-Y', strtotime($noticia->creado)).')'}}</small></label></p>
 							</div>
 						</div>
 						<div class="row">

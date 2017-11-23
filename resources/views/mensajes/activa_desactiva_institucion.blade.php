@@ -289,19 +289,19 @@ var comandos = {
         	$('#ni').click();
         }
          if(i == 1){
-        	setTimeout(function () { window.location = "misionyvision"; }, 0);
+        	setTimeout(function () { window.location = "{{ url('institucion/misionyvision') }}"; }, 0);
         }
         if(i == 2){
-        	setTimeout(function () { window.location = "datos"; }, 0);
+        	setTimeout(function () { window.location = "{{ url('institucion/datos') }}"; }, 0);
         }
         if(i == 3){
-        	setTimeout(function () { window.location = "noticia"; }, 0);
+        	setTimeout(function () { window.location = "{{ url('institucion/noticia') }}"; }, 0);
         }
         if(i == 4){
         	$('#oc').click();
         }
          if(i == 5){
-        	setTimeout(function () { window.location = "productosOcultos"; }, 0);
+        	setTimeout(function () { window.location = "{{ url('institucion/productosOcultos') }}"; }, 0);
         }
          if(i == 6){
         	$(".menu-btn").click();
@@ -316,13 +316,13 @@ var comandos = {
          	subir();
         }
          if(i == 10){
-         	setTimeout(function () { window.location = "serviciosOcultos"; }, 0);
+         	setTimeout(function () { window.location = "{{ url('institucion/serviciosOcultos') }}"; }, 0);
         }
         if(i == 11){
          	$('#registrobtn').click();
         }
         if (i == 12){
-        	setTimeout(function () { window.location = "inicio"; }, 0);
+        	setTimeout(function () { window.location = "{{ url('institucion/inicio') }}"; }, 0);
         }
          if (i == 13){
         	$('#loginbtn').click();

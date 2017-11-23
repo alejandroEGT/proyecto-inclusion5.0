@@ -107,15 +107,15 @@ class VendedorInstitucion extends Model
                         'area.nombre as nombreArea',
                         'vendedor.fecha_nac as fecha'
                   ])
-                  ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
-                  ->join('users','users.id','=','Vendedor.id_user')
+                  ->join('vendedor', 'vendedor.id','=','vendedor-institucion.id_vendedor')
+                  ->join('users','users.id','=','vendedor.id_user')
                   ->join('estado', 'estado.id','=','vendedor.id_estado')
                   ->join('area','area.id','=','vendedor-institucion.id_area')
                   ->join('institucion','institucion.id','=','area.id_institucion')
                   ->join('fotoperfil','fotoperfil.id_user','=','users.id')
                   ->where('vendedor.id_estado', 1)/*posible falla*/
                   ->where('users.id', $idAlumno)
-                  ->where('Institucion.id', $idI)
+                  ->where('institucion.id', $idI)
                   ->get();
         
         if (count($traer)>0) {
@@ -137,8 +137,8 @@ class VendedorInstitucion extends Model
                         //\DB::raw("DATE_FORMAT(vendedor.fecha_nac, '%d-%M-%Y') as fecha"),
 
                   ])
-                  ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
-                  ->join('users','users.id','=','Vendedor.id_user')
+                  ->join('vendedor', 'vendedor.id','=','vendedor-institucion.id_vendedor')
+                  ->join('users','users.id','=','vendedor.id_user')
                   ->join('estado', 'estado.id','=','vendedor.id_estado')
                   ->join('area','area.id','=','vendedor-institucion.id_area')
                   ->join('institucion','institucion.id','=','area.id_institucion')
@@ -169,8 +169,8 @@ class VendedorInstitucion extends Model
                         'vendedor.fecha_nac as fecha'
 
                   ])
-                  ->join('vendedor', 'Vendedor.id','=','vendedor-institucion.id_vendedor')
-                  ->join('users','users.id','=','Vendedor.id_user')
+                  ->join('vendedor', 'vendedor.id','=','vendedor-institucion.id_vendedor')
+                  ->join('users','users.id','=','vendedor.id_user')
                   ->join('estado', 'estado.id','=','vendedor.id_estado')
                   ->join('area','area.id','=','vendedor-institucion.id_area')
                   ->join('institucion','institucion.id','=','area.id_institucion')

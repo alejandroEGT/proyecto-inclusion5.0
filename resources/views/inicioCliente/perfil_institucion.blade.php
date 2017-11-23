@@ -1,8 +1,7 @@
 @extends('inicioCliente.clienteMaster')
 
 @section('content')
-	<div id="sfc1tpp2wnu56rs8py9h757hq8haz6jncpx"></div><script type="text/javascript" src="https://counter8.freecounter.ovh/private/counter.js?c=1tpp2wnu56rs8py9h757hq8haz6jncpx&down=async" async></script><noscript><a href="https://www.contadorvisitasgratis.com" title="contador de entradas"><img src="https://counter8.freecounter.ovh/private/contadorvisitasgratis.php?c=1tpp2wnu56rs8py9h757hq8haz6jncpx" border="0" title="contador de entradas" alt="contador de entradas"></a></noscript><a href="https://www.contadorvisitasgratis.com" title="contador de entradas"><img src="https://counter8.freecounter.ovh/private/contadorvisitasgratis.php?c=1tpp2wnu56rs8py9h757hq8haz6jncpx" border="0" title="contador de entradas" alt="contador de entradas"></a>
-	<div class="container-fluid">
+	
 	<a href="#" onclick="window.history.back();">
 		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
 	</a>
@@ -85,10 +84,11 @@
 								<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 							
 									<div class="mdl-card__media porteImgTienda"><img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod "></div>
-									<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ str_limit($producto->nombre, 10) }}</h4>
 
-									</div>
-									<p><a href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}" class="btn btn-primary btn-xs">Ver mas detalles</a></p>
+									<div class="mdl-card__title"><h4 class="mdl-card__title-text lbl-precio"> $ {{ $producto->precio }}</h4></div>
+
+									<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ str_limit($producto->nombre, 10) }}</h4></div>
+									<p><a href="{{ url('/detalleProducto/'.base64_encode($producto->idProducto).'/'.$idInstitucion) }}" class="btn btn-primary btn-xs">Ver</a></p>
 							
 								</div>
 							

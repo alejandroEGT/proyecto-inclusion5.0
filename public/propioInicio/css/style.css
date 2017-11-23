@@ -917,7 +917,10 @@ center h5{
   transition: .4s;
 }
 
-
+.img-princ{
+  height: 300px;
+  width: 410px;
+}
 
 
 .slider.round {

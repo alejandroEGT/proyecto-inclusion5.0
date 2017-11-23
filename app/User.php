@@ -123,12 +123,14 @@ class User extends Authenticatable
                     $user->nombres = $datos->nombres;
                     $user->apellidos = $datos->apellidos;
                     $user->email = $datos->correo;
-                    $user->password = \Hash::make($datos->clave);
+                    $user->password = \Hash::make($datos->pass);
                     $user->id_rol = "4";
                     $user->id_sexo = $datos->sexo;
 
                     if($user->save()){
+                       
                         return true;
+
                     }else{
                         return false;
                     }
@@ -149,6 +151,7 @@ class User extends Authenticatable
                     }
                     
                 if($user->save()){
+                    
                         return true;
                     }else{
                         return false;
@@ -172,6 +175,7 @@ class User extends Authenticatable
                     }
                     
                 if($user->save()){
+                   
                         return true;
                     }else{
                         return false;

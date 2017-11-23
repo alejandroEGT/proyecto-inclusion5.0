@@ -80,8 +80,10 @@
 								</form>	
 							</div>
 			</div>
-		@if ($user == 1 or $user == 2)	
-			<p><label><strong>Precio CLP: $ </strong></label> <label>{{ number_format($productos[0]->precio, 0, ',', '.') }}</label> <a data-toggle="collapse" data-target="#pre" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+			<p><label><strong>Precio CLP: $ </strong></label> <label>{{ number_format($productos[0]->precio, 0, ',', '.') }}</label> 
+			
+			@if ($user == 1 or $user == 2)	
+			<a data-toggle="collapse" data-target="#pre" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="pre" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url($ruta.'/actualizar_producto_precio') }}" method="post">
@@ -93,8 +95,11 @@
 								</form>	
 							</div>
 			</div>
+			@endif
+			<p><label><strong>Cantidad:</strong></label> <label>{{ $productos[0]->cantidad }}</label> 
 
-			<p><label><strong>Cantidad:</strong></label> <label>{{ $productos[0]->cantidad }}</label> <a data-toggle="collapse" data-target="#can" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+			@if ($user == 1 or $user == 2)	
+			<a data-toggle="collapse" data-target="#can" ><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
 			<div id="can" class="collapse">
 							<div class="alert alert-info" role="alert">
 								<form action="{{ url($ruta.'/actualizar_producto_cantidad') }}" method="post">
@@ -106,8 +111,11 @@
 								</form>	
 							</div>
 			</div>
-		
-			<p><label><strong>Visibilidad:</strong></label> <label>{{ $productos[0]->estadoProducto }} <a data-toggle="collapse" data-target="#vis" ><i class="fa fa-pencil" aria-hidden="true"></i></a>. (Apto para la visualización en la tienda)</label></p>
+			@endif
+			<p><label><strong>Visibilidad:</strong></label> <label>{{ $productos[0]->estadoProducto }} 
+			
+			@if ($user == 1 or $user == 2)	
+			<a data-toggle="collapse" data-target="#vis" ><i class="fa fa-pencil" aria-hidden="true"></i></a>. (Apto para la visualización en la tienda)</label></p>
 			<div id="vis" class="collapse">
 										<div class="alert alert-info" role="alert">
 											<form action="{{ url($ruta.'/actualizar_producto_visibilidad') }}" method="post">

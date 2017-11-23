@@ -6,6 +6,7 @@ use App\ContadorInstitucion;
 use App\Fotoperfil;
 use App\Http\Requests\clienteRequest;
 use App\Institucion;
+use App\Listadeseos;
 use App\Sexo;
 use App\Tienda_institucion;
 use App\Tienda_vendedor;
@@ -13,6 +14,7 @@ use App\User;
 use App\carro;
 use App\cliente;
 use App\foto_producto;
+use App\noticia;
 use App\producto;
 use App\servicio;
 use Cache;
@@ -36,12 +38,19 @@ class clienteController extends Controller
       $tiendas_vendedor = Tienda_vendedor::traerTiendas();
       //dd($tiendas);
       $ver_producto = producto::ver_producto();
-     //dd($ver_producto);
+      $ver_servicio = servicio::ver_servicio();
+      $noticias = noticia::all();
+     //dd($noticias);
 
       $this->verificarUser();
-      return view('inicioCliente.inicio_cliente')->with('ver_producto',$ver_producto)
-                                                 ->with('tiendas_vendedor',$tiendas_vendedor)
-                                                 ->with('tiendas',$tiendas);
+      return view('inicioCliente.inicio_cliente')
+      ->with([
+        'ver_producto' => $ver_producto,
+        'tiendas_vendedor' => $tiendas_vendedor,
+        'ver_servicio' => $ver_servicio,
+        'tiendas' => $tiendas,
+        'noticias' => $noticias
+      ]);
 
     }
 
@@ -53,13 +62,34 @@ class clienteController extends Controller
         return view('inicioCliente.vista_productos')->with('producto',$producto);
                                                  
     }  
+    public function vista_lista_deseos()
+    {
+
+       //$lista = Listadeseos::where('id_user', \Auth::user()->id)->get();
+      $lista = Listadeseos::traer(\Auth::user()->id);
+       return view('inicioCliente.lista_deseos')->with('lista', $lista);
+    }
+    public function guardar_en_lista_deseo(Request $dato)
+    {
+      $id_prod = base64_decode($dato->idProducto);
+
+      $agregar = Listadeseos::agregar(\Auth::user()->id, $id_prod);
+
+      if ($agregar) {
+        
+        return redirect()->back()->withErrors(['producto agregado a favoritos']);
+      }
+      return redirect()->back()->withErrors(['Producto ya listado']);
+    }
 
     public function ver_mas_producto(){
       $this->verificarUser();
       $ver_mas = producto::ver_mas_producto();
+      $ver_mas_ser = servicio::ver_servicio_mas();
        $tiendas = Tienda_institucion::traerTiendas();
        $tiendas_vendedor = Tienda_vendedor::traerTiendas();
       return view ('inicioCliente.inicio_cliente_mas')->with('ver_mas',$ver_mas)
+                                                      ->with('ver_mas_ser',$ver_mas_ser)
                                                       ->with('tiendas_vendedor',$tiendas_vendedor)
                                                       ->with('tiendas',$tiendas);
     }
@@ -107,12 +137,24 @@ class clienteController extends Controller
        public function guardar_cliente(Request $datos){
 
       try{
+
+        $this->validate($datos,[
+          'nombres' => 'required',
+          'apellidos' => 'required',
+          'telefono' => 'required',
+          'correo' => 'required | email',
+          'pass' => 'required | min:6',
+          'repPass' => 'required | min:6 | same:pass'
+       ]);
+
+
+
    		  $user = User::insertarCliente($datos,1);
         $idUser  = User::where('email', $datos->correo)->first();
         $cliente = cliente::guardarCliente($datos, $idUser);
           if($cliente){
               $foto = Fotoperfil::fotoDefault($idUser->id);
-              $carro = carro::crearCarro($idUser);
+              //$carro = carro::crearCarro($idUser);
 
             \Session::flash('Advertencia', 'Registro exitosamente');
              return redirect()->back();
@@ -215,15 +257,19 @@ class clienteController extends Controller
 
     try{
       $this->verificarUser();
+
       $this->validate($datos,[
                 'buscador' => 'required',
           ]);
       $productos = producto::filtrar_desde_cliente($datos->buscador);
+      $servicios = servicio::filtrar_desde_cliente($datos->buscador);
 
 
       return view('inicioCliente.nuestroProducto')
       ->with('productos', $productos)
-      ->with('titulo', "Filtrado de productos");
+      ->with('titulo', "Filtrado de productos")
+      ->with('servicios', $servicios)
+      ->with('titulo', "Filtrado de servicios");
 
     } catch (\Illuminate\Database\QueryException $e){
         return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
@@ -237,16 +283,24 @@ public function ver_detalleProducto(Request $dato)
       $this->verificarUser();
       $getId = base64_decode($dato->id);
       $productos = producto::detalleProducto_cliente($getId);
-      $tiendas = Tienda_institucion::traerTiendas();
       $ver_producto = producto::ver_productos_tienda();
 
 
       return view('inicioCliente.verDetalleProducto')
       ->with('ver_producto',$ver_producto)
-      ->with('tiendas',$tiendas)
       ->with('productos', $productos);
  }
+public function ver_detalleServicio(Request  $dato)
+{
+    $getIds = base64_decode($dato->idS);
+    $getIdi = base64_decode($dato->idI);
 
+    $servicios = servicio::detalleServicio($getIds, $getIdi);
+
+    return view('inicioCliente.verDetalleServicio')->with([
+        'servicios' => $servicios
+    ]);
+}
      public function vista_perfilInst(request $dato){
 
        
@@ -328,4 +382,5 @@ public function ver_detalleProducto(Request $dato)
       }
       return redirect()->back()->withErrors(['No es posible actualizar tu foto de perfil']);
     }
+
 }

@@ -396,5 +396,82 @@ class servicio extends Model
             return false;
 
     }
+
+
+     protected function filtrar_desde_cliente($nombre){
+        $mostrar = \DB::table("servicios")
+                    ->select([
+                        'servicios.id as idServicio',
+                        'institucion.id as idInstitucion',
+                        'foto_servicios.nombre as fotoServicio',
+                        'servicios.nombre as nombreServicio',
+                        'servicios.descripcion as descripcionServicio',
+                        'estado_tienda_servicio.estado as nombreEstado',
+                        'area.nombre as nombreArea',
+                    ])
+                    ->join("foto_servicios","foto_servicios.id_servicio","=","servicios.id")
+                    ->join("tienda_servicio_instituciones","tienda_servicio_instituciones.id_servicio","=","servicios.id")
+                    ->join("tiendas_instituciones","tiendas_instituciones.id","=","tienda_servicio_instituciones.id_tienda")
+                    ->join("estado_tienda_servicio","estado_tienda_servicio.id","=","tienda_servicio_instituciones.id_Estado")
+                    ->join("institucion","institucion.id","=","tiendas_instituciones.id_institucion")
+                    ->join("area","area.id","=","tienda_servicio_instituciones.id_area")
+                    ->where('servicios.nombre','like', '%'.$nombre.'%')
+                    ->where('tienda_servicio_instituciones.id_estado', 1)
+                    ->get();
+                    //->orderBy('productos.created_at', 'desc')/*Posible error*/
+                    //->paginate($cant);
+        return $mostrar;
+    }
+
+     protected function ver_servicio(){
+        $mostrar = \DB::table("servicios")
+                    ->select([
+                        'servicios.id as idServicio',
+                        'institucion.id as idInstitucion',
+                        'foto_servicios.nombre as fotoServicio',
+                        'servicios.nombre as nombreServicio',
+                        'servicios.descripcion as descripcionServicio',
+                        'estado_tienda_servicio.estado as nombreEstado',
+                        'area.nombre as nombreArea',
+                    ])
+                    ->join("foto_servicios","foto_servicios.id_servicio","=","servicios.id")
+                    ->join("tienda_servicio_instituciones","tienda_servicio_instituciones.id_servicio","=","servicios.id")
+                    ->join("tiendas_instituciones","tiendas_instituciones.id","=","tienda_servicio_instituciones.id_tienda")
+                    ->join("estado_tienda_servicio","estado_tienda_servicio.id","=","tienda_servicio_instituciones.id_Estado")
+                    ->join("institucion","institucion.id","=","tiendas_instituciones.id_institucion")
+                    ->join("area","area.id","=","tienda_servicio_instituciones.id_area")
+                    ->orderBy("servicios.created_at","desc")
+                    ->where('tienda_servicio_instituciones.id_estado', 1)
+                    ->take(4)->get();
+                    //->orderBy('productos.created_at', 'desc')/*Posible error*/
+                    //->paginate($cant);
+        return $mostrar;
+    }
+
+
+     protected function ver_servicio_mas(){
+        $mostrar = \DB::table("servicios")
+                    ->select([
+                        'servicios.id as idServicio',
+                        'institucion.id as idInstitucion',
+                        'foto_servicios.nombre as fotoServicio',
+                        'servicios.nombre as nombreServicio',
+                        'servicios.descripcion as descripcionServicio',
+                        'estado_tienda_servicio.estado as nombreEstado',
+                        'area.nombre as nombreArea',
+                    ])
+                    ->join("foto_servicios","foto_servicios.id_servicio","=","servicios.id")
+                    ->join("tienda_servicio_instituciones","tienda_servicio_instituciones.id_servicio","=","servicios.id")
+                    ->join("tiendas_instituciones","tiendas_instituciones.id","=","tienda_servicio_instituciones.id_tienda")
+                    ->join("estado_tienda_servicio","estado_tienda_servicio.id","=","tienda_servicio_instituciones.id_Estado")
+                    ->join("institucion","institucion.id","=","tiendas_instituciones.id_institucion")
+                    ->join("area","area.id","=","tienda_servicio_instituciones.id_area")
+                    ->orderBy("servicios.created_at","desc")
+                    ->where('tienda_servicio_instituciones.id_estado', 1)
+                    ->get();
+                    //->orderBy('productos.created_at', 'desc')/*Posible error*/
+                    //->paginate($cant);
+        return $mostrar;
+    }
     
 }

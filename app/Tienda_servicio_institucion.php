@@ -60,7 +60,7 @@ class Tienda_servicio_institucion extends Model
                             'servicios.nombre as nombre',
                             'servicios.descripcion as descripcion'
                     ])
-                    ->join('tiendas_instituciones','tiendas_instituciones.id','=','Tienda_servicio_instituciones.id_tienda')
+                    ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_servicio_instituciones.id_tienda')
                     ->join('institucion','institucion.id','tiendas_instituciones.id_institucion')
                     ->join('servicios','servicios.id','=','tienda_servicio_instituciones.id_servicio')
                     ->join('foto_servicios','foto_servicios.id_servicio','=','servicios.id')
@@ -79,7 +79,7 @@ class Tienda_servicio_institucion extends Model
                             'servicios.nombre as nombre',
                             'servicios.descripcion as descripcion'
                     ])
-                    ->join('tiendas_instituciones','tiendas_instituciones.id','=','Tienda_servicio_instituciones.id_tienda')
+                    ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_servicio_instituciones.id_tienda')
                     ->join('institucion','institucion.id','tiendas_instituciones.id_institucion')
                     ->join('servicios','servicios.id','=','tienda_servicio_instituciones.id_servicio')
                     ->join('foto_servicios','foto_servicios.id_servicio','=','servicios.id')
@@ -99,7 +99,7 @@ class Tienda_servicio_institucion extends Model
                             'servicios.nombre as nombre',
                             'servicios.descripcion as descripcion'
                     ])
-                    ->join('tiendas_instituciones','tiendas_instituciones.id','=','Tienda_servicio_instituciones.id_tienda')
+                    ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_servicio_instituciones.id_tienda')
                     ->join('institucion','institucion.id','tiendas_instituciones.id_institucion')
                     ->join('servicios','servicios.id','=','tienda_servicio_instituciones.id_servicio')
                     ->where('tienda_servicio_instituciones.id_area', $idA)

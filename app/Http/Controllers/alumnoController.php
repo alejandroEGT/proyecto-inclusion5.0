@@ -56,7 +56,11 @@ public function ver_todo_producto()
         $alumno = VendedorInstitucion::traerDatos();
         $producto = producto::verProductoDesdeArea($alumno->id_area, 5);
         //dd ($producto);
-        return view('vendedorDependiente.verTodoProducto')->with('productos', $producto);
+        return view('vendedorDependiente.verTodoProducto')
+        ->with([
+            'productos' => $producto,
+            'contador' => 1
+        ]);
 }
 	public function generarClave(Request $id){
 
@@ -316,6 +320,7 @@ public function ver_todo_producto()
            $user = User::find(\Auth::user()->id);
             $user->email =  $dato->correo;
             if ($user->save()) {
+                \Session::flash('ingresado', 'Correo actualizado');
                 return redirect()->back();
             }
             return redirect()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);;
@@ -339,7 +344,9 @@ public function ver_todo_producto()
                         $clave = User::find(\Auth::user()->id);
                         $clave->password = bcrypt($data->clave_nueva);
                         if ($clave->save()) {
-                          return "cambiada...";
+                            \Session::flash('ingresado', 'Contraseña actualizada');
+                            
+                          return redirect()->back();
                         }
                         return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
                 }
@@ -506,7 +513,10 @@ public function ver_todo_producto()
         $alumno = VendedorInstitucion::traerDatos();
         $servicios = servicio::mostrarServicioDesdeArea($alumno->id_area, 5);
         //dd($producto);
-        return view('vendedorDependiente.verTodoServicio')->with('servicios', $servicios);
+        return view('vendedorDependiente.verTodoServicio')->with([
+            'servicios' => $servicios,
+            'contador' => 1
+        ]);
     }
      public function todas_noticias_generales()
     {

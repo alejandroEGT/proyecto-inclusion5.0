@@ -19,7 +19,7 @@
 		    </div>
 		@endif
 
-	<h1 class="text-center">Registrate</h1>
+	<br><h1 class="text-center">Registrate</h1>
 	<div class="android-drawer-separator"></div>
 
 		<div class="container">

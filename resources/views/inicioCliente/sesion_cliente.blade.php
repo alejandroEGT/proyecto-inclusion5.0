@@ -5,7 +5,17 @@
 
 @section('content')
 
-	<h1 class="text-center">Iniciar Sesion</h1>
+@if ($errors->all())
+			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				            @endforeach
+				        </ul>
+			    </div>
+			@endif
+	<br><h1 class="text-center">Iniciar Sesion</h1>
 	<div class="android-drawer-separator"></div>
 
 
@@ -39,7 +49,7 @@
 				</form>
 
 			    <div class="android-drawer-separator"></div>
-				<form class="form-horizontal" action="/login/facebook" method="post">
+				{{--<form class="form-horizontal" action="/login/facebook" method="post">
 					{{csrf_field()}}
 					<div class="form-group text-center">	
 					   <button type="submit" class="btn btn-raised btn-info"> Ingresar con <i class="ion-social-facebook"></i>
@@ -53,7 +63,7 @@
 					  <button type="submit" class="btn btn-raised btn-danger"> Ingresar con <i class="ion-social-googleplus"></i>
 					  </button>
 					</div>
-				</form>
+				</form>--}}
 
 
 			</div>

@@ -372,8 +372,6 @@ Route::get('/eliminar_servicio_espera/{idServicio}', 'institucionController@elim
 /*inicio de usuarios*/
 
 
-
-
          Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
          Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
 
@@ -411,6 +409,8 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::post('/updClave', 'clienteController@updClave');
      Route::get('/carro_cliente' , 'clienteController@carro_cliente');
      Route::post('/updFoto', 'clienteController@updFoto');
+     Route::get('/lista_deseos', 'clienteController@vista_lista_deseos');
+     Route::get('/guardar_en_lista_deseo/{idProducto}','clienteController@guardar_en_lista_deseo');
 
 });
 
@@ -425,6 +425,7 @@ Route::group(['prefix' => 'carro', 'middleware' => ['cliente']], function(){
 
      Route::get('/filtrarProducto', 'clienteController@filtrarProducto');
      Route::get('/verDetalleProducto/{id}', 'clienteController@ver_detalleProducto');
+     Route::get('/detalleServicio/{idS}/{idI}', 'clienteController@ver_detalleServicio');
      Route::get('/perfil_institucion/{idinstitucion}','clienteController@vista_perfilInst');
 
 

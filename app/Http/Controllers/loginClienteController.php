@@ -13,7 +13,7 @@ use Laravel\Socialite\Facades\Socialite;
 class loginClienteController extends Controller
 {
 
-private $tipo;
+  private $tipo;
 
 public function setTipo($tipo) {
        $this->tipo = $tipo;
@@ -93,20 +93,20 @@ public function setTipo($tipo) {
 
 
 
- public function authCliente(Request $data){
-        
+    public function authCliente(Request $data){
+        //dd("jano");
            try{
-                  $data->flash();
+                  
                   $verificar = User::where('email', $data->correo)->first();
 
 
                   if(count($verificar)>0 && $verificar->id_rol == 4){  /**"eres vendedor institucional"**/
-         
-                      if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
+                 
+                      if (\Auth::attempt(['email' => $data->correo, 'password' => $data->pass])) {
               
                           return redirect('/inicio_cliente');    
                       }
-                      return redirect()->back();
+                      return redirect()->back()->withErrors(['datos incorrectos, intente nuevamente']);
                   }
                   return redirect()->back();
             }catch (\Illuminate\Database\QueryException $e) {

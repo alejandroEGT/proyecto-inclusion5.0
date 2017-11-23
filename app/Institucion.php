@@ -34,7 +34,7 @@ class Institucion extends Authenticatable
     	$instituto->direccion = $datos->direccion;
     	$instituto->logo = $url.'/'.$imageName;
     	$instituto->email = $datos->correo;
-    	$instituto->password = bcrypt($datos->clave);
+    	$instituto->password = \Hash::make($datos->clave);
     	if($instituto->save()){
             $datos->file('logo')->move(public_path($url), $imageName);
     		return 1;

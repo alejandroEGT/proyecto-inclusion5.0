@@ -124,14 +124,20 @@ class encargadoController extends Controller
         $encargado = Encargado::traerDatos();
         $producto = producto::verProductoDesdeArea($encargado[0]->id_area, 5);
         //dd ($producto);
-        return view('encargadoArea.verTodoProducto')->with('productos', $producto);
+        return view('encargadoArea.verTodoProducto')->with([
+          'productos' => $producto,
+          'contador' => 1
+        ]);
     }
      public function ver_todo_servicio()
     {
         $encargado = Encargado::traerDatos();
         $servicios = servicio::mostrarServicioDesdeArea($encargado[0]->id_area, 5);
         //dd($producto);
-        return view('encargadoArea.verTodoServicio')->with('servicios', $servicios);
+        return view('encargadoArea.verTodoServicio')->with([
+          'servicios' => $servicios,
+          'contador' => 1
+        ]);
     }
     public function vista_perfilVenInst($iduser){
         $idu = base64_decode($iduser);
@@ -190,7 +196,7 @@ class encargadoController extends Controller
 
       $productos = producto::detalleProducto_area($getId, $encargado[0]->id_area);
       
-      return view('encargadoArea.verDetalleProducto')
+      return view('encargadoArea.verDetalleproducto')
       ->with('productos', $productos)
       ->with('categoria', $categoria)
       ->with('estadoP', $estadoP)

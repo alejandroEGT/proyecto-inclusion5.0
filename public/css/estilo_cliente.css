@@ -66,11 +66,11 @@ h1{
 }
 .estiloDetalleTitulos{
 	font-size: 15px;
-	font-family: cursive;
+
 }
 .estiloDetalleDescripcion{
 	font-size: 13px;
-	font-family: cursive;
+
 }
 .fondoTienda{
 	background-color: #DFE0E5;
@@ -99,7 +99,7 @@ margin-right: -20px;
 .piePagina > img{
 	width: 110px;
 	height: 110px;
-	margin-top: 70px;
+	margin-top: 15px;
 
 }
 
@@ -170,4 +170,61 @@ font-weight:bold
 .margen-cantidad{
 	margin: 5px 5px 5px 5px;
 	width: 30px
+}
+
+.botonImagenKhipu{
+  background: url(/khipu/comprar_khipu.png)no-repeat 0 0;
+  cursor: pointer;
+  border: none;
+  width: 100px;
+  height: 50px;
+}
+
+.botonImagenVolver{
+  height:50px;
+  width:100px;
+  background-position:center;
+  cursor: pointer;
+}
+
+.botonImagenVer{
+
+  height:50px;
+  width:100px;
+  background-position:center;
+  cursor: pointer;
+
+}
+
+.iconoPerfilCliente{
+  height:30px;
+  width:30px;
+  background-position:center;
+  cursor: pointer;
+}
+.texto_barra{
+  background-position:center;
+  cursor: pointer;
+  color:black;
+}
+
+.margen_text{
+	margin: 50px;
+}
+
+.imagen-producto-detalle >img{
+  height:200px;
+  width:250px;
+}
+
+.posicion_compra{
+ float: right;
+}
+
+.posicion_volver{
+ float: left;
+}
+
+.cancelar_compra{
+	margin-top: 15%;
 }

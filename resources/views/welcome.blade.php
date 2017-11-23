@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>github</title>
+    <title>Proyecto INclusión</title>
     <link href="css/cssinit.css" rel="stylesheet">
 </head>
 
@@ -136,17 +136,23 @@
                 </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-offset-1 col-md-10">
                         <h4>El arte escondido</h4>  
                         <p>Nuestro objetivo busca la oportunidad en las personas con capacidades diferentes que ejercen sus apasionadas habilidades artísticas o manuales con la finalidad de apoyar su trabajo mediante el reconocimiento dirigido a todas las personas que tengan amor o estimación por el arte, personas que conozcan el esfuerzo dado por los autores. </p>
 
                         <p>Nuestro apoyo a esta problemática incorpora la comunicación y orientación de estas personas con capacidades diferentes a reflejar su esfuerzo u obra de arte en la tecnología de información (Internet), el cual será el puente de conexión con las personas amantes del arte y los autores demostrando su esfuerzo.</p>
                     </div>
-                    <div class="col-md-6">
-                        <h4>Versiones de prueba 2017 y 2018</h4>
-                        <a href="/inicio" ><img class="img-thumbnail img-z img-sombra" src="fotoequipo/app.png" height="350" alt="imagen que redirecciona al proyecto"></a>
+                </div> 
+                <div class="row">
+                     <div class="col-md-6">
+                        <h4>Versiones de prueba Administración</h4>
+                        <a href="/inicio" ><img class="img-thumbnail img-z img-sombra img-princ" src="fotoequipo/app.png"  alt="imagen que redirecciona al proyecto"></a>
                     </div>
-                </div>  
+                    <div class="col-md-6">
+                        <h4>Versiones de prueba Consumidores</h4>
+                        <a href="/inicio_cliente" ><img class="img-thumbnail img-z img-sombra img-princ" src="fotoequipo/cliente.png" alt="imagen que redirecciona al proyecto"></a>
+                    </div>
+                </div> 
             </div>
         </section>
        

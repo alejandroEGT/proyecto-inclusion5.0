@@ -11,6 +11,29 @@
 			</div>
 		</div>
 
+@if ($errors->any())
+			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				            @endforeach
+				        </ul>
+			    </div>
+			@endif
+			@if (Session::has('ingresado'))
+				<div class="alert alert-info">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        {{ Session::get('ingresado') }} <a href="{{ url('/login_institucion') }}">Ingresar a mi cuenta</a>
+			    </div>
+			@endif
+			@if (Session::has('ingreso'))
+				<div class="alert alert-info">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <center><label>{{ Session::get('ingreso') }}</label> </center>
+			    </div>
+			@endif
+
 <div class="row top">
 	<div class="col-md-offset-3 col-md-6 panel">
 		<center>
@@ -51,22 +74,7 @@
 			</form>	
 		</center>
 
-		@if ($errors->any())
-			    <div class="alert alert-danger">
-			    <a href="" class="close" data-dismiss="alert">&times;</a>
-				        <ul>
-				            @foreach ($errors->all() as $error)
-				                <li class="validacionRequest"><label>{{ $error }}</label></li>
-				            @endforeach
-				        </ul>
-			    </div>
-			@endif
-			@if (Session::has('ingresado'))
-				<div class="alert alert-info">
-			    <a href="" class="close" data-dismiss="alert">&times;</a>
-				        {{ Session::get('ingresado') }}
-			    </div>
-			@endif
+		
 	</div>
 </div>
 @endsection

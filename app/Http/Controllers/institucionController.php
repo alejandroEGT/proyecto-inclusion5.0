@@ -135,13 +135,21 @@ class institucionController extends Controller
     {
         $producto = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 5);
         //dd ($producto);
-        return view('institucion.verTodoProducto')->with('productos', $producto);
+        return view('institucion.verTodoProducto')
+        ->with([
+          'productos' => $producto,
+          'contador' => 1
+        ]);
     }
      public function ver_todo_servicio()
     {
         $servicios = servicio::mostrarServicioDesdeAdmin(\Auth::guard('institucion')->user()->id, 5);
         //dd($producto);
-        return view('institucion.verTodoServicio')->with('servicios', $servicios);
+        return view('institucion.verTodoServicio')->with([
+          'servicios' => $servicios,
+          'contador' => 1
+
+        ]);
     }
      public function vista_perfilVen($iduser){
          $idu = base64_decode($iduser);
@@ -639,13 +647,13 @@ class institucionController extends Controller
     }
 
     public function actualizar_nombre(Request $data){
-          try{ 
-             $this->validate($data,['nombre' => 'required|unique:institucion,nombre | max:50',]);
+          //try{ 
+             $this->validate($data,['nombre' => 'required| max:50 | unique:institucion,nombre,'. $data->nombre,]);
              $nombre = Institucion::actualizarNombre($data->nombre);
              return $nombre;
-          } catch (\Illuminate\Database\QueryException $e) {
+         /* } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
-          }
+          }*/
 
     }
     public function actualizar_rs(Request $data){
@@ -704,8 +712,10 @@ class institucionController extends Controller
                 'clave_nueva' => 'required | min:6',
                 'confirm_clave_nueva' => 'required|same:clave_nueva'
             ]);
-            $pass = Institucion::find(\Auth::guard('institucion')->user()->id)->get();
-            if (\Hash::check($data->clave_actual, $pass[0]->password)) {
+            $pass = Institucion::find(\Auth::guard('institucion')->user()->id);
+            //dd(\Hash::check('88223112',$pass->password));
+            
+            if (\Hash::check($data->clave_actual, $pass->password)) {
                     $clave = Institucion::actualizarClave($data->clave_nueva);
                     return $clave;
             }
@@ -1038,6 +1048,7 @@ class institucionController extends Controller
                 'buscar' => 'required | max:100',
           ]);
       $productos = producto::filtrar_desde_admin($datos->buscar);
+     
 
       return view('institucion.nuestroProducto')
       ->with('productos', $productos)

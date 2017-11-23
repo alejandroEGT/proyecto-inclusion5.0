@@ -80,7 +80,7 @@ class invitadoController extends Controller
                                           $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                                           $message->to($correo,'to');
                     });
-                    
+                    \Session::flash('ingreso', 'El codigo gue enviado a '.$dato->correo);
                     return redirect('/codigo_reset');
              }
              return redirect()->back();
@@ -103,7 +103,7 @@ class invitadoController extends Controller
             if ($verificarToken == true) {
                 
                 $inst = Institucion::where('email', $datos->correo)->first();
-                $inst->password = bcrypt($datos->clave);
+                $inst->password = \Hash::make($datos->clave);
                 if ($inst->save()) {
                     
                     $borrarToken = \DB::table('password_resets')->where('email', '=', $datos->correo)->where('token','=', $datos->codigo)->delete();

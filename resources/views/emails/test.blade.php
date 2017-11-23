@@ -1,0 +1,1 @@
+Haz recibido este correo por que tu pago a sido verificado, muchas gracias.

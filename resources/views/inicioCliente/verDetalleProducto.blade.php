@@ -33,9 +33,9 @@
 	<div class="row panel fondoTienda">
 		<div class="col-md-offset-1 col-md-12">
 			<label>Tienda:</label>
-			@foreach($tiendas as $tiendas)
-			<a href="{{ url("/perfil_institucion/".base64_encode($tiendas->id)) }}"> {{ $tiendas->nombre }}</a>	
-			@endforeach
+
+			<a href="{{ url("/perfil_institucion/".base64_encode($productos[0]->idTienda)) }}"> {{ $productos[0]->nombreTienda }}</a>	
+
 		</div>
 	</div>
 <div class="row panel fondoDescripcion">
@@ -71,6 +71,9 @@
 				</dd>
 				<hr>
 				<button type="submit" class="btn btn-primary btn-outline-danger">Añadir a la cesta</button>
+				<button type="submit" class="btn btn-primary btn-outline-primary">
+				<a href="{{ url('cliente/guardar_en_lista_deseo/'.base64_encode($productos[0]->idProducto)) }}">Añadir a lista de deseos</a>
+			</button>
 			</form>
 		</dl>				
 	</div>	

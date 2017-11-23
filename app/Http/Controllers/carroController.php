@@ -115,7 +115,9 @@ class carroController extends Controller
 
 	   	} catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back();
-          }
+        } catch (\Exception $e) {
+                 return redirect()->back();
+        }  
 	
     }
 

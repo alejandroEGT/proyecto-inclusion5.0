@@ -411,6 +411,7 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::post('/updFoto', 'clienteController@updFoto');
      Route::get('/lista_deseos', 'clienteController@vista_lista_deseos');
      Route::get('/guardar_en_lista_deseo/{idProducto}','clienteController@guardar_en_lista_deseo');
+     Route::get('eliminarProductoLista/{id}', 'clienteController@eliminarProductoLista');
 
 });
 

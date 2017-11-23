@@ -383,4 +383,18 @@ public function ver_detalleServicio(Request  $dato)
       return redirect()->back()->withErrors(['No es posible actualizar tu foto de perfil']);
     }
 
+    public function eliminarProductoLista(Request $dato)
+    {
+       $id_producto = base64_decode($dato->id);
+
+       $eliminar = Listadeseos::where('id_producto', $id_producto)
+                   ->where('id_user', \Auth::user()->id)->first();
+
+        if($eliminar->delete()){
+          \Session::flash('exito', 'Producto quitado');
+          return redirect()->back();
+        }
+        return redirect()->back()->withErrors(['Error al quitar producto']);
+    }
+
 }

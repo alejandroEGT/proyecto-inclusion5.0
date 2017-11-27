@@ -8,9 +8,9 @@
 				<div class="ico-add"></div>
 			</div>
 			<div class="col-md-6">
-				<p class="panel-title-agregar">Generar contraseñas</p>
+				<p class="panel-title-agregar">Generar contraseñas para alumnos</p>
 				<p class="panel-body-mst">
-					En esta vista podras generar contraseñas para los alumnos o encargados que olviden e impida iniciar sus cuentas personales.
+					En esta vista podras generar contraseñas para los alumnos que olviden e impida iniciar sus cuentas personales.
 				</p>
 			</div>
 		</div>

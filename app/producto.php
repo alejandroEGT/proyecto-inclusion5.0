@@ -144,7 +144,7 @@ class producto extends Model
                 ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
                 ->where('tienda_producto_instituciones.id_producto','=', $id)
-                ->where('Institucion.id','=', $insti)/*AGREGADA QUISAS DE ERRORES*/
+                ->where('institucion.id','=', $insti)/*AGREGADA QUISAS DE ERRORES*/
                  ->orderBy('productos.created_at', 'desc')/*Posible error*/
                 ->paginate(2);
 
@@ -202,7 +202,7 @@ class producto extends Model
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
                 ->where('productos.nombre','like', '%'.$nombre.'%')
                 ->where('estado_tienda_producto.id', 1)
-                ->where('Institucion.id','=', \Auth::guard('institucion')->user()->id)
+                ->where('institucion.id','=', \Auth::guard('institucion')->user()->id)
                 ->get();
 
                 return $traer;
@@ -318,7 +318,7 @@ class producto extends Model
                 ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
                 ->where('estado_tienda_producto.id', 2)
-                ->where('Institucion.id','=', \Auth::guard('institucion')->user()->id)
+                ->where('institucion.id','=', \Auth::guard('institucion')->user()->id)
                 ->orderBy('productos.created_at', 'desc')
                 ->get();
 
@@ -455,12 +455,13 @@ protected function ver_producto()
                     ])
                       ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
                       ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+                      ->orderBy('productos.created_at', 'desc')
                       ->where('tienda_producto_instituciones.id_estado',1)->take(4)->get();
 
         return $datos;
     }
 
-protected function ver_mas_producto()
+protected function ver_mas_producto($cantidad)
     {
         $ver_mas = \DB::table('tienda_producto_instituciones')
         ->select([
@@ -475,7 +476,9 @@ protected function ver_mas_producto()
                     ])
                       ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
                       ->join('foto_productos','foto_productos.id_producto','=','productos.id')
-                      ->where('tienda_producto_instituciones.id_estado',1)->get();
+                      ->orderBy('productos.created_at', 'desc')
+                      ->where('tienda_producto_instituciones.id_estado',1)
+                      ->paginate($cantidad);
 
         return $ver_mas;
     }
@@ -546,6 +549,7 @@ protected function ver_mas_producto()
                 ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
                 ->where('productos.nombre','like', '%'.$nombre.'%')
+                ->where('tienda_producto_instituciones.id_estado', 1)
                 ->get();
 
                 return $traer;
@@ -565,7 +569,9 @@ protected function ver_mas_producto()
                         'area.nombre as nombreArea',
                         'productos.cantidad as cantidad',
                         'categoria_productos.nombre as nombreCategoria',
-                        'productos.precio as precio'
+                        'productos.precio as precio',
+                        'institucion.nombre as nombreTienda',
+                        'institucion.id as idTienda'
                     ])
                 ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
                  ->join('foto_productos','foto_productos.id_producto','=','productos.id')
@@ -603,7 +609,7 @@ protected function ver_mas_producto()
                 ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
                 ->where('estado_tienda_producto.id', 1)
-                ->where('Institucion.id','=', $idI)
+                ->where('institucion.id','=', $idI)
                 ->where('area.id','=', $idA)
                 ->paginate(10);
 
@@ -658,25 +664,6 @@ protected function ver_mas_producto()
          ->where('tienda_vendedor.id_vendedor', $idVen)->take(5)->get();
 
          return $traer;
-    }
-    protected function ver_productos_tienda()
-    {
-        $ver_mas = \DB::table('productos')
-        ->select([
-                     'productos.id as caca'
-
-                    ])
-                    
-                    ->join('foto_productos','foto_productos.id_producto','=','productos.id')
-                    ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
-                    ->join('tienda_producto_instituciones','tienda_producto_instituciones.id_producto','=','productos.id')
-                    ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
-                    ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
-                    ->join('area','area.id_institucion','=','institucion.id')
-                    ->get();
-                    
-
-        return $ver_mas;
     }
 
 }

@@ -87,7 +87,15 @@
                      <li class="pushy-link"><a href="{{ url('institucion/traerServicioEnEspera') }}"><i class="fa fa-globe"></i> 
                     Solicitud de ingreso de servicios <span class="badge">@{{ notificacion_serv }}</span></a>
                     </li>
-                     <li class="pushy-link"><a href="{{ url('institucion/generarPassword') }}"><i class="fa fa-key"></i> Generar Contraseñas</a></li>
+
+                      <li class="pushy-submenu">
+                        <button><i class="fa fa-key"></i> Generar contraseñas</button>
+                        <ul>
+                            <li class="pushy-link"><a href="{{ url('institucion/generarPassword') }}"> Alumnos</a></li>
+                            <li class="pushy-link"><a href="{{ url('institucion/generarPasswordEncargado') }}"> Encargados</a></li>
+                            
+                        </ul>
+                    </li>
                     <li class="pushy-submenu">
                         <button><i class="fa fa-bar-chart"></i> Gráficos</button>
                         <ul>

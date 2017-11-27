@@ -94,7 +94,7 @@
 		<div class="row">
 			<div class="col-md-offset-2 col-md-7">
 				
-				<input class="btn btn-block" type="submit" name="" value="Registrar">
+				<input class="btn btn-primary btn-block" type="submit" name="" value="Registrar">
 		
 			</div>
 		</div>

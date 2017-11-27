@@ -12,89 +12,98 @@ class detalle_carro extends Model
 
 		if($datos->cantidad > $producto->cantidadProducto || $datos->cantidad == 0){
 			
-			\Session::flash('correcto', 'La cantidad ingresada es mayor al stock disponible, Intente nuevamente.');
+			\Session::flash('correcto', 'El campo cantidad es requerido, Intente nuevamente.');
              return false;
 		
 		}else{
 
-		$update = detalle_carro::where('id_carro', $carro->id)
-								->where('id_producto', $producto->idProducto)->first();
+		$update = detalle_carro::where('id_carro', $carro)->where('id_producto', $producto->idProducto)->first();
 
-		if($update && $update->id_producto == $producto->idProducto){
-					$update->cantidad = $update->cantidad+$datos->cantidad;
+			if($update && $update->id_producto == $producto->idProducto){
 
-					if($update->save()){
-						return true;
-					}else{
-						return false;
-					}
-		}else{
+						$update->cantidad = $update->cantidad+$datos->cantidad;
 
-		$agregar = new detalle_carro;
+						if($update->save()){
+							return true;
+						}else{
+							return false;
+						}
+			}else{
 
-		$agregar->id_carro = $carro->id;
-		$agregar->id_producto = $producto->idProducto;
-		$agregar->cantidad = $datos->cantidad;
-		$agregar->id_estado = 4;
+			$agregar = new detalle_carro;
 
-					if($agregar->save()){
-						return true;
-					}else{
-						return false;
-					}
+			$agregar->id_carro = $carro;
+			$agregar->id_producto = $producto->idProducto;
+			$agregar->cantidad = $datos->cantidad;
+			$agregar->id_estado = 4;
+
+						if($agregar->save()){
+							return true;
+						}else{
+							return false;
+						}
 			}
+		}
 	}
-}
 
 	protected function delProducto($id, $carro){
 
-		/*$delete = detalle_carro::where('id_carro', $carro->id)
-								->where('id_producto', $id)->first();
 
-		$delete->id_estado = 3;
-
-		if($delete->save()){
-			return true;
-		}else{
-			return false;
-		}
-		*/
-
+		//dd($id.' / '.$carro->id);
 
 		$delete = detalle_carro::where('id_carro', $carro->id)
+								->where('id_producto', $id)->delete();
+
+		return $delete;
+		
+
+		//dd($delete);
+
+		//$delete->id_estado = 3;
+
+		//if($delete->delete()){
+		//	dd('true');
+		//}else{
+		//	dd('false');
+		//}
+		
+
+
+		/*$delete = detalle_carro::where('id_carro', $carro->id)
 							->where('id_producto', $id)
 		->update([
                     'id_estado' => 3
         ]);
-
-        return $delete;
+		*/
+        //return $delete;
 	}
 
 	protected function actProducto($datos, $carro){
 
-		$getId = base64_decode($datos->id);
 
-		$producto = producto::where('id',$getId)->first();
+			$getId = base64_decode($datos->id);
 
-		if($datos->cantidad > $producto->cantidad || $datos->cantidad == 0){
+			$producto = producto::where('id',$getId)->first();
+
+			if($datos->cantidad > $producto->cantidad || $datos->cantidad == 0){
+				
+				\Session::flash('Advertencia', 'La cantidad ingresada es mayor al stock disponible, Intente nuevamente.');
+	             return false;
 			
-			\Session::flash('Advertencia', 'La cantidad ingresada es mayor al stock disponible, Intente nuevamente.');
-             return false;
-		
-		}else{
+			}else{
 
-		$update = detalle_carro::where('id_carro', $carro->id)
-								->where('id_producto', $getId)->first();
-		
-		$update->cantidad = $datos->cantidad;
+			$update = detalle_carro::where('id_carro', $carro->id)
+									->where('id_producto', $getId)->first();
+			//dd($update->cantidad = $datos->cantidad);
+			$update->cantidad = $datos->cantidad;
 
-		if($update->save()){
-			return true;
-		}else{
-			return false;
+			if($update->save()){
+				return true;
+			}else{
+				return false;
+			}
 		}
-	}
 
-}
+	}
 
 }

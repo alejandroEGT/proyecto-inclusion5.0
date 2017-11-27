@@ -63,7 +63,7 @@ class cliente extends Model
 
         $user = user::find(\Auth::user()->id);
 
-        if(\Hash::check($datos->passNueva, $user->password)){
+        if(\Hash::check($datos->passAntigua, $user->password)){
 
             $user->password = \Hash::make($datos->passNueva);
 

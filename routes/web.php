@@ -5,6 +5,39 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', function () {
             return view('welcome');
         });
+        Route::get('/status/{id}', function ($id) {
+
+            $receiver_id = ENV('KHIPU_APP_ID');
+            $secret = ENV('KHIPU_APP_KEY');
+
+            $khipu_url = 'https://khipu.com/api/1.3/paymentStatus';
+
+            $concatenated = "receiver_id=$receiver_id&payment_id=$id";
+
+            $hash = hash_hmac('sha256', $concatenated , $secret);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $khipu_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, true);
+
+            $data = array(
+            'receiver_id' => $receiver_id,
+            'payment_id' => $id,
+            'hash' => $hash
+            );
+
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            $output = curl_exec($ch);
+
+            $info = curl_getinfo($ch);
+            curl_close($ch);
+
+            $url = json_decode($output,true);
+            dd($url);
+
+        });
+        
         /*Redireccion a vistas*/
         Route::get('/ver_usuarios','invitadoController@vista_proyecto');
         Route::get('/inicio','invitadoController@vista_inicio');
@@ -79,6 +112,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_nombreArea', 'institucionController@actualizar_nombreArea');
         Route::post('/actualizar_descripcionArea', 'institucionController@actualizar_descripcion');
         Route::get('/generarPassword', 'institucionController@vitsa_generarPassword');
+         Route::get('/generarPasswordEncargado', 'institucionController@vitsa_generarPasswordEncargado');
         Route::get('/buscarUsuarioParaCambiarPassword/{buscar}', 'institucionController@buscarUsuarioParaCambiarPassword');
         Route::get('/detalleServicio/{id}','institucionController@ver_detalleServicio');
         Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'institucionController@ver_detalleServicio_institucion_local');
@@ -372,8 +406,6 @@ Route::get('/eliminar_servicio_espera/{idServicio}', 'institucionController@elim
 /*inicio de usuarios*/
 
 
-
-
          Route::get('/inicio_cliente', 'clienteController@inicio_cliente');
          Route::get('/inicio_cliente_mas','clienteController@ver_mas_producto');
 
@@ -396,7 +428,7 @@ Route::get('/registro_cliente' , 'clienteController@registro_cliente');
 Route::post('/registro_cliente' , 'clienteController@guardar_cliente');         
 Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
-
+Route::get('/productos_clientes','clienteController@productos_clientes');
 
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
@@ -411,6 +443,9 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::post('/updClave', 'clienteController@updClave');
      Route::get('/carro_cliente' , 'clienteController@carro_cliente');
      Route::post('/updFoto', 'clienteController@updFoto');
+    Route::get('/lista_deseos', 'clienteController@vista_lista_deseos');
+     Route::get('/guardar_en_lista_deseo/{idProducto}','clienteController@guardar_en_lista_deseo');
+     Route::get('eliminarProductoLista/{id}', 'clienteController@eliminarProductoLista');
 
 });
 
@@ -419,12 +454,18 @@ Route::group(['prefix' => 'carro', 'middleware' => ['cliente']], function(){
     Route::post('/agregarProd', 'carroController@ingProducto');
     Route::get('/eliminarProd/{id}','carroController@delProducto');
     Route::post('/actualizarProd','carroController@actProducto');
+    Route::get('/detalleCompra','carroController@detalleCompra');
     Route::get('/miCarro' , 'carroController@miCarro');
+    Route::get('/procesando', 'carroController@procesando');
+    Route::get('/cancelado', 'carroController@cancelado');
+    Route::post('/iniciarPago' , 'KhipuController@crearPago');
     
 });
 
      Route::get('/filtrarProducto', 'clienteController@filtrarProducto');
      Route::get('/verDetalleProducto/{id}', 'clienteController@ver_detalleProducto');
+     Route::get('/detalleProducto/{id}/{idI}', 'clienteController@ver_detalleProducto');
+     Route::get('/detalleServicio/{idS}/{idI}', 'clienteController@ver_detalleServicio');
      Route::get('/perfil_institucion/{idinstitucion}','clienteController@vista_perfilInst');
 
 
@@ -432,5 +473,14 @@ Route::group(['prefix' => 'carro', 'middleware' => ['cliente']], function(){
 Route::get('/test' , 'cuentaCobroController@crearIntegrador');
 
 Route::post('/testo' , 'cuentaCobroController@testo');
+Route::get('/testo2' , 'cuentaCobroController@testo2');
 
 Route::post('/crearCobro' , 'cuentaCobroController@crearCobro');
+
+
+    Route::get('/index', 'cuentaCobroController@index');
+    Route::post('/send', 'cuentaCobroController@send');
+    Route::get('/return', 'cuentaCobroController@return');
+   
+
+

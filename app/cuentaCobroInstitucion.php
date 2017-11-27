@@ -60,10 +60,6 @@ class cuentaCobroInstitucion extends Model
         $cuenta = \DB::table('cuenta_cobro_institucions')
                     ->select([
                         'cuenta_cobro_institucions.receiver_id as recieverID',
-                        'cuenta_cobro_institucions.secret_key as secretKey',
-                        'productos.id as idProducto',
-                        'productos.nombre as nombreProducto',
-                        'productos.precio as precio'
                     ])
                     ->join('institucion','institucion.id','=','cuenta_cobro_institucions.id_institucion')
                     ->join('tiendas_instituciones','tiendas_instituciones.id_institucion','=','institucion.id')

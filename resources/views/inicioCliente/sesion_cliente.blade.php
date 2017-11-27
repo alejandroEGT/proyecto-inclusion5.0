@@ -5,7 +5,7 @@
 
 @section('content')
 
-	<h1 class="text-center">Iniciar Sesion</h1>
+	<br><h1 class="text-center">Iniciar Sesion</h1>
 	<div class="android-drawer-separator"></div>
 
 

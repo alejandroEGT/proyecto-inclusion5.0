@@ -32,9 +32,9 @@
 			<div class="col-md-offset-2 col-md-7">
 				
 				<label><strong>Rut </strong></label><small> <label>{{Auth::guard('institucion')->user()->rut}}</label></small>
-				<button data-toggle="collapse" data-target="#nombre" class="btn btn-xs btn-success" >Editar</button>
+				<button data-toggle="collapse" data-target="#rut" class="btn btn-xs btn-success" >Editar</button>
 
-				<div id="nombre" class="collapse">
+				<div id="rut" class="collapse">
 					<div class="alert alert-info" role="alert">
 						<form action="{{ url('institucion/actualizar_rut') }}" method="post">
 						 {{csrf_field()}}

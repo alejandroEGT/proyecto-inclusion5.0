@@ -190,7 +190,7 @@ class encargadoController extends Controller
 
       $productos = producto::detalleProducto_area($getId, $encargado[0]->id_area);
       
-      return view('encargadoArea.verDetalleProducto')
+      return view('encargadoArea.verDetalleproducto')
       ->with('productos', $productos)
       ->with('categoria', $categoria)
       ->with('estadoP', $estadoP)

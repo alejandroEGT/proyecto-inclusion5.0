@@ -160,14 +160,14 @@
 									  <div class="form-group row">
 									    <label for="staticEmail" class="col-sm-3 col-form-label">Nuevo  N° Telefono</label>
 									    <div class="col-sm-5">  
-									       <input type="number" class="form-control" id="exampleInputEmail1" name="telefono" placeholder="+56998765432">
+									       <input type="number" class="form-control" id="exampleInputEmail1" name="telefono" placeholder="912345678">
 									    </div>
 									  </div>
 
 									  <div class="form-group row">
 									    <label for="staticEmail" class="col-sm-3 col-form-label">Repita N° Telefono</label>
 									    <div class="col-sm-5">
-									      <input type="number" class="form-control" id="exampleInputEmail1" name="repetirTelefono" placeholder="+56998765432">
+									      <input type="number" class="form-control" id="exampleInputEmail1" name="repetirTelefono" placeholder="912345678">
 									    </div>
 									  </div>
 

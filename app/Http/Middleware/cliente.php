@@ -23,6 +23,6 @@ class cliente
             }
             return redirect('inicio_cliente');
         }
-        return redirect('inicio_cliente');
+        return redirect()->back()->withErrors(['Porfavor ingrese a su sesión']);
     }
 }

@@ -123,7 +123,7 @@ class User extends Authenticatable
                     $user->nombres = $datos->nombres;
                     $user->apellidos = $datos->apellidos;
                     $user->email = $datos->correo;
-                    $user->password = \Hash::make($datos->clave);
+                    $user->password = \Hash::make($datos->pass);
                     $user->id_rol = "4";
                     $user->id_sexo = $datos->sexo;
 

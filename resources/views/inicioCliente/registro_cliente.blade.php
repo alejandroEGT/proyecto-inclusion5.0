@@ -11,7 +11,7 @@
 				            @endforeach
 				        </ul>
 			    </div>
-			@endif
+@endif
 		@if (Session::has('Advertencia'))
 			<div class="alert alert-info">
 		    <a href="" class="close" data-dismiss="alert">&times;</a>
@@ -19,7 +19,7 @@
 		    </div>
 		@endif
 
-	<h1 class="text-center">Registrate</h1>
+	<br><h1 class="text-center">Registrate</h1>
 	<div class="android-drawer-separator"></div>
 
 		<div class="container">

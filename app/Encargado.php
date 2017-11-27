@@ -38,5 +38,26 @@ class Encargado extends Model
         $estado = \DB::table('password-cuenta')->where('id_user', \Auth::user()->id )->get(); 
         return $estado[0]->id_estado;
     }
+
+     protected function filtrarEncargado()
+    {
+        $datos = \DB::table('users')
+                ->select([
+                        'users.id as id_user',
+                        'fotoperfil.foto as foto',
+                        'users.nombres as nombre',
+                        'users.apellidos as apellido',
+                        'users.email as email',
+                        'rol.nombre as nombreRol',
+                        'area.nombre as nombreArea'
+                ])
+                      ->join('usuario-institucion','usuario-institucion.id_user','=','users.id')
+                      ->join('area','area.id','=','usuario-institucion.id_area')
+                      ->join('rol','rol.id','=','users.id_rol')
+                      ->join('fotoperfil','fotoperfil.id_user','=','users.id')
+                      ->where('area.id_institucion', \Auth::guard('institucion')->user()->id)->get();
+
+        return $datos;
+    }
     
 }

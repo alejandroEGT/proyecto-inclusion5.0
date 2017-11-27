@@ -55,7 +55,7 @@
 								{{csrf_field()}}
 							  		<p><strong>Actualizar Nombres</strong> </p>
 							  		<input type="hidden" name="idUser" value="{{$alumno[0]->idUser}}">
-							  		<p><input class="" type="text" maxlength="250" name="nombres">
+							  		<p><input class="" type="text" maxlength="250" name="nombres" placeholder="Nombres">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar"></p>	
 								</form>	
 							</div>
@@ -72,7 +72,7 @@
 								{{csrf_field()}}
 							  		<p><strong>Actualizar Apellidos</strong> </p>
 							  		<input type="hidden" name="idUser" value="{{$alumno[0]->idUser}}">
-							  		<p><input class="" type="text" maxlength="250" name="apellidos">
+							  		<p><input class="" type="text" maxlength="250" name="apellidos" placeholder="Apellidos">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar"></p>	
 								</form>	
 							</div>
@@ -90,7 +90,7 @@
 								{{csrf_field()}}
 							  		<p><strong>Actualizar Fecha de nacimiento</strong> </p>
 							  		<input type="hidden" name="idUser" value="{{$alumno[0]->idUser}}">
-							  		<p><input class="" type="date" maxlength="250" name="fecha">
+							  		<p><input class="" type="date" maxlength="250" name="fecha" placeholder="wololo">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar"></p>	
 								</form>	
 							</div>
@@ -107,7 +107,7 @@
 								{{csrf_field()}}
 							  		<p><strong>Actualizar Correo</strong> </p>
 							  		<input type="hidden" name="idUser" value="{{$alumno[0]->idUser}}">
-							  		<p><input class="" type="text" maxlength="250" name="correo">
+							  		<p><input class="" type="text" maxlength="250" name="correo" placeholder="Correo electrónico">
 									<input class="btn btn-primary btn-xs" type="submit" value="Guardar"></p>	
 								</form>	
 							</div>

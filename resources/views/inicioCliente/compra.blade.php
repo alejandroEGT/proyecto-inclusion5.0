@@ -51,25 +51,11 @@
 				</div>
 			</div>-->
 
-			@if ($errors->any())
-			    <div class="alert alert-danger">
-			    <a href="" class="close" data-dismiss="alert">&times;</a>
-				        <ul>
-				            @foreach ($errors->all() as $error)
-				                <li class="validacionRequest"><label>{{ $error }}</label></li>
-				            @endforeach
-				        </ul>
-			    </div>
-			@endif
-
-
-
 
 			<div class="container">
 				<hr><h1 class="text-center">Resumen de la compra</h1><hr>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 fondo-blanco">
-
 
 						@foreach($carro as $carros)
 							

@@ -70,8 +70,8 @@
 		{{ csrf_field() }}
 			
 			
-			<div class="col-md-12">
-				<center><input class="btn" type="submit" name="" value="Registrar"></center>
+			<div class="col-md-offset-2 col-md-7">
+				<center><input class="btn btn-primary btn-block" type="submit" name="" value="Registrar"></center>
 			</div>
 			
 		</div>
@@ -86,7 +86,7 @@
 				
 			
 				<table class="table table-responsive">
-					 <tr class="head-color" >
+					 <tr class="head-color fondo-color-blue" >
 					 	<th>Id</th>
 					    <th>Foto</th>
 					    <th>Nombre</th> 

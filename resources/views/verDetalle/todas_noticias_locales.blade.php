@@ -25,8 +25,8 @@
 				@foreach ($noticias_locales as $nl)
 			<div class="col-md-offset-2 col-md-8 fondo-blanco top">
 					<div class="row">
-						<div class="col-md-offset-1 col-md-10">
-							<img src="{{ '/'.$nl->foto }}" class="img-thumbnail" >
+						<div class="col-md-offset-2 col-md-9">
+							<img src="{{ '/'.$nl->foto }}" class="img-thumbnail foto-noticia" >
 						</div>
 					</div>
 					<div class="row">

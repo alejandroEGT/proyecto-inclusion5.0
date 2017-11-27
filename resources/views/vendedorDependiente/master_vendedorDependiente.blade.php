@@ -111,7 +111,29 @@
                                     <button class="menu-btn">&#9776; Menu</button> 
                                 </div>             
                             </div>  
-                            <div class="col-md-4 col-xs-10">
+                           <div v-if="estadoPassword != 1">
+                                <div class="col-xs-offset-1 col-xs-3 col-md-3">
+                                 @if (Session::has('activarMicro'))
+                                <a href="{{ url('userDependiente/desactivarmicro') }}"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a>
+                            @endif
+
+                            @if (empty(Session::get('activarMicro')))
+                           <a href="{{ url('userDependiente/activarmicro') }}">
+                                <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
+                            </a>
+                            @endif
+                            @if (Session::has('activarText'))
+                               <a href="{{ url('userDependiente/desactivartext') }}"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a>
+                            @endif
+
+                            @if (empty(Session::get('activarText')))
+                           <a href="{{ url('userDependiente/activartext') }}">
+                                <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
+                            </a>
+                            @endif
+                            </div>
+                           </div>
+                            {{--<div class="col-md-4 col-xs-10">
                                 <form action="{{ url('userDependiente/buscador') }}" method="get">
                                     <div class="input-group">
                                     {{ csrf_field() }}
@@ -122,7 +144,7 @@
                                     </div>
                                 </form> 
                                 
-                            </div>
+                            </div>--}}
                             <div class="col-md-6">
                                 <div class="container-fluid" >
                                      <p class="p-right"><label onmouseover="fun_p(this)">Registrado como: {{Auth::user()->email}}</label></p>

@@ -391,7 +391,7 @@ class encargadoController extends Controller
                                           $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                                           $message->to($correo,'to jano');
                                       });
-                                        \Session::flash('registro', 'Alumno registrado correctasmente');
+                                        \Session::flash('registro', 'Alumno registrado correctamente');
                                         return redirect()->back();
                                     }
                                 }
@@ -607,7 +607,7 @@ class encargadoController extends Controller
     {
        $this->validate($datos,['titulo' => 'required|max:150',]);
        $noticia = noticia::find($datos->noticia);
-       $noticia->titulo = $datos->titulo;
+       $noticia->titulo = ucfirst($datos->titulo);
        if ($noticia->save()) {
             \Session::flash('correcto', 'Título actualizado');
               return redirect()->back();
@@ -617,7 +617,7 @@ class encargadoController extends Controller
     {
        $this->validate($datos,['texto' => 'required|max:3500',]);
         $noticia = noticia::find($datos->noticia);
-        $noticia->texto = $datos->texto;
+        $noticia->texto = ucfirst($datos->texto);
         if ($noticia->save()) {
             \Session::flash('correcto', 'Título actualizado');
               return redirect()->back();

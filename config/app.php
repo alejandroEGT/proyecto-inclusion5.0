@@ -179,7 +179,9 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
 
-    ],
+        Barryvdh\DomPDF\ServiceProvider::class,
+	    Collective\Html\HtmlServiceProvider::class,
+ ],
 
     /*
     |--------------------------------------------------------------------------
@@ -229,7 +231,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-
-    ],
+	    'PDF' => Barryvdh\DomPDF\Facade::class,
+	    'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+   ],
 
 ];

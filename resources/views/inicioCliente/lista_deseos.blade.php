@@ -50,7 +50,9 @@
 
 	@endif
 	@if (!count($lista))
-		<center><p>Nada para listar</p></center>
+
+		<center><h2>Agregue sus productos favoritos</h2></center>
+		<center><a href="{{url('/productos_clientes')}}"><img src="/ico/carro_vacio.png" class="diseñoCarroVacio"></a></center>
 	@endif
 	    </div>
 	</div>

@@ -49,7 +49,7 @@ class graficosAdminController extends Controller
 
     public function grafico_productosAdmin(Request $dato)
     {
-    	 $array;
+    	    $array;
           $contar;
       	  $areas = Area::traer();
           for ($i=0; $i < count($areas) ; $i++) { 
@@ -77,14 +77,64 @@ class graficosAdminController extends Controller
             ]);
     }
 
-    public function vista_grafico_visitas_tienda(Request $dato)
+     public function vista_grafico_visitas_tienda(Request $dato)
+    {
+      $dato->flash();
+      $tienda_institucion = Tienda_institucion::where('id_institucion', \Auth::guard('institucion')->user()->id )->first();
+      
+       $contar  = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)->sum('cantidad');
+
+       $array;
+          $contarVistas;
+          $fechas = ContadorInstitucion::trearFechas(\Auth::guard('institucion')->user()->id);
+          $fecha_mas_activa = ContadorInstitucion::fecha_mas_activa(\Auth::guard('institucion')->user()->id);
+
+          for ($i=0; $i < count($fechas) ; $i++) { 
+            $contarVisitas = ContadorInstitucion::traerVistasPorFechas(\Auth::guard('institucion')->user()->id,$fechas[$i]->fecha);
+            ;
+            $array[$i] = $fechas[$i]->fecha;
+            $contarVistas[$i] = $contarVisitas->sumaCantidad;
+          }
+
+          //return $array;
+          //return $contarVistas;
+            $chart = Charts::create($dato->tipo, 'highcharts')
+            ->title('Productos por área o especialidad (Cantidad)')
+            ->elementLabel('Cantidad de productos')
+            ->Labels($array)
+            ->values($contarVistas)
+            ->dimensions(1000,500)
+
+            ->responsive(true);
+    
+
+       return view('institucion.grafico_vista_tienda')
+       ->with('chart_vistas', $chart)
+       ->with('vistastotal', $contar);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*public function vista_grafico_visitas_tienda(Request $dato)
     {
       $dato->flash();
       $tienda_institucion = Tienda_institucion::where('id_institucion', \Auth::guard('institucion')->user()->id )->first();
   
-       $vistas =ContadorInstitucion::find(39);
+       $vistas =ContadorInstitucion::where('id_tienda', $tienda_institucion->id)->select('created_at')->distinct('created_at')->get();
+      
        $contar  = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)->sum('cantidad');
-      //dd($vistas);
+      dd($vistas);
       $chart = Charts::database( $vistas, $dato->tipo, 'highcharts')
       ->title('Cronología de visitas de la institución')
       ->elementLabel("Vistas")
@@ -96,5 +146,5 @@ class graficosAdminController extends Controller
        return view('institucion.grafico_vista_tienda')
        ->with('chart_vistas', $chart)
        ->with('vistastotal', $contar);
-    }
+    }*/
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Area;
 use App\ContadorInstitucion;
+use App\Encargado;
 use App\FotoPefil;
 use App\Fotoperfil;
 use App\Http\Requests\agregaralumnoRequest;
@@ -33,10 +34,12 @@ use App\foto_servicio;
 use App\noticia;
 use App\producto;
 use App\servicio;
-use ConsoleTVs\Charts\Charts;
+use App\venta_producto;
+use Charts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class institucionController extends Controller
 {
@@ -119,6 +122,54 @@ class institucionController extends Controller
          
           return view('institucion.grafico')->with('areas',json_encode($array));
     }
+
+    public function vista_venta(Request $dato)
+    {   
+      
+      /*try{*/
+          $array_fecha;
+          $array_cantidad;
+
+          $fecha_venta = venta_producto::fechas_ventas();
+
+          for ($i=0; $i < count($fecha_venta); $i++) { 
+             $array_fecha[$i] = $fecha_venta[$i]->fecha;
+             $cantidad = venta_producto::cantidad_ventas_por_fecha($fecha_venta[$i]->fecha);
+             $array_cantidad[$i] = $cantidad;
+
+          }
+        //$array_fecha;
+        //$array_cantidad;
+
+          $fechas = venta_producto::traerFecha(\Auth::guard('institucion')->user()->id);
+          $total = venta_producto::total(\Auth::guard('institucion')->user()->id);
+          $ventas = venta_producto::traerVentas(\Auth::guard('institucion')->user()->id);
+
+          //dd($ventas);
+         // $query = venta_producto::pruebaq(\Auth::guard('institucion')->user()->id);
+           $chart = Charts::create($dato->tipo, 'highcharts')
+              ->title('ventas realizadas (Cantidad)')
+              ->elementLabel('Cantidad de ventas')
+             ->Labels($array_fecha)
+              ->values($array_cantidad)
+              ->dimensions(1000,500)
+
+              ->responsive(true);
+
+          return view('institucion.ventas')->with([
+                  'fechas' => $fechas,
+                  'total' => $total->total,
+                  'ventas' => $ventas,
+                  'chart' => $chart,
+                  //'query' => $query
+          ]);
+
+       /* }catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+        } catch (\Exception $e) {
+                 return redirect()->back();
+        } */
+    }
     public function vista_detalleAlumno_inst(request $dato) 
   {
         $getId = base64_decode($dato->id);
@@ -151,20 +202,29 @@ class institucionController extends Controller
 
         ]);
     }
-     public function vista_perfilVen($iduser){
-         $idu = base64_decode($iduser);
-        //return $idu;
+     public function vista_perfilVen($iduser){/* Modificacion 23/11/2017  */
+        try{
 
-        $usuario = User::find($idu);
-        $vendedor = Vendedor::where('id_user',$usuario->id)->first();
-        $foto = Fotoperfil::traerFotobyid($idu);
-        $productos = producto::traerproductoVendedor($vendedor->id, 5);
+               $idu = base64_decode($iduser);
+                //return $idu;
 
-        return view('institucion.perfil_vendedor')
-        ->with('foto',$foto)
-        ->with('usuario',$usuario)
-        ->with('vendedor',$vendedor)
-        ->with('productos', $productos);
+                $usuario = User::find($idu);
+                $vendedor = Vendedor::where('id_user',$usuario->id)->first();
+                $foto = Fotoperfil::traerFotobyid($idu);
+                $productos = producto::traerproductoVendedor($vendedor->id, 5);
+
+                return view('institucion.perfil_vendedor')
+                ->with('foto',$foto)
+                ->with('usuario',$usuario)
+                ->with('vendedor',$vendedor)
+                ->with('productos', $productos);
+
+        }catch( \Exception $e){
+            return redirect()->back();
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            print_r($e);
+        }
     }
     public function vista_detalleProductoVendedor(Request $datos)
     {
@@ -276,6 +336,12 @@ class institucionController extends Controller
     public function vitsa_generarPassword()
     {
         return view('institucion.generarPassword');
+    }
+    public function vitsa_generarPasswordEncargado()
+    {
+        $encargados = Encargado::filtrarEncargado();
+        //dd($encargados);
+        return view('institucion.generarPasswordEncargado')->with('encargados', $encargados);
     }
     public function ver_detalleProducto(Request $dato)
     {
@@ -815,6 +881,12 @@ class institucionController extends Controller
         return response()->json($user);
     }
 
+   /* public function buscarEncargadooParaCambiarPassword(Request $dato)
+    {
+        $encargado = Encargado::filtrarEncargado();
+        return response()->json($encargado);
+    }*/
+
     /*PUBLICACION DE LOS PRODUCTOS*/
     public function publicarproducto(productoInstiRequest $datos){
       
@@ -866,7 +938,7 @@ class institucionController extends Controller
                \Session::flash('registro', 'Servicio registrado correctasmente');
                 return redirect()->back();
            }
-             return "Mal todo";
+             return "error";
         }
          return redirect()->back()->withErrors(['Algo salió mal']);
       }
@@ -876,11 +948,11 @@ class institucionController extends Controller
     public function eliminar_producto_institucion(Request $dato)
     {
 
-      $getFoto = foto_producto::where('id_producto',$dato->idProducto)->get();
+      //$getFoto = foto_producto::where('id_producto',$dato->idProducto)->get();
       //return $getFoto[0]->foto;
-      \File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
+      //\File::delete($getFoto[0]->foto);/*ELIMINAR FOTO*/
       
-      $foto_prod = foto_producto::borrar($getFoto[0]->id);
+      //$foto_prod = foto_producto::borrar($getFoto[0]->id);
       $tienda_prod_inst = Tienda_producto_institucion::borrar($dato->idProducto);
       //$prod_insti = producto::borrar($dato->idProducto);
 
@@ -889,9 +961,9 @@ class institucionController extends Controller
     public function eliminar_servicio_institucion(Request $dato)
     { 
       try{
-         $getFoto = foto_servicio::where('id_servicio',$dato->idServicio)->get();
-         \File::delete($getFoto[0]->nombre);/*ELIMINAR FOTO*/
-         $foto_servicio = foto_servicio::borrar($getFoto[0]->id);
+         //$getFoto = foto_servicio::where('id_servicio',$dato->idServicio)->get();
+         //\File::delete($getFoto[0]->nombre);/*ELIMINAR FOTO*/
+         //$foto_servicio = foto_servicio::borrar($getFoto[0]->id);
          $tienda_serv_inst = Tienda_servicio_institucion::borrar($dato->idServicio);
          //$serv_insti = servicio::borrar($dato->idServicio);
 
@@ -956,7 +1028,7 @@ class institucionController extends Controller
     {
         try{
              $this->validate($dato,[
-                  'precio' => 'required | numeric',
+                  'precio' => 'required | numeric | min:10',
             ]);
             $cant = producto::actualizar_precio($dato);
             if ($cant) {
@@ -974,7 +1046,7 @@ class institucionController extends Controller
     {
       try{
             $this->validate($dato,[
-                  'cantidad' => 'required | numeric',
+                  'cantidad' => 'required | numeric | min:1',
             ]);
             $cant = producto::actualizar_cantidad($dato);
             if ($cant) {
@@ -1202,6 +1274,8 @@ class institucionController extends Controller
            return redirect()->back();
       } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       }catch( \Exception $e){
+            return redirect()->back();
        }         
     }
 
@@ -1210,7 +1284,7 @@ class institucionController extends Controller
       try{
          $this->validate($datos,['titulo' => 'required|max:150',]);
          $noticia = noticia::find($datos->noticia);
-         $noticia->titulo = $datos->titulo;
+         $noticia->titulo = ucfirst($datos->titulo);
          if ($noticia->save()) {
               \Session::flash('correcto', 'Título actualizado');
                 return redirect()->back();
@@ -1218,14 +1292,16 @@ class institucionController extends Controller
 
       } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
-       }    
+       } catch( \Exception $e){
+            return redirect()->back();
+        }
     }
     public function actualizar_texto_noticia(Request $datos)
     {
       try{
          $this->validate($datos,['texto' => 'required|max:3500',]);
           $noticia = noticia::find($datos->noticia);
-          $noticia->texto = $datos->texto;
+          $noticia->texto = ucfirst($datos->texto);
           if ($noticia->save()) {
               \Session::flash('correcto', 'Título actualizado');
                 return redirect()->back();
@@ -1416,5 +1492,110 @@ class institucionController extends Controller
             return "true";
       }
     }
+    public function traerVentas(Request $dato)
+    {
+
+       try{
+        $array_fechas;
+        $array_cantidad;
+
+        $fecha_venta = venta_producto::fechas_ventas();
+        for ($i=0; $i < count($fecha_venta); $i++) { 
+           $array_fecha[$i] = $fecha_venta[$i]->fecha;
+           $cantidad = venta_producto::cantidad_ventas_por_fecha($fecha_venta[$i]->fecha);
+           $array_cantidad[$i] = $cantidad;
+
+        }
+           //$fecha_venta = venta_producto::fechas_ventas();
+           $fechas = venta_producto::traerFecha(\Auth::guard('institucion')->user()->id);
+           $total = venta_producto::total_segun_fechas(\Auth::guard('institucion')->user()->id, $dato->fecha);
+           $ventas = venta_producto::traerVentas_por_fecha(\Auth::guard('institucion')->user()->id, $dato->fecha);
+
+            $chart = Charts::create($dato->tipo, 'highcharts')
+            ->title('Ventas realizadas (Cantidad)')
+            ->elementLabel('Cantidad de ventas')
+           ->Labels($array_fecha)
+            ->values($array_cantidad)
+            ->dimensions(1000,500)
+
+            ->responsive(true);
+
+        return view('institucion.ventas')->with([
+                'fechas' => $fechas,
+                'total' => $total,
+                'ventas' => $ventas,
+                'chart' => $chart
+        ]);
+
+       }catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back();
+       }catch( \Exception $e){
+            return redirect()->back();
+        }
+    }
+    public function ver_detalleVenta(Request $dato)
+    {    
+       try{
+           $suma;
+           $productos = venta_producto::productos_de_venta($dato->id_venta);
+           $cliente = venta_producto::cliente_de_venta($dato->id_venta);
+
+           for ($i=0; $i < count($productos); $i++) { 
+              
+              $suma[$i] = $productos[$i]->precio_unitario * $productos[$i]->cantidad; 
+
+           }
+
+           //dd(array_sum($suma));
+           return view('institucion.detalleventa')->with([
+                  'productos' => $productos,
+                  'cliente' => $cliente,
+                  'total' => array_sum($suma),
+                  'id_venta' => $dato->id_venta
+           ]);
+        }catch( \Exception $e){
+            return redirect()->back();
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            print_r($e);
+        }   
+    }
+    public function descargar_detalle_venta(Request $dato)
+    {
+        try{
+
+           $suma;
+           $productos = venta_producto::productos_de_venta($dato->id_venta);
+           $cliente = venta_producto::cliente_de_venta($dato->id_venta);
+
+           for ($i=0; $i < count($productos); $i++) { 
+              
+              $suma[$i] = $productos[$i]->precio_unitario * $productos[$i]->cantidad; 
+
+           }
+
+            $total = array_sum($suma);
+            $id_venta = $dato->id_venta;
+
+           $pdf = PDF::loadView('institucion.detalleventa_reporte', compact(['productos','total','cliente']));
+           return $pdf->download('lol.pdf');
+
+        }catch( \Exception $e){
+            return redirect()->back();
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            print_r($e);
+        }   
+
+    }
   
 }
+
+/*
+
+          $producto = Producto::all();
+          $hola = "hola";
+
+           $pdf = PDF::loadView('admin-reportes.detalleventa_reporte', compact(['producto', 'hola']));
+      return $pdf->download('lol.pdf');
+*/

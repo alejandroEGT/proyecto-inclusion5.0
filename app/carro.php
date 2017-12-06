@@ -74,8 +74,53 @@ class carro extends Model
 
 
         return $carros;
+	
+	}
+
+        protected function devolverProducto($idCliente){
+
+        $carros = \DB::table('carros')
+                    ->select([
+                        'carros.id as idCarro',
+                        'carros.id_cliente as idCliente',
+                        'carros.id_estado as estado',
+                        'detalle_carros.id as idDetalleCarro',
+                        'detalle_carros.cantidad as cantidadProducto',
+                        'productos.id as idProducto',
+                        'productos.nombre as nombreProducto',
+                        'productos.precio as precioProducto',
+                        'productos.cantidad as stockProducto',
+                        'productos.descripcion as descripcionProducto',
+
+                    ])
+                    ->join('detalle_carros','detalle_carros.id_carro','=','carros.id')
+                    ->join('productos','productos.id','=','detalle_carros.id_producto')
+                    ->where('carros.id_cliente', $idCliente->id)
+                    ->where('detalle_carros.id_estado',4)
+                    ->where('carros.id_estado',9)
+                    ->get();
+
+        return $carros;
 
        
-		
-	}
+        
+    }
+
+
+    protected function cantidadProductosCarro($idCliente){
+
+        $productos = \DB::table('carros')
+                        ->select([
+                        'carros.id as idCarro',
+                    ])
+ 
+                        ->join('detalle_carros','detalle_carros.id_carro','=','carros.id')
+                        ->join('clientes','clientes.id','=','carros.id_cliente')
+                        ->join('users','users.id','=','clientes.id_user')
+                        ->where('clientes.id',$idCliente)
+                        ->where('carros.id_estado',1)
+                        ->get();
+        return $productos;
+
+    }
 }

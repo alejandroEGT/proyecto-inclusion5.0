@@ -15,6 +15,8 @@ use App\Tienda_producto_institucion;
 use App\Tienda_servicio_institucion;    
 use Illuminate\Support\Facades\Mail;
 use App\Passwordcuenta;
+use PDF;
+use Dompdf\Options;
 class areaController extends Controller
 {
 
@@ -44,7 +46,8 @@ class areaController extends Controller
             ->with('contarProd', $contarproductos)
             ->with('productos', $productos)
             ->with('servicios', $servicios)
-            ->with('venInstitucion', $datosVendedor);
+            ->with('venInstitucion', $datosVendedor)
+            ->with('id_area', $dato->id);
            
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors(['Primeramente asegúrese de ingresar productos y servicios en esta área. ']);
@@ -124,5 +127,37 @@ class areaController extends Controller
         //return $idArea[0];
         $user = Usuarioinstitucion::traerUser($idArea[0]);
         return response()->json([$user->idUser ,$user->nombre, $user->estado, $user->email]);
+    }
+    public function descargar_pdf_alumnos(Request $dato)
+    {
+        try{ 
+           //return "Cargando...".$dato->id_area;
+           $datosVendedor = VendedorInstitucion::datosVendedorInstitucion($dato->id_area);
+           $area = Area::find($dato->id_area);
+           $nombreArea = $area->nombre;
+           $encargado = Usuarioinstitucion::traerUser($dato->id_area);
+
+            $pdf = PDF::loadView('institucion.pdf_alumnos', compact(['nombreArea','datosVendedor','encargado']));
+            return $pdf->download('lol.pdf');
+        }catch( \Exception $e){
+            return redirect()->back();
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            print_r($e);
+        }     
+    }
+    public function descargar_pdf_productos(Request $dato)
+    {
+        
+             $area = Area::find($dato->id_area);
+             $nombreArea = $area->nombre;
+             $encargado = Usuarioinstitucion::traerUser($dato->id_area);
+             $productos = Tienda_producto_institucion::mostrarProductosArea($area->id, \Auth::guard('institucion')->user()->id);
+
+             $pdf = PDF::loadView('institucion.pdf_productos', compact(['nombreArea', 'encargado','productos']));
+             return $pdf->download('reporte_productos_area.pdf');
+
+        
+       
     }
 }

@@ -25,9 +25,10 @@
 		<div class="col-md-2"><br>
 			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
 			  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-expanded="true">Mis Datos</a>
+			  <!--
 			  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-expanded="true">Mis Compras</a>
 			  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-expanded="true">Mis Valoraciones</a>
-			  <a class="nav-link" id="v-pills-favoritos-tab" data-toggle="pill" href="#v-pills-favoritos" role="tab" aria-controls="v-pills-favoritos" aria-expanded="true">favoritos</a>
+			  <a class="nav-link" id="v-pills-favoritos-tab" data-toggle="pill" href="#v-pills-favoritos" role="tab" aria-controls="v-pills-favoritos" aria-expanded="true">favoritos</a>-->
 
 			</div>
 		</div>
@@ -209,23 +210,23 @@
 				    </div>
 				</div>
 
-				<!--Mis Compras-->
+				<!--
 			  	<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 
 			      	En Desarrollo
 			  	</div>
 
-				<!--Por Definir-->
+				
 			  	<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 
 			     	En Desarrollo
 			  	</div>
 				
-				<!--prueba de productos-->
+				
 			  	<div class="tab-pane fade" id="v-pills-favoritos" role="tabpanel" aria-labelledby="v-pills-favoritos-tab">
 
 					En Desarrollo
-			  	</div>
+			  	</div>-->
 
 			</div>
 		</div>

@@ -157,7 +157,7 @@
 			<div class="col-md-12">
 				<div id="demo" class="collapse">
 						@if (!is_null($venInstitucion))
-							
+							<a class="btn btn-success btn-sm" href="{{ url('institucion/descargarpdf_alumnos/'.$id_area) }}"> Exportar alumnos a PDF</a>
 							<table class="table table-hover">
 								<tr>
 									<td><label>Foto</label></td>
@@ -196,7 +196,11 @@
 			<div class="col-md-12">
 				<div id="demo2" class="collapse">
 						@if (!is_null($productos))
-							
+							<div class="row">
+								<div class="col-md-3">
+									<a href="{{ url('institucion/descargarpdf_productos/'.$id_area) }}" class="btn btn-success btn-sm" >Exportar productos a PDF</a>
+								</div>
+							</div>
 							<table class="table table-hover">
 								<tr>
 									<td><label>Foto</label></td>

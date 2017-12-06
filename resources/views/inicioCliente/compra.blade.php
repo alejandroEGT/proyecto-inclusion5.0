@@ -2,10 +2,10 @@
 
 <title>Detalle Compra</title>
 @section('content')
-<br><h1 class="text-center">Detalle de compra</h1><hr>
 
 
-			<div class="container">
+
+			<!--<div class="container">
 				<div class="row">
 
 						<div class="col-xs-12 col-sm-12 col-md-6"><br>
@@ -49,28 +49,32 @@
 						</div>
 
 				</div>
-			</div>
+			</div>-->
 
-			<br>
+			@if ($errors->any())
+			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				            @endforeach
+				        </ul>
+			    </div>
+			@endif
+
 
 
 
 			<div class="container">
+				<hr><h1 class="text-center">Resumen de la compra</h1><hr>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 fondo-blanco">
 
-							<br><h4 class="text-center"><b>Resumen de compra</b></h4><br>
-					</div>
-				</div>
-			</div>
-
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 fondo-blanco">
 
 						@foreach($carro as $carros)
 							
 							<div class="panel">
+									<br><h4 class="text-center"><b>Resumen del producto</b></h4><br>
 				
 								<div class="table-condensed">
 									<table class="table">

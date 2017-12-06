@@ -10,10 +10,24 @@
 	<link rel="stylesheet" href="{{asset('css/css.css')}}">
     <link rel="stylesheet" href="{{asset('css/estilo_institucion.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/nuevocss.css') }}">
 </head>
+
 <body  class="body-institucion" onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);">
-        
-    <div id="master">
+   @inject('validar', "App\Http\Controllers\KhipuController")
+
+   @if ($validar->verificarEstadoCuenta(Auth::guard('institucion')->user()->id) == false)
+       <p><center><img src="{{ asset('khipu/k2.png') }}" height="180"></center></p>
+       <div class="container">
+           <center><p><h4 style="color:black" >Saludos, recuerda que para comenzar a publicar tus productos primero deberas realizar la activación de tu cuenta de cobro en <strong>Khipu</strong>, te llegara un correo en el cual se te cobrara $2.000 pesos por temas de verificación de tu cuenta, los cuales seran devolvidos al dia siguiente.</h4></p>
+           <br>
+           <p><h4 style="color:black" >Saludos cordiales del equipo <strong>"El Arte Escondido"</strong>.</h4></p>
+           <br>
+           <a href="{{ url('institucion/logout') }}" class="btn btn-info" >Cerrar sesión</a></center>
+       </div>
+   @endif
+   @if ($validar->verificarEstadoCuenta(Auth::guard('institucion')->user()->id) == true)
+        <div id="master">
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
             <div v-if="this.navChrome == true">
                     <li class="pushy-submenu">
@@ -87,12 +101,24 @@
                      <li class="pushy-link"><a href="{{ url('institucion/traerServicioEnEspera') }}"><i class="fa fa-globe"></i> 
                     Solicitud de ingreso de servicios <span class="badge">@{{ notificacion_serv }}</span></a>
                     </li>
-                     <li class="pushy-link"><a href="{{ url('institucion/generarPassword') }}"><i class="fa fa-key"></i> Generar Contraseñas</a></li>
+
+                      <li class="pushy-submenu">
+                        <button><i class="fa fa-key"></i> Generar contraseñas</button>
+                        <ul>
+                            <li class="pushy-link"><a href="{{ url('institucion/generarPassword') }}"> Alumnos</a></li>
+                            <li class="pushy-link"><a href="{{ url('institucion/generarPasswordEncargado') }}"> Encargados</a></li>
+                            
+                        </ul>
+                    </li>
                     <li class="pushy-submenu">
                         <button><i class="fa fa-bar-chart"></i> Gráficos</button>
                         <ul>
+                            <li class="pushy-link" ><a href="{{ url('institucion/verVentas') }}">Ventas</a></li>
                             <li class="pushy-link"><a href="{{ url('institucion/grafico_productosAdmin') }}"> Cantidad de productos</a></li>
                             <li class="pushy-link"><a href="{{ url('institucion/my-chart') }}"> Cantidad de personas</a></li>
+                            <li class="pushy-link">
+                                <a  href="{{ url('institucion/ver_vistas_tienda') }}">Vistas en mi tienda</a>
+                            </li>
                             
                         </ul>
                     </li>
@@ -144,17 +170,19 @@
 
                </div>
             </div>
-    </div>    
+    </div>   
+  @endif
+    
 </body>
 	
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="/bootstrap/js/bootstrap.min.js" ></script>
 		
-		<script src="/js/vue/vue.js" ></script>
-        <script src="/js/vue/vue-resource.js"></script>
+		<script src="{{ asset('js/vue/vue.js') }}" ></script>
+        <script src="{{ asset('js/vue/vue-resource.js') }}"></script>
         <script src="{{ asset('js/toastr.js')}}" ></script>
         <script src="{{asset('js/artyom.js')}}" ></script>
-        <script src="/js/vue/vue_master_institucion.js"></script>
+        <script src="{{ asset('js/vue/vue_master_institucion.js') }}"></script>
        <!-- <script src="/js/sweetalert2.js" ></script>-->
 		<script src="/js/pushy.min.js"></script>
        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js" ></script>

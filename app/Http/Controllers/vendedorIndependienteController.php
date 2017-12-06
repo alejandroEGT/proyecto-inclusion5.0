@@ -284,8 +284,7 @@ class vendedorIndependienteController extends Controller
               ]);
 
             $categ = producto::actualizar_categoria($dato);
-              if ($categ) {
-                
+              if ($categ) {                
                 return redirect()->back();
               }
               return redirect()->back();

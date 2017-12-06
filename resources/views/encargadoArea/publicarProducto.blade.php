@@ -20,6 +20,11 @@
 					</div>
 				</div>		
 			</div>
+			<div class="col-md-2">
+				<div id="divFoto" hidden="true" >
+						<div id="img_destino" class="porte img-thumbnail" ></div>
+					</div>
+			</div>
 		</div>
 		<hr>
 			@if ($errors->all())
@@ -38,12 +43,15 @@
 		<div class="row">
 			
 			<div class="col-md-offset-2 col-md-3">
+				<label>Descripción del producto</label>
 				<p><input type="text" placeholder="Descripción del producto..." maxlength="250" class="form-control input" name="descripcion"></p>
 			</div>
 			<div class="col-md-2">
+				<label>Cantidad</label>
 				<p><input type="numeric" maxlength="4" placeholder="Cantidad..." class="form-control input" name="cantidad"></p>
 			</div>
 			<div class="col-md-2">
+				<label>Categoría</label>
 				<p><select name="categoria" class="form-control input" >
 					<option value="">Seleccione categoría..</option>
 					@foreach ($categoria_pro as $categoria)
@@ -57,25 +65,24 @@
 		<div class="row">
 		{{ csrf_field() }}
 			<div class="col-md-offset-2 col-md-3">
+				<label>Valor del producto (CLP)</label>
 				<input type="numeric" maxlength="7" minlength="2" name="valor" class="form-control input" placeholder="Ingrese valor">
 			</div>
 			<div class="col-md-3">
-				
+				<br>
 				<p><label for="file-input" class="label-foto-link">
 				 	<img src="/ico/image.png" for="file-input" class="label-foto-link">
 				 	Agregar foto..
 				</label></p>
 				<input style="display: none;" name="foto" id="file-input" type="file"/>
-
-					<div id="divFoto" hidden="true" >
-						<div id="img_destino" class="porte img-thumbnail" ></div>
-					</div>
 					
 			</div>
-			<div class="col-md-2">
-				<input class="btn" type="submit" name="" value="Registrar">
-			</div>
 			
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-7">
+				<input class="btn btn-success btn-block" type="submit" name="" value="Registrar">
+			</div>
 		</div>
 	</form>	
 		<hr>

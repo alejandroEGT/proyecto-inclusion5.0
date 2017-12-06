@@ -3,10 +3,10 @@
 @section('content')
 
 	
-@if (is_null($productos[0]))
+@if (is_null($productos))
 	<center><p style="font-size: 19px" >Nada para mostrar</p></center>
 @endif
-@if (!is_null($productos[0]))
+@if (!is_null($productos))
 	{{-- expr --}}
 
 	@if (count($errors))			
@@ -27,61 +27,62 @@
 				    </div>
 			@endif
 
-	<hr>
+	
+	<div class="container">
+		<hr>
 	<center><label><h1>Detalle del producto</h1></label></center>
 	<hr>
-	<div class="row panel fondoTienda">
+<div class="row panel fondoDescripcion">
+
 		<div class="col-md-offset-1 col-md-12">
 			<label>Tienda:</label>
 
-			<a href="{{ url("/perfil_institucion/".base64_encode($productos[0]->idTienda)) }}"> {{ $productos[0]->nombreTienda }}</a>	
+			<a href="{{ url("/perfil_institucion/".base64_encode($productos->idTienda)) }}"> {{ $productos->nombreTienda }}</a>	
 
-		</div>
-	</div>
-<div class="row panel fondoDescripcion">
+		<hr></div>
+		<br>
 
-	<div class="col-md-offset-1 col-md-6 porteimgDetalle">
-		<img src="{{ '/'.$productos[0]->foto }}" class="img-thumbnail img-responsive"><br>
+	<div class="col-md-offset-1 col-md-4 porteimgDetalle">
+		<img src="{{ '/'.$productos->foto }}" class="img-thumbnail img-responsive"><br>
 	</div>
-	<div class="col-md-6">	
-		<center><label class="estiloDetalleProducto"><h4> {{ $productos[0]->nombre }} </h4></label></center>
+	<div class="col-md-8">	
+		<br><center><label><h3> {{ $productos->nombre }} </h3></label></center><hr>
 		<dl>			
-			<dt><label class="estiloDetalleTitulos"><strong>Descripción del producto</strong></label></dt>
-			<dd><label class="estiloDetalleDescripcion">{{ $productos[0]->descripcion }}</label></dd>
+			<dt><label class="estiloDetalleTitulos"><strong>Descripción del producto:</strong></label></dt>
+			<dd><label class="estiloDetalleDescripcion">{{ $productos->descripcion }}</label></dd>
 
-			<dt><label class="estiloDetalleTitulos"><strong>Categoría del producto</strong></label></dt> 
-			<dd><label class="estiloDetalleDescripcion">{{ $productos[0]->nombreCategoria }}</label></dd>	
+			<dt><label class="estiloDetalleTitulos"><strong>Categoría del producto:</strong></label></dt> 
+			<dd><label class="estiloDetalleDescripcion">{{ $productos->nombreCategoria }}</label></dd>	
 			
-			<dt><label class="estiloDetalleTitulos"><strong>Área o especialidad del producto</strong></label></dt>
-			<dd><label class="estiloDetalleDescripcion">{{ $productos[0]->nombreArea }}</label></dd>
+			<dt><label class="estiloDetalleTitulos"><strong>Área o especialidad del producto:</strong></label></dt>
+			<dd><label class="estiloDetalleDescripcion">{{ $productos->nombreArea }}</label></dd>
 
-			<dt><label class="estiloDetalleTitulos"><strong>Precio</strong></label></dt>
-			<dd><label class="estiloDetalleDescripcion">$ {{ $productos[0]->precio }}</label></dd>
+			<dt><label class="estiloDetalleTitulos"><strong>Precio:</strong></label></dt>
+			<dd><label class="estiloDetalleDescripcion">$ {{ $productos->precio }}</label></dd>
 	
 			<form action="{{ url('carro/agregarProd')}}"  method="post">
 				{{ csrf_field() }}
-				<input type="hidden" name="id" value="{{ base64_encode($productos[0]->idProducto) }}">
+				<input type="hidden" name="id" value="{{ base64_encode($productos->idProducto) }}">
 
-				<dt><label class="estiloDetalleTitulos"><strong>Cantidad</strong></label></dt> 
+				<dt><label class="estiloDetalleTitulos"><strong>Cantidad:</strong></label></dt> 
 				
 				<dd>
-				<input id ="cantidadProducto" onkeyup ="validar_stock()" type="number" class="col-xs-12 col-sm-12 col-md-2" name="cantidad" max="{{ $productos[0]->cantidad }}" min="1">
-				<label class="bmd-label-floating"> unidades ({{ $productos[0]->cantidad }} unidades disponibles)</label>
+				<input id ="cantidadProducto" onkeyup ="validar_stock()" type="number" class="col-xs-12 col-sm-12 col-md-2" name="cantidad" max="{{ $productos->cantidad }}" min="1">
+				<label class="bmd-label-floating"> unidades ({{ $productos->cantidad }} unidades disponibles)</label>
 				<label id="mensaje" class="estiloDetalleCantidad" ></label>
 				</dd>
 				<hr>
 				<button type="submit" class="btn btn-primary btn-outline-danger">Añadir a la cesta</button>
 				<button type="submit" class="btn btn-primary btn-outline-primary">
-				<a href="{{ url('cliente/guardar_en_lista_deseo/'.base64_encode($productos[0]->idProducto)) }}">Añadir a lista de deseos</a>
+				<a href="{{ url('cliente/guardar_en_lista_deseo/'.base64_encode($productos->idProducto)) }}">Favoritos</a>
 			</button>
 			</form>
 		</dl>				
 	</div>	
-</div>
-<br><br>	
+</div>	
+<hr><center><div class="android-section-title"><h1>Ver mas productos</h1></div></center><hr>
 
-
-<hr><center><div class="android-section-title mdl-typography--display-1-color-contrast"><h1>Ver mas productos</h1></div></center><hr>
+		<div class="row panel">
 	  		<div class="android-card-container mdl-grid">		
 			@foreach($ver_producto as $producto)	
 				
@@ -101,6 +102,8 @@
 			@endforeach
 			
 			</div>
+		</div><br>
+		</div>
 
 @endif
 
@@ -108,7 +111,7 @@
 	
 	function validar_stock() {
 			document.getElementById("mensaje").innerHTML = "";
-		if (document.getElementById("cantidadProducto").value > {{ $productos[0]->cantidad }})
+		if (document.getElementById("cantidadProducto").value > {{ $productos->cantidad }})
 		{
 			document.getElementById("mensaje").innerHTML = "La cantidad ingresada supera el limite de stock";
 			document.getElementById("cantidadProducto").value = ""; 

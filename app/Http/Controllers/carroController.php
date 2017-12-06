@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Tienda_institucion;
 use App\carro;
 use App\cliente;
 use App\detalle_carro;
 use App\producto;
+use App\venta_producto;
 use Illuminate\Http\Request;
 
 class carroController extends Controller
@@ -99,24 +101,29 @@ class carroController extends Controller
        public function miCarro()
     {
     	try{
+    		$tiendas = Tienda_institucion::traerTiendas();
 	    	$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
 
 	    	$carro = carro::traerDatosCarro($id_cliente);
-	    	
+
 	    	$total;
 	    	for ($i=0; $i < count($carro); $i++) { 
 	    		$total[$i] = $carro[$i]->cantidadProducto*$carro[$i]->precioProducto; 
 	    	}
-	    	//dd(array_sum($total));
+
 	   		return view('inicioCliente.carro_cliente')->with([
 	   			'carro' => $carro,
-	   			'total' => array_sum($total)
+	   			'total' => array_sum($total),
+	   			'tiendas' => $tiendas,
+
 	   		]);
 
 	   	} catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back();
         } catch (\Exception $e) {
-                 return redirect()->back();
+        		\Session::flash('Prueba', 'Prueba');
+        		$tiendas = Tienda_institucion::traerTiendas();
+                 return view('inicioCliente.carro_cliente')->with('tiendas',$tiendas);
         }  
 	
     }
@@ -124,6 +131,7 @@ class carroController extends Controller
     public function detalleCompra(){
 
     	try{
+    		$tiendas = Tienda_institucion::traerTiendas();
 	    	$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
 
 	    	$carro = carro::traerDatosCarro($id_cliente);
@@ -135,20 +143,90 @@ class carroController extends Controller
 	    	//dd(array_sum($total));
 	   		return view('inicioCliente.compra')->with([
 	   			'carro' => $carro,
-	   			'total' => array_sum($total)
+	   			'total' => array_sum($total),
+	   			'tiendas' => $tiendas
 	   		]);
 
-	   	} catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back();
-          }
+        } catch (\Exception $e) {
+        	return redirect()->back();
+        }  
 	
     }
 
 
     public function cancelado(){
 
-    	
-    	 return view('inicioCliente.cancelar_compra');
+    	try{
+
+    				$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
+
+   			 		$devolver = carro::devolverProducto($id_cliente);
+
+
+			   		$carro = carro::where('id_cliente',$id_cliente->id)->where('id_estado',9)->first();
+
+   			 		if(is_null($carro)){
+					return redirect()->back();
+
+
+   			 		}else{
+
+   			 			for ($i=0; $i < count($devolver); $i++) { 
+
+   			 			$updProd[$i] = producto::where('id',$devolver[$i]->idProducto)->first();
+   			 			$updProd[$i]->cantidad = $devolver[$i]->stockProducto+$devolver[$i]->cantidadProducto;
+            			$updProd[$i]->save();
+   			 			    	     
+   			 		}
+
+			   			 $carro->id_estado = 1;
+
+			   			 if($carro->save()){
+
+			   			 	$venta = venta_producto::where('id_carro', $carro->id)->where('id_estado', 1)->first();
+
+			   			 	$venta->id_estado = 4;
+
+			   			 	if($venta->save()){
+
+			   			 		   	$tiendas = Tienda_institucion::traerTiendas();
+			    	 				return view('inicioCliente.cancelar_compra')->with('tiendas',$tiendas);
+			   			 	}
+
+			   			 }
+   			 		}
+
+   			 			
+
+
+    	}catch(Exception $e){
+    		return redirect()->back();
+    	}
+   			 	
+     }
+
+    public function procesando(){
+
+    	     $id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
+   			 $carro = carro::where('id_cliente',$id_cliente->id)->where('id_estado',9)->latest()->first();
+
+   			 if(is_null($carro)){
+
+   			 		return redirect()->back();
+   			 		
+   			 }else{
+   			 	$venta = venta_producto::where('id_carro', $carro->id)->where('id_estado', 1)->first();
+
+   			 $venta->id_estado = 2;
+
+   			 if($venta->save()){
+
+		    	$tiendas = Tienda_institucion::traerTiendas();
+		    	 return view('inicioCliente.aprobar_comprar')->with('tiendas',$tiendas);
+
+    	}
+   			 }
+
+   			 
     }
 }
-

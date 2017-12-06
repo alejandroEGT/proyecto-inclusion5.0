@@ -348,3 +348,7 @@ small{
 	height: 220px;
 	width: 240px;
 }
+.lbl-strong{
+	font-size: 30px;
+	color: green;
+}

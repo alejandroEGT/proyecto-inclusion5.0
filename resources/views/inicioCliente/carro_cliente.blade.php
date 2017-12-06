@@ -1,6 +1,13 @@
 @extends('inicioCliente.clienteMaster')
 
 <title>Carro</title>
+
+@section('tiendas')
+						@foreach($tiendas as $tienda)
+				          <a class="mdl-navigation__link" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}">{{ $tienda->nombre }}</a>
+				        @endforeach
+@endsection
+
 @section('content')
 
 
@@ -11,21 +18,31 @@
 		    </div>
 		@endif
 
-<br><h1 class="text-center">carro compras</h1>
-<div class="android-drawer-separator"></div>
+<div class="container">
+		<hr><center><h1>Carros de compras</h1></center><hr>
+</div>
 
 
+
+
+@if (Session::has('Prueba'))
+		<div class="container">
+				<div class="panel">
+				<center><h2>Agregue productos a su carro.</h2></center>
+				<center><a href="{{url('/productos_clientes')}}"><img src="/ico/carro_vacio.png" class="diseñoCarroVacio"></a></center>
+		</div>
+		</div>
+		@else
 
 
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
-
 			@foreach($carro as $carros)
 				<div class="panel">
 
-					<hr><p class="contenido-sesion letra-carro">Tienda: {{ $carros->nombreTienda  }}</p>
-					<p class="contenido-sesion letra-carro">Categoria: {{$carros->categoriaProducto}}</p><hr>
+					<p class="contenido-sesion letra-carro">Tienda:&nbsp;&nbsp;<label class="bmd-label-floating"> {{ $carros->nombreTienda  }}</label></p>
+					<p class="contenido-sesion letra-carro">Categoria:&nbsp;&nbsp;<label class="bmd-label-floating"> {{$carros->categoriaProducto}}</label></p><hr>
 					
 						<div class="container-fluid">
 							<div class="row caja-sesion">
@@ -56,7 +73,7 @@
 									</form>
 									<p class="letra-carro">Precio: 
 										<label class="lbl-precio-cliente">{{ '$'.$carros->precioProducto }} CLP </label>
-										<label class="bmd-label-floating">/ unidades</label>
+										<label class="bmd-label-floating"> c/u</label>
 									</p><hr>	
 								</div>
 
@@ -74,7 +91,7 @@
 
 				</div><br>		
 			@endforeach
-
+	
 		</div>
 	</div>
 </div>
@@ -83,7 +100,6 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12">
 				<div class="panel"><hr>
-
 							<p align="right">
 								<label for="" class="registro-sesion letra-carro">Total: <label class="lbl-precio-cliente">{{'$'.$total}} CLP </label></label>
 								<label for=""></label>
@@ -100,6 +116,8 @@
 			</div>
 		</div>
 	</div><br>
+
+
 
 <script type="text/javascript">
 	
@@ -120,5 +138,8 @@
 	}
 
 </script>
+
+@endif
+
 
 @endsection

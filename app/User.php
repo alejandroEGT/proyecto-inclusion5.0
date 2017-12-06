@@ -45,8 +45,8 @@ class User extends Authenticatable
 
             $user = new User;
 
-            $user->nombres = $datos->nombres;
-            $user->apellidos = $datos->apellidos;
+            $user->nombres = ucfirst($datos->nombres);
+            $user->apellidos = ucfirst($datos->apellidos);
             $user->email = $datos->correo;
             $user->password = \Hash::make($datos->clave);
             $user->id_rol = "2";/* id de vendedor dependiente */
@@ -61,8 +61,8 @@ class User extends Authenticatable
 
             $user = new User;
 
-            $user->nombres = $datos->nombres;
-            $user->apellidos = $datos->apellidos;
+            $user->nombres = ucfirst($datos->nombres);
+            $user->apellidos = ucfirst($datos->apellidos);
             $user->email = $datos->correo;
             $user->password = \Hash::make($clave);
             $user->id_rol = "2";/* id de vendedor dependiente */
@@ -77,8 +77,8 @@ class User extends Authenticatable
 
             $user = new User;
 
-            $user->nombres = $datos->nombres;
-            $user->apellidos = $datos->apellidos;
+            $user->nombres = ucfirst($datos->nombres);
+            $user->apellidos = ucfirst($datos->apellidos);
             $user->email = $datos->correo;
             $user->password = \Hash::make($claveGen);
             $user->id_rol = "3";/* id de encargado de area de Institucion,  */
@@ -120,8 +120,8 @@ class User extends Authenticatable
         switch ($tipo) {
 
             case '1':
-                    $user->nombres = $datos->nombres;
-                    $user->apellidos = $datos->apellidos;
+                    $user->nombres = ucfirst($datos->nombres);
+                    $user->apellidos = ucfirst($datos->apellidos);
                     $user->email = $datos->correo;
                     $user->password = \Hash::make($datos->pass);
                     $user->id_rol = "4";
@@ -190,7 +190,7 @@ class User extends Authenticatable
     protected function actualizarNombres($nombres, $idUser)
     {
           $usuario = User::find($idUser);
-            $usuario->nombres = $nombres;
+            $usuario->nombres = ucfirst($nombres);
             if ($usuario->save()) {
                 return true; 
             }
@@ -199,7 +199,7 @@ class User extends Authenticatable
     protected function actualizarApellidos($apellidos, $idUser)
     {
           $usuario = User::find($idUser);
-            $usuario->apellidos = $apellidos;
+            $usuario->apellidos = ucfirst($apellidos);
             if ($usuario->save()) {
                 return true; 
             }

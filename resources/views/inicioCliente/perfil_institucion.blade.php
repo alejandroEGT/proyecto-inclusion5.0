@@ -29,16 +29,16 @@
 				<hr>
 				@if (count($areas)>0)
 					<div class="linea panel-info">
-					  <div class="panel-heading">Áreas o Especialidades</div>
+					  <center><div class="panel-heading nombreblue">Áreas o Especialidades</div></center><hr>
 						  <div class="panel-body">
 						  	@foreach ($areas as $area)
 								
 									@if ($area->logo == null)
-										<p><a href="{{ url('/areaExtern/'.$idInstitucion.'/'.base64_encode($area->id)) }}"><label style="margin-left: 20px">{{ $area->nombre }}</label></a></p>
+										<p><label style="margin-left: 20px">{{ $area->nombre }}</label></a></p>
 										<hr>
 									@endif
 									@if (!$area->logo == null)
-										<p><a href="{{ url('/areaExtern/'.$idInstitucion.'/'.base64_encode($area->id)) }}"><img src="{{'/'.$area->logo }}" class="img-thumbnail img-prod ">  
+										<p><img src="{{'/'.$area->logo }}" class="img-thumbnail img-prod ">  
 										<label style="margin-left: 20px">{{ $area->nombre }}</label></a></p><hr>
 									@endif
 							@endforeach
@@ -50,13 +50,15 @@
 					<label>no hay áreas</label>
 				@endif
 
+				
+
 			</div>
-			<div class="col-md-8 fondo-blanco lineas-border">
+			<div class="col-md-8 fondo-blanco lineas-border"><hr>
 				<br>
 				<div class="row">
 					
 					@if (!empty($institucion->mision))
-					<div class="col-md-offset-1 col-md-4 linea-arriba">
+					<div class="col-md-offset-1 col-md-4">
 						
 							<p><strong><label>Misión</label></strong></p>
 							<p class="txt-gris">{{ $institucion->mision }}</p>
@@ -64,7 +66,7 @@
 					</div>
 					@endif
 					@if (!empty($institucion->vision))
-					<div class="col-md-offset-1 col-md-4 linea-arriba">
+					<div class="col-md-offset-1 col-md-4">
 							<p><strong><label>Visión</label></strong></p>
 							<p class="txt-gris" >{{ $institucion->vision }}</p>
 					</div>

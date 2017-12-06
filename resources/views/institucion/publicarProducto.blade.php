@@ -108,7 +108,7 @@
 					<center><label>Productos</label></center>
 				
 			
-				<table class="table table-responsive">
+				<table class="table table-hover">
 					 <tr class="head-color" >
 					 	<th>Id</th>
 					    <th>Foto</th>

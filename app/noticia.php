@@ -126,4 +126,42 @@ class noticia extends Model
         ->paginate(10)*/;
         return $noticia;
     }
+
+
+       protected function noticias_generales_cliente()
+    {
+        $noticias = noticia::where('id_estado', 1)
+        ->orderBy('created_at', 'desc')
+        ->take(4)->get();;
+        return $noticias;
+    }
+
+          protected function noticias_generales_cliente_all($cantidad)
+    {
+        $noticias = noticia::where('id_estado', 1)
+        ->orderBy('created_at', 'desc')
+        ->paginate($cantidad);
+        return $noticias;
+    }
+
+    protected function verDetalleNoticiaCliente($idNoticia)
+    {
+        $noticia = \DB::table('noticias')
+                    ->select([
+                        'noticias.id as id',
+                        'noticias.foto as foto',
+                        'noticias.titulo as titulo',
+                        'noticias.texto as texto',
+                        'noticias.created_at as creado',
+                        'institucion.id as idInstitucion',
+                        'institucion.nombre as nombreInstitucion',
+                        'institucion.logo as logoInstitucion'
+
+                    ])
+                    ->join('institucion','institucion.id','=','noticias.id_institucion')
+                    ->where('noticias.id_estado', 1)
+                    ->where('noticias.id', $idNoticia)->first();
+
+        return $noticia;
+    }
 }

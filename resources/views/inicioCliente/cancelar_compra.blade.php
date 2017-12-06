@@ -1,6 +1,8 @@
 @extends('inicioCliente.clienteMaster')
 
 <title>Cancelar Compra</title>
+
+
 @section('content')
 <div class="cancelar_compra">
 <center><h2>Compra cancelada</h2></center>

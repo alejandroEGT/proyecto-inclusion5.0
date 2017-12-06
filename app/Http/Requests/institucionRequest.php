@@ -15,7 +15,7 @@ class institucionRequest extends FormRequest
     public function rules()
     {
         return [
-            'rut' => 'max:9 | required | numeric | unique:institucion,rut,'. $this->rut,
+            'rut' => 'required | numeric | unique:institucion,rut,'. $this->rut,
             'nombre' => 'required | max:50',
             'razonSocial' => 'required | max:100',
             'telefono1' => 'required|min:11|numeric',

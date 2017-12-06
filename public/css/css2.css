@@ -1,12 +1,14 @@
-
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
 @import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons');
 
+
 @import url('../mdl/material.css');
 @import url('../bdm/css/bootstrap-material-design.css');
+@import url('../css/estilo_cliente.css');
 @import url('../css/estilo_carousel.css');
 @import url('../css/global.css');
 
-@import url('../css/estilo_cliente.css');
+
 @import url('../css/estilo_android.css');

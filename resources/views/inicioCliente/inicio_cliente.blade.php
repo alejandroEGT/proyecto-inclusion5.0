@@ -1,5 +1,7 @@
 
+
 @extends('inicioCliente.clienteMaster')
+
 
 @section('content')
 
@@ -48,7 +50,7 @@
 	</div>
 
 	<!--productos-->
-	<br><div class="android-more-section linea-gris fondo-blanco ">
+	<br><div class="android-more-section linea-gris fondo-blanco panel">
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Productos</div>
 	  		<div class="android-card-container mdl-grid">		
 				@foreach($ver_producto as $producto)	
@@ -66,10 +68,14 @@
 							</div>						
 							<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $producto->nombreProducto }}</h4>
 							</div>
-						
-							{{--<div class="mdl-card__supporting-text">
+							<div class="mdl-card__supporting-text">
 							<span class="mdl-typography--font-light mdl-typography--subhead">{{ $producto->descripcionProducto }}</span>
-							</div>--}}
+							</div>
+							<div class="mdl-card__actions">
+		         			<a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}">Ver<i class="material-icons">chevron_right</i></a>
+		      				</div>
+						
+							
 
 						</div>
 
@@ -77,11 +83,13 @@
 			
 			</div>
 			<hr>	
-			<center><a href="/inicio_cliente_mas">Ver Mas</a></center><hr>
+
+			<center><a href="/productos_clientes">Ver todos los productos...</a></center><hr>
+
 	</div>
 
 	<!--servicios-->
-	<br><div class="android-more-section linea-gris fondo-blanco">
+	<!--<br><div class="android-more-section linea-gris fondo-blanco panel">
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Servicios</div>
 	  		<div class="android-card-container mdl-grid">		
 			@foreach($ver_servicio as $servicio)	
@@ -105,29 +113,32 @@
 			</div>
 			<hr>	
 			<center><a href="/inicio_cliente_mas">Ver Mas</a></center><hr>
-	</div>
+	</div>-->
 
 
 
 
 	<!--tienda-->
-	<br><div class="android-more-section linea-gris fondo-blanco">
+	<br><div class="android-more-section linea-gris fondo-blanco panel">
 
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Tiendas</div>
 		<div class="android-card-container mdl-grid">
 		  	@foreach($tiendas as $tienda) 
 		    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
-		      <div class="mdl-card__media porteimg"><img src="{{'/'.$tienda->logo}}"></div>
+		      <a class="mdl-card__media porteimg" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}"><img src="{{'/'.$tienda->logo}}"></a>
 		      <div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $tienda->nombre }}</h4></div>
 		      <div class="mdl-card__supporting-text">
 		      <span class="mdl-typography--font-light mdl-typography--subhead">{{ $tienda->descripcion }}</span>
 		      </div>
 		      <div class="mdl-card__actions">
-		         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}">Ver Tienda<i class="material-icons">chevron_right</i></a>
+		         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}">Ver<i class="material-icons">chevron_right</i></a>
 		      </div>
 		    </div>
 	   		@endforeach
 	   	</div>
+	   		<hr>	
+
+			<center><a href="{{url ('/tiendas_clientes')}}">Ver todas las tiendas...</a></center><hr>
 	</div> 	
 		<!--<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Vendedores</div>
 		<div class="android-card-container mdl-grid">
@@ -146,24 +157,24 @@
 	  	</div>-->	 
 
 		<!--noticias-->
-		<br><div class="android-more-section linea-gris fondo-blanco">
+		<br><div class="android-more-section linea-gris fondo-blanco panel">
 				@if(count($noticias)>0)
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Noticias</div>
 		<div class="android-card-container mdl-grid">
 					@foreach ($noticias as $ng)
 						<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
-						<div class="mdl-card__media porteimg"><img class="img-notix"  src="{{ '/'.$ng->foto }}" alt="foto de noticia"></div>
+						<a class="mdl-card__media porteimg" href="{{ url('verDetalleNoticia/'.base64_encode($ng->id)) }}"><img class="img-notix"  src="{{ '/'.$ng->foto }}" alt="foto de noticia"></a>
 						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $ng->titulo}}</h4></div>
 						<div class="mdl-card__supporting-text">
 		      				<span class="mdl-typography--font-light mdl-typography--subhead">por definir</span>
 		      			</div>
 						 <div class="mdl-card__actions">
-		         			<a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url('institucion/detalleNoticia_general/'.base64_encode($ng->id)) }}">Ver Noticia<i class="material-icons">chevron_right</i></a>
+		         			<a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url('verDetalleNoticia/'.base64_encode($ng->id)) }}">Ver<i class="material-icons">chevron_right</i></a>
 		      			</div>
 		      		</div>
 					@endforeach
 					</div>
-					<hr><center><a href="{{ url('institucion/verNoticiasGenerales') }}">Ver todas las noticias...</a></center><hr>
+					<hr><center><a href="{{ url('/noticias_clientes') }}">Ver todas las noticias...</a></center><hr>
 			</div><br>
 				@endif
 				@if (!count($noticias))

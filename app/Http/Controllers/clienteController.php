@@ -10,6 +10,7 @@ use App\Listadeseos;
 use App\Sexo;
 use App\Tienda_institucion;
 use App\Tienda_vendedor;
+use App\venta_producto;
 use App\User;
 use App\carro;
 use App\cliente;
@@ -32,6 +33,7 @@ class clienteController extends Controller
         }
     }
 
+
     public function inicio_cliente(){
 
       $tiendas = Tienda_institucion::traerTiendas();
@@ -39,7 +41,7 @@ class clienteController extends Controller
       //dd($tiendas);
       $ver_producto = producto::ver_producto();
       $ver_servicio = servicio::ver_servicio();
-      $noticias = noticia::all();
+      $noticias = noticia::noticias_generales_cliente();
      //dd($noticias);
 
       $this->verificarUser();
@@ -57,17 +59,21 @@ class clienteController extends Controller
      public function vista_productos($id){
 
           $this->verificarUser();  
+          $tiendas = Tienda_institucion::traerTiendas();
           $getId = base64_decode($id);
         $producto = producto::producto_id($getId);
-        return view('inicioCliente.vista_productos')->with('producto',$producto);
+        return view('inicioCliente.vista_productos')->with(['producto' => $producto, 'tiendas' => $tiendas]);
                                                  
     }  
     public function vista_lista_deseos()
     {
 
        //$lista = Listadeseos::where('id_user', \Auth::user()->id)->get();
+
+      $tiendas = Tienda_institucion::traerTiendas();
       $lista = Listadeseos::traer(\Auth::user()->id);
-       return view('inicioCliente.lista_deseos')->with('lista', $lista);
+       return view('inicioCliente.lista_deseos')->with(['lista' => $lista, 'tiendas' => $tiendas]);
+
     }
     public function guardar_en_lista_deseo(Request $dato)
     {
@@ -94,32 +100,83 @@ class clienteController extends Controller
                                                       ->with('tiendas',$tiendas);
     }
 
+    public function productos_clientes(){
+       $productos = producto::ver_mas_producto(8);
+       $tiendas = Tienda_institucion::traerTiendas();
+
+       return view ('inicioCliente.productos')->with('productos',$productos)
+                                              ->with('tiendas',$tiendas);
+    }     
+     public function noticias_clientes(){
+       $noticias = noticia::noticias_generales_cliente_all(8);
+       $tiendas = Tienda_institucion::traerTiendas();
+
+       return view ('inicioCliente.noticias')->with('noticias',$noticias)
+                                              ->with('tiendas',$tiendas);
+    }
+     public function verDetalleNoticia(Request $dato)
+    {  
+          $tiendas = Tienda_institucion::traerTiendas(); 
+        $noticia = noticia::verDetalleNoticiaCliente(base64_decode($dato->idNoticia));
+        //dd($noticia);
+        return view('inicioCliente.verDetalleNoticia')->with('noticia', $noticia)
+                                                      ->with('tiendas',$tiendas);
+    }
+
+         public function tiendas_clientes(){
+       $tiendasAll = Tienda_institucion::traerTiendasAll(4);
+       $tiendas = Tienda_institucion::traerTiendas();
+
+       return view ('inicioCliente.tiendas')->with('tiendasAll',$tiendasAll)
+                                              ->with('tiendas',$tiendas);
+    }
+
 
     public function perfil_cliente(){
 
-
+      $tiendas = Tienda_institucion::traerTiendas();
       $id_cliente = cliente::where('id_user', Auth::user()->id)->first();
 
       $foto = Fotoperfil::traerFotobyid(Auth::user()->id);
 
       return view('inicioCliente.perfil_cliente')->with('id_cliente',$id_cliente)
-                                                 ->with('foto', $foto);
+                                                 ->with('foto', $foto)
+                                                ->with('tiendas', $tiendas);
 
     }     
+
+    public function mis_compras(Request $dato){
+    
+             try{
+       $tiendas = Tienda_institucion::traerTiendas();
+       $id_cliente = cliente::where('id_user', Auth::user()->id)->first();
+       $mis_compras = venta_producto::traerVentasCliente($id_cliente->id);
+
+
+        return view('inicioCliente.mis_compras')->with([
+                'tiendas' => $tiendas,
+                'mis_compras' => $mis_compras
+        ]);
+       }
+       catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back();
+    }  
+  }
 
 
 	public function sesion_cliente(){
     $this->verificarUser();
-    	return view('inicioCliente.sesion_cliente');
+    $tiendas = Tienda_institucion::traerTiendas();
+    	return view('inicioCliente.sesion_cliente')->with('tiendas', $tiendas);
     }
 
     public function registro_cliente(){
       $this->verificarUser();
-    	
+    	$tiendas = Tienda_institucion::traerTiendas();
       $sexo = Sexo::all();
       
 
-      return view('inicioCliente.registro_cliente')->with('sexo',$sexo);
+      return view('inicioCliente.registro_cliente')->with(['sexo' => $sexo, 'tiendas' => $tiendas]);
 
 
     }
@@ -226,11 +283,7 @@ class clienteController extends Controller
 
     try{
         $cliente = cliente::where('id_user', \Auth::user()->id)->first();
-      
-        if($cliente->facebook_id != null){
-          \Session::flash('Advertencia', 'tu contraseña no puede ser actualizado porque iniciaste la sesion con redes sociales');
-           return redirect()->back();
-        }
+  
      
        $this->validate($datos,[
           'passAntigua' => 'required | min:6 | max:50 ',
@@ -241,7 +294,7 @@ class clienteController extends Controller
        $update = cliente::updClave($datos);
 
         if($update){
-         \Session::flash('Advertencia', 'Tu numero de telefono ha sido actualizado exitosamente');
+         \Session::flash('Advertencia', 'Tu contraseña ha sido actualizado exitosamente');
           return redirect()->back();
        }
           return redirect()->back()->withErrors(['No es posible actualizar tu contraseña']);
@@ -264,12 +317,18 @@ class clienteController extends Controller
       $productos = producto::filtrar_desde_cliente($datos->buscador);
       $servicios = servicio::filtrar_desde_cliente($datos->buscador);
 
+$tiendas = Tienda_institucion::traerTiendas();
+
 
       return view('inicioCliente.nuestroProducto')
       ->with('productos', $productos)
       ->with('titulo', "Filtrado de productos")
       ->with('servicios', $servicios)
-      ->with('titulo', "Filtrado de servicios");
+
+      ->with('titulo', "Filtrado de servicios")
+
+      ->with('tiendas', $tiendas);
+
 
     } catch (\Illuminate\Database\QueryException $e){
         return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
@@ -281,24 +340,47 @@ class clienteController extends Controller
 public function ver_detalleProducto(Request $dato)
     {
       $this->verificarUser();
+      $tiendas = Tienda_institucion::traerTiendas();
       $getId = base64_decode($dato->id);
+
+      if($getId == null){
+
+        return redirect()->back();
+
+      }else{
+
       $productos = producto::detalleProducto_cliente($getId);
+
+      if($productos == null){
+
+           return redirect()->back();
+
+      }else{
+
       $ver_producto = producto::ver_productos_tienda();
-
-
       return view('inicioCliente.verDetalleProducto')
       ->with('ver_producto',$ver_producto)
-      ->with('productos', $productos);
+      ->with('productos', $productos)
+      ->with('tiendas', $tiendas);
+      }
+
+      }
+
+
  }
 public function ver_detalleServicio(Request  $dato)
 {
     $getIds = base64_decode($dato->idS);
     $getIdi = base64_decode($dato->idI);
 
+
+$tiendas = Tienda_institucion::traerTiendas();
     $servicios = servicio::detalleServicio($getIds, $getIdi);
 
     return view('inicioCliente.verDetalleServicio')->with([
-        'servicios' => $servicios
+        'servicios' => $servicios,
+        'tiendas' => $tiendas
+
     ]);
 }
      public function vista_perfilInst(request $dato){
@@ -318,7 +400,7 @@ public function ver_detalleServicio(Request  $dato)
               $contadorTienda = ContadorInstitucion::where('id_tienda', $tienda_institucion->id)
                                 ->where('laravel_session', $dato->ip())->first();
                      
-              
+              $tiendas = Tienda_institucion::traerTiendas();
 
               if($contadorTienda == true){ /*El usuario si ha visitado el perfil*/
 
@@ -353,6 +435,7 @@ public function ver_detalleServicio(Request  $dato)
               $institucion = Institucion::find($idI);
               $productos = producto::verProductosVisibles($institucion->id, 5);
               $areas = Area::where('id_institucion', $idI)->get();
+              //$alumnos = User::where('id_institucion', $idI)->get();
               $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
 
               return view('inicioCliente.perfil_institucion')
@@ -360,7 +443,9 @@ public function ver_detalleServicio(Request  $dato)
               ->with('servicios', $servicios)
               ->with('productos', $productos)
               ->with('idInstitucion', $dato->idinstitucion)
-              ->with('areas', $areas);
+              ->with('areas', $areas)
+              //->with('alumnos',$alumnos)
+              ->with('tiendas', $tiendas);
          } catch (\Illuminate\Database\QueryException $e){
             return redirect()->back();
           }
@@ -396,5 +481,6 @@ public function ver_detalleServicio(Request  $dato)
         }
         return redirect()->back()->withErrors(['Error al quitar producto']);
     }
+
 
 }

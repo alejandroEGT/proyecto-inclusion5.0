@@ -50,7 +50,15 @@ class Tienda_institucion extends Model
     protected function traerTiendas()
     {
         $tienda = \DB::table('tiendas_instituciones')
-                    ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')->get();
+                    ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')->take(4)->get();
+        return $tienda;
+    }
+
+     protected function traerTiendasAll($cantidad)
+    {
+        $tienda = \DB::table('tiendas_instituciones')
+                    ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
+                    ->paginate($cantidad);
         return $tienda;
     }
 

@@ -1,6 +1,7 @@
 
 @extends('inicioCliente.clienteMaster')
 
+
 @section('content')
 
 	<!--Carousel-->

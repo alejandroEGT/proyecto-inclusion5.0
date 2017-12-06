@@ -227,6 +227,17 @@ new Vue({
 	          })
       
         },
+        buscarEncargado(){
+            url="";
+	        if(this.txtBuscar == "") url="user/";
+	        else url="institucion/buscarEncargadooParaCambiarPassword/"+this.txtBuscar;
+	        
+	        this.$http.get(url).then(function(response){
+	                this.users = response.body;   
+	                console.log(response.body);
+	          })
+      
+        },
         generarClave($id){
 
         	if (confirm("¿Quieres genera una nueva contraseña para este usuario?") == true) {
@@ -402,6 +413,9 @@ new Vue({
         if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
            if (document.cookie.indexOf("iphone_redirect=false") == -1) this.nombreNav="Navegando en iphone";
         }
+      },
+      alerta(){
+      	alert("qqq");
       }
 	},
 

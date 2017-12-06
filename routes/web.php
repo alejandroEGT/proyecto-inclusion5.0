@@ -5,6 +5,39 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', function () {
             return view('welcome');
         });
+        Route::get('/status/{id}', function ($id) {
+
+            $receiver_id = ENV('KHIPU_APP_ID');
+            $secret = ENV('KHIPU_APP_KEY');
+
+            $khipu_url = 'https://khipu.com/api/1.3/paymentStatus';
+
+            $concatenated = "receiver_id=$receiver_id&payment_id=$id";
+
+            $hash = hash_hmac('sha256', $concatenated , $secret);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $khipu_url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, true);
+
+            $data = array(
+            'receiver_id' => $receiver_id,
+            'payment_id' => $id,
+            'hash' => $hash
+            );
+
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            $output = curl_exec($ch);
+
+            $info = curl_getinfo($ch);
+            curl_close($ch);
+
+            $url = json_decode($output,true);
+            dd($url);
+
+        });
+        
         /*Redireccion a vistas*/
         Route::get('/ver_usuarios','invitadoController@vista_proyecto');
         Route::get('/inicio','invitadoController@vista_inicio');
@@ -79,6 +112,7 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::post('/actualizar_nombreArea', 'institucionController@actualizar_nombreArea');
         Route::post('/actualizar_descripcionArea', 'institucionController@actualizar_descripcion');
         Route::get('/generarPassword', 'institucionController@vitsa_generarPassword');
+         Route::get('/generarPasswordEncargado', 'institucionController@vitsa_generarPasswordEncargado');
         Route::get('/buscarUsuarioParaCambiarPassword/{buscar}', 'institucionController@buscarUsuarioParaCambiarPassword');
         Route::get('/detalleServicio/{id}','institucionController@ver_detalleServicio');
         Route::get('/detalleServicio/{idServicio}/{idInstitucion}', 'institucionController@ver_detalleServicio_institucion_local');
@@ -139,6 +173,13 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/ver_todo_servicio_institucion/{id}', 'institucionController@vista_todo_servicio_institucion');
         Route::get('/ver_todo_servicio_vendedor/{id}', 'institucionController@vista_todo_servicio_vendedor');
         Route::get('/ver_vistas_tienda', 'graficosAdminController@vista_grafico_visitas_tienda');
+	    Route::get('/activar_cuenta_khipu','khipuController@funcion');
+        Route::get('/verVentas', 'institucionController@vista_venta');
+        Route::get('/traerVentas_fecha','institucionController@traerVentas');
+        Route::get('/detalleVenta/{id_venta}', 'institucionController@ver_detalleVenta');
+        Route::get('/descargarpdf_detalle_venta/{id_venta}','institucionController@descargar_detalle_venta');
+        Route::get('/descargarpdf_alumnos/{id_area}','areaController@descargar_pdf_alumnos');
+        Route::get('/descargarpdf_productos/{id_area}','areaController@descargar_pdf_productos');
 
 });
 
@@ -394,7 +435,10 @@ Route::get('/registro_cliente' , 'clienteController@registro_cliente');
 Route::post('/registro_cliente' , 'clienteController@guardar_cliente');         
 Route::get('/prueba_cliente' , 'clienteController@prueba_cliente');
 Route::get('/vista_productos/{id}' , 'clienteController@vista_productos');
-
+Route::get('/productos_clientes','clienteController@productos_clientes');
+Route::get('/noticias_clientes','clienteController@noticias_clientes');
+Route::get('/tiendas_clientes','clienteController@tiendas_clientes');
+Route::get('/verDetalleNoticia/{idNoticia}','clienteController@verDetalleNoticia');
 
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
@@ -409,7 +453,7 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
      Route::post('/updClave', 'clienteController@updClave');
      Route::get('/carro_cliente' , 'clienteController@carro_cliente');
      Route::post('/updFoto', 'clienteController@updFoto');
-     Route::get('/lista_deseos', 'clienteController@vista_lista_deseos');
+    Route::get('/lista_deseos', 'clienteController@vista_lista_deseos');
      Route::get('/guardar_en_lista_deseo/{idProducto}','clienteController@guardar_en_lista_deseo');
      Route::get('eliminarProductoLista/{id}', 'clienteController@eliminarProductoLista');
 
@@ -420,12 +464,17 @@ Route::group(['prefix' => 'carro', 'middleware' => ['cliente']], function(){
     Route::post('/agregarProd', 'carroController@ingProducto');
     Route::get('/eliminarProd/{id}','carroController@delProducto');
     Route::post('/actualizarProd','carroController@actProducto');
+    Route::get('/detalleCompra','carroController@detalleCompra');
     Route::get('/miCarro' , 'carroController@miCarro');
+    Route::get('/procesando', 'carroController@procesando');
+    Route::get('/cancelado', 'carroController@cancelado');
+    Route::post('/iniciarPago' , 'KhipuController@crearPago');
     
 });
 
      Route::get('/filtrarProducto', 'clienteController@filtrarProducto');
      Route::get('/verDetalleProducto/{id}', 'clienteController@ver_detalleProducto');
+     Route::get('/detalleProducto/{id}/{idI}', 'clienteController@ver_detalleProducto');
      Route::get('/detalleServicio/{idS}/{idI}', 'clienteController@ver_detalleServicio');
      Route::get('/perfil_institucion/{idinstitucion}','clienteController@vista_perfilInst');
 
@@ -434,5 +483,14 @@ Route::group(['prefix' => 'carro', 'middleware' => ['cliente']], function(){
 Route::get('/test' , 'cuentaCobroController@crearIntegrador');
 
 Route::post('/testo' , 'cuentaCobroController@testo');
+Route::get('/testo2' , 'cuentaCobroController@testo2');
 
 Route::post('/crearCobro' , 'cuentaCobroController@crearCobro');
+
+
+    Route::get('/index', 'cuentaCobroController@index');
+    Route::post('/send', 'cuentaCobroController@send');
+    Route::get('/return', 'cuentaCobroController@return');
+   
+
+

@@ -461,7 +461,7 @@ protected function ver_producto()
         return $datos;
     }
 
-protected function ver_mas_producto()
+protected function ver_mas_producto($cantidad)
     {
         $ver_mas = \DB::table('tienda_producto_instituciones')
         ->select([
@@ -477,7 +477,8 @@ protected function ver_mas_producto()
                       ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
                       ->join('foto_productos','foto_productos.id_producto','=','productos.id')
                       ->orderBy('productos.created_at', 'desc')
-                      ->where('tienda_producto_instituciones.id_estado',1)->get();
+                      ->where('tienda_producto_instituciones.id_estado',1)
+                      ->paginate($cantidad);
 
         return $ver_mas;
     }
@@ -580,7 +581,7 @@ protected function ver_mas_producto()
                 ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
                 ->join('area','area.id','=','tienda_producto_instituciones.id_area')
                 ->where('tienda_producto_instituciones.id_producto','=', $id)
-                ->paginate(2);
+                ->first();
 
                 return $traer;
     }

@@ -56,7 +56,8 @@ class carro extends Model
                         'categoria_productos.nombre as categoriaProducto',
                         'institucion.nombre as nombreTienda',
                         'institucion.id as idTienda',
-                        'foto_productos.foto as fotoProducto'
+                        'foto_productos.foto as fotoProducto',
+                        'detalle_carros.precio_actual as precioActual'
 
                     ])
                     ->join('detalle_carros','detalle_carros.id_carro','=','carros.id')
@@ -69,6 +70,7 @@ class carro extends Model
                     ->where('carros.id_cliente', $idCliente->id)
                     ->where('detalle_carros.id_estado',4)
                     ->where('carros.id_estado',1)
+                    ->where('tienda_producto_instituciones.id_estado',1)
                     ->get();
 
 
@@ -117,10 +119,15 @@ class carro extends Model
                         ->join('detalle_carros','detalle_carros.id_carro','=','carros.id')
                         ->join('clientes','clientes.id','=','carros.id_cliente')
                         ->join('users','users.id','=','clientes.id_user')
+                        ->join('productos','productos.id','=','detalle_carros.id_producto')
+                        ->join('tienda_producto_instituciones','tienda_producto_instituciones.id_producto','=','productos.id')
                         ->where('clientes.id',$idCliente)
                         ->where('carros.id_estado',1)
+                        ->where('tienda_producto_instituciones.id_estado',1)
                         ->get();
         return $productos;
 
     }
+
+
 }

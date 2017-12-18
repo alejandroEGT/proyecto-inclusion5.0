@@ -58,20 +58,41 @@
 				<br>
 					<div class="row">
 						<div class="col-md-12 ">
-							<center><p><label>Publicar productos o servicios para que sean visualizados en tu intitución</label></p></center>
+							<center><p><label>Publicar productos para que sean visualizados en tu institución</label></p></center>
 							<div class="row">
-								<div class="col-md-offset-2 col-md-4 well lineas">
+								<div class="col-md-offset- col-md-3 well ">
 									<center>
 										<div class="ico-producto"></div>
 										<a href="{{ url('userDependiente/publicarProducto') }}"><label>Publicar Producto</label></a>
 									</center>
 
 								</div>
-								<div class="col-md-4 well lineas">
-									<center>
-										<div class="ico-speaker"></div>
-										<a href="{{ url('userDependiente/publicarServicio') }}"><label>Publicar Servicio</label></a>
-									</center>
+								<div class="col-md-9 lineas">
+									<center><label>Herraminetas</label></center>
+									<div class="row">
+										<div class="col-md-4 ">
+											<p><i class="fa fa-microphone" aria-hidden="true"> </i> <label>Microfono</label></p>
+											<p><label>Herramienta para el redireccionamiento de pestañas dentro de tu perfil</label></p>
+											
+											{{--<center>
+												<div class="ico-speaker"></div>
+												<a href="{{ url('userDependiente/publicarServicio') }}"><label>Publicar Servicio</label></a>
+											</center>--}}
+										</div>
+										<div class="col-md-4">
+											<p><i class="fa fa-commenting-o" aria-hidden="true"></i> <label>Dictador de texto</label></p>
+											<p><label>
+												Herramienta para oir los elementos del sitio web según el posicionamiento del cursor
+											</label></p>
+											
+										</div>
+										<div class="col-md-4">
+											<p><i class="fa fa-eye" aria-hidden="true"></i> <label>Daltonismo</label></p>
+											<p><label>Herramienta para ampliar y contrastar el texto de tu perfil</label></p>
+
+										</div>
+									</div>
+									<p><center><label><a href="{{ url('userDependiente/herramientas') }}">Ver más información</a></label></center></p>
 								</div>
 							</div>
 						</div>
@@ -173,7 +194,7 @@
 
 							<hr>
 
-							@if (count($servicios)>0)
+							{{--@if (count($servicios)>0)
 								<div class="row">
 									<div class="col-md-12">
 										<center><label>Servicios en mi área</label> <i class="fa fa-star-o" aria-hidden="true"></i></center>
@@ -217,7 +238,7 @@
 									<br>
 									<img src="/ico/sad.png">
 								</center>
-							@endif
+							@endif--}}
 						</div>
 					</div>
 			</div><!-- PRIMERA VISTA PARA EL ALUMNO  -->

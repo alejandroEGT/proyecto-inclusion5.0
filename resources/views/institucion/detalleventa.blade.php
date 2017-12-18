@@ -12,7 +12,7 @@
 		</div>
 		<div class="col-md-3">
 			<p><label>Teléfono: </label> {{ $cliente->telefono }}</p>
-			<p><label>Fecha de venta: </label> {{ date('h:i:s - d/m/Y', strtotime($cliente->fecha)) }}</p>
+			<p><label>Fecha de venta: </label> {{ date('h:i:s - d-m-Y', strtotime($cliente->fecha)) }}</p>
 		</div>
 		<div class="col-md-3">
 			<a href="{{ url('institucion/descargarpdf_detalle_venta/'.$id_venta) }}" class="btn btn-success btn-sm" >Exportar a PDF esta venta</a>
@@ -33,7 +33,7 @@
 				<td>{{ $p->nombre }}</td>
 				<td>{{ $p->precio_unitario }}</td>
 				<td>{{ $p->cantidad }}</td>
-				<td>{{ $p->precio_unitario*$p->cantidad }}</td>
+				<td style="color: #16A085">{{ $p->precio_unitario*$p->cantidad }}</td>
 			</tr>
 		@endforeach
 	</table>

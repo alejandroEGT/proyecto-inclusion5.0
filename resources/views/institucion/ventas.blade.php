@@ -7,6 +7,23 @@
  {{-- Charts::assets() --}}
 
  {{-- $chart->render() --}}
+<div id="grafico"></div>
+<div id="sliders">
+    <table>
+        <tr>
+        	<td>Alpha Angle</td>
+        	<td><input id="alpha" type="range" min="0" max="45" value="15"/> <span id="alpha-value" class="value"></span></td>
+        </tr>
+        <tr>
+        	<td>Beta Angle</td>
+        	<td><input id="beta" type="range" min="-45" max="45" value="15"/> <span id="beta-value" class="value"></span></td>
+        </tr>
+        <tr>
+        	<td>Depth</td>
+        	<td><input id="depth" type="range" min="20" max="100" value="50"/> <span id="depth-value" class="value"></span></td>
+        </tr>
+    </table>
+</div>
 	<div class="row">
 		<div class="col-md-2">
 			@if ($fechas)
@@ -28,8 +45,12 @@
 		<div class="col-md-2">
 			<p>Total de todas las ventas:</p> <strong class="lbl-strong" > ${{ $total }}</strong>
 		</div>
+
 	</div>
 	<hr>
+	{{--<div class="container">
+		<p class="text-right"><a href="{{ url('institucion/lista_clientes') }}"><i class="fa fa-flag-checkered" aria-hidden="true"></i> Seguimiento de comprador</a></p>
+	</div>--}}
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table table-hover">
@@ -63,5 +84,65 @@
 		});
 	});
 	</script>
+	
 
+@endsection
+@section('js')
+	<script src="/code/highcharts.js"></script>
+<script src="/code/highcharts-3d.js"></script>
+<script src="/code/modules/exporting.js"></script>
+
+
+		<script type="text/javascript">
+
+// Set up the chart
+var chart = new Highcharts.Chart({
+    chart: {
+        renderTo: 'grafico',
+        type: 'column',
+        options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }
+    },
+    title: {
+        text: 'Cantidad de ventas en el tiempo'
+    },
+    subtitle: {
+        text: 'Gráfico tipo 3D'
+    },
+    plotOptions: {
+        column: {
+            depth: 25
+        }
+    },
+     xAxis: {
+    	value: 'jano',
+        categories: {!! json_encode($array_fecha)  !!}
+    },
+
+    series: [{
+    	name: 'Cantidad de ventas',
+        data: {!! json_encode($array_cantidad) !!},
+    }]
+});
+
+function showValues() {
+    $('#alpha-value').html(chart.options.chart.options3d.alpha);
+    $('#beta-value').html(chart.options.chart.options3d.beta);
+    $('#depth-value').html(chart.options.chart.options3d.depth);
+}
+
+// Activate the sliders
+$('#sliders input').on('input change', function () {
+    chart.options.chart.options3d[this.id] = parseFloat(this.value);
+    showValues();
+    chart.redraw(false);
+});
+
+showValues();
+		</script>
 @endsection

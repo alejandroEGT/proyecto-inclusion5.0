@@ -43,20 +43,21 @@
 		<div class="android-card-container mdl-grid">
 		  	@foreach($tiendasAll as $tienda) 
 		    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
-		      <div class="mdl-card__media porteimg"><img src="{{'/'.$tienda->logo}}"></div>
+		       <a class="mdl-card__media porteimg" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}"><img src="{{'/'.$tienda->logo}}"></a>
 		      <div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $tienda->nombre }}</h4></div>
 		      <div class="mdl-card__supporting-text">
-		      <span class="mdl-typography--font-light mdl-typography--subhead">{{ $tienda->descripcion }}</span>
+		      <span class="mdl-typography--font-light mdl-typography--subhead"> </span>
 		      </div>
 		      <div class="mdl-card__actions">
-		         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}">Ver Tienda<i class="material-icons">chevron_right</i></a>
+		         <a class="btn btn-raised btn-success" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}">Ver</a>
 		      </div>
 		    </div>
 	   		@endforeach
 	   	</div>
-	   		<hr>	
+	   		<br><div class="separacion-compras"><img src="/ico/separar.png"></div>	
+	   		<center><p>{{$tiendasAll->links()}}</p></center>
 	</div>
-			<center><p>{{$tiendasAll->links()}}</p></center>
+			
 
 			@endif
 				@if (!count($tiendasAll))

@@ -25,7 +25,7 @@ class vendedorDependienteController extends Controller
             $foto = Fotoperfil::traerFoto();
             $verificEstado = Vendedor::verificEstado(\Auth::user()->id);
             $estado_password = Passwordcuenta::traerEstado();
-            $productos = producto::verProductoDesdeArea( $alumno->id_area, 4);
+            $productos = producto::verProductoDesdeArea( $alumno->id_area, 10);
             $servicios = servicio::mostrarServicioDesdeArea($alumno->id_area, 4);
             $estado = $verificEstado[0]->id_estado;
             $noticias_generales = noticia::noticias_generales();

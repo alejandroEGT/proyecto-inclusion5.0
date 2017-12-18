@@ -14,6 +14,7 @@
 </head>
 
 <body  class="body-institucion" onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);">
+
    @inject('validar', "App\Http\Controllers\KhipuController")
 
    @if ($validar->verificarEstadoCuenta(Auth::guard('institucion')->user()->id) == false)
@@ -30,7 +31,7 @@
         <div id="master">
         <nav  class="navbar pushy pushy-left" data-focus="#first-link">
             <div v-if="this.navChrome == true">
-                    <li class="pushy-submenu">
+                    {{--<li class="pushy-submenu">
                         <button id="first-link">¿Te ayudamos?</button>
                         <ul>
                             @if (Session::has('activarMicro'))
@@ -53,7 +54,7 @@
                             @endif
                              <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
-                </li>
+                    </li>--}}
             </div>
             <div class="pushy-content">
                 <ul>
@@ -64,14 +65,14 @@
                             <p class="nombre-institucion-perfil" v-for="item in db_institucion">
                                 @{{ item.nombre }}
                             </p>
-                            <p><a href="{{ url('institucion/logout') }}">Salir</a></p>
+                            <p><a href="{{ url('institucion/logout') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Salir</a></p>
                         </div>
                         
                         <hr/>
                     </li>
                     <li class="pushy-link"><a href="{{ url('institucion/inicio') }}"><i class="fa fa-indent"></i> Inicio</a></li>
                     <li class="pushy-submenu">
-                        <button id="ni"><i class="fa fa-database"></i> Nuestra Información</button>
+                        <button id="ni"><i class="fa fa-database"></i> Nuestra Información <i class="fa fa-caret-down" aria-hidden="true"></i></button>
                         <ul>
                             <li class="pushy-link"><a href="{{ url('institucion/misionyvision') }}">Misión y Visión</a></li>
                             <li class="pushy-link"><a href="{{ url('institucion/datos') }}">Datos específicos</a></li>
@@ -79,15 +80,15 @@
                         </ul>
                     </li>
                      <li class="pushy-submenu">
-                        <button id="oc"><i class="fa fa-database"></i> Ocultos</button>
+                        <button id="oc"><i class="fa fa-database"></i> Ocultos <i class="fa fa-caret-down" aria-hidden="true"></i></button>
                         <ul>
-                            <li class="pushy-link"><a href="{{ url('institucion/productosOcultos') }}"><i class="fa fa-indent"></i> Productos Ocultos</a>
-                            <li class="pushy-link"><a href="{{ url('institucion/serviciosOcultos') }}"><i class="fa fa-indent"></i> Servicios Ocultos</a>
+                            <li class="pushy-link"><a href="{{ url('institucion/productosOcultos') }}"> Productos Ocultos</a></li>
+                            {{--<li class="pushy-link"><a href="{{ url('institucion/serviciosOcultos') }}"><i class="fa fa-indent"></i> Servicios Ocultos</a></li>--}}
                         </ul>
                     </li>
                     
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-cube"></i> Especialidad / Áreas</button>
+                        <button><i class="fa fa-cube"></i> Especialidad / Áreas <i class="fa fa-caret-down" aria-hidden="true"></i></button>
                         <ul v-for="item in db_area">
                             <li class="pushy-link"><a :href="'/institucion/verArea/' + item.id">@{{ item.nombre}}</a></li>
                         </ul>
@@ -98,12 +99,12 @@
                      <li class="pushy-link"><a href="{{ url('institucion/traerProductoEnEspera') }}"><i class="fa fa-globe"></i> 
                     Solicitud de ingreso de productos <span class="badge">@{{ notificacion_prod }}</span></a>
                     </li>
-                     <li class="pushy-link"><a href="{{ url('institucion/traerServicioEnEspera') }}"><i class="fa fa-globe"></i> 
+                     {{--<li class="pushy-link"><a href="{{ url('institucion/traerServicioEnEspera') }}"><i class="fa fa-globe"></i> 
                     Solicitud de ingreso de servicios <span class="badge">@{{ notificacion_serv }}</span></a>
-                    </li>
+                    </li>--}}
 
                       <li class="pushy-submenu">
-                        <button><i class="fa fa-key"></i> Generar contraseñas</button>
+                        <button><i class="fa fa-key"></i> Generar contraseñas <i class="fa fa-caret-down" aria-hidden="true"></i></button>
                         <ul>
                             <li class="pushy-link"><a href="{{ url('institucion/generarPassword') }}"> Alumnos</a></li>
                             <li class="pushy-link"><a href="{{ url('institucion/generarPasswordEncargado') }}"> Encargados</a></li>
@@ -111,7 +112,7 @@
                         </ul>
                     </li>
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-bar-chart"></i> Gráficos</button>
+                        <button><i class="fa fa-bar-chart"></i> Gráficos <i class="fa fa-caret-down" aria-hidden="true"></i></button>
                         <ul>
                             <li class="pushy-link" ><a href="{{ url('institucion/verVentas') }}">Ventas</a></li>
                             <li class="pushy-link"><a href="{{ url('institucion/grafico_productosAdmin') }}"> Cantidad de productos</a></li>
@@ -120,6 +121,12 @@
                                 <a  href="{{ url('institucion/ver_vistas_tienda') }}">Vistas en mi tienda</a>
                             </li>
                             
+                        </ul>
+                    </li>
+                    <li class="pushy-submenu" >
+                        <button>Opciones <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                        <ul>
+                            <li class="pushy-link"><a href="{{ url('institucion/stock_minimo') }}">Stock minimo</a></li>
                         </ul>
                     </li>
                     
@@ -136,6 +143,7 @@
             <div class="site-overlay"></div>
 
         <!-- contenido -->
+
             <div id="container">
             <!-- Menu Button -->
                 <nav class="navbar-fixed-top color-verde">
@@ -147,7 +155,7 @@
                                 <form action="{{ url('institucion/buscador') }}" method="get">
                                     <div class="input-group">
                                     {{ csrf_field() }}
-                                        <input name="buscador" type="text" class="form-control" placeholder="buscar novedades, instituciones o personas">
+                                        <input name="buscador" type="text" class="form-control" placeholder="buscar instituciones o personas">
                                           <span class="input-group-btn">
                                             <button class="btn btn-search" type="submit"><i class="fa fa-search fa-fw"></i></button>
                                           </span>
@@ -158,7 +166,7 @@
                                 <div class="container-fluid" v-for="item in db_institucion" >
 
                                      <p class="p-right"><strong>@{{item.email}}
-                                     </strong><a href="{{ url('institucion/logout') }}"><img src="/ico/arrows.png"  alt=""/></a></p>
+                                     </strong><a href="{{ url('institucion/logout') }}"><i class="fa fa-sign-in fa-2x" aria-hidden="true"></i></a></p>
                                      
                                 </div>
                             </div>
@@ -166,6 +174,21 @@
                             
                 </nav>
                 <div class="margen">
+                @if (Session::has('venta'))
+                <div class="alert alert-danger">
+                <a href="" class="close" data-dismiss="alert">&times;</a>
+                       <center> <i class="fa fa-info-circle" aria-hidden="true"></i> {{ Session::get('venta') }}</center>
+                </div>
+            @endif
+                    <noscript>
+                        <div class="alert alert-danger">
+                <a href="" class="close" data-dismiss="alert">&times;</a>
+                       <center> <i class="fa fa-info-circle" aria-hidden="true"></i> 
+                            <h5>Este sitio requiere de javascript, porfavor activarlo</h5>
+                       </center>
+                   </div>
+                    
+                    </noscript>
                     @yield('content')
 
                </div>

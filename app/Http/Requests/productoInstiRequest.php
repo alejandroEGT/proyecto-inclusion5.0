@@ -27,9 +27,9 @@ class productoInstiRequest extends FormRequest
             'nombre' => 'required|max:50 | min:3',
             'descripcion' => 'required | max:191 | min:3',
             'foto' => 'required|mimes:jpeg,bmp,png,gif|dimensions:max_width=5500,max_height=5500',
-            'valor' => 'required| numeric',
+            'valor' => 'required| numeric | min:10',
             'categoria' => 'required',
-            'cantidad' => 'required | numeric ',
+            'cantidad' => 'required | numeric | min:1',
             'area' => 'required',
         ];
     }

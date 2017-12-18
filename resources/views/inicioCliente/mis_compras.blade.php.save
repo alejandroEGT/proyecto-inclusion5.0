@@ -1,0 +1,153 @@
+@extends('inicioCliente.clienteMaster')
+
+<title>Mis compra</title>
+@section('content')
+
+
+@if ($errors->any())
+			    <div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				            @endforeach
+				        </ul>
+			    </div>
+			@endif
+
+
+
+
+			<div class="container">
+				@if(count($arrayVenta)>0)
+				<hr>
+				<h1 class="text-center">Mis compras</h1>
+			<hr>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 fondo-blanco">
+						<div class="panel">
+						@foreach($arrayVenta as $compras)
+							<div class="linea-gris"><br>
+								<div class="table-condensed">
+									<table class="table"><br>	
+		  							<h4 class="text-center"><b>Detalle de la venta</b></h4>
+									<p class="contenido-sesion"><b>Numero de compra: </b> {{base64_encode($compras[0]->id_venta)}} </p>
+									<p class="contenido-sesion"><b>Fecha de la compra: </b> {{date('d-m-Y', strtotime($compras[0]->fecha))}} </p>			
+									</table>
+									
+							
+							</div>
+							@foreach($compras as $c)
+							
+							<div class="linea-gris">
+								<div class="table-condensed">
+									<table class="table">
+									    <tbody>
+										    <tr>
+										      	<td>	
+		  											 <div class="imagen-producto-detalle" align="center"><br>
+														<img class="mdl-card__media"  src="{{ '/'.$c->fotoProducto }}">
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<div class="table-striped table-condensed">
+									<table class="table">
+										<thead>
+									      	<tr class="list-group-item-light">
+									      		<th>Producto</th>
+									      	</tr>
+									    </thead>
+
+										<tbody>
+											<tr>
+										        <td>{{ $c->nombreProducto }}</td>
+										    </tr>
+									    </tbody>
+
+									    <thead>
+									    	<tr class="list-group-item-light">
+									    		<th>Descripcion</th>
+									    	</tr>
+									    </thead>
+
+									    <tbody>
+									    	<tr>
+									    		<td>{{$c->descripcionProducto}}</td>
+									    	</tr>
+									    </tbody>
+
+									        <thead>
+									    	<tr class="list-group-item-light">									    	
+									        	<th>Cantidad</th>
+									    	</tr>
+									    </thead>
+
+									    <tbody>
+									    	<tr>
+										        <td>{{ $c->cantidadProducto }}</td> 
+									    	</tr>
+									    </tbody>
+
+									    <thead>
+									    	<tr class="list-group-item-light">
+										   		<th>Precio unitario</th>
+									    	</tr>
+									    </thead>
+
+									    <tbody>
+									    	<tr>
+									    		<td>{{ '$'.$c->precioProducto }} CLP </td>
+									    	</tr>
+									    </tbody>
+
+									    <thead>
+									    	<tr class="list-group-item-light">
+										   		<th>Total</th>
+									    	</tr>
+									    </thead>
+
+									    <tbody>
+									    	<tr>
+									    		<td>{{ '$'.$c->precioProducto*$c->cantidadProducto }} CLP </td>
+									    	</tr>
+									    </tbody>
+
+									    <thead>
+									    	<tr class="list-group-item-light">
+										        <th>estado de compra</th>
+									    	</tr>
+									    </thead>
+
+									    <tbody>
+									    	<tr>
+												<td>{{$c->nombre_estado}}</td>
+									    	</tr>
+									    </tbody>
+
+									</table>
+								</div>
+							</div>
+						@endforeach
+						<br><div class="separacion-compras"><img src="/ico/separar.png"></div><br>
+						
+					@endforeach 
+
+
+
+					</div>
+					</div>
+				</div>
+				@endif
+				@if (!count($arrayVenta))
+						<center><h1>No tienen niguna compra realizada aun.</h1></center>
+						<hr>
+				@endif	
+			</div>
+
+			
+
+@endsection

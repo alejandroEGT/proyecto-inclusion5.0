@@ -77,10 +77,10 @@
 						<a href="{{ url('encargadoArea/publicarProducto') }}"><div class="ico-small-speaker"></div></a>
 						<center><label>Publicar productos</label></center>
 					</div>
-					<div class="col-md-2 col-sm-1">
+					{{--<div class="col-md-2 col-sm-1">
 						<a href="{{ url('encargadoArea/publicarServicio') }}"><div class="ico-small-service"></div></a>
 						<center><label>Publicar servicio</label></center>
-					</div>
+					</div>--}}
 					<div class="col-md-2 col-sm-1">
 						<a href="{{ url('encargadoArea/clave') }}"><div class="ico-small-pass"></div></a>
 						<center><label>Cambiar contraseña</label></center>

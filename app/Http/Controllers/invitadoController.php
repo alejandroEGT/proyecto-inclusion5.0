@@ -80,7 +80,7 @@ class invitadoController extends Controller
                                           $message->from('nada@gmail.com', 'Equipo de "El Arte Escondido."');
                                           $message->to($correo,'to');
                     });
-                    \Session::flash('ingreso', 'El codigo gue enviado a '.$dato->correo);
+                    \Session::flash('ingreso', 'El codigo fue enviado a '.$dato->correo);
                     return redirect('/codigo_reset');
              }
              return redirect()->back();
@@ -145,4 +145,29 @@ class invitadoController extends Controller
         $password .= $cadena_base[rand(0, $limite)];
         return $password;
     }
+
+    public function mailsend(Request $dato)
+    {
+
+        $this->validate($dato,[
+            'nombre' => 'required | min:3 | max:50',
+            'email' => 'required | max:80 |email', 
+            'mensaje' => 'required |min:3 | max: 255'
+        ]);
+       
+        $correoSend = $dato->email;
+        $correo = "contacto.arte.escondido@gmail.com";
+        \Session::put('mensaje',$dato->mensaje);
+        \Session::put('correo', $correoSend);
+        \Session::put('nombre', $dato->nombre);
+        $var = Mail::send(['html'=>'emails.user_mail'],['name','Alejandro'],function ($message) use ($correo)
+        {
+                $message->from('nada@gmail.com', 'Persona');
+                $message->to($correo,'to');
+        });
+
+         
+          \Session::flash('enviado', 'Tu mensaje se envió con exito');
+         return true;
+     }
 }

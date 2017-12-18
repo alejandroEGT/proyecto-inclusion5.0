@@ -112,6 +112,10 @@ public function ver_todo_producto()
         
         //return view('encargadoArea.perfil_vendedorInstitucion')->with('foto',$foto)->with('usuario',$usuario);
     }
+    public function vista_herramientas()
+    {
+        return view('vendedorDependiente.herramientas');
+    }
     public function vista_perfilInst($idinstitucion){
 
         $idI = base64_decode($idinstitucion);

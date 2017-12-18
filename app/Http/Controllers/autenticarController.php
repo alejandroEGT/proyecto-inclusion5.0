@@ -1,5 +1,7 @@
 <?php
-
+/*
+ En este controlador se encuentras las funciones de autentificación de los usuarios del sistema desde la parte administrativa
+*/
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -29,7 +31,7 @@ class autenticarController extends Controller
         	if (\Auth::guard('institucion')->attempt(['email' => $data->correo, 'password' => $data->clave])) {
                return redirect('/institucion/inicio');
             }
-            return redirect()->back();
+            return redirect()->back()->withErrors(['Datos incorrectos, intente nuevamente']);
 
         }catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors(['Algo no anda bien, posiblemente datos mal ingresados o no hay conexión']);
@@ -65,9 +67,9 @@ class autenticarController extends Controller
               
                           return redirect('/userDependiente/inicio');    
                       }
-                      return redirect()->back();
+                      return redirect()->back()->withErrors(['Datos incorrectos, intente nuevamente']);;
                   }
-                  return redirect()->back();
+                   return redirect()->back()->withErrors(['Datos incorrectos, intente nuevamente']);
             }catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->withErrors(['Algo no anda bien, posiblemente datos mal ingresados o no hay conexión']);
        } 
@@ -88,18 +90,19 @@ class autenticarController extends Controller
      }
      public function login_vendedor(userloginRequest $data){
 
-            $data->flash();
-        try{    
+           
+        try{  
+            $data->flash();  
             $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
              if (count($verificar)>0 && $verificar[0]->id_rol == 1) { /**"eres vendedor individual"**/
                 if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
                     return redirect('/userIndependiente/inicio');
                 }
-                return redirect()->back();
+                return redirect()->back()->withErrors(['Datos incorrectos, intente nuevamente']);
                 
             }
-            return redirect()->back();
+             return redirect()->back()->withErrors(['Datos incorrectos, intente nuevamente']);
         }catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->withErrors(['Algo no anda bien, posiblemente datos mal ingresados o no hay conexión']);
        }     
@@ -110,19 +113,22 @@ class autenticarController extends Controller
             return view('invitado.login_encargadoArea');
      }
      public function login_loginEncargado(userloginRequest $data){
-        $data->flash();
+        
         try{
-            $verificar = \DB::select("select * from users where email = '".$data->correo."'");
 
+            $data->flash();
+            $verificar = \DB::select("select * from users where email = '".$data->correo."'");
+          
                 if(count($verificar)>0 && $verificar[0]->id_rol == 3){  /**"eres encargado de area"**/
                 
                     if (\Auth::attempt(['email' => $data->correo, 'password' => $data->clave])) {
                         
                         return redirect('/encargadoArea/inicio');    
                     }
-                    return redirect()->back();
+
+                    return redirect()->back()->withErrors(['Datos incorrectos, intente nuevamente']);
                 }
-                  return redirect()->back();
+                   return redirect()->back()->withErrors(['Datos incorrectos, intente nuevamente']);
         } catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->withErrors(['Algo no anda bien, posiblemente datos mal ingresados o no hay conexión']);
        }      

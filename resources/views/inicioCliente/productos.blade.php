@@ -37,7 +37,7 @@
 	
 
 	<!--recomedados-->
-	<div class="android-more-section">
+	<br><div class="android-more-section linea-gris fondo-blanco">
 		@if(count($productos)>0)
 		<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE8D0;</i> Productos de Instituciones</div>
 	  		<div class="android-card-container mdl-grid">		
@@ -47,20 +47,25 @@
 						<div class="imagen-producto">
 
 						<a class="mdl-card__media porteimg" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}"><img src="{{ '/'.$producto->fotoProducto }}"></a>
-
-						</div>							
-						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $producto->nombreProducto }}</h4></div>
-						<div class="mdl-card__supporting-text">
-						<span class="mdl-typography--font-light mdl-typography--subhead">{{ $producto->descripcionProducto }}</span>
 						</div>
+						<div class="mdl-card__title"><h4 class="lbl-precio"> $ {{ number_format($producto->precioProducto, 0, ',', '.') }} CLP</h4></div> 
+						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ str_limit($producto->nombreProducto,20) }}</h4></div>
+						<div class="mdl-card__supporting-text">
+						<span class="mdl-typography--font-light mdl-typography--subhead">{{ str_limit($producto->descripcionProducto,20) }}</span>
+						</div>
+						<div class="mdl-card__actions">
+		         			<a class="btn btn-raised btn-success" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}">Ver</a>
+		      				</div>
 					</div>
+
 				
 			@endforeach
 
 			</div>
-			<hr>
+			<br><div class="separacion-compras"><img src="/ico/separar.png"></div>
+			<center><p>{{$productos->links()}}</p></center>
 			</div>
-<center><p>{{$productos->links()}}</p></center>
+
 
 @endif
 				@if (!count($productos))

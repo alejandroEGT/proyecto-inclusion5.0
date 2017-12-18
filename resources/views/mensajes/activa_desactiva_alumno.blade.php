@@ -262,6 +262,15 @@
 					}
 				
 	@endif
+	@if (Session::has('activarDalt'))
+
+		$('*').css({
+	      "background-color": "black",
+	      "color": "white"
+    	});
+		
+	@endif
+
 
 	function iniciar(){
 			var texto ;
@@ -271,13 +280,13 @@
 		    listen:true, // Start listening after this
 		    speed:1.2, // Talk a little bit slow
 		    log: true,
-		    mode:"normal", // This parameter is not required as it will be normal by default
+		    mode:"quick", // This parameter is not required as it will be normal by default
 		    continuous:true
 			});
 		}
 	// Add a single command
 var comandos = {
-    indexes:["inicio","mis datos","publicar producto", "publicar servicio","ver productos","ver servicios","menú", "salir","bajar","subir","servicios ocultos","registros","inicio","login","atras","parar"
+    indexes:["inicio","mis datos","publicar producto", "publicar servicio","ver productos","ver servicios","menú", "salir","bajar","subir","servicios ocultos","registros","inicio","login","atras","parar","noticias generales","noticias locales","siguiente"
     	
     ], // Decir alguna de estas palabras activara el comando
     action:function(i){ // Acción a ejecutar cuando alguna palabra de los indices es reconocida
@@ -330,6 +339,18 @@ var comandos = {
         }
          if(i == 15){
          	stopScroll();
+        }
+        if(i == 16){
+        	setTimeout(function () { window.location = "{{ url('userDependiente/verNoticiasGenerales') }}"; }, 0);
+        }
+        if(i == 17){
+        	setTimeout(function () { window.location = "{{ url('userDependiente/verNoticiasLocales') }}"; }, 0);
+        }
+        if(i == 18){
+        
+        	  url = $("ul[class=pagination] li > a").attr('href');
+
+        	  window.location = url;
         }
         
     }

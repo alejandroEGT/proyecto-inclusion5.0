@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Proyecto Inclusión</title>
+    <title>Proyecto INclusión</title>
     <link href="css/cssinit.css" rel="stylesheet">
 </head>
 
@@ -107,7 +107,7 @@
                             <div class="inner">
                                 <h5>David Luna</h5>
                                 <p class="subtitle">Analista, Qa, testing y desarrollador web </p>
-                                <div class="avatar"><img src="fotoequipo/foto_david.jpg" alt="" class="img-propio img-responsive img-circle" />
+                                <div class="avatar"><img src="https://scontent.fscl9-1.fna.fbcdn.net/v/t1.0-9/19748523_1224555351000755_1098258178806284350_n.jpg?oh=21874980f15e07fa2282567291fa0749&oe=5A0B5A31" alt="" class="img-propio img-responsive img-circle" />
                                 </div>
 
                             </div>
@@ -187,13 +187,14 @@
                                 Your message has been sent. Thank you!
                             </div>
                             <div id="errormessage"></div>
-                                <form id="contact-form" action="" method="post" role="form" class="contactForm">
+                                <form id="contact-form" action="/mailsend" method="post" role="form" class="contactForm">
                                      <div class="row">
+                                        {{ csrf_field() }}
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="name">
                                                     Nombre</label>
-                                                <input type="text" name="name" class="form-control" id="name" placeholder="Su Nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                                <input type="text" name="nombre" class="form-control" id="name" placeholder="Su Nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                                                 <div class="validation"></div>
                                             </div>
                                             <div class="form-group">
@@ -210,7 +211,7 @@
                                             <div class="form-group">
                                                 <label for="name">
                                                     Mensaje</label>
-                                                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Mensaje"></textarea>
+                                                <textarea class="form-control" name="mensaje" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Mensaje"></textarea>
                                                 <div class="validation"></div>
                                             </div>
                                         </div>
@@ -237,7 +238,7 @@
                             </a>
                         </div>
                         </div>
-                        <p>&copy;SquadFREE. All rights reserved.</p>
+                        <p>&copy;Exod. Todos los derechos reservados.</p>
                         <div class="credits">
                             <!-- 
                                 All the links in the footer should remain intact. 
@@ -245,7 +246,7 @@
                                 Licensing information: https://bootstrapmade.com/license/
                                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Squadfree
                             -->
-                            <a href="https://bootstrapmade.com/free-one-page-bootstrap-themes-website-templates/">One Page Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                            <a href="https://exod.cl">Proyecto inclusión</a> by <a href="https://exod.cl/">Exod.cl</a>
                         </div>
                     </div>
                 </div>  

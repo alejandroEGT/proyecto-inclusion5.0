@@ -66,6 +66,7 @@ Route::group(['middleware' => ['web']], function () {
          Route::post('/resetPass','invitadoController@resetPass');
          Route::get('/codigo_reset','invitadoController@vista_codigo_reset');
          Route::post('/resetPassGo','invitadoController@resetPassGo');
+         Route::post('/mailsend', 'invitadoController@mailsend');
 });
 
 Route::group(['prefix' => 'institucion','middleware' => ['institucion']], function () {
@@ -180,6 +181,11 @@ Route::group(['prefix' => 'institucion','middleware' => ['institucion']], functi
         Route::get('/descargarpdf_detalle_venta/{id_venta}','institucionController@descargar_detalle_venta');
         Route::get('/descargarpdf_alumnos/{id_area}','areaController@descargar_pdf_alumnos');
         Route::get('/descargarpdf_productos/{id_area}','areaController@descargar_pdf_productos');
+        Route::get('/stock_minimo', 'institucionController@vista_stock');
+        Route::post('/activar_stock_min', 'institucionController@activar_stock_min');
+        Route::get('/ver_detalle_stock','institucionController@vista_detalle_stock');
+        Route::get('/lista_clientes','institucionController@vista_lista_cliente');
+        Route::get('/descargar_grafico_venta','graficosAdminController@descargar_grafico_venta');
 
 });
 
@@ -246,6 +252,9 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::get('/desactivarmicro', 'herramientasayudaController@desactivar_microfono');
         Route::get('/activartext', 'herramientasayudaController@activar_texto');
         Route::get('/desactivartext','herramientasayudaController@desactivar_texto');
+        Route::get('/activarDalt','herramientasayudaController@activar_dalt');
+        Route::get('/desactivarDalt','herramientasayudaController@desactivar_dalt');
+        Route::get('/herramientas','alumnoController@vista_herramientas');
        
         
 });
@@ -371,6 +380,9 @@ Route::group(['prefix' => 'encargadoArea', 'middleware' => ['encargadoArea']], f
         Route::get('/ver_todo_servicio_area/{id}', 'encargadoController@vista_todo_servicio_area');
         Route::get('/ver_todo_servicio_institucion/{id}', 'encargadoController@vista_todo_servicio_institucion');
         Route::get('/ver_todo_servicio_vendedor/{id}', 'encargadoController@vista_todo_servicio_vendedor');
+
+        Route::get('/verVentas', 'encargadoController@vista_venta');
+        Route::get('/traerVentas_fecha','encargadoController@traerVentas');
        
 });
 
@@ -440,6 +452,13 @@ Route::get('/noticias_clientes','clienteController@noticias_clientes');
 Route::get('/tiendas_clientes','clienteController@tiendas_clientes');
 Route::get('/verDetalleNoticia/{idNoticia}','clienteController@verDetalleNoticia');
 
+
+//Recuperar Clave Cliente
+Route::get('/recuperarContrasena', 'clienteController@recuperarContrasena');
+Route::post('/recuperarContrasena','clienteController@resetPass');
+Route::get('/ingresoCodigo','clienteController@ingresoCodigo');
+Route::post('/ingresoCodigo','clienteController@resetPassGo');
+
 //Socialite Login
 Route::post('login/{service}', 'loginClienteController@redirectToProvider');
 Route::get('login/{service}/callback', 'loginClienteController@handleProviderCallback');
@@ -456,6 +475,7 @@ Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function(){
     Route::get('/lista_deseos', 'clienteController@vista_lista_deseos');
      Route::get('/guardar_en_lista_deseo/{idProducto}','clienteController@guardar_en_lista_deseo');
      Route::get('eliminarProductoLista/{id}', 'clienteController@eliminarProductoLista');
+     Route::get('/mis_compras' , 'clienteController@mis_compras');
 
 });
 
@@ -491,6 +511,10 @@ Route::post('/crearCobro' , 'cuentaCobroController@crearCobro');
     Route::get('/index', 'cuentaCobroController@index');
     Route::post('/send', 'cuentaCobroController@send');
     Route::get('/return', 'cuentaCobroController@return');
-   
+
+
+      Route::get('/email', function () {
+            return view('emails.productosVendidos');
+        });   
 
 

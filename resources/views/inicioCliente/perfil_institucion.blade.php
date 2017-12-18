@@ -2,13 +2,12 @@
 
 @section('content')
 	
-	<a href="#" onclick="window.history.back();">
-		<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
-	</a>
+		<br><div class="container">
 		<div class="row">
 
 			<div class="col-md-3 fondo-blanco lineas-border">
-				<br>
+		
+						<a onclick="window.history.back();"><img src="/ico/boton_volver2.png" class="botonImagenVolver"></a>
 				<center><img src="{{ '/'.$institucion->logo }}" class="img img-thumbnail tamanio-inst" >
 					<hr>
 					<p><strong class="nombreblue" ><i class="fa fa-user" aria-hidden="true"></i> {{$institucion->nombre}}</strong></p>
@@ -84,21 +83,29 @@
 							@foreach ($productos as $producto)
 							
 								<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
-							
-									<div class="mdl-card__media porteImgTienda"><img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod "></div>
+									<a class="mdl-card__media porteImgTienda" href="{{ url('/detalleProducto/'.base64_encode($producto->idProducto).'/'.$idInstitucion) }}"><img src="{{ '/'.$producto->foto}}"></a>
 
-									<div class="mdl-card__title"><h4 class="mdl-card__title-text lbl-precio"> $ {{ $producto->precio }}</h4></div>
+									<div class="mdl-card__title"><h4 class="mdl-card__title-text lbl-precio"> $ {{ number_format($producto->precio, 0, ',', '.')}} CLP</h4></div>
 
-									<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ str_limit($producto->nombre, 10) }}</h4></div>
-									<p><a href="{{ url('/detalleProducto/'.base64_encode($producto->idProducto).'/'.$idInstitucion) }}" class="btn btn-primary btn-xs">Ver</a></p>
+									<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ str_limit($producto->nombre, 7) }}</h4></div>
+									<div class="mdl-card__actions">
+		         					<a class="btn btn-raised btn-success" href="{{ url('/detalleProducto/'.base64_encode($producto->idProducto).'/'.$idInstitucion) }}">Ver</a>
+		      						</div>
 							
 								</div>
+
+
 							
-							@endforeach						
+							@endforeach			
+
+
 
 					</div>
+					<center>{{ $productos->links() }}</center>
 
 				@endif
+
+
 				@if (!count($productos))
 					<center>
 						<label for="">No Existen  para mostrar</label>
@@ -132,17 +139,18 @@
 					</div>
 
 				@endif
-				@if (!count($servicios))
+				<!--@if (!count($servicios))
 					<center>
 						<label for="">No Existen Servicios para mostrar</label>
 						<br>
 						<img src="/ico/sad.png">
 					</center>
-				@endif
+				@endif-->
 			</div>
 			
 		</div>
 	
+	</div>
 	</div>
 
 

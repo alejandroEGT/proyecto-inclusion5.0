@@ -64,6 +64,7 @@
 				<script type="text/javascript">
 
 					
+					
 					var cont = 0;
 					var array = {!! json_encode($productos) !!}; 
 					var cantidadPrductos = [];

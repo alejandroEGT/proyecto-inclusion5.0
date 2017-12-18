@@ -90,6 +90,7 @@ class Institucion extends Authenticatable
         $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
         $institucion->rut = $rut;
         if($institucion->save()){
+            \Session::flash('ingresado', 'Rut actualizado');
             return redirect()->back();
         }
         return "nada ";   
@@ -100,6 +101,7 @@ class Institucion extends Authenticatable
         $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
         $institucion->nombre = ucfirst($nombre);
         if($institucion->save()){
+            \Session::flash('ingresado', 'Nombre actualizado');
             return redirect()->back();
         }
         return "nada ";
@@ -109,6 +111,7 @@ class Institucion extends Authenticatable
         $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
         $institucion->razonSocial = ucfirst($rs);
         if($institucion->save()){
+            \Session::flash('ingresado', 'Razón social actualizada');
             return redirect()->back();
         }
         return "nada ";
@@ -118,6 +121,7 @@ class Institucion extends Authenticatable
         $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
         $institucion->telefono1 = $tel1;
         if($institucion->save()){
+            \Session::flash('ingresado', 'Teléfono actualizado');
             return redirect()->back();
         }
         return "nada ";
@@ -127,6 +131,7 @@ class Institucion extends Authenticatable
         $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
         $institucion->telefono2 = $tel2;
         if($institucion->save()){
+             \Session::flash('ingresado', 'Teléfono actualizado');
             return redirect()->back();
         }
         return "nada ";
@@ -145,6 +150,7 @@ class Institucion extends Authenticatable
         $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
         $institucion->email = $correo;
         if($institucion->save()){
+             \Session::flash('ingresado', 'Correo actualizado');
             return redirect()->back();
         }
         return "nada ";
@@ -154,6 +160,7 @@ class Institucion extends Authenticatable
         $institucion = Institucion::find(\Auth::guard('institucion')->user()->id);
         $institucion->password = \Hash::make($clave);
         if($institucion->save()){
+             \Session::flash('ingresado', 'Contraseña actualizada');
             return redirect()->back();
         }
         return "nada ";

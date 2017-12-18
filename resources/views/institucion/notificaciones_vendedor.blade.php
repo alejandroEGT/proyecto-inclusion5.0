@@ -25,7 +25,7 @@
 									<td>{{ $esp->telefono }}</td>
 									<td>{{ $esp->created_at }}</td>
 									<td>{{ $esp->nombre }}</td>
-									<td><a  class="btn btn-success" @click="aceptarSolicitud({{ $esp->id_user }})" >Aceptar</a> | <input class="btn btn-danger" type="button" value="Cancelar"></td>
+									<td><a  class="btn btn-success" @click="aceptarSolicitud({{ $esp->id_user }})" >Aceptar</a> | <input @click="eliminarAlumno({{ $esp->id_user }})" class="btn btn-danger" type="button" value="Cancelar"></td>
 								</tr>
 								@endforeach		
 							</table>	

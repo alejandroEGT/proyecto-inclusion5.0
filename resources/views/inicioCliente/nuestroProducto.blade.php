@@ -4,9 +4,9 @@
 
 
 <div class="container">
-  <br>
+  <br><hr>
      <center><label><h1>Resultado de productos</h1></label></center>
-  <br>
+  <hr>
   <div class="row">
   <div class="col-md-offset-2 col-md-12 panel">
     @if (count($productos)>0)
@@ -15,9 +15,10 @@
           <div class="col-md-4 imagen-producto  ">
             <img src="{{'/'.$producto->foto}}" class="img-thumbnail  " >
           </div>
-          <div class="col-md-4  ">
-            <p><label>{{ $producto->nombre }}</label></p>
+          <div class="col-md-4">
+            <p><label><h4>{{ $producto->nombre }}</h4></label></p>
             <p><label style="color:#85929E" >{{ $producto->descripcion }}</label></p>
+            <p><label class="lbl-precio">{{'$'.number_format($producto->precio, 0, ',', '.') }} CLP</h4></label></p>
             <p>
               <a href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}"><img src="/ico/ver_detalle.png" class="botonImagenVer"></a>
 
@@ -34,7 +35,7 @@
 </div>
 <br>
 
-    <center><label><h1>Resultado de servicios</h1></label></center>
+    <!--<center><label><h1>Resultado de servicios</h1></label></center>
   <br>
 <div class="row">
   <div class="col-md-offset-2 col-md-12 panel">
@@ -62,6 +63,7 @@
 </div>
 
 </div>
+-->
 
 
 @endsection

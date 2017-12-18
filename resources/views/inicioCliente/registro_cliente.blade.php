@@ -19,90 +19,85 @@
 		    </div>
 		@endif
 
-	<br><h1 class="text-center">Registrate</h1>
-	<div class="android-drawer-separator"></div>
+
 
 		<div class="container">
+				<hr><h1 class="text-center">Formulario de registro</h1><hr>
 			<div class="row caja-sesion">
-				<div class="col-xs-12 col-sm-12 col-md-6 mdl-shadow--6dp">
+				<div class="col-xs-12 col-sm-12 col-md-5 panel">
 
 					<form action="/registro_cliente" method="post">
 						{{csrf_field()}}
 						<div class="contenido-sesion">				
-							<div class="form-row">
-							  <div class="col">
-							    <label for="exampleInputEmail1" class="bmd-label-floating">Nombres</label>
-							    <input type="text" class="form-control" id="formGroupExampleInput" name="nombres">
-							  </div>
+						  		<div class="form-group row">
+								    <label for="nombre" class="col-sm-3 col-form-label">Nombres: </label>
+								    <div class="col-sm-8">  
+								       <input type="text" class="form-control" id="nombre" name="nombres">
+								    </div>
+								 </div><br>
 
-							  <div class="col">
-								<label for="exampleInputEmail1" class="bmd-label-floating">Apellidos</label>
-							    <input type="text" class="form-control" id="formGroupExampleInput" name="apellidos">
-							  </div>
-							</div><br>
+								 <div class="form-group row">
+								    <label  for="ape" class="col-sm-3 col-form-label">Apellidos: </label>
+								    <div class="col-sm-8">  
+								       <input type="text" class="form-control" id="ape" name="apellidos">
+								    </div>
+								 </div><br>
+
+								 <div class="form-group row">
+								    <label for="sex" class="col-sm-3 col-form-label">Sexo: </label>
+								    <div class="col-sm-8">  
+								           <select class="form-control" id="sex" name="sexo">
+
+										     @foreach ($sexo as $sex)
+
+												<option value="{{$sex->id}}">{{ $sex->nombre }}</option>
+
+											 @endforeach
+
+							    			</select>
+								    </div>
+								 </div><br>
 							  
-							<div class="form-group">
-							    <label for="exampleSelect1" class="bmd-label-floating">Sexo</label>
-							    <select class="form-control" id="exampleSelect1" name="sexo">
+							
+						    <div class="form-group row">
+								<label for="" class="col-sm-3 col-form-label">Telefono: </label>
+								<div class="col-sm-8">
+							    	<input type="number" class="form-control" id="" name="telefono">
+								</div>
+						    </div><br>
 
-							     @foreach ($sexo as $sex)
+						    <div class="form-group row">
+							    <label for="" class="col-sm-3 col-form-label">Correo electronico: </label>
+							    <div class="col-sm-8">
+							    	<input type="email" class="form-control" id="" name="correo">
+							    </div>	
+						    </div><br>
 
-									<option value="{{$sex->id}}">{{ $sex->nombre }}</option>
+						    <div class="form-group row">
+							    <label for="pa" class="col-sm-3 col-form-label">Contraseña: </label>
+							    <div class="col-sm-8">
+							    	<input type="password" class="form-control" id="pa" name="pass">
+							    </div>
+						    </div><br>
 
-								 @endforeach
-
-							    </select>
-							</div>
-
-						    <div class="form-group">
-								<label for="exampleInputEmail1" class="bmd-label-floating">Telefono</label>
-							    <input type="number" class="form-control" id="formGroupExampleInput" name="telefono">
-						    </div>
-
-						    <div class="form-group">
-							    <label for="exampleInputEmail1" class="bmd-label-floating">Correo electronico</label>
-							    <input type="email" class="form-control" id="exampleInputEmail1" name="correo">
-						    </div>
-
-						    <div class="form-group">
-							    <label for="exampleInputPassword1" class="bmd-label-floating">Contraseña</label>
-							    <input type="password" class="form-control" id="exampleInputPassword1" name="pass">
-						    </div>
-
-						    <div class="form-group">
-							    <label for="exampleInputPassword1" class="bmd-label-floating">Repita Contraseña</label>
-							    <input type="password" class="form-control" id="exampleInputPassword1" name="repPass">
-						    </div>
+						    <div class="form-group row">
+							    <label for="repa" class="col-sm-3 col-form-label">Repita Contraseña: </label>
+							    <div class="col-sm-8">
+							    	<input type="password" class="form-control" id="repa" name="repPass">
+							    </div>
+						    </div><br>
 						</div>
 
 
 						<div class="form-group">
 							<div class="boton-sesion text-center">	
 							  	<p>
-							  	<button type="submit" class="btn btn-primary btn-outline-success">Registrarse</button>
-								<a href="inicio_cliente" class="btn btn-primary btn-outline-info">Atras</a>	
+							  	<button type="submit" class="btn btn-raised btn-success">Registrarse</button>
+								<a href="inicio_cliente" class="btn btn-raised btn-primary">Atras</a>	
 								</p>
 							</div>
 						</div>
 					</form>
-
-					<div class="android-drawer-separator"></div>
-						<form class="form-horizontal" action="/login/facebook" method="post">
-							{{csrf_field()}}
-							<div class="form-group text-center">
-							 <button type="submit" class="btn btn-raised btn-info"> Registrarse con <i class="ion-social-facebook"></i>
-							  </button>
-							</div>  
-						</form>
-
-						<form class="form-horizontal" action="/login/google" method="post">
-		                 	{{ csrf_field() }}
-		                 	<div class="form-group text-center">
-							  <button type="submit" class="btn btn-raised btn-danger"> Registrarse con <i class="ion-social-googleplus"></i>
-							  </button>
-							</div>
-						</form>
-
 				</div>
 
 				<div class="android-drawer-separator"></div>

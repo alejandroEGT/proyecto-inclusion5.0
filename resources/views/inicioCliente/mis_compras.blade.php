@@ -16,26 +16,49 @@
 			@endif
 
 
-
-
-			<div class="container">
+			<div class="container">		
 				<hr><h1 class="text-center">Mis compras</h1><hr>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 fondo-blanco">
+						<div class="panel">
 
-
-						@foreach($mis_compras as $compras)
-							
-							<div class="panel">
-									<br><h4 class="text-center"><b>Resumen de la compra</b> {{$compras->fecha}} </h4><br>
+							@if (Session::has('Prueba'))
+		<div class="container">
+			
+				<center><h2>No Existe la Pagina que buscas</h2></center>
 				
+
+		</div>
+		@else
+						@if(count($idVenta)>0)
+
+						@foreach($arrayVenta as $compras)
+						
+
+							<div class="linea-gris"><br>
+								<div class="table-condensed">
+									<table class="table"><br>	
+		  							<h4 class="text-center"><b>Detalle de la venta</b></h4>
+									<p class="contenido-sesion"><b>Identificador de compra: </b> {{$compras[0]->id_venta}} </p>
+									<p class="contenido-sesion"><b>Fecha de la compra: </b> <strong>{{date('d-m-Y / (H:i:s)', strtotime($compras[0]->fecha))}}</strong> </p>			
+									</table>
+									
+							
+							</div>
+
+
+							@foreach($compras as $c)
+
+
+							
+							<div class="linea-gris">
 								<div class="table-condensed">
 									<table class="table">
 									    <tbody>
 										    <tr>
 										      	<td>	
 		  											 <div class="imagen-producto-detalle" align="center"><br>
-														<img class="mdl-card__media"  src="{{ '/'.$compras->fotoProducto }}">
+														<img class="mdl-card__media"  src="{{ '/'.$c->fotoProducto }}">
 													</div>
 												</td>
 											</tr>
@@ -53,7 +76,7 @@
 
 										<tbody>
 											<tr>
-										        <td>{{ $compras->nombreProducto }}</td>
+										        <td>{{ $c->nombreProducto }}</td>
 										    </tr>
 									    </tbody>
 
@@ -65,7 +88,7 @@
 
 									    <tbody>
 									    	<tr>
-									    		<td>{{$compras->descripcionProducto}}</td>
+									    		<td>{{$c->descripcionProducto}}</td>
 									    	</tr>
 									    </tbody>
 
@@ -77,7 +100,7 @@
 
 									    <tbody>
 									    	<tr>
-										        <td>{{ $compras->cantidadProducto }}</td> 
+										        <td>{{ $c->cantidadProducto }}</td> 
 									    	</tr>
 									    </tbody>
 
@@ -89,30 +112,55 @@
 
 									    <tbody>
 									    	<tr>
-									    		<td>{{ '$'.$compras->precioProducto }} CLP </td>
+									    		<td>{{ '$'.number_format($c->precioProducto, 0, ',', '.') }} CLP </td>
 									    	</tr>
 									    </tbody>
 
 									    <thead>
 									    	<tr class="list-group-item-light">
-										        <th>estado de compra</th>
+										   		<th>Total</th>
 									    	</tr>
 									    </thead>
 
 									    <tbody>
 									    	<tr>
-												<td>{{$compras->nombre_estado}}</td>
+									    		<td>{{ '$'.number_format($c->precioProducto*$c->cantidadProducto, 0, ',', '.') }} CLP </td>
+									    	</tr>
+									    </tbody>
+
+									    <thead>
+									    	<tr class="list-group-item-light">
+										        <th>Estado del pago</th>
+									    	</tr>
+									    </thead>
+
+									    <tbody>
+									    	<tr>
+												<td>{{$c->nombre_estado}}</td>
 									    	</tr>
 									    </tbody>
 
 									</table>
 								</div>
-							</div><br>
+							</div>
+
+
 						@endforeach
+						<br><div class="separacion-compras"><img src="/ico/separar.png"></div><br>	
+					@endforeach
+					
+						<center>{{ $idVenta->links() }}</center>
+						@endif
+							@if (!count($idVenta))
+									<center><h1>No tienen niguna compra realizada aun.</h1></center>
+									<hr>
+							@endif	
+				
+						</div>
 					</div>
 				</div>
 			</div>
 
-			
+				@endif
 
 @endsection

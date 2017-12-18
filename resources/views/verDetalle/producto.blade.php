@@ -17,9 +17,9 @@
 						<div class="alert alert-danger">
 						    <a href="" class="close" data-dismiss="alert">&times;</a>
 						    @foreach ($errors->all() as $e)
-								<ul>
-									<li><label>{{ $e }}</label></li>
-								</ul>
+								<center><ul>
+									<li><label><i class="fa fa-info-circle" aria-hidden="true"></i> {{ $e }}</label></li>
+								</ul></center>
 							@endforeach
 						</div>
 				
@@ -27,7 +27,9 @@
 		@if (Session::has('correcto'))
 				<div class="alert alert-info">
 			    <a href="" class="close" data-dismiss="alert">&times;</a>
-				        <label>{{ Session::get('correcto') }}</label>
+				       <center> 
+				       	<label> <i class="fa fa-check" aria-hidden="true"></i> {{ Session::get('correcto') }}</label>
+				       </center>
 			    </div>
 		@endif
 			

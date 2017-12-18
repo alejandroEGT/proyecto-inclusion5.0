@@ -5,7 +5,9 @@
 	<div class="container ">
 		<div class="row panel">
 			<div class="col-md-offset-1 col-md-4">
-			<a href="{{ URL::previous() }} "><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></a>
+			<a href="#" onclick="window.history.back();">
+				<i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i>
+			</a>
 				<p style="text-align: center" class="panel-title-agregar-mv"><label>{{ $area->nombre}}</label>
 				<a data-toggle="collapse" data-target="#campo1" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
 				<div id="campo1" class="collapse">
@@ -124,15 +126,19 @@
 
 		<div class="row panel">
 			<div class="col-md-1">
-				<button data-toggle="collapse" data-target="#demo" class="btn btn-info btn-xs badge1" data-badge="{{ $contarP }}">Personas</button>
+				<button data-toggle="collapse" data-target="#demo" class="btn btn-info btn-xs ">Personas ({{ $contarP }})</button>
 			</div>
 			<div class="col-md-1">
-				<button data-toggle="collapse" data-target="#demo2" class="btn btn-danger btn-xs badge1" data-badge="{{$contarProd}}">Productos</button>
+				<button data-toggle="collapse" data-target="#demo2" class="btn btn-danger btn-xs">Productos ({{ $contarProd }})</button>
 			</div>
 			{{--<div class="col-md-1">
 				<button data-toggle="collapse" data-target="#demo3" class="btn btn-success btn-xs badge1" data-badge="{{$contarS}}">Servicio</button>
 			</div>--}}
+<<<<<<< HEAD
 			<div class="col-md-5 ">
+=======
+			<div class="col-md-offset-1 col-md-5 ">
+>>>>>>> 128e05ab3fe094c34560d32858b41294685fc7eb
 				<div v-if="this.existeEncargado == true">
 					<p><label>Encargado(a):</label>@{{ bd_encargadoNombre }} <button @click="eliminarEncargado(bd_encargadoId)" class="btn btn-primary btn-xs">Eliminar</button>
 					<a data-toggle="collapse" data-target="#ver"> | <i class="fa fa-eye" aria-hidden="true"></i></a>

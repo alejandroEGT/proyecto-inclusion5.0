@@ -136,7 +136,7 @@
 
 									    <tbody>
 									    	<tr>
-									    		<td>{{ '$'.$carros->precioProducto }} CLP </td>
+									    		<td>{{'$'.number_format($carros->precioProducto, 0, ',', '.')  }} CLP </td>
 									    	</tr>
 									    </tbody>
 
@@ -148,7 +148,7 @@
 
 									    <tbody>
 									    	<tr>
-												<td>{{ '$'.$carros->cantidadProducto*$carros->precioProducto}} CLP </td>
+												<td>{{'$'.number_format($carros->cantidadProducto*$carros->precioProducto, 0, ',', '.') }} CLP </td>
 									    	</tr>
 									    </tbody>
 
@@ -166,7 +166,7 @@
 					<div class="col-md-12">
 						<div class="panel list-group-item list-group-item-info ">
 
-							<label><b>Total Compra:</b><label class="lbl-precio-cliente"> {{'$'.$total}} CLP</label></label><br>
+							<label><b>Total Compra:</b><label class="lbl-precio-cliente"> {{'$'.number_format($total, 0, ',', '.')}} CLP</label></label><br>
 
 						</div><br>	
 					</div>
@@ -179,9 +179,8 @@
 						<div class="panel">
 
 					
-									<a href="{{ url("/carro/miCarro/") }}">
-							  			<input type="submit"  class="btn btn-primary btn-outline-success posicion_volver" value="volver al carro"></input>
-							  		</a>
+							
+							  		<a onclick="window.history.back();"><img src="/ico/boton_volver2.png" class="posicion_volver botonImagenVolver"></a>
 								
 				 					
 								<form action="/carro/iniciarPago" method="post">

@@ -4214,12 +4214,12 @@ input.mdl-button[type="submit"] {
   width: 330px;
   z-index: 1;
   position: relative;
-  background: rgb(255,255,255);
+  background: #FDFDFD;
   border-radius: 2px;
   box-sizing: border-box; }
 
 .mdl-card__media {
-  background-color: rgb(255,64,129);
+  background-color:#FDFDFD;
   background-repeat: repeat;
   background-position: 50% 50%;
   background-size: cover;

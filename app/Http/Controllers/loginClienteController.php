@@ -23,6 +23,9 @@ public function setTipo($tipo) {
       return $this->tipo;
   }
 
+
+  //Funciones que permitian la identificacion con facebook y google+
+
     public function redirectToProvider($service)
     {
         return Socialite::driver($service)->redirect();
@@ -88,11 +91,11 @@ public function setTipo($tipo) {
         }
 
     }
+//Aqui terminan las funciones que permitian la identificacion con facebook y google+
 
 
 
-
-
+    //Esta funcion identifica al cliente permitiendole de esta manera acceder a su cuenta
     public function authCliente(Request $data){
         //dd("jano");
            try{
@@ -115,7 +118,7 @@ public function setTipo($tipo) {
 
     }
 
-
+    //Esta funcion cierra la session del cliente
     public function logout(){
     	Auth::logout();
        return redirect('/inicio_cliente');

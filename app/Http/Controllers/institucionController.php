@@ -1,5 +1,7 @@
 <?php
-
+/**
+En este controlador se especifica el perfil de la institución, toda función que realiza se especifica en este documento de codigo.
+**/
 namespace App\Http\Controllers;
 
 use App\Area;
@@ -16,6 +18,7 @@ use App\Http\Requests\servicioInstRequest;
 use App\Institucion;
 use App\Passwordcuenta;
 use App\Sexo;
+use App\Stock;
 use App\Tienda_institucion;
 use App\Tienda_producto_institucion;
 use App\Tienda_producto_vendedor;
@@ -47,7 +50,7 @@ class institucionController extends Controller
     public function vista_institucion(){
 
           $datosInstitucion = Institucion::datos();
-          $productos = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 4);
+          $productos = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 10);
           $servicios = servicio::mostrarServicioDesdeAdmin(\Auth::guard('institucion')->user()->id, 4);
           $noticias_generales = noticia::noticias_generales();
           $noticias_locales = noticia::noticias_locales(\Auth::guard('institucion')->user()->id);
@@ -126,15 +129,15 @@ class institucionController extends Controller
     public function vista_venta(Request $dato)
     {   
       
-      /*try{*/
+     // try{
           $array_fecha;
           $array_cantidad;
 
           $fecha_venta = venta_producto::fechas_ventas();
 
           for ($i=0; $i < count($fecha_venta); $i++) { 
-             $array_fecha[$i] = $fecha_venta[$i]->fecha;
-             $cantidad = venta_producto::cantidad_ventas_por_fecha($fecha_venta[$i]->fecha);
+             $array_fecha[$i] = date('d/m/Y', strtotime($fecha_venta[$i]->fecha));
+             $cantidad = venta_producto::cantidad_ventas_por_fecha($fecha_venta[$i]->fecha, \Auth::guard('institucion')->user()->id);
              $array_cantidad[$i] = $cantidad;
 
           }
@@ -145,29 +148,34 @@ class institucionController extends Controller
           $total = venta_producto::total(\Auth::guard('institucion')->user()->id);
           $ventas = venta_producto::traerVentas(\Auth::guard('institucion')->user()->id);
 
-          //dd($ventas);
+          //dd($array_cantidad);
          // $query = venta_producto::pruebaq(\Auth::guard('institucion')->user()->id);
-           $chart = Charts::create($dato->tipo, 'highcharts')
+           /*$chart = Charts::create('bar','plottablejs')
               ->title('ventas realizadas (Cantidad)')
               ->elementLabel('Cantidad de ventas')
              ->Labels($array_fecha)
               ->values($array_cantidad)
-              ->dimensions(1000,500)
+              ->dimensions(10,20)
 
-              ->responsive(true);
+              ->responsive(true);*/
 
           return view('institucion.ventas')->with([
                   'fechas' => $fechas,
                   'total' => $total->total,
                   'ventas' => $ventas,
-                  'chart' => $chart,
-                  //'query' => $query
+
+                  'array_fecha' => $array_fecha,
+                  'array_cantidad' => $array_cantidad
           ]);
 
-       /* }catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()->withErrors(['Algo no anda bien en los campos, posible grandes cantidades de caracteres ingresados']);
+       /*}catch (\Illuminate\Database\QueryException $e) {
+
+             \Session::flash('venta', 'No existen ventas para mostrar');
+            return redirect()->back();
         } catch (\Exception $e) {
-                 return redirect()->back();
+
+             \Session::flash('venta', 'No existen ventas para mostrar');
+            return redirect()->back();
         } */
     }
     public function vista_detalleAlumno_inst(request $dato) 
@@ -242,7 +250,7 @@ class institucionController extends Controller
             $institucion = Institucion::find($idI);
             $areas = Area::where('id_institucion', $idI)->get();
             //return $institucion->id;
-            $productos = producto::verProductosVisibles($institucion->id, 5);
+            $productos = producto::verProductosVisibles($institucion->id, 15);
             $servicios = servicio::mostrarServicioDesdeAdmin($institucion->id, 5);
             return view('institucion.perfil_institucion')
             ->with('institucion', $institucion)
@@ -703,7 +711,13 @@ class institucionController extends Controller
     }
      public function actualizar_rut(Request $data){
           try{ 
-             $this->validate($data,['rut' => 'max:9 | required | numeric | unique:institucion,rut,'. $data->rut,]);
+             $this->validate($data,['rut' => 'required | unique:institucion,rut,'. $data->rut,]);
+             $validarRut = $this->valida_rut($data->rut);
+
+            if (!$validarRut) {
+                 
+                 return redirect()->back()->withErrors(['El rut es incorrecto']);
+            }
              $rut = Institucion::actualizarRut($data->rut);
              return $rut;
           } catch (\Illuminate\Database\QueryException $e) {
@@ -714,7 +728,7 @@ class institucionController extends Controller
 
     public function actualizar_nombre(Request $data){
           //try{ 
-             $this->validate($data,['nombre' => 'required| max:50 | unique:institucion,nombre,'. $data->nombre,]);
+             $this->validate($data,['nombre' => 'required| max:50 | min:3 | unique:institucion,nombre,'. $data->nombre,]);
              $nombre = Institucion::actualizarNombre($data->nombre);
              return $nombre;
          /* } catch (\Illuminate\Database\QueryException $e) {
@@ -724,7 +738,7 @@ class institucionController extends Controller
     }
     public function actualizar_rs(Request $data){
       try{
-          $this->validate($data,['razonSocial' => 'required | max:50',]);
+          $this->validate($data,['razonSocial' => 'required | max:50 | min:3',]);
           $rs = Institucion::actualizarRs($data->razonSocial); 
           return $rs;
         } catch (\Illuminate\Database\QueryException $e) {
@@ -733,7 +747,7 @@ class institucionController extends Controller
     }
     public function actualizar_tel1(Request $data){
         try{
-              $this->validate($data,['teléfono1' => 'required|max:9',]);
+              $this->validate($data,['teléfono1' => 'required|max:9 | min:9',]);
               $tel1 = Institucion::actualizarTel1($data->teléfono1);
               return $tel1;
           } catch (\Illuminate\Database\QueryException $e) {
@@ -742,7 +756,7 @@ class institucionController extends Controller
     }
     public function actualizar_tel2(Request $data){
         try{
-             $this->validate($data,['teléfono2' => 'required|max:9',]);
+             $this->validate($data,['teléfono2' => 'required|max:9 | min:9',]);
              $tel2 = Institucion::actualizarTel2($data->teléfono2);
              return $tel2;
 
@@ -1172,7 +1186,7 @@ class institucionController extends Controller
     {
       try{
          $this->validate($dato,[
-                  'fecha' => 'required | date',
+                  'fecha' => 'required | date | before:'.date("Y-m-d").'',
             ]);
 
            $update = vendedor::actualizarFecha($dato->fecha, $dato->idUser);
@@ -1495,43 +1509,46 @@ class institucionController extends Controller
     public function traerVentas(Request $dato)
     {
 
-       try{
+      // try{
         $array_fechas;
         $array_cantidad;
 
         $fecha_venta = venta_producto::fechas_ventas();
+
         for ($i=0; $i < count($fecha_venta); $i++) { 
-           $array_fecha[$i] = $fecha_venta[$i]->fecha;
-           $cantidad = venta_producto::cantidad_ventas_por_fecha($fecha_venta[$i]->fecha);
+           $array_fecha[$i] = date('d/m/Y', strtotime($fecha_venta[$i]->fecha));
+           $cantidad = venta_producto::cantidad_ventas_por_fecha($fecha_venta[$i]->fecha, \Auth::guard('institucion')->user()->id);
            $array_cantidad[$i] = $cantidad;
 
         }
            //$fecha_venta = venta_producto::fechas_ventas();
            $fechas = venta_producto::traerFecha(\Auth::guard('institucion')->user()->id);
            $total = venta_producto::total_segun_fechas(\Auth::guard('institucion')->user()->id, $dato->fecha);
+           //dd($total->total);
            $ventas = venta_producto::traerVentas_por_fecha(\Auth::guard('institucion')->user()->id, $dato->fecha);
 
-            $chart = Charts::create($dato->tipo, 'highcharts')
+            /*$chart = Charts::create('area', 'highcharts')
             ->title('Ventas realizadas (Cantidad)')
             ->elementLabel('Cantidad de ventas')
            ->Labels($array_fecha)
             ->values($array_cantidad)
             ->dimensions(1000,500)
 
-            ->responsive(true);
+            ->responsive(true);*/
 
         return view('institucion.ventas')->with([
                 'fechas' => $fechas,
-                'total' => $total,
+                'total' => $total->total,
                 'ventas' => $ventas,
-                'chart' => $chart
+                'array_fecha' => $array_fecha,
+                'array_cantidad' => $array_cantidad
         ]);
 
-       }catch (\Illuminate\Database\QueryException $e) {
+       /*}catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back();
        }catch( \Exception $e){
             return redirect()->back();
-        }
+        }*/
     }
     public function ver_detalleVenta(Request $dato)
     {    
@@ -1577,8 +1594,10 @@ class institucionController extends Controller
             $total = array_sum($suma);
             $id_venta = $dato->id_venta;
 
+
+
            $pdf = PDF::loadView('institucion.detalleventa_reporte', compact(['productos','total','cliente']));
-           return $pdf->download('lol.pdf');
+           return $pdf->download("detalle_venta_".date('d-m-Y')."pdf");
 
         }catch( \Exception $e){
             return redirect()->back();
@@ -1588,6 +1607,160 @@ class institucionController extends Controller
         }   
 
     }
+
+    public function vista_stock()
+    { 
+      $opcion = Stock::where('id_institucion', \Auth::guard('institucion')->user()->id)->first();
+      //dd($opcion);
+
+       return view('institucion.stock')->with([
+                'opcion' => $opcion
+       ]);
+    }
+    public function activar_stock_min(Request $dato)
+    {     
+
+          $this->validate($dato,['cantidad' => 'required | min:1 | max:10',]);
+
+          if ($dato->cantidad < 1) {
+            
+            \Session::flash('incorrecto', 'Stock minimo no permitido');
+            return back();
+          }
+
+          $stock_save = new Stock;
+
+          $stock = Stock::where('id_institucion', \Auth::guard('institucion')->user()->id)->first();
+          if ($stock == null) {
+                
+                $stock_save->id_institucion = \Auth::guard('institucion')->user()->id;
+                $stock_save->cantidad_minima = $dato->cantidad;
+                
+                if ($stock_save->save()) {
+                    
+                    \Session::flash('correcto', 'Stock minimo ingresado');
+                    return back();
+                }
+
+          }else{
+              $stock->cantidad_minima = $dato->cantidad;
+              if ($stock->save()) {
+                    
+                    \Session::flash('correcto', 'Stock minimo actualizado');
+                    return back();
+              }
+          }
+
+    }
+
+    public function vista_detalle_stock()
+    {
+
+      try{
+          $stock = Stock::where('id_institucion', \Auth::guard('institucion')->user()->id)->first();
+          $productos = producto::stock_minimo(\Auth::guard('institucion')->user()->id, $stock->cantidad_minima);
+          return view('institucion.detalle_stock_min')->with([
+            'productos' => $productos, 
+            'stok_min' => $stock->cantidad_minima
+          ]);
+      }catch( \Exception $e){
+            return redirect()->back();
+      }
+        catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back();
+      }  
+    }
+    public function vista_lista_cliente()
+    {
+      $result;
+      $clientes = venta_producto::listar_clientes();
+      //dd($clientes);
+
+    
+      for ($i=0; $i < count($clientes) ; $i++) { 
+          $result[$i] = venta_producto::cliente_con_mas_ventas(3);
+          dd($result);
+      }
+
+      //dd($result);
+        return view('institucion.lista_cliente')->with('clientes', $result);
+    }
+
+     
+function valida_rut($rut) 
+{ 
+if(strlen($rut) > 10) 
+{ 
+return false; 
+} 
+
+if(strstr($rut, '-') == false) 
+{ 
+return false; 
+} 
+
+$array_rut_sin_guion = explode('-',$rut); // separamos el la cadena del digito verificador. 
+$rut_sin_guion = $array_rut_sin_guion[0]; // la primera cadena 
+$digito_verificador = $array_rut_sin_guion[1];// el digito despues del guion. 
+
+
+if(is_numeric($rut_sin_guion)== false) 
+{ 
+return false; 
+} 
+if ($digito_verificador != 'k' and $digito_verificador != 'K') 
+{ 
+    if(is_numeric($digito_verificador)== false)  
+      { 
+      return false; 
+      } 
+} 
+$cantidad = strlen($rut_sin_guion); //8 o 7 elementos 
+for ( $i = 0; $i < $cantidad; $i++)//pasamos el rut sin guion a un vector 
+    { 
+    $rut_array[$i] = $rut_sin_guion{$i}; 
+    }   
+
+
+$i = ($cantidad-1); 
+$x=$i; 
+for ($ib = 0; $ib < $cantidad; $ib++)// ingresamos los elementos del ventor rut_array en otro vector pero al reves. 
+    { 
+    $rut_reverse[$ib]= $rut_array[$i]; 
+     
+     $rut_reverse[$ib]; 
+    $i=$i-1; 
+    } 
+     
+$i=2; 
+$ib=0; 
+$acum=0;  
+   do 
+    { 
+    if( $i > 7 ) 
+      { 
+      $i=2; 
+      } 
+      $acum = $acum + ($rut_reverse[$ib]*$i); 
+     $i++; 
+     $ib++; 
+   }while ( $ib <= $x); 
+
+$resto = $acum%11; 
+$resultado = 11-$resto; 
+if ($resultado == 11) { $resultado=0; } 
+if ($resultado == 10) { $resultado='k'; } 
+if ($digito_verificador == 'k' or $digito_verificador =='K') { $digito_verificador='k';} 
+
+if ($resultado == $digito_verificador) 
+    { 
+    return true; 
+    } 
+    else 
+    { 
+    return false; 
+    } 
+} 
   
 }
 

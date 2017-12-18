@@ -33,8 +33,8 @@
                         
                         <hr>
                     </li>
-                    <li class="pushy-link"><a href="{{ url('encargadoArea/inicio') }}">Inicio</a></li>
-                    <li class="pushy-submenu">
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/inicio') }}"><i class="fa fa-indent" aria-hidden="true"></i> Inicio</a></li>
+                    {{--<li class="pushy-submenu">
                         <button id="first-link">¿Te ayudamos?</button>
                         <ul>
                             @if (Session::has('activarMicro'))
@@ -57,26 +57,33 @@
                             @endif
                              <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
-                    </li>
-                    <li class="pushy-link"><a href="{{ url('encargadoArea/datosAreas') }}">Datos del área</a></li>
-                    <li class="pushy-link"><a href="{{ url('encargadoArea/equipo') }}">Nuestro equipo</a></li>
-                    <li class="pushy-link"><a href="{{ url('encargadoArea/publicarProducto') }}">Publicar producto</a></li>
-                    <li class="pushy-link"><a href="{{ url('encargadoArea/publicarServicio') }}">Publicar servicio</a></li>
-                    <li class="pushy-link"><a href="{{ url('encargadoArea/publicarNoticia') }}">Publicar noticia</a></li>
+                    </li>--}}
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/datosAreas') }}"><i class="fa fa-database" aria-hidden="true"></i> Datos del área</a></li>
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/equipo') }}"><i class="fa fa-users" aria-hidden="true"></i> Nuestro equipo</a></li>
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/publicarProducto') }}"><i class="fa fa-cubes" aria-hidden="true"></i> Publicar producto</a></li>
+                   {{-- <li class="pushy-link"><a href="{{ url('encargadoArea/publicarServicio') }}">Publicar servicio</a></li>--}}
+                    <li class="pushy-link"><a href="{{ url('encargadoArea/publicarNoticia') }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Publicar noticia</a></li>
 
-                       <li class="pushy-link"><a href="{{ url('encargadoArea/clave') }}">Cambiar contraseña</a></li>
+                       <li class="pushy-link"><a href="{{ url('encargadoArea/clave') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Cambiar contraseña</a></li>
                     <li class="pushy-submenu">
-                        <button>En espera</button>
+                        <button><i class="fa fa-exchange" aria-hidden="true"></i> En espera <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
                         <ul>
                             <li class="pushy-link"><a href="{{ url('encargadoArea/traerProductoEnEspera') }}">Productos</a></li>
-                            <li class="pushy-link"><a href="{{ url('encargadoArea/traerServicioEnEspera') }}">Servicios</a></li>
+                            {{--<li class="pushy-link"><a href="{{ url('encargadoArea/traerServicioEnEspera') }}">Servicios</a></li>--}}
                         </ul>
                     </li>
                      <li class="pushy-submenu">
-                        <button id="oc"><i class="fa fa-database"></i> Ocultos</button>
+                        <button id="oc"><i class="fa fa-eye-slash" aria-hidden="true"></i> Ocultos <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
                         <ul>
-                            <li class="pushy-link"><a href="{{ url('encargadoArea/productosOcultos') }}"><i class="fa fa-indent"></i> Productos Ocultos</a>
-                            <li class="pushy-link"><a href="{{ url('encargadoArea/serviciosOcultos') }}"><i class="fa fa-indent"></i> Servicios Ocultos</a>
+                            <li class="pushy-link"><a href="{{ url('encargadoArea/productosOcultos') }}">Productos Ocultos</a>
+                           {{-- <li class="pushy-link"><a href="{{ url('encargadoArea/serviciosOcultos') }}"><i class="fa fa-indent"></i> Servicios Ocultos</a>--}}
+                        </ul>
+                    </li>
+                    <li class="pushy-submenu">
+                        <button id="oc"><i class="fa fa-bar-chart" aria-hidden="true"></i> Novedades <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
+                        <ul>
+                            <li class="pushy-link"><a href="{{ url('encargadoArea/verVentas') }}">Ventas en mi área</a>
+                           {{-- <li class="pushy-link"><a href="{{ url('encargadoArea/serviciosOcultos') }}"><i class="fa fa-indent"></i> Servicios Ocultos</a>--}}
                         </ul>
                     </li>
                     <!--<li class="pushy-submenu">
@@ -88,10 +95,10 @@
                         </ul>
                     </li>-->
                   
-                    <li class="pushy-link"><a href="#"><i class="fa fa-globe"></i> Notificaciones</a></li>
+                   {{-- <li class="pushy-link"><a href="#"><i class="fa fa-globe"></i> Notificaciones</a></li>
                     <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
-                    <li class="pushy-link"><a href="#">Item 4</a></li>
+                    <li class="pushy-link"><a href="#">Item 4</a></li>--}}
                 </ul>
             </div>
         </nav>
@@ -131,6 +138,15 @@
                 </nav>
                 
                <div class="margen">
+                <noscript>
+                        <div class="alert alert-danger">
+                <a href="" class="close" data-dismiss="alert">&times;</a>
+                       <center> <i class="fa fa-info-circle" aria-hidden="true"></i> 
+                            <h5>Este sitio requiere de javascript, porfavor activarlo</h5>
+                       </center>
+                   </div>
+                    
+                    </noscript>
                     @yield('content')
 
                </div>

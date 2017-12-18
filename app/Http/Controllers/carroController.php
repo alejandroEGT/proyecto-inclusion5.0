@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class carroController extends Controller
 {
-   
+   //Esta funcion ingresa un producto al carro de compras desde DetalleProducto
 	public function ingProducto(Request $datos){
 
 		$getId = base64_decode($datos->id);/*id del producto*/
@@ -64,6 +64,7 @@ class carroController extends Controller
 		
 	}
 
+	//Esta funcion borra un producto desde el carro de compras
 	public function delProducto($id){
 
 
@@ -76,6 +77,7 @@ class carroController extends Controller
 		return redirect()->back();
 	}
 
+	//Esta funcion actualiza la cantidad de un producto desde el carro de compras
 	public function actProducto(Request $datos){
 
 		$id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
@@ -97,7 +99,7 @@ class carroController extends Controller
 		}
 	}
 
-
+	   //Esta funcion redirecciona al carro de compras del cliente
        public function miCarro()
     {
     	try{
@@ -127,7 +129,7 @@ class carroController extends Controller
         }  
 	
     }
-
+    //Esta funcion redirecciona al resumen de lo que se desea comprar para asi posteriormente proceder a la compra
     public function detalleCompra(){
 
     	try{
@@ -153,7 +155,7 @@ class carroController extends Controller
 	
     }
 
-
+    //Esta funcion redirecciona al carro de compras cuando el cliente cancela el pago desde Khipu
     public function cancelado(){
 
     	try{
@@ -204,8 +206,9 @@ class carroController extends Controller
     	}
    			 	
      }
-
+    //Esta funcion redirecciona a mis Compras una vez realizado el pago desde Khipu
     public function procesando(){
+    	try{
 
     	     $id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
    			 $carro = carro::where('id_cliente',$id_cliente->id)->where('id_estado',9)->latest()->first();
@@ -227,6 +230,29 @@ class carroController extends Controller
     	}
    			 }
 
-   			 
+   			     	}catch(Exception $e){
+    		return redirect()->back();
+    	}
     }
+
+    //Esta funcion cuenta los productos ingresados al carro para que de esta manera sean mostrados al cliente desde el menu
+    public function cantidadProductosCarro($idUser){
+
+    	try{
+    		$id_cliente = cliente::where('id_user', $idUser)->first();
+
+	    	$carro = carro::cantidadProductosCarro($id_cliente->id);
+
+	    	if($carro){
+	    		return count($carro);
+	    	}else{
+	    		return false;
+	    	}
+
+    	}catch(\Exception $e){
+    		return redirect()->back();
+    	}
+
+    }
+
 }

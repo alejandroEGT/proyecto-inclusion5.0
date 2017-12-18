@@ -32,6 +32,9 @@
 			<p><strong>Teléfono: </strong>{{ $cliente->telefono }}</p>
 			<p><strong>Fecha de venta: </strong>{{ date(' h:i:s - d-m-Y', strtotime($cliente->fecha)) }}</p>
 		</div>
+		<div class="col-md-3">
+			<p><strong>Institución: </strong> {{ \Auth::guard('institucion')->user()->nombre  }}</p>
+		</div>
 	</div>
 	
 	<table class="table table-hover" >

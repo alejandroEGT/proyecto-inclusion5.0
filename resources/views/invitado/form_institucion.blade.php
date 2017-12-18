@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-md-offset-3 col-md-3">
 					{{ csrf_field() }}
-					<label  class="p-form">RUT <small>(Sin puntos ni guiones)</small> </label>
+					<label  class="p-form">RUT <small>(especifique un guión)</small> </label>
 					<input  class="form-control input" type="text" name="rut" placeholder="rut" value="{{ old('rut') }}" >
 					<label  class="p-form">Nombre</label>
 					<input  class="form-control input" type="text" name="nombre" placeholder="nombre" value="{{ old('nombre') }}" >

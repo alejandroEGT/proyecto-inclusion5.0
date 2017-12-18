@@ -6,14 +6,15 @@
 	 <meta id="token" name="token" value="{{csrf_token() }}">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sesión de  {{ Auth::user()->email }}</title>
+  
 	<link rel="stylesheet" href="{{asset('css/css.css')}}">
-    <link rel="stylesheet" href="{{asset('css/estilo_vendedor.css')}}">
+    
 
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
 
 <!-- onMouseMove="stopScroll();" onmouseover="estaPulsadoShift(event);"-->
-<body class="body-vendedor" onmouseover="estaPulsadoShift(event);">
+<body class="body-vendedor" onmouseover="estaPulsadoShift(event);" >
         
 <div id="master-vendedorDependiente" class="animated fadeIn" >
 
@@ -37,13 +38,13 @@
                         
                         <hr>
                     </li>
-                     <li class="pushy-link"><a href="{{ url('userDependiente/inicio') }}">Inicio</a></li>
+                     <li class="pushy-link"><a href="{{ url('userDependiente/inicio') }}"><i class="fa fa-indent" aria-hidden="true"></i> Inicio</a></li>
                     
-                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}">Mis Datos</a></li>
-                    <li class="pushy-link"><a href="{{ url('userDependiente/publicarProducto') }}">Publicar productos</a></li>
-                    <li class="pushy-link"><a href="{{ url('userDependiente/publicarServicio') }}">Publicar servicios</a></li>
-                    <li class="pushy-link"><a href="{{ url('userDependiente/traerProductoEnEspera') }}">Productos en espera</a></li>
-                    <li class="pushy-link"><a href="{{ url('userDependiente/traerServicioEnEspera') }}">Servicios en espera</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/datos') }}"><i class="fa fa-database" aria-hidden="true"></i> Mis Datos</a></li>
+                    <li class="pushy-link"><a href="{{ url('userDependiente/publicarProducto') }}"><i class="fa fa-cubes" aria-hidden="true"></i> Publicar productos</a></li>
+                   {{-- <li class="pushy-link"><a href="{{ url('userDependiente/publicarServicio') }}">Publicar servicios</a></li>--}}
+                    <li class="pushy-link"><a href="{{ url('userDependiente/traerProductoEnEspera') }}"><i class="fa fa-gavel" aria-hidden="true"></i> Productos en espera</a></li>
+                    {{--<li class="pushy-link"><a href="{{ url('userDependiente/traerServicioEnEspera') }}">Servicios en espera</a></li>--}}
                     <!--<li class="pushy-submenu">
                         <button>Formularios</button>
                         <ul>
@@ -61,17 +62,17 @@
                         </ul>
                     </li>-->
                     <li class="pushy-submenu">
-                        <button><i class="fa fa-cube"></i> Especialidad / Areas</button>
+                        <button><i class="fa fa-cube"></i> Novedades</button>
                         <ul>
-                            <li class="pushy-link"><a href="#"><!--Aqui nombe--></a></li>
+                            <li class="pushy-link"><a href="{{ url('userDependiente/ventas') }}">productos vendidos</a></li>
                         </ul>
                     </li>
-                    <li class="pushy-link"><a href="#"><i class="fa fa-globe"></i> Notificaciones</a></li>
+                   
                     <!--<li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
                     <li class="pushy-link"><a href="#">Item 4</a></li>-->
-                </ul>
-                <li class="pushy-submenu">
+                
+                    <li class="pushy-submenu">
                         <button id="first-link">¿Te ayudamos?</button>
                         <ul>
                             @if (Session::has('activarMicro'))
@@ -95,6 +96,7 @@
                              <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
                     </li>
+                </ul> 
             </div>
         </nav>
 
@@ -112,24 +114,34 @@
                                 </div>             
                             </div>  
                            <div v-if="estadoPassword != 1">
-                                <div class="col-xs-offset-1 col-xs-3 col-md-3">
-                                 @if (Session::has('activarMicro'))
-                                <a href="{{ url('userDependiente/desactivarmicro') }}"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i></a>
+                                <div class="col-xs-offset-1 col-xs-4 col-md-4 ">
+                             @if (Session::has('activarMicro'))
+                                <a href="{{ url('userDependiente/desactivarmicro') }}"><i class="fa fa-microphone fa-2x micro-on" aria-hidden="true"></i>&nbsp;</a>
                             @endif
 
                             @if (empty(Session::get('activarMicro')))
                            <a href="{{ url('userDependiente/activarmicro') }}">
-                                <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true"></i>
+                                <i class="fa fa-microphone fa-2x micro-off" aria-hidden="true">&nbsp;</i>
                             </a>
                             @endif
                             @if (Session::has('activarText'))
-                               <a href="{{ url('userDependiente/desactivartext') }}"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i></a>
+                               <a href="{{ url('userDependiente/desactivartext') }}"><i class="fa fa-commenting fa-2x text-on" aria-hidden="true"></i>&nbsp;</a>
                             @endif
 
                             @if (empty(Session::get('activarText')))
                            <a href="{{ url('userDependiente/activartext') }}">
-                                <i class="fa fa-commenting fa-2x text-off" aria-hidden="true"></i></i>
+                                <i class="fa fa-commenting fa-2x text-off" aria-hidden="true">&nbsp;</i></i>
                             </a>
+                            @endif
+                            @if (Session::get('activarDalt'))
+                                <a href="{{ url('userDependiente/desactivarDalt') }}">
+                                    <i class="fa fa-eye fa-2x text-off" aria-hidden="true"></i>
+                                </a>
+                            @endif
+                             @if (empty(Session::get('activarDalt')))
+                                <a href="{{ url('userDependiente/activarDalt') }}">
+                                    <i class="fa fa-eye fa-2x text-off" aria-hidden="true"></i>
+                                </a>
                             @endif
                             </div>
                            </div>
@@ -145,9 +157,9 @@
                                 </form> 
                                 
                             </div>--}}
-                            <div class="col-md-6">
+                            <div class="col-md-offset-1 col-md-4 ">
                                 <div class="container-fluid" >
-                                     <p class="p-right"><label onmouseover="fun_p(this)">Registrado como: {{Auth::user()->email}}</label></p>
+                                     <p class="p-right"><label onmouseover="fun_p(this)">{{Auth::user()->email}}</label></p>
                                 </div>
                             </div>
                         </div>
@@ -155,6 +167,16 @@
                 </nav>
                 
                 <div class="margen">
+                    <noscript>
+                        <div class="alert alert-danger">
+                <a href="" class="close" data-dismiss="alert">&times;</a>
+                       <center> <i class="fa fa-info-circle" aria-hidden="true"></i> 
+                            <h5>Este sitio requiere de javascript, porfavor activarlo</h5>
+                       </center>
+                   </div>
+                    
+                    </noscript>
+
                     @yield('content')
                 </div>
 

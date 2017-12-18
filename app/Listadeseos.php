@@ -31,6 +31,8 @@ class Listadeseos extends Model
     	$traer = \DB::table('producto-favorito')
     			->join('productos','productos.id','=','producto-favorito.id_producto')
     			->join('foto_productos','foto_productos.id_producto','=','producto-favorito.id_producto')
+                ->join('tienda_producto_instituciones','tienda_producto_instituciones.id_producto','=','productos.id')
+                ->where('tienda_producto_instituciones.id_estado',1)
     			->where('producto-favorito.id_user', $id_user)->get();
 
     	return $traer;

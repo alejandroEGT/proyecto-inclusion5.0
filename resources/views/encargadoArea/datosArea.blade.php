@@ -31,7 +31,7 @@
 	<div class="col-md-offset-1 col-md-6">
 		<p><label><strong>Nombre del área:</strong></label> <small>{{ $datos->nombre}}</small>  </p>
 		<p><label><strong>Descripción:</strong></label> <small>{{ $datos->descripcion}}</small>  </p>
-		<p><label><strong>fecha de creación:</strong></label> <small>{{ $datos->created_at}}</small> </p>
+		<p><label><strong>fecha de creación:</strong></label> <small>{{ date('h:i:s - d/m/Y', strtotime($datos->created_at))}}</small> </p>
 		<hr>
 		<p><label><strong>Actual encargado(a):</strong></label> <small>{{ $datos->nombres.' '.$datos->apellidos}}</small>  </p>
 		<p><label><strong>Correo:</strong></label> <small>{{ $datos->email}}</small> <button data-toggle="collapse" data-target="#correo" class="btn btn-info btn-xs">Actualizar</button> </p>

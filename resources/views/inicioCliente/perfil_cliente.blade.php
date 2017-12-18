@@ -5,17 +5,17 @@
 		@if ($errors->any())
 			    <div class="alert alert-danger">
 			    <a href="" class="close" data-dismiss="alert">&times;</a>
-				        <ul>
+				        
 				            @foreach ($errors->all() as $error)
-				                <li class="validacionRequest"><label>{{ $error }}</label></li>
+				              <p class="validacionRequest"> <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ $error }} </p>
 				            @endforeach
-				        </ul>
+				       
 			    </div>
 			@endif
 		@if (Session::has('Advertencia'))
 			<div class="alert alert-info">
 		    <a href="" class="close" data-dismiss="alert">&times;</a>
-			        {{ Session::get('Advertencia') }}
+			       <i class="fa fa-check" aria-hidden="true"></i> {{ Session::get('Advertencia') }}
 		    </div>
 		@endif
 
@@ -24,8 +24,8 @@
 		<!--barra lateral-->
 		<div class="col-md-2"><br>
 			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
-			  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-expanded="true">Mis Datos</a>
-			  <!--
+			  <!--<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-expanded="true">Mis Datos</a>
+			  
 			  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-expanded="true">Mis Compras</a>
 			  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-expanded="true">Mis Valoraciones</a>
 			  <a class="nav-link" id="v-pills-favoritos-tab" data-toggle="pill" href="#v-pills-favoritos" role="tab" aria-controls="v-pills-favoritos" aria-expanded="true">favoritos</a>-->
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<!--contenido de cliente-->
-		<div class="col-md-6">	
+		<div class="col-md-5">	
 			<br>
 			<div class="tab-content" id="v-pills-tabContent">
 
@@ -92,7 +92,7 @@
 									  </div>
 
 								      <div class="boton-sesion row">	
-						  				<button type="submit" class="btn btn-primary btn-outline-success">Guardar</button>
+						  				<button type="submit" class="btn btn-raised btn-success">Guardar</button>
 									  </div>
 								  
 									</form>
@@ -136,7 +136,7 @@
 									  </div>
 
 								      <div class="boton-sesion row">	
-						  				<button type="submit" class="btn btn-primary btn-outline-success">Guardar</button>
+						  				<button type="submit" class="btn btn-raised btn-success">Guardar</button>
 									  </div>
 								  
 									</form>
@@ -173,7 +173,7 @@
 									  </div>
 
 								      <div class="boton-sesion row">	
-						  				<button type="submit" class="btn btn-primary btn-outline-success">Guardar</button>
+						  				<button type="submit" class="btn btn-raised btn-success">Guardar</button>
 									  </div>
 								  
 								</form>
@@ -200,7 +200,7 @@
 									    <input type="file" class="form-control-file " id="exampleFormControlFile1" name="foto">
 									  </div>
 								      <div class="boton-sesion row">	
-						  				<button type="submit" class="btn btn-primary btn-outline-success">Guardar</button>
+						  				<button type="submit" class="btn btn-raised btn-success">Guardar</button>
 									  </div>
 									</form>
 								</div>

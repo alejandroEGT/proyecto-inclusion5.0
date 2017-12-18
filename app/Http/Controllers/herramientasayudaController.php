@@ -43,4 +43,18 @@ class herramientasayudaController extends Controller
     			\Session::forget('activarText');
     			return redirect()->back();
 	}
+
+
+	public function activar_dalt()
+	{
+		\Session::put('activarDalt', '1');
+		\Session::flash('flash_activarDalt', 'Activando modo daltonismo');
+    			return redirect()->back();
+	}
+	public function desactivar_dalt()
+	{
+			\Session::flash('flash_desactivarDalt', 'desactivando modo daltonismo');
+    		\Session::forget('activarDalt');
+    		return redirect()->back();
+	}
 }

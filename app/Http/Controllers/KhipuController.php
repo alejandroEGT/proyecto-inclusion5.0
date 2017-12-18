@@ -7,6 +7,7 @@ use App\carro;
 use App\cliente;
 use App\cuentaCobroInstitucion;
 use App\cuentaCobroVendedor;
+use App\detalle_carro;
 use App\producto;
 use App\venta_producto;
 use Illuminate\Http\Request;
@@ -16,11 +17,28 @@ use Khipu;
 class KhipuController extends Controller
 {
 
+    //Esta funcion inicia el pago con Khipu, de esta manera iniciando la conexion con Khipu, entregando los precios, urls de retorno, cancelado y notificacion, los identificadores de la tiendas, para asi redireccionar al cliente a Khipu para que realize el pago
 	public function crearPago(){
+
 
     $id_cliente = cliente::where('id_user', \Auth::user()->id)->first();
 
     $carro = carro::traerDatosCarro($id_cliente);
+
+
+    $verificarEstadoProducto = detalle_carro::verificarEstadoProducto($carro[0]->idCarro);
+
+    if($verificarEstadoProducto){
+        
+                        for ($i=0; $i < count($verificarEstadoProducto); $i++) { 
+
+
+                                    $borrarDetalle[$i] = detalle_carro::where('id', $verificarEstadoProducto[$i]->idDetalle)
+                                    ->delete();
+
+                        }
+    }
+
 
 	$receiver_id = ENV('KHIPU_APP_ID');
     $secret = ENV('KHIPU_APP_KEY');
@@ -40,14 +58,20 @@ class KhipuController extends Controller
 
     $bank_id = '';
     $payer_email = \Auth::user()->email;
-    $expires_date = ''; //treinta dias a partir de ahora
+
+
+    $expires_date = time() + 60*10;
+
     $picture_url = '';
     $notify_url = 'https://exod.cl/api/notice';
     $return_url = 'https://exod.cl/carro/procesando';
     $cancel_url = 'https://exod.cl/carro/cancelado';
     $custom = '';
 
+
+
     for ($i=0; $i < count($carro); $i++) {  
+
 
             $updProd[$i] = producto::where('id',$carro[$i]->idProducto)->first();
 
@@ -69,9 +93,16 @@ class KhipuController extends Controller
                             "amount" => "$total[$i]",
                             "integrator_fee" => "10"
                         ); 
+
+                        $update[$i] = detalle_carro::where('id_carro', $carro[$i]->idCarro)->where('id_producto', $carro[$i]->idProducto)->first();
+
+                        $update[$i]->precio_actual = $carro[$i]->precioProducto;
+
+                        $update[$i]->save();
             
             }
 
+        
 
     }
 
@@ -114,7 +145,7 @@ class KhipuController extends Controller
     curl_close($ch);
 
     $url = json_decode($output,true);
-
+    
 
     if(array_has($url, 'error')){
 
@@ -143,6 +174,8 @@ class KhipuController extends Controller
 
     }
 
+
+    //Esta funcion recibe la notificacion del pago desde Khipu para asi poder finalizar la venta, enviando de esta manera correos de verificacion al cliente y/o institucion
     public function notice(Request $request){
     
         $receiver_id = ENV('KHIPU_APP_ID');
@@ -230,6 +263,7 @@ class KhipuController extends Controller
 
     }
 
+    //Esta funcion verifica si la institucion a pagado la activacion de su cuenta de cobro
     public function verificarEstadoCuenta($idInstitucion){
 
             $institucion = cuentaCobroInstitucion::where('id_institucion', $idInstitucion)->first();

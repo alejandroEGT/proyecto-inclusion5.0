@@ -483,7 +483,7 @@ protected function ver_mas_producto($cantidad)
         return $ver_mas;
     }
 
-    protected function ver_productos_tienda()//$idTienda)
+        protected function ver_productos_tienda($idTienda, $cantidad)
     {
         $ver_mas = \DB::table('tienda_producto_instituciones')
         ->select([
@@ -498,8 +498,9 @@ protected function ver_mas_producto($cantidad)
                     ])
                       ->join('productos','productos.id','=','tienda_producto_instituciones.id_producto')
                       ->join('foto_productos','foto_productos.id_producto','=','productos.id')
-                      //->where('tienda_producto_instituciones.id_tienda','=',$idTienda)
-                      ->where('tienda_producto_instituciones.id_estado',1)->get();
+                      ->where('tienda_producto_instituciones.id_tienda','=',$idTienda)
+                      ->where('tienda_producto_instituciones.id_estado',1)
+                      ->paginate($cantidad);
 
         return $ver_mas;
     }
@@ -664,6 +665,27 @@ protected function ver_mas_producto($cantidad)
          ->where('tienda_vendedor.id_vendedor', $idVen)->take(5)->get();
 
          return $traer;
+    }
+    protected function stock_minimo($id_institucion, $cantidad)
+    {
+         $traer = \DB::table('productos')
+                   ->select([
+                        'productos.id as id',
+                        'foto_productos.foto as foto',
+                        'productos.nombre as nombre',
+                        'productos.cantidad as cantidad'
+                   ])
+                  ->join('tienda_producto_instituciones','tienda_producto_instituciones.id_producto','=','productos.id')
+                  ->join('foto_productos','foto_productos.id_producto','productos.id')
+                  ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
+                  ->where('tienda_producto_instituciones.id_estado', 1)
+                  ->where('tiendas_instituciones.id_institucion', $id_institucion)
+                  ->where('productos.cantidad','<', $cantidad)
+                  ->get();
+        if (count($traer)>0) {
+        
+            return $traer; 
+        }         
     }
 
 }

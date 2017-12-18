@@ -19,7 +19,15 @@ class detalle_carro extends Model
 
 		$update = detalle_carro::where('id_carro', $carro)->where('id_producto', $producto->idProducto)->first();
 
+
 			if($update && $update->id_producto == $producto->idProducto){
+
+				if($update->cantidad >= $producto->cantidadProducto){
+
+				\Session::flash('correcto', 'Ha superado el stock disponible en Carro');
+           			  return false;
+
+				}else{
 
 						$update->cantidad = $update->cantidad+$datos->cantidad;
 
@@ -28,6 +36,8 @@ class detalle_carro extends Model
 						}else{
 							return false;
 						}
+
+				}
 			}else{
 
 			$agregar = new detalle_carro;
@@ -103,6 +113,35 @@ class detalle_carro extends Model
 				return false;
 			}
 		}
+
+	}
+
+	protected function verificarEstadoProducto($idCarro){
+
+
+		$carros = \DB::table('carros')
+                    ->select([
+                        'detalle_carros.id as idDetalle',
+                        'tienda_producto_instituciones.id_estado as idEstado'
+                    ])
+                    ->join('detalle_carros','detalle_carros.id_carro','=','carros.id')
+                    ->join('productos','productos.id','=','detalle_carros.id_producto')
+                    ->join('categoria_productos','categoria_productos.id','=','productos.id_categoria')
+                    ->join('tienda_producto_instituciones','tienda_producto_instituciones.id_producto','=','productos.id')
+                    ->join('foto_productos','foto_productos.id_producto','=','productos.id')
+                    ->join('tiendas_instituciones','tiendas_instituciones.id','=','tienda_producto_instituciones.id_tienda')
+                    ->join('institucion','institucion.id','=','tiendas_instituciones.id_institucion')
+                    ->where('carros.id', $idCarro)
+                    ->where('detalle_carros.id_estado',4)
+                    ->where('carros.id_estado',1)
+                    ->where('tienda_producto_instituciones.id_estado',2)
+                    ->get();
+
+       if(count($carros)>0){
+       	 return $carros;
+       	}else{
+       		return false;
+       	}
 
 	}
 

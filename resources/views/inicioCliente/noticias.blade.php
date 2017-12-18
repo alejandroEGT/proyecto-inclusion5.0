@@ -44,18 +44,19 @@
 					@foreach ($noticias as $ng)
 						<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 						<div class="mdl-card__media porteimg"><img class="img-notix"  src="{{ '/'.$ng->foto }}" alt="foto de noticia"></div>
-						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $ng->titulo}}</h4></div>
+						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ str_limit($ng->titulo,20)}}</h4></div>
 						<div class="mdl-card__supporting-text">
-		      				<span class="mdl-typography--font-light mdl-typography--subhead">por definir</span>
+		      				<span class="mdl-typography--font-light mdl-typography--subhead">{{ str_limit($ng->texto,30)}}</span>
 		      			</div>
 						 <div class="mdl-card__actions">
 		         			<a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url('verDetalleNoticia/'.base64_encode($ng->id)) }}">Ver Noticia<i class="material-icons">chevron_right</i></a>
 		      			</div>
 		      		</div>
 					@endforeach
-					</div>
-			</div><br>
+								</div>
+			<br><div class="separacion-compras"><img src="/ico/separar.png"></div>	
 			<center><p>{{$noticias->links()}}</p></center>
+					</div>
 				@endif
 				@if (!count($noticias))
 						<center><h1>No existen noticias</h1></center>

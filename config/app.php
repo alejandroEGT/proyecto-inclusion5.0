@@ -181,6 +181,7 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
 	    Collective\Html\HtmlServiceProvider::class,
+        PulkitJalan\GeoIP\GeoIPServiceProvider::class
  ],
 
     /*
@@ -234,6 +235,7 @@ return [
 	    'PDF' => Barryvdh\DomPDF\Facade::class,
 	    'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'GeoIP' => PulkitJalan\GeoIP\Facades\GeoIP::class,
    ],
 
 ];

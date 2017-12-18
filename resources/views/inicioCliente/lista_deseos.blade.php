@@ -17,13 +17,11 @@
 				        {{ Session::get('exito') }}
 			    </div>
 			@endif
-	<br>
 <div class="container">
+	<hr>
+		<center><h1>Lista de deseos</h1></center>
+		<hr>
 	<div class="panel panel-succses">
-	    <div class="panel-heading">
-	        <center><p><h4>Lista de deseos</h4></p></center>
-	        <hr>
-	    </div>
 	    <div class="panel-body">
 	    	@if (count($lista)>0)
 		
@@ -34,7 +32,8 @@
 				</div>
 				<div class="col-md-6">
 					<p><label class="lbl-nom" >{{$l->nombre}}</label></p>
-					<p><label class="lbl-precio" >$ {{$l->precio}}</label></p>
+					<span class="mdl-typography--font-light mdl-typography--subhead">{{ $l->descripcion }}</span>
+					<div class="mdl-card__title"><h4 class="lbl-precio">{{'$'.number_format($l->precio, 0, ',', '.') }} CLP</h4></div>	
 					<p><button class="btn btn-raised btn-info btn-xs">
 						<a href="{{ url('/verDetalleProducto/'.base64_encode($l->id_producto)) }}" style="color:white" >Ver</a>
 					</button>

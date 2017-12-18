@@ -33,7 +33,7 @@
 					    </div>
 
 					    <div class="carousel-item">
-					      <img class="d-block w-100" src="https://www.teleton.cl/wp-content/uploads/2017/04/inclusion975-790x495.jpg" alt="thirst slide">
+					      <img class="d-block w-100" src="https://www.zoomtecnologico.com/wp-content/uploads/2016/05/khipu-pago.jpg" alt="thirst slide">
 					    </div>					    
 					  </div>
 					  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -61,18 +61,14 @@
 							<a class="mdl-card__media porteimg" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}"><img src="{{ '/'.$producto->fotoProducto }}"></a>
 
 							</div>	
-							<div class="mdl-card__title">
-								<span class="mdl-typography--font-light mdl-typography--subhead lbl-precio ">
-									$ {{ $producto->precioProducto }}
-								</span>
-							</div>						
-							<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $producto->nombreProducto }}</h4>
+							<div class="mdl-card__title"><h4 class="lbl-precio"> $ {{ number_format($producto->precioProducto, 0, ',', '.')  }} CLP</h4></div>					
+							<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ str_limit($producto->nombreProducto,20) }}</h4>
 							</div>
 							<div class="mdl-card__supporting-text">
-							<span class="mdl-typography--font-light mdl-typography--subhead">{{ $producto->descripcionProducto }}</span>
+							<span class="mdl-typography--font-light mdl-typography--subhead">{{ str_limit($producto->descripcionProducto,20) }}</span>
 							</div>
 							<div class="mdl-card__actions">
-		         			<a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}">Ver<i class="material-icons">chevron_right</i></a>
+		         			<a class="btn btn-raised btn-success" href="{{ url("/verDetalleProducto/".base64_encode($producto->idProducto)) }}">Ver</a>
 		      				</div>
 						
 							
@@ -82,9 +78,9 @@
 				@endforeach
 			
 			</div>
-			<hr>	
-
-			<center><a href="/productos_clientes">Ver todos los productos...</a></center><hr>
+				
+			<br><div class="separacion-compras"><img src="/ico/separar.png"></div>	
+			<center><a href="/productos_clientes"><img src="/ico/ver_mas.png" class="botonImagenVerMas"></a></center>
 
 	</div>
 
@@ -128,17 +124,17 @@
 		      <a class="mdl-card__media porteimg" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}"><img src="{{'/'.$tienda->logo}}"></a>
 		      <div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $tienda->nombre }}</h4></div>
 		      <div class="mdl-card__supporting-text">
-		      <span class="mdl-typography--font-light mdl-typography--subhead">{{ $tienda->descripcion }}</span>
+		      <span class="mdl-typography--font-light mdl-typography--subhead"> </span>
 		      </div>
 		      <div class="mdl-card__actions">
-		         <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}">Ver<i class="material-icons">chevron_right</i></a>
+		         <a class="btn btn-raised btn-success" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}">Ver</a>
 		      </div>
 		    </div>
 	   		@endforeach
 	   	</div>
-	   		<hr>	
-
-			<center><a href="{{url ('/tiendas_clientes')}}">Ver todas las tiendas...</a></center><hr>
+	   		
+			<br><div class="separacion-compras"><img src="/ico/separar.png"></div>	
+			<center><a href="{{url ('/tiendas_clientes')}}"><img src="/ico/ver_mas.png" class="botonImagenVerMas"></a></center>
 	</div> 	
 		<!--<div class="android-section-title mdl-typography--display-1-color-contrast"><i class="material-icons">&#xE867;</i> Vendedores</div>
 		<div class="android-card-container mdl-grid">
@@ -164,17 +160,18 @@
 					@foreach ($noticias as $ng)
 						<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdl-card mdl-shadow--3dp">
 						<a class="mdl-card__media porteimg" href="{{ url('verDetalleNoticia/'.base64_encode($ng->id)) }}"><img class="img-notix"  src="{{ '/'.$ng->foto }}" alt="foto de noticia"></a>
-						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{ $ng->titulo}}</h4></div>
+						<div class="mdl-card__title"><h4 class="mdl-card__title-text">{{str_limit($ng->titulo, 20)}}</h4></div>
 						<div class="mdl-card__supporting-text">
-		      				<span class="mdl-typography--font-light mdl-typography--subhead">por definir</span>
+		      				<span class="mdl-typography--font-light mdl-typography--subhead">{{ str_limit($ng->texto,30)}}</span>
 		      			</div>
 						 <div class="mdl-card__actions">
-		         			<a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{{ url('verDetalleNoticia/'.base64_encode($ng->id)) }}">Ver<i class="material-icons">chevron_right</i></a>
+		         			<a class="btn btn-raised btn-success" href="{{ url('verDetalleNoticia/'.base64_encode($ng->id)) }}">Ver</a>
 		      			</div>
 		      		</div>
 					@endforeach
 					</div>
-					<hr><center><a href="{{ url('/noticias_clientes') }}">Ver todas las noticias...</a></center><hr>
+					<br><div class="separacion-compras"><img src="/ico/separar.png"></div>	
+					<center><a href="{{ url('/noticias_clientes') }}"><img src="/ico/ver_mas.png" class="botonImagenVerMas"></a></center>
 			</div><br>
 				@endif
 				@if (!count($noticias))

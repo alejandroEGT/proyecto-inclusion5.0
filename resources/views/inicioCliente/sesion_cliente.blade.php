@@ -15,40 +15,44 @@
 				        </ul>
 			    </div>
 			@endif
-	<br><h1 class="text-center">Iniciar Sesion</h1>
-	<div class="android-drawer-separator"></div>
+	
 
 
 	<div class="container">
+		<hr><h1 class="text-center">Iniciar Sesion</h1><hr>
 		<div class="row caja-sesion">
-			<div class="col-xs-12 col-sm-12 col-md-6 mdl-shadow--6dp">
+			<div class="col-xs-12 col-sm-12 col-md-6 panel">
 
 				<form action="/sesion_cliente" method="post">
 
 					{{csrf_field()}}
 					<div class="contenido-sesion">
 										
-					  <div class="form-group">
-					    <label for="exampleInputEmail1" class="bmd-label-floating">Correo electronico</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1" name="correo">
+					  <div class="form-group row">
+					    <label for="ema" class="col-sm-4 col-form-label">Correo electronico:</label>
+					    <div class="col-sm-8">
+					    	<input type="email" class="form-control" id="ema" name="correo">
+					    </div>
 					  </div>
 					
-					  <div class="form-group">
-					    <label for="exampleInputPassword1" class="bmd-label-floating">Contraseña</label>
-					    <input type="password" class="form-control" id="exampleInputPassword1" name="pass">
-					    <br><a href="">¿Olvido su contraseña?</a>
+					  <div class="form-group row">
+					    <label for="pa" class="col-sm-4 col-form-label">Contraseña:</label>
+					    <div class="col-sm-8">
+					    	<input type="password" class="form-control" id="pa" name="pass">
+						</div>
 					  </div>		
 					</div>
 
-					<div class="boton-sesion">	
-					  	<button type="submit" class="btn btn-primary btn-outline-success">Iniciar sesión</button>
+
+					<br><div class="boton-sesion text-center">	
+					  	<center><button type="submit" class="btn btn-raised btn-success">Iniciar sesión</button></center>
 					</div><br>
+					<center><a href="{{ url('/recuperarContrasena') }}">¿Olvido su contraseña?</a></center><br>
 					  	<p align="right">
 					  		<a href="registro_cliente" class="registro-sesion">¡Regístrate gratis!</a>
 					  	</p>
 				</form>
 
-			    <div class="android-drawer-separator"></div>
 				{{--<form class="form-horizontal" action="/login/facebook" method="post">
 					{{csrf_field()}}
 					<div class="form-group text-center">	

@@ -3,6 +3,12 @@
 @section('content')
 
 @if (isset($institucion))
+	@if (Session::has('stock'))
+				<div class="alert alert-danger">
+			    <a href="" class="close" data-dismiss="alert">&times;</a>
+				        <center><i class="fa fa-info-circle" aria-hidden="true"></i> {{ Session::get('stock') }} <a href="{{ url('institucion/ver_detalle_stock') }}">revisa para más detalles haciendo click aquí</a></center>
+			    </div>
+@endif
 	<div class="" >
 		<div class="row">
 			<div class="col-md-12 well background-blue">
@@ -23,13 +29,13 @@
 					<p><label>Puedes publicar tus novedades cuando gustes, también lo podrán hacer personas que pertenezcan a {{Auth::guard('institucion')->user()->nombre}}</label></p>
 						<div class="botones-grupo">
 							<a href="{{ url('institucion/publicarProducto') }}" class="btn btn-verde" >Publicar Producto</a>
-							<a href="{{ url('institucion/publicarServicio') }}" class="btn btn-naranja" >Publicar Servicio</a>
+							<a href="{{--url('institucion/publicarServicio')--}}{{ url('institucion/noticia') }}" class="btn btn-naranja" >{{--Publicar Servicio--}}Publicar noticia</a>
 						</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 					<div class="panel panel-info">
-					  <div class="panel-heading">Agregar información a nuestra institución</div>
+					  <div class="panel-heading"><i class="fa fa-suitcase" aria-hidden="true"></i> Agregar información a nuestra institución</div>
 					  <div class="panel-body">
 					  		<div class="list-group">
 	 							<a class="list-group-item" href="agregarAE"> <i class="fa fa-plus"></i> Agregar Área / Especialidad</a>
@@ -112,7 +118,7 @@
 							<hr>
 							
 							@foreach ($productos as $producto)
-							<div class="box-producto">
+								<div class="box-producto">
 								<center>
 									<img src="{{ '/'.$producto->foto }}" alt="foto de {{ $producto->nombre }}" class="img-thumbnail img-prod ">
 									<p><label>{{ str_limit($producto->nombre,10) }}</label></p>
@@ -121,7 +127,8 @@
 									</p>
 								</center>
 
-							</div>	
+							</div>
+						
 							@endforeach
 								<!--<center>{{-- $productos->links() --}}</center>-->
 
@@ -183,9 +190,9 @@
 					</div>
 
 				@endif
-				@if (!count($servicios))
+				{{--@if (!count($servicios))
 					<center><label for="">No Existen Servicios para mostrar <img src="/ico/sad.png"></label></center>
-				@endif
+				@endif--}}
 			</div>
 		</div>
 	</div>

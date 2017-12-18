@@ -6,6 +6,7 @@ use App\Area;
 use App\Encargado;
 use App\Fotoperfil;
 use App\Http\Requests\agregarAlumnoDesdeAreaRequest;
+use App\Http\Requests\noticiaRequest;
 use App\Http\Requests\productoRequest;
 use App\Institucion;
 use App\Passwordcuenta;
@@ -25,10 +26,10 @@ use App\estado_tienda_producto;
 use App\estado_tienda_servicio;
 use App\foto_producto;
 use App\foto_servicio;
-use App\http\Requests\noticiaRequest;
 use App\noticia;
 use App\producto;
 use App\servicio;
+use App\venta_producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -37,8 +38,8 @@ class encargadoController extends Controller
     public function vista_inicio(){
 
         $encargado = Encargado::traerDatos();
-        $productos = producto::verProductoDesdeArea($encargado[0]->id_area, 4);
-        $servicios = servicio::verServicioDesdeArea($encargado[0]->id_area, 4);
+        $productos = producto::verProductoDesdeArea($encargado[0]->id_area, 15);
+        $servicios = servicio::verServicioDesdeArea($encargado[0]->id_area, 15);
     	  $foto = Fotoperfil::traerFoto();
         $estado_password = Passwordcuenta::traerEstado();
         $logo = Area::traerArea();
@@ -823,9 +824,97 @@ class encargadoController extends Controller
           'servicios' => $servicios
       ]);
     }
-    public function vista_todo_servicio_vendedor(Request $dato)
-    {
-      # code... pendiente//////////
+    public function vista_venta(Request $dato)
+    {   
+        
+        $encargado = encargado::traerDatos();
+        $fechas = venta_producto::fechas_ventas_enc($encargado[0]->id_area);
+        $lista_ventas = venta_producto::traerVentas_para_area($encargado[0]->id_area, $encargado[0]->id_institucion); 
+     
+
+        return view('encargadoArea.ventas')->with([
+            'ventas' => $lista_ventas,
+            'fechas' => $fechas
+        ]);
+          /*   
+          $array_fecha;
+          $array_cantidad;
+
+          $fecha_venta = venta_producto::fechas_ventas();
+
+          for ($i=0; $i < count($fecha_venta); $i++) { 
+             $array_fecha[$i] = date('d/m/Y', strtotime($fecha_venta[$i]->fecha));
+             $cantidad = venta_producto::cantidad_ventas_por_fecha($fecha_venta[$i]->fecha);
+             $array_cantidad[$i] = $cantidad;
+
+          }
+        //$array_fecha;
+        //$array_cantidad;
+
+          $fechas = venta_producto::traerFecha(\Auth::guard('institucion')->user()->id);
+          $total = venta_producto::total(\Auth::guard('institucion')->user()->id);
+          $ventas = venta_producto::traerVentas(\Auth::guard('institucion')->user()->id);
+
+          //dd($ventas);
+         // $query = venta_producto::pruebaq(\Auth::guard('institucion')->user()->id);
+           $chart = Charts::create('area', 'highcharts')
+              ->title('ventas realizadas (Cantidad)')
+              ->elementLabel('Cantidad de ventas')
+             ->Labels($array_fecha)
+              ->values($array_cantidad)
+              ->dimensions(1000,500)
+
+              ->responsive(true);
+
+          return view('institucion.ventas')->with([
+                  'fechas' => $fechas,
+                  'total' => $total->total,
+                  'ventas' => $ventas,
+                  'chart' => $chart,
+                  //'query' => $query
+          ]);
+          */
+
+       
     }
+     public function traerVentas(Request $dato)
+    {
+
+        $array_fechas;
+        $array_cantidad;
+         $encargado = encargado::traerDatos();
+        $fecha_venta = venta_producto::fechas_ventas_enc($encargado[0]->id_area);
+
+        for ($i=0; $i < count($fecha_venta); $i++) { 
+           $array_fecha[$i] = $fecha_venta[$i]->fecha;
+           $cantidad = venta_producto::cantidad_ventas_por_fecha($fecha_venta[$i]->fecha, $encargado[0]->id_institucion);
+     
+           $array_cantidad[$i] = $cantidad;
+
+        }
+           //$fecha_venta = venta_producto::fechas_ventas();
+          
+           $fechas = venta_producto::traerFecha($encargado[0]->id_institucion);
+           $total = venta_producto::total_segun_fechas($encargado[0]->id_institucion, $dato->fecha);
+           $ventas = venta_producto::traerVentas_por_fecha_enc($encargado[0]->id_area, $dato->fecha);
+
+           /* $chart = Charts::create($dato->tipo, 'highcharts')
+            ->title('Ventas realizadas (Cantidad)')
+            ->elementLabel('Cantidad de ventas')
+           ->Labels($array_fecha)
+            ->values($array_cantidad)
+            ->dimensions(1000,500)
+
+            ->responsive(true);*/
+
+        return view('encargadoArea.ventas')->with([
+                'fechas' => $fechas,
+                'total' => $total,
+                'ventas' => $ventas,
+                //'chart' => $chart
+        ]);
+
+    }
+   
     
 }

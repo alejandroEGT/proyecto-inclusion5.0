@@ -23,7 +23,7 @@
                     <li class="pushy-submenu">
                         <button id="registrobtn"> <i class="fa fa-floppy-o"></i> Registros</button>
                         <ul>
-                            <li class="pushy-link"><a href="/ver_usuarios">crear usuarios</a></li>
+                            <li class="pushy-link"><a href="/formUsuarioInstitucion">crear alumno</a></li>
                             <li class="pushy-link"><a href="/formInstitucion">crear institución</a></li>
                         </ul>
                     </li>
@@ -33,21 +33,21 @@
                             <li class="pushy-link"><a href="/login_institucion">Institución</a></li>
                             <li class="pushy-link"><a href="/login_encargado">Encargado de área</a></li>
                             <li class="pushy-link"><a href="/login_vendedorInst">Alumno institucional</a></li>
-                            <li class="pushy-link"><a href="/login_vendedor">Vendedor Individual</a></li>
+                           {{-- <li class="pushy-link"><a href="/login_vendedor">Vendedor Individual</a></li>--}}
                         </ul>
                     </li>
-                    <li class="pushy-submenu">
+                    {{--<li class="pushy-submenu">
                         <button>Submenu 4</button>
                         <ul>
                             <li class="pushy-link"><a href="#">Item 1</a></li>
                             <li class="pushy-link"><a href="#">Item 2</a></li>
                             <li class="pushy-link"><a href="#">Item 3</a></li>
                         </ul>
-                    </li>
-                    <li class="pushy-link"><a href="#">Item 1</a></li>
+                    </li>--}}
+                    {{--<li class="pushy-link"><a href="#">Item 1</a></li>
                     <li class="pushy-link"><a href="#">Item 2</a></li>
                     <li class="pushy-link"><a href="#">Item 3</a></li>
-                    <li class="pushy-link"><a href="#">Item 4</a></li>
+                    <li class="pushy-link"><a href="#">Item 4</a></li>--}}
                 </ul>
             </div>
             <div v-if="this.navChrome == true">
@@ -88,6 +88,15 @@
             <div class="fx">
             	<button id="menu-btn" class="menu-btn">&#9776; Menú</button>
             </div>
+            <noscript>
+                        <div class="alert alert-danger">
+                <a href="" class="close" data-dismiss="alert">&times;</a>
+                       <center> <i class="fa fa-info-circle" aria-hidden="true"></i> 
+                            <h5>Este sitio requiere de javascript, porfavor activarlo</h5>
+                       </center>
+                   </div>
+                    
+                    </noscript>
 			@yield('content')
         </div>
     </div>    

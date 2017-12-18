@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'encargadoArea' => \App\Http\Middleware\encargadoArea::class,
         'admin_roles' => \App\Http\Middleware\admin_roles::class,
         'cliente' => \App\Http\Middleware\cliente::class,
+        'carro' =>  \App\Http\Middleware\dropCarro::class,
     ];
 }

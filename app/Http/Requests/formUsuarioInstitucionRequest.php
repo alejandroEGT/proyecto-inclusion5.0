@@ -21,7 +21,7 @@ class formUsuarioInstitucionRequest extends FormRequest
             /*'dia' => 'required | numeric',
             'mes' => 'required | numeric',
             'anio' => 'required | numeric',*/
-            'fechaDeNacimiento' => 'date|required',
+            'fechaDeNacimiento' => 'date|required | before:'.date("Y-m-d").'',
             'id_institucion' => 'required',
             'id_area' => 'required',
             'id_sexo' => 'required',
@@ -62,7 +62,8 @@ class formUsuarioInstitucionRequest extends FormRequest
                 'rClave.required' => 'No puedes dejar vacio el campo Repita Clave',
                 'rClave.min' => 'El campo repetir contraseña debe tener un minimo de 6 caracteres',
                 'clave.max' => 'El campo repetir contraseña debe tener un maximo de 16 caracteres',
-                'rClave.same' => 'Las contraseñas no coinciden'
+                'rClave.same' => 'Las contraseñas no coinciden',
+                'fechaDeNacimiento.before' => 'La fecha de nacimiento no existe o es futura'
 
  
             ]; 

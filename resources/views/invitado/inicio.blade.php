@@ -22,8 +22,8 @@
 		<ul class="ulli">
 			<li><a href="/login_institucion"><img class="logo" src="ico/school.png"> Institución</a></li>
 			<li><a href="/login_vendedorInst"><img class="logo" src="ico/user-school.png"> Alumno de institución</a></li>
-			<li><a href="/login_vendedor"><img class="logo" src="ico/user.png"> Venedor individual</a></li>
-			<li><a href="/login_encargado"><img class="logo" src="ico/vendedor.png"> usuario de institución</a></li>
+			{{--<li><a href="/login_vendedor"><img class="logo" src="ico/user.png"> Venedor individual</a></li>--}}
+			<li><a href="/login_encargado"><img class="logo" src="ico/vendedor.png"> Encargado de área institucional</a></li>
 		</ul>
 		</div>
 	</div>

@@ -12,6 +12,9 @@
 		
 	</head>
 		<body>
+	 @inject('carro', "App\Http\Controllers\carroController")
+
+
 			<div id="cliente" >
 				<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
@@ -46,12 +49,35 @@
 					              		<a class="mdl-navigation__link" href="{{ url('cliente/lista_deseos') }}">
 					              			<i class="material-icons">&#xE87E;</i> Lista de deseos 
 
-					              		<a class="mdl-navigation__link" href="{{ url('carro/miCarro') }}">
-					              			<i class="material-icons">&#xE8CC;</i> Carro
+										@if(\Auth::check() == true)
 
+										@if($carro->cantidadProductosCarro(\Auth::user()->id)>0)
 
+										<a class="mdl-navigation__link" href="{{ url('carro/miCarro') }}">
+					              			<i class="material-icons">&#xE8CC;</i> Cesta
+					              			<span class="badge badge-pill badge-primary">{{ $carro->cantidadProductosCarro(\Auth::user()->id) }}</span>
 					              			
-					              		</a>
+
+										</a>
+
+										@else
+
+										<a class="mdl-navigation__link" href="{{ url('carro/miCarro') }}">
+					              			<i class="material-icons">&#xE8CC;</i> Cesta
+
+										</a>
+
+										@endif
+
+
+										@else
+
+										<a class="mdl-navigation__link" href="{{ url('carro/miCarro') }}">
+					              			<i class="material-icons">&#xE8CC;</i> Cesta
+
+										</a>
+
+										@endif
 					              	</span>
 					            </nav>
 					        </div>
@@ -68,9 +94,9 @@
 		                        @else
 			                        <li class="mdl-menu__item" ><a href=""><center><b class="mayuscula">Bienvenido {{ Auth::user()->nombres }}</b></center></a></li>
 			                        <div class="android-drawer-separator"></div>
-			                        <li class="mdl-menu__item" ><a href="{{ url('cliente/perfil_cliente') }}"><img src="/ico/perfil_cliente.png" class="iconoPerfilCliente"><label class="texto_barra"><b> Mi perfil</b></label></a></li>
-			                        <li class="mdl-menu__item" ><a href="{{ url('cliente/mis_compras') }}"><img src="/ico/mis_compras.png" class="iconoPerfilCliente"><label class="texto_barra"><b> Mis compras</b></label></a></li>
-						            <li class="mdl-menu__item" ><a href="{{ url('cliente/logoutCliente') }}"><label class="texto_barra"><b><img src="/ico/logout_cliente.png" class="iconoPerfilCliente"> Logout</b></label></a></li>
+			                        <li class="mdl-menu__item" ><a href="{{ url('cliente/perfil_cliente') }}"><b><img src="/ico/perfil_cliente.png" class="iconoPerfilCliente"><label class="texto_barra">&nbsp;&nbsp;Mi perfil</b></label></a></li>
+			                        <li class="mdl-menu__item" ><a href="{{ url('cliente/mis_compras') }}"><b><img src="/ico/mis_compras.png" class="iconoPerfilCliente"><label class="texto_barra">&nbsp;&nbsp;Mis compras</b></label></a></li>
+						            <li class="mdl-menu__item" ><a href="{{ url('cliente/logoutCliente') }}"><label class="texto_barra"><b><img src="/ico/logout_cliente.png" class="iconoPerfilCliente">&nbsp;&nbsp;Logout</b></label></a></li>
 					        </ul>
 					         	@endif
 
@@ -84,28 +110,57 @@
 				        </span>
 				        <nav class="mdl-navigation">				          
 		    		      @if (Auth::guest())
-				          <a class="mdl-navigation__link" href="{{ url('sesion_cliente')}}">Iniciar Sesión</a>
-				          <a class="mdl-navigation__link" href="{{ url('registro_cliente')}}">Registrate</a>
+		    		      <a class="mdl-navigation__link" href="{{ url('inicio_cliente')}}"><i class="material-icons">&#xE88A;</i> Home</a>
+				          <a class="mdl-navigation__link" href="{{ url('sesion_cliente')}}"><i class="material-icons">&#xE7FD;</i> Iniciar Sesión</a>
+				          <a class="mdl-navigation__link" href="{{ url('registro_cliente')}}"><i class="material-icons">&#xE7FE;</i> Registrate</a>
 					      @else
 					      <span class="mdl-navigation__link"><center><b class="mayuscula">Bienvenido {{ Auth::user()->nombres }}</b></center></span>
+					      <a class="mdl-navigation__link" href="{{ url('inicio_cliente')}}"><i class="material-icons">&#xE88A;</i> Home</a>
 	                      <a class="mdl-navigation__link" href="{{ url('cliente/perfil_cliente')}}"><i class="material-icons">&#xE853;</i> Mi perfil</a>
-	                      <a class="mdl-navigation__link" href="{{ url('cliente/mis_compras')}}"><i class="material-icons">&#xE8CB;</i> Mis compras</a>
+	                      
 				          <a class="mdl-navigation__link" href="{{ url('cliente/logoutCliente')}}">Logout <i class="material-icons">exit_to_app</i></a>
 					      @endif
 				          <div class="android-drawer-separator"></div>
 				          <span>
+				          	<span class="mdl-navigation__link" href="#"><center><b> Productos</b></center></span>
+				          	@if(\Auth::check() == true)
+
+										@if($carro->cantidadProductosCarro(\Auth::user()->id)>0)
+
+										<a class="mdl-navigation__link" href="{{ url('carro/miCarro') }}">
+					              			<i class="material-icons">&#xE8CC;</i> Cesta
+					              			<span class="badge badge-pill badge-primary">{{ $carro->cantidadProductosCarro(\Auth::user()->id) }}</span>
+					              			
+
+										</a>
+
+										@else
+
+										<a class="mdl-navigation__link" href="{{ url('carro/miCarro') }}">
+					              			<i class="material-icons">&#xE8CC;</i> Cesta
+
+										</a>
+
+										@endif
+
+
+										@else
+
+										<a class="mdl-navigation__link" href="{{ url('carro/miCarro') }}">
+					              			<i class="material-icons">&#xE8CC;</i> Cesta
+
+										</a>
+										
+							@endif
 			          	  <a class="mdl-navigation__link" href="{{ url('cliente/lista_deseos') }}">
 			          	  <i class="material-icons">&#xE87E;</i> Lista de deseos
-			          	  </a> 
-						  <a class="mdl-navigation__link" href="{{ url('carro/miCarro') }}">
-			          	  <i class="material-icons">&#xE8CC;</i> Carro
-			          	  
 			          	  </a>
+			          	  				          	<a class="mdl-navigation__link" href="{{ url('cliente/mis_compras')}}"><i class="material-icons">&#xE8CB;</i> Mis compras</a> 
 				          </span>
 				          <div class="android-drawer-separator"></div>
-				          <span class="mdl-navigation__link" href="#"><i class="material-icons">&#xE8CB;</i> Tiendas</span>
+				          <span class="mdl-navigation__link" href="#"><center><b> Tiendas</b></center></span>
 				          @foreach($tiendas as $tienda)
-				          <a class="mdl-navigation__link" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}">{{ $tienda->nombre }}</a>
+				          <a class="mdl-navigation__link" href="{{ url("/perfil_institucion/".base64_encode($tienda->id))}}"><i class="material-icons">&#xE7F1;</i> {{ $tienda->nombre }}</a>
 				        	@endforeach
 				          <div class="android-drawer-separator"></div>
 				        </nav>  
@@ -118,6 +173,8 @@
 						<!--<footer><p>&copy; 2017 Exod.cl<p></footer>-->
 					</div>
 				</div>
+	 }
+	 }
 
 		</div>
 

@@ -55,19 +55,19 @@
 					<label>{{ $p->nombre }}</label>
 				</td>
 				<td>
-					<label>${{ $p->precio_unitario }}</label>
+					<label>{{ '$ '.number_format( $p->precio_unitario, 0, ',', '.') }}</label>
 				</td>
 				<td>
 					<label>{{ $p->cantidad }}</label>
 				</td>
 				<td>
-					<label>${{$p->precio_unitario*$p->cantidad}}</label>
+					<label>{{'$ '.number_format( $p->precio_unitario*$p->cantidad, 0, ',', '.')}}</label>
 				</td>
 			</tr>
 		@endforeach
 	</table>
 	<hr>
-	<label><strong>Total de esta venta: </strong> ${{ $total }}</label>
+	<label><strong>Total de esta venta: </strong>{{ '$ '.number_format( $total, 0, ',', '.') }}</label>
 	</div>
 </body>
 </html>

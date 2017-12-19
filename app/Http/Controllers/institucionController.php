@@ -50,7 +50,7 @@ class institucionController extends Controller
     public function vista_institucion(){
 
           $datosInstitucion = Institucion::datos();
-          $productos = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 10);
+          $productos = producto::traetProductosDesdeAdmin(\Auth::guard('institucion')->user()->id, 12);
           $servicios = servicio::mostrarServicioDesdeAdmin(\Auth::guard('institucion')->user()->id, 4);
           $noticias_generales = noticia::noticias_generales();
           $noticias_locales = noticia::noticias_locales(\Auth::guard('institucion')->user()->id);
@@ -1509,7 +1509,7 @@ class institucionController extends Controller
     public function traerVentas(Request $dato)
     {
 
-      // try{
+      try{
         $array_fechas;
         $array_cantidad;
 
@@ -1544,11 +1544,11 @@ class institucionController extends Controller
                 'array_cantidad' => $array_cantidad
         ]);
 
-       /*}catch (\Illuminate\Database\QueryException $e) {
+      }catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back();
        }catch( \Exception $e){
             return redirect()->back();
-        }*/
+        }
     }
     public function ver_detalleVenta(Request $dato)
     {    
@@ -1603,7 +1603,7 @@ class institucionController extends Controller
             return redirect()->back();
         }
         catch(\Illuminate\Database\QueryException $e){
-            print_r($e);
+           return redirect()->back();
         }   
 
     }

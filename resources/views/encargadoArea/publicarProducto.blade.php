@@ -29,16 +29,20 @@
 		<hr>
 			@if ($errors->all())
 				<div class="alert alert-info">
-					<ul>
+					<center>
+						<ul>
 						@foreach ($errors->all() as $error)
-							<li>{{$error}}</li>
+							<i class="fa fa-info-circle" aria-hidden="true"></i> <li>{{$error}}</li>
 						@endforeach
-					</ul>
+						</ul>
+					</center>
 				</div>
 			@endif
 			@if (Session::has('registro'))
-								<div class="alert alert-info">{{ Session::get('registro') }}</div>
-							@endif
+					<div class="alert alert-info">
+						<center><i class="fa fa-check" aria-hidden="true"></i> {{ Session::get('registro') }}</center>
+					</div>
+			@endif
 	
 		<div class="row">
 			

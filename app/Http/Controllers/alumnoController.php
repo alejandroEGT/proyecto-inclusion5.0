@@ -28,6 +28,7 @@ use App\noticia;
 use App\estado_noticia;
 use App\Institucion;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class alumnoController extends Controller
 {
@@ -687,9 +688,10 @@ public function ver_todo_producto()
           'servicios' => $servicios
       ]);
     }
-    public function vista_todo_servicio_vendedor(Request $dato)
+    public function descargar_comando()
     {
-      # code... pendiente//////////
+         $pdf = PDF::loadView('vendedorDependiente.comando_voz');
+           return $pdf->download("comandos_voz_".date('d-m-Y')."pdf");
     }
 
     

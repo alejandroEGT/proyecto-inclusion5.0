@@ -255,6 +255,7 @@ Route::group(['prefix' => 'userDependiente','middleware' => ['vendedorInstitucio
         Route::get('/activarDalt','herramientasayudaController@activar_dalt');
         Route::get('/desactivarDalt','herramientasayudaController@desactivar_dalt');
         Route::get('/herramientas','alumnoController@vista_herramientas');
+        Route::get('/descargar_comando','alumnoController@descargar_comando');
        
         
 });

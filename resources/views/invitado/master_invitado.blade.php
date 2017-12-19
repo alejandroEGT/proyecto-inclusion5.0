@@ -50,7 +50,7 @@
                     <li class="pushy-link"><a href="#">Item 4</a></li>--}}
                 </ul>
             </div>
-            <div v-if="this.navChrome == true">
+            {{--<div v-if="this.navChrome == true">
                         <li class="pushy-submenu">
                         <button id="first-link">¿Te ayudamos?</button>
                         <ul>
@@ -76,7 +76,7 @@
                              <li class="pushy-link"><a href="/ayuda">Nuestra ayuda</a></li>
                         </ul>
                     </li>
-            </div>
+            </div>--}}
         </nav>
 
         <!-- oscurece pantalla al deslizar menu -->

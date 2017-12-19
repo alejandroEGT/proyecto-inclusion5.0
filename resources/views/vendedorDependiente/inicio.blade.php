@@ -68,10 +68,10 @@
 
 								</div>
 								<div class="col-md-9 lineas">
-									<center><label>Herraminetas</label></center>
+									<center><label>Herramientas</label></center>
 									<div class="row">
 										<div class="col-md-4 ">
-											<p><i class="fa fa-microphone" aria-hidden="true"> </i> <label>Microfono</label></p>
+											<p><i class="fa fa-microphone" aria-hidden="true"> </i> <label>Micrófono</label></p>
 											<p><label>Herramienta para el redireccionamiento de pestañas dentro de tu perfil</label></p>
 											
 											{{--<center>
@@ -170,7 +170,7 @@
 										@foreach ($productos as $producto)
 										<div class="box-producto">
 											<center>
-												<img src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
+												<img alt="foto de {{$producto->nombre }}" src="{{ '/'.$producto->foto }}" class="img-thumbnail img-prod ">
 												<p>{{ str_limit($producto->nombre, 10) }}</p>
 												<a class="btn btn-primary btn-xs" href="{{ url("userDependiente/detalleProducto/".base64_encode($producto->idProducto)) }}">Ver..</a>
 											</center>

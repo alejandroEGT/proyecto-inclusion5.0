@@ -11,15 +11,15 @@
 <div id="sliders">
     <table>
         <tr>
-        	<td>Alpha Angle</td>
+        	<td>Ángulo alpha</td>
         	<td><input id="alpha" type="range" min="0" max="45" value="15"/> <span id="alpha-value" class="value"></span></td>
         </tr>
         <tr>
-        	<td>Beta Angle</td>
+        	<td>Ángulo beta</td>
         	<td><input id="beta" type="range" min="-45" max="45" value="15"/> <span id="beta-value" class="value"></span></td>
         </tr>
         <tr>
-        	<td>Depth</td>
+        	<td>Ángulo Bajo</td>
         	<td><input id="depth" type="range" min="20" max="100" value="50"/> <span id="depth-value" class="value"></span></td>
         </tr>
     </table>
@@ -43,7 +43,7 @@
 			@endif
 		</div>
 		<div class="col-md-2">
-			<p>Total de todas las ventas:</p> <strong class="lbl-strong" > ${{ $total }}</strong>
+			<p>Total de todas las ventas:</p> <strong class="lbl-strong" > ${{number_format($total , 0, ',', '.')}}</strong>
 		</div>
 
 	</div>

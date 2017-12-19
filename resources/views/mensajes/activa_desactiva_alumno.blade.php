@@ -286,14 +286,14 @@
 		}
 	// Add a single command
 var comandos = {
-    indexes:["inicio","mis datos","publicar producto", "publicar servicio","ver productos","ver servicios","menú", "salir","bajar","subir","servicios ocultos","registros","inicio","login","atras","parar","noticias generales","noticias locales","siguiente"
+    indexes:["herramientas","mis datos","publicar producto", "publicar servicio","ver productos","ver servicios","menú", "salir","bajar","subir","servicios ocultos","registros","inicio","login","atras","parar","noticias generales","noticias locales","siguiente","Desactivar","en espera"
     	
     ], // Decir alguna de estas palabras activara el comando
     action:function(i){ // Acción a ejecutar cuando alguna palabra de los indices es reconocida
         
         if(i == 0){
 
-        	setTimeout(function () { window.location = '{{ url("userDependiente/inicio") }}' }, 0);
+        	setTimeout(function () { window.location = '{{ url("userDependiente/herramientas") }}' }, 0);
         }
          if(i == 1){
         	setTimeout(function () { window.location = '{{ url('userDependiente/datos') }}' }, 0);
@@ -302,7 +302,7 @@ var comandos = {
         	setTimeout(function () { window.location = "{{ url('userDependiente/publicarProducto') }}"; }, 0);
         }
         if(i == 3){
-        	setTimeout(function () { window.location = "{{ url('userDependiente/publicarServicio') }}"; }, 0);
+        	setTimeout(function () { window.location = ""; }, 0);
         }
         if(i == 4){
         	setTimeout(function () { window.location = "{{ url('userDependiente/ver_todo_producto') }}"; }, 0);
@@ -329,7 +329,7 @@ var comandos = {
          	$('#registrobtn').click();
         }
         if (i == 12){
-        	setTimeout(function () { window.location = "inicio"; }, 0);
+        	setTimeout(function () { window.location = "{{ url('userDependiente/inicio') }}"; }, 0);
         }
          if (i == 13){
         	$('#loginbtn').click();
@@ -351,6 +351,16 @@ var comandos = {
         	  url = $("ul[class=pagination] li > a").attr('href');
 
         	  window.location = url;
+        }
+         if(i == 19){
+       
+
+        	  window.location = "{{ url('userDependiente/desactivarmicro') }}";
+        }
+         if(i == 20){
+       
+
+        	  window.location = "{{ url('userDependiente/traerProductoEnEspera') }}";
         }
         
     }

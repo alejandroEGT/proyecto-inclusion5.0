@@ -354,7 +354,7 @@ class encargadoController extends Controller
     public function actualizar_numero(request $dato){
 
           $this->validate($dato,[
-            'teléfono' => 'required|numeric',
+            'teléfono' => 'required|numeric | min:6',
           ]);
 
         $actualizarNumero = Usuarioinstitucion::actualizarNumero($dato->teléfono);

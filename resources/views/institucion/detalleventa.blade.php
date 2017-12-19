@@ -31,9 +31,9 @@
 			<tr>
 				<td><img class="sizeLogo" src="{{ '/'.$p->foto }}"></td>
 				<td>{{ $p->nombre }}</td>
-				<td>{{ $p->precio_unitario }}</td>
+				<td>{{ '$ '.number_format($p->precio_unitario, 0, ',', '.')  }}</td>
 				<td>{{ $p->cantidad }}</td>
-				<td style="color: #16A085">{{ $p->precio_unitario*$p->cantidad }}</td>
+				<td style="color: #16A085">{{'$ '.number_format( $p->precio_unitario*$p->cantidad, 0, ',', '.')  }}</td>
 			</tr>
 		@endforeach
 	</table>
@@ -41,7 +41,7 @@
 	<hr>
 	<div class="row">
 		<div class="col-md-10">
-			<span class="pull-right"><strong class="lbl-tv" >Total de esta venta:</strong> <label class="lbl-val" >$ {{ $total }}</label></span>
+			<span class="pull-right"><strong class="lbl-tv" >Total de esta venta:</strong> <label class="lbl-val" >$ {{number_format($total, 0, ',', '.') }}</label></span>
 		</div>
 	</div>
 @endsection

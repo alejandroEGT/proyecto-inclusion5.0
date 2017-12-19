@@ -143,12 +143,13 @@ class areaController extends Controller
             return redirect()->back();
         }
         catch(\Illuminate\Database\QueryException $e){
-            print_r($e);
+           return redirect()->back();
         }     
     }
     public function descargar_pdf_productos(Request $dato)
     {
         
+        try{
              $area = Area::find($dato->id_area);
              $nombreArea = $area->nombre;
              $encargado = Usuarioinstitucion::traerUser($dato->id_area);
@@ -157,6 +158,12 @@ class areaController extends Controller
              $pdf = PDF::loadView('institucion.pdf_productos', compact(['nombreArea', 'encargado','productos']));
              return $pdf->download('reporte_productos_area.pdf');
 
+         }catch( \Exception $e){
+            return redirect()->back();
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back();
+        }  
         
        
     }

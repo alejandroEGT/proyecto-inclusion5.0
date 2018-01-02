@@ -7559,7 +7559,7 @@
 </div>
 <div class="row-fluid">
                 <div class="pricing-table-header-pro">
-                    <h4 style="color: white;">Felicidades administrador de la institución  <strong>{{ Session::get('nombre') }}</strong>, se ha generado una venta, abajo se encuentra el detalle:</h4>
+                    <h4 style="color: white;">Felicidades administrador de la institución  <strong>{{ Session::get('nombre') }}</strong>, se ha generado una venta,<strong>Recuerda contactarte con el comprador para acordar la entrega del producto.</strong> Abajo se encuentra el detalle:</h4>
                 </div><br>
 
                     <table class=" table table-bordered table-striped">
@@ -7582,6 +7582,7 @@
                 </div>
          </div>
             <div class="row-fluid"><br>
+
 <p>Atentamente el equipo de "El arte escondido.</p>
 </div>
 </div>

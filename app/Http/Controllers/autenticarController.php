@@ -35,7 +35,9 @@ class autenticarController extends Controller
 
         }catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors(['Algo no anda bien, posiblemente datos mal ingresados o no hay conexión']);
-       }     
+        }catch( \Exception $e){
+            return redirect()->back();
+        }     
     }
 
     public function logout(){

@@ -107,7 +107,7 @@
                             <div class="inner">
                                 <h5>David Luna</h5>
                                 <p class="subtitle">Analista, Qa, testing y desarrollador web </p>
-                                <div class="avatar"><img src="https://scontent.fscl9-1.fna.fbcdn.net/v/t1.0-9/19748523_1224555351000755_1098258178806284350_n.jpg?oh=21874980f15e07fa2282567291fa0749&oe=5A0B5A31" alt="" class="img-propio img-responsive img-circle" />
+                                <div class="avatar"><img src="fotoequipo/foto_david.jpg" alt="" class="img-propio img-responsive img-circle" />
                                 </div>
 
                             </div>

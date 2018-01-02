@@ -48,7 +48,7 @@ class cliente
                 }
                 return $next($request);
             }
-            return redirect('inicio_cliente')->withErrors(['prueba']);
+            return redirect('inicio_cliente');
         }
         return redirect()->back()->withErrors(['Porfavor ingrese a su sesión']);
     }
